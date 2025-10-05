@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PC Multimedia</title>
+  <link rel="stylesheet" crossorigin href="/assets/main-CQnBzoBq.css">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body class="bg-gray-600 min-h-screen flex items-center justify-center">
+  <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
+    <h2 class="text-2xl font-bold text-center text-gray-800 mb-8">Plataforma de aprendizaje C</h2>
+    
+    <form id="loginForm" class="space-y-6" action="/login" method="POST">
+      <div>
+        <label for="id" class="block text-sm font-medium text-gray-700">Usuario</label>
+        <input type="text" id="user" name="user" required 
+               class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+      </div>
+
+      <div>
+        <label for="password" class="block text-sm font-medium text-gray-700">Contraseña</label>
+        <input type="password" id="password" name="password" required 
+               class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+      </div>
+
+      <div class="flex items-center justify-between">
+        <button id="login" type="submit" 
+                class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
+          Iniciar Sesión
+        </button>
+        <a href="forgot-password.html" class="text-sm text-blue-600 hover:text-blue-800">¿Olvidó la contraseña?</a>
+      </div>
+    </form>
+
+
+    <div class="mt-6" id="registerUser">
+      <div class="border-t border-gray-200 pt-6">
+        <h3 class="register-message block text-sm font-medium text-gray-700 text-center">¿Aún no tiene su cuenta?</h3>
+        <div class="flex justify-center pt-6">
+          <button type="submit" 
+                  class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
+                  <a href="registro.html" class="text-sm text-white">Registrarse</a>  
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const authError = urlParams.get('auth_error'); 
+
+        if (authError === 'true') {
+            Swal.fire({
+                icon: 'error', 
+                title: 'Acceso Denegado',
+                text: 'Debes iniciar sesión para acceder a esa página.',
+                confirmButtonText: 'Entendido',
+                customClass: {
+                    popup: 'swal2-show-from-top' 
+                },
+                showClass: {
+                    popup: 'animate__animated animate__fadeInDown' 
+                },
+                hideClass: {
+                    popup: 'animate__animated animate__fadeOutUp'
+                }
+            });
+            history.replaceState({}, document.title, window.location.pathname);
+        }
+    });
+
+    document.getElementById('loginForm').addEventListener('submit', async (event) => {
+        event.preventDefault();
+
+        const usernameInput = document.getElementById('user');
+        const passwordInput = document.getElementById('password');
+
+        const user = usernameInput.value;
+        const password = passwordInput.value;
+
+        try {
+            const response = await fetch('/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ user, password })
+            });
+
+            const data = await response.json(); 
+
+            if (response.ok) { // Esto significa que la respuesta fue 2xx (ej. 200 OK)
+                Swal.fire({
+                    icon: 'success',
+                    title: '¡Login con éxito!',
+                    text: data.message, // Mostrará "Inicio de sesión exitoso."
+                    timer: 2000, 
+                    timerProgressBar: true,
+                    didClose: () => {
+                        window.location.href = '/inicio'; // Redirigir al usuario
+                    }
+                });
+
+            } else { // Esto maneja cualquier respuesta que no sea 2xx (ej. 401, 403, 404, 500)
+                let title = 'Error de inicio de sesión';
+                let icon = 'error';
+                let timer = 3000; // Un poco más de tiempo para mensajes de error importantes
+                let timerProgressBar = true;
+
+                // Detectar el tipo de error específico usando el status HTTP
+                if (response.status === 403) { // Tu API envía 403 para cuentas inactivas/bloqueadas
+                    title = 'Acceso Denegado';
+                    icon = 'warning'; // Puedes usar 'warning' o 'info' para diferenciarlo visualmente
+                } else if (response.status === 401 || response.status === 404) { // Credenciales inválidas (usuario/contraseña incorrecta)
+                    // La API envía 401 o 404 para credenciales inválidas.
+                    // Podemos mantener el título genérico o ser más específicos si no quieres revelar si el usuario existe.
+                    title = 'Credenciales Incorrectas'; 
+                    icon = 'error';
+                } else if (response.status === 500) { // Error del servidor
+                    title = 'Error del Servidor';
+                    icon = 'error';
+                }
+                
+                Swal.fire({
+                    icon: icon,
+                    title: title,
+                    text: data.message || 'Ha ocurrido un error inesperado al iniciar sesión.', // Usar el mensaje del backend o un genérico
+                    timer: timer,
+                    timerProgressBar: timerProgressBar
+                });
+            }
+
+        } catch (error) {
+            // Este bloque captura errores de red (ej. servidor no disponible, internet caído)
+            Swal.fire({
+                icon: 'error',
+                title: 'Error de Conexión',
+                text: 'No se pudo conectar con el servidor. Por favor, verifica tu conexión a internet o inténtalo de nuevo.',
+                timer: 3000, // Un poco más de tiempo para errores de conexión
+                timerProgressBar: true
+            });
+        }
+    });
+</script>
+
+</body>
+</html>

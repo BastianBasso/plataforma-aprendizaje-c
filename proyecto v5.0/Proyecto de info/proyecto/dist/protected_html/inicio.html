@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sistema de Inventario</title>
+    <script type="module" crossorigin src="/assets/inicio-BsLeW05u.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/inicio-Bl_Z12De.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  </head>
+  <body class="bg-gray-50 dark:bg-gray-900">
+    <div class="flex h-screen w-full">
+      <!-- Sidebar -->
+      <aside class="w-64 h-screen bg-white border-r border-gray-200 dark:bg-gray-900 dark:border-gray-800 flex flex-col">
+        <div class="p-4 border-b border-gray-200 dark:border-gray-800">
+          <h1 class="text-xl font-bold text-blue-600 dark:text-blue-500 flex items-center gap-2">
+            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M20.5 7.27783L12 12.0001M12 12.0001L3.49997 7.27783M12 12.0001L12 21.5001M14 20.889L12.777 21.5684C12.4934 21.7173 12.3516 21.7917 12.2015 21.8223C12.0685 21.8497 11.9315 21.8497 11.7986 21.8223C11.6484 21.7917 11.5066 21.7173 11.223 21.5684L3.82297 17.5684C3.52346 17.4103 3.37368 17.3313 3.26463 17.2098C3.16816 17.1021 3.09515 16.9752 3.0502 16.8366C3 16.6804 3 16.5055 3 16.1557V7.84436C3 7.49459 3 7.31971 3.0502 7.16351C3.09515 7.02495 3.16816 6.898 3.26463 6.79033C3.37368 6.66884 3.52345 6.58977 3.82297 6.43163L11.223 2.43163C11.5066 2.28277 11.6484 2.20834 11.7986 2.17772C11.9315 2.15031 12.0685 2.15031 12.2015 2.17772C12.3516 2.20834 12.4934 2.28277 12.777 2.43163L20.177 6.43163C20.4765 6.58977 20.6263 6.66884 20.7354 6.79033C20.8318 6.898 20.9048 7.02495 20.9498 7.16351C21 7.31971 21 7.49459 21 7.84436V11.5001M7.5 4.50008L16.5 9.50008M19 21.0001V15.0001M16 18.0001H22" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span>PC Multimedia</span>
+          </h1>
+        </div>
+        
+        <nav class="flex-1 p-4 overflow-y-auto">
+          <ul class="space-y-1" id="sidebar-nav">
+            <li>
+              <button class="nav-item active flex items-center w-full gap-3 px-3 py-2 rounded-lg" data-page="dashboard">
+                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M20.5 7.27783L12 12.0001M12 12.0001L3.49997 7.27783M12 12.0001L12 21.5001" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <span class="text-sm font-medium">Inicio</span>
+              </button>
+            </li>
+            <li>
+              <button class="nav-item flex items-center w-full gap-3 px-3 py-2 rounded-lg" data-page="existencias">
+                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M20 12V8H4V12M20 12V16H4V12M20 12H4M4 20H20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <span class="text-sm font-medium">Existencias</span>
+              </button>
+            </li>
+
+            <li>
+              <button class="nav-item flex items-center w-full gap-3 px-3 py-2 rounded-lg" data-page="gestion-usuarios">
+                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="0">
+                  <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                </svg>
+                <span class="text-sm font-medium">Gestión de Usuarios</span>
+              </button>
+            </li>
+
+            <li>
+              <button class="nav-item flex items-center w-full gap-3 px-3 py-2 rounded-lg" data-page="configuracion">
+                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M12 15C13.6569 15 15 13.6569 15 12C15 10.3431 13.6569 9 12 9C10.3431 9 9 10.3431 9 12C9 13.6569 10.3431 15 12 15Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M19.4 15C19.1277 15.6171 19.2583 16.3378 19.73 16.82L19.79 16.88C20.1656 17.2551 20.3765 17.7642 20.3765 18.295C20.3765 18.8258 20.1656 19.3349 19.79 19.71C19.4149 20.0856 18.9058 20.2965 18.375 20.2965C17.8442 20.2965 17.3351 20.0856 16.96 19.71L16.9 19.65C16.4178 19.1783 15.6971 19.0477 15.08 19.32C14.4755 19.5791 14.0826 20.1724 14.08 20.83V21C14.08 22.1046 13.1846 23 12.08 23C10.9754 23 10.08 22.1046 10.08 21V20.91C10.0642 20.2327 9.63587 19.6339 9 19.4C8.38291 19.1277 7.66219 19.2583 7.18 19.73L7.12 19.79C6.74485 20.1656 6.23582 20.3765 5.705 20.3765C5.17418 20.3765 4.66515 20.1656 4.29 19.79C3.91445 19.4149 3.70351 18.9058 3.70351 18.375C3.70351 17.8442 3.91445 17.3351 4.29 16.96L4.35 16.9C4.82167 16.4178 4.95231 15.6971 4.68 15.08C4.42093 14.4755 3.82764 14.0826 3.17 14.08H3C1.89543 14.08 1 13.1846 1 12.08C1 10.9754 1.89543 10.08 3 10.08H3.09C3.76733 10.0642 4.36613 9.63587 4.6 9C4.87231 8.38291 4.74167 7.66219 4.27 7.18L4.21 7.12C3.83445 6.74485 3.62351 6.23582 3.62351 5.705C3.62351 5.17418 3.83445 4.66515 4.21 4.29C4.58515 3.91445 5.09418 3.70351 5.625 3.70351C6.15582 3.70351 6.66485 3.91445 7.04 4.29L7.1 4.35C7.58219 4.82167 8.30291 4.95231 8.92 4.68H9C9.60447 4.42093 9.99738 3.82764 10 3.17V3C10 1.89543 10.8954 1 12 1C13.1046 1 14 1.89543 14 3V3.09C14.0026 3.74764 14.3955 4.34093 15 4.6C15.6171 4.87231 16.3378 4.74167 16.82 4.27L16.88 4.21C17.2551 3.83445 17.7642 3.62351 18.295 3.62351C18.8258 3.62351 19.3349 3.83445 19.71 4.21C20.0856 4.58515 20.2965 5.09418 20.2965 5.625C20.2965 6.15582 20.0856 6.66485 19.71 7.04L19.65 7.1C19.1783 7.58219 19.0477 8.30291 19.32 8.92V9C19.5791 9.60447 20.1724 9.99738 20.83 10H21C22.1046 10 23 10.8954 23 12C23 13.1046 22.1046 14 21 14H20.91C20.2524 14.0026 19.6591 14.3955 19.4 15Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <span class="text-sm font-medium">Configuración</span>
+              </button>
+            </li>
+
+
+          </ul>
+        </nav>
+        
+        <div class="p-4 border-t border-gray-200 dark:border-gray-800">
+          <button id="theme-toggle" class="flex items-center w-full gap-3 px-3 py-2 rounded-lg text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800/60 transition-all duration-200">
+            <svg id="theme-icon" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 3V5M12 19V21M21 12H19M5 12H3M18.364 5.636L16.95 7.05M7.05 16.95L5.636 18.364M18.364 18.364L16.95 16.95M7.05 7.05L5.636 5.636" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span class="text-sm font-medium" id="theme-text">Modo Oscuro</span>
+          </button>
+          
+          <button id="logoutButton" class="flex items-center w-full gap-3 px-3 py-2 mt-2 rounded-lg text-red-600 hover:bg-red-50 dark:text-red-400 dark:hover:bg-red-900/20 transition-all duration-200">
+            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M16 17L21 12M21 12L16 7M21 12H9M9 3H7.8C6.11984 3 5.27976 3 4.63803 3.32698C4.07354 3.6146 3.6146 4.07354 3.32698 4.63803C3 5.27976 3 6.11984 3 7.8V16.2C3 17.8802 3 18.7202 3.32698 19.362C3.6146 19.9265 4.07354 20.3854 4.63803 20.673C5.27976 21 6.11984 21 7.8 21H9" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span class="text-sm font-medium">Cerrar Sesión</span>
+          </button>
+        </div>
+      </aside>
+
+      <!-- Main Content -->
+      <div class="flex flex-col flex-1 overflow-hidden">
+        <!-- Header -->
+        <header class="bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800 py-4 px-6 flex justify-end items-center">
+          <div class="flex items-center space-x-4">
+            <button class="relative p-2 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 transition-colors">
+            </button>
+            
+            
+            <div class="relative" id="user-menu">
+              <button class="flex items-center space-x-3 focus:outline-none">
+                <div class="h-9 w-9 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center">
+                  <svg class="h-5 w-5 text-blue-600 dark:text-blue-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M20 21V19C20 17.9391 19.5786 16.9217 18.8284 16.1716C18.0783 15.4214 17.0609 15 16 15H8C6.93913 15 5.92172 15.4214 5.17157 16.1716C4.42143 16.9217 4 17.9391 4 19V21M16 7C16 9.20914 14.2091 11 12 11C9.79086 11 8 9.20914 8 7C8 4.79086 9.79086 3 12 3C14.2091 3 16 4.79086 16 7Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </div>
+                  <div class="hidden md:block text-left">
+                      <p class="text-sm font-medium text-gray-700 dark:text-gray-300" id="usernameDisplay">Cargando nombre...</p>
+                      <p class="text-xs text-gray-500 dark:text-gray-400" id="roleDisplay">Cargando rol...</p>
+                  </div>
+                <svg class="h-4 w-4 text-gray-500 dark:text-gray-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M6 9L12 15L18 9" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </button>
+              
+              <div id="user-dropdown" class="hidden absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white dark:bg-gray-800 py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                <a href="#" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">Tu Perfil</a>
+                <a href="#" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">Configuración</a>
+              </div>
+            </div>
+          </div>
+        </header>
+
+        <!-- Main Content Area -->
+        <main class="flex-1 overflow-x-hidden p-6" id="main-content">
+          <!-- Content will be dynamically loaded here -->
+        </main>
+      </div>
+    </div>
+  </body>
+</html>
