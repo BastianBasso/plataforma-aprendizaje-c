@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
@@ -9,231 +9,369 @@
     <link rel="stylesheet" crossorigin href="/assets/main-CQnBzoBq.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <style>
+      /* Two-column card */
+      .auth-card { display:flex; gap:24px; max-width:1100px; width:100%; border-radius:12px; overflow:hidden; box-shadow: 0 10px 30px rgba(2,6,23,0.45); }
+      .left-panel {
+        flex:1;
+        min-width:320px;
+        background: linear-gradient(135deg,#081028 0%, #162047 50%, #3b2fa6 100%);
+        color:#fff;
+        position:relative;
+        padding:28px;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+      }
+      .code-bg {
+        position:absolute;
+        inset:0;
+        opacity:0.12;
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, "Roboto Mono", monospace;
+        font-size:12px;
+        line-height:1.3;
+        color:#7dd3fc;
+        padding:28px;
+        overflow:hidden;
+        pointer-events:none;
+        filter: blur(2px) saturate(1.1);
+      }
+      .binary-overlay {
+        position:absolute;
+        inset:0;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        pointer-events:none;
+        mix-blend-mode: screen;
+        opacity:0.25;
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, "Roboto Mono", monospace;
+        letter-spacing:6px;
+      }
+      .hex-blob {
+        width:180px;
+        height:180px;
+      }
+      .right-panel { flex:1; background:#fff; padding:28px; min-width:360px; }
+      .segmented { display:flex; justify-content:center; gap:12px; margin-bottom:18px; }
+      .segmented button { padding:8px 18px; border-radius:999px; border:none; cursor:pointer; font-weight:600; }
+      .segmented .active { 
+         background: linear-gradient(90deg,#2563eb,#4f46e5);
+        color:#fff;
+        box-shadow: 0 6px 18px rgba(79,70,229,0.2);
+      }
+      .segmented .inactive { background:#dbeafe; color:#083344; }
+      @media (max-width:880px) { .auth-card { flex-direction:column; } .left-panel { min-height:160px; } .hex-blob { width:140px; height:140px; } }
+    </style>
 </head>
-<body class="bg-gray-600 min-h-screen flex items-center justify-center">
-    <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
-      <h2 class="text-2xl font-bold text-center text-gray-800 mb-8">Registro de Usuario</h2>
-      
+<body class="bg-gray-600 min-h-screen flex items-center justify-center p-6">
+
+  <div class="auth-card bg-white w-full max-w-4xl">
+    <!-- Left visual panel: código + hexágono + binario -->
+    <div class="left-panel">
+      <pre class="code-bg" aria-hidden="true">
+#include <tonc.h>
+#include <maxmod.h>
+#include <string.h>
+
+#include "sprite.h"
+#include "card.h"
+#include "game.h"
+#include "blind.h"
+#include "joker.h"
+#include "affine_background.h"
+#include "graphic_utils.h"
+
+// Graphics
+#include "background_gfx.h"
+#include "affine_background_gfx.h"
+
+// Audio
+#include "soundbank.h"
+#include "soundbank_bin.h"
+
+void init()
+{
+    irq_init(NULL);
+    irq_add(II_VBLANK, mmVBlank);
+    irq_add(II_HBLANK, affine_background_hblank);
+
+    // Initialize text engine
+    tte_init_se(0, BG_CBB(TTE_CBB) | BG_SBB(TTE_SBB), 0, CLR_WHITE, TTE_BIT_UNPACK_OFFSET, NULL, NULL);
+    tte_erase_screen();
+    tte_init_con();
+
+    // TTE palette setup
+    pal_bg_bank[TTE_YELLOW_PB][TTE_BIT_ON_CLR_IDX] = TEXT_CLR_YELLOW;
+    pal_bg_bank[TTE_BLUE_PB][TTE_BIT_ON_CLR_IDX] = TEXT_CLR_BLUE; 
+    pal_bg_bank[TTE_RED_PB][TTE_BIT_ON_CLR_IDX] = TEXT_CLR_RED; 
+    pal_bg_bank[TTE_WHITE_PB][TTE_BIT_ON_CLR_IDX] = TEXT_CLR_WHITE;
+
+    // Set up the video mode
+    // BG0 is the TTE text layer
+    REG_BG0CNT = BG_PRIO(0) | BG_CBB(TTE_CBB) | BG_SBB(TTE_SBB) | BG_4BPP;
+    // BG1 is the main background layer
+    REG_BG1CNT = BG_PRIO(1) | BG_CBB(MAIN_BG_CBB) | BG_SBB(MAIN_BG_SBB) | BG_8BPP;
+	// BG2 is the affine background layer
+    REG_BG2CNT = BG_PRIO(2) | BG_CBB(AFFINE_BG_CBB) | BG_SBB(AFFINE_BG_SBB) | BG_8BPP | BG_WRAP;
+
+    int win1_left = 72;
+    int win1_top = 44;
+    int win1_right = 200;
+    int win1_bottom = 128;
+
+    
+      </pre>
+
+      <div class="binary-overlay" aria-hidden="true">
+        <div style="text-align:center">
+          <svg class="hex-blob" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <defs>
+              <linearGradient id="g1" x1="0" x2="1">
+                <stop offset="0" stop-color="#60a5fa"/>
+                <stop offset="1" stop-color="#7c3aed"/>
+              </linearGradient>
+            </defs>
+            <polygon points="50 4 90 24 90 76 50 96 10 76 10 24" fill="url(#g1)" opacity="0.95"/>
+            <g transform="translate(50,50)" fill="rgba(255,255,255,0.12)" font-family="monospace" font-size="6" text-anchor="middle">
+
+              <text y="-6">1010 0101</text>
+              <text y="6">0101 1010</text>
+              <text y="33" font-size="100" fill="white">C</text>
+            </g>
+            <circle cx="50" cy="50" r="16" fill="rgba(255,255,255,0.06)"/>
+          </svg>
+          <div style="color:#a5b4fc; margin-top:10px; font-weight:700; letter-spacing:1px;">PLATAFORMA C</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right functional panel: formulario -->
+    <div class="right-panel">
+      <h2 class="text-2xl font-bold text-gray-800 mb-2">Crea tu cuenta y empieza a aprender hoy</h2>
+      <br>
+      <p class="text-sm text-gray-500 mb-4">Estás a un paso de convertirte en un desarrollador C. El registro es rápido, gratuito y te da acceso inmediato a tu rutas de aprendizaje ,desde lo fundamental hasta temas avanzados.<br>Completa el formulario de la derecha para iniciar tu viaje en la programación.</p>
+        <br>
+      <div class="segmented">
+        <button id="tab-login" class="inactive" onclick="window.location.href='index.html'">Ingresar</button>
+        <button id="tab-register" class="active">Registrarse</button>
+      </div>
+
+      <!-- Mantener todos los atributos del formulario original -->
       <form class="space-y-6" id="registration-form" action="/register" method="POST">
         <div>
-          <label for="email" class="block text-sm font-medium text-gray-700">Correo electrónico</label>
-          <input type="email" id="email" name="email" required 
+          <label for="email" class="block text-sm font-medium text-gray-700">Dirección de correo</label>
+          <input type="email" id="email" name="email" required placeholder="Enter your Email Address"
                  class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
         </div>
 
         <div>
           <label for="name" class="block text-sm font-medium text-gray-700">Nombre de usuario</label>
-          <input type="text" id="name" name="name" required 
+          <input type="text" id="name" name="name" required placeholder="Enter your User name"
                  class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
         </div>
 
         <div>
           <label for="password" class="block text-sm font-medium text-gray-700">Contraseña</label>
-          <input type="password" id="password" name="password" required 
+          <input type="password" id="password" name="password" required placeholder="Enter your Password"
                  class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
-                 <input type="checkbox" onclick="myFunction1()">Mostrar contraseña
+          <label class="inline-flex items-center mt-2 text-sm text-gray-600">
+            <input type="checkbox" onclick="myFunction1()" class="h-4 w-4 rounded border-gray-300">
+            <span class="ml-2">Mostrar contraseña</span>
+          </label>
           <div id="passwordSecurityErrorMessages" class="text-red-500 text-sm mt-1"></div>
         </div>
- 
+
         <div>
             <label for="confirm-password" class="block text-sm font-medium text-gray-700">Confirmar Contraseña</label>
-            <input type="password" id="confirm-password" name="confirm-password" required 
+            <input type="password" id="confirm-password" name="confirm-password" required placeholder="Confirm your Password"
                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
-                   <input type="checkbox" onclick="myFunction2()">Mostrar contraseña
+            <label class="inline-flex items-center mt-2 text-sm text-gray-600">
+              <input type="checkbox" onclick="myFunction2()" class="h-4 w-4 rounded border-gray-300">
+              <span class="ml-2">Mostrar contraseña</span>
+            </label>
             <div id="passwordMismatchError" class="text-red-500 text-sm mt-1"></div>
-          </div>
+        </div>
 
         <div class="flex justify-center">
           <button type="submit" 
-                  class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
-            Enviar
+                  class=" bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
+            Registrarse
           </button>
         </div>
       </form>
- 
+
+      <!--
       <div class="mt-6" id="loginUser">
         <div class="border-t border-gray-200 pt-6">
           <h3 class="login-message block text-sm font-medium text-gray-700 text-center">¿Ya tiene cuenta?</h3>
           <div class="flex justify-center pt-6">
             <button type="button" 
-                    class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
+                    class="  bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
                       <a href="index.html" class="text-sm text-white">Iniciar sesión</a>  
             </button>
           </div>
         </div>
       </div>
+      -->
+      
+    </div>
+  </div>
 
-    <script>
+<script>
+    function validatePassword(password) {
+        const errors = [];
 
-        function validatePassword(password) {
-            const errors = [];
-
-            
-            if (password.length <= 8) {
-                errors.push('La contraseña debe tener al menos 9 caracteres.');
-            }
-
-            
-            if (!/[A-Z]/.test(password)) {
-                errors.push('La contraseña debe contener al menos una letra mayúscula.');
-            }
-
-            
-            if (!/[^0-9a-zA-Z]/.test(password)) {
-                errors.push('La contraseña debe contener al menos un carácter especial (ej. !, @, #, $, %).');
-            }
-
-            
-            if (!/[0-9]/.test(password)) {
-                errors.push('La contraseña debe contener al menos un número.');
-            }
-
-            return {
-                isValid: errors.length === 0,
-                errors: errors
-            };
+        if (password.length <= 8) {
+            errors.push('La contraseña debe tener al menos 9 caracteres.');
         }
 
+        if (!/[A-Z]/.test(password)) {
+            errors.push('La contraseña debe contener al menos una letra mayúscula.');
+        }
 
-        document.getElementById("registration-form").addEventListener("submit", async function(event) {
-            event.preventDefault(); 
+        if (!/[^0-9a-zA-Z]/.test(password)) {
+            errors.push('La contraseña debe contener al menos un carácter especial (ej. !, @, #, $, %).');
+        }
 
-            const passwordInput = document.getElementById("password");
-            const confirmPasswordInput = document.getElementById("confirm-password");
-            const passwordSecurityErrorMessagesDiv = document.getElementById("passwordSecurityErrorMessages");
-            const passwordMismatchErrorDiv = document.getElementById("passwordMismatchError");
+        if (!/[0-9]/.test(password)) {
+            errors.push('La contraseña debe contener al menos un número.');
+        }
 
-            const password = passwordInput.value;
-            const confirmPassword = confirmPasswordInput.value;
+        return {
+            isValid: errors.length === 0,
+            errors: errors
+        };
+    }
 
-            
-            passwordSecurityErrorMessagesDiv.innerHTML = '';
-            passwordMismatchErrorDiv.innerHTML = '';
+    document.getElementById("registration-form").addEventListener("submit", async function(event) {
+        event.preventDefault();
 
-            let allValid = true;
+        const passwordInput = document.getElementById("password");
+        const confirmPasswordInput = document.getElementById("confirm-password");
+        const passwordSecurityErrorMessagesDiv = document.getElementById("passwordSecurityErrorMessages");
+        const passwordMismatchErrorDiv = document.getElementById("passwordMismatchError");
 
-          
-            if (password !== confirmPassword) {
-                passwordMismatchErrorDiv.innerHTML = '<p>• Las contraseñas no coinciden.</p>';
+        const password = passwordInput.value;
+        const confirmPassword = confirmPasswordInput.value;
+
+        passwordSecurityErrorMessagesDiv.innerHTML = '';
+        passwordMismatchErrorDiv.innerHTML = '';
+
+        let allValid = true;
+
+        if (password !== confirmPassword) {
+            passwordMismatchErrorDiv.innerHTML = '<p>• Las contraseñas no coinciden.</p>';
+            Swal.fire({
+                icon: 'error',
+                title: '¡Error de Contraseña!',
+                text: 'Las contraseñas no coinciden. Por favor, asegúrate de que sean iguales.',
+                confirmButtonText: 'OK',
+                showClass: { popup: 'animate__animated animate__shakeX' },
+                hideClass: { popup: 'animate__animated animate__fadeOutUp' }
+            });
+            allValid = false;
+        }
+
+        const securityValidationResult = validatePassword(password);
+        if (!securityValidationResult.isValid) {
+            securityValidationResult.errors.forEach(error => {
+                const p = document.createElement('p');
+                p.textContent = `• ${error}`;
+                passwordSecurityErrorMessagesDiv.appendChild(p);
+            });
+            allValid = false;
+        }
+
+        if (!allValid) {
+            passwordInput.focus();
+            return;
+        }
+
+        const username = document.getElementById("name").value;
+        const email = document.getElementById("email").value;
+
+        try {
+            const response = await fetch("/register", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ text: username, email, password })
+            });
+
+            const data = await response.json();
+
+            if (response.ok && data.success) {
+                Swal.fire({
+                    icon: 'success',
+                    title: '¡Registro Exitoso!',
+                    text: data.message || 'Tu cuenta ha sido creada. ¡Bienvenido!',
+                    timer: 2000,
+                    timerProgressBar: true,
+                    showClass: { popup: 'animate__animated animate__fadeInDown' },
+                    hideClass: { popup: 'animate__animated animate__fadeOutUp' },
+                    didClose: () => {
+                        window.location.href = '/index.html';
+                    }
+                });
+            } else {
                 Swal.fire({
                     icon: 'error',
-                    title: '¡Error de Contraseña!',
-                    text: 'Las contraseñas no coinciden. Por favor, asegúrate de que sean iguales.',
-                    confirmButtonText: 'OK',
+                    title: 'Error en el Registro',
+                    text: data.message || 'Hubo un problema al registrarte. Por favor, inténtalo de nuevo.',
+                    confirmButtonText: 'Entendido',
                     showClass: { popup: 'animate__animated animate__shakeX' },
                     hideClass: { popup: 'animate__animated animate__fadeOutUp' }
                 });
-                allValid = false;
             }
 
-            
-            const securityValidationResult = validatePassword(password);
-            if (!securityValidationResult.isValid) {
-                securityValidationResult.errors.forEach(error => {
-                    const p = document.createElement('p');
-                    p.textContent = `• ${error}`;
-                    passwordSecurityErrorMessagesDiv.appendChild(p);
-                });
-                allValid = false;
-            }
+        } catch (error) {
+            console.error("Error de red o del servidor:", error);
+            Swal.fire({
+                icon: 'error',
+                title: 'Error de Conexión',
+                text: 'No se pudo conectar con el servidor. Por favor, verifica tu conexión o inténtalo de nuevo.',
+                confirmButtonText: 'Cerrar',
+                showClass: { popup: 'animate__animated animate__zoomIn' },
+                hideClass: { popup: 'animate__animated animate__zoomOut' }
+            });
+        }
+    });
 
-            
-            if (!allValid) {
-                
-                passwordInput.focus();
-                return; 
-            }
+    document.getElementById("password").addEventListener('input', () => {
+        const passwordInput = document.getElementById("password");
+        const passwordSecurityErrorMessagesDiv = document.getElementById("passwordSecurityErrorMessages");
+        const password = passwordInput.value;
+        const validationResult = validatePassword(password);
 
-            
-            const username = document.getElementById("name").value; 
-            const email = document.getElementById("email").value;
-            
+        passwordSecurityErrorMessagesDiv.innerHTML = '';
 
-            try {
-                
-                const response = await fetch("/register", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify({ text: username, email, password }) 
-                });
+        if (!validationResult.isValid) {
+            validationResult.errors.forEach(error => {
+                const p = document.createElement('p');
+                p.textContent = `• ${error}`;
+                passwordSecurityErrorMessagesDiv.appendChild(p);
+            });
+        }
+    });
 
-                const data = await response.json();
-
-                if (response.ok && data.success) {
-                    Swal.fire({
-                        icon: 'success',
-                        title: '¡Registro Exitoso!',
-                        text: data.message || 'Tu cuenta ha sido creada. ¡Bienvenido!', 
-                        timer: 2000,
-                        timerProgressBar: true,
-                        showClass: { popup: 'animate__animated animate__fadeInDown' },
-                        hideClass: { popup: 'animate__animated animate__fadeOutUp' },
-                        didClose: () => {
-                            window.location.href = '/index.html';
-                        }
-                    });
-                } else {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Error en el Registro',
-                        text: data.message || 'Hubo un problema al registrarte. Por favor, inténtalo de nuevo.',
-                        confirmButtonText: 'Entendido',
-                        showClass: { popup: 'animate__animated animate__shakeX' },
-                        hideClass: { popup: 'animate__animated animate__fadeOutUp' }
-                    });
-                }
-
-            } catch (error) {
-                console.error("Error de red o del servidor:", error);
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Error de Conexión',
-                    text: 'No se pudo conectar con el servidor. Por favor, verifica tu conexión o inténtalo de nuevo.',
-                    confirmButtonText: 'Cerrar',
-                    showClass: { popup: 'animate__animated animate__zoomIn' },
-                    hideClass: { popup: 'animate__animated animate__zoomOut' }
-                });
-            }
-        });
-
-        
-        document.getElementById("password").addEventListener('input', () => {
-            const passwordInput = document.getElementById("password");
-            const passwordSecurityErrorMessagesDiv = document.getElementById("passwordSecurityErrorMessages");
-            const password = passwordInput.value;
-            const validationResult = validatePassword(password);
-
-            passwordSecurityErrorMessagesDiv.innerHTML = '';
-
-            if (!validationResult.isValid) {
-                validationResult.errors.forEach(error => {
-                    const p = document.createElement('p');
-                    p.textContent = `• ${error}`;
-                    passwordSecurityErrorMessagesDiv.appendChild(p);
-                });
-            }
-        });
-
-    </script>
-    <script>
-        function myFunction1() {
+    function myFunction1() {
         var x = document.getElementById("password");
         if (x.type === "password") {
             x.type = "text";
         } else {
             x.type = "password";
         }
-        }
-        function myFunction2() {
+    }
+    function myFunction2() {
         var x = document.getElementById("confirm-password");
         if (x.type === "password") {
             x.type = "text";
         } else {
             x.type = "password";
         }
-        }
-    </script>
+    }
+</script>
 </body>
 </html>
