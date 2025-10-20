@@ -14,19 +14,15 @@ DELETE FROM Usuario WHERE ID = '33';
 SELECT * FROM Usuario;
 
 CREATE TABLE Usuario
-(
-ID int auto_increment primary key not null,
-Usuario varchar(45) unique not null,
-Correo varchar(100)  unique not null,
-Contraseña varchar(300) not null,
-Rol varchar(45) not null DEFAULT 'Usuario',
-Fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-Ultimo_acceso DATETIME, 
-Estado varchar(50) NOT NULL DEFAULT 'Activo' 
+CREATE TABLE Usuario (
+    ID SERIAL PRIMARY KEY,
+    Usuario VARCHAR(45) UNIQUE NOT NULL,
+    Correo VARCHAR(100) UNIQUE NOT NULL,
+    Contraseña VARCHAR(300) NOT NULL,
+    Rol VARCHAR(45) NOT NULL DEFAULT 'Usuario',
+    Fecha_creacion TIMESTAMP WITHOUT TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    Ultimo_acceso TIMESTAMP WITHOUT TIME ZONE
 );
-ALTER TABLE Usuario
-ALTER COLUMN Rol SET DEFAULT 'Usuario';
-ALTER TABLE Usuario ADD Estado varchar(50) NOT NULL;
 
 
 CREATE TABLE tokens_recuperar_contraseña (
