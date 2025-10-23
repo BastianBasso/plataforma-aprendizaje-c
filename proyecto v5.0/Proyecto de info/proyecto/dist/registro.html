@@ -61,6 +61,11 @@
         box-shadow: 0 6px 18px rgba(79,70,229,0.2);
       }
       .segmented .inactive { background:#dbeafe; color:#083344; }
+      .left-panel, .right-panel {
+      flex: 1 1 0%;
+      min-width: 0;
+      width: 50%;
+      }
       @media (max-width:880px) { .auth-card { flex-direction:column; } .left-panel { min-height:160px; } .hex-blob { width:140px; height:140px; } }
     </style>
 </head>
@@ -106,35 +111,35 @@ void init()
     pal_bg_bank[TTE_BLUE_PB][TTE_BIT_ON_CLR_IDX] = TEXT_CLR_BLUE; 
     pal_bg_bank[TTE_RED_PB][TTE_BIT_ON_CLR_IDX] = TEXT_CLR_RED; 
     pal_bg_bank[TTE_WHITE_PB][TTE_BIT_ON_CLR_IDX] = TEXT_CLR_WHITE;
-
+    
     // Set up the video mode
     // BG0 is the TTE text layer
     REG_BG0CNT = BG_PRIO(0) | BG_CBB(TTE_CBB) | BG_SBB(TTE_SBB) | BG_4BPP;
     // BG1 is the main background layer
     REG_BG1CNT = BG_PRIO(1) | BG_CBB(MAIN_BG_CBB) | BG_SBB(MAIN_BG_SBB) | BG_8BPP;
-	// BG2 is the affine background layer
+    // BG2 is the affine background layer
     REG_BG2CNT = BG_PRIO(2) | BG_CBB(AFFINE_BG_CBB) | BG_SBB(AFFINE_BG_SBB) | BG_8BPP | BG_WRAP;
-
+    
     int win1_left = 72;
     int win1_top = 44;
     int win1_right = 200;
     int win1_bottom = 128;
-
     
-      </pre>
-
-      <div class="binary-overlay" aria-hidden="true">
-        <div style="text-align:center">
-          <svg class="hex-blob" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <defs>
-              <linearGradient id="g1" x1="0" x2="1">
+    
+  </pre>
+  
+  <div class="binary-overlay" aria-hidden="true">
+    <div style="text-align:center">
+      <svg class="hex-blob" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <defs>
+          <linearGradient id="g1" x1="0" x2="1">
                 <stop offset="0" stop-color="#60a5fa"/>
                 <stop offset="1" stop-color="#7c3aed"/>
               </linearGradient>
             </defs>
             <polygon points="50 4 90 24 90 76 50 96 10 76 10 24" fill="url(#g1)" opacity="0.95"/>
             <g transform="translate(50,50)" fill="rgba(255,255,255,0.12)" font-family="monospace" font-size="6" text-anchor="middle">
-
+              
               <text y="-6">1010 0101</text>
               <text y="6">0101 1010</text>
               <text y="33" font-size="100" fill="white">C</text>
@@ -145,36 +150,40 @@ void init()
         </div>
       </div>
     </div>
-
+    
     <!-- Right functional panel: formulario -->
     <div class="right-panel">
+      <h2 class="text-5xl font-extrabold text-blue-600 mb-4" style="font-size:2rem;">Registrarse</h2>
       <h2 class="text-2xl font-bold text-gray-800 mb-2">Crea tu cuenta y empieza a aprender hoy</h2>
       <br>
       <p class="text-sm text-gray-500 mb-4">Estás a un paso de convertirte en un desarrollador C. El registro es rápido, gratuito y te da acceso inmediato a tu rutas de aprendizaje ,desde lo fundamental hasta temas avanzados.<br>Completa el formulario de la derecha para iniciar tu viaje en la programación.</p>
-        <br>
-      <div class="segmented">
+      
+      
+      <!--
+      <div class="segmented ">
         <button id="tab-login" class="inactive" onclick="window.location.href='index.html'">Ingresar</button>
         <button id="tab-register" class="active">Registrarse</button>
       </div>
+      -->
 
       <!-- Mantener todos los atributos del formulario original -->
       <form class="space-y-6" id="registration-form" action="/register" method="POST">
         <div>
           <label for="email" class="block text-sm font-medium text-gray-700">Dirección de correo</label>
-          <input type="email" id="email" name="email" required placeholder="Enter your Email Address"
-                 class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
-        </div>
+          <input type="email" id="email" name="email" required placeholder="Ingresa tu correo electrónico"
+            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+          </div>
 
-        <div>
-          <label for="name" class="block text-sm font-medium text-gray-700">Nombre de usuario</label>
-          <input type="text" id="name" name="name" required placeholder="Enter your User name"
-                 class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
-        </div>
-
-        <div>
+          <div>
+            <label for="name" class="block text-sm font-medium text-gray-700">Nombre de usuario</label>
+            <input type="text" id="name" name="name" required placeholder="Ingresa tu nombre de usuario"
+            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+          </div>
+          
+          <div>
           <label for="password" class="block text-sm font-medium text-gray-700">Contraseña</label>
-          <input type="password" id="password" name="password" required placeholder="Enter your Password"
-                 class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+          <input type="password" id="password" name="password" required placeholder="Ingresa tu contraseña"
+          class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
           <label class="inline-flex items-center mt-2 text-sm text-gray-600">
             <input type="checkbox" onclick="myFunction1()" class="h-4 w-4 rounded border-gray-300">
             <span class="ml-2">Mostrar contraseña</span>
@@ -184,31 +193,31 @@ void init()
 
         <div>
             <label for="confirm-password" class="block text-sm font-medium text-gray-700">Confirmar Contraseña</label>
-            <input type="password" id="confirm-password" name="confirm-password" required placeholder="Confirm your Password"
-                   class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+            <input type="password" id="confirm-password" name="confirm-password" required placeholder="Confirma tu contraseña"
+            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
             <label class="inline-flex items-center mt-2 text-sm text-gray-600">
               <input type="checkbox" onclick="myFunction2()" class="h-4 w-4 rounded border-gray-300">
               <span class="ml-2">Mostrar contraseña</span>
             </label>
             <div id="passwordMismatchError" class="text-red-500 text-sm mt-1"></div>
-        </div>
-
-        <div class="flex justify-center">
-          <button type="submit" 
-                  class=" bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
+          </div>
+          
+          <div class="segmented  justify-center">
+            <button type="submit" 
+            class=" segmented active ">
             Registrarse
           </button>
         </div>
       </form>
-
+      
       <!--
-      <div class="mt-6" id="loginUser">
-        <div class="border-t border-gray-200 pt-6">
-          <h3 class="login-message block text-sm font-medium text-gray-700 text-center">¿Ya tiene cuenta?</h3>
-          <div class="flex justify-center pt-6">
-            <button type="button" 
-                    class="  bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
-                      <a href="index.html" class="text-sm text-white">Iniciar sesión</a>  
+        <div class="mt-6" id="loginUser">
+          <div class="border-t border-gray-200 pt-6">
+            <h3 class="login-message block text-sm font-medium text-gray-700 text-center">¿Ya tiene cuenta?</h3>
+            <div class="flex justify-center pt-6">
+              <button type="button" 
+              class="  bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
+              <a href="index.html" class="text-sm text-white">Iniciar sesión</a>  
             </button>
           </div>
         </div>

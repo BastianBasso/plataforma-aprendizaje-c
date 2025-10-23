@@ -18,7 +18,10 @@
       display:flex;
       align-items:center;
       justify-content:center;
+      min-width:320px;
       padding:24px;
+      width: 538px;
+      height: 752px;
     }
     .bit-pattern {
       position:absolute;
@@ -58,6 +61,7 @@
     .right-panel {
       padding:28px;
       background: #fff;
+      width: 562px;
       min-width:320px;
       flex:1;
     }
@@ -94,6 +98,12 @@
       display:flex;
       align-items:center;
     }
+    .segmented button { padding:8px 18px; border-radius:999px; border:none; cursor:pointer; font-weight:600; }
+    .left-panel, .right-panel {
+      flex: 1 1 0%;
+      min-width: 0;
+      width: 50%;
+    }
     /* smaller adjustments */
     @media (max-width: 880px) {
       .auth-card { flex-direction:column; }
@@ -112,25 +122,26 @@
 
     <!-- Right functional panel -->
     <div class="right-panel w-1/2 md:w-1/2">
-      <h2 class="text-2xl font-bold text-gray-800 mb-2">BIENVENIDO A AC!</h2>
-      <p class="text-sm text-gray-500 mb-6">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Replace this with a friendly welcome message or short instructions.</p>
+      <h2 class="text-5xl font-extrabold text-blue-600 mb-4" style="font-size:2rem;">Iniciar Sesión</h2>
+    
+      <!--<h2 class="text-2x1 font-bold text-gray-800 mb-2">Bienvenido a la plataforma</h2> -->
+      <br>
+      <p class="text-sm text-gray-500 mb-6">Estamos felices de verte. Por favor, introduce tus datos para acceder a tu cuenta y continuar.</p>
+      <br>
 
-      <div class="segmented flex gap-3 mb-6">
-        <button id="tab-login" class="active">Ingresar</button>
-        <button id="tab-register" class="inactive">Registrarse</button>
-      </div>
-
+      <br>
+      
       <form id="loginForm" class="space-y-4" action="/login" method="POST" autocomplete="on">
         <div>
           <label for="user" class="block text-sm font-medium text-gray-700">Nombre de usuario</label>
-          <input type="text" id="user" name="user" required placeholder="Enter your User name"
-                 class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+          <input type="text" id="user" name="user" required placeholder="Ingresa tu nombre de usuario"
+          class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
         </div>
-
+        <br>
         <div class="password-wrapper">
           <label for="password" class="block text-sm font-medium text-gray-700">Contraseña</label>
-          <input type="password" id="password" name="password" required placeholder="Enter your Password"
-                 class="mt-1 block w-full rounded-md border-gray-300 shadow-sm pr-10 focus:border-blue-500 focus:ring-blue-500">
+          <input type="password" id="password" name="password" required placeholder="Ingresa tu contraseña"
+          class="mt-1 block w-full rounded-md border-gray-300 shadow-sm pr-10 focus:border-blue-500 focus:ring-blue-500">
           <button type="button" id="togglePassword" class="toggle-eye" aria-label="Mostrar contraseña">
             <!-- eye svg (closed/open toggled by script) -->
             <svg id="eyeOpen" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-600" viewBox="0 0 24 24" fill="none" stroke="currentColor">
@@ -153,18 +164,27 @@
           </label>
           <a href="forgot-password.html" class="text-sm text-blue-600 hover:text-blue-800">¿Olvidaste tu contraseña?</a>
         </div>
-
-        <div>
+        <br>
+        <br>
+        <!--
+        <div class="segmented flex  justify-center gap-3 mb-6 ">
+          <button id="tab-login" class="active">Ingreso</button>
+          <button id="tab-register" class="inactive" onclick="window.location.href='registro.html'">Registro</button>
+        </div>
+        -->
+        
+        <div class="segmented flex justify-center ">
           <button id="login" type="submit"
-                  class="w-full bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
+          class="segmented active ">
             Ingresar
           </button>
         </div>
-      </form>
-
-      <div class="mt-6 border-t border-gray-100 pt-4 text-center">
-        <p class="text-sm text-gray-500">¿Aún no tienes cuenta? <a href="registro.html" class="text-blue-600 hover:text-blue-800 font-medium">Regístrate</a></p>
-      </div>
+        <br>
+    </form>
+    
+    <div class="mt-6 border-t border-gray-100 pt-4 text-center">
+      <p class="text-sm text-gray-500">¿Aún no tienes cuenta? <a href="registro.html" class="text-blue-600 hover:text-blue-800 font-medium">Regístrate</a></p>
+    </div>
     </div>
   </div>
 
