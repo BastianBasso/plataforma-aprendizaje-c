@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contenido del Curso C | Plataforma C</title>
+  <link rel="stylesheet" crossorigin href="/assets/main-CQnBzoBq.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+  <style>
+    body { background: #f3f4f6; }
+    .header-c { background: #fff; border-bottom: 1px solid #e5e7eb; }
+    .logo-c {
+      background: linear-gradient(135deg,#162047 60%, #3b2fa6 100%);
+      color: #fff;
+      font-weight: 900;
+      font-size: 1.7rem;
+      border-radius: 8px;
+      width: 38px; height: 38px;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 2px 8px rgba(59,47,166,0.08);
+      margin-right: 10px;
+    }
+    .user-profile {
+      display: flex; align-items: center; gap: 10px;
+      background: #e0e7ff;
+      border-radius: 999px;
+      padding: 6px 16px;
+      font-size: 1rem;
+      color: #3730a3;
+      font-weight: 600;
+    }
+    .content-title {
+      color: #3730a3;
+      font-size: 2.2rem;
+      font-weight: 800;
+      margin: 36px auto 10px auto;
+      text-align: center;
+      letter-spacing: 1px;
+    }
+    .progress-bar-container {
+      max-width: 700px;
+      margin: 0 auto 32px auto;
+      background: #e0e7ff;
+      border-radius: 999px;
+      padding: 8px 24px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #3730a3;
+      box-shadow: 0 2px 8px rgba(59,47,166,0.08);
+    }
+    .progress-bar {
+      flex: 1;
+      height: 16px;
+      background: #c7d2fe;
+      border-radius: 999px;
+      overflow: hidden;
+      position: relative;
+    }
+    .progress-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg,#2563eb,#3b2fa6);
+      border-radius: 999px;
+      width: 12%;
+      transition: width 0.4s;
+    }
+    .modules-list {
+      max-width: 900px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+    }
+    .module-card {
+      background: linear-gradient(135deg,#2563eb 60%, #3b2fa6 100%);
+      color: #fff;
+      border-radius: 18px;
+      box-shadow: 0 6px 24px rgba(59,47,166,0.10);
+      padding: 0;
+      display: flex;
+      align-items: stretch;
+      position: relative;
+      overflow: hidden;
+      min-height: 140px;
+    }
+    .module-progress-bar {
+      width: 18px;
+      background: #a5b4fc;
+      display: flex;
+      align-items: flex-end;
+      border-radius: 18px 0 0 18px;
+      margin-right: 0;
+      position: relative;
+    }
+    .module-progress-fill {
+      width: 100%;
+      background: #3730a3;
+      border-radius: 18px 0 0 18px;
+      transition: height 0.4s;
+    }
+    .module-content {
+      flex: 1;
+      padding: 24px 32px 24px 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .module-title {
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .module-desc {
+      font-size: 1rem;
+      color: #dbeafe;
+      margin-bottom: 10px;
+    }
+    .module-topics {
+      margin-left: 1.2em;
+      margin-bottom: 10px;
+      color: #e0e7ff;
+      font-size: 0.98rem;
+    }
+    .module-card .start-btn {
+      align-self: flex-end;
+      background: linear-gradient(90deg,#4f46e5,#2563eb);
+      color: #fff;
+      font-weight: 700;
+      border: none;
+      border-radius: 999px;
+      padding: 10px 28px;
+      font-size: 1rem;
+      box-shadow: 0 2px 8px rgba(37,99,235,0.18);
+      transition: background 0.2s;
+      cursor: pointer;
+      margin-top: 8px;
+    }
+    .module-card .start-btn:hover {
+      background: linear-gradient(90deg,#2563eb,#4f46e5);
+    }
+    .footer-c {
+      background: linear-gradient(90deg,#49b3af,#25a6d7 90%);
+      color: #fff;
+      padding: 36px 0 18px 0;
+      margin-top: 48px;
+    }
+    .footer-c .footer-content {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 32px;
+      justify-content: space-between;
+      align-items: flex-start;
+      padding: 0 32px;
+    }
+    .footer-c .footer-logo {
+      display: flex; align-items: center; gap: 10px;
+      font-size: 1.5rem; font-weight: 800;
+      letter-spacing: 1px;
+    }
+    .footer-c .footer-links, .footer-c .footer-newsletter {
+      min-width: 180px;
+    }
+    .footer-c .footer-links a {
+      color: #e0f2fe;
+      display: block;
+      margin-bottom: 8px;
+      text-decoration: none;
+      font-size: 1rem;
+      transition: color 0.2s;
+    }
+    .footer-c .footer-links a:hover {
+      color: #fff;
+    }
+    .footer-c .newsletter-form {
+      display: flex; gap: 8px; margin-top: 8px;
+    }
+    .footer-c .newsletter-form input[type="email"] {
+      border-radius: 999px 0 0 999px;
+      border: none;
+      padding: 8px 16px;
+      font-size: 1rem;
+      outline: none;
+      min-width: 0;
+    }
+    .footer-c .newsletter-form button {
+      border-radius: 0 999px 999px 0;
+      border: none;
+      background: #2563eb;
+      color: #fff;
+      font-weight: 700;
+      padding: 8px 18px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .footer-c .newsletter-form button:hover {
+      background: #1e40af;
+    }
+    .footer-c .copyright {
+      text-align: center;
+      color: #bae6fd;
+      font-size: 0.95rem;
+      margin-top: 24px;
+    }
+    @media (max-width: 900px) {
+      .footer-c .footer-content { flex-direction: column; gap: 18px; align-items: flex-start; }
+      .content-c, .hero-c { padding: 24px 10px; }
+    }
+    @media (max-width: 900px) {
+      .modules-list { padding: 0 8px; }
+      .module-content { padding: 18px 10px 18px 10px; }
+      .content-title { font-size: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="header-c px-6 py-4 flex items-center justify-between">
+    <div class="flex items-center">
+      <div class="logo-c" aria-label="Logo C">C</div>
+      <span class="font-bold text-blue-700 text-lg tracking-wide">Plataforma C</span>
+    </div>
+    <div class="user-profile">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20 21V19C20 17.9391 19.5786 16.9217 18.8284 16.1716C18.0783 15.4214 17.0609 15 16 15H8C6.93913 15 5.92172 15.4214 5.17157 16.1716C4.42143 16.9217 4 17.9391 4 19V21" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="7" r="4"/></svg>
+      <span>Usuario</span>
+    </div>
+  </header>
+
+  <!-- Título -->
+  <div class="content-title animate__animated animate__fadeInDown">Contenido</div>
+
+  <!-- Barra de progreso general -->
+  <div class="progress-bar-container animate__animated animate__fadeIn">
+    <span>12% completado</span>
+    <div class="progress-bar">
+      <div class="progress-bar-fill" style="width:12%"></div>
+    </div>
+  </div>
+
+  <!-- Lista de módulos -->
+  <div class="modules-list animate__animated animate__fadeInUp">
+    <!-- Módulo 1 -->
+    <div class="module-card">
+      <div class="module-progress-bar">
+        <div class="module-progress-fill" style="height: 100%;"></div>
+      </div>
+      <div class="module-content">
+        <div class="module-title">Módulo 1 - Fundamentos (Introducción) 🚀</div>
+        <div class="module-desc">Bases de la programación y el lenguaje C.</div>
+        <ul class="module-topics">
+          <li>Introducción a la programación y Algoritmos</li>
+          <li>Historia, propósito y aplicaciones del lenguaje C</li>
+          <li>El proceso de compilación y el ciclo de vida del código</li>
+          <li>Estructura básica de un programa C (la función main)</li>
+          <li>Pensamiento Computacional: Descomposición y Abstracción</li>
+          <li>Primeros pasos y la función de salida básica</li>
+        </ul>
+        <button class="start-btn">Comenzar</button>
+      </div>
+    </div>
+    <!-- Módulo 2 -->
+    <div class="module-card">
+      <div class="module-progress-bar">
+        <div class="module-progress-fill" style="height: 60%;"></div>
+      </div>
+      <div class="module-content">
+        <div class="module-title">Módulo 2 - Tipos de Datos y Variables</div>
+        <div class="module-desc">Gestión de datos y memoria en C.</div>
+        <ul class="module-topics">
+          <li>El concepto de dato y la gestión de memoria</li>
+          <li>Clasificación de Tipos Primitivos (int, float, char)</li>
+          <li>Declaración, inicialización y uso de Variables</li>
+          <li>Variables y Constantes</li>
+          <li>Límites y rangos de los tipos de datos (desbordamiento)</li>
+          <li>Declaración de variables y buenas prácticas</li>
+        </ul>
+        <button class="start-btn">Comenzar</button>
+      </div>
+    </div>
+    <!-- Módulo 3 -->
+    <div class="module-card">
+      <div class="module-progress-bar">
+        <div class="module-progress-fill" style="height: 0%;"></div>
+      </div>
+      <div class="module-content">
+        <div class="module-title">Módulo 3 - Operadores y E/S de Datos</div>
+        <div class="module-desc">Procesamiento y entrada/salida básica.</div>
+        <ul class="module-topics">
+          <li>Operadores Aritméticos y Asignación</li>
+          <li>Operadores Relacionales y Lógicos (bases para la decisión)</li>
+          <li>Prioridad de operadores y expresiones</li>
+          <li>Entrada Estándar de Datos (Input): Captura de valores</li>
+          <li>Salida Estándar de Datos (Output): Formateo de resultados</li>
+          <li>Implementación práctica de un ciclo Input-Procesamiento-Output</li>
+        </ul>
+        <button class="start-btn">Comenzar</button>
+      </div>
+    </div>
+    <!-- Módulo 4 -->
+    <div class="module-card">
+      <div class="module-progress-bar">
+        <div class="module-progress-fill" style="height: 0%;"></div>
+      </div>
+      <div class="module-content">
+        <div class="module-title">Módulo 4 - Estructuras de Control</div>
+        <div class="module-desc">Lógica de control y flujo de ejecución.</div>
+        <ul class="module-topics">
+          <li>El flujo de ejecución lineal vs. el control de flujo</li>
+          <li>Estructuras Condicionales Simples y Dobles (if / else)</li>
+          <li>Estructuras Condicionales Múltiples (switch y anidamiento)</li>
+          <li>Bucles de Repetición por Contador (for)</li>
+          <li>Bucles de Repetición Condicionales (while / do-while)</li>
+          <li>Control de bucles (break y continue)</li>
+        </ul>
+        <button class="start-btn">Comenzar</button>
+      </div>
+    </div>
+    <!-- Módulo 5 -->
+    <div class="module-card">
+      <div class="module-progress-bar">
+        <div class="module-progress-fill" style="height: 0%;"></div>
+      </div>
+      <div class="module-content">
+        <div class="module-title">Módulo 5 - Funciones y Modularidad</div>
+        <div class="module-desc">Organización y reutilización del código.</div>
+        <ul class="module-topics">
+          <li>Concepto de Modularidad y Reutilización de Código</li>
+          <li>Definición, declaración y llamada de Funciones</li>
+          <li>Comunicación de datos: Paso de Argumentos y Parámetros</li>
+          <li>Valores de Retorno y el tipo void</li>
+          <li>Ámbito (Scope) de las variables: locales y globales</li>
+          <li>Creación de librerías simples (archivos .h y .c conceptual)</li>
+        </ul>
+        <button class="start-btn">Comenzar</button>
+      </div>
+    </div>
+    <!-- Módulo 6 -->
+    <div class="module-card">
+      <div class="module-progress-bar">
+        <div class="module-progress-fill" style="height: 0%;"></div>
+      </div>
+      <div class="module-content">
+        <div class="module-title">Módulo 6 - Arrays y Punteros</div>
+        <div class="module-desc">Estructuras de datos y manipulación de memoria.</div>
+        <ul class="module-topics">
+          <li>Concepto y declaración de Arrays (Arreglos) unidimensionales</li>
+          <li>Acceso a elementos mediante indexación</li>
+          <li>Arrays bidimensionales (Matrices) y su utilidad</li>
+          <li>Concepto de Puntero y Dirección de Memoria</li>
+          <li>Operadores de Punteros (* y &)</li>
+          <li>Relación fundamental entre Punteros y Arrays</li>
+        </ul>
+        <button class="start-btn">Comenzar</button>
+      </div>
+    </div>
+    <!-- Módulo 7 -->
+    <div class="module-card">
+      <div class="module-progress-bar">
+        <div class="module-progress-fill" style="height: 0%;"></div>
+      </div>
+      <div class="module-content">
+        <div class="module-title">Módulo 7 - Structs y Unions</div>
+        <div class="module-desc">Tipos de datos complejos definidos por el usuario.</div>
+        <ul class="module-topics">
+          <li>Concepto de tipo de dato definido por el usuario</li>
+          <li>Declaración y uso de Structs (Estructuras)</li>
+          <li>Acceso a miembros de Structs (Operador punto . y flecha ->)</li>
+          <li>Arrays de Structs (Colecciones complejas)</li>
+          <li>Concepto y uso de Unions para optimización de memoria</li>
+          <li>Campos de bits y alineación de datos (concepto avanzado)</li>
+        </ul>
+        <button class="start-btn">Comenzar</button>
+      </div>
+    </div>
+    <!-- Módulo 8 -->
+    <div class="module-card">
+      <div class="module-progress-bar">
+        <div class="module-progress-fill" style="height: 0%;"></div>
+      </div>
+      <div class="module-content">
+        <div class="module-title">Módulo 8 - Manipulación de Archivos</div>
+        <div class="module-desc">Persistencia de datos y manejo de archivos.</div>
+        <ul class="module-topics">
+          <li>Concepto de persistencia de datos y Streams</li>
+          <li>Apertura y Cierre de Archivos (Manejo de flujo FILE*)</li>
+          <li>Modos de Operación (r, w, a): Lectura, Escritura y Anexar</li>
+          <li>Manipulación de Archivos de Texto</li>
+          <li>Manipulación de Archivos Binarios</li>
+          <li>Detección de errores y comprobación del fin de archivo</li>
+        </ul>
+        <button class="start-btn">Comenzar</button>
+      </div>
+    </div>
+    <!-- Módulo 9 -->
+    <div class="module-card">
+      <div class="module-progress-bar">
+        <div class="module-progress-fill" style="height: 0%;"></div>
+      </div>
+      <div class="module-content">
+        <div class="module-title">Módulo 9 - Asignación de Memoria Dinámica</div>
+        <div class="module-desc">Gestión de memoria en tiempo de ejecución.</div>
+        <ul class="module-topics">
+          <li>Diferencia entre Memoria Estática y Memoria Dinámica (Heap)</li>
+          <li>Asignación de Memoria: la función malloc</li>
+          <li>Redimensión de Memoria: la función realloc</li>
+          <li>Inicialización de Memoria: la función calloc</li>
+          <li>Liberación de Memoria: la función free</li>
+          <li>Fugas de Memoria (Memory Leaks) y buenas prácticas</li>
+        </ul>
+        <button class="start-btn">Comenzar</button>
+      </div>
+    </div>
+    <!-- Módulo 10 -->
+    <div class="module-card">
+      <div class="module-progress-bar">
+        <div class="module-progress-fill" style="height: 0%;"></div>
+      </div>
+      <div class="module-content">
+        <div class="module-title">Módulo 10 - Listas Enlazadas</div>
+        <div class="module-desc">Estructura de datos dinámica fundamental.</div>
+        <ul class="module-topics">
+          <li>El problema de los Arrays de tamaño fijo</li>
+          <li>Estructura de un Nodo: Dato y Puntero de Enlace</li>
+          <li>Creación de Listas Enlazadas Simples</li>
+          <li>Operaciones fundamentales: Inserción (inicio, fin, medio)</li>
+          <li>Operaciones fundamentales: Eliminación y Recorrido</li>
+          <li>Aplicación: Implementación básica de una Pila o Cola</li>
+        </ul>
+        <button class="start-btn">Comenzar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer-c">
+    <div class="footer-content">
+      <div class="footer-logo">
+        <div class="logo-c" style="width:32px;height:32px;font-size:1.3rem;">C</div>
+        Plataforma C
+      </div>
+      <div class="footer-links">
+        <div class="font-bold mb-2">Enlaces rápidos</div>
+        <a href="#">Inicio</a>
+        <a href="#">Contenidos</a>
+        <a href="#">Sobre nosotros</a>
+        <a href="#">Información de contacto</a>
+      </div>
+      <!--
+      <div class="footer-newsletter">
+        <div class="font-bold mb-2">Newsletter</div>
+          <form class="newsletter-form" onsubmit="event.preventDefault(); alert('¡Gracias por suscribirte!');">
+            <input type="email" placeholder="Tu correo electrónico" required>
+            <button type="submit">Get Newsletter</button>
+          </form>
+        </div>
+      </div>
+      -->
+    <div class="copyright mt-6">&copy; 2025 Plataforma C. Todos los derechos reservados.</div>
+  </footer>
+</body>
+</html>

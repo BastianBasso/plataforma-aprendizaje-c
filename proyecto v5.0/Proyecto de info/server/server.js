@@ -39,6 +39,10 @@ function isAuthenticated(req, res, next) {
 
 
 app.use(express.static(path.join(__dirname, "../proyecto/dist")));
+app.use(express.static(path.join(__dirname, "../proyecto/dist/protected_html")));
+// linea anteriror añadida ayuda a que cargue los archivos html protegidos, pero ojo con esto puede generar vulnerabilidades si no se maneja bien  test hecho para cursos-selec.html
+// >Bastian: bastante inseguro si no se maneja bien, pero si el acceso a las rutas protegidas esta bien hecho no habria problema
+
 
 // Rutas estáticas de páginas
 app.get("/index", (req, res) => { 
