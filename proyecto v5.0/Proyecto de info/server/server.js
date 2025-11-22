@@ -20,7 +20,7 @@ app.use(session({
     }
 }));
 
-// Middleware para parsing
+
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
