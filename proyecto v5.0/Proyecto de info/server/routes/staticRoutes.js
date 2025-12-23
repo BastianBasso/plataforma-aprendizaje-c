@@ -29,4 +29,19 @@ router.get('/inicio.html', isAuthenticated, (req, res) => {
     res.sendFile(path.join(__dirname, "../../proyecto/dist/protected_html/inicio.html")); 
 });
 
+router.get('/cursos-selec.html',isAuthenticated ,(req, res) => {
+    res.sendFile(path.join(__dirname, "../../proyecto/dist/protected_html/cursos-selec.html"));
+});
+
+router.get('/admin.html',isAuthenticated ,(req, res) => {
+    res.sendFile(path.join(__dirname, "../../proyecto/dist/protected_html/admin.html"));
+});
+
+// Modulos de contenido  igual usan un isAuthenticated
+const modulosRoutes = require('./modulosRoutes');
+router.use(modulosRoutes);
+
+
+
+
 module.exports = router;
