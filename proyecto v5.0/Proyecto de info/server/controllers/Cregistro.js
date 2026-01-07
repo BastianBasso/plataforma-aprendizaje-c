@@ -162,7 +162,7 @@ const forgotPassword = async (req, res) => {
             return res.status(500).json({ success: false, message: 'Error interno del servidor al generar el enlace.' });
         }
 
-        const resetLink = `http://localhost:8080/restore-password.html?token=${token}`;
+        const resetLink = `http://localhost:8080/react/restore-password?token=${token}`;
 
         const mailOptions = {
             from: 'soportepcmultimedia@gmail.com',

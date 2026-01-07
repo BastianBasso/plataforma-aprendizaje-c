@@ -5,36 +5,41 @@ const { isAuthenticated } = require('../middlewares/auth');
 
 // Rutas estáticas públicas
 router.get("/index", (req, res) => { 
-    res.sendFile(path.join(__dirname, "../../proyecto/dist/index.html"));
+    res.redirect(302, "/react/");
+});
+
+router.get("/login", (req, res) => { 
+    res.redirect(302, "/react/login");
 });
 
 router.get("/registro", (req, res) => { 
-    res.sendFile(path.join(__dirname, "../../proyecto/dist/registro.html"));
+    res.redirect(302, "/react/registro");
 });
 
 router.get("/forgot-password", (req, res) => { 
-    res.sendFile(path.join(__dirname, "../../proyecto/dist/forgot-password.html"));
+    res.redirect(302, "/react/forgot-password");
 });
 
 router.get("/restore-password", (req, res) => { 
-    res.sendFile(path.join(__dirname, "../../proyecto/dist/restore-password.html"));
+    const qs = req.originalUrl.includes('?') ? req.originalUrl.substring(req.originalUrl.indexOf('?')) : '';
+    res.redirect(302, `/react/restore-password${qs}`);
 });
 
 // Rutas protegidas
 router.get('/inicio', isAuthenticated, (req, res) => {
-    res.sendFile(path.join(__dirname, "../../proyecto/dist/protected_html/inicio.html")); 
+    res.redirect(302, '/react/inicio');
 });
 
 router.get('/inicio.html', isAuthenticated, (req, res) => {
-    res.sendFile(path.join(__dirname, "../../proyecto/dist/protected_html/inicio.html")); 
+    res.redirect(302, '/react/inicio');
 });
 
 router.get('/cursos-selec.html',isAuthenticated ,(req, res) => {
-    res.sendFile(path.join(__dirname, "../../proyecto/dist/protected_html/cursos-selec.html"));
+    res.redirect(302, '/react/cursos');
 });
 
 router.get('/admin.html',isAuthenticated ,(req, res) => {
-    res.sendFile(path.join(__dirname, "../../proyecto/dist/protected_html/admin.html"));
+    res.redirect(302, '/react/admin');
 });
 
 // Modulos de contenido  igual usan un isAuthenticated

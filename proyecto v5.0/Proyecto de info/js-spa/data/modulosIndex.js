@@ -1,0 +1,624 @@
+export const modulosIndex = [
+  {
+    "modulo": "modulo-1-Fundamentos-Introduccion",
+    "archivos": [
+      {
+        "nombre": "100-Introduccion-a-la-programacion-y-Algoritmos.html",
+        "ruta": "/Modulos/modulo-1-Fundamentos-Introduccion/100-Introduccion-a-la-programacion-y-Algoritmos.html"
+      },
+      {
+        "nombre": "101-preguntas-introduccion-.html",
+        "ruta": "/Modulos/modulo-1-Fundamentos-Introduccion/101-preguntas-introduccion-.html"
+      },
+      {
+        "nombre": "200-Historia-Proposito-y-aplicaciones-del-lenguaje-C.html",
+        "ruta": "/Modulos/modulo-1-Fundamentos-Introduccion/200-Historia-Proposito-y-aplicaciones-del-lenguaje-C.html"
+      },
+      {
+        "nombre": "201-preguntas-respuesta.html",
+        "ruta": "/Modulos/modulo-1-Fundamentos-Introduccion/201-preguntas-respuesta.html"
+      },
+      {
+        "nombre": "300-El-proceso-de-compilacion-y-el-ciclo-de-vida-del-codigo.html",
+        "ruta": "/Modulos/modulo-1-Fundamentos-Introduccion/300-El-proceso-de-compilacion-y-el-ciclo-de-vida-del-codigo.html"
+      },
+      {
+        "nombre": "301-preguntas--respuestas.html",
+        "ruta": "/Modulos/modulo-1-Fundamentos-Introduccion/301-preguntas--respuestas.html"
+      },
+      {
+        "nombre": "400---Estructura-basica-de-un-programa-C-la-funcion-main.html",
+        "ruta": "/Modulos/modulo-1-Fundamentos-Introduccion/400---Estructura-basica-de-un-programa-C-la-funcion-main.html"
+      },
+      {
+        "nombre": "401-preguntas-respuestas.html",
+        "ruta": "/Modulos/modulo-1-Fundamentos-Introduccion/401-preguntas-respuestas.html"
+      },
+      {
+        "nombre": "500-Pensamiento-Computacional-Descomposicion-y-Abstraccion.html",
+        "ruta": "/Modulos/modulo-1-Fundamentos-Introduccion/500-Pensamiento-Computacional-Descomposicion-y-Abstraccion.html"
+      },
+      {
+        "nombre": "501-preguntas-respuestas.html",
+        "ruta": "/Modulos/modulo-1-Fundamentos-Introduccion/501-preguntas-respuestas.html"
+      },
+      {
+        "nombre": "600-Primeros-pasos-y-la-funcion-de-salida-basica.html",
+        "ruta": "/Modulos/modulo-1-Fundamentos-Introduccion/600-Primeros-pasos-y-la-funcion-de-salida-basica.html"
+      },
+      {
+        "nombre": "601-q-a.html",
+        "ruta": "/Modulos/modulo-1-Fundamentos-Introduccion/601-q-a.html"
+      },
+      {
+        "nombre": "800-Resumen.html",
+        "ruta": "/Modulos/modulo-1-Fundamentos-Introduccion/800-Resumen.html"
+      }
+    ]
+  },
+  {
+    "modulo": "modulo-10-Listas-Enlazadas",
+    "archivos": [
+      {
+        "nombre": "100-1.-El-Problema-de-los-Arrays-de-Tamanyo-Fijo-.html",
+        "ruta": "/Modulos/modulo-10-Listas-Enlazadas/100-1.-El-Problema-de-los-Arrays-de-Tamanyo-Fijo-.html"
+      },
+      {
+        "nombre": "150.html",
+        "ruta": "/Modulos/modulo-10-Listas-Enlazadas/150.html"
+      },
+      {
+        "nombre": "200-2.-Estructura-de-un-Nodo-Dato-y-Puntero-de-Enlace.html",
+        "ruta": "/Modulos/modulo-10-Listas-Enlazadas/200-2.-Estructura-de-un-Nodo-Dato-y-Puntero-de-Enlace.html"
+      },
+      {
+        "nombre": "250-ejercicios.html",
+        "ruta": "/Modulos/modulo-10-Listas-Enlazadas/250-ejercicios.html"
+      },
+      {
+        "nombre": "300-3.-Creacion-de-Listas-Enlazadas-Simples.html",
+        "ruta": "/Modulos/modulo-10-Listas-Enlazadas/300-3.-Creacion-de-Listas-Enlazadas-Simples.html"
+      },
+      {
+        "nombre": "350-progra.html",
+        "ruta": "/Modulos/modulo-10-Listas-Enlazadas/350-progra.html"
+      },
+      {
+        "nombre": "400-4.-Operaciones-Fundamentales-Insercion-Inicio,-Fin,-Medio.html",
+        "ruta": "/Modulos/modulo-10-Listas-Enlazadas/400-4.-Operaciones-Fundamentales-Insercion-Inicio,-Fin,-Medio.html"
+      },
+      {
+        "nombre": "450-ejercicios.html",
+        "ruta": "/Modulos/modulo-10-Listas-Enlazadas/450-ejercicios.html"
+      },
+      {
+        "nombre": "500-5.-Operaciones-Fundamentales-Eliminacion-y-Recorrido.html",
+        "ruta": "/Modulos/modulo-10-Listas-Enlazadas/500-5.-Operaciones-Fundamentales-Eliminacion-y-Recorrido.html"
+      },
+      {
+        "nombre": "550-ejercicios.html",
+        "ruta": "/Modulos/modulo-10-Listas-Enlazadas/550-ejercicios.html"
+      },
+      {
+        "nombre": "600-6.-Aplicacion-Implementacion-Basica-de-una-Pila-o-Cola.html",
+        "ruta": "/Modulos/modulo-10-Listas-Enlazadas/600-6.-Aplicacion-Implementacion-Basica-de-una-Pila-o-Cola.html"
+      },
+      {
+        "nombre": "650-ejercicios.html",
+        "ruta": "/Modulos/modulo-10-Listas-Enlazadas/650-ejercicios.html"
+      },
+      {
+        "nombre": "700-proyecto.html",
+        "ruta": "/Modulos/modulo-10-Listas-Enlazadas/700-proyecto.html"
+      },
+      {
+        "nombre": "750-proyecto-solucion.html",
+        "ruta": "/Modulos/modulo-10-Listas-Enlazadas/750-proyecto-solucion.html"
+      },
+      {
+        "nombre": "800-Resumen.html",
+        "ruta": "/Modulos/modulo-10-Listas-Enlazadas/800-Resumen.html"
+      }
+    ]
+  },
+  {
+    "modulo": "Modulo-2-Tipos-de-Datos-y-Variables",
+    "archivos": [
+      {
+        "nombre": "100--1.-El-Concepto-de-Dato-y-la-Gestion-de-Memoria.html",
+        "ruta": "/Modulos/Modulo-2-Tipos-de-Datos-y-Variables/100--1.-El-Concepto-de-Dato-y-la-Gestion-de-Memoria.html"
+      },
+      {
+        "nombre": "101-preg-resp--.html",
+        "ruta": "/Modulos/Modulo-2-Tipos-de-Datos-y-Variables/101-preg-resp--.html"
+      },
+      {
+        "nombre": "200-Clasificacion-de-Tipos-Primitivos-int,-float,-char.html",
+        "ruta": "/Modulos/Modulo-2-Tipos-de-Datos-y-Variables/200-Clasificacion-de-Tipos-Primitivos-int,-float,-char.html"
+      },
+      {
+        "nombre": "201-preguntas-progra.html",
+        "ruta": "/Modulos/Modulo-2-Tipos-de-Datos-y-Variables/201-preguntas-progra.html"
+      },
+      {
+        "nombre": "300-Declaracion,-Inicializacion-y-Uso-de-Variables.html",
+        "ruta": "/Modulos/Modulo-2-Tipos-de-Datos-y-Variables/300-Declaracion,-Inicializacion-y-Uso-de-Variables.html"
+      },
+      {
+        "nombre": "301-preg-progra.html",
+        "ruta": "/Modulos/Modulo-2-Tipos-de-Datos-y-Variables/301-preg-progra.html"
+      },
+      {
+        "nombre": "400-4.-Variables-y-Constantes-.html",
+        "ruta": "/Modulos/Modulo-2-Tipos-de-Datos-y-Variables/400-4.-Variables-y-Constantes-.html"
+      },
+      {
+        "nombre": "401-preg-resp.html",
+        "ruta": "/Modulos/Modulo-2-Tipos-de-Datos-y-Variables/401-preg-resp.html"
+      },
+      {
+        "nombre": "500-5.-Limites-y-Rangos-de-los-Tipos-de-Datos-Desbordamiento.html",
+        "ruta": "/Modulos/Modulo-2-Tipos-de-Datos-y-Variables/500-5.-Limites-y-Rangos-de-los-Tipos-de-Datos-Desbordamiento.html"
+      },
+      {
+        "nombre": "501-programas.html",
+        "ruta": "/Modulos/Modulo-2-Tipos-de-Datos-y-Variables/501-programas.html"
+      },
+      {
+        "nombre": "600-Declaracion-de-Variables-y-Buenas-Practicas.html",
+        "ruta": "/Modulos/Modulo-2-Tipos-de-Datos-y-Variables/600-Declaracion-de-Variables-y-Buenas-Practicas.html"
+      },
+      {
+        "nombre": "601-progra.html",
+        "ruta": "/Modulos/Modulo-2-Tipos-de-Datos-y-Variables/601-progra.html"
+      },
+      {
+        "nombre": "700-Proyecto.html",
+        "ruta": "/Modulos/Modulo-2-Tipos-de-Datos-y-Variables/700-Proyecto.html"
+      },
+      {
+        "nombre": "800-Resumen.html",
+        "ruta": "/Modulos/Modulo-2-Tipos-de-Datos-y-Variables/800-Resumen.html"
+      }
+    ]
+  },
+  {
+    "modulo": "Modulo-3-Operadores-y-ES-de-Datos",
+    "archivos": [
+      {
+        "nombre": "100-1--Operadores-Aritmeticos-y-Asignacion.html",
+        "ruta": "/Modulos/Modulo-3-Operadores-y-ES-de-Datos/100-1--Operadores-Aritmeticos-y-Asignacion.html"
+      },
+      {
+        "nombre": "101-progra.html",
+        "ruta": "/Modulos/Modulo-3-Operadores-y-ES-de-Datos/101-progra.html"
+      },
+      {
+        "nombre": "200-2--Operadores-Relacionales-y-Logicos-bases-para-la-decision.html",
+        "ruta": "/Modulos/Modulo-3-Operadores-y-ES-de-Datos/200-2--Operadores-Relacionales-y-Logicos-bases-para-la-decision.html"
+      },
+      {
+        "nombre": "201-preguntas.html",
+        "ruta": "/Modulos/Modulo-3-Operadores-y-ES-de-Datos/201-preguntas.html"
+      },
+      {
+        "nombre": "300-3--Prioridad-de-operadores-y-expresiones.html",
+        "ruta": "/Modulos/Modulo-3-Operadores-y-ES-de-Datos/300-3--Prioridad-de-operadores-y-expresiones.html"
+      },
+      {
+        "nombre": "301-ejercicios.html",
+        "ruta": "/Modulos/Modulo-3-Operadores-y-ES-de-Datos/301-ejercicios.html"
+      },
+      {
+        "nombre": "400-4--Entrada-Estandar-de-Datos-Input-Captura-de-valores.html",
+        "ruta": "/Modulos/Modulo-3-Operadores-y-ES-de-Datos/400-4--Entrada-Estandar-de-Datos-Input-Captura-de-valores.html"
+      },
+      {
+        "nombre": "401-preg.html",
+        "ruta": "/Modulos/Modulo-3-Operadores-y-ES-de-Datos/401-preg.html"
+      },
+      {
+        "nombre": "500-5--Salida-Estandar-de-Datos-Output-Formateo-de-resultados.html",
+        "ruta": "/Modulos/Modulo-3-Operadores-y-ES-de-Datos/500-5--Salida-Estandar-de-Datos-Output-Formateo-de-resultados.html"
+      },
+      {
+        "nombre": "501-preguntas.html",
+        "ruta": "/Modulos/Modulo-3-Operadores-y-ES-de-Datos/501-preguntas.html"
+      },
+      {
+        "nombre": "600-6--Implementacion-practica-de-un-ciclo-Input-Procesamiento-Output.html",
+        "ruta": "/Modulos/Modulo-3-Operadores-y-ES-de-Datos/600-6--Implementacion-practica-de-un-ciclo-Input-Procesamiento-Output.html"
+      },
+      {
+        "nombre": "601-preguntas.html",
+        "ruta": "/Modulos/Modulo-3-Operadores-y-ES-de-Datos/601-preguntas.html"
+      },
+      {
+        "nombre": "700-proyecto.html",
+        "ruta": "/Modulos/Modulo-3-Operadores-y-ES-de-Datos/700-proyecto.html"
+      },
+      {
+        "nombre": "800-resumen.html",
+        "ruta": "/Modulos/Modulo-3-Operadores-y-ES-de-Datos/800-resumen.html"
+      }
+    ]
+  },
+  {
+    "modulo": "Modulo-4-Estructuras-de-Control",
+    "archivos": [
+      {
+        "nombre": "100-1-El-Flujo-de-Ejecucion-Lineal-vs-el-Control-de-Flujo.html",
+        "ruta": "/Modulos/Modulo-4-Estructuras-de-Control/100-1-El-Flujo-de-Ejecucion-Lineal-vs-el-Control-de-Flujo.html"
+      },
+      {
+        "nombre": "101-preguntas.html",
+        "ruta": "/Modulos/Modulo-4-Estructuras-de-Control/101-preguntas.html"
+      },
+      {
+        "nombre": "200--Estructuras-Condicionales-Simples-y-Dobles-if--else.html",
+        "ruta": "/Modulos/Modulo-4-Estructuras-de-Control/200--Estructuras-Condicionales-Simples-y-Dobles-if--else.html"
+      },
+      {
+        "nombre": "201-progra.html",
+        "ruta": "/Modulos/Modulo-4-Estructuras-de-Control/201-progra.html"
+      },
+      {
+        "nombre": "300-3-Estructuras-Condicionales-Multiples-switch-y-Anidamiento.html",
+        "ruta": "/Modulos/Modulo-4-Estructuras-de-Control/300-3-Estructuras-Condicionales-Multiples-switch-y-Anidamiento.html"
+      },
+      {
+        "nombre": "301-progra.html",
+        "ruta": "/Modulos/Modulo-4-Estructuras-de-Control/301-progra.html"
+      },
+      {
+        "nombre": "400-4-Bucles-de-Repeticion-por-Contador-for.html",
+        "ruta": "/Modulos/Modulo-4-Estructuras-de-Control/400-4-Bucles-de-Repeticion-por-Contador-for.html"
+      },
+      {
+        "nombre": "401-progra.html",
+        "ruta": "/Modulos/Modulo-4-Estructuras-de-Control/401-progra.html"
+      },
+      {
+        "nombre": "500-5-Bucles-de-Repeticion-Condicionales-while-do-while.html",
+        "ruta": "/Modulos/Modulo-4-Estructuras-de-Control/500-5-Bucles-de-Repeticion-Condicionales-while-do-while.html"
+      },
+      {
+        "nombre": "501-progra.html",
+        "ruta": "/Modulos/Modulo-4-Estructuras-de-Control/501-progra.html"
+      },
+      {
+        "nombre": "600-6-Control-de-bucles-break-y-continue.html",
+        "ruta": "/Modulos/Modulo-4-Estructuras-de-Control/600-6-Control-de-bucles-break-y-continue.html"
+      },
+      {
+        "nombre": "601-progra.html",
+        "ruta": "/Modulos/Modulo-4-Estructuras-de-Control/601-progra.html"
+      },
+      {
+        "nombre": "700-proyecto-.html",
+        "ruta": "/Modulos/Modulo-4-Estructuras-de-Control/700-proyecto-.html"
+      },
+      {
+        "nombre": "800-Resumen.html",
+        "ruta": "/Modulos/Modulo-4-Estructuras-de-Control/800-Resumen.html"
+      }
+    ]
+  },
+  {
+    "modulo": "Modulo-5-Funciones-y-Modularidad",
+    "archivos": [
+      {
+        "nombre": "100-1-Concepto-de-Modularidad-y-Reutilizacion-de-Codigo.html",
+        "ruta": "/Modulos/Modulo-5-Funciones-y-Modularidad/100-1-Concepto-de-Modularidad-y-Reutilizacion-de-Codigo.html"
+      },
+      {
+        "nombre": "101-preguntas-.html",
+        "ruta": "/Modulos/Modulo-5-Funciones-y-Modularidad/101-preguntas-.html"
+      },
+      {
+        "nombre": "200--2-Definicion,-Declaracion-y-Llamada-de-Funciones.html",
+        "ruta": "/Modulos/Modulo-5-Funciones-y-Modularidad/200--2-Definicion,-Declaracion-y-Llamada-de-Funciones.html"
+      },
+      {
+        "nombre": "201-progra-.html",
+        "ruta": "/Modulos/Modulo-5-Funciones-y-Modularidad/201-progra-.html"
+      },
+      {
+        "nombre": "300--3-Comunicacion-de-Datos-Paso-de-Argumentos-y-Parametros.html",
+        "ruta": "/Modulos/Modulo-5-Funciones-y-Modularidad/300--3-Comunicacion-de-Datos-Paso-de-Argumentos-y-Parametros.html"
+      },
+      {
+        "nombre": "301-progra.html",
+        "ruta": "/Modulos/Modulo-5-Funciones-y-Modularidad/301-progra.html"
+      },
+      {
+        "nombre": "400-4-Valores-de-Retorno-y-el-Tipo-void.html",
+        "ruta": "/Modulos/Modulo-5-Funciones-y-Modularidad/400-4-Valores-de-Retorno-y-el-Tipo-void.html"
+      },
+      {
+        "nombre": "401-progra.html",
+        "ruta": "/Modulos/Modulo-5-Funciones-y-Modularidad/401-progra.html"
+      },
+      {
+        "nombre": "500--5-Ambito-Scope-de-las-Variables-Locales-y-Globales.html",
+        "ruta": "/Modulos/Modulo-5-Funciones-y-Modularidad/500--5-Ambito-Scope-de-las-Variables-Locales-y-Globales.html"
+      },
+      {
+        "nombre": "501-progra.html",
+        "ruta": "/Modulos/Modulo-5-Funciones-y-Modularidad/501-progra.html"
+      },
+      {
+        "nombre": "600-6-Creacion-de-Librerias-Simples-Archivos-h-y-c-Conceptual.html",
+        "ruta": "/Modulos/Modulo-5-Funciones-y-Modularidad/600-6-Creacion-de-Librerias-Simples-Archivos-h-y-c-Conceptual.html"
+      },
+      {
+        "nombre": "601-progra.html",
+        "ruta": "/Modulos/Modulo-5-Funciones-y-Modularidad/601-progra.html"
+      },
+      {
+        "nombre": "700-proyecto.html",
+        "ruta": "/Modulos/Modulo-5-Funciones-y-Modularidad/700-proyecto.html"
+      },
+      {
+        "nombre": "800-resumen.html",
+        "ruta": "/Modulos/Modulo-5-Funciones-y-Modularidad/800-resumen.html"
+      }
+    ]
+  },
+  {
+    "modulo": "modulo-6-Arrays-y-Punteros",
+    "archivos": [
+      {
+        "nombre": "100-1-concepto-y-declaracion-de-Arrays.html",
+        "ruta": "/Modulos/modulo-6-Arrays-y-Punteros/100-1-concepto-y-declaracion-de-Arrays.html"
+      },
+      {
+        "nombre": "101-progra.html",
+        "ruta": "/Modulos/modulo-6-Arrays-y-Punteros/101-progra.html"
+      },
+      {
+        "nombre": "200-2-Acceso-a-Elementos-Mediante-Indexacion.html",
+        "ruta": "/Modulos/modulo-6-Arrays-y-Punteros/200-2-Acceso-a-Elementos-Mediante-Indexacion.html"
+      },
+      {
+        "nombre": "201-progra.html",
+        "ruta": "/Modulos/modulo-6-Arrays-y-Punteros/201-progra.html"
+      },
+      {
+        "nombre": "300-3-Arrays-Bidimensionales-Matrices-y-su-Utilidad-.html",
+        "ruta": "/Modulos/modulo-6-Arrays-y-Punteros/300-3-Arrays-Bidimensionales-Matrices-y-su-Utilidad-.html"
+      },
+      {
+        "nombre": "301-progra.html",
+        "ruta": "/Modulos/modulo-6-Arrays-y-Punteros/301-progra.html"
+      },
+      {
+        "nombre": "400--4-Concepto-de-Puntero-y-Direccion-de-Memoria-.html",
+        "ruta": "/Modulos/modulo-6-Arrays-y-Punteros/400--4-Concepto-de-Puntero-y-Direccion-de-Memoria-.html"
+      },
+      {
+        "nombre": "401-preguntas.html",
+        "ruta": "/Modulos/modulo-6-Arrays-y-Punteros/401-preguntas.html"
+      },
+      {
+        "nombre": "500-5-Operadores-de-Punteros--y-&.html",
+        "ruta": "/Modulos/modulo-6-Arrays-y-Punteros/500-5-Operadores-de-Punteros--y-&.html"
+      },
+      {
+        "nombre": "501-preg.html",
+        "ruta": "/Modulos/modulo-6-Arrays-y-Punteros/501-preg.html"
+      },
+      {
+        "nombre": "600-6-Relacion-Fundamental-entre-Punteros-y-Arrays.html",
+        "ruta": "/Modulos/modulo-6-Arrays-y-Punteros/600-6-Relacion-Fundamental-entre-Punteros-y-Arrays.html"
+      },
+      {
+        "nombre": "601-pregunras.html",
+        "ruta": "/Modulos/modulo-6-Arrays-y-Punteros/601-pregunras.html"
+      },
+      {
+        "nombre": "700-proyexto.html",
+        "ruta": "/Modulos/modulo-6-Arrays-y-Punteros/700-proyexto.html"
+      },
+      {
+        "nombre": "800-resumen.html",
+        "ruta": "/Modulos/modulo-6-Arrays-y-Punteros/800-resumen.html"
+      }
+    ]
+  },
+  {
+    "modulo": "modulo-7-Structs-y-Unions",
+    "archivos": [
+      {
+        "nombre": "100-1.-Concepto-de-Tipo-de-Dato-Definido-por-el-Usuario.html",
+        "ruta": "/Modulos/modulo-7-Structs-y-Unions/100-1.-Concepto-de-Tipo-de-Dato-Definido-por-el-Usuario.html"
+      },
+      {
+        "nombre": "101-preguntas.html",
+        "ruta": "/Modulos/modulo-7-Structs-y-Unions/101-preguntas.html"
+      },
+      {
+        "nombre": "200-2.-Declaracion-y-Uso-de-Structs-Estructuras.html",
+        "ruta": "/Modulos/modulo-7-Structs-y-Unions/200-2.-Declaracion-y-Uso-de-Structs-Estructuras.html"
+      },
+      {
+        "nombre": "201-progra.html",
+        "ruta": "/Modulos/modulo-7-Structs-y-Unions/201-progra.html"
+      },
+      {
+        "nombre": "300-3-Acceso-a-Miembros-de-Structs-Operador-punto--y-flecha--.html",
+        "ruta": "/Modulos/modulo-7-Structs-y-Unions/300-3-Acceso-a-Miembros-de-Structs-Operador-punto--y-flecha--.html"
+      },
+      {
+        "nombre": "301-progra.html",
+        "ruta": "/Modulos/modulo-7-Structs-y-Unions/301-progra.html"
+      },
+      {
+        "nombre": "400-4.-Arrays-de-Structs-Colecciones-Complejas.html",
+        "ruta": "/Modulos/modulo-7-Structs-y-Unions/400-4.-Arrays-de-Structs-Colecciones-Complejas.html"
+      },
+      {
+        "nombre": "401-progra-.html",
+        "ruta": "/Modulos/modulo-7-Structs-y-Unions/401-progra-.html"
+      },
+      {
+        "nombre": "500-5.-Concepto-y-Uso-de-Unions-para-Optimizacion-de-Memoria.html",
+        "ruta": "/Modulos/modulo-7-Structs-y-Unions/500-5.-Concepto-y-Uso-de-Unions-para-Optimizacion-de-Memoria.html"
+      },
+      {
+        "nombre": "501-progra-.html",
+        "ruta": "/Modulos/modulo-7-Structs-y-Unions/501-progra-.html"
+      },
+      {
+        "nombre": "600-6.-Campos-de-Bits-y-Alineacion-de-Datos-Concepto-Avanzado.html",
+        "ruta": "/Modulos/modulo-7-Structs-y-Unions/600-6.-Campos-de-Bits-y-Alineacion-de-Datos-Concepto-Avanzado.html"
+      },
+      {
+        "nombre": "601-preguntas.html",
+        "ruta": "/Modulos/modulo-7-Structs-y-Unions/601-preguntas.html"
+      },
+      {
+        "nombre": "700-proyecto.html",
+        "ruta": "/Modulos/modulo-7-Structs-y-Unions/700-proyecto.html"
+      },
+      {
+        "nombre": "701-respuesta-proyect.html",
+        "ruta": "/Modulos/modulo-7-Structs-y-Unions/701-respuesta-proyect.html"
+      },
+      {
+        "nombre": "800-resumen.html",
+        "ruta": "/Modulos/modulo-7-Structs-y-Unions/800-resumen.html"
+      }
+    ]
+  },
+  {
+    "modulo": "modulo-8-Manipulacion-de-Archivos",
+    "archivos": [
+      {
+        "nombre": "100-1.-Concepto-de-Persistencia-de-Datos-y-Streams.html",
+        "ruta": "/Modulos/modulo-8-Manipulacion-de-Archivos/100-1.-Concepto-de-Persistencia-de-Datos-y-Streams.html"
+      },
+      {
+        "nombre": "101-preguntas.html",
+        "ruta": "/Modulos/modulo-8-Manipulacion-de-Archivos/101-preguntas.html"
+      },
+      {
+        "nombre": "200-2-Apertura-y-Cierre-de-Archivos-Manejo-de-flujo-FILE.html",
+        "ruta": "/Modulos/modulo-8-Manipulacion-de-Archivos/200-2-Apertura-y-Cierre-de-Archivos-Manejo-de-flujo-FILE.html"
+      },
+      {
+        "nombre": "201-progra.html",
+        "ruta": "/Modulos/modulo-8-Manipulacion-de-Archivos/201-progra.html"
+      },
+      {
+        "nombre": "300--Modos-de-Operacion-r-w--a--Lectura,-Escritura-y-Anexar.html",
+        "ruta": "/Modulos/modulo-8-Manipulacion-de-Archivos/300--Modos-de-Operacion-r-w--a--Lectura,-Escritura-y-Anexar.html"
+      },
+      {
+        "nombre": "301-progra.html",
+        "ruta": "/Modulos/modulo-8-Manipulacion-de-Archivos/301-progra.html"
+      },
+      {
+        "nombre": "400-4-Manipulacion-de-Archivos-de-Texto.html",
+        "ruta": "/Modulos/modulo-8-Manipulacion-de-Archivos/400-4-Manipulacion-de-Archivos-de-Texto.html"
+      },
+      {
+        "nombre": "401-progra.html",
+        "ruta": "/Modulos/modulo-8-Manipulacion-de-Archivos/401-progra.html"
+      },
+      {
+        "nombre": "500-5.-Manipulacion-de-Archivos-Binarios.html",
+        "ruta": "/Modulos/modulo-8-Manipulacion-de-Archivos/500-5.-Manipulacion-de-Archivos-Binarios.html"
+      },
+      {
+        "nombre": "501-progra-.html",
+        "ruta": "/Modulos/modulo-8-Manipulacion-de-Archivos/501-progra-.html"
+      },
+      {
+        "nombre": "600-6-Deteccion-de-Errores-y-Comprobacion-del-Fin-de-Archivo.html",
+        "ruta": "/Modulos/modulo-8-Manipulacion-de-Archivos/600-6-Deteccion-de-Errores-y-Comprobacion-del-Fin-de-Archivo.html"
+      },
+      {
+        "nombre": "601-progra.html",
+        "ruta": "/Modulos/modulo-8-Manipulacion-de-Archivos/601-progra.html"
+      },
+      {
+        "nombre": "700-proyecto.html",
+        "ruta": "/Modulos/modulo-8-Manipulacion-de-Archivos/700-proyecto.html"
+      },
+      {
+        "nombre": "750-proyecto-resultado.html",
+        "ruta": "/Modulos/modulo-8-Manipulacion-de-Archivos/750-proyecto-resultado.html"
+      },
+      {
+        "nombre": "800-Resumen.html",
+        "ruta": "/Modulos/modulo-8-Manipulacion-de-Archivos/800-Resumen.html"
+      }
+    ]
+  },
+  {
+    "modulo": "modulo-9-Asignacion-de-Memoria-Dinamica",
+    "archivos": [
+      {
+        "nombre": "100-1.-Diferencia-entre-Memoria-Estatica-y-Memoria-Dinamica-Heap.html",
+        "ruta": "/Modulos/modulo-9-Asignacion-de-Memoria-Dinamica/100-1.-Diferencia-entre-Memoria-Estatica-y-Memoria-Dinamica-Heap.html"
+      },
+      {
+        "nombre": "150-progra.html",
+        "ruta": "/Modulos/modulo-9-Asignacion-de-Memoria-Dinamica/150-progra.html"
+      },
+      {
+        "nombre": "200-2.-Asignacion-de-Memoria-la-funcion-malloc-.html",
+        "ruta": "/Modulos/modulo-9-Asignacion-de-Memoria-Dinamica/200-2.-Asignacion-de-Memoria-la-funcion-malloc-.html"
+      },
+      {
+        "nombre": "250-ejercicios.html",
+        "ruta": "/Modulos/modulo-9-Asignacion-de-Memoria-Dinamica/250-ejercicios.html"
+      },
+      {
+        "nombre": "300-3-Redimension-de-Memoria-la-funcion-realloc.html",
+        "ruta": "/Modulos/modulo-9-Asignacion-de-Memoria-Dinamica/300-3-Redimension-de-Memoria-la-funcion-realloc.html"
+      },
+      {
+        "nombre": "350-ejercicios.html",
+        "ruta": "/Modulos/modulo-9-Asignacion-de-Memoria-Dinamica/350-ejercicios.html"
+      },
+      {
+        "nombre": "400-4.-Inicializacion-de-Memoria-la-funcion-calloc.html",
+        "ruta": "/Modulos/modulo-9-Asignacion-de-Memoria-Dinamica/400-4.-Inicializacion-de-Memoria-la-funcion-calloc.html"
+      },
+      {
+        "nombre": "450-preguntas.html",
+        "ruta": "/Modulos/modulo-9-Asignacion-de-Memoria-Dinamica/450-preguntas.html"
+      },
+      {
+        "nombre": "500-5.-Liberacion-de-Memoria-la-funcion-free.html",
+        "ruta": "/Modulos/modulo-9-Asignacion-de-Memoria-Dinamica/500-5.-Liberacion-de-Memoria-la-funcion-free.html"
+      },
+      {
+        "nombre": "550-problemas.html",
+        "ruta": "/Modulos/modulo-9-Asignacion-de-Memoria-Dinamica/550-problemas.html"
+      },
+      {
+        "nombre": "600-6.-Fugas-de-Memoria-Memory-Leaks-y-Buenas-Practicas.html",
+        "ruta": "/Modulos/modulo-9-Asignacion-de-Memoria-Dinamica/600-6.-Fugas-de-Memoria-Memory-Leaks-y-Buenas-Practicas.html"
+      },
+      {
+        "nombre": "650-ejercicios.html",
+        "ruta": "/Modulos/modulo-9-Asignacion-de-Memoria-Dinamica/650-ejercicios.html"
+      },
+      {
+        "nombre": "700-proyecto-.html",
+        "ruta": "/Modulos/modulo-9-Asignacion-de-Memoria-Dinamica/700-proyecto-.html"
+      },
+      {
+        "nombre": "750-proyecto-respuesta.html",
+        "ruta": "/Modulos/modulo-9-Asignacion-de-Memoria-Dinamica/750-proyecto-respuesta.html"
+      },
+      {
+        "nombre": "800-resumen.html",
+        "ruta": "/Modulos/modulo-9-Asignacion-de-Memoria-Dinamica/800-resumen.html"
+      }
+    ]
+  }
+];

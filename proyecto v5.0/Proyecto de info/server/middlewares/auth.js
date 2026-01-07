@@ -7,7 +7,7 @@ function isAuthenticated(req, res, next) {
         next();
     } else {
         console.log('Acceso denegado: Usuario no autenticado. Redirigiendo a /');
-        res.redirect('/?auth_error=true');
+        res.redirect('/react/login?auth_error=true');
     }
 }
 
