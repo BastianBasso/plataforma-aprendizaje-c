@@ -1,10 +1,18 @@
-import { useMemo } from 'react';
+import { useCallback, useMemo, useRef } from 'react';
 import { Link, useParams } from 'react-router-dom';
 
 export function ModuloViewer({ modulosIndex }) {
   const { modIndex, fileIndex } = useParams();
   const mi = Number(modIndex);
   const fi = Number(fileIndex);
+
+  const iframeRef = useRef(null);
+
+  // CSS adicional para el contenido HTML cargado en el iframe.
+  // Nota: esto solo funciona si el iframe es same-origin.
+  const injectedCssHrefs = useMemo(() => [
+    '/js-spa/css-dinamico/c-code-style.css',
+  ], []);
 
   const flat = useMemo(() => {
     if (!modulosIndex) return [];
@@ -30,6 +38,36 @@ export function ModuloViewer({ modulosIndex }) {
     return mod?.archivos?.[fi] || null;
   }, [modulosIndex, mi, fi]);
 
+  const handleFrameLoad = useCallback(() => {
+    const iframe = iframeRef.current;
+    if (!iframe) return;
+
+    try {
+      const doc = iframe.contentDocument;
+      if (!doc) return;
+
+      const head = doc.head || doc.getElementsByTagName('head')[0];
+      if (!head) return;
+
+      for (const href of injectedCssHrefs) {
+        if (!href) continue;
+        const linkId = `injected-css-${btoa(href).replace(/=+$/g, '')}`;
+        let link = doc.getElementById(linkId);
+        if (!link) {
+          link = doc.createElement('link');
+          link.rel = 'stylesheet';
+          link.href = href;
+          link.id = linkId;
+          head.appendChild(link);
+        } else {
+          link.href = href;
+        }
+      }
+    } catch {
+      // Cross-origin o políticas del iframe: no se puede inyectar.
+    }
+  }, [injectedCssHrefs]);
+
   return (
     <div className="viewer">
       <main className="viewer-content">
@@ -39,6 +77,8 @@ export function ModuloViewer({ modulosIndex }) {
             src={file.ruta}
             title={file.nombre || 'Contenido'}
             loading="eager"
+            ref={iframeRef}
+            onLoad={handleFrameLoad}
           />
         ) : (
           <p>Contenido no encontrado</p>

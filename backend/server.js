@@ -25,9 +25,10 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 // Archivos estáticos
-app.use(express.static(path.join(__dirname, "../frontend/dist")));
+const reactDist = path.join(__dirname, '../frontend/react-spa/dist');
+app.use(express.static(reactDist));
 app.use('/js-spa', express.static(path.join(__dirname, '../frontend/js-spa'))); // Aplicacion del SP
-app.use('/react', express.static(path.join(__dirname, '../frontend/dist')));
+app.use('/react', express.static(reactDist));
 
 // Montar rutas
 app.use('/', authRoutes); // mantiene compatibilidad con frontend existente
@@ -36,7 +37,7 @@ app.use('/', staticRoutes); // rutas estáticas
 
 // Fallback SPA para React (Express 5 compatible)
 app.get(/^\/react(\/.*)?$/, (req, res) => {
-    res.sendFile(path.join(__dirname, '../frontend/dist/index.html'));
+    res.sendFile(path.join(reactDist, 'index.html'));
 });
 
 // Ruta raíz
