@@ -5,7 +5,9 @@
 
   color-scheme: light dark;
   /*color: #222e3a;*/
-  color: rgba(255, 255, 255, 0.87);
+
+  /*color: rgba(255, 255, 255, 0.87);*/
+  color: #000000;
 
   /*background-color: #242424;*/
   background: linear-gradient(180deg, #b3d8ff 0%, #eaf6ff 100%);
