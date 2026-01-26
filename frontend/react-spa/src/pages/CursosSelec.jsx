@@ -48,6 +48,8 @@ export function CursosSelec({ modulosIndex, loading, error }) {
                     <Link className="hub-lesson" to={`/m/${modIndex}/${fileIndex}`}>{archivo.nombre}</Link>
                   </li>
                 ))}
+
+              
               </ul>
             </section>
           ))}

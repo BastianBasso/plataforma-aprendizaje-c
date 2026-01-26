@@ -26,7 +26,13 @@ app.use(express.json());
 
 // Archivos estáticos
 const reactDist = path.join(__dirname, '../frontend/react-spa/dist');
+const legacyDist = path.join(__dirname, '../frontend/dist');
 app.use(express.static(reactDist));
+
+// Assets legacy usados por protected_html (HTML de módulos) como /assets/content-01sust.css
+// Importante: no reemplaza los assets de React; solo sirve los que no existan en reactDist.
+app.use('/assets', express.static(path.join(legacyDist, 'assets')));
+
 app.use('/js-spa', express.static(path.join(__dirname, '../frontend/js-spa'))); // Aplicacion del SP
 app.use('/react', express.static(reactDist));
 

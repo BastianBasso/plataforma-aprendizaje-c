@@ -36,26 +36,133 @@ export function ForgotPassword() {
   }
 
   return (
-    <main className="page" aria-label="Recuperar contraseña">
-      <h1>Recuperar contraseña</h1>
+    <main aria-label="Recuperar contraseña">
+      <style>{`
+        .auth-page {
+          min-height: 100vh;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 24px;
+          background: #6b7280; /* gray */
+        }
 
-      <form className="form" onSubmit={onSubmit}>
-        <label>
-          Correo
-          <input value={email} onChange={e => setEmail(e.target.value)} autoComplete="email" />
-        </label>
+        .auth-card {
+          border-radius: 12px;
+          overflow: hidden;
+          box-shadow: 0 10px 30px rgba(2, 6, 23, 0.45);
+          max-width: 520px;
+          width: 100%;
+          background: #ffffff;
+        }
 
-        {error ? <p className="form-error">{error}</p> : null}
-        {message ? <p className="form-success">{message}</p> : null}
+        .auth-card-inner {
+          padding: 28px;
+          color: #111827;
+        }
 
-        <button className="btn" type="submit" disabled={submitting}>
-          {submitting ? 'Enviando…' : 'Enviar enlace'}
-        </button>
+        .fp-title {
+          margin: 0 0 10px;
+          font-weight: 900;
+          font-size: 2rem;
+          color: #2563eb;
+        }
 
-        <div className="form-links">
-          <Link to="/login">Volver al login</Link>
+        .fp-subtitle {
+          margin: 0 0 18px;
+          color: #6b7280;
+          font-size: 0.95rem;
+          line-height: 1.45;
+        }
+
+        .fp-form {
+          display: grid;
+          gap: 14px;
+        }
+
+        .fp-form label {
+          display: grid;
+          gap: 6px;
+          font-size: 0.9rem;
+          color: #374151;
+          font-weight: 600;
+        }
+
+        .fp-form input {
+          padding: 10px 12px;
+          border-radius: 10px;
+          border: 1px solid rgba(0, 0, 0, 0.18);
+          background: #ffffff;
+          color: #111827;
+        }
+
+        .fp-actions {
+          display: flex;
+          justify-content: center;
+          margin-top: 8px;
+        }
+
+        .fp-primary-btn {
+          padding: 10px 18px;
+          border-radius: 999px;
+          border: none;
+          cursor: pointer;
+          font-weight: 800;
+          background: linear-gradient(90deg, #2563eb, #4f46e5);
+          color: #ffffff;
+          box-shadow: 0 6px 18px rgba(79, 70, 229, 0.2);
+        }
+
+        .fp-primary-btn:disabled {
+          opacity: 0.6;
+          cursor: not-allowed;
+        }
+
+        .fp-footer {
+          margin-top: 18px;
+          padding-top: 14px;
+          border-top: 1px solid rgba(0, 0, 0, 0.08);
+          text-align: center;
+          color: #6b7280;
+          font-size: 0.95rem;
+        }
+
+        .fp-footer a {
+          color: #2563eb;
+          font-weight: 700;
+        }
+      `}</style>
+
+      <div className="auth-page">
+        <div className="auth-card">
+          <div className="auth-card-inner">
+            <h1 className="fp-title">Recuperar contraseña</h1>
+            <p className="fp-subtitle">
+              Ingresa tu correo y te enviaremos un enlace para restablecer tu contraseña.
+            </p>
+
+            <form className="fp-form" onSubmit={onSubmit}>
+              <label>
+                Correo
+                <input value={email} onChange={e => setEmail(e.target.value)} autoComplete="email" />
+              </label>
+
+              {error ? <p className="form-error">{error}</p> : null}
+              {message ? <p className="form-success">{message}</p> : null}
+
+              <div className="fp-actions">
+                <button className="fp-primary-btn" type="submit" disabled={submitting}>
+                  {submitting ? 'Enviando…' : 'Enviar enlace'}
+                </button>
+              </div>
+
+              <div className="fp-footer">
+                <Link to="/login">Volver al login</Link>
+              </div>
+            </form>
+          </div>
         </div>
-      </form>
+      </div>
     </main>
   );
 }
