@@ -58,7 +58,7 @@ Please change the parent <Route path="${Z}"> to <Route path="${Z==="/"?"*":`${Z}
 
         .hub-cursos .generic-card {
           background: #fff;
-          border: 1px solid #e3eaf2;
+          border: 2px solid #c4c5c5;
           border-radius: 18px;
           padding: 18px 20px;
           margin-bottom: 20px;
@@ -87,7 +87,8 @@ Please change the parent <Route path="${Z}"> to <Route path="${Z==="/"?"*":`${Z}
 
         .hub-cursos .hub-card {
           background: #fff;
-          border: 1px solid #e3eaf2;
+          border: 2px solid #c4c5c5;
+          
           border-radius: 18px;
           padding: 18px 18px;
           box-shadow: 0 2px 10px rgba(60, 120, 200, 0.10);
