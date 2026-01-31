@@ -1,0 +1,934 @@
+<!--
+Formulario Único: 
+   Todo está dentro de la etiqueta <form id="quiz-programacion">.
+
+Identificadores Únicos:
+   Cada pregunta está envuelta en un <fieldset> con un id único (ej: id="q1").
+   Todas las opciones de una pregunta tienen el mismo atributo name (ej: name="q1").
+
+Registro de Respuesta del Usuario:
+   La respuesta elegida se enviará con el formulario como el par name=value (ej: q1=C).
+
+Respuesta Correcta para Calificación (API):
+   La respuesta correcta se almacena en el atributo data-correct-answer de cada <fieldset> (ej: data-correct-answer="C"). La API debe leer este atributo para calificar.
+
+-->
+
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Ejercicio 1 Modulo 1</title>
+    <link rel="stylesheet" crossorigin href="/assets/content-01sust.css">
+    <style>
+        
+    .header-c { background: #fff; border-bottom: 1px solid #e5e7eb; }
+    .logo-c {
+      background: linear-gradient(135deg,#162047 60%, #3b2fa6 100%);
+      color: #fff;
+      font-weight: 900;
+      font-size: 1.7rem;
+      border-radius: 8px;
+      width: 38px; height: 38px;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 2px 8px rgba(59,47,166,0.08);
+      margin-right: 10px;
+    }
+    .user-profile {
+      display: flex; align-items: center; gap: 10px;
+      background: #e0e7ff;
+      border-radius: 999px;
+      padding: 6px 16px;
+      font-size: 1rem;
+      color: #3730a3;
+      font-weight: 600;
+    }
+    .content-title {
+      color: #3730a3;
+      font-size: 2.2rem;
+      font-weight: 800;
+      margin: 36px auto 10px auto;
+      text-align: center;
+      letter-spacing: 1px;
+    }
+    .progress-bar-container {
+      max-width: 700px;
+      margin: 0 auto 32px auto;
+      background: #e0e7ff;
+      border-radius: 999px;
+      padding: 8px 24px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #3730a3;
+      box-shadow: 0 2px 8px rgba(59,47,166,0.08);
+    }
+    .progress-bar {
+      flex: 1;
+      height: 16px;
+      background: #c7d2fe;
+      border-radius: 999px;
+      overflow: hidden;
+      position: relative;
+    }
+    .progress-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg,#2563eb,#3b2fa6);
+      border-radius: 999px;
+      width: 12%;
+      transition: width 0.4s;
+    }
+    .modules-list {
+      max-width: 900px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+    }
+    .module-card {
+      background: linear-gradient(135deg,#2563eb 60%, #3b2fa6 100%);
+      color: #fff;
+      border-radius: 18px;
+      box-shadow: 0 6px 24px rgba(59,47,166,0.10);
+      padding: 0;
+      display: flex;
+      align-items: stretch;
+      position: relative;
+      overflow: hidden;
+      min-height: 140px;
+    }
+    .module-progress-bar {
+      width: 18px;
+      background: #a5b4fc;
+      display: flex;
+      align-items: flex-end;
+      border-radius: 18px 0 0 18px;
+      margin-right: 0;
+      position: relative;
+    }
+    .module-progress-fill {
+      width: 100%;
+      background: #3730a3;
+      border-radius: 18px 0 0 18px;
+      transition: height 0.4s;
+    }
+    .module-content {
+      flex: 1;
+      padding: 24px 32px 24px 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .module-title {
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .module-desc {
+      font-size: 1rem;
+      color: #dbeafe;
+      margin-bottom: 10px;
+    }
+    .module-topics {
+      margin-left: 1.2em;
+      margin-bottom: 10px;
+      color: #e0e7ff;
+      font-size: 0.98rem;
+    }
+    .module-card .start-btn {
+      align-self: flex-end;
+      background: linear-gradient(90deg,#4f46e5,#2563eb);
+      color: #fff;
+      font-weight: 700;
+      border: none;
+      border-radius: 999px;
+      padding: 10px 28px;
+      font-size: 1rem;
+      box-shadow: 0 2px 8px rgba(37,99,235,0.18);
+      transition: background 0.2s;
+      cursor: pointer;
+      margin-top: 8px;
+    }
+    .module-card .start-btn:hover {
+      background: linear-gradient(90deg,#2563eb,#4f46e5);
+    }
+    .footer-c {
+      background: linear-gradient(90deg,#49b3af,#25a6d7 90%);
+      color: #fff;
+      padding: 36px 0 18px 0;
+      margin-top: 48px;
+    }
+    .footer-c .footer-content {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 32px;
+      justify-content: space-between;
+      align-items: flex-start;
+      padding: 0 32px;
+    }
+    .footer-c .footer-logo {
+      display: flex; align-items: center; gap: 10px;
+      font-size: 1.5rem; font-weight: 800;
+      letter-spacing: 1px;
+    }
+    .footer-c .footer-links, .footer-c .footer-newsletter {
+      min-width: 180px;
+    }
+    .footer-c .footer-links a {
+      color: #e0f2fe;
+      display: block;
+      margin-bottom: 8px;
+      text-decoration: none;
+      font-size: 1rem;
+      transition: color 0.2s;
+    }
+    .footer-c .footer-links a:hover {
+      color: #fff;
+    }
+    .footer-c .newsletter-form {
+      display: flex; gap: 8px; margin-top: 8px;
+    }
+    .footer-c .newsletter-form input[type="email"] {
+      border-radius: 999px 0 0 999px;
+      border: none;
+      padding: 8px 16px;
+      font-size: 1rem;
+      outline: none;
+      min-width: 0;
+    }
+    .footer-c .newsletter-form button {
+      border-radius: 0 999px 999px 0;
+      border: none;
+      background: #2563eb;
+      color: #fff;
+      font-weight: 700;
+      padding: 8px 18px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .footer-c .newsletter-form button:hover {
+      background: #1e40af;
+    }
+    .footer-c .copyright {
+      text-align: center;
+      color: #bae6fd;
+      font-size: 0.95rem;
+      margin-top: 24px;
+    }
+    @media (max-width: 900px) {
+      .footer-c .footer-content { flex-direction: column; gap: 18px; align-items: flex-start; }
+      .content-c, .hero-c { padding: 24px 10px; }
+    }
+    @media (max-width: 900px) {
+      .modules-list { padding: 0 8px; }
+      .module-content { padding: 18px 10px 18px 10px; }
+      .content-title { font-size: 1.5rem; }
+    }
+  </style>
+</head>
+
+
+
+<body>
+    
+<div class="main-content">
+
+<form id="quiz-programacion" data-quiz-name="Introducción a la Programación y Algoritmos">
+    <header>
+        <h1>Cuestionario: Introducción a la Programación y Algoritmos</h1>
+        <p>Pon a prueba tus conocimientos sobre los conceptos fundamentales de la programación y el diseño de algoritmos.</p>
+    </header>
+
+    <h2>Preguntas de Alternativas</h2>
+
+    <fieldset id="q1" data-question-number="1" data-correct-answer="C">
+        <legend>1. ¿Cuál es la definición más precisa de Programación?</legend>
+        <ul>
+            <li>
+                <input type="radio" id="q1_a" name="q1" value="A">
+                <label for="q1_a">A. El arte de crear diseños gráficos para páginas web.</label>
+            </li>
+            <li>
+                <input type="radio" id="q1_b" name="q1" value="B">
+                <label for="q1_b">B. La manipulación de hardware sin necesidad de software.</label>
+            </li>
+            <li>
+                <input type="radio" id="q1_c" name="q1" value="C">
+                <label for="q1_c">C. El proceso de dar instrucciones precisas y lógicas a una computadora para resolver un problema.</label>
+            </li>
+            <li>
+                <input type="radio" id="q1_d" name="q1" value="D">
+                <label for="q1_d">D. La ciencia que estudia la composición de los circuitos electrónicos de la CPU.</label>
+            </li>
+        </ul>
+        <p class="feedback-msg"></p>
+    </fieldset>
+
+    <fieldset id="q2" data-question-number="2" data-correct-answer="C">
+        <legend>2. ¿Cuál es el orden correcto de las tres partes del ciclo de procesamiento de información (Modelo IPO)?</legend>
+        <ul>
+            <li>
+                <input type="radio" id="q2_a" name="q2" value="A">
+                <label for="q2_a">A. Proceso → Salida → Entrada</label>
+            </li>
+            <li>
+                <input type="radio" id="q2_b" name="q2" value="B">
+                <label for="q2_b">B. Entrada → Salida → Proceso</label>
+            </li>
+            <li>
+                <input type="radio" id="q2_c" name="q2" value="C">
+                <label for="q2_c">C. Entrada → Proceso → Salida</label>
+            </li>
+            <li>
+                <input type="radio" id="q2_d" name="q2" value="D">
+                <label for="q2_d">D. Salida → Entrada → Proceso</label>
+            </li>
+        </ul>
+        <p class="feedback-msg"></p>
+    </fieldset>
+
+    <fieldset id="q3" data-question-number="3" data-correct-answer="D">
+        <legend>3. ¿Qué característica de un algoritmo se incumple si el proceso se repite sin llegar a un resultado final?</legend>
+        <ul>
+            <li>
+                <input type="radio" id="q3_a" name="q3" value="A">
+                <label for="q3_a">A. Preciso (Inequívoco)</label>
+            </li>
+            <li>
+                <input type="radio" id="q3_b" name="q3" value="B">
+                <label for="q3_b">B. Definido (Consistente)</label>
+            </li>
+            <li>
+                <input type="radio" id="q3_c" name="q3" value="C">
+                <label for="q3_c">C. Ordenado</label>
+            </li>
+            <li>
+                <input type="radio" id="q3_d" name="q3" value="D">
+                <label for="q3_d">D. Finito (Limitado)</label>
+            </li>
+        </ul>
+        <p class="feedback-msg"></p>
+    </fieldset>
+
+    <fieldset id="q4" data-question-number="4" data-correct-answer="B">
+        <legend>4. ¿Cuál de las siguientes analogías describe mejor el concepto de Algoritmo en programación?</legend>
+        <ul>
+            <li>
+                <input type="radio" id="q4_a" name="q4" value="A">
+                <label for="q4_a">A. Una caja etiquetada para guardar datos.</label>
+            </li>
+            <li>
+                <input type="radio" id="q4_b" name="q4" value="B">
+                <label for="q4_b">B. El manual de instrucciones o la receta para una tarta.</label>
+            </li>
+            <li>
+                <input type="radio" id="q4_c" name="q4" value="C">
+                <label for="q4_c">C. Un circuito integrado de la memoria RAM.</label>
+            </li>
+            <li>
+                <input type="radio" id="q4_d" name="q4" value="D">
+                <label for="q4_d">D. El punto y coma (;) al final de una línea de código.</label>
+            </li>
+        </ul>
+        <p class="feedback-msg"></p>
+    </fieldset>
+
+    <fieldset id="q5" data-question-number="5" data-correct-answer="D">
+        <legend>5. ¿En qué fase de la resolución de problemas se utiliza el Pseudocódigo o los Diagramas de Flujo?</legend>
+        <ul>
+            <li>
+                <input type="radio" id="q5_a" name="q5" value="A">
+                <label for="q5_a">A. Codificación</label>
+            </li>
+            <li>
+                <input type="radio" id="q5_b" name="q5" value="B">
+                <label for="q5_b">B. Análisis del Problema</label>
+            </li>
+            <li>
+                <input type="radio" id="q5_c" name="q5" value="C">
+                <label for="q5_c">C. Prueba y Depuración (Debugging)</label>
+            </li>
+            <li>
+                <input type="radio" id="q5_d" name="q5" value="D">
+                <label for="q5_d">D. Diseño del Algoritmo</label>
+            </li>
+        </ul>
+        <p class="feedback-msg"></p>
+    </fieldset>
+
+    <fieldset id="q6" data-question-number="6" data-correct-answer="C">
+        <legend>6. ¿Cuál es el objetivo principal de la fase de Prueba y Depuración (Debugging)?</legend>
+        <ul>
+            <li>
+                <input type="radio" id="q6_a" name="q6" value="A">
+                <label for="q6_a">A. Redactar la documentación del programa.</label>
+            </li>
+            <li>
+                <input type="radio" id="q6_b" name="q6" value="B">
+                <label for="q6_b">B. Traducir el Pseudocódigo a Lenguaje C.</label>
+            </li>
+            <li>
+                <input type="radio" id="q6_c" name="q6" value="C">
+                <label for="q6_c">C. Localizar, analizar y corregir los errores o fallos (bugs).</label>
+            </li>
+            <li>
+                <input type="radio" id="q6_d" name="q6" value="D">
+                <label for="q6_d">D. Definir los requisitos y las salidas esperadas del programa.</label>
+            </li>
+        </ul>
+        <p class="feedback-msg"></p>
+    </fieldset>
+
+    <fieldset id="q7" data-question-number="7" data-correct-answer="C">
+        <legend>7. ¿Cuál es la herramienta de representación de algoritmos que utiliza símbolos estandarizados (óvalos, rombos, rectángulos) para visualizar el flujo?</legend>
+        <ul>
+            <li>
+                <input type="radio" id="q7_a" name="q7" value="A">
+                <label for="q7_a">A. Pseudocódigo</label>
+            </li>
+            <li>
+                <input type="radio" id="q7_b" name="q7" value="B">
+                <label for="q7_b">B. Lenguaje C</label>
+            </li>
+            <li>
+                <input type="radio" id="q7_c" name="q7" value="C">
+                <label for="q7_c">C. Diagrama de Flujo (Flowchart)</label>
+            </li>
+            <li>
+                <input type="radio" id="q7_d" name="q7" value="D">
+                <label for="q7_d">D. Sentencia</label>
+            </li>
+        </ul>
+        <p class="feedback-msg"></p>
+    </fieldset>
+
+    <fieldset id="q8" data-question-number="8" data-correct-answer="C">
+        <legend>8. En el contexto de los conceptos fundamentales, ¿qué representan las Variables?</legend>
+        <ul>
+            <li>
+                <input type="radio" id="q8_a" name="q8" value="A">
+                <label for="q8_a">A. La capacidad del programa para tomar decisiones.</label>
+            </li>
+            <li>
+                <input type="radio" id="q8_b" name="q8" value="B">
+                <label for="q8_b">B. La unidad de trabajo más pequeña que da una orden completa.</label>
+            </li>
+            <li>
+                <input type="radio" id="q8_c" name="q8" value="C">
+                <label for="q8_c">C. Espacios de memoria reservados para almacenar y manipular datos.</label>
+            </li>
+            <li>
+                <input type="radio" id="q8_d" name="q8" value="D">
+                <label for="q8_d">D. La sintaxis utilizada para finalizar una instrucción.</label>
+            </li>
+        </ul>
+        <p class="feedback-msg"></p>
+    </fieldset>
+
+    <fieldset id="q9" data-question-number="9" data-correct-answer="B">
+        <legend>9. La cualidad "Definido" de un algoritmo implica que:</legend>
+        <ul>
+            <li>
+                <input type="radio" id="q9_a" name="q9" value="A">
+                <label for="q9_a">A. Siempre debe terminar en un número limitado de pasos.</label>
+            </li>
+            <li>
+                <input type="radio" id="q9_b" name="q9" value="B">
+                <label for="q9_b">B. Si se ejecuta múltiples veces con los mismos datos de entrada, debe producir el mismo resultado.</label>
+            </li>
+            <li>
+                <input type="radio" id="q9_c" name="q9" value="C">
+                <label for="q9_c">C. Debe ser fácil de leer para un humano.</label>
+            </li>
+            <li>
+                <input type="radio" id="q9_d" name="q9" value="D">
+                <label for="q9_d">D. Sus instrucciones deben estar en un lenguaje de programación de bajo nivel.</label>
+            </li>
+        </ul>
+        <p class="feedback-msg"></p>
+    </fieldset>
+
+    <fieldset id="q10" data-question-number="10" data-correct-answer="C">
+        <legend>10. Las Estructuras de Control (Condicionales e Iterativas) son fundamentales porque:</legend>
+        <ul>
+            <li>
+                <input type="radio" id="q10_a" name="q10" value="A">
+                <label for="q10_a">A. Reservan memoria para los datos del programa.</label>
+            </li>
+            <li>
+                <input type="radio" id="q10_b" name="q10" value="B">
+                <label for="q10_b">B. Permiten que la computadora solo opere en código binario.</label>
+            </li>
+            <li>
+                <input type="radio" id="q10_c" name="q10" value="C">
+                <label for="q10_c">C. Dotan al programa de inteligencia para tomar decisiones y repetir acciones.</label>
+            </li>
+            <li>
+                <input type="radio" id="q10_d" name="q10" value="D">
+                <label for="q10_d">D. Finalizan todas las sentencias con un punto y coma.</label>
+            </li>
+        </ul>
+        <p class="feedback-msg"></p>
+    </fieldset>
+
+    <h2 id="quiz-score" style="display:none;">Resultado: <span id="score-text"></span></h2>
+
+    <button type="submit">Enviar Respuestas y Corregir</button>
+
+</form>
+
+<style>
+    /* Estilos básicos para la retroalimentación visual */
+    .correct-answer {
+        color: green;
+        font-weight: bold;
+    }
+    .wrong-answer {
+        color: red;
+        font-weight: bold;
+    }
+    .correct-mark::after {
+        content: " ✓"; /* Tick para correcto */
+        color: green;
+    }
+    .wrong-mark::after {
+        content: " ✕"; /* Cruz para incorrecto */
+        color: red;
+    }
+</style>
+
+<script>
+    document.getElementById('quiz-programacion').addEventListener('submit', function(event) {
+        event.preventDefault(); // Detiene el envío del formulario a un servidor
+        
+        const form = event.target;
+        const fieldsets = form.querySelectorAll('fieldset');
+        let score = 0;
+        const totalQuestions = fieldsets.length;
+
+        fieldsets.forEach(fieldset => {
+            const questionName = fieldset.id; // q1, q2, etc.
+            const correctAnswer = fieldset.dataset.correctAnswer;
+            const feedbackMsg = fieldset.querySelector('.feedback-msg');
+            
+            // Limpiar clases y mensajes anteriores
+            feedbackMsg.innerHTML = '';
+            
+            // Quitar estilos de corrección de todas las etiquetas y inputs
+            fieldset.querySelectorAll('label, input').forEach(el => {
+                el.classList.remove('correct-mark', 'wrong-mark');
+            });
+
+
+            // Obtener la respuesta seleccionada por el usuario
+            const selectedInput = fieldset.querySelector(`input[name="${questionName}"]:checked`);
+
+            if (selectedInput) {
+                const userAnswer = selectedInput.value;
+                const userLabel = selectedInput.nextElementSibling; // La etiqueta <label> asociada al input
+
+                if (userAnswer === correctAnswer) {
+                    // **Respuesta Correcta**
+                    score++;
+                    userLabel.classList.add('correct-mark', 'correct-answer');
+                    feedbackMsg.innerHTML = '<span class="correct-answer">¡Correcto!</span>';
+                } else {
+                    // **Respuesta Incorrecta**
+                    userLabel.classList.add('wrong-mark', 'wrong-answer');
+                    
+                    // Marcar la respuesta correcta con el ticket para el usuario
+                    const correctLabel = fieldset.querySelector(`input[id="${questionName}_${correctAnswer.toLowerCase()}"]`).nextElementSibling;
+                    correctLabel.classList.add('correct-mark', 'correct-answer');
+                    
+                    // Mostrar el mensaje de corrección
+                    feedbackMsg.innerHTML = `<span class="wrong-answer">Incorrecto.</span> Respuesta correcta: <strong>${correctAnswer}</strong>.`;
+                }
+            } else {
+                // Si la pregunta no fue respondida
+                // Solo marcamos la correcta
+                const correctLabel = fieldset.querySelector(`input[id="${questionName}_${correctAnswer.toLowerCase()}"]`).nextElementSibling;
+                correctLabel.classList.add('correct-mark', 'correct-answer');
+                feedbackMsg.innerHTML = `<span class="wrong-answer">Sin responder.</span> Respuesta correcta: <strong>${correctAnswer}</strong>.`;
+            }
+            
+            // Deshabilitar los botones de radio para que el usuario no pueda cambiar la respuesta después de la corrección
+            fieldset.querySelectorAll('input[type="radio"]').forEach(input => {
+                input.disabled = true;
+            });
+        });
+
+        // Mostrar el resultado final
+        const scoreElement = document.getElementById('quiz-score');
+        const scoreText = document.getElementById('score-text');
+        
+        scoreText.textContent = `${score} de ${totalQuestions} (${((score / totalQuestions) * 100).toFixed(2)}%)`;
+        scoreElement.style.display = 'block';
+
+        // Opcional: Deshabilitar el botón de enviar después de la corrección
+        form.querySelector('button[type="submit"]').disabled = true;
+    });
+</script>
+
+
+<!--
+<form id="quiz-programacion" data-quiz-name="Introducción a la Programación y Algoritmos">
+    <header>
+        <h1>Cuestionario: Introducción a la Programación y Algoritmos</h1>
+        <p>Pon a prueba tus conocimientos sobre los conceptos fundamentales de la programación y el diseño de algoritmos.</p>
+    </header>
+
+    <h2>Preguntas de Alternativas</h2>
+
+    <fieldset id="q1" data-question-number="1" data-correct-answer="C">
+        <legend>1. ¿Cuál es la definición más precisa de Programación?</legend>
+        <ul>
+            <li>
+                <input type="radio" id="q1_a" name="q1" value="A">
+                <label for="q1_a">A. El arte de crear diseños gráficos para páginas web.</label>
+            </li>
+            <li>
+                <input type="radio" id="q1_b" name="q1" value="B">
+                <label for="q1_b">B. La manipulación de hardware sin necesidad de software.</label>
+            </li>
+            <li>
+                <input type="radio" id="q1_c" name="q1" value="C">
+                <label for="q1_c">C. El proceso de dar instrucciones precisas y lógicas a una computadora para resolver un problema.</label>
+            </li>
+            <li>
+                <input type="radio" id="q1_d" name="q1" value="D">
+                <label for="q1_d">D. La ciencia que estudia la composición de los circuitos electrónicos de la CPU.</label>
+            </li>
+        </ul>
+    </fieldset>
+
+    <fieldset id="q2" data-question-number="2" data-correct-answer="C">
+        <legend>2. ¿Cuál es el orden correcto de las tres partes del ciclo de procesamiento de información (Modelo IPO)?</legend>
+        <ul>
+            <li>
+                <input type="radio" id="q2_a" name="q2" value="A">
+                <label for="q2_a">A. Proceso → Salida → Entrada</label>
+            </li>
+            <li>
+                <input type="radio" id="q2_b" name="q2" value="B">
+                <label for="q2_b">B. Entrada → Salida → Proceso</label>
+            </li>
+            <li>
+                <input type="radio" id="q2_c" name="q2" value="C">
+                <label for="q2_c">C. Entrada → Proceso → Salida</label>
+            </li>
+            <li>
+                <input type="radio" id="q2_d" name="q2" value="D">
+                <label for="q2_d">D. Salida → Entrada → Proceso</label>
+            </li>
+        </ul>
+    </fieldset>
+
+    <fieldset id="q3" data-question-number="3" data-correct-answer="D">
+        <legend>3. ¿Qué característica de un algoritmo se incumple si el proceso se repite sin llegar a un resultado final?</legend>
+        <ul>
+            <li>
+                <input type="radio" id="q3_a" name="q3" value="A">
+                <label for="q3_a">A. Preciso (Inequívoco)</label>
+            </li>
+            <li>
+                <input type="radio" id="q3_b" name="q3" value="B">
+                <label for="q3_b">B. Definido (Consistente)</label>
+            </li>
+            <li>
+                <input type="radio" id="q3_c" name="q3" value="C">
+                <label for="q3_c">C. Ordenado</label>
+            </li>
+            <li>
+                <input type="radio" id="q3_d" name="q3" value="D">
+                <label for="q3_d">D. Finito (Limitado)</label>
+            </li>
+        </ul>
+    </fieldset>
+
+    <fieldset id="q4" data-question-number="4" data-correct-answer="B">
+        <legend>4. ¿Cuál de las siguientes analogías describe mejor el concepto de Algoritmo en programación?</legend>
+        <ul>
+            <li>
+                <input type="radio" id="q4_a" name="q4" value="A">
+                <label for="q4_a">A. Una caja etiquetada para guardar datos.</label>
+            </li>
+            <li>
+                <input type="radio" id="q4_b" name="q4" value="B">
+                <label for="q4_b">B. El manual de instrucciones o la receta para una tarta.</label>
+            </li>
+            <li>
+                <input type="radio" id="q4_c" name="q4" value="C">
+                <label for="q4_c">C. Un circuito integrado de la memoria RAM.</label>
+            </li>
+            <li>
+                <input type="radio" id="q4_d" name="q4" value="D">
+                <label for="q4_d">D. El punto y coma (;) al final de una línea de código.</label>
+            </li>
+        </ul>
+    </fieldset>
+
+    <fieldset id="q5" data-question-number="5" data-correct-answer="D">
+        <legend>5. ¿En qué fase de la resolución de problemas se utiliza el Pseudocódigo o los Diagramas de Flujo?</legend>
+        <ul>
+            <li>
+                <input type="radio" id="q5_a" name="q5" value="A">
+                <label for="q5_a">A. Codificación</label>
+            </li>
+            <li>
+                <input type="radio" id="q5_b" name="q5" value="B">
+                <label for="q5_b">B. Análisis del Problema</label>
+            </li>
+            <li>
+                <input type="radio" id="q5_c" name="q5" value="C">
+                <label for="q5_c">C. Prueba y Depuración (Debugging)</label>
+            </li>
+            <li>
+                <input type="radio" id="q5_d" name="q5" value="D">
+                <label for="q5_d">D. Diseño del Algoritmo</label>
+            </li>
+        </ul>
+    </fieldset>
+
+    <fieldset id="q6" data-question-number="6" data-correct-answer="C">
+        <legend>6. ¿Cuál es el objetivo principal de la fase de Prueba y Depuración (Debugging)?</legend>
+        <ul>
+            <li>
+                <input type="radio" id="q6_a" name="q6" value="A">
+                <label for="q6_a">A. Redactar la documentación del programa.</label>
+            </li>
+            <li>
+                <input type="radio" id="q6_b" name="q6" value="B">
+                <label for="q6_b">B. Traducir el Pseudocódigo a Lenguaje C.</label>
+            </li>
+            <li>
+                <input type="radio" id="q6_c" name="q6" value="C">
+                <label for="q6_c">C. Localizar, analizar y corregir los errores o fallos (bugs).</label>
+            </li>
+            <li>
+                <input type="radio" id="q6_d" name="q6" value="D">
+                <label for="q6_d">D. Definir los requisitos y las salidas esperadas del programa.</label>
+            </li>
+        </ul>
+    </fieldset>
+
+    <fieldset id="q7" data-question-number="7" data-correct-answer="C">
+        <legend>7. ¿Cuál es la herramienta de representación de algoritmos que utiliza símbolos estandarizados (óvalos, rombos, rectángulos) para visualizar el flujo?</legend>
+        <ul>
+            <li>
+                <input type="radio" id="q7_a" name="q7" value="A">
+                <label for="q7_a">A. Pseudocódigo</label>
+            </li>
+            <li>
+                <input type="radio" id="q7_b" name="q7" value="B">
+                <label for="q7_b">B. Lenguaje C</label>
+            </li>
+            <li>
+                <input type="radio" id="q7_c" name="q7" value="C">
+                <label for="q7_c">C. Diagrama de Flujo (Flowchart)</label>
+            </li>
+            <li>
+                <input type="radio" id="q7_d" name="q7" value="D">
+                <label for="q7_d">D. Sentencia</label>
+            </li>
+        </ul>
+        
+    </fieldset>
+
+    <fieldset id="q8" data-question-number="8" data-correct-answer="C">
+        <legend>8. En el contexto de los conceptos fundamentales, ¿qué representan las Variables?</legend>
+        <ul>
+            <li>
+                <input type="radio" id="q8_a" name="q8" value="A">
+                <label for="q8_a">A. La capacidad del programa para tomar decisiones.</label>
+            </li>
+            <li>
+                <input type="radio" id="q8_b" name="q8" value="B">
+                <label for="q8_b">B. La unidad de trabajo más pequeña que da una orden completa.</label>
+            </li>
+            <li>
+                <input type="radio" id="q8_c" name="q8" value="C">
+                <label for="q8_c">C. Espacios de memoria reservados para almacenar y manipular datos.</label>
+            </li>
+            <li>
+                <input type="radio" id="q8_d" name="q8" value="D">
+                <label for="q8_d">D. La sintaxis utilizada para finalizar una instrucción.</label>
+            </li>
+        </ul>
+    </fieldset>
+
+    <fieldset id="q9" data-question-number="9" data-correct-answer="B">
+        <legend>9. La cualidad "Definido" de un algoritmo implica que:</legend>
+        <ul>
+            <li>
+                <input type="radio" id="q9_a" name="q9" value="A">
+                <label for="q9_a">A. Siempre debe terminar en un número limitado de pasos.</label>
+            </li>
+            <li>
+                <input type="radio" id="q9_b" name="q9" value="B">
+                <label for="q9_b">B. Si se ejecuta múltiples veces con los mismos datos de entrada, debe producir el mismo resultado.</label>
+            </li>
+            <li>
+                <input type="radio" id="q9_c" name="q9" value="C">
+                <label for="q9_c">C. Debe ser fácil de leer para un humano.</label>
+            </li>
+            <li>
+                <input type="radio" id="q9_d" name="q9" value="D">
+                <label for="q9_d">D. Sus instrucciones deben estar en un lenguaje de programación de bajo nivel.</label>
+            </li>
+        </ul>
+    </fieldset>
+
+    <fieldset id="q10" data-question-number="10" data-correct-answer="C">
+        <legend>10. Las Estructuras de Control (Condicionales e Iterativas) son fundamentales porque:</legend>
+        <ul>
+            <li>
+                <input type="radio" id="q10_a" name="q10" value="A">
+                <label for="q10_a">A. Reservan memoria para los datos del programa.</label>
+            </li>
+            <li>
+                <input type="radio" id="q10_b" name="q10" value="B">
+                <label for="q10_b">B. Permiten que la computadora solo opere en código binario.</label>
+            </li>
+            <li>
+                <input type="radio" id="q10_c" name="q10" value="C">
+                <label for="q10_c">C. Dotan al programa de inteligencia para tomar decisiones y repetir acciones.</label>
+            </li>
+            <li>
+                <input type="radio" id="q10_d" name="q10" value="D">
+                <label for="q10_d">D. Finalizan todas las sentencias con un punto y coma.</label>
+            </li>
+        </ul>
+    </fieldset>
+
+    <button type="submit" class="btn-submit">Enviar Respuestas</button>
+    <style>
+      .btn-submit {
+        display: inline-block;
+        background: linear-gradient(90deg, #2563eb 60%, #3b2fa6 100%);
+        color: #fff;
+        font-weight: 700;
+        font-size: 1.08rem;
+        padding: 12px 38px;
+        border-radius: 999px;
+        border: none;
+        box-shadow: 0 2px 12px rgba(37,99,235,0.14);
+        letter-spacing: 0.5px;
+        cursor: pointer;
+        transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+        margin: 24px auto 0 auto;
+        display: block;
+      }
+      .btn-submit:hover {
+        background: linear-gradient(90deg, #3b2fa6 60%, #2563eb 100%);
+        transform: translateY(-2px) scale(1.04);
+        box-shadow: 0 6px 24px rgba(37,99,235,0.22);
+      }
+    </style>
+
+</form>
+-->
+
+
+
+
+<!--
+<p><strong>Cuestionario: Introducción a la Programación y
+Algoritmos</strong></p>
+<p>Pon a prueba tus conocimientos sobre los conceptos fundamentales de
+la programación y el diseño de algoritmos.</p>
+<p><strong>Preguntas de Alternativas</strong></p>
+<p>1. ¿Cuál es la definición más precisa de Programación?</p>
+<p>A. El arte de crear diseños gráficos para páginas web.</p>
+<p>B. La manipulación de hardware sin necesidad de software.</p>
+<p>C. El proceso de dar instrucciones precisas y lógicas a una
+computadora para resolver un problema.</p>
+<p>D. La ciencia que estudia la composición de los circuitos
+electrónicos de la CPU.</p>
+<p>2. ¿Cuál es el orden correcto de las tres partes del ciclo de
+procesamiento de información (Modelo IPO)?</p>
+<p>A. Proceso → Salida → Entrada</p>
+<p>B. Entrada → Salida → Proceso</p>
+<p>C. Entrada → Proceso → Salida</p>
+<p>D. Salida → Entrada → Proceso</p>
+<p>3. ¿Qué característica de un algoritmo se incumple si el proceso se
+repite sin llegar a un resultado final?</p>
+<p>A. Preciso (Inequívoco)</p>
+<p>B. Definido (Consistente)</p>
+<p>C. Ordenado</p>
+<p>D. Finito (Limitado)</p>
+<p>4. ¿Cuál de las siguientes analogías describe mejor el concepto de
+Algoritmo en programación?</p>
+<p>A. Una caja etiquetada para guardar datos.</p>
+<p>B. El manual de instrucciones o la receta para una tarta.</p>
+<p>C. Un circuito integrado de la memoria RAM.</p>
+<p>D. El punto y coma (;) al final de una línea de código.</p>
+<p>5. ¿En qué fase de la resolución de problemas se utiliza el
+Pseudocódigo o los Diagramas de Flujo?</p>
+<p>A. Codificación</p>
+<p>B. Análisis del Problema</p>
+<p>C. Prueba y Depuración (Debugging)</p>
+<p>D. Diseño del Algoritmo</p>
+<p>6. ¿Cuál es el objetivo principal de la fase de Prueba y Depuración
+(Debugging)?</p>
+<p>A. Redactar la documentación del programa.</p>
+<p>B. Traducir el Pseudocódigo a Lenguaje C.</p>
+<p>C. Localizar, analizar y corregir los errores o fallos (bugs).</p>
+<p>D. Definir los requisitos y las salidas esperadas del programa.</p>
+<p>7. ¿Cuál es la herramienta de representación de algoritmos que
+utiliza símbolos estandarizados (óvalos, rombos, rectángulos) para
+visualizar el flujo?</p>
+<p>A. Pseudocódigo</p>
+<p>B. Lenguaje C</p>
+<p>C. Diagrama de Flujo (Flowchart)</p>
+<p>D. Sentencia</p>
+<p>8. En el contexto de los conceptos fundamentales, ¿qué representan
+las Variables?</p>
+<p>A. La capacidad del programa para tomar decisiones.</p>
+<p>B. La unidad de trabajo más pequeña que da una orden completa.</p>
+<p>C. Espacios de memoria reservados para almacenar y manipular
+datos.</p>
+<p>D. La sintaxis utilizada para finalizar una instrucción.</p>
+<p>9. La cualidad "Definido" de un algoritmo implica que:</p>
+<p>A. Siempre debe terminar en un número limitado de pasos.</p>
+<p>B. Si se ejecuta múltiples veces con los mismos datos de entrada,
+debe producir el mismo resultado.</p>
+<p>C. Debe ser fácil de leer para un humano.</p>
+<p>D. Sus instrucciones deben estar en un lenguaje de programación de
+bajo nivel.</p>
+<p>10. Las Estructuras de Control (Condicionales e Iterativas) son
+fundamentales porque:</p>
+<p>A. Reservan memoria para los datos del programa.</p>
+<p>B. Permiten que la computadora solo opere en código binario.</p>
+<p>C. Dotan al programa de inteligencia para tomar decisiones y repetir
+acciones.</p>
+<p>D. Finalizan todas las sentencias con un punto y coma.</p>
+<p><strong>Respuestas</strong></p>
+<ol type="1">
+<li><p>C</p></li>
+<li><p>C</p></li>
+<li><p>D</p></li>
+<li><p>B</p></li>
+<li><p>D</p></li>
+<li><p>C</p></li>
+<li><p>C</p></li>
+<li><p>C</p></li>
+<li><p>B</p></li>
+<li><p>C</p></li>
+</ol>
+-->
+</div>
+
+
+</body>
+</html>

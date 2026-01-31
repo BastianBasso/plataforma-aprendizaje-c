@@ -1,0 +1,173 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" crossorigin href="/assets/content-01sust.css">
+</head>
+<body>
+<div class="main-content">
+<h2 id="asignaciÃ³n-dinÃ¡mica-del-nodo-heap">AsignaciÃ³n DinÃ¡mica del Nodo
+(Heap) ðŸš€</h2>
+<p>Para que una Lista Enlazada funcione correctamente y no pierda sus
+datos, sus nodos <strong>deben</strong> crearse utilizando
+<strong>asignaciÃ³n dinÃ¡mica</strong> de memoria en el
+<strong><em>Heap</em></strong> (MontÃ³n).</p>
+<hr />
+<h3 id="la-necesidad-del-heap">La Necesidad del <em>Heap</em></h3>
+<p>Los nodos de una lista enlazada generalmente se crean dentro de una
+funciÃ³n (como <code>insertar_al_inicio()</code>).</p>
+<ul>
+<li>Si un nodo se declara localmente en el <strong>Stack</strong>
+(Pila), su memoria se liberarÃ¡ automÃ¡ticamente en cuanto la funciÃ³n
+termine y su Ã¡mbito (<code>scope</code>) se cierre. <strong>El nodo
+desaparecerÃ­a</strong>.</li>
+<li>Para que un nodo persista y sea accesible por los punteros
+<code>HEAD</code> y <code>siguiente</code> <strong>despuÃ©s</strong> de
+que la funciÃ³n creadora haya terminado, debe residir en una zona de
+memoria con un ciclo de vida controlado manualmente: el
+<strong>Heap</strong>.</li>
+</ul>
+<h3 id="uso-de-malloc">Uso de <code>malloc()</code></h3>
+<p>La funciÃ³n estÃ¡ndar para reservar memoria para un nodo en el
+<em>Heap</em> es <code>malloc()</code>:</p>
+<ol type="1">
+<li>Se solicita al sistema operativo el tamaÃ±o exacto necesario para el
+nodo usando <code>sizeof(Nodo)</code>.</li>
+<li><code>malloc()</code> devuelve un puntero a esa nueva Ã¡rea de
+memoria (o <code>NULL</code> si falla).</li>
+<li>El programador es responsable de <strong>liberar</strong>
+explÃ­citamente esta memoria con <code>free()</code> cuando el nodo sea
+eliminado de la lista (refuerzo del MÃ³dulo 9).</li>
+</ol>
+<p><span class="math display">â€˜Nodo *nuevo_nodo = (Nodo
+*)malloc(sizeof(Nodo));â€˜</span></p>
+<h2 id="funciÃ³n-de-creaciÃ³n-de-nodo">FunciÃ³n de CreaciÃ³n de Nodo ðŸ› ï¸</h2>
+<p>La forma mÃ¡s estructurada y segura de crear nuevos nodos es
+encapsular todo el proceso de asignaciÃ³n e inicializaciÃ³n dentro de una
+funciÃ³n dedicada. Esta funciÃ³n actÃºa como una â€œfÃ¡bricaâ€ de nodos,
+simplificando el cÃ³digo principal de la lista.</p>
+<hr />
+<h3 id="implementaciÃ³n-de-la-funciÃ³n">ImplementaciÃ³n de la FunciÃ³n</h3>
+<p>La funciÃ³n debe cumplir cuatro tareas esenciales:</p>
+<ol type="1">
+<li><strong>Aceptar el Dato:</strong> Recibir el valor que el nodo
+almacenarÃ¡.</li>
+<li><strong>Asignar Memoria:</strong> Usar <code>malloc()</code> para
+obtener espacio en el <em>Heap</em>.</li>
+<li><strong>Inicializar:</strong> Asignar el dato y establecer el
+puntero de enlace a <code>NULL</code> (ya que, por definiciÃ³n, un nuevo
+nodo siempre es el final temporal de la secuencia).</li>
+<li><strong>Retornar:</strong> Devolver el puntero al nuevo nodo.</li>
+</ol>
+<p><strong>Ejemplo de CÃ³digo (Asumiendo
+<code>typedef struct Nodo { int dato; struct Nodo *siguiente; } Nodo;</code>):</strong></p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>Nodo <span class="op">*</span>crear_nodo<span class="op">(</span><span class="dt">int</span> valor<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">// 1. Asignar memoria dinÃ¡mica</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    Nodo <span class="op">*</span>nuevo_nodo <span class="op">=</span> <span class="op">(</span>Nodo <span class="op">*)</span>malloc<span class="op">(</span><span class="kw">sizeof</span><span class="op">(</span>Nodo<span class="op">));</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="co">// 2. Verificar fallo de asignaciÃ³n (Manejo de Errores)</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>nuevo_nodo <span class="op">==</span> NULL<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>        <span class="co">// En un entorno real, se deberÃ­a manejar el error o salir.</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> NULL<span class="op">;</span> </span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    <span class="co">// 3. Inicializar el nodo</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    nuevo_nodo<span class="op">-&gt;</span>dato <span class="op">=</span> valor<span class="op">;</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    nuevo_nodo<span class="op">-&gt;</span>siguiente <span class="op">=</span> NULL<span class="op">;</span> <span class="co">// Un nuevo nodo siempre apunta a NULL</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    <span class="co">// 4. Retornar el puntero</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> nuevo_nodo<span class="op">;</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<h2 id="manejo-del-primer-nodo-e-inserciÃ³n-inicial">Manejo del Primer
+Nodo e InserciÃ³n Inicial ðŸ“Œ</h2>
+<p>El manejo del puntero <strong><code>HEAD</code></strong> (cabeza de
+la lista) es el primer paso lÃ³gico en cualquier operaciÃ³n de inserciÃ³n.
+La forma en que se inserta un nodo depende fundamentalmente de si la
+lista estÃ¡ <strong>vacÃ­a</strong> o no.</p>
+<hr />
+<h3 id="lÃ³gica-inicial-lista-vacÃ­a">LÃ³gica Inicial: Lista VacÃ­a</h3>
+<p>La condiciÃ³n base para la creaciÃ³n de una lista es verificar si el
+puntero <code>HEAD</code> estÃ¡ apuntando a <code>NULL</code>.</p>
+<ul>
+<li><strong>CondiciÃ³n:</strong> Si <span class="math inline">â€˜HEAD ==
+NULLâ€˜</span>, significa que la lista estÃ¡ vacÃ­a.</li>
+<li><strong>AcciÃ³n:</strong> El nodo reciÃ©n creado es el primer y Ãºnico
+elemento de la lista. Simplemente se hace que <strong><code>HEAD</code>
+apunte a este nuevo nodo</strong>.</li>
+</ul>
+<p><span class="math display">â€˜if (HEAD == NULL) {HEAD = nuevo_nodo;
+}â€˜</span></p>
+<h3 id="inserciÃ³n-en-una-lista-no-vacÃ­a">InserciÃ³n en una Lista No
+VacÃ­a</h3>
+<p>Si la lista ya contiene elementos (<span class="math inline">â€˜HEAD !=
+NULLâ€˜</span>), el nuevo nodo debe ser conectado a la secuencia
+existente. Los dos lugares mÃ¡s comunes para la inserciÃ³n inicial
+son:</p>
+<h4 id="inserciÃ³n-al-inicio-mÃ¡s-sencilla">1. InserciÃ³n al Inicio (MÃ¡s
+Sencilla)</h4>
+<p>El nuevo nodo se convierte en el nuevo primer elemento, desplazando
+al nodo original que estaba en la cabeza.</p>
+<ol type="1">
+<li>El puntero <code>siguiente</code> del <strong>nuevo nodo</strong> se
+asigna al nodo al que actualmente apunta <code>HEAD</code>.</li>
+<li><code>HEAD</code> se reasigna para apuntar al <strong>nuevo
+nodo</strong>.</li>
+</ol>
+<h4 id="inserciÃ³n-al-final-requiere-recorrido">2. InserciÃ³n al Final
+(Requiere Recorrido)</h4>
+<p>El nuevo nodo se aÃ±ade despuÃ©s del Ãºltimo elemento de la lista.</p>
+<ol type="1">
+<li>Se requiere recorrer la lista <strong>desde
+<code>HEAD</code></strong> hasta encontrar el nodo cuyo campo
+<code>siguiente</code> es <code>NULL</code> (el Ãºltimo nodo).</li>
+<li>El puntero <code>siguiente</code> de ese Ãºltimo nodo se reasigna
+para apuntar al <strong>nuevo nodo</strong>.</li>
+</ol>
+<h2 id="liberaciÃ³n-de-memoria-al-fallar-la-asignaciÃ³n">LiberaciÃ³n de
+Memoria al Fallar la AsignaciÃ³n ðŸš«</h2>
+<p>Una buena prÃ¡ctica esencial, relacionada con la gestiÃ³n de memoria
+vista en mÃ³dulos anteriores, es la <strong>verificaciÃ³n estricta de la
+asignaciÃ³n dinÃ¡mica</strong>.</p>
+<hr />
+<h3 id="verificaciÃ³n-de-malloc">VerificaciÃ³n de
+<code>malloc()</code></h3>
+<p>Antes de intentar usar un nodo reciÃ©n asignado, es crucial verificar
+si la llamada a <code>malloc()</code> (o <code>calloc()</code>) fue
+exitosa.</p>
+<ul>
+<li>Si la funciÃ³n encuentra espacio disponible en el <em>Heap</em>,
+devuelve la direcciÃ³n de ese bloque (un puntero vÃ¡lido).</li>
+<li>Si la funciÃ³n <strong>no encuentra suficiente memoria</strong> para
+satisfacer la solicitud (ej. si el sistema estÃ¡ agotado), devuelve el
+puntero nulo: <strong><code>NULL</code></strong>.</li>
+</ul>
+<p><strong>Nunca se debe intentar acceder a los campos de un puntero si
+este es <code>NULL</code></strong>, ya que esto resultarÃ­a en un
+<strong>Fallo de SegmentaciÃ³n</strong> (<em>Segmentation Fault</em>) y
+la terminaciÃ³n forzosa del programa.</p>
+<h3 id="manejo-adecuado-del-error">Manejo Adecuado del Error</h3>
+<p>En el contexto de la creaciÃ³n de un nodo, el manejo de errores
+implica detener la operaciÃ³n y comunicar el fallo al cÃ³digo que realizÃ³
+la llamada:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>Nodo <span class="op">*</span>nuevo_nodo <span class="op">=</span> <span class="op">(</span>Nodo <span class="op">*)</span>malloc<span class="op">(</span><span class="kw">sizeof</span><span class="op">(</span>Nodo<span class="op">));</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="op">(</span>nuevo_nodo <span class="op">==</span> NULL<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">// 1. Manejar el error: Imprimir un mensaje de fallo.</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    fprintf<span class="op">(</span>stderr<span class="op">,</span> <span class="st">&quot;Error: Fallo en la asignaciÃ³n de memoria para el nuevo nodo.</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="co">// 2. Comunicar el fallo: Devolver NULL.</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> NULL<span class="op">;</span> </span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    <span class="co">// NOTA: No hay memoria que liberar con free() aquÃ­, ya que malloc() fallÃ³.</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="co">// Si llegamos aquÃ­, la asignaciÃ³n fue exitosa y podemos inicializar el nodo.</span></span></code></pre></div>
+<p>Devolver <strong><code>NULL</code></strong> permite que la funciÃ³n
+llamadora decida la acciÃ³n apropiada (por ejemplo, intentar una
+inserciÃ³n mÃ¡s tarde, o informar al usuario).</p>
+
+</div>
+</body>
+</html>
+

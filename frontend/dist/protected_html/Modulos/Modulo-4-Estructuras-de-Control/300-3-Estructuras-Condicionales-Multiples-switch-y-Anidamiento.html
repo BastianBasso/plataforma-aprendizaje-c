@@ -1,0 +1,270 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" crossorigin href="/assets/content-01sust.css">
+</head>
+<body>
+<div class="main-content">
+<h1>3. Estructuras Condicionales Múltiples (switch y Anidamiento)</h1>
+<p><strong>La Estructura else if (Cadena de Decisión)</strong></p>
+<p>Cuando necesitas tomar una decisión que tiene <strong>más de dos
+caminos posibles</strong> (por ejemplo, clasificar calificaciones como
+A, B, C, D o F), la estructura if-else simple es insuficiente. Para
+estos casos, utilizamos la estructura <strong>else if</strong>, creando
+una <strong>Cadena de Decisión</strong>.</p>
+<p><strong>Sintaxis de la Cadena de Decisión</strong></p>
+<p>La estructura else if te permite evaluar una secuencia de
+condiciones. Tan pronto como una condición resulta
+<strong>Verdadera</strong>, el bloque de código asociado se ejecuta, y
+<strong>el resto de la cadena se salta</strong> por completo. Si ninguna
+condición es Verdadera, el control pasa al bloque <strong>else
+final</strong> (si existe).</p>
+<p>$$\text{if } (\text{C1}) \left\{ \right. \text{Bloque 1} \left.
+\right\} \text{ else if } (\text{C2}) \left\{ \right. \text{Bloque 2}
+\left. \right\} \text{ else } \left\{ \right. \text{Bloque Final} \left.
+\right\}$$</p>
+<p>C</p>
+<p>if (condicion_1) {</p>
+<p>// Se ejecuta solo si la C1 es Verdadera.</p>
+<p>} else if (condicion_2) {</p>
+<p>// Se ejecuta solo si la C1 fue Falsa Y la C2 es Verdadera.</p>
+<p>} else if (condicion_3) {</p>
+<p>// Se ejecuta solo si C1 y C2 fueron Falsas Y la C3 es Verdadera.</p>
+<p>} else {</p>
+<p>// Se ejecuta si TODAS las condiciones anteriores fueron Falsas.</p>
+<p>}</p>
+<p><strong>Principios Clave</strong></p>
+<ol type="1">
+<li><p><strong>Evaluación Secuencial:</strong> Las condiciones se
+evalúan en estricto orden, de arriba abajo.</p></li>
+<li><p><strong>Exclusión Mutua:</strong> Solo se ejecutará un único
+bloque de código en toda la cadena. Una vez que se encuentra la primera
+condición Verdadera, el programa sale de la estructura.</p></li>
+<li><p><strong>Eficiencia:</strong> Esto es más eficiente que múltiples
+if simples, porque si la primera condición es Verdadera, no se pierden
+recursos evaluando las condiciones subsiguientes.</p></li>
+</ol>
+<p><strong>Ejemplo Práctico: Clasificación de Rangos</strong></p>
+<p>En este ejemplo, si la nota es $85$:</p>
+<ol type="1">
+<li><p>nota &gt;= 90 es Falsa.</p></li>
+<li><p>nota &gt;= 80 es <strong>Verdadera</strong>, se ejecuta
+"B".</p></li>
+<li><p>Las condiciones nota &gt;= 70 y el else final <strong>se
+ignoran</strong>.</p></li>
+</ol>
+<p>C</p>
+<p>int nota = 85;</p>
+<p>if (nota &gt;= 90) {</p>
+<p>printf("Clasificacion: A\n");</p>
+<p>} else if (nota &gt;= 80) {</p>
+<p>printf("Clasificacion: B\n");</p>
+<p>} else if (nota &gt;= 70) {</p>
+<p>printf("Clasificacion: C\n");</p>
+<p>} else {</p>
+<p>printf("Clasificacion: F\n");</p>
+<p>}</p>
+<p>// Output: Clasificacion: B</p>
+<p><strong>Anidamiento de if (<em>Nested if</em>) 🧩</strong></p>
+<p>El <strong>anidamiento de if</strong> (<em>Nested if</em>) es una
+técnica de Control de Flujo que consiste en colocar una estructura de
+decisión completa (if o if-else) <strong>dentro del bloque de
+código</strong> (entre las llaves {}) de otra estructura de
+decisión.</p>
+<p>Esto se utiliza para evaluar <strong>condiciones
+dependientes</strong>, donde la segunda condición solo tiene sentido (y
+solo debe ser evaluada) si la primera condición ya se cumplió.</p>
+<p><strong>Sintaxis y Funcionamiento</strong></p>
+<p>El anidamiento crea una jerarquía lógica donde el programa debe pasar
+varios filtros secuenciales para llegar al bloque de código más
+interno.</p>
+<p>C</p>
+<p>if (Condicion_Externa) {</p>
+<p>// Si la Condición Externa es VERDADERA, entramos aquí.</p>
+<p>if (Condicion_Interna_A) {</p>
+<p>// Bloque A: Se ejecuta solo si Externa es V Y Interna A es V.</p>
+<p>} else {</p>
+<p>// Bloque B: Se ejecuta solo si Externa es V Y Interna A es F.</p>
+<p>}</p>
+<p>} else {</p>
+<p>// Si la Condición Externa es FALSA, el bloque anidado NUNCA se
+ejecuta.</p>
+<p>}</p>
+<p><strong>Ejemplo Práctico: Verificación de Credenciales</strong></p>
+<p>Queremos dar acceso a la Administración <strong>solo si</strong> el
+usuario está <em>activo</em> <strong>y</strong> tiene el <em>rol de
+administrador</em>.</p>
+<p>C</p>
+<p>int activo = 1;</p>
+<p>int rol = 2; // 1 = Admin, 2 = Usuario Estandar</p>
+<p>if (activo == 1) { // 1. Condición Externa: ¿Usuario Activo?</p>
+<p>if (rol == 1) { // 2. Condición Interna (Dependiente): ¿Es
+Administrador?</p>
+<p>printf("ACCESO TOTAL: Bienvenido Admin.\n");</p>
+<p>} else {</p>
+<p>printf("ACCESO LIMITADO: Eres activo, pero no administrador.\n");</p>
+<p>}</p>
+<p>} else {</p>
+<p>printf("ACCESO DENEGADO: Usuario inactivo.\n");</p>
+<p>}</p>
+<p>En este ejemplo, si activo fuera $0$, la pregunta sobre el rol nunca
+se haría, y se ejecutaría inmediatamente el else externo.</p>
+<p><strong>⚠️ Advertencia: Riesgos de la Complejidad</strong></p>
+<p>El anidamiento es una herramienta poderosa, pero debe usarse con
+moderación:</p>
+<ol type="1">
+<li><p><strong>Complejidad y Legibilidad:</strong> Anidar más de dos o
+tres niveles de if hace que el código sea muy difícil de leer y seguir
+(<em>spaghetti code</em>).</p></li>
+<li><p><strong>Mantenimiento:</strong> Es fácil cometer errores lógicos
+o de indentación al modificar bloques internos.</p></li>
+</ol>
+<p><strong>Mejor Práctica:</strong> Si tienes dos condiciones que
+<em>deben</em> ser Verdaderas, es a menudo más claro combinarlas con el
+operador lógico <strong>&amp;&amp;</strong> en una sola condición: if
+(activo == 1 &amp;&amp; rol == 1). El anidamiento se reserva para cuando
+las decisiones son verdaderamente <strong>secuenciales o
+dependientes</strong>.</p>
+<p><strong>Sintaxis y Propósito de switch 🔄</strong></p>
+<p>La sentencia <strong>switch</strong> es una poderosa estructura de
+control en C que ofrece una alternativa <strong>más limpia y
+legible</strong> a las largas y repetitivas cadenas de <strong>if-else
+if-else</strong>, especialmente cuando la lógica del programa implica
+comparar una <strong>única expresión o variable</strong> contra
+<strong>múltiples valores constantes fijos</strong>.</p>
+<p><strong>Propósito: Eficiencia y Claridad</strong></p>
+<p>El propósito principal de switch es simplificar la toma de decisiones
+múltiples.</p>
+<ul>
+<li><p><strong>¿Cuándo usar switch?</strong> Úsalo cuando la decisión se
+base en el <strong>valor exacto</strong> de una variable (por ejemplo,
+comparar el valor de una variable entera con $1$, $2$, $3$,
+etc.).</p></li>
+<li><p><strong>¿Cuándo NO usar switch?</strong> No se puede usar para
+comparar rangos o condiciones complejas (ej: $\text{si } x &gt; 10
+\text{ y } x &lt; 50$). Para rangos y condiciones booleanas complejas,
+la cadena else if sigue siendo necesaria.</p></li>
+</ul>
+<p><strong>Sintaxis Básica de switch</strong></p>
+<p>La estructura requiere una <strong>expresión entera</strong> (o que
+pueda promoverse a entero, como char) dentro de los paréntesis.</p>
+<p>C</p>
+<p>switch (expresion_entera) {</p>
+<p>// Bloque 1: Compara si la expresion es igual a VALOR_1</p>
+<p>case VALOR_1:</p>
+<p>// Código a ejecutar si coincide</p>
+<p>break; // Necesario para salir del switch</p>
+<p>// Bloque 2: Compara si la expresion es igual a VALOR_2</p>
+<p>case VALOR_2:</p>
+<p>// Código a ejecutar si coincide</p>
+<p>break;</p>
+<p>// Bloque Final: Código que se ejecuta si NINGUNA de las cases
+coincide</p>
+<p>default:</p>
+<p>// Código por defecto</p>
+<p>}</p>
+<p><strong>Ejemplo Conceptual</strong></p>
+<p>Si tienes una variable opcion y quieres ejecutar código diferente
+para $1$, $2$ o $3$:</p>
+<table>
+<colgroup>
+<col style="width: 48%" />
+<col style="width: 51%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Cadena if-else if</strong></th>
+<th><strong>Estructura switch</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>c if (opcion == 1) { /* ... */ } else if (opcion == 2) { /* ... */ }
+else if (opcion == 3) { /* ... */ } else { /* ... */ }</td>
+<td>c switch (opcion) { case 1: /* ... */; break; case 2: /* ... */;
+break; case 3: /* ... */; break; default: /* ... */; }</td>
+</tr>
+</tbody>
+</table>
+<p>La estructura switch es visiblemente más limpia y su intención
+(comparación de valores) es clara a primera vista.</p>
+<p><strong>Componentes Esenciales de switch: case, break y
+default</strong></p>
+<p>La sentencia switch está compuesta por tres palabras clave internas
+que definen su comportamiento y aseguran que el flujo de ejecución sea
+controlado: <strong>case</strong>, <strong>break</strong> y
+<strong>default</strong>.</p>
+<p><strong>1. case (Etiquetas de Valor)</strong></p>
+<p>La palabra clave <strong>case</strong> se utiliza para definir los
+posibles <strong>valores constantes</strong> contra los cuales se
+comparará la expresión inicial del switch.</p>
+<ul>
+<li><p><strong>Rol:</strong> Actúa como una "etiqueta" o punto de
+entrada. Si la expresion evaluada en el switch() coincide exactamente
+con el valor de un case, la ejecución del programa salta directamente a
+ese punto.</p></li>
+<li><p><strong>Sintaxis:</strong> Va seguido de un <strong>valor
+constante</strong> (un literal o una constante definida, no una
+variable) y un <strong>dos puntos</strong> (:).</p></li>
+</ul>
+<p>$$\text{case VALOR\_CONSTANTE: sentencia\_1; sentencia\_2; ...}$$</p>
+<p><strong>2. break (Terminación Controlada)</strong></p>
+<p>La palabra clave <strong>break</strong> es vital para el correcto
+funcionamiento de la mayoría de los switch.</p>
+<ul>
+<li><p><strong>Rol:</strong> Una vez que se ejecuta el código dentro de
+un case coincidente, <strong>break</strong> saca inmediatamente el
+control de flujo del resto de la estructura switch.</p></li>
+<li><p><strong>Ejecución en Cascada (<em>Fall-through</em>):</strong> Si
+se <strong>omite</strong> el break, el flujo de ejecución no se detiene;
+continúa ejecutando el código del siguiente case y los subsiguientes,
+ignorando sus condiciones, hasta que encuentra un break o llega al final
+del switch. Esto se llama <em>fall-through</em> y es una característica
+que a veces se utiliza intencionalmente, pero que a menudo es una fuente
+de errores si se omite por descuido.</p></li>
+</ul>
+<p><strong>3. default (El Camino por Defecto)</strong></p>
+<p>La etiqueta <strong>default</strong> es opcional, pero altamente
+recomendada.</p>
+<ul>
+<li><p><strong>Rol:</strong> Actúa como el bloque <strong>else</strong>
+de una cadena if-else if. Si la expresión del switch no coincide con
+<strong>ninguno</strong> de los valores definidos en las etiquetas case,
+la ejecución salta a la sección default.</p></li>
+<li><p><strong>Uso:</strong> Es esencial para manejar errores, opciones
+inválidas o cualquier otro escenario no contemplado
+explícitamente.</p></li>
+</ul>
+<p><strong>Ejemplo de Estructura Completa</strong></p>
+<p>C</p>
+<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
+<p>int main(void) {</p>
+<p>int dia = 3;</p>
+<p>switch (dia) {</p>
+<p>case 1:</p>
+<p>printf("Lunes: Inicio de semana laboral.\n");</p>
+<p>break; // NECESARIO para salir</p>
+<p>case 2:</p>
+<p>case 3: // Se ejecuta lo mismo para 2 que para 3 (fall-through
+intencional)</p>
+<p>printf("Martes o Miercoles: Plena actividad.\n");</p>
+<p>break;</p>
+<p>case 7:</p>
+<p>printf("Domingo: Dia de descanso.\n");</p>
+<p>break;</p>
+<p>default: // Se ejecuta si dia no es 1, 2, 3, o 7</p>
+<p>printf("Dia no reconocido o fin de semana.\n");</p>
+<p>// No necesita 'break' porque es la última sentencia</p>
+<p>}</p>
+<p>return 0;</p>
+<p>}</p>
+<p>En este ejemplo, si dia = 3, se ejecuta el código del case 3, se
+encuentra el break, y el programa salta fuera del switch.</p>
+
+
+</div>
+</body>
+</html>
+

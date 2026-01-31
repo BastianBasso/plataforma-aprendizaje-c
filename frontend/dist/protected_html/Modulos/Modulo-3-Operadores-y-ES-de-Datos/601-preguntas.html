@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" crossorigin href="/assets/content-01sust.css">
+</head>
+<body>
+<div class="main-content">
+
+<h1> Ejercicios Integradores: Aplicando I-P-O, Operadores y Formateo</h1>
+
+<table style="width:97%;">
+<colgroup>
+<col style="width: 11%" />
+<col style="width: 24%" />
+<col style="width: 34%" />
+<col style="width: 26%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>N°</strong></th>
+<th style="text-align: left;"><strong>Enfoque Principal</strong></th>
+<th style="text-align: left;"><strong>Conceptos Clave</strong></th>
+<th style="text-align: left;"><strong>Tipo de Ejercicio</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>1</strong></td>
+<td style="text-align: left;"><strong>Mecánica I/O</strong></td>
+<td style="text-align: left;">scanf() con &amp;, printf() como
+<em>Prompt</em>, Tipos de datos (%d, %f).</td>
+<td style="text-align: left;"><strong>Implementación
+directa.</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>2</strong></td>
+<td style="text-align: left;"><strong>Procesamiento y
+Casting</strong></td>
+<td style="text-align: left;">Operadores aritméticos, Módulo (%),
+<strong>Casting Explícito</strong>.</td>
+<td style="text-align: left;"><strong>Cálculo y
+corrección.</strong></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>3</strong></td>
+<td style="text-align: left;"><strong>I-P-O Completo y
+Formato</strong></td>
+<td style="text-align: left;">Descomposición I-P-O, Constantes (const),
+Formato de salida (precisión %.2f).</td>
+<td style="text-align: left;"><strong>Proyecto
+mini-simulación.</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>1. Ejercicios Prácticos para la Sección I-P-O (3
+Ejercicios)</strong></p>
+<p><strong>Ejercicio 1: La Conversión de Dólares (Mecánica I/O)
+💱</strong></p>
+<p><strong>Objetivo:</strong> Asegurar que el estudiante puede capturar
+y mostrar datos de dos tipos (int y float) correctamente, respetando el
+ciclo I-P-O.</p>
+<p><strong>Instrucción:</strong> Escribe un programa en C que solicite
+al usuario dos datos:</p>
+<ol type="1">
+<li><p>La <strong>cantidad de euros</strong> a convertir (tipo
+int).</p></li>
+<li><p>El <strong>tipo de cambio</strong> actual a dólares (tipo
+float).</p></li>
+</ol>
+<p>Luego, el programa debe calcular la cantidad de dólares
+(multiplicando ambos valores) y mostrar el resultado en la consola.</p>
+<table style="width:97%;">
+<colgroup>
+<col style="width: 27%" />
+<col style="width: 70%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>Fase</strong></th>
+<th style="text-align: left;"><strong>Tarea</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>Input</strong></td>
+<td style="text-align: left;">Usar printf() como <em>prompt</em> y
+scanf() con %d y %f.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Procesamiento</strong></td>
+<td style="text-align: left;">dolares = euros * tipo_cambio;</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Output</strong></td>
+<td style="text-align: left;">Imprimir el resultado final con un mensaje
+claro.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Ejercicio 2: El Desglose de Tiempo (Procesamiento Avanzado)
+⏱️</strong></p>
+<p><strong>Objetivo:</strong> Forzar el uso del operador <strong>módulo
+(%)</strong> y la división de <strong>enteros</strong>, junto con el
+<strong>casting explícito</strong> para obtener un resultado preciso
+(promedio).</p>
+<p><strong>Instrucción:</strong> Escribe un programa que solicite al
+usuario la <strong>cantidad total de segundos</strong> transcurridos en
+un día (tipo int). El programa debe realizar dos cálculos:</p>
+<ol type="1">
+<li><p><strong>Desglose de Minutos:</strong> Usar la división entera (/)
+y el módulo (%) para calcular la cantidad de <strong>minutos
+completos</strong> y los <strong>segundos restantes</strong>.</p>
+<ul>
+<li><p>minutos_completos = total_segundos / 60;</p></li>
+<li><p>segundos_residuo = total_segundos % 60;</p></li>
+</ul></li>
+<li><p><strong>Promedio de Velocidad:</strong> Si la cantidad de
+segundos representa el tiempo total de un corredor en una carrera de 400
+metros, calcula la <strong>velocidad promedio</strong> en metros por
+segundo.</p>
+<ul>
+<li><strong>Importante:</strong> Debes usar <strong>Casting
+Explícito</strong> para asegurar que el resultado sea decimal. float
+velocidad = 400.0f / (float)total_segundos;</li>
+</ul></li>
+</ol>
+<table style="width:97%;">
+<colgroup>
+<col style="width: 26%" />
+<col style="width: 71%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>Fase</strong></th>
+<th style="text-align: left;"><strong>Tarea</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>Input</strong></td>
+<td style="text-align: left;">Usar scanf() para obtener el
+total_segundos.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Procesamiento</strong></td>
+<td style="text-align: left;">Aplicar / y % para el desglose; aplicar
+<em>Casting</em> para el promedio.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Output</strong></td>
+<td style="text-align: left;">Imprimir el desglose y el promedio con un
+mensaje descriptivo.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Ejercicio 3: Calculadora de Área de Círculo (I-P-O y Formato)
+📐</strong></p>
+<p><strong>Objetivo:</strong> Crear un programa I-P-O completo,
+utilizando una <strong>constante</strong> (const float PI), aplicando la
+buena práctica de float y controlando la precisión de la salida.</p>
+<p><strong>Instrucción:</strong> Escribe un programa que calcule el área
+de un círculo.</p>
+<ol type="1">
+<li><p><strong>Constante:</strong> Declara el valor de $\pi$ como una
+<strong>constante de tipo const float</strong> (PI = 3.14159f).</p></li>
+<li><p><strong>Input:</strong> Solicita al usuario el
+<strong>radio</strong> del círculo (tipo float).</p></li>
+<li><p><strong>Procesamiento:</strong> Aplica la fórmula: $Área = \pi
+\times radio^2$.</p></li>
+<li><p><strong>Output:</strong> Imprime el resultado final, asegurándote
+de usar el especificador %.3f para mostrar el área con <strong>tres
+decimales de precisión</strong>.</p></li>
+</ol>
+<table style="width:97%;">
+<colgroup>
+<col style="width: 29%" />
+<col style="width: 67%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>Fase</strong></th>
+<th style="text-align: left;"><strong>Tarea</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>Input</strong></td>
+<td style="text-align: left;">Usar scanf() con %f para el radio.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Procesamiento</strong></td>
+<td style="text-align: left;">Usar la const y el operador * para el
+cálculo.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Output</strong></td>
+<td style="text-align: left;">Usar printf() con el formato %.3f.</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</body>
+</html>
+

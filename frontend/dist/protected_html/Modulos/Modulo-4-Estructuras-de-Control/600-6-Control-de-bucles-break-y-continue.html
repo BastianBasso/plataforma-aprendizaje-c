@@ -1,0 +1,182 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" crossorigin href="/assets/content-01sust.css">
+</head>
+<body>
+<div class="main-content">
+<h1><strong>6. Control de Bucles (break y continue)</strong></h1>
+<p><strong>La Sentencia break (Salida Anticipada)</strong></p>
+<p>La sentencia <strong>break</strong> es una herramienta de control de
+flujo que se utiliza dentro del cuerpo de un bucle (for, while o
+do-while) o de una estructura switch.</p>
+<p>Su propósito principal es forzar la <strong>terminación
+inmediata</strong> del bucle o switch que la contiene.</p>
+<ul>
+<li><p><strong>Función Clave:</strong> Cuando el programa ejecuta break,
+ignora el resto del código que quede en la iteración actual y
+<strong>sale instantáneamente</strong> del bucle más interno,
+transfiriendo el control a la primera instrucción que sigue a dicho
+bucle.</p></li>
+<li><p><strong>Independencia de la Condición:</strong> La sentencia
+break actúa sin importar si la <strong>condición de parada</strong> del
+bucle (while (condicion)) es verdadera o falsa en ese momento. Es una
+<strong>salida de emergencia</strong> anticipada.</p></li>
+</ul>
+<p><strong>Ejemplo:</strong> Imagina que estás revisando una lista de
+$100$ artículos. Si encuentras el artículo que buscas en la posición
+$5$, no tiene sentido seguir revisando los otros $95$ artículos. Usar
+<strong>break</strong> detiene la revisión inmediatamente, optimizando
+el tiempo de ejecución.</p>
+<p><strong>Sintaxis y Uso:</strong></p>
+<p>El uso de break siempre está condicionado a una lógica interna,
+generalmente un if, para especificar cuándo debe ocurrir la salida de
+emergencia.</p>
+<p>C</p>
+<p>for (/* Inicialización */; /* Condición */; /* Actualización */)
+{</p>
+<p>// Código de la iteración...</p>
+<p>if (/* Condición de Salida Inesperada */) {</p>
+<p>break; // ¡SALIDA INMEDIATA DEL BUCLE!</p>
+<p>}</p>
+<p>// Este código se salta si se ejecuta el 'break'</p>
+<p>}</p>
+<p>// El programa continúa aquí, justo después del bucle.</p>
+<p><strong>Aplicación Común (Búsqueda Eficiente):</strong></p>
+<p>Se utiliza estratégicamente para detener bucles tan pronto como se ha
+logrado el objetivo, como se verá en el Ejercicio Propuesto A.</p>
+<p><strong>La Sentencia continue (Saltar Iteración)</strong></p>
+<p>La sentencia <strong>continue</strong> también se utiliza dentro de
+los bucles (for, while o do-while), pero tiene un propósito diferente a
+break.</p>
+<p>Mientras que break finaliza el bucle por completo,
+<strong>continue</strong> solo afecta a la <strong>iteración
+actual</strong>.</p>
+<ul>
+<li><p><strong>Función Clave:</strong> Cuando el programa ejecuta
+continue, <strong>salta el resto del código</strong> que sigue dentro
+del cuerpo del bucle para esa iteración y pasa inmediatamente a la
+<strong>siguiente iteración</strong>.</p></li>
+<li><p><strong>En for:</strong> Tras continue, se ejecuta directamente
+la sección de <strong>actualización/incremento</strong> del bucle (i++)
+y se reevalúa la condición.</p></li>
+<li><p><strong>En while/do-while:</strong> Tras continue, se reevalúa
+directamente la <strong>condición</strong> del bucle para determinar si
+se debe iniciar la siguiente iteración.</p></li>
+</ul>
+<p><strong>Uso Común:</strong> continue es ideal para situaciones donde
+necesitas <strong>filtrar</strong> o <strong>ignorar</strong> ciertas
+condiciones o datos dentro del ciclo de procesamiento, permitiendo que
+el bucle siga ejecutándose para los demás casos.</p>
+<p><strong>Sintaxis y Funcionamiento:</strong></p>
+<p>Al igual que break, continue se anida típicamente dentro de una
+estructura condicional (if).</p>
+<p>C</p>
+<p>for (/* ... */) {</p>
+<p>// Código 1</p>
+<p>if (/* Condición de Omisión */) {</p>
+<p>continue; // Saltar el resto de la iteración actual</p>
+<p>}</p>
+<p>// Código 2 (Este bloque SOLO se ejecuta si NO se ejecutó el
+'continue')</p>
+<p>}</p>
+<p>// El bucle continuará hasta que la condición principal sea
+Falsa.</p>
+<p><strong>Aplicación Común (Filtrado de Datos):</strong></p>
+<p>Se usa para ignorar o no procesar elementos que cumplen con un
+criterio específico, como se verá en el Ejercicio Propuesto B (filtrar
+números pares).</p>
+<p><strong>Uso Estratégico de break (Optimización en
+Búsquedas)</strong></p>
+<p>El uso más significativo de la sentencia <strong>break</strong> es la
+optimización del rendimiento en bucles de <strong>búsqueda</strong>.</p>
+<p>Cuando un bucle está diseñado para recorrer una colección de
+elementos (como una lista o un arreglo) en busca de un valor específico,
+no es eficiente continuar la iteración una vez que el valor ha sido
+encontrado.</p>
+<p><strong>Principio de Ahorro de Tiempo de Ejecución</strong></p>
+<ol type="1">
+<li><p><strong>Objetivo:</strong> El propósito es encontrar un
+elemento.</p></li>
+<li><p><strong>Detección:</strong> El elemento se encuentra en la
+iteración $N$.</p></li>
+<li><p><strong>Acción:</strong> En ese momento, se ejecuta la sentencia
+<strong>break</strong>.</p></li>
+<li><p><strong>Resultado:</strong> El bucle termina inmediatamente,
+<strong>saltando</strong> todas las iteraciones restantes. Esto ahorra
+tiempo de procesamiento innecesario.</p></li>
+</ol>
+<p><strong>Ejemplo Práctico: Búsqueda Eficiente</strong></p>
+<p>Consideremos un arreglo de $100$ números. Si el número objetivo está
+en la posición $5$, un bucle sin break seguiría comprobando las $95$
+posiciones restantes. Con break, el bucle se detiene en la posición
+$5$.</p>
+<p>C</p>
+<p>// Búsqueda del número 42 en un arreglo de 10 elementos
+(simulado)</p>
+<p>int numeros[] = {10, 20, 30, 42, 50, 60, 70, 80, 90, 100};</p>
+<p>int elemento_buscado = 42;</p>
+<p>int encontrado = 0;</p>
+<p>int i;</p>
+<p>for (i = 0; i &lt; 10; i++) {</p>
+<p>printf("Revisando elemento en posición %d\n", i);</p>
+<p>if (numeros[i] == elemento_buscado) {</p>
+<p>encontrado = 1;</p>
+<p>printf("¡Elemento encontrado en posición %d!\n", i);</p>
+<p>break; // Detiene el bucle inmediatamente</p>
+<p>}</p>
+<p>}</p>
+<p>// Si se hubiera encontrado el elemento, el bucle sale aquí.</p>
+<p>// Si no se encuentra, el bucle termina al llegar a i = 10.</p>
+<p>Este uso estratégico no solo resuelve el problema (encuentra el
+elemento) sino que lo hace de la manera más rápida posible.</p>
+<p><strong>Uso Estratégico de continue (Filtrado y Omisión)</strong></p>
+<p>El uso estratégico de la sentencia <strong>continue</strong> se
+centra en el <strong>filtrado de datos</strong> o la <strong>omisión de
+casos especiales</strong> dentro de un ciclo de repetición.</p>
+<p>Su objetivo es evitar la ejecución de un bloque de código específico
+en la iteración actual, permitiendo que el bucle avance inmediatamente
+al siguiente ciclo.</p>
+<p><strong>Principio de Filtrado</strong></p>
+<ol type="1">
+<li><p><strong>Iteración:</strong> El bucle procesa una secuencia de
+datos.</p></li>
+<li><p><strong>Condición de Filtro:</strong> Se encuentra un dato que
+cumple un criterio que debe ser <strong>ignorado</strong> (ej. un número
+par, un dato inválido, un valor nulo).</p></li>
+<li><p><strong>Acción:</strong> Se ejecuta la sentencia
+<strong>continue</strong>.</p></li>
+<li><p><strong>Resultado:</strong> El programa salta cualquier
+instrucción restante en esa iteración y <strong>pasa a la
+siguiente</strong> comprobación del bucle, asegurando que solo se
+procesen los datos deseados.</p></li>
+</ol>
+<p><strong>Ejemplo Práctico: Procesamiento Selectivo de
+Impares</strong></p>
+<p>En el ejemplo de procesar números del 1 al 100 y omitir los pares, el
+uso de continue permite escribir el código principal de procesamiento
+fuera del condicional if, logrando un flujo más limpio.</p>
+<p>C</p>
+<p>// Iterar del 1 al 10. Solo queremos imprimir los números
+impares.</p>
+<p>for (int i = 1; i &lt;= 10; i++) {</p>
+<p>// Condición de Omisión (Filtro): Si el número es par...</p>
+<p>if (i % 2 == 0) {</p>
+<p>printf(" -&gt; Se omite el %d\n", i);</p>
+<p>continue; // Saltar el resto del código para números pares</p>
+<p>}</p>
+<p>// Este código SÓLO se ejecuta para números impares</p>
+<p>printf("Procesando el número impar: %d\n", i);</p>
+<p>}</p>
+<p>// El bucle sigue iterando hasta que i &gt; 10.</p>
+<p>De esta manera, continue aísla y desecha los elementos no deseados de
+forma eficiente, dejando que el flujo de procesamiento normal se aplique
+únicamente a los elementos que sí cumplen el criterio.</p>
+
+
+</div>
+</body>
+</html>
+

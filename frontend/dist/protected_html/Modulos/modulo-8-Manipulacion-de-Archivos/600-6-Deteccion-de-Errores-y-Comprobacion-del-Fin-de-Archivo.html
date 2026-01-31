@@ -1,0 +1,377 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" crossorigin href="/assets/content-01sust.css">
+</head>
+<body>
+<div class="main-content">
+<h2 id="comprobaciÃ³n-del-fin-de-archivo-feof">ComprobaciÃ³n del Fin de
+Archivo (<code>feof</code>) ðŸ”š</h2>
+<p>La funciÃ³n <strong><code>feof()</code></strong> es una herramienta de
+diagnÃ³stico en C que se utiliza para determinar si el <strong>indicador
+de fin de archivo (EOF)</strong> se ha establecido para un flujo de
+archivo determinado.</p>
+<hr />
+<h3 id="sintaxis-y-propÃ³sito">1. Sintaxis y PropÃ³sito</h3>
+<p>La funciÃ³n <code>feof()</code> no realiza operaciones de lectura;
+simplemente verifica el estado interno del flujo.</p>
+<p><span class="math display">â€˜int feof(FILE *stream);â€˜</span></p>
+<ul>
+<li><strong><code>stream</code></strong>: El puntero
+<strong><code>FILE*</code></strong> del flujo de archivo que se desea
+comprobar.</li>
+</ul>
+<h3 id="valor-de-retorno">2. Valor de Retorno</h3>
+<ul>
+<li><strong>Distinto de Cero (Verdadero):</strong> El indicador de EOF
+<strong>ha sido</strong> establecido. Esto significa que la Ãºltima
+operaciÃ³n de lectura intentÃ³ leer mÃ¡s allÃ¡ del Ãºltimo byte del
+archivo.</li>
+<li><strong>Cero (Falso):</strong> El indicador de EOF <strong>no ha
+sido</strong> establecido. Esto puede significar que todavÃ­a hay datos
+que leer o que ha ocurrido un error de lectura.</li>
+</ul>
+<h3 id="el-momento-clave-de-feof-post-lectura">3. El Momento Clave de
+<code>feof()</code> (Post-Lectura)</h3>
+<p>Es crucial entender que el indicador de EOF <strong>solo se activa
+(se establece)</strong> <em>despuÃ©s</em> de que una operaciÃ³n de lectura
+(como <code>fgetc()</code>, <code>fscanf()</code>, o
+<code>fread()</code>) intenta leer y falla porque <strong>no hay mÃ¡s
+datos</strong> en el archivo.</p>
+<p>Por lo tanto, el uso correcto de <code>feof()</code> es
+<strong>despuÃ©s</strong> de que una funciÃ³n de lectura ha indicado un
+fallo (por ejemplo, devolviendo <code>EOF</code> o un nÃºmero incompleto
+de elementos), para distinguir si el fallo fue causado por el final
+legÃ­timo del archivo o por un error de E/S.</p>
+<h4 id="ejemplo-uso-incorrecto-vs.-correcto">Ejemplo (Uso Incorrecto
+vs.Â Correcto):</h4>
+<p><strong>âŒ USO INCORRECTO (Causa un ciclo extra):</strong></p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> <span class="op">(!</span>feof<span class="op">(</span>archivo<span class="op">))</span> <span class="op">{</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">// ... intenta leer datos ...</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">// La primera vez que lee el Ãºltimo dato, feof() aÃºn es FALSO.</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Intenta leer una vez MÃS, la lectura falla, y feof() se activa.</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="co">// El cÃ³digo dentro del bucle se ejecuta una vez con datos &quot;basura&quot; </span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="co">// o con el Ãºltimo dato duplicado (dependiendo de la implementaciÃ³n).</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p><strong>âœ… USO CORRECTO (Verifica el estado despuÃ©s del fallo de
+lectura):</strong></p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> <span class="op">(</span><span class="co">/* la lectura es exitosa */</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Procesar datos</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co">// Una vez que el bucle termina, se usa feof() para saber si fue por EOF</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="op">(</span>feof<span class="op">(</span>archivo<span class="op">))</span> <span class="op">{</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;Fin del archivo alcanzado.</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Si no fue EOF, fue un error</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;OcurriÃ³ un error de lectura/escritura.</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span> </span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<blockquote>
+<p><strong>PrÃ¡ctica Recomendada:</strong> Siempre se debe utilizar el
+<strong>valor de retorno</strong> de las funciones de lectura
+(<code>fscanf()</code>, <code>fread()</code>, <code>fgets()</code>) para
+controlar el bucle de lectura. <code>feof()</code> se reserva para el
+<strong>chequeo final</strong> para confirmar la causa de la salida del
+bucle.</p>
+</blockquote>
+<h2 id="detecciÃ³n-de-errores-en-el-flujo-ferror">DetecciÃ³n de Errores en
+el Flujo (<code>ferror</code>) ðŸ›‘</h2>
+<p>La funciÃ³n <strong><code>ferror()</code></strong> es crucial para
+mantener la <strong>integridad y robustez</strong> de las operaciones de
+entrada/salida (E/S) en C. Su propÃ³sito es verificar si se ha producido
+un error durante una operaciÃ³n de lectura o escritura previa en un flujo
+de archivo.</p>
+<hr />
+<h3 id="sintaxis-y-propÃ³sito-1">1. Sintaxis y PropÃ³sito</h3>
+<p><code>ferror()</code> funciona verificando el <strong>indicador de
+error</strong> interno que el sistema C mantiene para cada flujo de
+archivo abierto.</p>
+<p><span class="math display">â€˜int ferror(FILE *stream);â€˜</span></p>
+<ul>
+<li><strong><code>stream</code></strong>: El puntero
+<strong><code>FILE*</code></strong> del flujo de archivo cuyo estado de
+error se desea comprobar.</li>
+</ul>
+<h3 id="valor-de-retorno-1">2. Valor de Retorno</h3>
+<ul>
+<li><strong>Distinto de Cero (Verdadero):</strong> El indicador de error
+estÃ¡ activado. Esto significa que ha ocurrido un <strong>fallo de
+E/S</strong> (ej., error de hardware, disco lleno, permisos
+insuficientes, archivo corrupto) y el flujo ya no es confiable.</li>
+<li><strong>Cero (Falso):</strong> El indicador de error estÃ¡
+desactivado. Esto no garantiza que la operaciÃ³n fue Ãºtil, solo que no
+hubo un error a nivel de sistema.</li>
+</ul>
+<h3 id="uso-prÃ¡ctico">3. Uso PrÃ¡ctico</h3>
+<p>A diferencia de <code>feof()</code>, que solo se activa al intentar
+leer mÃ¡s allÃ¡ del archivo, <code>ferror()</code> puede activarse en
+<strong>cualquier momento</strong> si una operaciÃ³n de E/S no se
+completa correctamente.</p>
+<p>Se utiliza tÃ­picamente <strong>despuÃ©s</strong> de una operaciÃ³n
+crÃ­tica (<code>fwrite</code>, <code>fread</code>, <code>fprintf</code>,
+etc.) para confirmar que el fallo de la operaciÃ³n no fue un simple fin
+de archivo, sino un problema grave:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Intentar escribir datos crÃ­ticos</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="dt">size_t</span> escritos <span class="op">=</span> fwrite<span class="op">(</span>datos<span class="op">,</span> size<span class="op">,</span> count<span class="op">,</span> archivo<span class="op">);</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co">// Comprobar si la escritura fallÃ³</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="op">(</span>escritos <span class="op">!=</span> count<span class="op">)</span> <span class="op">{</span> </span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Si no se escribieron todos los elementos, comprobar la causa:</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>ferror<span class="op">(</span>archivo<span class="op">))</span> <span class="op">{</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">&quot;ERROR IRRECUPERABLE: Fallo de E/S en el flujo.</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>        perror<span class="op">(</span><span class="st">&quot;DiagnÃ³stico del sistema&quot;</span><span class="op">);</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Manejar el error: cerrar el archivo y salir</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>        <span class="co">// El fallo fue causado por EOF/Disco lleno, pero no un error de E/S directo.</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Aunque esto es similar a feof, es una forma de distinguir el problema.</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<blockquote>
+<p><strong>Nota:</strong> El indicador de error permanece establecido
+hasta que se llama a la funciÃ³n <strong><code>clearerr()</code></strong>
+(que lo restablece a cero) o hasta que se cierra el flujo
+(<code>fclose()</code>). Si un error ocurre, todas las operaciones de
+E/S subsiguientes en ese flujo probablemente fallarÃ¡n hasta que se
+restablezca el indicador.</p>
+</blockquote>
+<h2 id="posicionamiento-en-el-flujo-fseek">Posicionamiento en el Flujo
+(<code>fseek</code>) ðŸ§­</h2>
+<p>La funciÃ³n <strong><code>fseek()</code></strong> permite la
+manipulaciÃ³n directa del <strong>puntero de posiciÃ³n actual</strong>
+dentro de un flujo de archivo abierto. Esto es fundamental para el
+<strong>acceso aleatorio</strong> (<em>random access</em>), permitiendo
+al programa leer o escribir en cualquier punto del archivo sin tener que
+procesarlo secuencialmente desde el inicio.</p>
+<hr />
+<h3 id="sintaxis-y-propÃ³sito-2">1. Sintaxis y PropÃ³sito</h3>
+<p><code>fseek()</code> mueve el puntero de posiciÃ³n a un
+<em>offset</em> (desplazamiento) especÃ­fico desde un punto de referencia
+dado.</p>
+<p><span class="math display">â€˜int fseek(FILE *stream, long offset, int
+whence);â€˜</span></p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">ParÃ¡metro</th>
+<th style="text-align: center;">Tipo</th>
+<th style="text-align: center;">DescripciÃ³n</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td
+style="text-align: center;"><strong><code>stream</code></strong></td>
+<td style="text-align: center;"><code>FILE *</code></td>
+<td style="text-align: center;">El puntero al flujo de archivo que se va
+a manipular.</td>
+</tr>
+<tr class="even">
+<td
+style="text-align: center;"><strong><code>offset</code></strong></td>
+<td style="text-align: center;"><code>long</code></td>
+<td style="text-align: center;">El nÃºmero de bytes que el puntero debe
+moverse desde el punto de referencia (<code>whence</code>). Puede ser
+positivo (mover hacia adelante) o negativo (mover hacia atrÃ¡s).</td>
+</tr>
+<tr class="odd">
+<td
+style="text-align: center;"><strong><code>whence</code></strong></td>
+<td style="text-align: center;"><code>int</code></td>
+<td style="text-align: center;">El <strong>punto de referencia</strong>
+(el origen) para el desplazamiento. Debe ser uno de los siguientes:</td>
+</tr>
+</tbody>
+</table>
+<h3 id="puntos-de-referencia-whence">2. Puntos de Referencia
+(<code>whence</code>)</h3>
+<p>La constante <code>whence</code> define desde quÃ© lugar del archivo
+se inicia la cuenta del desplazamiento:</p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Constante</th>
+<th style="text-align: center;">Significado</th>
+<th style="text-align: center;">PosiciÃ³n</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td
+style="text-align: center;"><strong><code>SEEK_SET</code></strong></td>
+<td style="text-align: center;">Inicio del archivo.</td>
+<td style="text-align: center;">El desplazamiento se cuenta desde el
+byte 0.</td>
+</tr>
+<tr class="even">
+<td
+style="text-align: center;"><strong><code>SEEK_CUR</code></strong></td>
+<td style="text-align: center;">PosiciÃ³n actual del puntero.</td>
+<td style="text-align: center;">El desplazamiento se cuenta desde la
+ubicaciÃ³n actual.</td>
+</tr>
+<tr class="odd">
+<td
+style="text-align: center;"><strong><code>SEEK_END</code></strong></td>
+<td style="text-align: center;">Final del archivo.</td>
+<td style="text-align: center;">El desplazamiento se cuenta hacia atrÃ¡s
+desde el final del archivo.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="aplicaciÃ³n-clave-acceso-aleatorio">3. AplicaciÃ³n Clave: Acceso
+Aleatorio</h3>
+<p><code>fseek()</code> es especialmente Ãºtil en el manejo de
+<strong>archivos binarios</strong> donde todos los registros tienen un
+tamaÃ±o fijo (por ejemplo, <em>structs</em>). Esto permite calcular la
+posiciÃ³n exacta de cualquier registro que se desee leer o modificar:</p>
+<p><span class="math display">PosiciÃ³n del registro
+Nâ€„=â€„Nâ€…Ã—â€…sizeof(Registro)</span></p>
+<h4 id="ejemplo-de-uso">Ejemplo de Uso</h4>
+<p>Para posicionarse en el <strong>tercer registro</strong> (Ã­ndice 2,
+si empezamos desde 0) de un archivo binario de estructuras:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co">// Supongamos que Registro es una struct con un tamaÃ±o fijo</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="pp">#define TAMANO_REGISTRO </span><span class="dv">32</span><span class="pp"> </span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="dt">FILE</span> <span class="op">*</span>archivo <span class="op">=</span> fopen<span class="op">(</span><span class="st">&quot;datos.bin&quot;</span><span class="op">,</span> <span class="st">&quot;rb+&quot;</span><span class="op">);</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>archivo <span class="op">==</span> NULL<span class="op">)</span> <span class="cf">return</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    <span class="dt">long</span> indice_deseado <span class="op">=</span> <span class="dv">2</span><span class="op">;</span> <span class="co">// Queremos el tercer registro</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    <span class="dt">long</span> desplazamiento<span class="op">;</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Calculamos el desplazamiento: 2 registros * 32 bytes/registro</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>    desplazamiento <span class="op">=</span> indice_deseado <span class="op">*</span> TAMANO_REGISTRO<span class="op">;</span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Mover el puntero al inicio del tercer registro</span></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>    <span class="co">// SEEK_SET: Posicionar desde el inicio del archivo</span></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> resultado <span class="op">=</span> fseek<span class="op">(</span>archivo<span class="op">,</span> desplazamiento<span class="op">,</span> SEEK_SET<span class="op">);</span> </span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>resultado <span class="op">==</span> <span class="dv">0</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">&quot;Puntero posicionado en el inicio del tercer registro.</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Ahora se puede usar fread() o fwrite()</span></span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>    <span class="co">// ... fgetc() o fread() ...</span></span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>    fclose<span class="op">(</span>archivo<span class="op">);</span></span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<h2 id="patrÃ³n-de-lectura-segura-en-bucles">PatrÃ³n de Lectura Segura en
+Bucles ðŸ›¡ï¸</h2>
+<p>El patrÃ³n de lectura mÃ¡s robusto en C utiliza el <strong>valor de
+retorno</strong> de la funciÃ³n de lectura (<code>fscanf()</code>,
+<code>fread()</code>, o <code>fgets()</code>) para controlar la
+ejecuciÃ³n del bucle. Esto evita el problema comÃºn de un ciclo de
+procesamiento extra que puede ocurrir si se utiliza <code>feof()</code>
+como Ãºnica condiciÃ³n del bucle.</p>
+<hr />
+<h3 id="principio-fundamental">1. Principio Fundamental</h3>
+<p>La condiciÃ³n del bucle debe ser la <strong>operaciÃ³n de lectura
+exitosa</strong>.</p>
+<ul>
+<li><strong>Si la lectura es exitosa</strong>, la funciÃ³n devuelve el
+nÃºmero de elementos leÃ­dos (o un puntero no nulo, como en
+<code>fgets</code>). El bucle continÃºa, y los datos se procesan.</li>
+<li><strong>Si la lectura falla</strong> (ya sea por EOF o por un error
+de E/S), la funciÃ³n devuelve un valor que termina el bucle
+inmediatamente, <strong>antes</strong> de intentar procesar los datos
+invÃ¡lidos o duplicados.</li>
+</ul>
+<h3 id="patrones-seguros-especÃ­ficos">2. Patrones Seguros
+EspecÃ­ficos</h3>
+<h4 id="a.-lectura-de-registros-formateados-fscanf-y-fread">A. Lectura
+de Registros Formateados (<code>fscanf</code> y <code>fread</code>)</h4>
+<p>Para leer mÃºltiples elementos (<code>%d</code>, <code>structs</code>,
+etc.), la condiciÃ³n del bucle verifica que se haya leÃ­do la cantidad
+esperada de elementos.</p>
+<p><span class="math display">Valor de Retorno Esperado (N)â€„=â€„NÃºmero de
+campos en el formato</span></p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Supongamos que esperamos leer 2 enteros: ID y Cantidad</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> id<span class="op">,</span> cantidad<span class="op">;</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="dt">FILE</span> <span class="op">*</span>f <span class="op">=</span> fopen<span class="op">(</span><span class="st">&quot;datos.txt&quot;</span><span class="op">,</span> <span class="st">&quot;r&quot;</span><span class="op">);</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co">// El bucle se ejecuta SOLO si fscanf devuelve exactamente 2 (lectura exitosa)</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> <span class="op">(</span>fscanf<span class="op">(</span>f<span class="op">,</span> <span class="st">&quot;</span><span class="sc">%d</span><span class="st"> </span><span class="sc">%d</span><span class="st">&quot;</span><span class="op">,</span> <span class="op">&amp;</span>id<span class="op">,</span> <span class="op">&amp;</span>cantidad<span class="op">)</span> <span class="op">==</span> <span class="dv">2</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    <span class="co">// 1. Lectura Exitosa.</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    <span class="co">// 2. Procesamiento: El cÃ³digo se ejecuta solo con datos vÃ¡lidos.</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;Registro leÃ­do: ID=</span><span class="sc">%d</span><span class="st">, Cantidad=</span><span class="sc">%d\n</span><span class="st">&quot;</span><span class="op">,</span> id<span class="op">,</span> cantidad<span class="op">);</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="co">// Control Secundario: Usar ferror/feof para determinar la causa de la salida</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="op">(</span>feof<span class="op">(</span>f<span class="op">))</span> <span class="op">{</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;FIN: El bucle terminÃ³ por alcanzar el final del archivo.</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> <span class="cf">else</span> <span class="cf">if</span> <span class="op">(</span>ferror<span class="op">(</span>f<span class="op">))</span> <span class="op">{</span></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>    perror<span class="op">(</span><span class="st">&quot;ERROR CRITICO: Fallo de I/O detectado&quot;</span><span class="op">);</span></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;ADVERTENCIA: Fallo de formato o lectura parcial (ej. solo quedaba 1 campo).</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<hr />
+<h4 id="b.-lectura-de-lÃ­neas-de-texto-fgets">B. Lectura de LÃ­neas de
+Texto (<code>fgets</code>)</h4>
+<p><code>fgets()</code> es inherentemente seguro porque verifica el
+tamaÃ±o del <em>buffer</em>. El bucle se controla con la verificaciÃ³n del
+puntero de retorno.</p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Valor de Retorno</th>
+<th style="text-align: center;">CondiciÃ³n</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><strong>Puntero a la
+Cadena</strong></td>
+<td style="text-align: center;">Lectura exitosa.</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong><code>NULL</code></strong></td>
+<td style="text-align: center;">Fallo de lectura (EOF o error).</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb6"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#define MAX_LINEA </span><span class="dv">256</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="dt">char</span> linea<span class="op">[</span>MAX_LINEA<span class="op">];</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="dt">FILE</span> <span class="op">*</span>f <span class="op">=</span> fopen<span class="op">(</span><span class="st">&quot;documento.txt&quot;</span><span class="op">,</span> <span class="st">&quot;r&quot;</span><span class="op">);</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co">// El bucle se ejecuta SOLO si fgets devuelve un puntero (no es NULL)</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> <span class="op">(</span>fgets<span class="op">(</span>linea<span class="op">,</span> MAX_LINEA<span class="op">,</span> f<span class="op">)</span> <span class="op">!=</span> NULL<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    <span class="co">// 1. Lectura Exitosa.</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    <span class="co">// 2. Procesamiento: El &#39;linea&#39; contiene datos vÃ¡lidos.</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;LÃ­nea: </span><span class="sc">%s</span><span class="st">&quot;</span><span class="op">,</span> linea<span class="op">);</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="co">// Control Secundario: Determinar si el fallo fue EOF o un error real</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="op">(</span>ferror<span class="op">(</span>f<span class="op">))</span> <span class="op">{</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>    perror<span class="op">(</span><span class="st">&quot;ERROR: Fallo de lectura/escritura en el flujo&quot;</span><span class="op">);</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;FIN: Lectura de todas las lÃ­neas completada.</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<blockquote>
+<p><strong>ConclusiÃ³n:</strong> Al controlar el bucle directamente con
+el resultado de la operaciÃ³n de lectura, garantizamos que el bloque de
+procesamiento (<strong><code>// Procesamiento</code></strong>) solo se
+ejecute con datos que el sistema de E/S ha confirmado como vÃ¡lidos,
+haciendo innecesaria la comprobaciÃ³n de <code>feof()</code>
+<em>antes</em> de la lectura.</p>
+</blockquote>
+
+</div>
+</body>
+</html>
+

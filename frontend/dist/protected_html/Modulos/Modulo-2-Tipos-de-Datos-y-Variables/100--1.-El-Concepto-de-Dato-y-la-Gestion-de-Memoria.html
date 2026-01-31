@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>El Concepto de Dato y la Gestion de Memoria</title>
+    <link rel="stylesheet" crossorigin href="/assets/content-01sust.css">
+    <style>
+        
+    .header-c { background: #fff; border-bottom: 1px solid #e5e7eb; }
+    .logo-c {
+      background: linear-gradient(135deg,#162047 60%, #3b2fa6 100%);
+      color: #fff;
+      font-weight: 900;
+      font-size: 1.7rem;
+      border-radius: 8px;
+      width: 38px; height: 38px;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 2px 8px rgba(59,47,166,0.08);
+      margin-right: 10px;
+    }
+    .user-profile {
+      display: flex; align-items: center; gap: 10px;
+      background: #e0e7ff;
+      border-radius: 999px;
+      padding: 6px 16px;
+      font-size: 1rem;
+      color: #3730a3;
+      font-weight: 600;
+    }
+    .content-title {
+      color: #3730a3;
+      font-size: 2.2rem;
+      font-weight: 800;
+      margin: 36px auto 10px auto;
+      text-align: center;
+      letter-spacing: 1px;
+    }
+    .progress-bar-container {
+      max-width: 700px;
+      margin: 0 auto 32px auto;
+      background: #e0e7ff;
+      border-radius: 999px;
+      padding: 8px 24px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #3730a3;
+      box-shadow: 0 2px 8px rgba(59,47,166,0.08);
+    }
+    .progress-bar {
+      flex: 1;
+      height: 16px;
+      background: #c7d2fe;
+      border-radius: 999px;
+      overflow: hidden;
+      position: relative;
+    }
+    .progress-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg,#2563eb,#3b2fa6);
+      border-radius: 999px;
+      width: 12%;
+      transition: width 0.4s;
+    }
+    .modules-list {
+      max-width: 900px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+    }
+    .module-card {
+      background: linear-gradient(135deg,#2563eb 60%, #3b2fa6 100%);
+      color: #fff;
+      border-radius: 18px;
+      box-shadow: 0 6px 24px rgba(59,47,166,0.10);
+      padding: 0;
+      display: flex;
+      align-items: stretch;
+      position: relative;
+      overflow: hidden;
+      min-height: 140px;
+    }
+    .module-progress-bar {
+      width: 18px;
+      background: #a5b4fc;
+      display: flex;
+      align-items: flex-end;
+      border-radius: 18px 0 0 18px;
+      margin-right: 0;
+      position: relative;
+    }
+    .module-progress-fill {
+      width: 100%;
+      background: #3730a3;
+      border-radius: 18px 0 0 18px;
+      transition: height 0.4s;
+    }
+    .module-content {
+      flex: 1;
+      padding: 24px 32px 24px 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .module-title {
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .module-desc {
+      font-size: 1rem;
+      color: #dbeafe;
+      margin-bottom: 10px;
+    }
+    .module-topics {
+      margin-left: 1.2em;
+      margin-bottom: 10px;
+      color: #e0e7ff;
+      font-size: 0.98rem;
+    }
+    .module-card .start-btn {
+      align-self: flex-end;
+      background: linear-gradient(90deg,#4f46e5,#2563eb);
+      color: #fff;
+      font-weight: 700;
+      border: none;
+      border-radius: 999px;
+      padding: 10px 28px;
+      font-size: 1rem;
+      box-shadow: 0 2px 8px rgba(37,99,235,0.18);
+      transition: background 0.2s;
+      cursor: pointer;
+      margin-top: 8px;
+    }
+    .module-card .start-btn:hover {
+      background: linear-gradient(90deg,#2563eb,#4f46e5);
+    }
+    .footer-c {
+      background: linear-gradient(90deg,#49b3af,#25a6d7 90%);
+      color: #fff;
+      padding: 36px 0 18px 0;
+      margin-top: 48px;
+    }
+    .footer-c .footer-content {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 32px;
+      justify-content: space-between;
+      align-items: flex-start;
+      padding: 0 32px;
+    }
+    .footer-c .footer-logo {
+      display: flex; align-items: center; gap: 10px;
+      font-size: 1.5rem; font-weight: 800;
+      letter-spacing: 1px;
+    }
+    .footer-c .footer-links, .footer-c .footer-newsletter {
+      min-width: 180px;
+    }
+    .footer-c .footer-links a {
+      color: #e0f2fe;
+      display: block;
+      margin-bottom: 8px;
+      text-decoration: none;
+      font-size: 1rem;
+      transition: color 0.2s;
+    }
+    .footer-c .footer-links a:hover {
+      color: #fff;
+    }
+    .footer-c .newsletter-form {
+      display: flex; gap: 8px; margin-top: 8px;
+    }
+    .footer-c .newsletter-form input[type="email"] {
+      border-radius: 999px 0 0 999px;
+      border: none;
+      padding: 8px 16px;
+      font-size: 1rem;
+      outline: none;
+      min-width: 0;
+    }
+    .footer-c .newsletter-form button {
+      border-radius: 0 999px 999px 0;
+      border: none;
+      background: #2563eb;
+      color: #fff;
+      font-weight: 700;
+      padding: 8px 18px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .footer-c .newsletter-form button:hover {
+      background: #1e40af;
+    }
+    .footer-c .copyright {
+      text-align: center;
+      color: #bae6fd;
+      font-size: 0.95rem;
+      margin-top: 24px;
+    }
+    @media (max-width: 900px) {
+      .footer-c .footer-content { flex-direction: column; gap: 18px; align-items: flex-start; }
+      .content-c, .hero-c { padding: 24px 10px; }
+    }
+    @media (max-width: 900px) {
+      .modules-list { padding: 0 8px; }
+      .module-content { padding: 18px 10px 18px 10px; }
+      .content-title { font-size: 1.5rem; }
+    }
+  </style>
+</head>
+
+<!-- Header -->
+  <header class="header-c px-6 py-4 flex items-center justify-between">
+    <div class="flex items-center">
+      <div class="logo-c" aria-label="Logo C">C</div>
+      <span class="font-bold text-blue-700 text-lg tracking-wide">Plataforma C</span>
+    </div>
+    <div class="user-profile">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20 21V19C20 17.9391 19.5786 16.9217 18.8284 16.1716C18.0783 15.4214 17.0609 15 16 15H8C6.93913 15 5.92172 15.4214 5.17157 16.1716C4.42143 16.9217 4 17.9391 4 19V21" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="7" r="4"/></svg>
+      <span>Usuario</span>
+    </div>
+  </header>
+
+<body>
+    
+<div class="main-content">
+
+<h1>Módulo 2: Tipos de Datos y Variables</h1>
+<h2><strong>¿Qué es un Dato en Programación? 💡</strong></h2>
+<p>En el corazón de la programación, un <strong>Dato</strong> es la
+<strong>unidad fundamental de información</strong> que un programa
+manipula, almacena o procesa. Tu programa C es, esencialmente, una
+máquina diseñada para transformar datos de una forma a otra.</p>
+<ul>
+<li><p><strong>Definición:</strong> Un dato es cualquier valor o
+información registrada que puede ser representada digitalmente (mediante
+0s y 1s) y que tiene un significado para el programa.</p></li>
+<li><p><strong>Significado:</strong> En C, es crucial que el dato tenga
+un significado claro. El número 10 no es solo un valor; puede
+representar la <strong>edad</strong> de una persona, la
+<strong>temperatura</strong> de una habitación, o la <strong>cantidad de
+veces</strong> que se repite un proceso.</p></li>
+</ul>
+<p><strong>Clasificación Fundamental de Datos</strong></p>
+<p>En el mundo digital, los datos se clasifican según su naturaleza, lo
+que determina cómo se almacenan y qué operaciones se pueden realizar con
+ellos:</p>
+<table style="width:97%;">
+<colgroup>
+<col style="width: 34%" />
+<col style="width: 39%" />
+<col style="width: 24%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>Tipo de Dato</strong></th>
+<th style="text-align: left;"><strong>Propósito</strong></th>
+<th style="text-align: left;"><strong>Ejemplos en C</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>Numéricos</strong></td>
+<td style="text-align: left;">Representan cantidades. Permiten
+operaciones matemáticas (suma, resta, etc.).</td>
+<td style="text-align: left;"><strong>Enteros</strong> (5, -100),
+<strong>Decimales</strong> (3.14, 0.5).</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Textuales/Caracteres</strong></td>
+<td style="text-align: left;">Representan letras, símbolos o cualquier
+carácter tipográfico. Se usan para formar palabras o frases.</td>
+<td style="text-align: left;">Letras ('A', 'z'), Símbolos ('#',
+'@').</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Lógicos
+(<em>Booleanos</em>)</strong></td>
+<td style="text-align: left;">Representan la verdad o la falsedad.
+Permiten tomar decisiones en el código.</td>
+<td style="text-align: left;">Verdadero (1) o Falso (0).</td>
+</tr>
+</tbody>
+</table>
+<p>En el Lenguaje C, el <strong>Tipo de Dato</strong> (que veremos a
+continuación) es lo que define el significado y, crucialmente, la
+cantidad de <strong>memoria</strong> que la computadora reservará para
+almacenar esa pieza de información.</p>
+<h2><strong>El Byte y el Bit: Las Unidades de Memoria 🧱</strong></h2>
+<p>Toda la información que manipula una computadora —números, letras,
+imágenes o instrucciones— se reduce a combinaciones de dos unidades
+fundamentales: el <strong>Bit</strong> y el <strong>Byte</strong>.</p>
+<figure>
+<img src="media/image1.png" style="width:3.12639in;height:1.41806in"
+alt="What You Need to Know About Bits, Bytes, and Kilobytes [Dev Concepts #31] - SoftUni Global" />
+<figcaption aria-hidden="true">What You Need to Know About Bits, Bytes,
+and Kilobytes [Dev Concepts #31] - SoftUni Global</figcaption>
+</figure>
+<p><strong>El Bit (Binary Digit)</strong></p>
+<ul>
+<li><p><strong>Definición:</strong> El <strong>Bit</strong> es la
+<strong>unidad mínima de información</strong> en un sistema digital.
+Solo puede tener uno de dos estados posibles: <strong>0</strong>
+(apagado, falso) o <strong>1</strong> (encendido, verdadero).</p></li>
+<li><p><strong>Rol:</strong> Un único bit no puede almacenar mucha
+información, pero es la base lógica de toda la computación.</p></li>
+</ul>
+<p><strong>El Byte (Agrupación)</strong></p>
+<p>Dado que un bit es tan limitado, las computadoras agrupan los bits en
+conjuntos para almacenar información más útil.</p>
+<ul>
+<li><p><strong>Definición:</strong> Un <strong>Byte</strong> es un
+conjunto de <strong>8 bits</strong>. Es la unidad más pequeña de memoria
+que la CPU puede direccionar (la que recibe un "código postal" único en
+la RAM).</p></li>
+<li><p><strong>Capacidad:</strong> Un byte puede representar $2^8 = 256$
+valores diferentes (desde 0 hasta 255), lo que es suficiente para
+almacenar un solo carácter (como la letra 'A' o el número '5').</p></li>
+</ul>
+<p><strong>Variables y el Espacio en Bytes</strong></p>
+<p>Cuando programas en C, cada <strong>tipo de dato</strong> que eliges
+(ej. un número entero o un carácter) requiere un número específico de
+<em>bytes</em> para ser almacenado de forma segura y completa.</p>
+<ul>
+<li><p>Si tienes una variable de 4 <em>bytes</em>, significa que la
+computadora está reservando 4 * 8 = 32 bits de espacio contiguo en la
+memoria RAM para ese dato.</p></li>
+<li><p>En el siguiente tema, veremos cómo el tipo de dato que eliges le
+indica a C exactamente <strong>cuántos bytes</strong> reservar para cada
+variable que declaras.</p></li>
+</ul>
+<p><strong>Concepto de Memoria RAM</strong></p>
+<p>La <strong>Memoria RAM</strong> (<em>Random Access Memory</em>,
+Memoria de Acceso Aleatorio) es el lugar físico donde tu programa C
+guarda y recupera todos sus datos mientras se está ejecutando. Cuando
+declaras una variable, estás pidiéndole al sistema operativo que te
+reserve un espacio aquí.</p>
+<h2><strong>RAM como un Gran Armario de Cajones</strong></h2>
+<p>Podemos imaginar la memoria RAM como un <strong>gran armario de
+archivado</strong> con millones de pequeños cajones.</p>
+<ul>
+<li><p><strong>Cada Cajón es un Byte:</strong> Cada cajón, el espacio de
+memoria más pequeño que se puede direccionar, se llama
+<strong>Byte</strong>.</p></li>
+<li><p><strong>Cada Cajón tiene una Dirección:</strong> Cada uno de
+estos <em>bytes</em> tiene una <strong>dirección única</strong> (un
+número de ubicación) que funciona como su "núdigo postal". Cuando el
+programa necesita guardar o leer un dato, usa esta dirección para ir
+directamente a la celda exacta.</p></li>
+<li><p><strong>Acceso Rápido:</strong> El término "acceso aleatorio"
+significa que la CPU (Unidad Central de Procesamiento) puede saltar
+inmediatamente a cualquier dirección de memoria para leer o escribir un
+dato, sin tener que revisar los datos anteriores en orden.</p></li>
+</ul>
+<p><strong>¿Cómo se Relaciona con las Variables?</strong></p>
+<p>En C, cuando declaramos una <strong>variable</strong> (como int
+edad;), estamos haciendo tres cosas relacionadas con la memoria RAM:</p>
+<ol type="1">
+<li><p><strong>Reserva de Espacio:</strong> Le pedimos al compilador que
+reserve una cantidad específica de <strong>bytes contiguos</strong>
+(varios cajones juntos) para ese tipo de dato.</p></li>
+<li><p><strong>Etiquetado:</strong> Le damos un <strong>nombre</strong>
+(edad) a ese espacio de memoria para que no tengamos que recordar su
+dirección numérica.</p></li>
+<li><p><strong>Almacenamiento:</strong> Ahí es donde se guardará el
+<strong>valor</strong> de la variable (25).</p></li>
+</ol>
+<p>Por lo tanto, la <strong>gestión de memoria</strong> es fundamental:
+el tipo de dato que elijas le dice a C cuántos de estos "cajones"
+contiguos debe usar para almacenar tu información.</p>
+<h2><strong>Asignación de Espacio y Dirección 📍</strong></h2>
+<p>Cuando declaras una variable en C, no solo estás dándole un nombre a
+un dato; estás iniciando un proceso fundamental de gestión de memoria:
+la <strong>asignación de espacio</strong>.</p>
+<p><strong>El Proceso de Reserva de Memoria</strong></p>
+<ol type="1">
+<li><p><strong>Reserva de Bytes Contiguos:</strong> El <strong>Tipo de
+Dato</strong> que eliges (ej. int o char) le indica al compilador
+<strong>cuántos bytes</strong> necesita tu variable. El compilador, en
+la fase de Enlazado o durante la ejecución, le pide al sistema operativo
+que reserve un bloque de esos bytes. Este bloque siempre es
+<strong>contiguo</strong> (los cajones de memoria están uno al lado del
+otro).</p>
+<ul>
+<li><em>Ejemplo:</em> Si declaras un entero (int), el compilador reserva
+4 bytes juntos en la RAM.</li>
+</ul></li>
+<li><p><strong>La Dirección de Memoria:</strong> Dado que cada
+<em>byte</em> en la RAM tiene una dirección única, la variable, al
+ocupar un bloque, se identifica por la <strong>dirección del primer
+byte</strong> de ese bloque.</p>
+<ul>
+<li>Esta dirección es un número largo (a menudo representado en
+hexadecimal) que actúa como la <strong>ubicación física y única</strong>
+de tu variable en la RAM.</li>
+</ul></li>
+</ol>
+<p><strong>El Nombre de la Variable vs. la Dirección</strong></p>
+<table style="width:97%;">
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 49%" />
+<col style="width: 22%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>Concepto</strong></th>
+<th style="text-align: left;"><strong>Lo que es</strong></th>
+<th style="text-align: left;"><strong>Ejemplo</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>Nombre de la
+Variable</strong></td>
+<td style="text-align: left;">Una <strong>etiqueta</strong> simple y
+legible (para el programador).</td>
+<td style="text-align: left;">edad</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Valor</strong></td>
+<td style="text-align: left;">El contenido que se almacena en el espacio
+reservado.</td>
+<td style="text-align: left;">25</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Dirección de Memoria</strong></td>
+<td style="text-align: left;">La <strong>ubicación real</strong> del
+primer byte del dato (para la CPU).</td>
+<td style="text-align: left;">0x7ffee21a1f58</td>
+</tr>
+</tbody>
+</table>
+<p>En C, utilizas el nombre (edad) para trabajar con el valor (25),
+mientras que el compilador utiliza la <strong>dirección de
+memoria</strong> para saber exactamente dónde ir en la RAM para leer o
+modificar ese valor.</p>
+<p>Aunque los punteros (que exploraremos más adelante) son la
+herramienta principal para trabajar con direcciones, es crucial entender
+ahora que <strong>cada variable en tu programa vive en una ubicación
+específica y única en la memoria RAM</strong>.</p>
+</div>
+
+
+</body>
+

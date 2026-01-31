@@ -1,0 +1,476 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" crossorigin href="/assets/content-01sust.css">
+</head>
+<body>
+<div class="main-content">
+<h2 id="nota">Nota:</h2>
+<p>Utiliza la siguiente estructura para los ejercicios 5, 6 y 10:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdlib.h&gt;</span><span class="pp"> </span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="kw">typedef</span> <span class="kw">struct</span> <span class="op">{</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> id<span class="op">;</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">float</span> valor<span class="op">;</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> Registro<span class="op">;</span></span></code></pre></div>
+<hr />
+<h2 id="ejercicios-redimensiÃ³n-de-memoria-con-realloc">10 Ejercicios:
+RedimensiÃ³n de Memoria con <code>realloc()</code> ðŸ“</h2>
+<h3 id="bloque-1-expansiÃ³n-y-contracciÃ³n-bÃ¡sica">Bloque 1: ExpansiÃ³n y
+ContracciÃ³n BÃ¡sica</h3>
+<p><strong>1. ExpansiÃ³n de un Array de Enteros</strong> a. Inicializa un
+<em>array</em> dinÃ¡mico de 3 enteros (<code>int</code>) utilizando
+<code>malloc()</code>. Asigna los valores <span
+class="math inline">10,â€†20,â€†30</span>. b. Redimensiona el <em>array</em>
+a 5 enteros utilizando <strong><code>realloc()</code></strong>.
+c.Â Asigna los valores <span class="math inline">40</span> y <span
+class="math inline">50</span> a las nuevas posiciones (Ã­ndices 3 y 4).
+d.Â Imprime todos los 5 elementos para demostrar que los datos originales
+(<span class="math inline">10,â€†20,â€†30</span>) se conservaron.</p>
+<p><strong>2. ContracciÃ³n de un Array de Flotantes</strong> a.
+Inicializa un <em>array</em> dinÃ¡mico de 8 flotantes
+(<code>float</code>) con valores de tu elecciÃ³n (ej: <span
+class="math inline">1.0,â€†2.0,â€†â€¦,â€†8.0</span>). b. Utiliza
+<strong><code>realloc()</code></strong> para reducir el tamaÃ±o del
+<em>array</em> a 4 flotantes. c.Â Imprime los 4 elementos restantes para
+confirmar que la memoria no se perdiÃ³ durante la contracciÃ³n.</p>
+<p><strong>3. VerificaciÃ³n de Cambio de DirecciÃ³n (Nueva
+AsignaciÃ³n)</strong> a. Asigna un pequeÃ±o bloque de memoria (ej: 10
+bytes) con <code>malloc()</code> e imprime su direcciÃ³n. b. Intenta
+reasignar un bloque mucho mÃ¡s grande (ej: 1000 bytes) utilizando
+<strong><code>realloc()</code></strong>. c.Â Imprime la <strong>nueva
+direcciÃ³n</strong> retornada por <code>realloc()</code>.
+d.Â <strong>Pregunta a Responder:</strong> Â¿La direcciÃ³n es la misma o
+diferente? (Este ejercicio intenta forzar, conceptualmente, la
+reubicaciÃ³n para demostrar que el puntero puede cambiar).</p>
+<hr />
+<h3 id="bloque-2-prÃ¡ctica-segura-y-tipos-compuestos">Bloque 2: PrÃ¡ctica
+Segura y Tipos Compuestos</h3>
+<p><strong>4. RedimensiÃ³n Segura y Manejo de <code>NULL</code></strong>
+Escribe un fragmento de cÃ³digo que demuestre la <strong>prÃ¡ctica
+segura</strong> para redimensionar un <em>array</em> de 5 enteros a 10
+enteros: a. Asigna el resultado de <code>realloc()</code> a un puntero
+<strong>temporal</strong> (<code>temp_ptr</code>). b. Utiliza una
+declaraciÃ³n <code>if</code> para verificar si <code>temp_ptr</code> es
+<strong><code>NULL</code></strong>. c.Â Si la asignaciÃ³n falla
+(<code>NULL</code>), imprime un error y garantiza que el <strong>puntero
+original sigue siendo vÃ¡lido</strong> (los datos antiguos no se
+pierden). d.Â Si tiene Ã©xito, sobrescribe el puntero original con
+<code>temp_ptr</code>.</p>
+<p><strong>5. ExpansiÃ³n DinÃ¡mica de Estructuras</strong> a. Inicializa
+un <em>array</em> dinÃ¡mico de 2 estructuras <code>Registro</code> con
+<code>malloc()</code> y asignales datos (ej: <span
+class="math inline"><em>R</em><sub>0</sub>â€„=â€„{1,â€†10.5},â€†<em>R</em><sub>1</sub>â€„=â€„{2,â€†20.5}</span>).
+b. Utiliza <strong><code>realloc()</code></strong> para expandir el
+<em>array</em> a 4 estructuras. c.Â Asigna datos a las dos nuevas
+posiciones (<span
+class="math inline"><em>R</em><sub>2</sub>,â€†<em>R</em><sub>3</sub></span>).
+d.Â Imprime el contenido de las 4 estructuras.</p>
+<p><strong>6. FunciÃ³n de Agregar Registro (Redimensionamiento
+Continuo)</strong> Escribe una funciÃ³n llamada
+<code>agregar_registro(Registro **array, int *tamano_actual)</code> que
+simule el crecimiento de una base de datos: a. Recibe el puntero al
+puntero (<code>Registro **</code>) del <em>array</em> y un puntero al
+tamaÃ±o actual. b. Incrementa el <code>*tamano_actual</code>. c.Â Usa
+<code>realloc()</code> para aÃ±adir espacio para un nuevo
+<code>Registro</code>. d.Â La funciÃ³n debe manejar la verificaciÃ³n de
+<code>NULL</code> y actualizar el puntero del <em>array</em> de manera
+segura.</p>
+<hr />
+<h3 id="bloque-3-casos-especiales-de-null-y-cero">Bloque 3: Casos
+Especiales de <code>NULL</code> y Cero</h3>
+<p><strong>7. <code>realloc(NULL, size)</code>: AsignaciÃ³n
+Inicial</strong> a. Declara un puntero <code>int *p_datos</code> e
+inicialÃ­zalo a <code>NULL</code>. b. Utiliza
+<strong><code>realloc()</code></strong> con el puntero <code>NULL</code>
+para asignar espacio para 5 enteros. c.Â Imprime la direcciÃ³n retornada y
+un mensaje de Ã©xito, demostrando que <code>realloc(NULL, size)</code> es
+equivalente a <code>malloc(size)</code>.</p>
+<p><strong>8. <code>realloc(ptr, 0)</code>: LiberaciÃ³n de
+Memoria</strong> a. Asigna un bloque de memoria para 10 enteros con
+<code>malloc()</code>. Imprime su direcciÃ³n. b. Utiliza
+<strong><code>realloc()</code></strong> pasando el puntero original y un
+tamaÃ±o de <strong><code>0</code></strong> bytes. c.Â Imprime la direcciÃ³n
+de retorno (deberÃ­a ser <code>NULL</code> o un puntero invÃ¡lido) y un
+mensaje confirmando que la memoria ha sido liberada.</p>
+<p><strong>9. RedimensiÃ³n a TamaÃ±o Igual</strong> a. Asigna un bloque de
+memoria para 4 enteros con <code>malloc()</code>. b. Llama a
+<strong><code>realloc()</code></strong> solicitando un nuevo tamaÃ±o que
+sea <strong>exactamente igual</strong> al tamaÃ±o original (4 enteros).
+c.Â Imprime las direcciones antes y despuÃ©s de <code>realloc()</code> y
+comenta sobre el resultado (en la mayorÃ­a de los casos, la direcciÃ³n
+permanecerÃ¡ igual, ya que no se necesita reubicaciÃ³n).</p>
+<p><strong>10. Bucle de Crecimiento DinÃ¡mico</strong> Escribe un
+programa que: a. Declare un puntero <code>int *datos</code> inicializado
+a <code>NULL</code> y un contador <code>N = 0</code>. b. Ejecuta un
+bucle <code>for</code> de 1 a 5. Dentro del bucle: i. Incrementa
+<code>N</code>. ii. Usa <code>realloc()</code> para aumentar el tamaÃ±o
+de <code>datos</code> en un entero por iteraciÃ³n (utilizando
+<strong><code>realloc(datos, N * sizeof(int))</code></strong>). iii.
+Asigna el valor <code>N * 10</code> al Ãºltimo elemento. c.Â Imprime el
+contenido final del <em>array</em> (deberÃ­a ser <span
+class="math inline">10,â€†20,â€†30,â€†40,â€†50</span>).</p>
+<h2 id="soluciones-redimensiÃ³n-de-memoria-con-realloc">âœ… Soluciones:
+RedimensiÃ³n de Memoria con <code>realloc()</code></h2>
+<div class="sourceCode" id="cb2"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdlib.h&gt;</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;string.h&gt;</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="kw">typedef</span> <span class="kw">struct</span> <span class="op">{</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> id<span class="op">;</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="dt">float</span> valor<span class="op">;</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> Registro<span class="op">;</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="co">// FunciÃ³n auxiliar para imprimir arrays de int</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> imprimir_array_int<span class="op">(</span><span class="dt">const</span> <span class="dt">char</span> <span class="op">*</span>titulo<span class="op">,</span> <span class="dt">int</span> <span class="op">*</span>arr<span class="op">,</span> <span class="dt">int</span> size<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;</span><span class="sc">%s</span><span class="st"> [TamaÃ±o: </span><span class="sc">%d</span><span class="st">]: &quot;</span><span class="op">,</span> titulo<span class="op">,</span> size<span class="op">);</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> size<span class="op">;</span> i<span class="op">++)</span> <span class="op">{</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">&quot;</span><span class="sc">%d</span><span class="st"> &quot;</span><span class="op">,</span> arr<span class="op">[</span>i<span class="op">]);</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="co">// -----------------------------------------------------------</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="co">// SoluciÃ³n 1: ExpansiÃ³n de un Array de Enteros</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="co">// -----------------------------------------------------------</span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> solucion1<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;</span><span class="sc">\n</span><span class="st">--- SoluciÃ³n 1: ExpansiÃ³n ---</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> size <span class="op">=</span> <span class="dv">3</span><span class="op">;</span></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>    <span class="co">// a. InicializaciÃ³n con malloc</span></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> <span class="op">*</span>datos <span class="op">=</span> <span class="op">(</span><span class="dt">int</span> <span class="op">*)</span>malloc<span class="op">(</span>size <span class="op">*</span> <span class="kw">sizeof</span><span class="op">(</span><span class="dt">int</span><span class="op">));</span></span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>datos <span class="op">==</span> NULL<span class="op">)</span> <span class="op">{</span> perror<span class="op">(</span><span class="st">&quot;malloc fallo&quot;</span><span class="op">);</span> exit<span class="op">(</span>EXIT_FAILURE<span class="op">);</span> <span class="op">}</span></span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>    datos<span class="op">[</span><span class="dv">0</span><span class="op">]</span> <span class="op">=</span> <span class="dv">10</span><span class="op">;</span> datos<span class="op">[</span><span class="dv">1</span><span class="op">]</span> <span class="op">=</span> <span class="dv">20</span><span class="op">;</span> datos<span class="op">[</span><span class="dv">2</span><span class="op">]</span> <span class="op">=</span> <span class="dv">30</span><span class="op">;</span></span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>    imprimir_array_int<span class="op">(</span><span class="st">&quot;Original&quot;</span><span class="op">,</span> datos<span class="op">,</span> size<span class="op">);</span></span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>    <span class="co">// b. Redimensionar a 5 enteros</span></span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> nuevo_size <span class="op">=</span> <span class="dv">5</span><span class="op">;</span></span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> <span class="op">*</span>temp_ptr <span class="op">=</span> <span class="op">(</span><span class="dt">int</span> <span class="op">*)</span>realloc<span class="op">(</span>datos<span class="op">,</span> nuevo_size <span class="op">*</span> <span class="kw">sizeof</span><span class="op">(</span><span class="dt">int</span><span class="op">));</span></span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>temp_ptr <span class="op">==</span> NULL<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">&quot;ERROR: realloc fallo. Datos originales conservados.</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>        free<span class="op">(</span>datos<span class="op">);</span></span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span><span class="op">;</span></span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a>    datos <span class="op">=</span> temp_ptr<span class="op">;</span></span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a>    size <span class="op">=</span> nuevo_size<span class="op">;</span></span>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a>    <span class="co">// c. Asignar nuevos valores</span></span>
+<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a>    datos<span class="op">[</span><span class="dv">3</span><span class="op">]</span> <span class="op">=</span> <span class="dv">40</span><span class="op">;</span></span>
+<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a>    datos<span class="op">[</span><span class="dv">4</span><span class="op">]</span> <span class="op">=</span> <span class="dv">50</span><span class="op">;</span></span>
+<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a>    <span class="co">// d. Imprimir</span></span>
+<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a>    imprimir_array_int<span class="op">(</span><span class="st">&quot;Expandido&quot;</span><span class="op">,</span> datos<span class="op">,</span> size<span class="op">);</span></span>
+<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a>    free<span class="op">(</span>datos<span class="op">);</span></span>
+<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a><span class="co">// -----------------------------------------------------------</span></span>
+<span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a><span class="co">// SoluciÃ³n 2: ContracciÃ³n de un Array de Flotantes</span></span>
+<span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a><span class="co">// -----------------------------------------------------------</span></span>
+<span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> solucion2<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb2-58"><a href="#cb2-58" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;</span><span class="sc">\n</span><span class="st">--- SoluciÃ³n 2: ContracciÃ³n ---</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb2-59"><a href="#cb2-59" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> size <span class="op">=</span> <span class="dv">8</span><span class="op">;</span></span>
+<span id="cb2-60"><a href="#cb2-60" aria-hidden="true" tabindex="-1"></a>    <span class="dt">float</span> <span class="op">*</span>datos <span class="op">=</span> <span class="op">(</span><span class="dt">float</span> <span class="op">*)</span>malloc<span class="op">(</span>size <span class="op">*</span> <span class="kw">sizeof</span><span class="op">(</span><span class="dt">float</span><span class="op">));</span></span>
+<span id="cb2-61"><a href="#cb2-61" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>datos <span class="op">==</span> NULL<span class="op">)</span> <span class="op">{</span> perror<span class="op">(</span><span class="st">&quot;malloc fallo&quot;</span><span class="op">);</span> exit<span class="op">(</span>EXIT_FAILURE<span class="op">);</span> <span class="op">}</span></span>
+<span id="cb2-62"><a href="#cb2-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-63"><a href="#cb2-63" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> size<span class="op">;</span> i<span class="op">++)</span> <span class="op">{</span></span>
+<span id="cb2-64"><a href="#cb2-64" aria-hidden="true" tabindex="-1"></a>        datos<span class="op">[</span>i<span class="op">]</span> <span class="op">=</span> <span class="op">(</span><span class="dt">float</span><span class="op">)(</span>i <span class="op">+</span> <span class="fl">1.0</span><span class="op">);</span></span>
+<span id="cb2-65"><a href="#cb2-65" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">&quot;</span><span class="sc">%.1f</span><span class="st"> &quot;</span><span class="op">,</span> datos<span class="op">[</span>i<span class="op">]);</span></span>
+<span id="cb2-66"><a href="#cb2-66" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb2-67"><a href="#cb2-67" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;&lt;- Original (8 elementos)</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb2-68"><a href="#cb2-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-69"><a href="#cb2-69" aria-hidden="true" tabindex="-1"></a>    <span class="co">// b. Reducir a 4 flotantes</span></span>
+<span id="cb2-70"><a href="#cb2-70" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> nuevo_size <span class="op">=</span> <span class="dv">4</span><span class="op">;</span></span>
+<span id="cb2-71"><a href="#cb2-71" aria-hidden="true" tabindex="-1"></a>    <span class="dt">float</span> <span class="op">*</span>temp_ptr <span class="op">=</span> <span class="op">(</span><span class="dt">float</span> <span class="op">*)</span>realloc<span class="op">(</span>datos<span class="op">,</span> nuevo_size <span class="op">*</span> <span class="kw">sizeof</span><span class="op">(</span><span class="dt">float</span><span class="op">));</span></span>
+<span id="cb2-72"><a href="#cb2-72" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-73"><a href="#cb2-73" aria-hidden="true" tabindex="-1"></a>    <span class="co">// NOTA: Con la contracciÃ³n, temp_ptr casi siempre serÃ¡ igual a datos.</span></span>
+<span id="cb2-74"><a href="#cb2-74" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>temp_ptr <span class="op">==</span> NULL<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb2-75"><a href="#cb2-75" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">&quot;ERROR: realloc fallo.</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb2-76"><a href="#cb2-76" aria-hidden="true" tabindex="-1"></a>        free<span class="op">(</span>datos<span class="op">);</span></span>
+<span id="cb2-77"><a href="#cb2-77" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span><span class="op">;</span></span>
+<span id="cb2-78"><a href="#cb2-78" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb2-79"><a href="#cb2-79" aria-hidden="true" tabindex="-1"></a>    datos <span class="op">=</span> temp_ptr<span class="op">;</span></span>
+<span id="cb2-80"><a href="#cb2-80" aria-hidden="true" tabindex="-1"></a>    size <span class="op">=</span> nuevo_size<span class="op">;</span></span>
+<span id="cb2-81"><a href="#cb2-81" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-82"><a href="#cb2-82" aria-hidden="true" tabindex="-1"></a>    <span class="co">// c. Imprimir los 4 restantes</span></span>
+<span id="cb2-83"><a href="#cb2-83" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;Contraido [TamaÃ±o: </span><span class="sc">%d</span><span class="st">]: &quot;</span><span class="op">,</span> size<span class="op">);</span></span>
+<span id="cb2-84"><a href="#cb2-84" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> size<span class="op">;</span> i<span class="op">++)</span> <span class="op">{</span></span>
+<span id="cb2-85"><a href="#cb2-85" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">&quot;</span><span class="sc">%.1f</span><span class="st"> &quot;</span><span class="op">,</span> datos<span class="op">[</span>i<span class="op">]);</span></span>
+<span id="cb2-86"><a href="#cb2-86" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb2-87"><a href="#cb2-87" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb2-88"><a href="#cb2-88" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-89"><a href="#cb2-89" aria-hidden="true" tabindex="-1"></a>    free<span class="op">(</span>datos<span class="op">);</span></span>
+<span id="cb2-90"><a href="#cb2-90" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb2-91"><a href="#cb2-91" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-92"><a href="#cb2-92" aria-hidden="true" tabindex="-1"></a><span class="co">// -----------------------------------------------------------</span></span>
+<span id="cb2-93"><a href="#cb2-93" aria-hidden="true" tabindex="-1"></a><span class="co">// SoluciÃ³n 3: VerificaciÃ³n de Cambio de DirecciÃ³n</span></span>
+<span id="cb2-94"><a href="#cb2-94" aria-hidden="true" tabindex="-1"></a><span class="co">// -----------------------------------------------------------</span></span>
+<span id="cb2-95"><a href="#cb2-95" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> solucion3<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb2-96"><a href="#cb2-96" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;</span><span class="sc">\n</span><span class="st">--- SoluciÃ³n 3: Cambio de DirecciÃ³n ---</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb2-97"><a href="#cb2-97" aria-hidden="true" tabindex="-1"></a>    <span class="co">// a. AsignaciÃ³n inicial pequeÃ±a</span></span>
+<span id="cb2-98"><a href="#cb2-98" aria-hidden="true" tabindex="-1"></a>    <span class="dt">void</span> <span class="op">*</span>ptr_original <span class="op">=</span> malloc<span class="op">(</span><span class="dv">10</span> <span class="op">*</span> <span class="kw">sizeof</span><span class="op">(</span><span class="dt">char</span><span class="op">));</span></span>
+<span id="cb2-99"><a href="#cb2-99" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>ptr_original <span class="op">==</span> NULL<span class="op">)</span> <span class="op">{</span> perror<span class="op">(</span><span class="st">&quot;malloc fallo&quot;</span><span class="op">);</span> exit<span class="op">(</span>EXIT_FAILURE<span class="op">);</span> <span class="op">}</span></span>
+<span id="cb2-100"><a href="#cb2-100" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;1. Direccion Original (10 bytes): </span><span class="sc">%p\n</span><span class="st">&quot;</span><span class="op">,</span> ptr_original<span class="op">);</span></span>
+<span id="cb2-101"><a href="#cb2-101" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-102"><a href="#cb2-102" aria-hidden="true" tabindex="-1"></a>    <span class="co">// b. ReasignaciÃ³n grande (intenta forzar reubicaciÃ³n)</span></span>
+<span id="cb2-103"><a href="#cb2-103" aria-hidden="true" tabindex="-1"></a>    <span class="dt">void</span> <span class="op">*</span>ptr_nuevo <span class="op">=</span> realloc<span class="op">(</span>ptr_original<span class="op">,</span> <span class="dv">1000</span> <span class="op">*</span> <span class="kw">sizeof</span><span class="op">(</span><span class="dt">char</span><span class="op">));</span></span>
+<span id="cb2-104"><a href="#cb2-104" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-105"><a href="#cb2-105" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>ptr_nuevo <span class="op">==</span> NULL<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb2-106"><a href="#cb2-106" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">&quot;ERROR: realloc fallo. Datos originales conservados en </span><span class="sc">%p</span><span class="st">.</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">,</span> ptr_original<span class="op">);</span></span>
+<span id="cb2-107"><a href="#cb2-107" aria-hidden="true" tabindex="-1"></a>        free<span class="op">(</span>ptr_original<span class="op">);</span></span>
+<span id="cb2-108"><a href="#cb2-108" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span><span class="op">;</span></span>
+<span id="cb2-109"><a href="#cb2-109" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb2-110"><a href="#cb2-110" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-111"><a href="#cb2-111" aria-hidden="true" tabindex="-1"></a>    <span class="co">// c. Imprimir la nueva direcciÃ³n</span></span>
+<span id="cb2-112"><a href="#cb2-112" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;2. Nueva Direccion (1000 bytes): </span><span class="sc">%p\n</span><span class="st">&quot;</span><span class="op">,</span> ptr_nuevo<span class="op">);</span></span>
+<span id="cb2-113"><a href="#cb2-113" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-114"><a href="#cb2-114" aria-hidden="true" tabindex="-1"></a>    <span class="co">// d. Respuesta</span></span>
+<span id="cb2-115"><a href="#cb2-115" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>ptr_nuevo <span class="op">==</span> ptr_original<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb2-116"><a href="#cb2-116" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">&quot;Respuesta: Las direcciones son IGUALES (Expansion en el lugar).</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb2-117"><a href="#cb2-117" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
+<span id="cb2-118"><a href="#cb2-118" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">&quot;Respuesta: Las direcciones son DIFERENTES (Reubicacion forzada, los datos fueron copiados).</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb2-119"><a href="#cb2-119" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb2-120"><a href="#cb2-120" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-121"><a href="#cb2-121" aria-hidden="true" tabindex="-1"></a>    free<span class="op">(</span>ptr_nuevo<span class="op">);</span></span>
+<span id="cb2-122"><a href="#cb2-122" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb2-123"><a href="#cb2-123" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-124"><a href="#cb2-124" aria-hidden="true" tabindex="-1"></a><span class="co">// -----------------------------------------------------------</span></span>
+<span id="cb2-125"><a href="#cb2-125" aria-hidden="true" tabindex="-1"></a><span class="co">// SoluciÃ³n 4: RedimensiÃ³n Segura y Manejo de NULL</span></span>
+<span id="cb2-126"><a href="#cb2-126" aria-hidden="true" tabindex="-1"></a><span class="co">// -----------------------------------------------------------</span></span>
+<span id="cb2-127"><a href="#cb2-127" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> solucion4<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb2-128"><a href="#cb2-128" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;</span><span class="sc">\n</span><span class="st">--- SoluciÃ³n 4: RedimensiÃ³n Segura ---</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb2-129"><a href="#cb2-129" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> current_size <span class="op">=</span> <span class="dv">5</span><span class="op">;</span></span>
+<span id="cb2-130"><a href="#cb2-130" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> new_size <span class="op">=</span> <span class="dv">10</span><span class="op">;</span></span>
+<span id="cb2-131"><a href="#cb2-131" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> <span class="op">*</span>ptr_original <span class="op">=</span> <span class="op">(</span><span class="dt">int</span> <span class="op">*)</span>malloc<span class="op">(</span>current_size <span class="op">*</span> <span class="kw">sizeof</span><span class="op">(</span><span class="dt">int</span><span class="op">));</span></span>
+<span id="cb2-132"><a href="#cb2-132" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>ptr_original <span class="op">==</span> NULL<span class="op">)</span> <span class="op">{</span> perror<span class="op">(</span><span class="st">&quot;malloc fallo&quot;</span><span class="op">);</span> exit<span class="op">(</span>EXIT_FAILURE<span class="op">);</span> <span class="op">}</span></span>
+<span id="cb2-133"><a href="#cb2-133" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-134"><a href="#cb2-134" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Inicializar datos</span></span>
+<span id="cb2-135"><a href="#cb2-135" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> current_size<span class="op">;</span> i<span class="op">++)</span> ptr_original<span class="op">[</span>i<span class="op">]</span> <span class="op">=</span> i <span class="op">+</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb2-136"><a href="#cb2-136" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;Original: </span><span class="sc">%p</span><span class="st">. Contenido conservado: &quot;</span><span class="op">,</span> ptr_original<span class="op">);</span></span>
+<span id="cb2-137"><a href="#cb2-137" aria-hidden="true" tabindex="-1"></a>    imprimir_array_int<span class="op">(</span><span class="st">&quot;&quot;</span><span class="op">,</span> ptr_original<span class="op">,</span> current_size<span class="op">);</span></span>
+<span id="cb2-138"><a href="#cb2-138" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-139"><a href="#cb2-139" aria-hidden="true" tabindex="-1"></a>    <span class="co">// a. Asignar el resultado a un puntero temporal</span></span>
+<span id="cb2-140"><a href="#cb2-140" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> <span class="op">*</span>temp_ptr <span class="op">=</span> <span class="op">(</span><span class="dt">int</span> <span class="op">*)</span>realloc<span class="op">(</span>ptr_original<span class="op">,</span> new_size <span class="op">*</span> <span class="kw">sizeof</span><span class="op">(</span><span class="dt">int</span><span class="op">));</span></span>
+<span id="cb2-141"><a href="#cb2-141" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-142"><a href="#cb2-142" aria-hidden="true" tabindex="-1"></a>    <span class="co">// b. Verificar si temp_ptr es NULL</span></span>
+<span id="cb2-143"><a href="#cb2-143" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>temp_ptr <span class="op">==</span> NULL<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb2-144"><a href="#cb2-144" aria-hidden="true" tabindex="-1"></a>        <span class="co">// c. AsignaciÃ³n fallida: el puntero original sigue siendo vÃ¡lido</span></span>
+<span id="cb2-145"><a href="#cb2-145" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">&quot;ERROR: Reasignacion de memoria (a </span><span class="sc">%d</span><span class="st"> elementos) fallida.</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">,</span> new_size<span class="op">);</span></span>
+<span id="cb2-146"><a href="#cb2-146" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">&quot;El puntero original </span><span class="sc">%p</span><span class="st"> con sus </span><span class="sc">%d</span><span class="st"> elementos sigue siendo valido.</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">,</span> ptr_original<span class="op">,</span> current_size<span class="op">);</span></span>
+<span id="cb2-147"><a href="#cb2-147" aria-hidden="true" tabindex="-1"></a>        free<span class="op">(</span>ptr_original<span class="op">);</span></span>
+<span id="cb2-148"><a href="#cb2-148" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
+<span id="cb2-149"><a href="#cb2-149" aria-hidden="true" tabindex="-1"></a>        <span class="co">// d. AsignaciÃ³n exitosa: sobrescribir el puntero original</span></span>
+<span id="cb2-150"><a href="#cb2-150" aria-hidden="true" tabindex="-1"></a>        ptr_original <span class="op">=</span> temp_ptr<span class="op">;</span></span>
+<span id="cb2-151"><a href="#cb2-151" aria-hidden="true" tabindex="-1"></a>        current_size <span class="op">=</span> new_size<span class="op">;</span></span>
+<span id="cb2-152"><a href="#cb2-152" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">&quot;EXITO: Nueva direccion: </span><span class="sc">%p</span><span class="st">. Nuevo tamaÃ±o: </span><span class="sc">%d</span><span class="st">.</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">,</span> ptr_original<span class="op">,</span> current_size<span class="op">);</span></span>
+<span id="cb2-153"><a href="#cb2-153" aria-hidden="true" tabindex="-1"></a>        free<span class="op">(</span>ptr_original<span class="op">);</span></span>
+<span id="cb2-154"><a href="#cb2-154" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb2-155"><a href="#cb2-155" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb2-156"><a href="#cb2-156" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-157"><a href="#cb2-157" aria-hidden="true" tabindex="-1"></a><span class="co">// -----------------------------------------------------------</span></span>
+<span id="cb2-158"><a href="#cb2-158" aria-hidden="true" tabindex="-1"></a><span class="co">// SoluciÃ³n 5: ExpansiÃ³n DinÃ¡mica de Estructuras</span></span>
+<span id="cb2-159"><a href="#cb2-159" aria-hidden="true" tabindex="-1"></a><span class="co">// -----------------------------------------------------------</span></span>
+<span id="cb2-160"><a href="#cb2-160" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> solucion5<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb2-161"><a href="#cb2-161" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;</span><span class="sc">\n</span><span class="st">--- SoluciÃ³n 5: ExpansiÃ³n de Structs ---</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb2-162"><a href="#cb2-162" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> size <span class="op">=</span> <span class="dv">2</span><span class="op">;</span></span>
+<span id="cb2-163"><a href="#cb2-163" aria-hidden="true" tabindex="-1"></a>    Registro <span class="op">*</span>registros <span class="op">=</span> <span class="op">(</span>Registro <span class="op">*)</span>malloc<span class="op">(</span>size <span class="op">*</span> <span class="kw">sizeof</span><span class="op">(</span>Registro<span class="op">));</span></span>
+<span id="cb2-164"><a href="#cb2-164" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>registros <span class="op">==</span> NULL<span class="op">)</span> <span class="op">{</span> perror<span class="op">(</span><span class="st">&quot;malloc fallo&quot;</span><span class="op">);</span> exit<span class="op">(</span>EXIT_FAILURE<span class="op">);</span> <span class="op">}</span></span>
+<span id="cb2-165"><a href="#cb2-165" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-166"><a href="#cb2-166" aria-hidden="true" tabindex="-1"></a>    <span class="co">// a. Asignar datos iniciales</span></span>
+<span id="cb2-167"><a href="#cb2-167" aria-hidden="true" tabindex="-1"></a>    registros<span class="op">[</span><span class="dv">0</span><span class="op">]</span> <span class="op">=</span> <span class="op">(</span>Registro<span class="op">){</span><span class="dv">1</span><span class="op">,</span> <span class="fl">10.5</span><span class="bu">f</span><span class="op">};</span></span>
+<span id="cb2-168"><a href="#cb2-168" aria-hidden="true" tabindex="-1"></a>    registros<span class="op">[</span><span class="dv">1</span><span class="op">]</span> <span class="op">=</span> <span class="op">(</span>Registro<span class="op">){</span><span class="dv">2</span><span class="op">,</span> <span class="fl">20.5</span><span class="bu">f</span><span class="op">};</span></span>
+<span id="cb2-169"><a href="#cb2-169" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;Inicial: R0(</span><span class="sc">%.1f</span><span class="st">), R1(</span><span class="sc">%.1f</span><span class="st">)</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">,</span> registros<span class="op">[</span><span class="dv">0</span><span class="op">].</span>valor<span class="op">,</span> registros<span class="op">[</span><span class="dv">1</span><span class="op">].</span>valor<span class="op">);</span></span>
+<span id="cb2-170"><a href="#cb2-170" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-171"><a href="#cb2-171" aria-hidden="true" tabindex="-1"></a>    <span class="co">// b. Expandir a 4 estructuras</span></span>
+<span id="cb2-172"><a href="#cb2-172" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> nuevo_size <span class="op">=</span> <span class="dv">4</span><span class="op">;</span></span>
+<span id="cb2-173"><a href="#cb2-173" aria-hidden="true" tabindex="-1"></a>    Registro <span class="op">*</span>temp_ptr <span class="op">=</span> <span class="op">(</span>Registro <span class="op">*)</span>realloc<span class="op">(</span>registros<span class="op">,</span> nuevo_size <span class="op">*</span> <span class="kw">sizeof</span><span class="op">(</span>Registro<span class="op">));</span></span>
+<span id="cb2-174"><a href="#cb2-174" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-175"><a href="#cb2-175" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>temp_ptr <span class="op">==</span> NULL<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb2-176"><a href="#cb2-176" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">&quot;ERROR: realloc fallo.</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb2-177"><a href="#cb2-177" aria-hidden="true" tabindex="-1"></a>        free<span class="op">(</span>registros<span class="op">);</span></span>
+<span id="cb2-178"><a href="#cb2-178" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span><span class="op">;</span></span>
+<span id="cb2-179"><a href="#cb2-179" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb2-180"><a href="#cb2-180" aria-hidden="true" tabindex="-1"></a>    registros <span class="op">=</span> temp_ptr<span class="op">;</span></span>
+<span id="cb2-181"><a href="#cb2-181" aria-hidden="true" tabindex="-1"></a>    size <span class="op">=</span> nuevo_size<span class="op">;</span></span>
+<span id="cb2-182"><a href="#cb2-182" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-183"><a href="#cb2-183" aria-hidden="true" tabindex="-1"></a>    <span class="co">// c. Asignar datos a las nuevas posiciones</span></span>
+<span id="cb2-184"><a href="#cb2-184" aria-hidden="true" tabindex="-1"></a>    registros<span class="op">[</span><span class="dv">2</span><span class="op">]</span> <span class="op">=</span> <span class="op">(</span>Registro<span class="op">){</span><span class="dv">3</span><span class="op">,</span> <span class="fl">30.5</span><span class="bu">f</span><span class="op">};</span></span>
+<span id="cb2-185"><a href="#cb2-185" aria-hidden="true" tabindex="-1"></a>    registros<span class="op">[</span><span class="dv">3</span><span class="op">]</span> <span class="op">=</span> <span class="op">(</span>Registro<span class="op">){</span><span class="dv">4</span><span class="op">,</span> <span class="fl">40.5</span><span class="bu">f</span><span class="op">};</span></span>
+<span id="cb2-186"><a href="#cb2-186" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-187"><a href="#cb2-187" aria-hidden="true" tabindex="-1"></a>    <span class="co">// d. Imprimir las 4 estructuras</span></span>
+<span id="cb2-188"><a href="#cb2-188" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;Expandido: &quot;</span><span class="op">);</span></span>
+<span id="cb2-189"><a href="#cb2-189" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> size<span class="op">;</span> i<span class="op">++)</span> <span class="op">{</span></span>
+<span id="cb2-190"><a href="#cb2-190" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">&quot;R</span><span class="sc">%d</span><span class="st">(</span><span class="sc">%.1f</span><span class="st">) &quot;</span><span class="op">,</span> registros<span class="op">[</span>i<span class="op">].</span>id<span class="op">,</span> registros<span class="op">[</span>i<span class="op">].</span>valor<span class="op">);</span></span>
+<span id="cb2-191"><a href="#cb2-191" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb2-192"><a href="#cb2-192" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb2-193"><a href="#cb2-193" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-194"><a href="#cb2-194" aria-hidden="true" tabindex="-1"></a>    free<span class="op">(</span>registros<span class="op">);</span></span>
+<span id="cb2-195"><a href="#cb2-195" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb2-196"><a href="#cb2-196" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-197"><a href="#cb2-197" aria-hidden="true" tabindex="-1"></a><span class="co">// -----------------------------------------------------------</span></span>
+<span id="cb2-198"><a href="#cb2-198" aria-hidden="true" tabindex="-1"></a><span class="co">// SoluciÃ³n 6: FunciÃ³n de Agregar Registro (Redimensionamiento Continuo)</span></span>
+<span id="cb2-199"><a href="#cb2-199" aria-hidden="true" tabindex="-1"></a><span class="co">// -----------------------------------------------------------</span></span>
+<span id="cb2-200"><a href="#cb2-200" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> agregar_registro<span class="op">(</span>Registro <span class="op">**</span>array<span class="op">,</span> <span class="dt">int</span> <span class="op">*</span>tamano_actual<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb2-201"><a href="#cb2-201" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> nuevo_tamano <span class="op">=</span> <span class="op">*</span>tamano_actual <span class="op">+</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb2-202"><a href="#cb2-202" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-203"><a href="#cb2-203" aria-hidden="true" tabindex="-1"></a>    <span class="co">// c. Usar realloc para aÃ±adir espacio</span></span>
+<span id="cb2-204"><a href="#cb2-204" aria-hidden="true" tabindex="-1"></a>    Registro <span class="op">*</span>temp_ptr <span class="op">=</span> <span class="op">(</span>Registro <span class="op">*)</span>realloc<span class="op">(*</span>array<span class="op">,</span> nuevo_tamano <span class="op">*</span> <span class="kw">sizeof</span><span class="op">(</span>Registro<span class="op">));</span></span>
+<span id="cb2-205"><a href="#cb2-205" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-206"><a href="#cb2-206" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>temp_ptr <span class="op">==</span> NULL<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb2-207"><a href="#cb2-207" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">&quot;</span><span class="sc">\n</span><span class="st">ERROR: Memoria llena. No se pudo agregar el registro </span><span class="sc">%d</span><span class="st">.</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">,</span> nuevo_tamano<span class="op">);</span></span>
+<span id="cb2-208"><a href="#cb2-208" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span><span class="op">;</span></span>
+<span id="cb2-209"><a href="#cb2-209" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb2-210"><a href="#cb2-210" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-211"><a href="#cb2-211" aria-hidden="true" tabindex="-1"></a>    <span class="co">// d. Actualizar el puntero y el tamaÃ±o de manera segura</span></span>
+<span id="cb2-212"><a href="#cb2-212" aria-hidden="true" tabindex="-1"></a>    <span class="op">*</span>array <span class="op">=</span> temp_ptr<span class="op">;</span></span>
+<span id="cb2-213"><a href="#cb2-213" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-214"><a href="#cb2-214" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Asignar datos al nuevo espacio (Ãºltimo Ã­ndice)</span></span>
+<span id="cb2-215"><a href="#cb2-215" aria-hidden="true" tabindex="-1"></a>    <span class="op">(*</span>array<span class="op">)[</span>nuevo_tamano <span class="op">-</span> <span class="dv">1</span><span class="op">].</span>id <span class="op">=</span> nuevo_tamano <span class="op">*</span> <span class="dv">10</span><span class="op">;</span></span>
+<span id="cb2-216"><a href="#cb2-216" aria-hidden="true" tabindex="-1"></a>    <span class="op">(*</span>array<span class="op">)[</span>nuevo_tamano <span class="op">-</span> <span class="dv">1</span><span class="op">].</span>valor <span class="op">=</span> <span class="op">(</span><span class="dt">float</span><span class="op">)</span>nuevo_tamano <span class="op">*</span> <span class="fl">100.0</span><span class="bu">f</span><span class="op">;</span></span>
+<span id="cb2-217"><a href="#cb2-217" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-218"><a href="#cb2-218" aria-hidden="true" tabindex="-1"></a>    <span class="co">// b. Incrementar el tamaÃ±o actual</span></span>
+<span id="cb2-219"><a href="#cb2-219" aria-hidden="true" tabindex="-1"></a>    <span class="op">*</span>tamano_actual <span class="op">=</span> nuevo_tamano<span class="op">;</span></span>
+<span id="cb2-220"><a href="#cb2-220" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb2-221"><a href="#cb2-221" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-222"><a href="#cb2-222" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> solucion6<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb2-223"><a href="#cb2-223" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;</span><span class="sc">\n</span><span class="st">--- SoluciÃ³n 6: FunciÃ³n de Agregar Registro ---</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb2-224"><a href="#cb2-224" aria-hidden="true" tabindex="-1"></a>    Registro <span class="op">*</span>db <span class="op">=</span> NULL<span class="op">;</span> <span class="co">// Inicializar a NULL (Heap vacio)</span></span>
+<span id="cb2-225"><a href="#cb2-225" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> count <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb2-226"><a href="#cb2-226" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-227"><a href="#cb2-227" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;Iniciando con count = </span><span class="sc">%d\n</span><span class="st">&quot;</span><span class="op">,</span> count<span class="op">);</span></span>
+<span id="cb2-228"><a href="#cb2-228" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-229"><a href="#cb2-229" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> <span class="dv">3</span><span class="op">;</span> i<span class="op">++)</span> <span class="op">{</span></span>
+<span id="cb2-230"><a href="#cb2-230" aria-hidden="true" tabindex="-1"></a>        agregar_registro<span class="op">(&amp;</span>db<span class="op">,</span> <span class="op">&amp;</span>count<span class="op">);</span></span>
+<span id="cb2-231"><a href="#cb2-231" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">&quot;Agregado R</span><span class="sc">%d</span><span class="st">. Valor: </span><span class="sc">%.0f</span><span class="st">. Puntero: </span><span class="sc">%p\n</span><span class="st">&quot;</span><span class="op">,</span> </span>
+<span id="cb2-232"><a href="#cb2-232" aria-hidden="true" tabindex="-1"></a>               db<span class="op">[</span>count <span class="op">-</span> <span class="dv">1</span><span class="op">].</span>id <span class="op">/</span> <span class="dv">10</span><span class="op">,</span> db<span class="op">[</span>count <span class="op">-</span> <span class="dv">1</span><span class="op">].</span>valor<span class="op">,</span> <span class="op">(</span><span class="dt">void</span> <span class="op">*)</span>db<span class="op">);</span></span>
+<span id="cb2-233"><a href="#cb2-233" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb2-234"><a href="#cb2-234" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-235"><a href="#cb2-235" aria-hidden="true" tabindex="-1"></a>    free<span class="op">(</span>db<span class="op">);</span></span>
+<span id="cb2-236"><a href="#cb2-236" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb2-237"><a href="#cb2-237" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-238"><a href="#cb2-238" aria-hidden="true" tabindex="-1"></a><span class="co">// -----------------------------------------------------------</span></span>
+<span id="cb2-239"><a href="#cb2-239" aria-hidden="true" tabindex="-1"></a><span class="co">// SoluciÃ³n 7: realloc(NULL, size): AsignaciÃ³n Inicial</span></span>
+<span id="cb2-240"><a href="#cb2-240" aria-hidden="true" tabindex="-1"></a><span class="co">// -----------------------------------------------------------</span></span>
+<span id="cb2-241"><a href="#cb2-241" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> solucion7<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb2-242"><a href="#cb2-242" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;</span><span class="sc">\n</span><span class="st">--- SoluciÃ³n 7: realloc(NULL, size) ---</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb2-243"><a href="#cb2-243" aria-hidden="true" tabindex="-1"></a>    <span class="co">// a. Declarar e inicializar a NULL</span></span>
+<span id="cb2-244"><a href="#cb2-244" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> <span class="op">*</span>p_datos <span class="op">=</span> NULL<span class="op">;</span> </span>
+<span id="cb2-245"><a href="#cb2-245" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-246"><a href="#cb2-246" aria-hidden="true" tabindex="-1"></a>    <span class="co">// b. Usar realloc(NULL, size) para asignar por primera vez</span></span>
+<span id="cb2-247"><a href="#cb2-247" aria-hidden="true" tabindex="-1"></a>    p_datos <span class="op">=</span> <span class="op">(</span><span class="dt">int</span> <span class="op">*)</span>realloc<span class="op">(</span>p_datos<span class="op">,</span> <span class="dv">5</span> <span class="op">*</span> <span class="kw">sizeof</span><span class="op">(</span><span class="dt">int</span><span class="op">));</span></span>
+<span id="cb2-248"><a href="#cb2-248" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-249"><a href="#cb2-249" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>p_datos <span class="op">==</span> NULL<span class="op">)</span> <span class="op">{</span> perror<span class="op">(</span><span class="st">&quot;realloc(NULL) fallo&quot;</span><span class="op">);</span> exit<span class="op">(</span>EXIT_FAILURE<span class="op">);</span> <span class="op">}</span></span>
+<span id="cb2-250"><a href="#cb2-250" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-251"><a href="#cb2-251" aria-hidden="true" tabindex="-1"></a>    <span class="co">// c. Imprimir</span></span>
+<span id="cb2-252"><a href="#cb2-252" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;Asignacion inicial exitosa via realloc(NULL, size).</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb2-253"><a href="#cb2-253" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;Direccion retornada: </span><span class="sc">%p\n</span><span class="st">&quot;</span><span class="op">,</span> <span class="op">(</span><span class="dt">void</span> <span class="op">*)</span>p_datos<span class="op">);</span></span>
+<span id="cb2-254"><a href="#cb2-254" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-255"><a href="#cb2-255" aria-hidden="true" tabindex="-1"></a>    free<span class="op">(</span>p_datos<span class="op">);</span></span>
+<span id="cb2-256"><a href="#cb2-256" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb2-257"><a href="#cb2-257" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-258"><a href="#cb2-258" aria-hidden="true" tabindex="-1"></a><span class="co">// -----------------------------------------------------------</span></span>
+<span id="cb2-259"><a href="#cb2-259" aria-hidden="true" tabindex="-1"></a><span class="co">// SoluciÃ³n 8: realloc(ptr, 0): LiberaciÃ³n de Memoria</span></span>
+<span id="cb2-260"><a href="#cb2-260" aria-hidden="true" tabindex="-1"></a><span class="co">// -----------------------------------------------------------</span></span>
+<span id="cb2-261"><a href="#cb2-261" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> solucion8<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb2-262"><a href="#cb2-262" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;</span><span class="sc">\n</span><span class="st">--- SoluciÃ³n 8: realloc(ptr, 0) ---</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb2-263"><a href="#cb2-263" aria-hidden="true" tabindex="-1"></a>    <span class="co">// a. Asignar un bloque</span></span>
+<span id="cb2-264"><a href="#cb2-264" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> <span class="op">*</span>p_datos <span class="op">=</span> <span class="op">(</span><span class="dt">int</span> <span class="op">*)</span>malloc<span class="op">(</span><span class="dv">10</span> <span class="op">*</span> <span class="kw">sizeof</span><span class="op">(</span><span class="dt">int</span><span class="op">));</span></span>
+<span id="cb2-265"><a href="#cb2-265" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>p_datos <span class="op">==</span> NULL<span class="op">)</span> <span class="op">{</span> perror<span class="op">(</span><span class="st">&quot;malloc fallo&quot;</span><span class="op">);</span> exit<span class="op">(</span>EXIT_FAILURE<span class="op">);</span> <span class="op">}</span></span>
+<span id="cb2-266"><a href="#cb2-266" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;Direccion antes de liberar: </span><span class="sc">%p\n</span><span class="st">&quot;</span><span class="op">,</span> <span class="op">(</span><span class="dt">void</span> <span class="op">*)</span>p_datos<span class="op">);</span></span>
+<span id="cb2-267"><a href="#cb2-267" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-268"><a href="#cb2-268" aria-hidden="true" tabindex="-1"></a>    <span class="co">// b. Usar realloc(ptr, 0) para liberar</span></span>
+<span id="cb2-269"><a href="#cb2-269" aria-hidden="true" tabindex="-1"></a>    p_datos <span class="op">=</span> <span class="op">(</span><span class="dt">int</span> <span class="op">*)</span>realloc<span class="op">(</span>p_datos<span class="op">,</span> <span class="dv">0</span><span class="op">);</span> </span>
+<span id="cb2-270"><a href="#cb2-270" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-271"><a href="#cb2-271" aria-hidden="true" tabindex="-1"></a>    <span class="co">// c. Imprimir</span></span>
+<span id="cb2-272"><a href="#cb2-272" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;Memoria liberada via realloc(ptr, 0).</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb2-273"><a href="#cb2-273" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;Direccion retornada (debe ser NULL o invalida): </span><span class="sc">%p\n</span><span class="st">&quot;</span><span class="op">,</span> <span class="op">(</span><span class="dt">void</span> <span class="op">*)</span>p_datos<span class="op">);</span></span>
+<span id="cb2-274"><a href="#cb2-274" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Nota: No se llama a free(p_datos) ya que realloc(ptr, 0) lo hace.</span></span>
+<span id="cb2-275"><a href="#cb2-275" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb2-276"><a href="#cb2-276" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-277"><a href="#cb2-277" aria-hidden="true" tabindex="-1"></a><span class="co">// -----------------------------------------------------------</span></span>
+<span id="cb2-278"><a href="#cb2-278" aria-hidden="true" tabindex="-1"></a><span class="co">// SoluciÃ³n 9: RedimensiÃ³n a TamaÃ±o Igual</span></span>
+<span id="cb2-279"><a href="#cb2-279" aria-hidden="true" tabindex="-1"></a><span class="co">// -----------------------------------------------------------</span></span>
+<span id="cb2-280"><a href="#cb2-280" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> solucion9<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb2-281"><a href="#cb2-281" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;</span><span class="sc">\n</span><span class="st">--- SoluciÃ³n 9: RedimensiÃ³n a TamaÃ±o Igual ---</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb2-282"><a href="#cb2-282" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> size <span class="op">=</span> <span class="dv">4</span><span class="op">;</span></span>
+<span id="cb2-283"><a href="#cb2-283" aria-hidden="true" tabindex="-1"></a>    <span class="co">// a. Asignar un bloque</span></span>
+<span id="cb2-284"><a href="#cb2-284" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> <span class="op">*</span>datos <span class="op">=</span> <span class="op">(</span><span class="dt">int</span> <span class="op">*)</span>malloc<span class="op">(</span>size <span class="op">*</span> <span class="kw">sizeof</span><span class="op">(</span><span class="dt">int</span><span class="op">));</span></span>
+<span id="cb2-285"><a href="#cb2-285" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>datos <span class="op">==</span> NULL<span class="op">)</span> <span class="op">{</span> perror<span class="op">(</span><span class="st">&quot;malloc fallo&quot;</span><span class="op">);</span> exit<span class="op">(</span>EXIT_FAILURE<span class="op">);</span> <span class="op">}</span></span>
+<span id="cb2-286"><a href="#cb2-286" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-287"><a href="#cb2-287" aria-hidden="true" tabindex="-1"></a>    <span class="dt">void</span> <span class="op">*</span>ptr_original <span class="op">=</span> datos<span class="op">;</span></span>
+<span id="cb2-288"><a href="#cb2-288" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;Direccion original (4 int): </span><span class="sc">%p\n</span><span class="st">&quot;</span><span class="op">,</span> ptr_original<span class="op">);</span></span>
+<span id="cb2-289"><a href="#cb2-289" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-290"><a href="#cb2-290" aria-hidden="true" tabindex="-1"></a>    <span class="co">// b. Llamar a realloc con el mismo tamaÃ±o</span></span>
+<span id="cb2-291"><a href="#cb2-291" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> <span class="op">*</span>ptr_nuevo <span class="op">=</span> <span class="op">(</span><span class="dt">int</span> <span class="op">*)</span>realloc<span class="op">(</span>datos<span class="op">,</span> size <span class="op">*</span> <span class="kw">sizeof</span><span class="op">(</span><span class="dt">int</span><span class="op">));</span> </span>
+<span id="cb2-292"><a href="#cb2-292" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-293"><a href="#cb2-293" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>ptr_nuevo <span class="op">==</span> NULL<span class="op">)</span> <span class="op">{</span> </span>
+<span id="cb2-294"><a href="#cb2-294" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">&quot;ERROR: realloc fallo (improbable).</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span> </span>
+<span id="cb2-295"><a href="#cb2-295" aria-hidden="true" tabindex="-1"></a>        free<span class="op">(</span>datos<span class="op">);</span> </span>
+<span id="cb2-296"><a href="#cb2-296" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span><span class="op">;</span> </span>
+<span id="cb2-297"><a href="#cb2-297" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb2-298"><a href="#cb2-298" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-299"><a href="#cb2-299" aria-hidden="true" tabindex="-1"></a>    <span class="co">// c. Imprimir y comentar</span></span>
+<span id="cb2-300"><a href="#cb2-300" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;Direccion despues de realloc(mismo size): </span><span class="sc">%p\n</span><span class="st">&quot;</span><span class="op">,</span> ptr_nuevo<span class="op">);</span></span>
+<span id="cb2-301"><a href="#cb2-301" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;Comentario: La direccion suele permanecer IGUAL ya que no hay necesidad de reubicar.</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb2-302"><a href="#cb2-302" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-303"><a href="#cb2-303" aria-hidden="true" tabindex="-1"></a>    free<span class="op">(</span>ptr_nuevo<span class="op">);</span></span>
+<span id="cb2-304"><a href="#cb2-304" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb2-305"><a href="#cb2-305" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-306"><a href="#cb2-306" aria-hidden="true" tabindex="-1"></a><span class="co">// -----------------------------------------------------------</span></span>
+<span id="cb2-307"><a href="#cb2-307" aria-hidden="true" tabindex="-1"></a><span class="co">// SoluciÃ³n 10: Bucle de Crecimiento DinÃ¡mico</span></span>
+<span id="cb2-308"><a href="#cb2-308" aria-hidden="true" tabindex="-1"></a><span class="co">// -----------------------------------------------------------</span></span>
+<span id="cb2-309"><a href="#cb2-309" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> solucion10<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb2-310"><a href="#cb2-310" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;</span><span class="sc">\n</span><span class="st">--- SoluciÃ³n 10: Bucle de Crecimiento DinÃ¡mico ---</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb2-311"><a href="#cb2-311" aria-hidden="true" tabindex="-1"></a>    <span class="co">// a. Declarar puntero y contador</span></span>
+<span id="cb2-312"><a href="#cb2-312" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> <span class="op">*</span>datos <span class="op">=</span> NULL<span class="op">;</span> </span>
+<span id="cb2-313"><a href="#cb2-313" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> N <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb2-314"><a href="#cb2-314" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-315"><a href="#cb2-315" aria-hidden="true" tabindex="-1"></a>    <span class="co">// b. Bucle de 5 iteraciones</span></span>
+<span id="cb2-316"><a href="#cb2-316" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">1</span><span class="op">;</span> i <span class="op">&lt;=</span> <span class="dv">5</span><span class="op">;</span> i<span class="op">++)</span> <span class="op">{</span></span>
+<span id="cb2-317"><a href="#cb2-317" aria-hidden="true" tabindex="-1"></a>        N<span class="op">++;</span></span>
+<span id="cb2-318"><a href="#cb2-318" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb2-319"><a href="#cb2-319" aria-hidden="true" tabindex="-1"></a>        <span class="co">// ii. Usar realloc para aumentar el tamaÃ±o en N elementos</span></span>
+<span id="cb2-320"><a href="#cb2-320" aria-hidden="true" tabindex="-1"></a>        <span class="dt">int</span> <span class="op">*</span>temp_ptr <span class="op">=</span> <span class="op">(</span><span class="dt">int</span> <span class="op">*)</span>realloc<span class="op">(</span>datos<span class="op">,</span> N <span class="op">*</span> <span class="kw">sizeof</span><span class="op">(</span><span class="dt">int</span><span class="op">));</span></span>
+<span id="cb2-321"><a href="#cb2-321" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb2-322"><a href="#cb2-322" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span>temp_ptr <span class="op">==</span> NULL<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb2-323"><a href="#cb2-323" aria-hidden="true" tabindex="-1"></a>            printf<span class="op">(</span><span class="st">&quot;ERROR: realloc fallo en la iteracion </span><span class="sc">%d</span><span class="st">.</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">,</span> N<span class="op">);</span></span>
+<span id="cb2-324"><a href="#cb2-324" aria-hidden="true" tabindex="-1"></a>            free<span class="op">(</span>datos<span class="op">);</span></span>
+<span id="cb2-325"><a href="#cb2-325" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span><span class="op">;</span></span>
+<span id="cb2-326"><a href="#cb2-326" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
+<span id="cb2-327"><a href="#cb2-327" aria-hidden="true" tabindex="-1"></a>        datos <span class="op">=</span> temp_ptr<span class="op">;</span></span>
+<span id="cb2-328"><a href="#cb2-328" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-329"><a href="#cb2-329" aria-hidden="true" tabindex="-1"></a>        <span class="co">// iii. Asignar el valor</span></span>
+<span id="cb2-330"><a href="#cb2-330" aria-hidden="true" tabindex="-1"></a>        datos<span class="op">[</span>N <span class="op">-</span> <span class="dv">1</span><span class="op">]</span> <span class="op">=</span> N <span class="op">*</span> <span class="dv">10</span><span class="op">;</span></span>
+<span id="cb2-331"><a href="#cb2-331" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">&quot;Iteracion </span><span class="sc">%d</span><span class="st">: Agregado </span><span class="sc">%d</span><span class="st">. Tamano actual: </span><span class="sc">%d</span><span class="st">. Puntero: </span><span class="sc">%p\n</span><span class="st">&quot;</span><span class="op">,</span> i<span class="op">,</span> datos<span class="op">[</span>N <span class="op">-</span> <span class="dv">1</span><span class="op">],</span> N<span class="op">,</span> <span class="op">(</span><span class="dt">void</span> <span class="op">*)</span>datos<span class="op">);</span></span>
+<span id="cb2-332"><a href="#cb2-332" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb2-333"><a href="#cb2-333" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-334"><a href="#cb2-334" aria-hidden="true" tabindex="-1"></a>    <span class="co">// c. Imprimir el contenido final</span></span>
+<span id="cb2-335"><a href="#cb2-335" aria-hidden="true" tabindex="-1"></a>    imprimir_array_int<span class="op">(</span><span class="st">&quot;Contenido Final&quot;</span><span class="op">,</span> datos<span class="op">,</span> N<span class="op">);</span></span>
+<span id="cb2-336"><a href="#cb2-336" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-337"><a href="#cb2-337" aria-hidden="true" tabindex="-1"></a>    free<span class="op">(</span>datos<span class="op">);</span></span>
+<span id="cb2-338"><a href="#cb2-338" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb2-339"><a href="#cb2-339" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-340"><a href="#cb2-340" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-341"><a href="#cb2-341" aria-hidden="true" tabindex="-1"></a><span class="co">// // FunciÃ³n principal para ejecutar todas las soluciones</span></span>
+<span id="cb2-342"><a href="#cb2-342" aria-hidden="true" tabindex="-1"></a><span class="co">// int main() {</span></span>
+<span id="cb2-343"><a href="#cb2-343" aria-hidden="true" tabindex="-1"></a><span class="co">//     solucion1();</span></span>
+<span id="cb2-344"><a href="#cb2-344" aria-hidden="true" tabindex="-1"></a><span class="co">//     solucion2();</span></span>
+<span id="cb2-345"><a href="#cb2-345" aria-hidden="true" tabindex="-1"></a><span class="co">//     solucion3();</span></span>
+<span id="cb2-346"><a href="#cb2-346" aria-hidden="true" tabindex="-1"></a><span class="co">//     solucion4();</span></span>
+<span id="cb2-347"><a href="#cb2-347" aria-hidden="true" tabindex="-1"></a><span class="co">//     solucion5();</span></span>
+<span id="cb2-348"><a href="#cb2-348" aria-hidden="true" tabindex="-1"></a><span class="co">//     solucion6();</span></span>
+<span id="cb2-349"><a href="#cb2-349" aria-hidden="true" tabindex="-1"></a><span class="co">//     solucion7();</span></span>
+<span id="cb2-350"><a href="#cb2-350" aria-hidden="true" tabindex="-1"></a><span class="co">//     solucion8();</span></span>
+<span id="cb2-351"><a href="#cb2-351" aria-hidden="true" tabindex="-1"></a><span class="co">//     solucion9();</span></span>
+<span id="cb2-352"><a href="#cb2-352" aria-hidden="true" tabindex="-1"></a><span class="co">//     solucion10();</span></span>
+<span id="cb2-353"><a href="#cb2-353" aria-hidden="true" tabindex="-1"></a><span class="co">//     return 0;</span></span>
+<span id="cb2-354"><a href="#cb2-354" aria-hidden="true" tabindex="-1"></a><span class="co">// }</span></span></code></pre></div>
+
+</div>
+</body>
+</html>
+

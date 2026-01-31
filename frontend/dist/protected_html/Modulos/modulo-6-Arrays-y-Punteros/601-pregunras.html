@@ -1,0 +1,427 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" crossorigin href="/assets/content-01sust.css">
+</head>
+<body>
+<div class="main-content">
+<h2 id="ejercicios-relaciÃ³n-array-puntero-y-aritmÃ©tica">10 Ejercicios:
+RelaciÃ³n Array-Puntero y AritmÃ©tica</h2>
+<h3
+id="bloque-1-equivalencia-y-asignaciÃ³n-de-punteros-array-vs-array0">Bloque
+1: Equivalencia y AsignaciÃ³n de Punteros (<code>array</code> vs
+<code>&amp;array[0]</code>)</h3>
+<h4 id="asignaciÃ³n-de-direcciÃ³n-base">1) AsignaciÃ³n de DirecciÃ³n
+Base</h4>
+<p>Escribe un programa que declare un array de enteros
+<code>numeros</code> con 4 elementos. Declara un puntero
+<code>int* p</code>. Asigna la <strong>direcciÃ³n base</strong> de
+<code>numeros</code> a <code>p</code> utilizando el nombre del array sin
+corchetes. Imprime el valor del primer elemento usando
+<strong>desreferencia</strong> en <code>p</code>.</p>
+<p>Output Esperado: Primer elemento (con *p): 10</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">// CÃ³digo de Ejemplo</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> numeros<span class="op">[]</span> <span class="op">=</span> <span class="op">{</span><span class="dv">10</span><span class="op">,</span> <span class="dv">20</span><span class="op">,</span> <span class="dv">30</span><span class="op">,</span> <span class="dv">40</span><span class="op">};</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span><span class="op">*</span> p <span class="op">=</span> numeros<span class="op">;</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co">// ... Imprimir *p ...</span></span></code></pre></div>
+<h4 id="verificaciÃ³n-de-equivalencia-de-direcciones">2) VerificaciÃ³n de
+Equivalencia de Direcciones</h4>
+<p>Declara un array <code>edades</code> de tamaÃ±o 3. Imprime la
+<strong>direcciÃ³n</strong> del primer elemento usando: a) El nombre del
+array (<code>edades</code>) y b) El operador <code>&amp;</code> con el
+Ã­ndice cero (<code>&amp;edades[0]</code>). Verifica que ambas
+direcciones son idÃ©nticas.</p>
+<p>Output Esperado: Dir. 1 (Nombre): 0x7ffeeâ€¦10 (La direcciÃ³n exacta
+variarÃ¡) Dir. 2 (&amp;[0]): 0x7ffeeâ€¦10</p>
+<h4 id="acceso-directo-al-segundo-elemento-puntero">3) Acceso Directo al
+Segundo Elemento (Puntero)</h4>
+<p>Declara un array de <code>float</code> con 5 valores. Declara un
+puntero <code>float* fp = array;</code>. Sin usar el operador
+<code>[]</code>, utiliza la <strong>aritmÃ©tica de punteros</strong> y el
+operador de desreferencia para acceder e imprimir el valor del
+<strong>segundo elemento</strong> (Ã­ndice 1).</p>
+<p>Output Esperado: Segundo elemento: 15.50</p>
+<h3 id="bloque-2-aritmÃ©tica-de-punteros-pi-y-p">Bloque 2: AritmÃ©tica de
+Punteros (<code>p+i</code> y <code>p++</code>)</h3>
+<h4 id="salto-con-aritmÃ©tica-acceso-con-i">4) Salto con AritmÃ©tica
+(Acceso con <code>+i</code>)</h4>
+<p>Declara un array <code>codigos</code> de 6 enteros. Accede y modifica
+el valor del <strong>cuarto elemento</strong> (Ã­ndice 3) usando la
+notaciÃ³n <code>*(codigos + 3)</code>. Asigna el valor <code>999</code> y
+luego imprime el valor modificado.</p>
+<p>Output Esperado: Valor modificado en indice 3: 999</p>
+<h4 id="recorrido-secuencial-con-p">5) Recorrido Secuencial con
+<code>p++</code></h4>
+<p>Declara un array <code>letras</code> de 4 caracteres. Declara un
+puntero <code>char* ptr_letra = letras;</code>. Usa un bucle
+<strong><code>for</code></strong> que se ejecute 4 veces e
+<strong>incremente</strong> el puntero en cada iteraciÃ³n
+(<code>ptr_letra++</code>) para imprimir secuencialmente todos los
+caracteres del array.</p>
+<p>Output Esperado: A B C D</p>
+<h4 id="desplazamiento-y-lectura-especÃ­fica">6) Desplazamiento y Lectura
+EspecÃ­fica</h4>
+<p>Declara un array <code>precios</code> de 5 valores
+<code>double</code>. Declara un puntero
+<code>double* p_precio = precios;</code>. Mueve el puntero <strong>dos
+posiciones</strong> hacia adelante
+(<code>p_precio = p_precio + 2;</code>). Luego, imprime el valor al que
+apunta actualmente (<code>*p_precio</code>).</p>
+<p>Output Esperado: Precio en posicion 2: 7.50</p>
+<h3 id="bloque-3-equivalencia-de-sintaxis-y-paso-a-funciones">Bloque 3:
+Equivalencia de Sintaxis y Paso a Funciones</h3>
+<h4 id="comprobaciÃ³n-de-equivalencia-de-lectura">7) ComprobaciÃ³n de
+Equivalencia de Lectura</h4>
+<p>Declara un array <code>datos</code> con 3 enteros. Imprime el valor
+del <strong>tercer elemento</strong> (Ã­ndice 2) de dos maneras: a)
+<code>datos[2]</code> y b) <code>*(datos + 2)</code>.</p>
+<p>Output Esperado: Lectura por [indice]: 30 Lectura por *(puntero):
+30</p>
+<h4 id="modificaciÃ³n-por-equivalencia-de-escritura">8) ModificaciÃ³n por
+Equivalencia de Escritura</h4>
+<p>Declara un array <code>status</code> de 4 enteros, todos
+inicializados a <code>0</code>. Usa la notaciÃ³n de puntero para cambiar
+el valor del <strong>primer elemento</strong> (Ã­ndice 0) a
+<code>10</code> y el valor del <strong>Ãºltimo elemento</strong> (Ã­ndice
+3) a <code>40</code>.</p>
+<p>Output Esperado: Array final: 10, 0, 0, 40</p>
+<h4 id="funciÃ³n-que-lee-array-simulando-paso-por-referencia">9) FunciÃ³n
+que Lee Array (Simulando Paso por Referencia)</h4>
+<p>Crea una funciÃ³n llamada <code>mostrar_primeros</code> que reciba un
+puntero a <code>int</code> (<code>int* arr</code>) y un entero
+(<code>tamano</code>). La funciÃ³n debe imprimir los primeros dos
+elementos del array usando <strong>solo notaciÃ³n de punteros</strong>
+(<code>*arr</code> y <code>*(arr + 1)</code>).</p>
+<p>Output Esperado: Los primeros dos son: 5 y 10</p>
+<h4 id="funciÃ³n-que-modifica-array-confirmando-paso-por-referencia">10)
+FunciÃ³n que Modifica Array (Confirmando Paso por Referencia)</h4>
+<p>Crea una funciÃ³n llamada <code>reiniciar_array</code> que reciba un
+puntero a <code>int</code> (<code>int* arr</code>) y un entero
+(<code>tamano</code>). La funciÃ³n debe recorrer el array y asignar el
+valor <code>0</code> a <strong>todos</strong> sus elementos. En
+<code>main</code>, llama a la funciÃ³n e imprime el array para verificar
+que fue modificado.</p>
+<p>Output Esperado: Array Original: 1, 2, 3 Array Reiniciado: 0, 0,
+0</p>
+<h2 id="soluciones-relaciÃ³n-array-puntero-y-aritmÃ©tica">âœ… Soluciones:
+RelaciÃ³n Array-Puntero y AritmÃ©tica</h2>
+<h3 id="bloque-1-equivalencia-y-asignaciÃ³n-de-punteros">Bloque 1:
+Equivalencia y AsignaciÃ³n de Punteros</h3>
+<h4 id="asignaciÃ³n-de-direcciÃ³n-base-1">1) AsignaciÃ³n de DirecciÃ³n
+Base</h4>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Input de Ejemplo</th>
+<th style="text-align: center;">Output Esperado</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">(Ninguna)</td>
+<td style="text-align: center;">Primer elemento (con *p): 10</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb2"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> numeros<span class="op">[]</span> <span class="op">=</span> <span class="op">{</span><span class="dv">10</span><span class="op">,</span> <span class="dv">20</span><span class="op">,</span> <span class="dv">30</span><span class="op">,</span> <span class="dv">40</span><span class="op">};</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span><span class="op">*</span> p<span class="op">;</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="co">// AsignaciÃ³n: el nombre del array es la direcciÃ³n base</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    p <span class="op">=</span> numeros<span class="op">;</span> </span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;Primer elemento (con *p): </span><span class="sc">%d\n</span><span class="st">&quot;</span><span class="op">,</span> <span class="op">*</span>p<span class="op">);</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<h4 id="verificaciÃ³n-de-equivalencia-de-direcciones-1">2) VerificaciÃ³n
+de Equivalencia de Direcciones</h4>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Input de Ejemplo</th>
+<th style="text-align: center;">Output Esperado</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">(Ninguna)</td>
+<td style="text-align: center;">Dir. 1 (Nombre): 0x7ffeeâ€¦10 (La
+direcciÃ³n exacta variarÃ¡)<br>Dir. 2 (&amp;[0]): 0x7ffeeâ€¦10</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb3"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> edades<span class="op">[]</span> <span class="op">=</span> <span class="op">{</span><span class="dv">18</span><span class="op">,</span> <span class="dv">25</span><span class="op">,</span> <span class="dv">30</span><span class="op">};</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Imprimir las direcciones para comparar</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;Dir. 1 (Nombre): </span><span class="sc">%p\n</span><span class="st">&quot;</span><span class="op">,</span> <span class="op">(</span><span class="dt">void</span><span class="op">*)</span>edades<span class="op">);</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;Dir. 2 (&amp;[0]): </span><span class="sc">%p\n</span><span class="st">&quot;</span><span class="op">,</span> <span class="op">(</span><span class="dt">void</span><span class="op">*)&amp;</span>edades<span class="op">[</span><span class="dv">0</span><span class="op">]);</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<h4 id="acceso-directo-al-segundo-elemento-puntero-1">3) Acceso Directo
+al Segundo Elemento (Puntero)</h4>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Input de Ejemplo</th>
+<th style="text-align: center;">Output Esperado</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">(Ninguna)</td>
+<td style="text-align: center;">Segundo elemento: 15.50</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb4"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">float</span> datos<span class="op">[]</span> <span class="op">=</span> <span class="op">{</span><span class="fl">10.0</span><span class="bu">f</span><span class="op">,</span> <span class="fl">15.50</span><span class="bu">f</span><span class="op">,</span> <span class="fl">20.0</span><span class="bu">f</span><span class="op">,</span> <span class="fl">25.0</span><span class="bu">f</span><span class="op">,</span> <span class="fl">30.0</span><span class="bu">f</span><span class="op">};</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">float</span><span class="op">*</span> fp <span class="op">=</span> datos<span class="op">;</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Acceso al segundo elemento (Ã­ndice 1) usando p + i</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;Segundo elemento: </span><span class="sc">%.2f\n</span><span class="st">&quot;</span><span class="op">,</span> <span class="op">*(</span>fp <span class="op">+</span> <span class="dv">1</span><span class="op">));</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<h3 id="bloque-2-aritmÃ©tica-de-punteros-pi-y-p-1">Bloque 2: AritmÃ©tica
+de Punteros (<code>p+i</code> y <code>p++</code>)</h3>
+<h4 id="salto-con-aritmÃ©tica-acceso-con-i-1">4) Salto con AritmÃ©tica
+(Acceso con <code>+i</code>)</h4>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Input de Ejemplo</th>
+<th style="text-align: center;">Output Esperado</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">(Ninguna)</td>
+<td style="text-align: center;">Valor modificado en indice 3: 999</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb5"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> codigos<span class="op">[]</span> <span class="op">=</span> <span class="op">{</span><span class="dv">100</span><span class="op">,</span> <span class="dv">200</span><span class="op">,</span> <span class="dv">300</span><span class="op">,</span> <span class="dv">400</span><span class="op">,</span> <span class="dv">500</span><span class="op">,</span> <span class="dv">600</span><span class="op">};</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Acceso y modificaciÃ³n del cuarto elemento (Ã­ndice 3)</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    <span class="op">*(</span>codigos <span class="op">+</span> <span class="dv">3</span><span class="op">)</span> <span class="op">=</span> <span class="dv">999</span><span class="op">;</span> </span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;Valor modificado en indice 3: </span><span class="sc">%d\n</span><span class="st">&quot;</span><span class="op">,</span> codigos<span class="op">[</span><span class="dv">3</span><span class="op">]);</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<h4 id="recorrido-secuencial-con-p-1">5) Recorrido Secuencial con
+<code>p++</code></h4>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Input de Ejemplo</th>
+<th style="text-align: center;">Output Esperado</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">(Ninguna)</td>
+<td style="text-align: center;">A B C D</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb6"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">char</span> letras<span class="op">[]</span> <span class="op">=</span> <span class="op">{</span><span class="ch">&#39;A&#39;</span><span class="op">,</span> <span class="ch">&#39;B&#39;</span><span class="op">,</span> <span class="ch">&#39;C&#39;</span><span class="op">,</span> <span class="ch">&#39;D&#39;</span><span class="op">};</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">char</span><span class="op">*</span> ptr_letra <span class="op">=</span> letras<span class="op">;</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;Resultado: &quot;</span><span class="op">);</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> <span class="dv">4</span><span class="op">;</span> i<span class="op">++)</span> <span class="op">{</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">&quot;</span><span class="sc">%c</span><span class="st"> &quot;</span><span class="op">,</span> <span class="op">*</span>ptr_letra<span class="op">);</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>        ptr_letra<span class="op">++;</span> <span class="co">// El puntero se mueve 1 byte (sizeof(char))</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<h4 id="desplazamiento-y-lectura-especÃ­fica-1">6) Desplazamiento y
+Lectura EspecÃ­fica</h4>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Input de Ejemplo</th>
+<th style="text-align: center;">Output Esperado</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">(Ninguna)</td>
+<td style="text-align: center;">Precio en posicion 2: 7.50</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb7"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">double</span> precios<span class="op">[]</span> <span class="op">=</span> <span class="op">{</span><span class="fl">1.50</span><span class="op">,</span> <span class="fl">3.25</span><span class="op">,</span> <span class="fl">7.50</span><span class="op">,</span> <span class="fl">10.00</span><span class="op">,</span> <span class="fl">12.99</span><span class="op">};</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">double</span><span class="op">*</span> p_precio <span class="op">=</span> precios<span class="op">;</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Mover el puntero 2 posiciones (salta 2 * sizeof(double))</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    p_precio <span class="op">=</span> p_precio <span class="op">+</span> <span class="dv">2</span><span class="op">;</span> </span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Imprimir el valor apuntado (el de Ã­ndice 2)</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;Precio en posicion 2: </span><span class="sc">%.2f\n</span><span class="st">&quot;</span><span class="op">,</span> <span class="op">*</span>p_precio<span class="op">);</span> </span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<h3 id="bloque-3-equivalencia-de-sintaxis-y-paso-a-funciones-1">Bloque
+3: Equivalencia de Sintaxis y Paso a Funciones</h3>
+<h4 id="comprobaciÃ³n-de-equivalencia-de-lectura-1">7) ComprobaciÃ³n de
+Equivalencia de Lectura</h4>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Input de Ejemplo</th>
+<th style="text-align: center;">Output Esperado</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">(Ninguna)</td>
+<td style="text-align: center;">Lectura por [indice]: 30<br>Lectura por
+*(puntero): 30</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb8"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> datos<span class="op">[]</span> <span class="op">=</span> <span class="op">{</span><span class="dv">10</span><span class="op">,</span> <span class="dv">20</span><span class="op">,</span> <span class="dv">30</span><span class="op">};</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    <span class="co">// a) NotaciÃ³n de corchetes</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;Lectura por [indice]: </span><span class="sc">%d\n</span><span class="st">&quot;</span><span class="op">,</span> datos<span class="op">[</span><span class="dv">2</span><span class="op">]);</span> </span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>    <span class="co">// b) NotaciÃ³n de punteros y aritmÃ©tica</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;Lectura por *(puntero): </span><span class="sc">%d\n</span><span class="st">&quot;</span><span class="op">,</span> <span class="op">*(</span>datos <span class="op">+</span> <span class="dv">2</span><span class="op">));</span> </span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<h4 id="modificaciÃ³n-por-equivalencia-de-escritura-1">8) ModificaciÃ³n
+por Equivalencia de Escritura</h4>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Input de Ejemplo</th>
+<th style="text-align: center;">Output Esperado</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">(Ninguna)</td>
+<td style="text-align: center;">Array final: 10, 0, 0, 40</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb9"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> status<span class="op">[</span><span class="dv">4</span><span class="op">]</span> <span class="op">=</span> <span class="op">{</span><span class="dv">0</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">0</span><span class="op">};</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Modificar el primer elemento (Ã­ndice 0)</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    <span class="op">*(</span>status <span class="op">+</span> <span class="dv">0</span><span class="op">)</span> <span class="op">=</span> <span class="dv">10</span><span class="op">;</span> </span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Modificar el Ãºltimo elemento (Ã­ndice 3)</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>    <span class="op">*(</span>status <span class="op">+</span> <span class="dv">3</span><span class="op">)</span> <span class="op">=</span> <span class="dv">40</span><span class="op">;</span> </span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;Array final: </span><span class="sc">%d</span><span class="st">, </span><span class="sc">%d</span><span class="st">, </span><span class="sc">%d</span><span class="st">, </span><span class="sc">%d\n</span><span class="st">&quot;</span><span class="op">,</span> status<span class="op">[</span><span class="dv">0</span><span class="op">],</span> status<span class="op">[</span><span class="dv">1</span><span class="op">],</span> status<span class="op">[</span><span class="dv">2</span><span class="op">],</span> status<span class="op">[</span><span class="dv">3</span><span class="op">]);</span></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<h4 id="funciÃ³n-que-lee-array-simulando-paso-por-referencia-1">9)
+FunciÃ³n que Lee Array (Simulando Paso por Referencia)</h4>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Input de Ejemplo</th>
+<th style="text-align: center;">Output Esperado</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">(Ninguna)</td>
+<td style="text-align: center;">Los primeros dos son: 5 y 10</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb10"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="co">// El parÃ¡metro &#39;arr&#39; recibe la direcciÃ³n base (es un puntero)</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> mostrar_primeros<span class="op">(</span><span class="dt">int</span> <span class="op">*</span>arr<span class="op">,</span> <span class="dt">int</span> tamano<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Uso exclusivo de notaciÃ³n de punteros</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;Los primeros dos son: </span><span class="sc">%d</span><span class="st"> y </span><span class="sc">%d\n</span><span class="st">&quot;</span><span class="op">,</span> <span class="op">*</span>arr<span class="op">,</span> <span class="op">*(</span>arr <span class="op">+</span> <span class="dv">1</span><span class="op">));</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> valores<span class="op">[]</span> <span class="op">=</span> <span class="op">{</span><span class="dv">5</span><span class="op">,</span> <span class="dv">10</span><span class="op">,</span> <span class="dv">15</span><span class="op">,</span> <span class="dv">20</span><span class="op">};</span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Pasamos el nombre del array (su direcciÃ³n)</span></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>    mostrar_primeros<span class="op">(</span>valores<span class="op">,</span> <span class="dv">4</span><span class="op">);</span> </span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<h4
+id="funciÃ³n-que-modifica-array-confirmando-paso-por-referencia-1">10)
+FunciÃ³n que Modifica Array (Confirmando Paso por Referencia)</h4>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Input de Ejemplo</th>
+<th style="text-align: center;">Output Esperado</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">(Ninguna)</td>
+<td style="text-align: center;">Array Original: 1, 2, 3<br>Array
+Reiniciado: 0, 0, 0</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb11"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="co">// La funciÃ³n modifica el array original al usar la direcciÃ³n base</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> reiniciar_array<span class="op">(</span><span class="dt">int</span> <span class="op">*</span>arr<span class="op">,</span> <span class="dt">int</span> tamano<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> tamano<span class="op">;</span> i<span class="op">++)</span> <span class="op">{</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Usamos la notaciÃ³n de corchetes, que el compilador traduce a punteros</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>        arr<span class="op">[</span>i<span class="op">]</span> <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> </span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> numeros<span class="op">[]</span> <span class="op">=</span> <span class="op">{</span><span class="dv">1</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">3</span><span class="op">};</span></span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> n <span class="op">=</span> <span class="dv">3</span><span class="op">;</span></span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;Array Original: </span><span class="sc">%d</span><span class="st">, </span><span class="sc">%d</span><span class="st">, </span><span class="sc">%d\n</span><span class="st">&quot;</span><span class="op">,</span> numeros<span class="op">[</span><span class="dv">0</span><span class="op">],</span> numeros<span class="op">[</span><span class="dv">1</span><span class="op">],</span> numeros<span class="op">[</span><span class="dv">2</span><span class="op">]);</span></span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>    <span class="co">// La funciÃ³n accede y modifica la memoria original</span></span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a>    reiniciar_array<span class="op">(</span>numeros<span class="op">,</span> n<span class="op">);</span> </span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;Array Reiniciado: </span><span class="sc">%d</span><span class="st">, </span><span class="sc">%d</span><span class="st">, </span><span class="sc">%d\n</span><span class="st">&quot;</span><span class="op">,</span> numeros<span class="op">[</span><span class="dv">0</span><span class="op">],</span> numeros<span class="op">[</span><span class="dv">1</span><span class="op">],</span> numeros<span class="op">[</span><span class="dv">2</span><span class="op">]);</span></span>
+<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+
+</div>
+</body>
+</html>
+

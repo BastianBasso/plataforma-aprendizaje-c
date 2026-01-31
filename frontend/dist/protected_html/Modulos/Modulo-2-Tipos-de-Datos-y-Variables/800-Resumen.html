@@ -1,0 +1,119 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" crossorigin href="/assets/content-01sust.css">
+</head>
+<body>
+<div class="main-content">
+<h1><strong>Resumen del Módulo 2: Tipos de Datos y Variables</strong></h1>
+<p>El Módulo 2 establece los cimientos de la programación en C al
+introducir cómo la información se almacena, manipula y gestiona dentro
+de la memoria de la computadora.</p>
+<p><strong>1. Tipos de Datos Fundamentales (Secciones 1, 2,
+3)</strong></p>
+<p>Se definen los tipos básicos que determinan el tamaño (en
+<em>bytes</em>) y el rango de valores que una variable puede
+almacenar:</p>
+<ul>
+<li><p><strong>Enteros (int, short, long):</strong> Almacenan números
+enteros sin componente fraccional. Son el tipo más común.</p></li>
+<li><p><strong>Punto Flotante (float, double, long double):</strong>
+Almacenan números con componentes decimales. double (doble precisión) es
+generalmente el preferido por su mayor exactitud y rango.</p></li>
+<li><p><strong>Carácter (char):</strong> Almacena un solo carácter (una
+letra, dígito, o símbolo), pero internamente se maneja como un número
+entero pequeño (su código ASCII).</p>
+<ul>
+<li><strong>Función sizeof():</strong> Una herramienta crucial para
+determinar el tamaño exacto, en <em>bytes</em>, que un tipo de dato o
+variable ocupa en la memoria del sistema.</li>
+</ul></li>
+</ul>
+<p><strong>2. Variables y Constantes (Sección 4)</strong></p>
+<p>Se diferencia entre datos mutables e inmutables, y se establecen las
+herramientas para definirlos:</p>
+<ul>
+<li><p><strong>Variables:</strong> Ubicaciones de memoria cuyo valor
+puede ser <strong>modificado</strong> (<em>mutable</em>) durante la
+ejecución del programa (ej: int edad = 30;).</p></li>
+<li><p><strong>Constantes:</strong> Ubicaciones de memoria cuyo valor se
+fija una única vez y <strong>no puede ser modificado</strong>
+(<em>inmutable</em>).</p>
+<ul>
+<li><p><strong>Calificador const:</strong> El método preferido y tipado
+para definir constantes (ej: const float PI = 3.14159f;). Proporciona
+mayor seguridad y control de tipos.</p></li>
+<li><p><strong>Directiva #define:</strong> Utiliza el preprocesador para
+realizar un simple <strong>reemplazo de texto</strong>. No tiene tipo de
+dato.</p></li>
+</ul></li>
+<li><p><strong>Convención de Nomenclatura:</strong> Las constantes se
+nombran tradicionalmente en <strong>MAYÚSCULAS</strong> separadas por
+guiones bajos (<em>Snake Case</em>): LIMITE_MAXIMO.</p></li>
+</ul>
+<p><strong>3. Límites, Desbordamiento y Modificadores (Sección
+5)</strong></p>
+<p>Se aborda la realidad de los límites finitos de los tipos de
+datos:</p>
+<ul>
+<li><p><strong>Límites de Rango:</strong> Los <em>headers</em>
+&lt;limits.h&gt; (INT_MAX, CHAR_MIN) y &lt;float.h&gt; (FLT_MAX,
+DBL_MIN) proporcionan los valores máximos y mínimos que un tipo puede
+almacenar en un sistema dado.</p></li>
+<li><p><strong>Desbordamiento (<em>Overflow</em> y
+<em>Underflow</em>):</strong> Ocurre cuando un valor excede el límite
+máximo o mínimo de su tipo.</p></li>
+<li><p><strong>Efecto <em>Wrap Around</em>:</strong> El resultado del
+<em>overflow</em> en enteros con signo es, típicamente, que el valor
+<strong>salta</strong> del límite positivo (INT_MAX) al límite negativo
+(INT_MIN), y viceversa.</p></li>
+<li><p><strong>Modificadores signed y unsigned:</strong></p>
+<ul>
+<li><p><strong>signed (por defecto):</strong> Permite números positivos
+y negativos.</p></li>
+<li><p><strong>unsigned:</strong> Elimina los números negativos para
+<strong>duplicar el rango positivo</strong> (va de $0$ hasta el doble de
+INT_MAX).</p></li>
+</ul></li>
+</ul>
+<p><strong>4. Conversión de Tipos (<em>Casting</em>)</strong></p>
+<p>El proceso de cambiar el tipo de dato de un valor:</p>
+<ul>
+<li><p><strong>Conversión Implícita (Coerción):</strong> Ocurre
+automáticamente cuando se realiza una operación entre tipos de diferente
+tamaño, promocionando el tipo "más pequeño" al "más grande" (ej: int +
+float resulta en float).</p></li>
+<li><p><strong>Conversión Explícita (<em>Casting</em>):</strong> El
+programador fuerza la conversión usando la sintaxis
+(tipo_destino)variable. Es esencial en la división de enteros para
+obtener resultados decimales (ej: (float)num1 / num2), pero puede causar
+pérdida de datos (truncamiento de decimales).</p></li>
+</ul>
+<p><strong>5. Buenas Prácticas y Estilo</strong></p>
+<p>Se establecen directrices para escribir código limpio, legible y
+mantenible:</p>
+<ul>
+<li><p><strong>Nombres Descriptivos:</strong> Priorizar la
+<strong>claridad</strong> sobre la brevedad (ej: contador_productos
+vs. c).</p></li>
+<li><p><strong>Reglas y Restricciones:</strong> El nombre no puede ser
+una <strong>palabra reservada</strong> (if, int), no debe contener
+<strong>espacios</strong> o <strong>caracteres especiales</strong>
+(excepto _), y no puede comenzar con un
+<strong>dígito</strong>.</p></li>
+<li><p><strong>Convención Snake Case:</strong> Utilizar
+<strong>minúsculas</strong> separadas por <strong>guiones bajos</strong>
+(_) para variables y funciones (ej: velocidad_actual).</p></li>
+<li><p><strong>Declaración Cerca del Uso:</strong> Declarar las
+variables lo más próximo posible al lugar donde se usarán por primera
+vez (estilo C99+), mejorando la legibilidad y limitando su
+<strong>ámbito (<em>scope</em>)</strong>.</p></li>
+</ul>
+
+
+</div>
+</body>
+</html>
+

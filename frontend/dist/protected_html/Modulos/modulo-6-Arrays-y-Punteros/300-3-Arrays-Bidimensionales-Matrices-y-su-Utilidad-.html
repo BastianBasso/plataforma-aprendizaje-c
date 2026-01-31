@@ -1,0 +1,280 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" crossorigin href="/assets/content-01sust.css">
+</head>
+<body>
+<div class="main-content">
+<h2 id="concepto-de-matriz-array-bidimensional---2d">Concepto de Matriz
+(Array Bidimensional - 2D) ðŸ§±</h2>
+<p>Un <strong>Array Bidimensional</strong> (tambiÃ©n conocido como
+<strong>Matriz</strong> o <em>2D Array</em>) es una estructura de datos
+en C utilizada para representar informaciÃ³n que requiere dos dimensiones
+para ser organizada, similar a una tabla, una hoja de cÃ¡lculo, o un
+tablero de ajedrez.</p>
+<h3 id="array-de-arrays">Array de Arrays</h3>
+<p>Conceptualmente, una matriz en C es un <strong>array de
+arrays</strong>.</p>
+<ul>
+<li>El <em>array</em> principal agrupa las <strong>filas</strong> (la
+primera dimensiÃ³n).</li>
+<li>Cada elemento de ese <em>array</em> principal es, a su vez, otro
+<em>array</em> que contiene las <strong>columnas</strong> (la segunda
+dimensiÃ³n).</li>
+</ul>
+<p>Esta organizaciÃ³n lÃ³gica es extremadamente Ãºtil para modelar datos
+del mundo real que tienen una estructura tabular:</p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Utilidad</th>
+<th style="text-align: left;">Ejemplo de Modelado</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>Tableros de Juego</strong></td>
+<td style="text-align: left;">Un tablero de ajedrez de 8x8 o el mapa de
+un juego, donde la posiciÃ³n se define por (Fila, Columna).</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Tablas de Datos</strong></td>
+<td style="text-align: left;">Almacenar datos de estudiantes, donde cada
+fila es un estudiante y cada columna es una calificaciÃ³n.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>MatemÃ¡ticas</strong></td>
+<td style="text-align: left;">Representar matrices y realizar
+operaciones algebraicas sobre ellas.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="organizaciÃ³n-lÃ³gica">OrganizaciÃ³n LÃ³gica</h3>
+<p>Una matriz se visualiza lÃ³gicamente como una cuadrÃ­cula:</p>
+<ul>
+<li>El primer Ã­ndice representa la <strong>Fila</strong> (el nÃºmero de
+la fila).</li>
+<li>El segundo Ã­ndice representa la <strong>Columna</strong> (el
+elemento dentro de esa fila).</li>
+</ul>
+<p>Al igual que con los <em>arrays</em> unidimensionales, la indexaciÃ³n
+de filas y columnas en una matriz <strong>siempre comienza en
+0</strong>.</p>
+<h2 id="declaraciÃ³n-e-inicializaciÃ³n-de-matrices">DeclaraciÃ³n e
+InicializaciÃ³n de Matrices ðŸ“</h2>
+<p>La sintaxis para declarar y asignar espacio a una matriz en C
+requiere especificar el tamaÃ±o de ambas dimensiones:
+<strong>filas</strong> y <strong>columnas</strong>.</p>
+<hr />
+<h3 id="sintaxis-de-declaraciÃ³n">Sintaxis de DeclaraciÃ³n</h3>
+<p>Se utilizan dos pares de corchetes <code>[]</code> para indicar las
+dimensiones de la matriz:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>tipo nombre<span class="op">[</span>filas<span class="op">][</span>columnas<span class="op">];</span></span></code></pre></div>
+<ul>
+<li><strong><code>filas</code></strong>: El tamaÃ±o de la <strong>primera
+dimensiÃ³n</strong> (el nÃºmero de <em>arrays</em> contenidos).</li>
+<li><strong><code>columnas</code></strong>: El tamaÃ±o de la
+<strong>segunda dimensiÃ³n</strong> (el nÃºmero de elementos en cada
+<em>array</em> o fila).</li>
+</ul>
+<p><strong>Ejemplo de DeclaraciÃ³n:</strong></p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Matriz de 3 filas y 4 columnas para almacenar nÃºmeros enteros (3x4 = 12 elementos totales).</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> tabla<span class="op">[</span><span class="dv">3</span><span class="op">][</span><span class="dv">4</span><span class="op">];</span> </span></code></pre></div>
+<p>Al igual que con los <em>arrays</em> unidimensionales, los valores de
+<code>filas</code> y <code>columnas</code> deben ser
+<strong>constantes</strong> conocidas en tiempo de compilaciÃ³n.</p>
+<h3 id="inicializaciÃ³n-con-anidamiento-de-llaves">InicializaciÃ³n con
+Anidamiento de Llaves</h3>
+<p>Para inicializar una matriz al momento de la declaraciÃ³n, se utiliza
+un <strong>anidamiento de llaves <code>{}</code></strong>. Cada par de
+llaves internas representa una <strong>fila</strong> completa de la
+matriz.</p>
+<p><strong>Ejemplo de InicializaciÃ³n ExplÃ­cita
+(Recomendado):</strong></p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> matriz_A<span class="op">[</span><span class="dv">3</span><span class="op">][</span><span class="dv">2</span><span class="op">]</span> <span class="op">=</span> <span class="op">{</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="op">{</span><span class="dv">10</span><span class="op">,</span> <span class="dv">20</span><span class="op">},</span>  <span class="co">// Fila 0</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="op">{</span><span class="dv">30</span><span class="op">,</span> <span class="dv">40</span><span class="op">},</span>  <span class="co">// Fila 1</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="op">{</span><span class="dv">50</span><span class="op">,</span> <span class="dv">60</span><span class="op">}</span>   <span class="co">// Fila 2</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span></code></pre></div>
+<p>Esta forma de escribirlo hace mÃ¡s clara la organizaciÃ³n de la
+matriz:</p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;"></th>
+<th style="text-align: center;">Col. 0</th>
+<th style="text-align: center;">Col. 1</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><strong>Fila 0</strong></td>
+<td style="text-align: center;">10</td>
+<td style="text-align: center;">20</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>Fila 1</strong></td>
+<td style="text-align: center;">30</td>
+<td style="text-align: center;">40</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>Fila 2</strong></td>
+<td style="text-align: center;">50</td>
+<td style="text-align: center;">60</td>
+</tr>
+</tbody>
+</table>
+<h3 id="omisiÃ³n-de-la-dimensiÃ³n-de-filas">OmisiÃ³n de la DimensiÃ³n de
+Filas</h3>
+<p>De manera similar a los <em>arrays</em> 1D, si se inicializa la
+matriz completamente, se puede <strong>omitir la dimensiÃ³n de las
+filas</strong>, dejando el primer par de corchetes vacÃ­o. <strong>Sin
+embargo, la dimensiÃ³n de las columnas es obligatoria.</strong></p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">// El compilador calcula que hay 3 filas (3 arrays de 2 elementos).</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="dt">float</span> datos_temp<span class="op">[][</span><span class="dv">2</span><span class="op">]</span> <span class="op">=</span> <span class="op">{</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="op">{</span><span class="fl">15.5</span><span class="bu">f</span><span class="op">,</span> <span class="fl">18.0</span><span class="bu">f</span><span class="op">},</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="op">{</span><span class="fl">12.2</span><span class="bu">f</span><span class="op">,</span> <span class="fl">14.9</span><span class="bu">f</span><span class="op">},</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="op">{</span><span class="fl">16.0</span><span class="bu">f</span><span class="op">,</span> <span class="fl">17.5</span><span class="bu">f</span><span class="op">}</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="op">};</span> </span></code></pre></div>
+<p>El compilador <strong>necesita</strong> la dimensiÃ³n de las columnas
+(el <strong>2</strong> en este caso) para saber cuÃ¡ntos elementos
+agrupar por fila y asÃ­ calcular correctamente la direcciÃ³n de memoria de
+cada elemento.</p>
+<h2 id="acceso-a-elementos-2d-indexaciÃ³n-doble">Acceso a Elementos 2D
+(IndexaciÃ³n Doble) ðŸŽ¯</h2>
+<p>Para acceder a cualquier elemento dentro de un <strong>Array
+Bidimensional</strong> (Matriz), se requiere especificar <strong>dos
+Ã­ndices</strong>: uno para la fila y otro para la columna.</p>
+<hr />
+<h3 id="sintaxis-de-acceso">Sintaxis de Acceso</h3>
+<p>La sintaxis para acceder o manipular un elemento en una matriz es la
+siguiente:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>nombre_matriz<span class="op">[</span>indice_fila<span class="op">][</span>indice_columna<span class="op">]</span></span></code></pre></div>
+<p>Donde:</p>
+<ul>
+<li><span class="math inline"><em>i</em></span> (o
+<code>indice_fila</code>): Es el <strong>primer Ã­ndice</strong> que
+selecciona la fila deseada.</li>
+<li><span class="math inline"><em>j</em></span> (o
+<code>indice_columna</code>): Es el <strong>segundo Ã­ndice</strong> que
+selecciona la columna deseada dentro de esa fila.</li>
+</ul>
+<p>Al igual que con los <em>arrays</em> unidimensionales, <strong>ambos
+Ã­ndices comienzan siempre en 0</strong>.</p>
+<h3 id="ejemplos-de-acceso-y-modificaciÃ³n">Ejemplos de Acceso y
+ModificaciÃ³n</h3>
+<p>Consideremos una matriz <code>tablero[3][4]</code>. El rango de
+Ã­ndices es:</p>
+<ul>
+<li>Filas: <span class="math inline"><em>i</em></span> va de 0 a 2.</li>
+<li>Columnas: <span class="math inline"><em>j</em></span> va de 0 a
+3.</li>
+</ul>
+<!-- end list -->
+<ol type="1">
+<li><p><strong>Lectura:</strong> Para leer el valor en la segunda fila
+(Ã­ndice 1) y tercera columna (Ã­ndice 2):</p>
+<div class="sourceCode" id="cb6"><pre
+class="sourceCode c"><code class="sourceCode c"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> valor_central <span class="op">=</span> tablero<span class="op">[</span><span class="dv">1</span><span class="op">][</span><span class="dv">2</span><span class="op">];</span></span></code></pre></div></li>
+<li><p><strong>ModificaciÃ³n:</strong> Para asignar un valor al elemento
+en la primera fila (Ã­ndice 0) y primera columna (Ã­ndice 0):</p>
+<div class="sourceCode" id="cb7"><pre
+class="sourceCode c"><code class="sourceCode c"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>tablero<span class="op">[</span><span class="dv">0</span><span class="op">][</span><span class="dv">0</span><span class="op">]</span> <span class="op">=</span> <span class="dv">10</span><span class="op">;</span></span></code></pre></div></li>
+<li><p><strong>Uso en Expresiones:</strong></p>
+<div class="sourceCode" id="cb8"><pre
+class="sourceCode c"><code class="sourceCode c"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> resultado <span class="op">=</span> tablero<span class="op">[</span><span class="dv">2</span><span class="op">][</span><span class="dv">3</span><span class="op">]</span> <span class="op">*</span> <span class="dv">2</span><span class="op">;</span> <span class="co">// Accede al elemento en la Ãºltima posiciÃ³n (Fila 2, Columna 3)</span></span></code></pre></div></li>
+</ol>
+<h3 id="acceso-lÃ³gico-vs.-fÃ­sico">Acceso LÃ³gico vs.Â FÃ­sico</h3>
+<p>Aunque lÃ³gicamente utilizamos la notaciÃ³n de doble Ã­ndice
+(<code>[i][j]</code>), es importante recordar que en la memoria RAM, los
+elementos de la matriz estÃ¡n almacenados de forma <strong>contigua y
+lineal</strong> (elemento tras elemento).</p>
+<p>C realiza la traducciÃ³n de los dos Ã­ndices <span
+class="math inline">(<em>i</em>,<em>j</em>)</span> a una Ãºnica direcciÃ³n
+de memoria fÃ­sica, asegurando el acceso directo a cualquier
+elemento.</p>
+<h2 id="recorrido-con-bucles-anidados-nested-loops">Recorrido con Bucles
+Anidados (Nested Loops) ðŸ”</h2>
+<p>Para acceder y procesar <strong>todos los elementos</strong> de un
+<strong>Array Bidimensional (Matriz)</strong> de manera sistemÃ¡tica, es
+imprescindible utilizar <strong>bucles <code>for</code>
+anidados</strong> (<em>nested loops</em>).</p>
+<hr />
+<h3 id="la-lÃ³gica-del-anidamiento">La LÃ³gica del Anidamiento</h3>
+<p>El principio del recorrido de matrices se basa en su estructura
+lÃ³gica de filas y columnas:</p>
+<ol type="1">
+<li><strong>Bucle Exterior (Filas):</strong> Este bucle controla el
+Ã­ndice de la <strong>fila</strong> (<span
+class="math inline"><em>i</em></span>). Es el mÃ¡s lento, ya que se
+ejecuta una vez por cada fila.</li>
+<li><strong>Bucle Interior (Columnas):</strong> Este bucle controla el
+Ã­ndice de la <strong>columna</strong> (<span
+class="math inline"><em>j</em></span>). Es el mÃ¡s rÃ¡pido, ya que se
+ejecuta completamente (recorre todas las columnas) por <strong>cada
+iteraciÃ³n</strong> de la fila exterior.</li>
+</ol>
+<p>Este patrÃ³n garantiza que, para cada fila, se visiten todas sus
+columnas antes de pasar a la siguiente fila.</p>
+<h3 id="ejemplo-de-recorrido-para-impresiÃ³n">Ejemplo de Recorrido para
+ImpresiÃ³n</h3>
+<p>Consideremos una matriz <code>notas[FILAS][COLUMNAS]</code>. Para
+imprimir todos los elementos y mantener la estructura tabular, usamos el
+siguiente esquema:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#define FILAS </span><span class="dv">3</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="pp">#define COLUMNAS </span><span class="dv">4</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> notas<span class="op">[</span>FILAS<span class="op">][</span>COLUMNAS<span class="op">]</span> <span class="op">=</span> <span class="op">{</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>        <span class="op">{</span><span class="dv">10</span><span class="op">,</span> <span class="dv">8</span><span class="op">,</span> <span class="dv">9</span><span class="op">,</span> <span class="dv">7</span><span class="op">},</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>        <span class="op">{</span><span class="dv">6</span><span class="op">,</span> <span class="dv">10</span><span class="op">,</span> <span class="dv">7</span><span class="op">,</span> <span class="dv">9</span><span class="op">},</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>        <span class="op">{</span><span class="dv">9</span><span class="op">,</span> <span class="dv">7</span><span class="op">,</span> <span class="dv">8</span><span class="op">,</span> <span class="dv">10</span><span class="op">}</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>    <span class="op">};</span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;--- Notas de Alumnos ---</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>    <span class="co">// 1. Bucle EXTERIOR: Recorre las FILAS (i = 0, 1, 2)</span></span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> FILAS<span class="op">;</span> i<span class="op">++)</span> <span class="op">{</span></span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">&quot;Fila </span><span class="sc">%d</span><span class="st">: &quot;</span><span class="op">,</span> i<span class="op">);</span> </span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>        <span class="co">// 2. Bucle INTERIOR: Recorre las COLUMNAS (j = 0, 1, 2, 3)</span></span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> j <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> j <span class="op">&lt;</span> COLUMNAS<span class="op">;</span> j<span class="op">++)</span> <span class="op">{</span></span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>            </span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>            <span class="co">// Acceso al elemento: notas[i][j]</span></span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>            printf<span class="op">(</span><span class="st">&quot;</span><span class="sc">%d\t</span><span class="st">&quot;</span><span class="op">,</span> notas<span class="op">[</span>i<span class="op">][</span>j<span class="op">]);</span> <span class="co">// \t es para tabulaciÃ³n horizontal</span></span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a>            </span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span> <span class="co">// El bucle interno termina, todas las columnas de esta fila fueron procesadas.</span></span>
+<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span> <span class="co">// Salto de lÃ­nea para empezar la siguiente fila visualmente</span></span>
+<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<h3 id="regla-general">Regla General</h3>
+<p>Siempre que necesites procesar todos los elementos de una matriz:</p>
+<ul>
+<li>Usa el Ã­ndice de la fila (<span
+class="math inline"><em>i</em></span>) para el <strong>bucle
+exterior</strong> (de 0 a <span
+class="math inline">FILASâ€…âˆ’â€…1</span>).</li>
+<li>Usa el Ã­ndice de la columna (<span
+class="math inline"><em>j</em></span>) para el <strong>bucle
+interior</strong> (de 0 a <span
+class="math inline">COLUMNASâ€…âˆ’â€…1</span>).</li>
+<li>El acceso se realiza siempre como
+<code>nombre_matriz[i][j]</code>.</li>
+</ul>
+
+</div>
+</body>
+</html>
+

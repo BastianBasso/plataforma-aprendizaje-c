@@ -1,0 +1,299 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" crossorigin href="/assets/content-01sust.css">
+</head>
+<body>
+<div class="main-content">
+<p>3. ComunicaciÃ³n de Datos: Paso de Argumentos y ParÃ¡metros</p>
+<p><strong>ParÃ¡metros vs.Â Argumentos</strong></p>
+<p>Aunque los tÃ©rminos <strong>ParÃ¡metros</strong> y
+<strong>Argumentos</strong> se usan a menudo de forma intercambiable, es
+crucial distinguirlos tÃ©cnicamente para comprender cÃ³mo funciona la
+comunicaciÃ³n de datos en las funciones de C.</p>
+<p><strong>ParÃ¡metros (Variables de la FunciÃ³n)</strong></p>
+<p>Los <strong>ParÃ¡metros</strong> son las <strong>variables
+especiales</strong> declaradas en el <strong>encabezado</strong> del
+prototipo y la definiciÃ³n de la funciÃ³n. ActÃºan como
+<em>placeholders</em> (marcadores de posiciÃ³n) para los datos que la
+funciÃ³n espera recibir.</p>
+<ul>
+<li><p><strong>UbicaciÃ³n:</strong> Se definen en la <strong>DeclaraciÃ³n
+(Prototipo)</strong> y la <strong>DefiniciÃ³n (Cuerpo)</strong> de la
+funciÃ³n.</p></li>
+<li><p><strong>FunciÃ³n:</strong> Especifican el <strong>tipo de
+dato</strong> y el <strong>nombre interno</strong> que se usarÃ¡ para
+manipular la informaciÃ³n dentro del cuerpo de la funciÃ³n.</p></li>
+</ul>
+<p>C</p>
+<p>// a y b son los PARÃMETROS: las variables que recibirÃ¡n los
+valores.</p>
+<p>int sumar(int a, int b) {</p>
+<p>return a + b;</p>
+<p>}</p>
+<p><strong>Argumentos (Valores Enviados)</strong></p>
+<p>Los <strong>Argumentos</strong> son los <strong>valores
+reales</strong> o las expresiones que se envÃ­an a la funciÃ³n cuando esta
+es <strong>llamada</strong> o invocada.</p>
+<ul>
+<li><p><strong>UbicaciÃ³n:</strong> Se utilizan en el <strong>momento de
+la llamada</strong> a la funciÃ³n.</p></li>
+<li><p><strong>FunciÃ³n:</strong> Proporcionan los datos concretos que
+los parÃ¡metros de la funciÃ³n esperan recibir.</p></li>
+</ul>
+<p>C</p>
+<p>int num1 = 10;</p>
+<p>int num2 = 5;</p>
+<p>// num1 (o 10) y num2 (o 5) son los ARGUMENTOS: los valores reales
+que se envÃ­an.</p>
+<p>int resultado = sumar(num1, num2);</p>
+<p><strong>Resumen de la DistinciÃ³n</strong></p>
+<table style="width:97%;">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 38%" />
+<col style="width: 38%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>Concepto</strong></th>
+<th style="text-align: left;"><strong>UbicaciÃ³n</strong></th>
+<th style="text-align: left;"><strong>Representa</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>ParÃ¡metro</strong></td>
+<td style="text-align: left;">DefiniciÃ³n/Prototipo de la funciÃ³n</td>
+<td style="text-align: left;">La <strong>variable</strong> que espera un
+valor.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Argumento</strong></td>
+<td style="text-align: left;">Llamada a la funciÃ³n</td>
+<td style="text-align: left;">El <strong>valor real</strong> que se
+envÃ­a.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Mecanismo de Paso por Valor (Pass by Value)</strong></p>
+<p>El <strong>Paso por Valor</strong> es el <strong>mecanismo de
+comunicaciÃ³n de datos por defecto y mÃ¡s importante</strong> que utiliza
+el lenguaje C para transferir informaciÃ³n desde la funciÃ³n llamadora
+(como main()) a la funciÃ³n llamada (el mÃ³dulo).</p>
+<p><strong>Concepto Crucial: Copia de Datos</strong></p>
+<p>El concepto fundamental del Paso por Valor es que la funciÃ³n llamada
+<strong>nunca recibe la variable original</strong>, sino Ãºnicamente una
+<strong>copia de su valor</strong>.</p>
+<ol type="1">
+<li><p><strong>Copia:</strong> Cuando se llama a una funciÃ³n, el valor
+contenido en la variable del <strong>Argumento</strong> se copia y se
+almacena en el <strong>ParÃ¡metro</strong> correspondiente de la funciÃ³n
+llamada.</p></li>
+<li><p><strong>Aislamiento:</strong> La funciÃ³n trabaja exclusivamente
+con esa copia de datos, tratÃ¡ndola como una <strong>variable
+local</strong> dentro de su propio cuerpo.</p></li>
+<li><p><strong>Inmutabilidad:</strong> Si la funciÃ³n modifica o altera
+el valor de su parÃ¡metro interno, esa modificaciÃ³n <strong>solo afecta a
+la copia</strong> y <strong>nunca al valor original</strong> de la
+variable argumento en la funciÃ³n llamadora. La variable original
+permanece inmutable.</p></li>
+</ol>
+<p><strong>Ejemplo Demostrativo</strong></p>
+<p>El siguiente ejemplo muestra cÃ³mo una funciÃ³n intenta modificar un
+nÃºmero, pero el cambio se pierde porque solo se trabajÃ³ sobre una
+copia:</p>
+<p>C</p>
+<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
+<p>// Prototipo</p>
+<p>void intentar_modificar(int num);</p>
+<p>// DEFINICIÃ“N: La funciÃ³n solo recibe una COPIA de
+'valor_original'.</p>
+<p>void intentar_modificar(int num) {</p>
+<p>printf(" Dentro de la funciÃ³n: El parÃ¡metro 'num' inicia en %d.\n",
+num);</p>
+<p>num = 99; // Modifica la COPIA local</p>
+<p>printf(" Dentro de la funciÃ³n: El parÃ¡metro 'num' se ha modificado a
+%d.\n", num);</p>
+<p>}</p>
+<p>int main() {</p>
+<p>int valor_original = 10;</p>
+<p>printf("Antes de la llamada: valor_original = %d\n",
+valor_original);</p>
+<p>// LLAMADA: Se envÃ­a una copia del valor 10.</p>
+<p>intentar_modificar(valor_original);</p>
+<p>// Al regresar, el valor original NO HA CAMBIADO.</p>
+<p>printf("DespuÃ©s de la llamada: valor_original = %d\n",
+valor_original);</p>
+<p>return 0;</p>
+<p>}</p>
+<p>// Salida esperada:</p>
+<p>// Antes de la llamada: valor_original = 10</p>
+<p>// Dentro de la funciÃ³n: El parÃ¡metro 'num' inicia en 10.</p>
+<p>// Dentro de la funciÃ³n: El parÃ¡metro 'num' se ha modificado a
+99.</p>
+<p>// DespuÃ©s de la llamada: valor_original = 10</p>
+<p>El <strong>Paso por Valor</strong> es fundamental para el
+<strong>aislamiento</strong> de los mÃ³dulos y contribuye a la
+<strong>estabilidad del sistema</strong>, ya que previene que una
+funciÃ³n altere accidentalmente datos cruciales de otra. Para poder
+modificar una variable original, se requiere utilizar el mecanismo
+avanzado de <strong>Paso por Referencia</strong> (usando punteros), que
+se verÃ¡ en secciones posteriores.</p>
+<h2 id="declaraciÃ³n-y-uso-de-mÃºltiples-parÃ¡metros">DeclaraciÃ³n y Uso de
+MÃºltiples ParÃ¡metros</h2>
+<p>La verdadera potencia de la modularidad reside en la capacidad de las
+funciones para recibir mÃºltiples datos de entrada. La
+<strong>DeclaraciÃ³n y el Uso de MÃºltiples ParÃ¡metros</strong> permiten a
+una funciÃ³n realizar cÃ¡lculos o tareas complejas que dependen de varios
+valores distintos.</p>
+<h3 id="sintaxis-para-mÃºltiples-parÃ¡metros">Sintaxis para MÃºltiples
+ParÃ¡metros</h3>
+<p>Tanto en la declaraciÃ³n del prototipo como en la definiciÃ³n del
+cuerpo, los parÃ¡metros mÃºltiples se listan dentro de los parÃ©ntesis () y
+se separan por <strong>comas (,)</strong>. Cada parÃ¡metro debe tener su
+propio <strong>tipo de dato</strong> especificado.</p>
+<h4 id="en-la-declaraciÃ³n-prototipo">1. En la DeclaraciÃ³n
+(Prototipo)</h4>
+<p>Se define la interfaz, especificando el tipo de retorno, el nombre, y
+la secuencia de los tipos de datos esperados.</p>
+<p>C</p>
+<p>// [Tipo_Retorno] [Nombre_Funcion]([Tipo1] param1, [Tipo2] param2,
+[Tipo3] param3);</p>
+<p>// Ejemplo: Una funciÃ³n que calcula el salario neto</p>
+<p>float calcular_salario_neto(float bruto, int dias_trabajados, float
+deducciones);</p>
+<h4 id="en-la-definiciÃ³n-cuerpo">2. En la DefiniciÃ³n (Cuerpo)</h4>
+<p>La definiciÃ³n incluye el mismo encabezado, y los nombres de los
+parÃ¡metros se usan como variables locales en la lÃ³gica de la
+funciÃ³n.</p>
+<p>C</p>
+<p>float calcular_salario_neto(float bruto, int dias_trabajados, float
+deducciones) {</p>
+<p>float salario_diario;</p>
+<p>// CÃ¡lculo: Utiliza los tres parÃ¡metros de entrada</p>
+<p>salario_diario = bruto / dias_trabajados;</p>
+<p>return (salario_diario * dias_trabajados) - deducciones;</p>
+<p>}</p>
+<h4 id="en-la-llamada-uso">3. En la Llamada (Uso)</h4>
+<p>Al invocar la funciÃ³n, se deben proporcionar los
+<strong>argumentos</strong> en el <strong>mismo orden y tipo</strong> en
+que se declararon los parÃ¡metros.</p>
+<p>C</p>
+<p>int main() {</p>
+<p>float sueldo = 1500.0f;</p>
+<p>int dias = 20;</p>
+<p>float descuento = 150.0f;</p>
+<p>// LLAMADA: Los argumentos se asignan a los parÃ¡metros segÃºn su
+ORDEN:</p>
+<p>// 1500.0f (bruto), 20 (dias_trabajados), 150.0f (deducciones)</p>
+<p>float neto = calcular_salario_neto(sueldo, dias, descuento);</p>
+<p>printf("Salario Neto: %.2f\n", neto);</p>
+<p>return 0;</p>
+<p>}</p>
+<h3 id="importancia-del-orden">Importancia del Orden</h3>
+<p>El <strong>orden</strong> de los parÃ¡metros es
+<strong>crÃ­tico</strong>. Si se intercambia el orden de los argumentos
+al llamar a la funciÃ³n (ej: pasar dias antes que sueldo), los tipos
+pueden no coincidir o, peor aÃºn, los valores incorrectos serÃ¡n asignados
+a las variables dentro de la funciÃ³n, llevando a resultados lÃ³gicos
+errÃ³neos.</p>
+<p><strong>Importancia de la Coincidencia de Tipo (Type
+Matching)</strong></p>
+<p>La <strong>Coincidencia de Tipo</strong> es una regla estricta y
+esencial en C que rige la comunicaciÃ³n de datos entre la funciÃ³n
+llamadora y la funciÃ³n llamada. Se refiere a la necesidad de que el
+<strong>tipo de dato</strong> de cada <strong>Argumento</strong>
+proporcionado en la llamada debe ser <strong>idÃ©ntico o
+compatible</strong> con el tipo de dato del <strong>ParÃ¡metro</strong>
+correspondiente definido en el prototipo y el cuerpo de la funciÃ³n.</p>
+<p><strong>Riesgos de la Incoherencia de Tipos</strong></p>
+<p>Si los tipos no coinciden, pueden ocurrir dos problemas principales,
+afectando la estabilidad y precisiÃ³n del programa:</p>
+<ol type="1">
+<li><p><strong>Advertencias (Warnings) o Errores de
+CompilaciÃ³n:</strong> Si la incoherencia es grave (ej., pasar una cadena
+de texto donde se espera un entero), el compilador detendrÃ¡ el proceso,
+ya que no puede realizar la conversiÃ³n implÃ­cita de forma
+segura.</p></li>
+<li><p><strong>PÃ©rdida de Datos y Errores LÃ³gicos:</strong> Este es el
+riesgo mÃ¡s sutil y peligroso. Si los tipos son incompatibles pero el
+compilador realiza una conversiÃ³n implÃ­cita (coerciÃ³n), esto puede
+llevar a resultados inesperados:</p>
+<ul>
+<li><p><strong>Truncamiento:</strong> Si se pasa un valor de tipo float
+como argumento a un parÃ¡metro de tipo int, se <strong>pierde la parte
+decimal</strong> del valor.</p></li>
+<li><p><strong>InterpretaciÃ³n Incorrecta:</strong> Si los tipos tienen
+diferentes tamaÃ±os de memoria, la funciÃ³n podrÃ­a leer una cantidad
+incorrecta de <em>bytes</em>, llevando a datos basura o valores sin
+sentido.</p></li>
+</ul></li>
+</ol>
+<p><strong>Ejemplo de PÃ©rdida de Datos por Truncamiento</strong></p>
+<p>Considera una funciÃ³n diseÃ±ada para recibir un nÃºmero entero, pero
+accidentalmente le pasamos un valor decimal:</p>
+<p>C</p>
+<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
+<p>// La funciÃ³n espera un entero (int)</p>
+<p>void imprimir_entero(int numero_entero) {</p>
+<p>printf("El valor recibido es: %d\n", numero_entero);</p>
+<p>}</p>
+<p>int main() {</p>
+<p>float valor_decimal = 5.99f;</p>
+<p>// LLAMADA: Se pasa un 'float' (Argumento) a un 'int'
+(ParÃ¡metro).</p>
+<p>// El compilador intentarÃ¡ hacer una conversiÃ³n implÃ­cita.</p>
+<p>imprimir_entero(valor_decimal);</p>
+<p>// Output: El valor recibido es: 5</p>
+<p>// El .99 se ha TRUNCADO y perdido.</p>
+<p>return 0;</p>
+<p>}</p>
+<p><strong>La Mejor PrÃ¡ctica: Coincidencia Perfecta</strong></p>
+<p>Para evitar problemas de coerciÃ³n implÃ­cita y garantizar que la
+funciÃ³n reciba exactamente la informaciÃ³n que espera, la regla de oro es
+mantener una <strong>coincidencia de tipo perfecta</strong> entre el
+argumento enviado y el parÃ¡metro definido, o utilizar el
+<em>casting</em> explÃ­cito si se requiere una conversiÃ³n controlada.</p>
+<table style="width:97%;">
+<colgroup>
+<col style="width: 28%" />
+<col style="width: 30%" />
+<col style="width: 38%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>ParÃ¡metro Esperado</strong></th>
+<th style="text-align: left;"><strong>Argumento Requerido</strong></th>
+<th style="text-align: left;"><strong>Ejemplo de Llamada
+Correcta</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">int a</td>
+<td style="text-align: left;">Una variable o literal int</td>
+<td style="text-align: left;">funcion_ejemplo(10);</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">float b</td>
+<td style="text-align: left;">Una variable o literal float</td>
+<td style="text-align: left;">funcion_ejemplo(3.14f);</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">char c</td>
+<td style="text-align: left;">Una variable o literal char</td>
+<td style="text-align: left;">funcion_ejemplo('A');</td>
+</tr>
+</tbody>
+</table>
+<p>Asegurar la coincidencia de tipos es fundamental para la
+<strong>integridad de los datos</strong> y la
+<strong>confiabilidad</strong> del cÃ³digo modular.</p>
+
+</div>
+</body>
+</html>
+

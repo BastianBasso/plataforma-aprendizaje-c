@@ -1,0 +1,285 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" crossorigin href="/assets/content-01sust.css">
+</head>
+<body>
+<div class="main-content">
+<h2 id="proyecto-simulador-de-telemetrÃ­a-y-registro-de-eventos">ðŸ‘¨â€ðŸ”¬
+Proyecto: â€œSimulador de TelemetrÃ­a y Registro de Eventosâ€</h2>
+<h3 id="objetivo-principal">ðŸŽ¯ Objetivo Principal</h3>
+<p>Desarrollar un sistema de registro de datos (un <em>Data Logger</em>)
+capaz de almacenar lecturas de diversos sensores. El proyecto forzarÃ¡ el
+uso de <strong>Arrays de Estructuras</strong> para la colecciÃ³n,
+<strong>Unions</strong> para la optimizaciÃ³n de memoria en datos de tipo
+variable, y <strong>Campos de Bits</strong> para un control eficiente de
+los estados del sistema.</p>
+<h3 id="conceptos-obligatorios-a-aplicar">ðŸ“š Conceptos Obligatorios a
+Aplicar</h3>
+<ol type="1">
+<li><strong>Tipos Definidos por el Usuario
+(<code>typedef struct</code>)</strong>: Para definir la entidad
+principal del registro.</li>
+<li><strong>Arrays de Estructuras</strong>: Para gestionar la colecciÃ³n
+de lecturas de telemetrÃ­a (la â€œbase de datos en memoriaâ€).</li>
+<li><strong>Uniones (<code>union</code>)</strong>: Para modelar el valor
+de la lectura, que puede variar en formato.</li>
+<li><strong>Campos de Bits (<code>bit fields</code>)</strong>: Para
+crear un registro de estado compacto y optimizado.</li>
+<li><strong>Acceso a Miembros</strong>: Uso correcto de los operadores
+<strong><code>.</code></strong> (punto) y
+<strong><code>-&gt;</code></strong> (flecha).</li>
+</ol>
+<hr />
+<h3 id="especificaciones-del-sistema-y-requisitos">âš™ï¸ Especificaciones
+del Sistema y Requisitos</h3>
+<p>El sistema debe gestionar una colecciÃ³n de hasta <strong>500</strong>
+registros de telemetrÃ­a.</p>
+<h4
+id="requisito-1-la-estructura-de-registro-principal-registro">Requisito
+1: La Estructura de Registro Principal (<code>Registro</code>)</h4>
+<p>Defina una estructura llamada <code>Registro</code> que agrupe toda
+la informaciÃ³n de una Ãºnica lectura del sensor.</p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Miembro</th>
+<th style="text-align: center;">Tipo de Dato</th>
+<th style="text-align: center;">PropÃ³sito</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><code>id_sensor</code></td>
+<td style="text-align: center;"><code>int</code></td>
+<td style="text-align: center;">Identificador Ãºnico del sensor (1 a
+10).</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>tipo_dato</code></td>
+<td style="text-align: center;"><code>int</code> o
+<code>enum</code></td>
+<td style="text-align: center;"><strong>Etiqueta</strong> para la
+<code>union</code> (0=Flotante, 1=Entero, 2=String de Estado).</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>datos</code></td>
+<td style="text-align: center;"><strong><code>union</code></strong></td>
+<td style="text-align: center;">El valor real de la lectura (ver
+Requisito 3).</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>timestamp</code></td>
+<td style="text-align: center;"><code>long</code></td>
+<td style="text-align: center;">Marca de tiempo simulada (puede ser un
+contador de segundos).</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>estado</code></td>
+<td style="text-align: center;"><strong><code>struct</code> con Bit
+Fields</strong></td>
+<td style="text-align: center;">Indicadores de estado compactos (ver
+Requisito 2).</td>
+</tr>
+</tbody>
+</table>
+<h4
+id="requisito-2-optimizaciÃ³n-de-estado-con-campos-de-bits-mÃ³dulo-6">Requisito
+2: OptimizaciÃ³n de Estado con Campos de Bits (MÃ³dulo 6)</h4>
+<p>Defina una <strong>estructura anidada</strong> dentro de
+<code>Registro</code> (o una externa con <code>typedef</code>) llamada
+<code>EstadoSensor</code> que utilice <strong>Campos de Bits</strong>
+para almacenar la configuraciÃ³n de un solo byte:</p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Campo de Bits</th>
+<th style="text-align: center;">TamaÃ±o (Bits)</th>
+<th style="text-align: center;">Significado</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><code>error_critico</code></td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1 si hay un fallo de hardware.</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>warning</code></td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1 si la lectura estÃ¡ fuera del rango
+normal.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>calibracion_ok</code></td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1 si el sensor estÃ¡ calibrado.</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>modo_baja_potencia</code></td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1 si estÃ¡ en modo <em>sleep</em>.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>reservado</code></td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">Bits de relleno para completar el
+byte.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Tarea:</strong> Demuestre que el <code>sizeof()</code> de
+esta estructura es igual a <strong>1 byte</strong> (o el tamaÃ±o del tipo
+de datos base usado, forzando la optimizaciÃ³n de la memoria).</p>
+<h4
+id="requisito-3-manejo-de-tipos-de-datos-variables-con-union-mÃ³dulo-5">Requisito
+3: Manejo de Tipos de Datos Variables con Union (MÃ³dulo 5)</h4>
+<p>Defina una <strong><code>union</code></strong> llamada
+<code>ValorLectura</code> que se almacene en el miembro
+<code>datos</code> de <code>Registro</code>. Esta <code>union</code>
+debe permitir almacenar la lectura en <strong>uno de los tres
+formatos</strong> para optimizar la memoria.</p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Miembro de la <code>union</code></th>
+<th style="text-align: center;">Tipo de Dato</th>
+<th style="text-align: center;">PropÃ³sito</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><code>valor_flotante</code></td>
+<td style="text-align: center;"><code>float</code></td>
+<td style="text-align: center;">Para lecturas de temperatura o
+presiÃ³n.</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>valor_entero</code></td>
+<td style="text-align: center;"><code>int</code></td>
+<td style="text-align: center;">Para lecturas de conteo o ID de
+evento.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>estado_str</code></td>
+<td style="text-align: center;"><code>char[8]</code></td>
+<td style="text-align: center;">Para un mensaje de estado breve (ej:
+â€œOKâ€, â€œFAILâ€).</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Tarea:</strong> Confirme con <code>sizeof()</code> que el
+tamaÃ±o de la <code>union</code> es igual al tamaÃ±o de su miembro mÃ¡s
+grande (<code>float</code> o <code>char[8]</code>, dependiendo del
+<em>padding</em> del sistema).</p>
+<h4 id="requisito-4-colecciÃ³n-y-acceso-secciÃ³n-3-y-4">Requisito 4:
+ColecciÃ³n y Acceso (SecciÃ³n 3 y 4)</h4>
+<ol type="1">
+<li>Defina un <strong>Array de Estructuras</strong> global o estÃ¡tico
+llamado <code>log_telemetria</code> con capacidad para 500 registros.
+<code>c     #define MAX_REGISTROS 500     Registro log_telemetria[MAX_REGISTROS];</code></li>
+<li>Implemente una <strong>funciÃ³n</strong> llamada
+<code>agregar_registro(int id, int tipo, ...)</code> que reciba datos y
+aÃ±ada una nueva <code>Registro</code> al array (simulando un
+<em>push</em> de datos).</li>
+<li>Implemente una <strong>funciÃ³n</strong> llamada
+<code>mostrar_log(int max_a_mostrar)</code> que itere sobre el array y
+use la etiqueta (<code>tipo_dato</code>) para imprimir correctamente el
+valor de la <code>union</code>.</li>
+</ol>
+<h4 id="requisito-5-pruebas-y-reporte">Requisito 5: Pruebas y
+Reporte</h4>
+<p>Dentro de la funciÃ³n <code>main()</code>:</p>
+<ol type="1">
+<li>Muestre los tamaÃ±os en bytes de la <code>union</code> y la
+estructura con Campos de Bits.</li>
+<li>Agregue <strong>cinco</strong> registros de prueba al
+<code>log_telemetria</code>:
+<ul>
+<li>Dos registros de tipo <strong>Flotante</strong> con
+<code>error_critico=0</code> y <code>calibracion_ok=1</code>.</li>
+<li>Dos registros de tipo <strong>Entero</strong> con
+<code>error_critico=0</code> y <code>warning=1</code>.</li>
+<li>Un registro de tipo <strong>String de Estado</strong> con
+<code>error_critico=1</code> y <code>calibracion_ok=0</code>.</li>
+</ul></li>
+<li>Imprima el array completo. En el caso del registro con
+<code>error_critico=1</code>, muestre un mensaje especial de
+advertencia.</li>
+</ol>
+<hr />
+<h3 id="criterios-de-autoevaluaciÃ³n">ðŸ“ Criterios de AutoevaluaciÃ³n</h3>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Criterio</th>
+<th style="text-align: center;">PonderaciÃ³n</th>
+<th style="text-align: center;">DescripciÃ³n</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><strong>DefiniciÃ³n de
+Tipos</strong></td>
+<td style="text-align: center;">30%</td>
+<td style="text-align: center;">Uso correcto de
+<code>typedef struct</code>, <code>union</code>, y la sintaxis de
+<strong>Campos de Bits</strong>.</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>Manejo de
+Colecciones</strong></td>
+<td style="text-align: center;">30%</td>
+<td style="text-align: center;">ImplementaciÃ³n funcional del Array de
+Estructuras y la funciÃ³n <code>agregar_registro</code>.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>LÃ³gica de la
+<code>union</code></strong></td>
+<td style="text-align: center;">20%</td>
+<td style="text-align: center;">Uso de la etiqueta
+(<code>tipo_dato</code>) para acceder correctamente a los miembros de la
+<code>union</code> al imprimir los datos.</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>Sintaxis y Estilo</strong></td>
+<td style="text-align: center;">10%</td>
+<td style="text-align: center;">Uso consistente de operadores
+(<code>.</code> y <code>-&gt;</code>) y cÃ³digo legible con
+comentarios.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>DemostraciÃ³n de
+Memoria</strong></td>
+<td style="text-align: center;">10%</td>
+<td style="text-align: center;">ImpresiÃ³n de los <code>sizeof()</code>
+de la <code>union</code> y la estructura de Campos de Bits para
+demostrar la optimizaciÃ³n.</td>
+</tr>
+</tbody>
+</table>
+<p>Este ejercicio te darÃ¡ la base necesaria para comprender cÃ³mo se
+modelan datos complejos y se optimiza el espacio en entornos de recursos
+limitados.</p>
+
+</div>
+</body>
+</html>
+

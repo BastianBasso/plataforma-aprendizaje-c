@@ -1,0 +1,196 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" crossorigin href="/assets/content-01sust.css">
+</head>
+<body>
+<div class="main-content">
+<h2 id="la-regla-de-oro-de-c-liberaciÃ³n-obligatoria">La Regla de Oro de
+C: LiberaciÃ³n Obligatoria âš–ï¸</h2>
+<p>La gestiÃ³n de memoria dinÃ¡mica en C se rige por un principio
+fundamental que debe ser ineludiblemente observado por el
+programador:</p>
+<blockquote>
+<p><strong>Toda asignaciÃ³n de memoria dinÃ¡mica (realizada con
+<code>malloc</code>, <code>calloc</code>, o <code>realloc</code>) debe
+tener un <code>free()</code> correspondiente.</strong></p>
+</blockquote>
+<hr />
+<h3 id="quÃ©-implica-esta-regla">Â¿QuÃ© Implica esta Regla?</h3>
+<p>Esta â€œRegla de Oroâ€ establece la <strong>responsabilidad</strong> del
+programador en la gestiÃ³n del ciclo de vida de la memoria del
+<em>Heap</em> (MontÃ³n).</p>
+<ul>
+<li><strong>AsignaciÃ³n Manual:</strong> Cuando el programa solicita
+memoria dinÃ¡mica, el sistema operativo la reserva, pero
+<strong>no</strong> se encarga de recuperarla automÃ¡ticamente.</li>
+<li><strong>LiberaciÃ³n Manual:</strong> Es tu trabajo, como
+desarrollador, invocar la funciÃ³n
+<strong><code>free(puntero)</code></strong> para devolver el bloque de
+memoria al sistema operativo. Al hacerlo, le indicas al sistema que ese
+espacio puede ser reutilizado por tu programa o por otros procesos.</li>
+</ul>
+<h3 id="consecuencia-de-incumplir-la-regla">Consecuencia de Incumplir la
+Regla</h3>
+<p>Si se omite el <code>free()</code> correspondiente, se produce una
+<strong>fuga de memoria</strong> (<em>Memory Leak</em>).</p>
+<ul>
+<li><strong>Fuga de Memoria:</strong> Ocurre cuando un programa pierde
+la referencia al bloque de memoria asignado (pierde el puntero original)
+o simplemente no lo libera. El sistema operativo sigue considerando esa
+memoria como <strong>â€œen usoâ€</strong>, incluso cuando el programa ya no
+la necesita.</li>
+<li><strong>Impacto:</strong> Con el tiempo, las fugas de memoria
+consumen progresivamente la memoria RAM disponible, lo que ralentiza el
+programa o, en casos graves, provoca el fallo de la aplicaciÃ³n o del
+sistema operativo al agotar los recursos.</li>
+</ul>
+<h2 id="sintaxis-y-uso-de-free">Sintaxis y Uso de <code>free()</code>
+ðŸ§¹</h2>
+<p>La funciÃ³n <strong><code>free()</code></strong> es la herramienta
+estÃ¡ndar en C para devolver la memoria del <em>Heap</em> al sistema
+operativo. Su sintaxis y uso son extremadamente sencillos, pero
+requieren precisiÃ³n.</p>
+<hr />
+<h3 id="sintaxis-de-free">Sintaxis de <code>free()</code></h3>
+<p>La funciÃ³n <code>free()</code> forma parte de la librerÃ­a
+<code>&lt;stdlib.h&gt;</code> y requiere un Ãºnico argumento:</p>
+<p><span class="math display">â€˜void free(void *ptr);â€˜</span></p>
+<p>Donde:</p>
+<ul>
+<li><strong><code>ptr</code></strong>: Es el <strong>puntero
+base</strong> que apunta al inicio del bloque de memoria que fue
+devuelto por una llamada previa y exitosa a <code>malloc()</code>,
+<code>calloc()</code>, o <code>realloc()</code>.</li>
+</ul>
+<h3 id="uso-preciso">Uso Preciso</h3>
+<ol type="1">
+<li><p><strong>Solo el Puntero Base:</strong> El argumento pasado a
+<code>free()</code> <strong>debe ser exactamente el puntero
+original</strong> que se recibiÃ³ de la funciÃ³n de asignaciÃ³n de
+memoria.</p>
+<blockquote>
+<p><strong>Advertencia:</strong> Si intentas liberar la memoria usando
+una direcciÃ³n que no es el punto de inicio del bloque asignado (por
+ejemplo, si has movido el puntero dentro de un <em>array</em> dinÃ¡mico y
+luego intentas liberarlo), el resultado serÃ¡ un <strong>error
+fatal</strong> en tiempo de ejecuciÃ³n o una corrupciÃ³n silenciosa de la
+estructura interna del <em>Heap</em>.</p>
+</blockquote></li>
+<li><p><strong>No Hay Valor de Retorno:</strong> <code>free()</code> no
+devuelve ningÃºn valor; su Ã©xito o fracaso se gestiona internamente por
+el sistema operativo.</p></li>
+<li><p><strong>Memoria del Heap:</strong> Solo se debe llamar a
+<code>free()</code> con punteros que apunten a memoria asignada en el
+<em>Heap</em>. Llamar a <code>free()</code> con un puntero a una
+variable del <em>Stack</em> o a una memoria estÃ¡tica causarÃ¡ un
+fallo.</p></li>
+</ol>
+<h4 id="ejemplo">Ejemplo</h4>
+<div class="sourceCode" id="cb1"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> <span class="op">*</span>datos <span class="op">=</span> <span class="op">(</span><span class="dt">int</span> <span class="op">*)</span>malloc<span class="op">(</span><span class="dv">10</span> <span class="op">*</span> <span class="kw">sizeof</span><span class="op">(</span><span class="dt">int</span><span class="op">));</span> <span class="co">// Asigna memoria</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co">// ... Uso del array dinÃ¡mico ...</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>free<span class="op">(</span>datos<span class="op">);</span> <span class="co">// Libera el bloque de </span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>             <span class="co">// memoria apuntado por &#39;datos&#39;</span></span></code></pre></div>
+<h2 id="punteros-colgantes-dangling-pointers">Punteros Colgantes
+(<em>Dangling Pointers</em>) â›“ï¸</h2>
+<p>Uno de los errores mÃ¡s comunes y peligrosos en la gestiÃ³n de memoria
+con <code>free()</code> es la creaciÃ³n de <strong>punteros
+colgantes</strong> (<em>dangling pointers</em>).</p>
+<hr />
+<h3 id="quÃ©-es-un-puntero-colgante">Â¿QuÃ© es un Puntero Colgante?</h3>
+<p>Un puntero colgante ocurre cuando la memoria a la que apunta ha sido
+<strong>liberada</strong> de vuelta al sistema (usando
+<code>free()</code>), pero el puntero en sÃ­ <strong>todavÃ­a contiene la
+direcciÃ³n</strong> de esa memoria.</p>
+<ul>
+<li><strong>Problema:</strong> DespuÃ©s de <code>free(ptr)</code>, la
+direcciÃ³n de memoria es ahora considerada â€œdisponibleâ€ para ser
+reutilizada por el sistema. Si intentas desreferenciar (<em>acceder a
+travÃ©s de</em>) el puntero <code>ptr</code> para leer o escribir datos,
+estarÃ¡s accediendo a memoria que ya no es tuya.</li>
+<li><strong>Consecuencia:</strong> Esto puede conducir a un
+<strong>comportamiento indefinido</strong>, que va desde la corrupciÃ³n
+de datos en otros bloques de memoria hasta un <strong>fallo de
+segmentaciÃ³n</strong> (<em>Segmentation Fault</em>) si el sistema
+operativo detecta el acceso ilegal.</li>
+</ul>
+<h3 id="la-soluciÃ³n-anular-el-puntero-ptr-null">La SoluciÃ³n: Anular el
+Puntero (<code>ptr = NULL;</code>)</h3>
+<p>Para prevenir los punteros colgantes, la <strong>prÃ¡ctica de
+programaciÃ³n esencial</strong> es asignar explÃ­citamente el valor
+<strong><code>NULL</code></strong> al puntero inmediatamente despuÃ©s de
+haber liberado la memoria que apuntaba.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> <span class="op">*</span>datos <span class="op">=</span> <span class="op">(</span><span class="dt">int</span> <span class="op">*)</span>malloc<span class="op">(</span><span class="dv">10</span> <span class="op">*</span> <span class="kw">sizeof</span><span class="op">(</span><span class="dt">int</span><span class="op">));</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co">// ... Uso del bloque ...</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>free<span class="op">(</span>datos<span class="op">);</span>    <span class="co">// La memoria es liberada.</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>datos <span class="op">=</span> NULL<span class="op">;</span>   <span class="co">// Â¡ESENCIAL! El puntero ahora es seguro.</span></span></code></pre></div>
+<p>Al asignar <code>datos = NULL</code>, estÃ¡s indicando que el puntero
+no apunta a ninguna ubicaciÃ³n de memoria vÃ¡lida. Si accidentalmente
+intentas usar <code>datos</code> mÃ¡s tarde, el sistema puede detectar el
+intento de acceder a <code>NULL</code> y generar un error controlado, lo
+cual es mucho mÃ¡s seguro que un fallo de segmentaciÃ³n impredecible.</p>
+<h2 id="doble-liberaciÃ³n-double-free">Doble LiberaciÃ³n (<em>Double
+Free</em>) ðŸ’¥</h2>
+<p>Intentar llamar a la funciÃ³n <strong><code>free()</code></strong>
+sobre el <strong>mismo bloque de memoria dos o mÃ¡s veces</strong> es un
+error fatal de programaciÃ³n conocido como <em>Double Free</em>.</p>
+<hr />
+<h3 id="el-peligro-de-la-doble-liberaciÃ³n">El Peligro de la Doble
+LiberaciÃ³n</h3>
+<p>Cuando llamas a <code>free(ptr)</code> por primera vez, el sistema
+operativo (a travÃ©s de la biblioteca de C) marca ese bloque de memoria
+como disponible y lo aÃ±ade a su lista de memoria libre.</p>
+<p>Si llamas a <code>free(ptr)</code> una <strong>segunda vez</strong>,
+pueden ocurrir dos cosas graves:</p>
+<ol type="1">
+<li><strong>CorrupciÃ³n del Heap:</strong> El sistema intenta liberar una
+memoria que ya considera libre, lo que corrompe la estructura interna
+que el administrador del <em>Heap</em> utiliza para rastrear los bloques
+de memoria. Esto puede llevar a <strong>errores silenciosos</strong> o a
+que futuras llamadas a <code>malloc()</code> o <code>free()</code>
+fallen de manera impredecible.</li>
+<li><strong>Fallo Fatal:</strong> El error se detecta inmediatamente,
+causando que el programa termine abruptamente con un <strong>fallo de
+ejecuciÃ³n</strong> (ej., <em>Segmentation Fault</em> o un mensaje de
+error especÃ­fico de corrupciÃ³n del <em>Heap</em>).</li>
+</ol>
+<h3 id="cÃ³mo-prevenir-el-double-free">CÃ³mo Prevenir el <em>Double
+Free</em></h3>
+<p>La forma mÃ¡s efectiva de evitar este error es combinar la liberaciÃ³n
+de memoria con la anulaciÃ³n del puntero, la misma tÃ©cnica utilizada para
+prevenir los punteros colgantes:</p>
+<ol type="1">
+<li><strong>Liberar:</strong> Llama a <code>free(ptr)</code> para
+devolver la memoria.</li>
+<li><strong>Anular:</strong> Asigna inmediatamente el puntero a
+<strong><code>NULL</code></strong>.</li>
+</ol>
+<!-- end list -->
+<div class="sourceCode" id="cb3"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> <span class="op">*</span>datos <span class="op">=</span> <span class="op">(</span><span class="dt">int</span> <span class="op">*)</span>malloc<span class="op">(</span><span class="kw">sizeof</span><span class="op">(</span><span class="dt">int</span><span class="op">));</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co">// ... CÃ³digo que usa &#39;datos&#39; ...</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>free<span class="op">(</span>datos<span class="op">);</span> </span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>datos <span class="op">=</span> NULL<span class="op">;</span> <span class="co">// El puntero es seguro.</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="co">// Si accidentalmente intentas liberarlo de nuevo:</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>free<span class="op">(</span>datos<span class="op">);</span> <span class="co">// Es seguro, ya que free(NULL) no hace nada (es una operacion definida).</span></span></code></pre></div>
+<blockquote>
+<p><strong>Nota:</strong> La norma de C garantiza que llamar a
+<code>free(NULL)</code> es una <strong>operaciÃ³n segura que no hace
+nada</strong>. Por lo tanto, establecer el puntero a <code>NULL</code>
+despuÃ©s de liberarlo evita el <em>Double Free</em> porque cualquier
+llamada subsiguiente se convertirÃ¡ inofensivamente en
+<code>free(NULL)</code>.</p>
+</blockquote>
+
+</div>
+</body>
+</html>
+

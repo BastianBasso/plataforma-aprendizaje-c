@@ -1,0 +1,290 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" crossorigin href="/assets/content-01sust.css">
+</head>
+<body>
+<div class="main-content">
+
+<p><strong>💻 15 Ejercicios: Bucles de Repetición por Contador
+(for)</strong></p>
+<p><strong>Bloque 1: Estructura Básica y Contadores</strong></p>
+<p><strong>1) Imprimir Secuencia Ascendente</strong></p>
+<p>Utiliza un bucle for para imprimir los números del 1 al 10 en una
+sola línea, separados por espacios.</p>
+<p>Output Esperado: 1 2 3 4 5 6 7 8 9 10</p>
+<p><strong>2) Imprimir Números Pares</strong></p>
+<p>Utiliza un bucle for para imprimir solo los números pares entre $2$ y
+$20$ (ambos incluidos). Puedes hacerlo incrementando el contador en $2$
+(i = i + 2) o usando un condicional if dentro del bucle.</p>
+<p>Output Esperado: 2 4 6 8 10 12 14 16 18 20</p>
+<p><strong>3) Tabla de Multiplicar (Ejercicio Propuesto A)</strong></p>
+<p>Pide un número al usuario. Usa un bucle for para imprimir la tabla de
+multiplicar de ese número del $1$ al $10$.</p>
+<p>Input de Ejemplo: 5</p>
+<p>Output Esperado: 5 x 1 = 5, 5 x 2 = 10, ... 5 x 10 = 50</p>
+<p><strong>4) Imprimir un Carácter Múltiples Veces</strong></p>
+<p>Pide al usuario un carácter (char) y un número entero $N$. Usa un
+bucle for para imprimir ese carácter $N$ veces.</p>
+<p>Input de Ejemplo: *, 6</p>
+<p>Output Esperado: ******</p>
+<p><strong>5) Impresión con Separador</strong></p>
+<p>Utiliza un bucle for para imprimir los números del $10$ al $1$.
+Asegúrate de que, después de cada número, se imprima una coma (, ),
+excepto después del último número ($1$).</p>
+<p>Output Esperado: 10, 9, 8, 7, 6, 5, 4, 3, 2, 1</p>
+<p><strong>Bloque 2: Acumuladores y Cálculos</strong></p>
+<p><strong>6) Suma de N Números (Ejercicio Propuesto B)</strong></p>
+<p>Pide al usuario un número $N$. Usa un bucle for con una variable
+acumuladora para calcular e imprimir la suma de todos los números desde
+$1$ hasta $N$.</p>
+<p>Input de Ejemplo: 4</p>
+<p>Output Esperado: La suma de 1 a 4 es: 10 ($1+2+3+4$)</p>
+<p><strong>7) Cálculo de Promedio</strong></p>
+<p>Pide al usuario que ingrese la cantidad de notas $N$ que desea
+promediar. Luego, usa un bucle for para pedirle al usuario que ingrese
+cada una de esas $N$ notas y use un acumulador para sumarlas.
+Finalmente, calcula e imprime el promedio.</p>
+<p>Input de Ejemplo: 3 (Notas), 7.0, 6.0, 8.0</p>
+<p>Output Esperado: El promedio es: 7.0</p>
+<p><strong>8) Factorial de un Número</strong></p>
+<p>Pide un número entero $N$ (máximo $10$ para evitar desbordamiento de
+int). Usa un bucle for con una variable acumuladora (inicializada a 1)
+para calcular el factorial de $N$ ($N! = 1 \times 2 \times 3 \times ...
+\times N$).</p>
+<p>Input de Ejemplo: 5</p>
+<p>Output Esperado: El factorial de 5 es: 120</p>
+<p><strong>9) Suma de Números Impares</strong></p>
+<p>Pide un número entero $N$. Usa un bucle for que recorra los números
+de $1$ a $N$ y un acumulador para sumar solo los números impares.</p>
+<p>Input de Ejemplo: 7</p>
+<p>Output Esperado: La suma de impares (1, 3, 5, 7) es: 16</p>
+<p><strong>10) Conversión de Moneda (Iterativa)</strong></p>
+<p>Pide la cantidad de días $N$. Usa un bucle for para mostrar la
+equivalencia de $5$ dólares en pesos (o cualquier moneda) para cada día,
+asumiendo que el valor del dólar aumenta $1$ peso cada día. (Usar un
+acumulador para el valor de la moneda).</p>
+<p>Dato inicial: Valor del Dólar (V): $800$ pesos.</p>
+<p>Input de Ejemplo: 3 (días)</p>
+<p>Output Esperado: Día 1: 4000 pesos (5 * 800)</p>
+<p>Día 2: 4005 pesos (5 * 801)</p>
+<p>Día 3: 4010 pesos (5 * 802)</p>
+<p><strong>Bloque 3: Iteración en Sentido Inverso y Pasos
+Personalizados</strong></p>
+<p><strong>11) Cuenta Regresiva de 10 a 0</strong></p>
+<p>Usa un bucle for para realizar una cuenta regresiva desde $10$ hasta
+$0$.</p>
+<p>Output Esperado: 10 9 8 7 6 5 4 3 2 1 0</p>
+<p><strong>12) Decremento con Pasos Múltiples</strong></p>
+<p>Usa un bucle for para contar desde $50$ hasta $0$, pero dando saltos
+de $-5$ en cada iteración.</p>
+<p>Output Esperado: 50 45 40 35 30 25 20 15 10 5 0</p>
+<p><strong>13) Simulación de Desgaste (Inverso)</strong></p>
+<p>Una máquina tiene $100\%$ de eficiencia y pierde $4\%$ por cada hora
+de uso. Usa un bucle for en sentido inverso, comenzando en la hora $0$
+hasta la hora $10$, para imprimir la eficiencia restante en cada
+hora.</p>
+<p>Output Esperado (Ejemplo de Hora 5): Hora 5: 80.0% de eficiencia</p>
+<p><strong>14) Impresión de Rango Variable Inverso</strong></p>
+<p>Pide dos números enteros, Inicio y Fin. Asume que Inicio $&gt;$ Fin.
+Usa un bucle for para imprimir todos los números desde Inicio hasta Fin
+(incluidos) en orden descendente.</p>
+<p>Input de Ejemplo: Inicio=7, Fin=3</p>
+<p>Output Esperado: 7 6 5 4 3</p>
+<p><strong>15) Desafío: Suma Acumulativa Inversa</strong></p>
+<p>Pide un número $N$. Usa un bucle for que cuente hacia atrás desde $N$
+hasta $1$. Dentro del bucle, usa un acumulador para sumar los
+números.</p>
+<p>Input de Ejemplo: 3</p>
+<p>Output Esperado: Suma acumulada (3+2+1): 6</p>
+<p><strong>✅ Respuestas de los 15 Ejercicios: Bucles de Repetición por
+Contador (for)</strong></p>
+<p>A continuación, se presenta la solución en código C para cada uno de
+los 15 ejercicios, utilizando las estructuras de repetición
+<strong>for</strong>, contadores y acumuladores.</p>
+<p><strong>Bloque 1: Estructura Básica y Contadores</strong></p>
+<p><strong>1) Imprimir Secuencia Ascendente</strong></p>
+<p>C</p>
+<p>// Imprime del 1 al 10</p>
+<p>for (int i = 1; i &lt;= 10; i++) {</p>
+<p>printf("%d ", i);</p>
+<p>}</p>
+<p>// Output: 1 2 3 4 5 6 7 8 9 10</p>
+<p><strong>2) Imprimir Números Pares</strong></p>
+<p>C</p>
+<p>// Imprime del 2 al 20, incrementando el contador en 2 (i += 2)</p>
+<p>for (int i = 2; i &lt;= 20; i += 2) {</p>
+<p>printf("%d ", i);</p>
+<p>}</p>
+<p>// Output: 2 4 6 8 10 12 14 16 18 20</p>
+<p><strong>3) Tabla de Multiplicar (Ej. Propuesto A)</strong></p>
+<p>C</p>
+<p>// Entrada: numero = 5</p>
+<p>int numero = 5;</p>
+<p>for (int i = 1; i &lt;= 10; i++) {</p>
+<p>printf("%d x %d = %d\n", numero, i, numero * i);</p>
+<p>}</p>
+<p>/*</p>
+<p>Output:</p>
+<p>5 x 1 = 5</p>
+<p>...</p>
+<p>5 x 10 = 50</p>
+<p>*/</p>
+<p><strong>4) Imprimir un Carácter Múltiples Veces</strong></p>
+<p>C</p>
+<p>// Entrada: caracter = '*', N = 6</p>
+<p>char caracter = '*';</p>
+<p>int N = 6;</p>
+<p>for (int i = 0; i &lt; N; i++) {</p>
+<p>printf("%c", caracter);</p>
+<p>}</p>
+<p>printf("\n");</p>
+<p>// Output: ******</p>
+<p><strong>5) Impresión con Separador</strong></p>
+<p>C</p>
+<p>// Bucle en sentido inverso</p>
+<p>for (int i = 10; i &gt;= 1; i--) {</p>
+<p>printf("%d", i);</p>
+<p>// Condicional para evitar la coma después del último número (1)</p>
+<p>if (i &gt; 1) {</p>
+<p>printf(", ");</p>
+<p>}</p>
+<p>}</p>
+<p>printf("\n");</p>
+<p>// Output: 10, 9, 8, 7, 6, 5, 4, 3, 2, 1</p>
+<p><strong>Bloque 2: Acumuladores y Cálculos</strong></p>
+<p><strong>6) Suma de N Números (Ej. Propuesto B)</strong></p>
+<p>C</p>
+<p>// Entrada: N = 4</p>
+<p>int N = 4;</p>
+<p>int suma = 0; // Acumulador</p>
+<p>for (int i = 1; i &lt;= N; i++) {</p>
+<p>suma += i; // suma = suma + i;</p>
+<p>}</p>
+<p>printf("La suma de 1 a %d es: %d\n", N, suma);</p>
+<p>// Output: La suma de 1 a 4 es: 10</p>
+<p><strong>7) Cálculo de Promedio</strong></p>
+<p>C</p>
+<p>// Entrada: N_notas = 3, notas (7.0, 6.0, 8.0)</p>
+<p>int N_notas = 3;</p>
+<p>float nota_actual;</p>
+<p>float suma_notas = 0.0f; // Acumulador</p>
+<p>// Aquí se simula la entrada de datos, en un programa real se usaría
+scanf</p>
+<p>float notas_ejemplo[] = {7.0f, 6.0f, 8.0f};</p>
+<p>for (int i = 0; i &lt; N_notas; i++) {</p>
+<p>// nota_actual = obtener_nota_del_usuario(); // Simulación</p>
+<p>nota_actual = notas_ejemplo[i];</p>
+<p>suma_notas += nota_actual;</p>
+<p>}</p>
+<p>float promedio = suma_notas / N_notas;</p>
+<p>printf("El promedio es: %.1f\n", promedio);</p>
+<p>// Output: El promedio es: 7.0</p>
+<p><strong>8) Factorial de un Número</strong></p>
+<p>C</p>
+<p>// Entrada: N = 5</p>
+<p>int N_fact = 5;</p>
+<p>// El acumulador para producto (factorial) debe inicializarse a 1</p>
+<p>long long factorial = 1;</p>
+<p>for (int i = 1; i &lt;= N_fact; i++) {</p>
+<p>factorial *= i; // factorial = factorial * i;</p>
+<p>}</p>
+<p>printf("El factorial de %d es: %lld\n", N_fact, factorial);</p>
+<p>// Output: El factorial de 5 es: 120</p>
+<p><strong>9) Suma de Números Impares</strong></p>
+<p>C</p>
+<p>// Entrada: N = 7</p>
+<p>int N_limite = 7;</p>
+<p>int suma_impares = 0; // Acumulador</p>
+<p>// Iniciamos en 1, incrementamos en 2 para sumar solo impares</p>
+<p>for (int i = 1; i &lt;= N_limite; i += 2) {</p>
+<p>suma_impares += i;</p>
+<p>}</p>
+<p>printf("La suma de impares (1, 3, 5, 7) es: %d\n", suma_impares);</p>
+<p>// Output: La suma de impares (1, 3, 5, 7) es: 16</p>
+<p><strong>10) Conversión de Moneda (Iterativa)</strong></p>
+<p>C</p>
+<p>// Entrada: dias = 3</p>
+<p>int dias = 3;</p>
+<p>int valor_dolar_inicial = 800; // Acumulador</p>
+<p>int dolares = 5;</p>
+<p>for (int i = 1; i &lt;= dias; i++) {</p>
+<p>int valor_dia = valor_dolar_inicial + (i - 1);</p>
+<p>int total_pesos = dolares * valor_dia;</p>
+<p>printf("Día %d: %d pesos (%d * %d)\n", i, total_pesos, dolares,
+valor_dia);</p>
+<p>}</p>
+<p>/*</p>
+<p>Output:</p>
+<p>Día 1: 4000 pesos (5 * 800)</p>
+<p>Día 2: 4005 pesos (5 * 801)</p>
+<p>Día 3: 4010 pesos (5 * 802)</p>
+<p>*/</p>
+<p><strong>Bloque 3: Iteración en Sentido Inverso y Pasos
+Personalizados</strong></p>
+<p><strong>11) Cuenta Regresiva de 10 a 0</strong></p>
+<p>C</p>
+<p>// Inicialización alta, Condición de Mayor o Igual, Decremento</p>
+<p>for (int i = 10; i &gt;= 0; i--) {</p>
+<p>printf("%d ", i);</p>
+<p>}</p>
+<p>printf("\n");</p>
+<p>// Output: 10 9 8 7 6 5 4 3 2 1 0</p>
+<p><strong>12) Decremento con Pasos Múltiples</strong></p>
+<p>C</p>
+<p>// Inicialización alta, Condición de Mayor o Igual, Decremento de 5
+(i -= 5)</p>
+<p>for (int i = 50; i &gt;= 0; i -= 5) {</p>
+<p>printf("%d ", i);</p>
+<p>}</p>
+<p>printf("\n");</p>
+<p>// Output: 50 45 40 35 30 25 20 15 10 5 0</p>
+<p><strong>13) Simulación de Desgaste (Inverso)</strong></p>
+<p>C</p>
+<p>// Eficiencia inicial: 100.0%</p>
+<p>float eficiencia = 100.0f;</p>
+<p>float perdida_por_hora = 4.0f;</p>
+<p>int horas_max = 10;</p>
+<p>// Recorremos de 0 a 10 (ascendente es más claro aquí para el
+cálculo)</p>
+<p>for (int hora = 0; hora &lt;= horas_max; hora++) {</p>
+<p>float eficiencia_restante = eficiencia - (perdida_por_hora *
+hora);</p>
+<p>printf("Hora %d: %.1f%% de eficiencia\n", hora,
+eficiencia_restante);</p>
+<p>}</p>
+<p>/*</p>
+<p>Output (Hora 5):</p>
+<p>Hora 5: 80.0% de eficiencia</p>
+<p>*/</p>
+<p><strong>14) Impresión de Rango Variable Inverso</strong></p>
+<p>C</p>
+<p>// Entrada: Inicio=7, Fin=3. Asumimos Inicio &gt; Fin.</p>
+<p>int Inicio = 7;</p>
+<p>int Fin = 3;</p>
+<p>// Inicialización = Inicio; Condición = mientras sea &gt;= Fin;
+Actualización = decremento.</p>
+<p>for (int i = Inicio; i &gt;= Fin; i--) {</p>
+<p>printf("%d ", i);</p>
+<p>}</p>
+<p>printf("\n");</p>
+<p>// Output: 7 6 5 4 3</p>
+<p><strong>15) Desafío: Suma Acumulativa Inversa</strong></p>
+<p>C</p>
+<p>// Entrada: N = 3</p>
+<p>int N_inv = 3;</p>
+<p>int suma_inv = 0; // Acumulador</p>
+<p>// Cuenta regresiva desde N hasta 1</p>
+<p>for (int i = N_inv; i &gt;= 1; i--) {</p>
+<p>suma_inv += i;</p>
+<p>}</p>
+<p>printf("Suma acumulada (3+2+1): %d\n", suma_inv);</p>
+<p>// Output: Suma acumulada (3+2+1): 6</p>
+
+
+</div>
+</body>
+</html>
+

@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" crossorigin href="/assets/content-01sust.css">
+</head>
+<body>
+<div class="main-content">
+
+<h1>5. Límites y Rangos de los Tipos de Datos (Desbordamiento)</h1>
+<p><strong>Rangos de Valores: Headers &lt;limits.h&gt; y
+&lt;float.h&gt;</strong></p>
+<p>Aunque un tipo como int comúnmente utiliza 4 bytes, el estándar C no
+garantiza un tamaño universal. Para escribir código portable que
+funcione correctamente en cualquier arquitectura, los programadores
+necesitan una forma de conocer los <strong>límites exactos</strong> (el
+valor máximo y mínimo) de los tipos de datos en el sistema donde se está
+compilando el programa.</p>
+<p>La biblioteca estándar de C proporciona dos archivos de cabecera
+(headers) fundamentales que definen estas constantes:</p>
+<p><strong>1. &lt;limits.h&gt; (Límites para Enteros)</strong></p>
+<p>Este <em>header</em> define macros que especifican el rango exacto de
+los tipos de datos <strong>enteros</strong> (int, char, long, etc.).</p>
+<table style="width:97%;">
+<colgroup>
+<col style="width: 19%" />
+<col style="width: 21%" />
+<col style="width: 56%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>Macro</strong></th>
+<th style="text-align: left;"><strong>Tipo de Dato</strong></th>
+<th style="text-align: left;"><strong>Significado</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>INT_MAX</strong></td>
+<td style="text-align: left;">int</td>
+<td style="text-align: left;">Valor entero positivo
+<strong>máximo</strong> representable.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>INT_MIN</strong></td>
+<td style="text-align: left;">int</td>
+<td style="text-align: left;">Valor entero negativo
+<strong>mínimo</strong> representable.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>CHAR_MAX</strong></td>
+<td style="text-align: left;">char</td>
+<td style="text-align: left;">Valor máximo de un carácter.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>UINT_MAX</strong></td>
+<td style="text-align: left;">unsigned int</td>
+<td style="text-align: left;">Valor máximo para un entero sin
+signo.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>2. &lt;float.h&gt; (Límites para Punto Flotante)</strong></p>
+<p>Este <em>header</em> define macros que especifican los límites y la
+precisión de los tipos de <strong>punto flotante</strong> (float,
+double, long double).</p>
+<table style="width:97%;">
+<colgroup>
+<col style="width: 18%" />
+<col style="width: 19%" />
+<col style="width: 59%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>Macro</strong></th>
+<th style="text-align: left;"><strong>Tipo de Dato</strong></th>
+<th style="text-align: left;"><strong>Significado</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>FLT_MAX</strong></td>
+<td style="text-align: left;">float</td>
+<td style="text-align: left;">Valor de punto flotante
+<strong>máximo</strong> representable.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>FLT_MIN</strong></td>
+<td style="text-align: left;">float</td>
+<td style="text-align: left;">Valor de punto flotante positivo
+<strong>mínimo</strong> normalizado.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>DBL_MAX</strong></td>
+<td style="text-align: left;">double</td>
+<td style="text-align: left;">Valor double máximo representable.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Uso Práctico en C</strong></p>
+<p>Para acceder a estos límites, simplemente debes incluir el
+<em>header</em> correspondiente al inicio de tu archivo:</p>
+<p>C</p>
+<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
+<p>#<strong>include</strong> &lt;limits.h&gt; // Necesario para
+INT_MAX</p>
+<p>int main(void) {</p>
+<p>// Uso de la constante INT_MAX para inicializar una variable a su
+máximo.</p>
+<p>int maximo_entero = INT_MAX;</p>
+<p>printf("El valor INT_MAX en este sistema es: %d\n",
+maximo_entero);</p>
+<p>// Si INT_MAX es 2,147,483,647 (típico 4 bytes), este valor se
+imprimirá.</p>
+<p>return 0;</p>
+<p>}</p>
+<p>Al utilizar estas macros en lugar de escribir los números de forma
+manual (ej., 2147483647), garantizas que tu programa siempre respete los
+límites de la arquitectura, evitando problemas de desbordamiento de
+forma segura.</p>
+<p><strong>Desbordamiento (<em>Overflow</em> y
+<em>Underflow</em>)</strong></p>
+<p>El desbordamiento es un concepto crítico en C que ocurre cuando
+intentamos almacenar en una variable un valor que está <strong>fuera de
+los límites</strong> definidos por su tipo de dato. Es una consecuencia
+directa de la cantidad fija de <em>bytes</em> que se asigna a cada
+tipo.</p>
+<p><strong>1. Desbordamiento Superior (<em>Overflow</em>)</strong></p>
+<p>El <em>overflow</em> ocurre cuando el resultado de una operación es
+<strong>mayor que el valor máximo</strong> que el tipo de dato puede
+representar.</p>
+<ul>
+<li><p><strong>Escenario:</strong> Imagina un velocímetro que solo puede
+marcar hasta 99. Si intentas aumentar la velocidad a 100, el contador se
+desborda y su comportamiento es inesperado o erróneo.</p></li>
+<li><p><strong>En C:</strong> Si una variable int (cuyo límite máximo es
+INT_MAX, aprox. $2.14$ mil millones) intenta almacenar un número $1$
+unidad mayor que ese límite, el resultado es un
+<em>overflow</em>.</p></li>
+</ul>
+<p><strong>Ejemplo de <em>Overflow</em>:</strong></p>
+<p>C</p>
+<p>// Usamos INT_MAX (el valor máximo para un int)</p>
+<p>#<strong>include</strong> &lt;limits.h&gt;</p>
+<p>int main(void) {</p>
+<p>int valor_maximo = INT_MAX; // Ejemplo: 2,147,483,647</p>
+<p>// Intentar sumar 1 al valor máximo causa overflow.</p>
+<p>int desbordamiento = valor_maximo + 1;</p>
+<p>// El resultado no es el esperado (+2,147,483,648).</p>
+<p>// En su lugar, el valor "da la vuelta" al límite negativo (ver
+próximo tema).</p>
+<p>return 0;</p>
+<p>}</p>
+<p><strong>2. Desbordamiento Inferior (<em>Underflow</em>)</strong></p>
+<p>El <em>underflow</em> ocurre cuando el resultado de una operación es
+<strong>menor que el valor mínimo</strong> que el tipo de dato puede
+representar.</p>
+<ul>
+<li><p><strong>Enteros:</strong> En tipos enteros, el <em>underflow</em>
+sucede cuando se intenta almacenar un valor más pequeño que INT_MIN (el
+valor negativo más grande).</p></li>
+<li><p><strong>Punto Flotante:</strong> Es más común en tipos de punto
+flotante (float, double) cuando un resultado es un número decimal tan
+cercano a cero que no puede ser representado con precisión. El sistema
+lo puede aproximar a cero.</p></li>
+</ul>
+<p><strong>Consecuencias:</strong></p>
+<p>El desbordamiento en C para tipos enteros signados (como el int
+estándar) resulta en un <strong>comportamiento indefinido</strong> según
+el estándar, aunque la mayoría de las arquitecturas utilizan la técnica
+de "<strong>Dar la Vuelta</strong>" (<em>Wrap Around</em>), lo cual se
+detalla a continuación. En cualquier caso, es un error lógico que debe
+evitarse.</p>
+<p><strong>El Efecto de "Dar la Vuelta" (<em>Wrap
+Around</em>)</strong></p>
+<p>Cuando ocurre un desbordamiento (<em>overflow</em>) en variables de
+tipo entero <strong>con signo</strong> (int, char, etc.), el estándar de
+C define este comportamiento como <strong>indefinido</strong>. Sin
+embargo, en la inmensa mayoría de las arquitecturas de computadoras, se
+utiliza un comportamiento predecible y cíclico conocido como el efecto
+de "<strong>Dar la Vuelta</strong>" o <em>Wrap Around</em>.</p>
+<p><strong>¿Cómo Funciona el <em>Wrap Around</em>?</strong></p>
+<p>Este efecto se debe a la forma en que los números se representan en
+la memoria utilizando un número fijo de bits (ej., 32 bits para un int).
+Piensa en los valores posibles como si estuvieran dispuestos en una
+<strong>rueda</strong> o reloj:</p>
+<ul>
+<li><p>Cuando el contador alcanza el <strong>valor máximo
+positivo</strong> (INT_MAX), el siguiente incremento hace que el valor
+<strong>salte inmediatamente al valor mínimo negativo</strong>
+(INT_MIN).</p></li>
+<li><p>De manera inversa, si el contador alcanza el <strong>valor mínimo
+negativo</strong> (INT_MIN), el siguiente decremento lo hace saltar de
+vuelta al valor <strong>máximo positivo</strong>.</p></li>
+</ul>
+<p>$$\text{Fórmula del Overflow (Típico): } \text{INT\_MAX} + 1
+\rightarrow \text{INT\_MIN}$$</p>
+<p><strong>Demostración Empírica en C</strong></p>
+<p>Para demostrar este efecto, es necesario utilizar el <em>header</em>
+&lt;limits.h&gt; para acceder al valor máximo que nuestro sistema puede
+manejar.</p>
+<p>C</p>
+<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
+<p>#<strong>include</strong> &lt;limits.h&gt; // Necesario para
+INT_MAX</p>
+<p>int main(void) {</p>
+<p>// 1. Inicializamos la variable con el límite superior de int.</p>
+<p>int contador = INT_MAX;</p>
+<p>printf("Valor Máximo (INT_MAX): %d\n", contador);</p>
+<p>// 2. Realizamos la operación que causa el desbordamiento.</p>
+<p>contador = contador + 1;</p>
+<p>// 3. Imprimimos el nuevo valor, que debería ser el valor mínimo
+(INT_MIN).</p>
+<p>printf("Valor después de sumar 1: %d\n", contador);</p>
+<p>return 0;</p>
+<p>}</p>
+<p><strong>Salida Típica (Sistema de 32/64 bits):</strong></p>
+<p>Valor Máximo (INT_MAX): 2147483647</p>
+<p>Valor después de sumar 1: -2147483648</p>
+<p>El resultado es el <strong>valor más negativo</strong> posible para
+un int, demostrando el salto cíclico. Este comportamiento es muy
+importante de entender, ya que es una fuente común de errores de lógica
+en programas que no validan los límites de sus variables.</p>
+<p><strong>Modificadores de Tipo: signed y unsigned</strong></p>
+<p>Para controlar mejor el rango de valores de los tipos enteros, C
+proporciona modificadores de tipo que alteran la forma en que el
+compilador interpreta los bits reservados, permitiendo extender el rango
+positivo a expensas de los números negativos.</p>
+<p><strong>1. El Modificador signed (Con Signo)</strong></p>
+<p>El modificador signed indica que la variable <strong>puede almacenar
+números positivos y negativos</strong>.</p>
+<ul>
+<li><p><strong>Comportamiento por Defecto:</strong> Los tipos enteros
+estándar (int, char) son <strong>signed por defecto</strong>. La mitad
+de sus posibles valores se usa para números negativos, y la otra mitad
+(menos un valor para el cero) para números positivos.</p></li>
+<li><p><strong>Representación:</strong> Un bit (el bit más
+significativo) se utiliza para representar el signo (cero para positivo,
+uno para negativo).</p></li>
+</ul>
+<table style="width:97%;">
+<colgroup>
+<col style="width: 17%" />
+<col style="width: 40%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>Tipo</strong></th>
+<th style="text-align: left;"><strong>Rango (4 bytes)</strong></th>
+<th style="text-align: left;"><strong>Bits para Valor</strong></th>
+<th style="text-align: left;"><strong>Bit para Signo</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">int (Signed)</td>
+<td style="text-align: left;">Aprox. $\pm 2.14 \text{ mil
+millones}$</td>
+<td style="text-align: left;">31</td>
+<td style="text-align: left;">1</td>
+</tr>
+</tbody>
+</table>
+<p><strong>2. El Modificador unsigned (Sin Signo)</strong></p>
+<p>El modificador unsigned indica que la variable <strong>solo puede
+almacenar números positivos, incluido el cero</strong>.</p>
+<ul>
+<li><p><strong>Ventaja:</strong> Al eliminar la necesidad de un bit para
+el signo, ese bit adicional se utiliza para el valor, <strong>duplicando
+efectivamente el rango positivo</strong> de la variable.</p></li>
+<li><p><strong>Uso:</strong> Ideal para contadores, tamaños de memoria,
+o cualquier valor que lógicamente nunca deba ser negativo.</p></li>
+</ul>
+<table style="width:97%;">
+<colgroup>
+<col style="width: 15%" />
+<col style="width: 42%" />
+<col style="width: 19%" />
+<col style="width: 19%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>Tipo</strong></th>
+<th style="text-align: left;"><strong>Rango (4 bytes)</strong></th>
+<th style="text-align: left;"><strong>Bits para Valor</strong></th>
+<th style="text-align: left;"><strong>Bit para Signo</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">unsigned int</td>
+<td style="text-align: left;">$\text{0 a aprox. } 4.29 \text{ mil
+millones}$</td>
+<td style="text-align: left;">32</td>
+<td style="text-align: left;">0 (No se usa)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Sintaxis y Aplicación</strong></p>
+<p>El modificador se coloca antes del tipo de dato. Si se omite el tipo
+(solo se usa unsigned), C asume unsigned int.</p>
+<table style="width:97%;">
+<colgroup>
+<col style="width: 22%" />
+<col style="width: 28%" />
+<col style="width: 46%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>Tipo Completo</strong></th>
+<th style="text-align: left;"><strong>Abreviatura Común</strong></th>
+<th style="text-align: left;"><strong>Rango de Uso</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">signed int</td>
+<td style="text-align: left;">int</td>
+<td style="text-align: left;">Valores positivos y negativos.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">unsigned int</td>
+<td style="text-align: left;">unsigned</td>
+<td style="text-align: left;">Solo valores de $0$ a máximo
+positivo.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">unsigned char</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Almacena $0$ a $255$.</td>
+</tr>
+</tbody>
+</table>
+<p>C</p>
+<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
+<p>int main(void) {</p>
+<p>// Variable con rango positivo y negativo.</p>
+<p>signed int cuenta_normal = -500;</p>
+<p>// Variable solo con rango positivo (el doble que el signed int).</p>
+<p>unsigned int poblacion_total = 4000000000;</p>
+<p>printf("Cuenta normal: %d\n", cuenta_normal);</p>
+<p>printf("Población (solo positivo): %u\n", poblacion_total); // Usa
+%u</p>
+<p>return 0;</p>
+<p>}</p>
+<p>Es crucial usar el modificador correcto: si intentas almacenar un
+número negativo en una variable unsigned, se producirá un
+<em>overflow</em> inmediato, causando el efecto <em>wrap around</em> y
+generando un número positivo erróneo.</p>
+
+
+</div>
+</body>
+</html>
+

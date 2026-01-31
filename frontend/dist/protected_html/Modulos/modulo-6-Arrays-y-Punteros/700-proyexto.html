@@ -1,0 +1,183 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" crossorigin href="/assets/content-01sust.css">
+</head>
+<body>
+<div class="main-content">
+<h2
+id="proyecto-de-laboratorio-implementaciÃ³n-de-un-buffer-circular-estÃ¡tico-con-aritmÃ©tica-de-punteros">ðŸ’¾
+Proyecto de Laboratorio: ImplementaciÃ³n de un Buffer Circular EstÃ¡tico
+con AritmÃ©tica de Punteros</h2>
+<h3 id="i.-introducciÃ³n-la-voz-del-experto">I. IntroducciÃ³n (La Voz del
+Experto)</h3>
+<p>Este proyecto representa la culminaciÃ³n del entendimiento entre las
+estructuras de datos estÃ¡ticas y la manipulaciÃ³n directa de la memoria a
+travÃ©s de punteros. En el desarrollo de sistemas embebidos y
+comunicaciones, el <strong>Buffer Circular</strong> (o <em>Ring
+Buffer</em>) es una estructura vital para gestionar datos de manera
+eficiente sin depender de asignaciÃ³n dinÃ¡mica.</p>
+<p><strong>La Regla de Oro:</strong> Para dominar C, deben ver el nombre
+de un <em>array</em> como un <strong>puntero constante</strong> al
+primer elemento. En este laboratorio, toda operaciÃ³n de lectura y
+escritura debe realizarse a travÃ©s de la <strong>desreferencia de
+punteros (<code>*</code>)</strong> y la <strong>aritmÃ©tica de
+direcciones</strong>, absteniÃ©ndose del uso de la notaciÃ³n de corchetes
+<code>[]</code> en las funciones principales, excepto para la
+declaraciÃ³n inicial.</p>
+<h3 id="ii.-objetivo-del-proyecto">II. ðŸŽ¯ Objetivo del Proyecto</h3>
+<p>Implementar una <strong>estructura de datos de Buffer
+Circular</strong> para enteros (<code>int</code>) con un tamaÃ±o fijo
+predefinido, donde la lectura y la escritura se mueven cÃ­clicamente a
+travÃ©s de un <em>array</em> subyacente.</p>
+<h3 id="iii.-estructura-y-requisitos-tÃ©cnicos">III. ðŸ› ï¸ Estructura y
+Requisitos TÃ©cnicos</h3>
+<h4 id="definiciÃ³n-de-la-estructura">1. DefiniciÃ³n de la Estructura</h4>
+<p>Se debe definir una estructura principal que encapsule el estado del
+buffer:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#define CAPACIDAD </span><span class="dv">8</span><span class="pp"> </span><span class="co">// Capacidad fija del Buffer</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="kw">typedef</span> <span class="kw">struct</span> <span class="op">{</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> datos<span class="op">[</span>CAPACIDAD<span class="op">];</span> <span class="co">// El array subyacente (BÃºfer estÃ¡tico)</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> <span class="op">*</span>head<span class="op">;</span>            <span class="co">// Puntero de Lectura (primera posiciÃ³n ocupada)</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> <span class="op">*</span>tail<span class="op">;</span>            <span class="co">// Puntero de Escritura (primera posiciÃ³n disponible)</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> count<span class="op">;</span>            <span class="co">// Contador de elementos actual</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> CircularBuffer<span class="op">;</span></span></code></pre></div>
+<h4 id="funciones-obligatorias">2. Funciones Obligatorias</h4>
+<p>Todas las funciones de manipulaciÃ³n de datos
+(<strong><code>buffer_push</code></strong> y
+<strong><code>buffer_pop</code></strong>) deben trabajar exclusivamente
+con los punteros <code>head</code> y <code>tail</code>.</p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">FunciÃ³n</th>
+<th style="text-align: left;">PropÃ³sito</th>
+<th style="text-align: left;">Requisitos de ImplementaciÃ³n</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td
+style="text-align: left;"><code>void buffer_init(CircularBuffer *cb);</code></td>
+<td style="text-align: left;">Inicializa el buffer. Debe usar el
+operador <strong><code>&amp;</code></strong> para inicializar
+<code>head</code> y <code>tail</code> a la direcciÃ³n base del
+array.</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td
+style="text-align: left;"><code>int buffer_push(CircularBuffer *cb, int valor);</code></td>
+<td style="text-align: left;">Agrega un nuevo <code>valor</code> al
+bÃºfer, usando el puntero <code>tail</code> y el operador de
+<strong>desreferencia <code>*</code></strong>.</td>
+<td style="text-align: left;"><strong>AritmÃ©tica de Punteros:</strong>
+El puntero <code>tail</code> debe avanzar
+(<code>cb-&gt;tail++</code>).</td>
+</tr>
+<tr class="odd">
+<td
+style="text-align: left;"><code>int buffer_pop(CircularBuffer *cb, int *destino);</code></td>
+<td style="text-align: left;">Lee el elemento mÃ¡s antiguo del bÃºfer,
+usando <code>head</code> para la lectura y el operador
+<strong><code>*</code></strong> para escribir el dato en la variable de
+destino (<code>*destino</code>).</td>
+<td style="text-align: left;"><strong>AritmÃ©tica de Punteros:</strong>
+El puntero <code>head</code> debe avanzar
+(<code>cb-&gt;head++</code>).</td>
+</tr>
+<tr class="even">
+<td
+style="text-align: left;"><code>int buffer_is_full(const CircularBuffer *cb);</code></td>
+<td style="text-align: left;">Retorna verdadero (<code>1</code>) si el
+bÃºfer estÃ¡ lleno.</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td
+style="text-align: left;"><code>int buffer_is_empty(const CircularBuffer *cb);</code></td>
+<td style="text-align: left;">Retorna verdadero (<code>1</code>) si el
+bÃºfer estÃ¡ vacÃ­o.</td>
+<td style="text-align: left;"></td>
+</tr>
+</tbody>
+</table>
+<h3 id="iv.-desafÃ­o-y-manejo-de-lÃ­mites-buffer-overflowwrap-around">IV.
+ðŸš¨ DesafÃ­o y Manejo de LÃ­mites (Buffer Overflow/Wrap-Around)</h3>
+<p>El corazÃ³n de este laboratorio es evitar el desbordamiento y lograr
+la circularidad.</p>
+<ol type="1">
+<li><strong>Circularidad (Wrap-Around):</strong> Si al incrementar
+<code>head</code> o <code>tail</code>, el puntero excede la Ãºltima
+posiciÃ³n legal del <em>array</em> (la direcciÃ³n de
+<code>datos[CAPACIDAD - 1]</code>), el puntero debe
+<strong>resetearse</strong> a la direcciÃ³n base
+(<code>&amp;cb-&gt;datos[0]</code>). Esto imita el comportamiento de
+<strong>sobreescribir</strong> la memoria, pero de forma controlada y
+segura, dentro de los lÃ­mites del <em>array</em> estÃ¡tico.</li>
+<li><strong>ValidaciÃ³n de LÃ­mites:</strong>
+<ul>
+<li><code>buffer_push</code> debe fallar (retornar <code>0</code>) si el
+bÃºfer estÃ¡ lleno.</li>
+<li><code>buffer_pop</code> debe fallar (retornar <code>0</code>) si el
+bÃºfer estÃ¡ vacÃ­o.</li>
+</ul></li>
+</ol>
+<h3 id="v.-puntuaciÃ³n-y-criterios-de-evaluaciÃ³n">V. ðŸ§ª PuntuaciÃ³n y
+Criterios de EvaluaciÃ³n</h3>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Criterio</th>
+<th style="text-align: left;">Porcentaje</th>
+<th style="text-align: left;">Observaciones Clave</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>Funcionalidad</strong></td>
+<td style="text-align: left;">40%</td>
+<td style="text-align: left;">El Buffer debe poder hacer <em>push</em> y
+<em>pop</em> de manera secuencial y cÃ­clica.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Punteros (<code>*</code> y
+<code>&amp;</code>)</strong></td>
+<td style="text-align: left;">30%</td>
+<td style="text-align: left;">Uso estricto de <strong>aritmÃ©tica de
+punteros</strong> para acceder a los datos. Se prohÃ­be el uso de
+<code>cb-&gt;datos[i]</code> dentro de <code>push</code> y
+<code>pop</code>.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Manejo de LÃ­mites</strong></td>
+<td style="text-align: left;">20%</td>
+<td style="text-align: left;">ImplementaciÃ³n correcta y robusta del
+<strong>Wrap-Around</strong> (la circularidad) y la detecciÃ³n de
+<code>is_full</code>/<code>is_empty</code>.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Estilo y Modularidad</strong></td>
+<td style="text-align: left;">10%</td>
+<td style="text-align: left;">CÃ³digo organizado, con <code>main.c</code>
+dedicado solo a las pruebas. Uso de comentarios claros.</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</body>
+</html>
+

@@ -1,0 +1,127 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" crossorigin href="/assets/content-01sust.css">
+</head>
+<body>
+<div class="main-content">
+<h2 id="definiciÃ³n-de-un-nodo-node">DefiniciÃ³n de un Nodo (Node) ðŸ—ï¸</h2>
+<p>En el contexto de las Listas Enlazadas, el <strong>Nodo</strong> es
+la <strong>unidad fundamental y mÃ­nima</strong> de la estructura de
+datos. Funciona como un contenedor discreto que encapsula tanto el valor
+que se desea almacenar como la informaciÃ³n necesaria para mantener el
+orden lÃ³gico de la lista.</p>
+<hr />
+<h3 id="el-nodo-como-struct">El Nodo como <code>struct</code></h3>
+<p>En el lenguaje C, un nodo se implementa siempre como una
+<strong>estructura</strong> (<code>struct</code>). Esta elecciÃ³n es
+necesaria porque un nodo debe agrupar bajo un mismo nombre dos o mÃ¡s
+tipos de datos que son intrÃ­nsecamente diferentes, pero que deben
+manejarse conjuntamente:</p>
+<ul>
+<li><strong>El dato real</strong> (que podrÃ­a ser un entero, un
+flotante, o incluso otra estructura mÃ¡s compleja).</li>
+<li><strong>El enlace</strong> o puntero que apunta al siguiente
+nodo.</li>
+</ul>
+<p>Por lo tanto, la definiciÃ³n de un nodo en C debe ser un
+<strong><code>struct</code></strong> que contenga al menos dos
+campos.</p>
+<h2 id="campo-de-datos-data-field">Campo de Datos (Data Field) ðŸ’¾</h2>
+<p>El <strong>Campo de Datos</strong> es la primera parte fundamental de
+la estructura del nodo. Su propÃ³sito es <strong>almacenar la informaciÃ³n
+real</strong> que se desea guardar y gestionar dentro de la Lista
+Enlazada.</p>
+<hr />
+<h3 id="funciÃ³n-y-flexibilidad">FunciÃ³n y Flexibilidad</h3>
+<p>Este campo representa el valor o la carga Ãºtil de la unidad del nodo.
+Puede ser de cualquier tipo de dato vÃ¡lido en C, ofreciendo gran
+flexibilidad:</p>
+<ul>
+<li><strong>Tipos Primitivos:</strong> Puede ser un simple entero
+(<code>int</code>), un carÃ¡cter (<code>char</code>), un nÃºmero de punto
+flotante (<code>float</code>), etc.</li>
+<li><strong>Tipos Compuestos:</strong> En aplicaciones reales, es comÃºn
+que el campo de datos sea una <strong>estructura anidada
+(<code>struct</code>)</strong> o un <strong>puntero</strong> a otra
+estructura mÃ¡s compleja. Por ejemplo, podrÃ­a contener un registro
+completo de un cliente (nombre, ID, direcciÃ³n), haciendo del nodo un
+contenedor para objetos complejos.</li>
+</ul>
+<p><strong>Ejemplo de DefiniciÃ³n:</strong></p>
+<p>Si la lista se va a utilizar para almacenar nÃºmeros enteros:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">struct</span> Nodo <span class="op">{</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> dato<span class="op">;</span> <span class="co">// Este es el campo de datos</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">// ... struct Nodo *siguiente; // Campo de enlace</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span></code></pre></div>
+<p>La elecciÃ³n del tipo de dato en este campo determina la utilidad de
+la Lista Enlazada para la aplicaciÃ³n especÃ­fica que se estÃ©
+desarrollando.</p>
+<h2 id="campo-de-enlace-siguiente">Campo de Enlace
+(<code>siguiente</code>) âž¡ï¸</h2>
+<p>El <strong>Campo de Enlace</strong> (a menudo llamado
+<code>siguiente</code> o <code>next</code>) es la parte mÃ¡s crucial de
+la estructura del nodo, ya que es el mecanismo que
+<strong>enlaza</strong> el nodo actual con el resto de la secuencia
+lÃ³gica de la lista.</p>
+<hr />
+<h3 id="naturaleza-recursiva-del-puntero">Naturaleza Recursiva del
+Puntero</h3>
+<p>Este campo debe ser obligatoriamente un <strong>puntero</strong>
+(<code>*</code>) que apunta a una estructura del <strong>mismo
+tipo</strong> de nodo. Esto se conoce como una estructura de datos
+autorreferenciada o recursiva.</p>
+<p>Si defines la estructura de la lista como <code>struct Nodo</code>,
+el campo de enlace debe ser:</p>
+<p><span class="math display">â€˜struct Nodo *siguiente;â€˜</span></p>
+<ul>
+<li><strong>FunciÃ³n:</strong> La variable <code>siguiente</code>
+almacena la <strong>direcciÃ³n de memoria</strong> (en el <em>Heap</em>)
+donde reside el prÃ³ximo nodo en la lista.</li>
+<li><strong>TerminaciÃ³n de la Lista:</strong> Si un nodo es el Ãºltimo de
+la lista, su campo <code>siguiente</code> debe contener el valor
+<strong><code>NULL</code></strong>. El valor <code>NULL</code> actÃºa
+como el marcador de fin de la lista, indicando que no hay mÃ¡s nodos a
+seguir.</li>
+</ul>
+<p>El campo de enlace permite que, a partir de cualquier nodo, se pueda
+recorrer la lista enlazada, saltando de una ubicaciÃ³n de memoria a otra
+hasta llegar al final.</p>
+<h2 id="el-puntero-head-cabeza">El Puntero <code>HEAD</code> (Cabeza)
+ðŸ§ </h2>
+<p>El puntero <strong><code>HEAD</code></strong> (o
+<strong>Cabeza</strong>) es fundamental en la gestiÃ³n de cualquier Lista
+Enlazada. No es un nodo en sÃ­ mismo, sino el <strong>punto de
+partida</strong> obligatorio para acceder a toda la estructura.</p>
+<hr />
+<h3 id="funciÃ³n-y-propÃ³sito">FunciÃ³n y PropÃ³sito</h3>
+<p>El puntero <code>HEAD</code> actÃºa como el <strong>ancla</strong> o
+la <strong>puerta de entrada</strong> a la lista:</p>
+<ol type="1">
+<li><strong>Ãšnico Punto de Acceso:</strong> Es la Ãºnica variable que
+almacena la direcciÃ³n de memoria del primer elemento de la lista. Si se
+pierde <code>HEAD</code>, se pierde el acceso a <strong>toda la
+lista</strong> (lo que resultarÃ­a en una fuga de memoria si la lista fue
+asignada dinÃ¡micamente).</li>
+<li><strong>Referencia al Primer Nodo:</strong> Si la lista contiene
+nodos, <code>HEAD</code> siempre apunta al <strong>primer nodo</strong>
+de la secuencia.</li>
+<li><strong>Lista VacÃ­a:</strong> Si la lista estÃ¡ completamente vacÃ­a y
+no contiene nodos, el puntero <code>HEAD</code> debe estar inicializado
+y contener el valor <strong><code>NULL</code></strong>. Este es el
+estado inicial de toda lista enlazada.</li>
+</ol>
+<h3 id="declaraciÃ³n">DeclaraciÃ³n</h3>
+<p>Debido a que <code>HEAD</code> debe almacenar la direcciÃ³n de un
+nodo, se declara como un puntero del mismo tipo de estructura:</p>
+<p><span class="math display">â€˜struct Nodo *head = NULL;â€˜</span></p>
+<p>Cuando se trabaja con listas, el manejo de <code>HEAD</code> es el
+paso inicial para cualquier operaciÃ³n, ya sea recorrido, inserciÃ³n o
+eliminaciÃ³n.</p>
+
+</div>
+</body>
+</html>
+

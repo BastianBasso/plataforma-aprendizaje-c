@@ -1,0 +1,252 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" crossorigin href="/assets/content-01sust.css">
+</head>
+<body>
+<div class="main-content">
+<p><strong>15 Ejercicios: Operadores Aritméticos y
+Asignación</strong></p>
+<p><strong>1. División Entera (Truncamiento)</strong></p>
+<p><strong>Instrucción:</strong> Demuestra la división entera en C
+dividiendo 25 / 4 y mostrando el resultado.</p>
+<p><strong>Solución en C:</strong></p>
+<p>C</p>
+<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
+<p>int main(void) {</p>
+<p>int a = 25;</p>
+<p>int b = 4;</p>
+<p>int resultado = a / b;</p>
+<p>printf("Resultado de 25 / 4 (entero): %d\n", resultado);</p>
+<p>return 0;</p>
+<p>}</p>
+<p><strong>Output Esperado:</strong></p>
+<p>Resultado de 25 / 4 (entero): 6</p>
+<p><strong>2. División con <em>Casting</em> (Precisión)</strong></p>
+<p><strong>Instrucción:</strong> Repite la división de 25 / 4, pero usa
+<em>casting</em> explícito para obtener un resultado de punto
+flotante.</p>
+<p><strong>Solución en C:</strong></p>
+<p>C</p>
+<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
+<p>int main(void) {</p>
+<p>int a = 25;</p>
+<p>int b = 4;</p>
+<p>// Convierte 'a' a float antes de la división</p>
+<p>float resultado = (float)a / b;</p>
+<p>printf("Resultado con casting: %.2f\n", resultado);</p>
+<p>return 0;</p>
+<p>}</p>
+<p><strong>Output Esperado:</strong></p>
+<p>Resultado con casting: 6.25</p>
+<p><strong>3. Operador Módulo (%)</strong></p>
+<p><strong>Instrucción:</strong> Calcula el módulo de 37 % 5 para
+encontrar el resto de la división.</p>
+<p><strong>Solución en C:</strong></p>
+<p>C</p>
+<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
+<p>int main(void) {</p>
+<p>int a = 37;</p>
+<p>int b = 5;</p>
+<p>int resto = a % b;</p>
+<p>printf("El resto de 37 / 5 es: %d\n", resto);</p>
+<p>return 0;</p>
+<p>}</p>
+<p><strong>Output Esperado:</strong></p>
+<p>El resto de 37 / 5 es: 2</p>
+<p><strong>4. Módulo para Par/Impar</strong></p>
+<p><strong>Instrucción:</strong> Usa el operador módulo para determinar
+si el número 98 es par (debería dar un resto de 0).</p>
+<p><strong>Solución en C:</strong></p>
+<p>C</p>
+<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
+<p>int main(void) {</p>
+<p>int numero = 98;</p>
+<p>int paridad = numero % 2;</p>
+<p>printf("Paridad de 98 (0=par, 1=impar): %d\n", paridad);</p>
+<p>return 0;</p>
+<p>}</p>
+<p><strong>Output Esperado:</strong></p>
+<p>Paridad de 98 (0=par, 1=impar): 0</p>
+<p><strong>5. Operador de Asignación Simple (=)</strong></p>
+<p><strong>Instrucción:</strong> Asigna el resultado de la expresión (10
+* 3) - 5 a la variable valor_calculado.</p>
+<p><strong>Solución en C:</strong></p>
+<p>C</p>
+<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
+<p>int main(void) {</p>
+<p>int valor_calculado; // Declaración</p>
+<p>// Asignación simple: 30 - 5 = 25</p>
+<p>valor_calculado = (10 * 3) - 5;</p>
+<p>printf("Valor calculado: %d\n", valor_calculado);</p>
+<p>return 0;</p>
+<p>}</p>
+<p><strong>Output Esperado:</strong></p>
+<p>Valor calculado: 25</p>
+<p><strong>6. Asignación Compuesta de Suma (+=)</strong></p>
+<p><strong>Instrucción:</strong> Inicializa puntuacion a 50. Luego, usa
++= para sumarle 15 puntos.</p>
+<p><strong>Solución en C:</strong></p>
+<p>C</p>
+<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
+<p>int main(void) {</p>
+<p>int puntuacion = 50;</p>
+<p>puntuacion += 15; // Equivalente a puntuacion = puntuacion + 15;</p>
+<p>printf("Puntuación final: %d\n", puntuacion);</p>
+<p>return 0;</p>
+<p>}</p>
+<p><strong>Output Esperado:</strong></p>
+<p>Puntuación final: 65</p>
+<p><strong>7. Asignación Compuesta de Multiplicación (*=)</strong></p>
+<p><strong>Instrucción:</strong> Inicializa saldo a 200. Usa *= para
+duplicar el saldo.</p>
+<p><strong>Solución en C:</strong></p>
+<p>C</p>
+<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
+<p>int main(void) {</p>
+<p>int saldo = 200;</p>
+<p>saldo *= 2; // Equivalente a saldo = saldo * 2;</p>
+<p>printf("Nuevo saldo: %d\n", saldo);</p>
+<p>return 0;</p>
+<p>}</p>
+<p><strong>Output Esperado:</strong></p>
+<p>Nuevo saldo: 400</p>
+<p><strong>8. Asignación Compuesta de Resta (-=)</strong></p>
+<p><strong>Instrucción:</strong> Inicializa inventario a 100. Usa -=
+para restar 35 unidades.</p>
+<p><strong>Solución en C:</strong></p>
+<p>C</p>
+<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
+<p>int main(void) {</p>
+<p>int inventario = 100;</p>
+<p>inventario -= 35; // Equivalente a inventario = inventario - 35;</p>
+<p>printf("Inventario restante: %d\n", inventario);</p>
+<p>return 0;</p>
+<p>}</p>
+<p><strong>Output Esperado:</strong></p>
+<p>Inventario restante: 65</p>
+<p><strong>9. Asignación Compuesta de División (/=)</strong></p>
+<p><strong>Instrucción:</strong> Inicializa total a 150. Usa /= para
+dividir el total entre 3 (división entera).</p>
+<p><strong>Solución en C:</strong></p>
+<p>C</p>
+<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
+<p>int main(void) {</p>
+<p>int total = 150;</p>
+<p>total /= 3; // Equivalente a total = total / 3;</p>
+<p>printf("Total dividido: %d\n", total);</p>
+<p>return 0;</p>
+<p>}</p>
+<p><strong>Output Esperado:</strong></p>
+<p>Total dividido: 50</p>
+<p><strong>10. Incremento Postfijo (x++)</strong></p>
+<p><strong>Instrucción:</strong> Inicializa x a 8. Usa el postfijo en
+una asignación: y = x++;. Imprime ambos valores.</p>
+<p><strong>Solución en C:</strong></p>
+<p>C</p>
+<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
+<p>int main(void) {</p>
+<p>int x = 8;</p>
+<p>int y = x++; // y toma el valor original (8), luego x se incrementa a
+9.</p>
+<p>printf("Valor de x: %d\n", x);</p>
+<p>printf("Valor de y: %d\n", y);</p>
+<p>return 0;</p>
+<p>}</p>
+<p><strong>Output Esperado:</strong></p>
+<p>Valor de x: 9</p>
+<p>Valor de y: 8</p>
+<p><strong>11. Incremento Prefijo (++x)</strong></p>
+<p><strong>Instrucción:</strong> Inicializa a a 8. Usa el prefijo en una
+asignación: b = ++a;. Imprime ambos valores.</p>
+<p><strong>Solución en C:</strong></p>
+<p>C</p>
+<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
+<p>int main(void) {</p>
+<p>int a = 8;</p>
+<p>int b = ++a; // a se incrementa a 9, luego b toma el nuevo valor
+(9).</p>
+<p>printf("Valor de a: %d\n", a);</p>
+<p>printf("Valor de b: %d\n", b);</p>
+<p>return 0;</p>
+<p>}</p>
+<p><strong>Output Esperado:</strong></p>
+<p>Valor de a: 9</p>
+<p>Valor de b: 9</p>
+<p><strong>12. Decremento Postfijo (x--)</strong></p>
+<p><strong>Instrucción:</strong> Inicializa contador a 3. Usa el
+postfijo en una asignación: resta = contador--;. Imprime el
+resultado.</p>
+<p><strong>Solución en C:</strong></p>
+<p>C</p>
+<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
+<p>int main(void) {</p>
+<p>int contador = 3;</p>
+<p>int resta = contador--; // resta toma 3, luego contador es 2.</p>
+<p>printf("Contador original (asignado a resta): %d\n", resta);</p>
+<p>printf("Contador final: %d\n", contador);</p>
+<p>return 0;</p>
+<p>}</p>
+<p><strong>Output Esperado:</strong></p>
+<p>Contador original (asignado a resta): 3</p>
+<p>Contador final: 2</p>
+<p><strong>13. Cadena de Operadores Aritméticos</strong></p>
+<p><strong>Instrucción:</strong> Calcula el resultado de la expresión:
+(5 * 2) + 1 - (15 / 4). Recuerda el truncamiento.</p>
+<p><strong>Solución en C:</strong></p>
+<p>C</p>
+<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
+<p>int main(void) {</p>
+<p>// (5 * 2) -&gt; 10</p>
+<p>// (15 / 4) -&gt; 3 (truncamiento)</p>
+<p>// 10 + 1 - 3 -&gt; 8</p>
+<p>int resultado = (5 * 2) + 1 - (15 / 4);</p>
+<p>printf("Resultado de la cadena: %d\n", resultado);</p>
+<p>return 0;</p>
+<p>}</p>
+<p><strong>Output Esperado:</strong></p>
+<p>Resultado de la cadena: 8</p>
+<p><strong>14. Uso de Módulo para Cíclicos</strong></p>
+<p><strong>Instrucción:</strong> Tienes un contador de meses que va de 1
+a 12. Si el contador es 15, usa el módulo para encontrar el mes
+equivalente (resultado 3, ya que el ciclo se reinicia).</p>
+<p><strong>Solución en C:</strong></p>
+<p>C</p>
+<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
+<p>int main(void) {</p>
+<p>int meses_pasados = 15;</p>
+<p>// Si queremos que el resultado sea 1-12, necesitamos (meses % 12) +
+1</p>
+<p>// Si el resultado es 0, significa que es el mes 12.</p>
+<p>int mes_actual = (meses_pasados % 12);</p>
+<p>printf("Mes 15 en un ciclo de 12 (0=diciembre): %d\n",
+mes_actual);</p>
+<p>return 0;</p>
+<p>}</p>
+<p><strong>Output Esperado:</strong></p>
+<p>Mes 15 en un ciclo de 12 (0=diciembre): 3</p>
+<p><strong>15. Múltiples Asignaciones Compuestas</strong></p>
+<p><strong>Instrucción:</strong> Inicializa valor a 10. Primero usa
+valor += 3, luego valor *= 2, y finalmente valor %= 5. Imprime el valor
+final.</p>
+<p><strong>Solución en C:</strong></p>
+<p>C</p>
+<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
+<p>int main(void) {</p>
+<p>int valor = 10;</p>
+<p>valor += 3; // valor = 10 + 3 = 13</p>
+<p>valor *= 2; // valor = 13 * 2 = 26</p>
+<p>valor %= 5; // valor = 26 % 5 = 1 (ya que 5 * 5 + 1 = 26)</p>
+<p>printf("Valor final: %d\n", valor);</p>
+<p>return 0;</p>
+<p>}</p>
+<p><strong>Output Esperado:</strong></p>
+<p>Valor final: 1</p>
+
+
+</div>
+</body>
+</html>
+

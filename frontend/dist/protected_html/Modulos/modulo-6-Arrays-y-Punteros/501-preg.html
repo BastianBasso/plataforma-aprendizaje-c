@@ -1,0 +1,228 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" crossorigin href="/assets/content-01sust.css">
+</head>
+<body>
+<div class="main-content">
+<h2 id="preguntas-de-alternativa-operadores-de-punteros-y">ðŸ“ 10
+Preguntas de Alternativa: Operadores de Punteros (<code>*</code> y
+<code>&amp;</code>)</h2>
+<hr />
+<h3 id="pregunta-1-funciÃ³n-del-operador">Pregunta 1: FunciÃ³n del
+operador <code>&amp;</code></h3>
+<p>Â¿CuÃ¡l es la funciÃ³n principal del operador <strong>ampersand</strong>
+(<code>&amp;</code>) cuando se aplica a una variable regular
+(<code>int x;</code>)?</p>
+<ol type="A">
+<li>Obtener el valor almacenado en la variable.</li>
+<li>Declarar una variable como puntero.</li>
+<li><strong>Obtener la direcciÃ³n de memoria de la
+variable.</strong></li>
+<li>Multiplicar el valor de la variable por 8.</li>
+</ol>
+<hr />
+<h3 id="pregunta-2-uso-del-operador-desreferencia">Pregunta 2: Uso del
+operador <code>*</code> (Desreferencia)</h3>
+<p>Si tienes un puntero <code>int* p;</code> que ya apunta a una
+variable entera <code>x</code>, Â¿quÃ© realiza la expresiÃ³n
+<code>*p = 50;</code>?</p>
+<ol type="A">
+<li>Asigna el valor 50 a la variable puntero <code>p</code>.</li>
+<li>Inicializa el puntero <code>p</code> con el valor 50.</li>
+<li><strong>Modifica el valor de la variable original a la que apunta
+<code>p</code> (es decir, cambia el valor de <code>x</code> a
+50).</strong></li>
+<li>Declara un nuevo puntero llamado <code>*p</code> con el valor
+50.</li>
+</ol>
+<hr />
+<h3 id="pregunta-3-el-valor-de-un-puntero">Pregunta 3: El valor de un
+puntero</h3>
+<p>Â¿QuÃ© tipo de valor almacena siempre una variable puntero
+(<code>int* p;</code>)?</p>
+<ol type="A">
+<li>Un nÃºmero entero (<code>int</code>).</li>
+<li>Un valor de coma flotante (<code>float</code>).</li>
+<li><strong>Una direcciÃ³n de memoria (ubicaciÃ³n en la
+RAM).</strong></li>
+<li>Una cadena de texto (<code>char*</code>).</li>
+</ol>
+<hr />
+<h3 id="pregunta-4-resultado-de-la-desreferencia">Pregunta 4: Resultado
+de la desreferencia</h3>
+<p>Si el puntero <code>p</code> apunta a una variable
+<code>float f</code>, Â¿quÃ© tipo de dato representa la expresiÃ³n
+<strong>desreferenciada</strong> <code>*p</code>?</p>
+<ol type="A">
+<li>Un puntero a <code>float</code> (<code>float*</code>).</li>
+<li>La direcciÃ³n de memoria de <code>f</code>.</li>
+<li>Un entero (<code>int</code>).</li>
+<li><strong>Un valor de tipo <code>float</code>.</strong></li>
+</ol>
+<hr />
+<h3 id="pregunta-5-asignaciÃ³n-de-direcciÃ³n">Pregunta 5: AsignaciÃ³n de
+direcciÃ³n</h3>
+<p>Dada la declaraciÃ³n: <code>int a = 10;</code> y
+<code>int* ptr;</code>. Â¿CuÃ¡l es la sintaxis correcta para hacer que el
+puntero <code>ptr</code> apunte a la variable <code>a</code>?</p>
+<ol type="A">
+<li><code>ptr = *a;</code></li>
+<li><code>*ptr = a;</code></li>
+<li><code>ptr = a;</code></li>
+<li><strong><code>ptr = &amp;a;</code></strong></li>
+</ol>
+<hr />
+<h3 id="pregunta-6-concepto-de-paso-por-referencia">Pregunta 6: Concepto
+de Paso por Referencia</h3>
+<p>El mecanismo de <strong>Paso por Referencia</strong> en C (basado en
+<code>*</code> y <code>&amp;</code>) se utiliza para:</p>
+<ol type="A">
+<li>Asegurar que una funciÃ³n trabaje Ãºnicamente con copias locales de
+las variables.</li>
+<li>Retornar mÃºltiples valores de una funciÃ³n.</li>
+<li><strong>Permitir que una funciÃ³n modifique directamente las
+variables que le fueron pasadas desde fuera de su Ã¡mbito.</strong></li>
+<li>Optimizar el uso de los registros del procesador.</li>
+</ol>
+<hr />
+<h3 id="pregunta-7-modificaciÃ³n-indirecta">Pregunta 7: ModificaciÃ³n
+indirecta</h3>
+<p>Si tienes el siguiente cÃ³digo:
+<code>int val = 5; int* p_val = &amp;val; *p_val = 20;</code>, Â¿cuÃ¡l es
+el valor final de la variable <code>val</code>?</p>
+<ol type="A">
+<li>5</li>
+<li>25</li>
+<li><strong>20</strong></li>
+<li>La direcciÃ³n de memoria de <code>val</code>.</li>
+</ol>
+<hr />
+<h3 id="pregunta-8-analogÃ­a-de-punteros">Pregunta 8: AnalogÃ­a de
+Punteros</h3>
+<p>El concepto de un puntero que contiene la direcciÃ³n de una variable
+es anÃ¡logo a tener:</p>
+<ol type="A">
+<li>Un libro que contiene toda la informaciÃ³n.</li>
+<li>Un mapa que muestra una ciudad.</li>
+<li><strong>Una etiqueta con el nÃºmero de habitaciÃ³n (direcciÃ³n) donde
+se encuentra un objeto (valor).</strong></li>
+<li>Un interruptor de encendido y apagado.</li>
+</ol>
+<hr />
+<h3 id="pregunta-9-la-base-para-modificar-variables-externas">Pregunta
+9: La base para modificar variables externas</h3>
+<p>Â¿QuÃ© operador es necesario aplicar a un parÃ¡metro dentro de una
+funciÃ³n (al recibir una direcciÃ³n) para poder modificar el valor de la
+variable externa original?</p>
+<ol type="A">
+<li>El operador de DirecciÃ³n (<code>&amp;</code>).</li>
+<li>El operador de AsignaciÃ³n (<code>=</code>).</li>
+<li><strong>El operador de Desreferencia (<code>*</code>).</strong></li>
+<li>El operador AritmÃ©tico de Suma (<code>+</code>).</li>
+</ol>
+<hr />
+<h3 id="pregunta-10-propÃ³sito-del-puntero">Pregunta 10: PropÃ³sito del
+puntero</h3>
+<p>Cuando se utiliza un puntero en una expresiÃ³n como
+<code>y = *p;</code>, la finalidad principal es:</p>
+<ol type="A">
+<li>Obtener la direcciÃ³n de memoria de <code>p</code>.</li>
+<li>Copiar el puntero <code>p</code> a la variable <code>y</code>.</li>
+<li><strong>Leer el valor de la variable a la que apunta la direcciÃ³n
+almacenada en <code>p</code>.</strong></li>
+<li>Declarar el puntero <code>p</code> y asignarle un valor
+inicial.</li>
+</ol>
+<h2 id="respuestas-correctas">Respuestas Correctas</h2>
+<table>
+<colgroup>
+<col style="width: 18%" />
+<col style="width: 41%" />
+<col style="width: 39%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Pregunta</th>
+<th style="text-align: center;">Respuesta Correcta</th>
+<th style="text-align: left;">ExplicaciÃ³n Breve</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><strong>1</strong></td>
+<td style="text-align: center;"><strong>C</strong></td>
+<td style="text-align: left;">El operador <code>&amp;</code> se usa para
+obtener la <strong>direcciÃ³n de memoria</strong> de una variable.</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>2</strong></td>
+<td style="text-align: center;"><strong>C</strong></td>
+<td style="text-align: left;">La desreferencia (<code>*p</code>) actÃºa
+como un alias para la variable original, permitiendo modificar su
+valor.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>3</strong></td>
+<td style="text-align: center;"><strong>C</strong></td>
+<td style="text-align: left;">Un puntero es una variable cuyo valor es
+una <strong>direcciÃ³n de memoria</strong>.</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>4</strong></td>
+<td style="text-align: center;"><strong>D</strong></td>
+<td style="text-align: left;">Al desreferenciar (<code>*p</code>), se
+accede al valor almacenado, que es del tipo al que apunta el puntero
+(<code>float</code>).</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>5</strong></td>
+<td style="text-align: center;"><strong>D</strong></td>
+<td style="text-align: left;">Se usa el operador <code>&amp;</code> para
+obtener la direcciÃ³n de <code>a</code> y asignarla al puntero
+<code>ptr</code>.</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>6</strong></td>
+<td style="text-align: center;"><strong>C</strong></td>
+<td style="text-align: left;">El Paso por Referencia es el mecanismo que
+permite a una funciÃ³n tener un <strong>control indirecto</strong> sobre
+variables externas.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>7</strong></td>
+<td style="text-align: center;"><strong>C</strong></td>
+<td style="text-align: left;">La lÃ­nea <code>*p_val = 20;</code>
+modifica indirectamente el valor de la variable <code>val</code> a
+travÃ©s del puntero <code>p_val</code>.</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>8</strong></td>
+<td style="text-align: center;"><strong>C</strong></td>
+<td style="text-align: left;">El puntero almacena la
+<strong>ubicaciÃ³n</strong> (la direcciÃ³n), no el objeto en sÃ­.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>9</strong></td>
+<td style="text-align: center;"><strong>C</strong></td>
+<td style="text-align: left;">El operador de Desreferencia
+(<code>*</code>) es necesario para <strong>acceder y manipular</strong>
+el contenido de la direcciÃ³n recibida.</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>10</strong></td>
+<td style="text-align: center;"><strong>C</strong></td>
+<td style="text-align: left;">La desreferencia siempre busca el
+<strong>valor</strong> almacenado en la direcciÃ³n que tiene el
+puntero.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+
+</div>
+</body>
+</html>
+

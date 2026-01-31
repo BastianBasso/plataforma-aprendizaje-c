@@ -1,0 +1,310 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" crossorigin href="/assets/content-01sust.css">
+</head>
+<body>
+<div class="main-content">
+<p>Este cÃ³digo es la soluciÃ³n al desafÃ­o de los <strong>cuatro
+punteros</strong> y la eficiencia <span
+class="math inline"><em>O</em>(1)</span> para las inserciones en los
+extremos.</p>
+<hr />
+<h2 id="archivo-de-cabecera-cdll.h">1. Archivo de Cabecera:
+<code>cdll.h</code></h2>
+<p>Este archivo define la interfaz del mÃ³dulo: las estructuras de datos
+y las firmas (prototipos) de todas las funciones requeridas.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#ifndef CDLL_H</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#define CDLL_H</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdlib.h&gt;</span><span class="pp"> </span><span class="co">// Para malloc y free</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co">// --- 1. DefiniciÃ³n de las Estructuras ---</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co">// Nodo: La unidad fundamental (Doble Enlace)</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="kw">typedef</span> <span class="kw">struct</span> Nodo <span class="op">{</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> id_proceso<span class="op">;</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    <span class="kw">struct</span> Nodo <span class="op">*</span>siguiente<span class="op">;</span>  <span class="co">// Puntero al siguiente nodo</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    <span class="kw">struct</span> Nodo <span class="op">*</span>anterior<span class="op">;</span>   <span class="co">// Puntero al nodo previo</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> Nodo<span class="op">;</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="co">// Estructura de la Lista: El punto de acceso</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="kw">typedef</span> <span class="kw">struct</span> <span class="op">{</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>    Nodo <span class="op">*</span>HEAD<span class="op">;</span>  <span class="co">// El punto de inicio del cÃ­rculo</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> CDLL<span class="op">;</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="co">// --- 2. Prototipos de Funciones Fundamentales ---</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="co">// Constructor de Nodos</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>Nodo <span class="op">*</span>crear_nodo<span class="op">(</span><span class="dt">int</span> id<span class="op">);</span></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a><span class="co">// GestiÃ³n de la Lista</span></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> inicializar_cdll<span class="op">(</span>CDLL <span class="op">*</span>lista<span class="op">);</span></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> cdll_esta_vacia<span class="op">(</span><span class="dt">const</span> CDLL <span class="op">*</span>lista<span class="op">);</span></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a><span class="co">// Operaciones O(1) CRÃTICAS</span></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> insertar_al_inicio<span class="op">(</span>CDLL <span class="op">*</span>lista<span class="op">,</span> <span class="dt">int</span> id<span class="op">);</span></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> insertar_al_final<span class="op">(</span>CDLL <span class="op">*</span>lista<span class="op">,</span> <span class="dt">int</span> id<span class="op">);</span></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a><span class="co">// OperaciÃ³n O(N)</span></span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> eliminar_por_id<span class="op">(</span>CDLL <span class="op">*</span>lista<span class="op">,</span> <span class="dt">int</span> id_eliminar<span class="op">);</span></span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a><span class="co">// Utilidades</span></span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> mostrar_rotacion<span class="op">(</span>CDLL <span class="op">*</span>lista<span class="op">,</span> <span class="dt">int</span> N_turnos<span class="op">);</span></span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> liberar_lista<span class="op">(</span>CDLL <span class="op">*</span>lista<span class="op">);</span></span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a><span class="pp">#endif </span><span class="co">// CDLL_H</span></span></code></pre></div>
+<hr />
+<h2 id="archivo-de-implementaciÃ³n-cdll.c">2. Archivo de ImplementaciÃ³n:
+<code>cdll.c</code></h2>
+<p>Este archivo contiene la lÃ³gica completa para cada funciÃ³n,
+implementando la gestiÃ³n dinÃ¡mica de memoria y la manipulaciÃ³n precisa
+de los punteros dobles y la circularidad.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;cdll.h&quot;</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co">// --- Constructor de Nodos ---</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>Nodo <span class="op">*</span>crear_nodo<span class="op">(</span><span class="dt">int</span> id<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    Nodo <span class="op">*</span>nuevo_nodo <span class="op">=</span> <span class="op">(</span>Nodo <span class="op">*)</span>malloc<span class="op">(</span><span class="kw">sizeof</span><span class="op">(</span>Nodo<span class="op">));</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>nuevo_nodo <span class="op">==</span> NULL<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>        fprintf<span class="op">(</span>stderr<span class="op">,</span> <span class="st">&quot;Error: Fallo en la asignaciÃ³n de memoria para el nuevo nodo.</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> NULL<span class="op">;</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    nuevo_nodo<span class="op">-&gt;</span>id_proceso <span class="op">=</span> id<span class="op">;</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    nuevo_nodo<span class="op">-&gt;</span>siguiente <span class="op">=</span> NULL<span class="op">;</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    nuevo_nodo<span class="op">-&gt;</span>anterior <span class="op">=</span> NULL<span class="op">;</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> nuevo_nodo<span class="op">;</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="co">// --- GestiÃ³n de la Lista ---</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> inicializar_cdll<span class="op">(</span>CDLL <span class="op">*</span>lista<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>    lista<span class="op">-&gt;</span>HEAD <span class="op">=</span> NULL<span class="op">;</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> cdll_esta_vacia<span class="op">(</span><span class="dt">const</span> CDLL <span class="op">*</span>lista<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="op">(</span>lista<span class="op">-&gt;</span>HEAD <span class="op">==</span> NULL<span class="op">);</span></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a><span class="co">// --- Operaciones O(1) CRÃTICAS ---</span></span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a><span class="co">// Nota: insertar_al_inicio e insertar_al_final comparten gran parte de la lÃ³gica.</span></span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a><span class="co">// Para el caso de un solo nodo o la lista vacÃ­a, la lÃ³gica es idÃ©ntica.</span></span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> insertar_al_inicio<span class="op">(</span>CDLL <span class="op">*</span>lista<span class="op">,</span> <span class="dt">int</span> id<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>    Nodo <span class="op">*</span>nuevo_nodo <span class="op">=</span> crear_nodo<span class="op">(</span>id<span class="op">);</span></span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>nuevo_nodo <span class="op">==</span> NULL<span class="op">)</span> <span class="cf">return</span><span class="op">;</span> <span class="co">// Fallo de malloc</span></span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Caso 1: Lista vacÃ­a</span></span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>cdll_esta_vacia<span class="op">(</span>lista<span class="op">))</span> <span class="op">{</span></span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>        nuevo_nodo<span class="op">-&gt;</span>siguiente <span class="op">=</span> nuevo_nodo<span class="op">;</span> <span class="co">// Apunta a sÃ­ mismo</span></span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>        nuevo_nodo<span class="op">-&gt;</span>anterior <span class="op">=</span> nuevo_nodo<span class="op">;</span>  <span class="co">// Apunta a sÃ­ mismo</span></span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>        lista<span class="op">-&gt;</span>HEAD <span class="op">=</span> nuevo_nodo<span class="op">;</span>           <span class="co">// Es el Ãºnico nodo</span></span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">&quot;Proceso </span><span class="sc">%d</span><span class="st"> insertado (Inicio, lista vacÃ­a).</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">,</span> id<span class="op">);</span></span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span><span class="op">;</span></span>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Caso 2: Lista no vacÃ­a (O(1))</span></span>
+<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a>    Nodo <span class="op">*</span>cola <span class="op">=</span> lista<span class="op">-&gt;</span>HEAD<span class="op">-&gt;</span>anterior<span class="op">;</span></span>
+<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a>    <span class="co">// 1. Enlaces del nuevo nodo</span></span>
+<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a>    nuevo_nodo<span class="op">-&gt;</span>siguiente <span class="op">=</span> lista<span class="op">-&gt;</span>HEAD<span class="op">;</span> <span class="co">// El nuevo apunta al viejo HEAD</span></span>
+<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a>    nuevo_nodo<span class="op">-&gt;</span>anterior <span class="op">=</span> cola<span class="op">;</span>         <span class="co">// El nuevo apunta al nodo COLA</span></span>
+<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a>    <span class="co">// 2. Enlaces de los nodos adyacentes</span></span>
+<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a>    cola<span class="op">-&gt;</span>siguiente <span class="op">=</span> nuevo_nodo<span class="op">;</span>         <span class="co">// El viejo COLA apunta al nuevo nodo</span></span>
+<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a>    lista<span class="op">-&gt;</span>HEAD<span class="op">-&gt;</span>anterior <span class="op">=</span> nuevo_nodo<span class="op">;</span>   <span class="co">// El viejo HEAD apunta al nuevo nodo (por anterior)</span></span>
+<span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a>    <span class="co">// 3. Actualizar HEAD</span></span>
+<span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a>    lista<span class="op">-&gt;</span>HEAD <span class="op">=</span> nuevo_nodo<span class="op">;</span></span>
+<span id="cb2-58"><a href="#cb2-58" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;Proceso </span><span class="sc">%d</span><span class="st"> insertado (Inicio, O(1)).</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">,</span> id<span class="op">);</span></span>
+<span id="cb2-59"><a href="#cb2-59" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb2-60"><a href="#cb2-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-61"><a href="#cb2-61" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> insertar_al_final<span class="op">(</span>CDLL <span class="op">*</span>lista<span class="op">,</span> <span class="dt">int</span> id<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb2-62"><a href="#cb2-62" aria-hidden="true" tabindex="-1"></a>    Nodo <span class="op">*</span>nuevo_nodo <span class="op">=</span> crear_nodo<span class="op">(</span>id<span class="op">);</span></span>
+<span id="cb2-63"><a href="#cb2-63" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>nuevo_nodo <span class="op">==</span> NULL<span class="op">)</span> <span class="cf">return</span><span class="op">;</span></span>
+<span id="cb2-64"><a href="#cb2-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-65"><a href="#cb2-65" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Caso 1: Lista vacÃ­a</span></span>
+<span id="cb2-66"><a href="#cb2-66" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>cdll_esta_vacia<span class="op">(</span>lista<span class="op">))</span> <span class="op">{</span></span>
+<span id="cb2-67"><a href="#cb2-67" aria-hidden="true" tabindex="-1"></a>        <span class="co">// La lÃ³gica es idÃ©ntica a insertar al inicio en este caso</span></span>
+<span id="cb2-68"><a href="#cb2-68" aria-hidden="true" tabindex="-1"></a>        nuevo_nodo<span class="op">-&gt;</span>siguiente <span class="op">=</span> nuevo_nodo<span class="op">;</span></span>
+<span id="cb2-69"><a href="#cb2-69" aria-hidden="true" tabindex="-1"></a>        nuevo_nodo<span class="op">-&gt;</span>anterior <span class="op">=</span> nuevo_nodo<span class="op">;</span></span>
+<span id="cb2-70"><a href="#cb2-70" aria-hidden="true" tabindex="-1"></a>        lista<span class="op">-&gt;</span>HEAD <span class="op">=</span> nuevo_nodo<span class="op">;</span></span>
+<span id="cb2-71"><a href="#cb2-71" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">&quot;Proceso </span><span class="sc">%d</span><span class="st"> insertado (Final, lista vacÃ­a).</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">,</span> id<span class="op">);</span></span>
+<span id="cb2-72"><a href="#cb2-72" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span><span class="op">;</span></span>
+<span id="cb2-73"><a href="#cb2-73" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb2-74"><a href="#cb2-74" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-75"><a href="#cb2-75" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Caso 2: Lista no vacÃ­a (O(1))</span></span>
+<span id="cb2-76"><a href="#cb2-76" aria-hidden="true" tabindex="-1"></a>    Nodo <span class="op">*</span>cola <span class="op">=</span> lista<span class="op">-&gt;</span>HEAD<span class="op">-&gt;</span>anterior<span class="op">;</span></span>
+<span id="cb2-77"><a href="#cb2-77" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-78"><a href="#cb2-78" aria-hidden="true" tabindex="-1"></a>    <span class="co">// 1. Enlaces del nuevo nodo</span></span>
+<span id="cb2-79"><a href="#cb2-79" aria-hidden="true" tabindex="-1"></a>    nuevo_nodo<span class="op">-&gt;</span>siguiente <span class="op">=</span> lista<span class="op">-&gt;</span>HEAD<span class="op">;</span> <span class="co">// El nuevo apunta a HEAD (circularidad)</span></span>
+<span id="cb2-80"><a href="#cb2-80" aria-hidden="true" tabindex="-1"></a>    nuevo_nodo<span class="op">-&gt;</span>anterior <span class="op">=</span> cola<span class="op">;</span>         <span class="co">// El nuevo apunta a la vieja COLA</span></span>
+<span id="cb2-81"><a href="#cb2-81" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-82"><a href="#cb2-82" aria-hidden="true" tabindex="-1"></a>    <span class="co">// 2. Enlaces de los nodos adyacentes</span></span>
+<span id="cb2-83"><a href="#cb2-83" aria-hidden="true" tabindex="-1"></a>    cola<span class="op">-&gt;</span>siguiente <span class="op">=</span> nuevo_nodo<span class="op">;</span>         <span class="co">// El viejo COLA ahora apunta al nuevo nodo</span></span>
+<span id="cb2-84"><a href="#cb2-84" aria-hidden="true" tabindex="-1"></a>    lista<span class="op">-&gt;</span>HEAD<span class="op">-&gt;</span>anterior <span class="op">=</span> nuevo_nodo<span class="op">;</span>   <span class="co">// HEAD ahora apunta al nuevo nodo (por anterior)</span></span>
+<span id="cb2-85"><a href="#cb2-85" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-86"><a href="#cb2-86" aria-hidden="true" tabindex="-1"></a>    <span class="co">// HEAD NO se mueve.</span></span>
+<span id="cb2-87"><a href="#cb2-87" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;Proceso </span><span class="sc">%d</span><span class="st"> insertado (Final, O(1)).</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">,</span> id<span class="op">);</span></span>
+<span id="cb2-88"><a href="#cb2-88" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb2-89"><a href="#cb2-89" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-90"><a href="#cb2-90" aria-hidden="true" tabindex="-1"></a><span class="co">// --- OperaciÃ³n O(N) ---</span></span>
+<span id="cb2-91"><a href="#cb2-91" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-92"><a href="#cb2-92" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> eliminar_por_id<span class="op">(</span>CDLL <span class="op">*</span>lista<span class="op">,</span> <span class="dt">int</span> id_eliminar<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb2-93"><a href="#cb2-93" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>cdll_esta_vacia<span class="op">(</span>lista<span class="op">))</span> <span class="op">{</span></span>
+<span id="cb2-94"><a href="#cb2-94" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">&quot;Error: La lista estÃ¡ vacÃ­a. No se puede eliminar.</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb2-95"><a href="#cb2-95" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb2-96"><a href="#cb2-96" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb2-97"><a href="#cb2-97" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-98"><a href="#cb2-98" aria-hidden="true" tabindex="-1"></a>    Nodo <span class="op">*</span>actual <span class="op">=</span> lista<span class="op">-&gt;</span>HEAD<span class="op">;</span></span>
+<span id="cb2-99"><a href="#cb2-99" aria-hidden="true" tabindex="-1"></a>    Nodo <span class="op">*</span>a_eliminar <span class="op">=</span> NULL<span class="op">;</span></span>
+<span id="cb2-100"><a href="#cb2-100" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-101"><a href="#cb2-101" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Recorrido O(N): Buscar el nodo. En una CDLL, necesitamos una condiciÃ³n</span></span>
+<span id="cb2-102"><a href="#cb2-102" aria-hidden="true" tabindex="-1"></a>    <span class="co">// de parada clara para evitar un bucle infinito. Recorremos hasta que</span></span>
+<span id="cb2-103"><a href="#cb2-103" aria-hidden="true" tabindex="-1"></a>    <span class="co">// volvamos al HEAD, o encontremos el ID.</span></span>
+<span id="cb2-104"><a href="#cb2-104" aria-hidden="true" tabindex="-1"></a>    <span class="cf">do</span> <span class="op">{</span></span>
+<span id="cb2-105"><a href="#cb2-105" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span>actual<span class="op">-&gt;</span>id_proceso <span class="op">==</span> id_eliminar<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb2-106"><a href="#cb2-106" aria-hidden="true" tabindex="-1"></a>            a_eliminar <span class="op">=</span> actual<span class="op">;</span></span>
+<span id="cb2-107"><a href="#cb2-107" aria-hidden="true" tabindex="-1"></a>            <span class="cf">break</span><span class="op">;</span></span>
+<span id="cb2-108"><a href="#cb2-108" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
+<span id="cb2-109"><a href="#cb2-109" aria-hidden="true" tabindex="-1"></a>        actual <span class="op">=</span> actual<span class="op">-&gt;</span>siguiente<span class="op">;</span></span>
+<span id="cb2-110"><a href="#cb2-110" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span> <span class="cf">while</span> <span class="op">(</span>actual <span class="op">!=</span> lista<span class="op">-&gt;</span>HEAD<span class="op">);</span></span>
+<span id="cb2-111"><a href="#cb2-111" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-112"><a href="#cb2-112" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>a_eliminar <span class="op">==</span> NULL<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb2-113"><a href="#cb2-113" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">&quot;Error: Proceso con ID </span><span class="sc">%d</span><span class="st"> no encontrado en la lista.</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">,</span> id_eliminar<span class="op">);</span></span>
+<span id="cb2-114"><a href="#cb2-114" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb2-115"><a href="#cb2-115" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb2-116"><a href="#cb2-116" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-117"><a href="#cb2-117" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Caso 1: El nodo es el Ãºnico en la lista</span></span>
+<span id="cb2-118"><a href="#cb2-118" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>a_eliminar<span class="op">-&gt;</span>siguiente <span class="op">==</span> a_eliminar<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb2-119"><a href="#cb2-119" aria-hidden="true" tabindex="-1"></a>        lista<span class="op">-&gt;</span>HEAD <span class="op">=</span> NULL<span class="op">;</span></span>
+<span id="cb2-120"><a href="#cb2-120" aria-hidden="true" tabindex="-1"></a>        free<span class="op">(</span>a_eliminar<span class="op">);</span></span>
+<span id="cb2-121"><a href="#cb2-121" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">&quot;Proceso </span><span class="sc">%d</span><span class="st"> eliminado (Ãšnico nodo).</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">,</span> id_eliminar<span class="op">);</span></span>
+<span id="cb2-122"><a href="#cb2-122" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb2-123"><a href="#cb2-123" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb2-124"><a href="#cb2-124" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-125"><a href="#cb2-125" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Caso 2: El nodo es la cabeza (HEAD)</span></span>
+<span id="cb2-126"><a href="#cb2-126" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>a_eliminar <span class="op">==</span> lista<span class="op">-&gt;</span>HEAD<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb2-127"><a href="#cb2-127" aria-hidden="true" tabindex="-1"></a>        lista<span class="op">-&gt;</span>HEAD <span class="op">=</span> a_eliminar<span class="op">-&gt;</span>siguiente<span class="op">;</span> <span class="co">// La nueva HEAD es el siguiente</span></span>
+<span id="cb2-128"><a href="#cb2-128" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb2-129"><a href="#cb2-129" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-130"><a href="#cb2-130" aria-hidden="true" tabindex="-1"></a>    <span class="co">// LÃ³gica de manipulaciÃ³n de punteros (Cuatro Punteros)</span></span>
+<span id="cb2-131"><a href="#cb2-131" aria-hidden="true" tabindex="-1"></a>    Nodo <span class="op">*</span>anterior <span class="op">=</span> a_eliminar<span class="op">-&gt;</span>anterior<span class="op">;</span></span>
+<span id="cb2-132"><a href="#cb2-132" aria-hidden="true" tabindex="-1"></a>    Nodo <span class="op">*</span>siguiente <span class="op">=</span> a_eliminar<span class="op">-&gt;</span>siguiente<span class="op">;</span></span>
+<span id="cb2-133"><a href="#cb2-133" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-134"><a href="#cb2-134" aria-hidden="true" tabindex="-1"></a>    <span class="co">// 1. El nodo ANTERIOR enlaza al Siguiente del nodo a eliminar</span></span>
+<span id="cb2-135"><a href="#cb2-135" aria-hidden="true" tabindex="-1"></a>    anterior<span class="op">-&gt;</span>siguiente <span class="op">=</span> siguiente<span class="op">;</span></span>
+<span id="cb2-136"><a href="#cb2-136" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-137"><a href="#cb2-137" aria-hidden="true" tabindex="-1"></a>    <span class="co">// 2. El nodo SIGUIENTE enlaza al Anterior del nodo a eliminar</span></span>
+<span id="cb2-138"><a href="#cb2-138" aria-hidden="true" tabindex="-1"></a>    siguiente<span class="op">-&gt;</span>anterior <span class="op">=</span> anterior<span class="op">;</span></span>
+<span id="cb2-139"><a href="#cb2-139" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-140"><a href="#cb2-140" aria-hidden="true" tabindex="-1"></a>    <span class="co">// 3. LiberaciÃ³n de memoria</span></span>
+<span id="cb2-141"><a href="#cb2-141" aria-hidden="true" tabindex="-1"></a>    free<span class="op">(</span>a_eliminar<span class="op">);</span></span>
+<span id="cb2-142"><a href="#cb2-142" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;Proceso </span><span class="sc">%d</span><span class="st"> eliminado (CDLL).</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">,</span> id_eliminar<span class="op">);</span></span>
+<span id="cb2-143"><a href="#cb2-143" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb2-144"><a href="#cb2-144" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb2-145"><a href="#cb2-145" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-146"><a href="#cb2-146" aria-hidden="true" tabindex="-1"></a><span class="co">// --- Utilidades ---</span></span>
+<span id="cb2-147"><a href="#cb2-147" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-148"><a href="#cb2-148" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> mostrar_rotacion<span class="op">(</span>CDLL <span class="op">*</span>lista<span class="op">,</span> <span class="dt">int</span> N_turnos<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb2-149"><a href="#cb2-149" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>cdll_esta_vacia<span class="op">(</span>lista<span class="op">))</span> <span class="op">{</span></span>
+<span id="cb2-150"><a href="#cb2-150" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">&quot;La lista estÃ¡ vacÃ­a.</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb2-151"><a href="#cb2-151" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span><span class="op">;</span></span>
+<span id="cb2-152"><a href="#cb2-152" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb2-153"><a href="#cb2-153" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-154"><a href="#cb2-154" aria-hidden="true" tabindex="-1"></a>    Nodo <span class="op">*</span>actual <span class="op">=</span> lista<span class="op">-&gt;</span>HEAD<span class="op">;</span></span>
+<span id="cb2-155"><a href="#cb2-155" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;</span><span class="sc">\n</span><span class="st">--- SimulaciÃ³n de RotaciÃ³n (</span><span class="sc">%d</span><span class="st"> Turnos) ---</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">,</span> N_turnos<span class="op">);</span></span>
+<span id="cb2-156"><a href="#cb2-156" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-157"><a href="#cb2-157" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">1</span><span class="op">;</span> i <span class="op">&lt;=</span> N_turnos<span class="op">;</span> i<span class="op">++)</span> <span class="op">{</span></span>
+<span id="cb2-158"><a href="#cb2-158" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">&quot;Turno </span><span class="sc">%2d</span><span class="st">: Ejecutando Proceso ID </span><span class="sc">%d\n</span><span class="st">&quot;</span><span class="op">,</span> i<span class="op">,</span> actual<span class="op">-&gt;</span>id_proceso<span class="op">);</span></span>
+<span id="cb2-159"><a href="#cb2-159" aria-hidden="true" tabindex="-1"></a>        actual <span class="op">=</span> actual<span class="op">-&gt;</span>siguiente<span class="op">;</span> <span class="co">// Mover al siguiente proceso</span></span>
+<span id="cb2-160"><a href="#cb2-160" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb2-161"><a href="#cb2-161" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;-----------------------------------------</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb2-162"><a href="#cb2-162" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb2-163"><a href="#cb2-163" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-164"><a href="#cb2-164" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> liberar_lista<span class="op">(</span>CDLL <span class="op">*</span>lista<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb2-165"><a href="#cb2-165" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>cdll_esta_vacia<span class="op">(</span>lista<span class="op">))</span> <span class="cf">return</span><span class="op">;</span></span>
+<span id="cb2-166"><a href="#cb2-166" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-167"><a href="#cb2-167" aria-hidden="true" tabindex="-1"></a>    Nodo <span class="op">*</span>actual <span class="op">=</span> lista<span class="op">-&gt;</span>HEAD<span class="op">;</span></span>
+<span id="cb2-168"><a href="#cb2-168" aria-hidden="true" tabindex="-1"></a>    Nodo <span class="op">*</span>temp <span class="op">=</span> NULL<span class="op">;</span></span>
+<span id="cb2-169"><a href="#cb2-169" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-170"><a href="#cb2-170" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Romper la circularidad</span></span>
+<span id="cb2-171"><a href="#cb2-171" aria-hidden="true" tabindex="-1"></a>    lista<span class="op">-&gt;</span>HEAD<span class="op">-&gt;</span>anterior<span class="op">-&gt;</span>siguiente <span class="op">=</span> NULL<span class="op">;</span></span>
+<span id="cb2-172"><a href="#cb2-172" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-173"><a href="#cb2-173" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Recorrido estÃ¡ndar (como SLL) con free</span></span>
+<span id="cb2-174"><a href="#cb2-174" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> <span class="op">(</span>actual <span class="op">!=</span> NULL<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb2-175"><a href="#cb2-175" aria-hidden="true" tabindex="-1"></a>        temp <span class="op">=</span> actual<span class="op">;</span></span>
+<span id="cb2-176"><a href="#cb2-176" aria-hidden="true" tabindex="-1"></a>        actual <span class="op">=</span> actual<span class="op">-&gt;</span>siguiente<span class="op">;</span></span>
+<span id="cb2-177"><a href="#cb2-177" aria-hidden="true" tabindex="-1"></a>        free<span class="op">(</span>temp<span class="op">);</span></span>
+<span id="cb2-178"><a href="#cb2-178" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb2-179"><a href="#cb2-179" aria-hidden="true" tabindex="-1"></a>    lista<span class="op">-&gt;</span>HEAD <span class="op">=</span> NULL<span class="op">;</span></span>
+<span id="cb2-180"><a href="#cb2-180" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;Memoria de la lista circular liberada.</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb2-181"><a href="#cb2-181" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<hr />
+<h2 id="archivo-de-prueba-main.c">3. Archivo de Prueba:
+<code>main.c</code></h2>
+<p>Este programa de prueba demuestra el cumplimiento de todos los
+requisitos del laboratorio, incluyendo las inserciones <span
+class="math inline"><em>O</em>(1)</span>, la circularidad y la
+eliminaciÃ³n.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;cdll.h&quot;</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    CDLL sistema_turnos<span class="op">;</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    inicializar_cdll<span class="op">(&amp;</span>sistema_turnos<span class="op">);</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;--- Fase 1: Inserciones O(1) ---</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    <span class="co">// InserciÃ³n inicial (caso lista vacÃ­a)</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    insertar_al_inicio<span class="op">(&amp;</span>sistema_turnos<span class="op">,</span> <span class="dv">50</span><span class="op">);</span> <span class="co">// Lista: (50)</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    <span class="co">// InserciÃ³n O(1) al final</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    insertar_al_final<span class="op">(&amp;</span>sistema_turnos<span class="op">,</span> <span class="dv">70</span><span class="op">);</span> <span class="co">// Lista: 50 &lt;-&gt; 70</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>    insertar_al_final<span class="op">(&amp;</span>sistema_turnos<span class="op">,</span> <span class="dv">80</span><span class="op">);</span> <span class="co">// Lista: 50 &lt;-&gt; 70 &lt;-&gt; 80</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>    <span class="co">// InserciÃ³n O(1) al inicio</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>    insertar_al_inicio<span class="op">(&amp;</span>sistema_turnos<span class="op">,</span> <span class="dv">30</span><span class="op">);</span> <span class="co">// Lista: 30 &lt;-&gt; 50 &lt;-&gt; 70 &lt;-&gt; 80</span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>    insertar_al_inicio<span class="op">(&amp;</span>sistema_turnos<span class="op">,</span> <span class="dv">10</span><span class="op">);</span> <span class="co">// Lista: 10 &lt;-&gt; 30 &lt;-&gt; 50 &lt;-&gt; 70 &lt;-&gt; 80</span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>    mostrar_rotacion<span class="op">(&amp;</span>sistema_turnos<span class="op">,</span> <span class="dv">10</span><span class="op">);</span> <span class="co">// Prueba la circularidad (10 -&gt; 30 -&gt; 50 -&gt; 70 -&gt; 80 -&gt; 10...)</span></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;</span><span class="sc">\n</span><span class="st">--- Fase 2: EliminaciÃ³n O(N) ---</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Eliminar un nodo intermedio</span></span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>    eliminar_por_id<span class="op">(&amp;</span>sistema_turnos<span class="op">,</span> <span class="dv">50</span><span class="op">);</span> <span class="co">// Se elimina el 50. Lista: 10 &lt;-&gt; 30 &lt;-&gt; 70 &lt;-&gt; 80</span></span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Eliminar la cabeza (requiere reasignaciÃ³n de HEAD)</span></span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>    eliminar_por_id<span class="op">(&amp;</span>sistema_turnos<span class="op">,</span> <span class="dv">10</span><span class="op">);</span> <span class="co">// Se elimina el 10. HEAD ahora es 30. Lista: 30 &lt;-&gt; 70 &lt;-&gt; 80</span></span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Eliminar el Ãºltimo nodo (cola)</span></span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>    eliminar_por_id<span class="op">(&amp;</span>sistema_turnos<span class="op">,</span> <span class="dv">80</span><span class="op">);</span> <span class="co">// Se elimina el 80. Lista: 30 &lt;-&gt; 70</span></span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Intentar eliminar un ID que no existe</span></span>
+<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a>    eliminar_por_id<span class="op">(&amp;</span>sistema_turnos<span class="op">,</span> <span class="dv">99</span><span class="op">);</span> </span>
+<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a>    mostrar_rotacion<span class="op">(&amp;</span>sistema_turnos<span class="op">,</span> <span class="dv">6</span><span class="op">);</span> <span class="co">// Prueba la nueva circularidad: 30 -&gt; 70 -&gt; 30 -&gt; 70...</span></span>
+<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;</span><span class="sc">\n</span><span class="st">--- Fase 3: EliminaciÃ³n del Ãšltimo y LiberaciÃ³n ---</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Dejar un solo nodo</span></span>
+<span id="cb3-40"><a href="#cb3-40" aria-hidden="true" tabindex="-1"></a>    eliminar_por_id<span class="op">(&amp;</span>sistema_turnos<span class="op">,</span> <span class="dv">70</span><span class="op">);</span> <span class="co">// Lista: 30</span></span>
+<span id="cb3-41"><a href="#cb3-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-42"><a href="#cb3-42" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Eliminar el Ãºltimo nodo (caso lÃ­mite del Ãºnico nodo)</span></span>
+<span id="cb3-43"><a href="#cb3-43" aria-hidden="true" tabindex="-1"></a>    eliminar_por_id<span class="op">(&amp;</span>sistema_turnos<span class="op">,</span> <span class="dv">30</span><span class="op">);</span> <span class="co">// Lista: VacÃ­a</span></span>
+<span id="cb3-44"><a href="#cb3-44" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-45"><a href="#cb3-45" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Prueba de lista vacÃ­a</span></span>
+<span id="cb3-46"><a href="#cb3-46" aria-hidden="true" tabindex="-1"></a>    eliminar_por_id<span class="op">(&amp;</span>sistema_turnos<span class="op">,</span> <span class="dv">100</span><span class="op">);</span> </span>
+<span id="cb3-47"><a href="#cb3-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-48"><a href="#cb3-48" aria-hidden="true" tabindex="-1"></a>    <span class="co">// LiberaciÃ³n segura de memoria (aunque la lista ya estÃ© vacÃ­a)</span></span>
+<span id="cb3-49"><a href="#cb3-49" aria-hidden="true" tabindex="-1"></a>    liberar_lista<span class="op">(&amp;</span>sistema_turnos<span class="op">);</span> </span>
+<span id="cb3-50"><a href="#cb3-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-51"><a href="#cb3-51" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb3-52"><a href="#cb3-52" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+
+</div>
+</body>
+</html>
+

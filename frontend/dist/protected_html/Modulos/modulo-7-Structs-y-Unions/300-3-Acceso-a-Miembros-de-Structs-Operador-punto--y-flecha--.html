@@ -1,0 +1,243 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" crossorigin href="/assets/content-01sust.css">
+</head>
+<body>
+<div class="main-content">
+<h2 id="acceso-directo-el-operador-punto-.">Acceso Directo: El Operador
+Punto (<code>.</code>) ðŸ“Œ</h2>
+<p>Una vez que has declarado una variable de tipo estructura, necesitas
+una forma de acceder a cada uno de sus atributos o
+<strong>miembros</strong> de manera individual. Para esto, se utiliza el
+<strong>operador punto</strong> (<code>.</code>).</p>
+<h3 id="uso-del-operador-punto">Uso del Operador Punto</h3>
+<p>El operador punto (<code>.</code>) se utiliza siempre que se necesita
+acceder a un miembro de una variable que es una <code>struct</code>
+<strong>declarada directamente</strong>, es decir, que <strong>NO es un
+puntero</strong> a una estructura.</p>
+<p>La sintaxis es simple y directa:</p>
+<p><span class="math display">â€˜nombre_variable_struct .
+nombre_miembroâ€˜</span></p>
+<p><strong>Ejemplo PrÃ¡ctico:</strong></p>
+<p>Considera la estructura <code>Persona</code>:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">typedef</span> <span class="kw">struct</span> <span class="op">{</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> edad<span class="op">;</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">float</span> altura<span class="op">;</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> Persona<span class="op">;</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="co">// DeclaraciÃ³n directa de la variable &#39;mi_amigo&#39;</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    Persona mi_amigo<span class="op">;</span> </span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Acceso y asignaciÃ³n directa a los miembros usando el operador punto (.)</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    mi_amigo<span class="op">.</span>edad <span class="op">=</span> <span class="dv">30</span><span class="op">;</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    mi_amigo<span class="op">.</span>altura <span class="op">=</span> <span class="fl">1.75</span><span class="bu">f</span><span class="op">;</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;Edad: </span><span class="sc">%d</span><span class="st">, Altura: </span><span class="sc">%.2f\n</span><span class="st">&quot;</span><span class="op">,</span> mi_amigo<span class="op">.</span>edad<span class="op">,</span> mi_amigo<span class="op">.</span>altura<span class="op">);</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<ul>
+<li><strong><code>mi_amigo.edad</code></strong>: Accede al campo
+<code>edad</code> dentro de la variable <code>mi_amigo</code>.</li>
+<li><strong><code>mi_amigo.altura</code></strong>: Accede al campo
+<code>altura</code> dentro de la variable <code>mi_amigo</code>.</li>
+</ul>
+<p>El operador punto actÃºa como un selector que te permite interactuar
+con los datos internos de la estructura como si fueran variables
+independientes, pero manteniendo la agrupaciÃ³n lÃ³gica bajo el nombre de
+la variable principal (<code>mi_amigo</code>).</p>
+<h2 id="punteros-a-estructuras-struct">Punteros a Estructuras
+(<code>struct</code>) âž¡ï¸</h2>
+<p>Al igual que podemos crear punteros a tipos primitivos
+(<code>int*</code>) o a arrays (<code>int*</code>), tambiÃ©n podemos
+declarar <strong>punteros a estructuras</strong>. Esto es esencial para
+temas como asignaciÃ³n dinÃ¡mica de memoria (memoria <em>heap</em>) o para
+pasar estructuras a funciones de manera eficiente.</p>
+<h3 id="declaraciÃ³n-de-un-puntero-a-struct">DeclaraciÃ³n de un Puntero a
+<code>struct</code></h3>
+<p>Para declarar un puntero que almacene la direcciÃ³n de una variable
+<code>struct</code>, usamos la sintaxis estÃ¡ndar de punteros: la palabra
+clave <code>struct</code>, la etiqueta, y el asterisco
+(<code>*</code>).</p>
+<p><span class="math display">â€˜struct Nombre_Etiqueta *
+nombre_puntero;â€˜</span></p>
+<p><strong>Ejemplo PrÃ¡ctico:</strong></p>
+<p>Dada la estructura <code>Caja</code> y una variable
+<code>mi_caja</code>:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">typedef</span> <span class="kw">struct</span> <span class="op">{</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> ancho<span class="op">;</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> alto<span class="op">;</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> Caja<span class="op">;</span> </span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="co">// 1. DeclaraciÃ³n de la variable struct &quot;normal&quot;</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    Caja mi_caja<span class="op">;</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    mi_caja<span class="op">.</span>ancho <span class="op">=</span> <span class="dv">5</span><span class="op">;</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    <span class="co">// 2. DeclaraciÃ³n del puntero a la estructura</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    Caja <span class="op">*</span>ptr_caja<span class="op">;</span> </span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Si hubiÃ©ramos usado la sintaxis larga:</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>    <span class="co">// struct Caja *ptr_caja_largo; </span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>    <span class="co">// ...</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<h3 id="asignaciÃ³n-de-direcciÃ³n">AsignaciÃ³n de DirecciÃ³n</h3>
+<p>Un puntero a <code>struct</code> necesita almacenar la
+<strong>direcciÃ³n de memoria</strong> de una variable
+<code>struct</code> existente. Para obtener esta direcciÃ³n, utilizamos
+el operador de direcciÃ³n (<strong><code>&amp;</code></strong>).</p>
+<p><strong>ContinuaciÃ³n del Ejemplo:</strong></p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    Caja mi_caja<span class="op">;</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    mi_caja<span class="op">.</span>ancho <span class="op">=</span> <span class="dv">5</span><span class="op">;</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    Caja <span class="op">*</span>ptr_caja<span class="op">;</span> </span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    <span class="co">// AsignaciÃ³n: ptr_caja ahora almacena la direcciÃ³n de memoria de mi_caja.</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    <span class="co">// ptr_caja apunta a la variable mi_caja.</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    ptr_caja <span class="op">=</span> <span class="op">&amp;</span>mi_caja<span class="op">;</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Ahora, podemos acceder a los miembros de mi_caja de forma indirecta</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    <span class="co">// usando ptr_caja (lo cual se explicarÃ¡ con el operador -&gt;).</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p>El puntero <code>ptr_caja</code> no contiene los datos
+(<code>ancho</code> y <code>alto</code>), solo la direcciÃ³n de memoria
+donde esos datos comienzan.</p>
+<h2 id="acceso-indirecto-el-operador-flecha--">Acceso Indirecto: El
+Operador Flecha (<code>-&gt;</code>) ðŸ¹</h2>
+<p>Cuando trabajamos con un <strong>puntero</strong> a una estructura,
+no podemos usar el operador punto (<code>.</code>) para acceder a sus
+miembros, ya que el puntero solo almacena una
+<strong>direcciÃ³n</strong>, no los datos en sÃ­. Para este escenario, C
+nos proporciona el <strong>operador flecha</strong>
+(<code>-&gt;</code>).</p>
+<h3 id="uso-del-operador-flecha">Uso del Operador Flecha</h3>
+<p>El operador flecha (<code>-&gt;</code>) es la forma simplificada y
+preferida para acceder a los miembros de una estructura <strong>a travÃ©s
+de un puntero</strong>.</p>
+<p>El operador <code>-&gt;</code> realiza dos acciones en un solo
+paso:</p>
+<ol type="1">
+<li><strong>Desreferencia:</strong> Obtiene el contenido de la direcciÃ³n
+almacenada en el puntero (es decir, accede a la estructura
+completa).</li>
+<li><strong>Acceso a Miembro:</strong> Utiliza el operador punto
+(<code>.</code>) sobre la estructura desreferenciada para seleccionar un
+miembro especÃ­fico.</li>
+</ol>
+<p><span class="math display">â€˜nombre_puntero_struct -&gt;
+nombre_miembroâ€˜</span></p>
+<p><strong>Ejemplo PrÃ¡ctico:</strong></p>
+<p>Siguiendo el ejemplo de la estructura <code>Caja</code> y su puntero
+<code>ptr_caja</code>:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">typedef</span> <span class="kw">struct</span> <span class="op">{</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> ancho<span class="op">;</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> alto<span class="op">;</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> Caja<span class="op">;</span> </span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    Caja mi_caja<span class="op">;</span>      <span class="co">// Variable struct (los datos)</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    Caja <span class="op">*</span>ptr_caja<span class="op">;</span>    <span class="co">// Puntero a struct (la direcciÃ³n)</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    ptr_caja <span class="op">=</span> <span class="op">&amp;</span>mi_caja<span class="op">;</span> <span class="co">// Asigna la direcciÃ³n de mi_caja a ptr_caja</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Acceso Indirecto y AsignaciÃ³n con el operador FLECHA (-&gt;)</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    ptr_caja<span class="op">-&gt;</span>ancho <span class="op">=</span> <span class="dv">20</span><span class="op">;</span> <span class="co">// Esto es lo mismo que mi_caja.ancho = 20;</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>    ptr_caja<span class="op">-&gt;</span>alto <span class="op">=</span> <span class="dv">50</span><span class="op">;</span>  <span class="co">// Esto es lo mismo que mi_caja.alto = 50;</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;Ancho accedido por flecha: </span><span class="sc">%d\n</span><span class="st">&quot;</span><span class="op">,</span> ptr_caja<span class="op">-&gt;</span>ancho<span class="op">);</span></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<blockquote>
+<p><strong>Punto Clave:</strong> Si tienes la variable
+<code>struct</code> <strong>directamente</strong> (ej.
+<code>mi_caja</code>), usa el <strong>punto</strong> (<code>.</code>).
+Si tienes la <strong>direcciÃ³n</strong> de la <code>struct</code> en un
+<strong>puntero</strong> (ej. <code>ptr_caja</code>), usa la
+<strong>flecha</strong> (<code>-&gt;</code>).</p>
+</blockquote>
+<h2 id="equivalencia-de-notaciÃ³n---vs.-.">Equivalencia de NotaciÃ³n:
+<code>-&gt;</code> vs.Â <code>(*).</code> ðŸ”„</h2>
+<p>El operador flecha (<code>-&gt;</code>) que utilizamos para acceder a
+un miembro a travÃ©s de un puntero a estructura es, de hecho, una
+<strong>abreviatura sintÃ¡ctica</strong> que el lenguaje C creÃ³ para
+simplificar un proceso de dos pasos.</p>
+<p>Aunque se recomienda usar la flecha por su claridad, es importante
+entender la operaciÃ³n subyacente que realiza.</p>
+<h3 id="la-identidad-fundamental">La Identidad Fundamental</h3>
+<p>El acceso a un miembro mediante el operador flecha
+(<code>-&gt;</code>) es <strong>sintÃ¡cticamente equivalente</strong> a
+desreferenciar el puntero primero y luego usar el operador punto
+(<code>.</code>).</p>
+<p><span class="math display">â€˜puntero -&gt; miembroâ€˜ â€„â‰¡â€„ â€˜(*puntero) .
+miembroâ€˜</span></p>
+<h3 id="desglose-de-la-sintaxis-larga">Desglose de la Sintaxis
+Larga</h3>
+<p>Para entender por quÃ© se necesita el operador flecha, examinemos la
+forma larga, <strong><code>(*puntero).miembro</code></strong>:</p>
+<ol type="1">
+<li><strong><code>*puntero</code> (Desreferencia):</strong> El asterisco
+<code>*</code> toma el puntero (<code>ptr_amigo</code>) y accede al
+<strong>contenido</strong> de la direcciÃ³n, es decir, a la estructura
+completa que estÃ¡ almacenada allÃ­. El resultado de esta operaciÃ³n es la
+variable <code>struct</code> <strong>directa</strong>.</li>
+<li><strong><code>(...) . miembro</code> (Acceso Directo):</strong> Una
+vez que se tiene la estructura directa (gracias al paso 1), se utiliza
+el operador punto (<code>.</code>) para acceder a uno de sus
+miembros.</li>
+</ol>
+<h4 id="importancia-de-los-parÃ©ntesis"><strong>Importancia de los
+ParÃ©ntesis</strong></h4>
+<p>Los parÃ©ntesis en <code>(*puntero).miembro</code> son obligatorios.
+Esto se debe a que el operador punto (<code>.</code>) tiene una
+<strong>mayor precedencia</strong> que el operador de desreferencia
+(<code>*</code>).</p>
+<ul>
+<li>Si escribiÃ©ramos <strong><code>*puntero.miembro</code></strong>, el
+compilador intentarÃ­a primero acceder al miembro
+(<code>puntero.miembro</code>) y luego desreferenciar ese miembro, lo
+que resultarÃ­a en un error de sintaxis, ya que <code>puntero</code> no
+es una estructura directa.</li>
+</ul>
+<h3 id="ejemplo-demostrativo">Ejemplo Demostrativo</h3>
+<p>Usando la estructura <code>Estudiante</code> y su puntero:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">typedef</span> <span class="kw">struct</span> <span class="op">{</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> matricula<span class="op">;</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> nota<span class="op">;</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> Estudiante<span class="op">;</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    Estudiante juan <span class="op">=</span> <span class="op">{</span><span class="dv">1001</span><span class="op">,</span> <span class="dv">95</span><span class="op">};</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    Estudiante <span class="op">*</span>ptr_juan <span class="op">=</span> <span class="op">&amp;</span>juan<span class="op">;</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Acceso usando el operador flecha (Forma Recomendada)</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> nota_flecha <span class="op">=</span> ptr_juan<span class="op">-&gt;</span>nota<span class="op">;</span> </span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Acceso usando la equivalencia sintÃ¡ctica (Forma Larga)</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>    <span class="co">// 1. Obtener la struct (*ptr_juan)</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>    <span class="co">// 2. Acceder al miembro .nota</span></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> nota_larga <span class="op">=</span> <span class="op">(*</span>ptr_juan<span class="op">).</span>nota<span class="op">;</span> </span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;Nota (Flecha): </span><span class="sc">%d\n</span><span class="st">&quot;</span><span class="op">,</span> nota_flecha<span class="op">);</span>   <span class="co">// Salida: 95</span></span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;Nota (Larga): </span><span class="sc">%d\n</span><span class="st">&quot;</span><span class="op">,</span> nota_larga<span class="op">);</span>     <span class="co">// Salida: 95</span></span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p>Ambas notaciones producen el mismo resultado en memoria, pero el
+operador <strong>flecha (<code>-&gt;</code>)</strong> ofrece una lectura
+mucho mÃ¡s clara y es el estÃ¡ndar de facto para el manejo de punteros a
+estructuras.</p>
+
+</div>
+</body>
+</html>
+

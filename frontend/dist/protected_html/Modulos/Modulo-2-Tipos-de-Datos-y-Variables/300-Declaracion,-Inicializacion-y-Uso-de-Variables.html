@@ -1,0 +1,255 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" crossorigin href="/assets/content-01sust.css">
+</head>
+<body>
+<div class="main-content">
+<h1>3. Declaración, Inicialización y Uso de Variables</h1>
+<p><strong>Declaración de Variables 🏷️</strong></p>
+<p>La <strong>Declaración de una variable</strong> es el primer paso y
+el más fundamental para usar datos en tu programa C. Es el acto de
+informarle al compilador que vas a necesitar un espacio en la memoria
+RAM para almacenar una pieza de información de un tipo específico.</p>
+<p><strong>Sintaxis y Propósito</strong></p>
+<p>La sintaxis para declarar una variable es siempre la misma: se
+especifica primero el <strong>Tipo de Dato</strong>, seguido por el
+<strong>Nombre</strong> que usarás para referirte a esa ubicación de
+memoria.</p>
+<p><strong>Sintaxis: tipo_de_dato nombre_de_variable;</strong></p>
+<table style="width:97%;">
+<colgroup>
+<col style="width: 19%" />
+<col style="width: 21%" />
+<col style="width: 3%" />
+<col style="width: 52%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>Elemento</strong></th>
+<th style="text-align: left;"><strong>Ejemplo</strong></th>
+<th></th>
+<th style="text-align: left;"><strong>Propósito</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>Tipo de Dato</strong></td>
+<td style="text-align: left;">int, float, char</td>
+<td></td>
+<td style="text-align: left;">Le indica al compilador <strong>cuántos
+bytes</strong> reservar (ej. 4 bytes para int).</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Nombre</strong></td>
+<td style="text-align: left;">contador, precio, inicial</td>
+<td></td>
+<td style="text-align: left;">Proporciona la <strong>etiqueta
+legible</strong> que usarás en tu código.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Ejemplos de Declaración:</strong></p>
+<p>C</p>
+<p>int contador; // Declara una variable entera llamada contador.</p>
+<p>float precio; // Declara una variable de punto flotante.</p>
+<p>char inicial; // Declara una variable para un solo carácter.</p>
+<p><strong>El Rol de la Declaración</strong></p>
+<p>Es crucial entender lo que hace y lo que <strong>no hace</strong> una
+declaración:</p>
+<ol type="1">
+<li><p><strong>Reserva de Espacio (SÍ):</strong> Cuando declaras int
+contador;, el compilador reserva el número de <em>bytes</em> necesarios
+(típicamente 4) en la memoria RAM.</p></li>
+<li><p><strong>Definición de Valor (NO):</strong> La declaración por sí
+sola <strong>no asigna un valor útil</strong> a esa ubicación de
+memoria. Simplemente reserva el espacio.</p></li>
+</ol>
+<p>En este punto, la variable existe en la memoria, pero contiene un
+<strong>valor indeterminado</strong> (o "valor basura"), que es lo que
+queda de programas anteriores en esa celda de la RAM. La asignación del
+primer valor se aborda en el siguiente tema: la
+<strong>Inicialización</strong>.</p>
+<p><strong>Inicialización de Variables 🎯</strong></p>
+<p>La <strong>Inicialización</strong> es el proceso de <strong>asignar
+el primer valor</strong> útil a una variable declarada. Es el paso que
+sigue a la declaración (reservar el espacio) y es crucial para evitar el
+uso de valores basura.</p>
+<p><strong>El Operador de Asignación (=)</strong></p>
+<p>El operador clave para la inicialización (y reasignación posterior)
+es el <strong>operador de asignación</strong> (=).</p>
+<ul>
+<li>En C, el símbolo = no significa "igual a" (como en matemáticas),
+sino que significa <strong>"asigna el valor de la derecha a la variable
+de la izquierda"</strong>.</li>
+</ul>
+<p><strong>Métodos de Inicialización</strong></p>
+<p>Existen dos formas principales de inicializar variables en C:</p>
+<ol type="1">
+<li>Declaración y Asignación por Separado (Dos Pasos):</li>
+</ol>
+<blockquote>
+<p>Primero se reserva el espacio (declaración), y en una línea
+posterior, se le da un valor por primera vez (inicialización).</p>
+<p>C</p>
+<p>int cantidad; // 1. Declaración (reserva 4 bytes)</p>
+<p>cantidad = 50; // 2. Inicialización (asigna el valor 50)</p>
+</blockquote>
+<ol start="2" type="1">
+<li>Inicialización Directa (Un Solo Paso):</li>
+</ol>
+<blockquote>
+<p>Es el método más seguro y recomendado. La declaración y la asignación
+del primer valor se hacen en la misma línea.</p>
+<p>C</p>
+<p>int edad = 25; // Declara e inicializa la edad a 25.</p>
+<p>float temperatura = 36.5f; // Declara e inicializa la
+temperatura.</p>
+<p>char codigo = 'P'; // Declara e inicializa el carácter.</p>
+</blockquote>
+<table style="width:97%;">
+<colgroup>
+<col style="width: 31%" />
+<col style="width: 66%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>Método</strong></th>
+<th style="text-align: left;"><strong>Ventaja Principal</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>Separado</strong></td>
+<td style="text-align: left;">Útil cuando el valor inicial depende de
+una lógica posterior en el programa.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Directo
+(Recomendado)</strong></td>
+<td style="text-align: left;"><strong>Evita los valores basura</strong>
+(ver próximo subtema) y mejora la legibilidad.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Siempre debes asegurarte de que una variable esté
+inicializada antes de usar su valor.</strong></p>
+<p><strong>Variables sin Inicializar (Valores Basura)</strong></p>
+<p>Una de las características más críticas (y a veces peligrosas) de C
+es su enfoque en la eficiencia y el control de bajo nivel. Esto nos
+lleva al concepto de <strong>valores basura</strong>.</p>
+<p><strong>¿Qué son los Valores Basura?</strong></p>
+<p>Cuando tú <strong>declaras</strong> una variable, el compilador
+reserva un bloque de <em>bytes</em> en la memoria RAM, pero <strong>no
+limpia</strong> ni sobrescribe esos <em>bytes</em> automáticamente.</p>
+<ul>
+<li><p><strong>Definición:</strong> El <strong>valor basura</strong>
+(<em>garbage value</em>) es el dato impredecible, aleatorio y sin
+sentido que ya existía previamente en la dirección de memoria asignada a
+tu nueva variable. Es, literalmente, lo que dejó el último programa que
+utilizó ese espacio.</p></li>
+<li><p><strong>Advertencia Crucial:</strong> C asume que, como
+programador, <strong>tú eres responsable</strong> de inicializar la
+variable antes de leer su valor. Si intentas usar una variable que solo
+ha sido declarada, tu programa utilizará este valor basura, lo que puede
+llevar a resultados erróneos o a un comportamiento
+impredecible.</p></li>
+</ul>
+<p><strong>Ejemplo Empírico en C</strong></p>
+<p>El siguiente código demuestra el problema del valor basura. Nota que
+la variable valor_basura se declara, pero <strong>nunca se le asigna un
+valor</strong> antes de ser impresa.</p>
+<p>C</p>
+<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
+<p>int main(void) {</p>
+<p>// 1. Declaración: El espacio para esta variable se reserva en la
+RAM.</p>
+<p>int valor_basura;</p>
+<p>// 2. USO PELIGROSO: Intentamos leer la variable sin inicializar.</p>
+<p>printf("El valor basura es (impredecible): %d\n", valor_basura);</p>
+<p>// 3. Demostración de un comportamiento seguro</p>
+<p>int valor_seguro = 10;</p>
+<p>printf("El valor seguro es: %d\n", valor_seguro);</p>
+<p>return 0;</p>
+<p>}</p>
+<p><strong>Salida Típica (Resultado Impredecible):</strong></p>
+<p>El valor basura es (impredecible): -1073741824</p>
+<p>El valor seguro es: 10</p>
+<p><strong>Nota:</strong> La salida del valor basura (-1073741824 en
+este ejemplo) <strong>cambiará</strong> cada vez que se ejecute el
+programa en diferentes máquinas o incluso en diferentes momentos en la
+misma máquina. Este comportamiento aleatorio es la razón por la que
+<strong>siempre debes inicializar</strong> tus variables al
+declararlas.</p>
+<p><strong>Uso y Reasignación de Variables</strong></p>
+<p>Una vez que una variable ha sido declarada e inicializada, podemos
+interactuar con ella de dos maneras fundamentales:
+<strong>usando</strong> su valor (leyéndolo) o
+<strong>cambiando</strong> su valor (reasignándolo).</p>
+<p><strong>1. Uso (Acceso) del Valor</strong></p>
+<p>Para acceder al valor almacenado en una variable, simplemente
+utilizamos su <strong>nombre</strong> en cualquier expresión o
+sentencia.</p>
+<p>El nombre de la variable actúa como un marcador de posición para el
+valor que contiene.</p>
+<ul>
+<li><p><strong>En la Salida (printf):</strong> Usamos el nombre para
+mostrar el valor al usuario.</p></li>
+<li><p><strong>En Operaciones:</strong> Usamos el nombre para realizar
+cálculos con ese valor.</p></li>
+</ul>
+<p>C</p>
+<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
+<p>int main(void) {</p>
+<p>int saldo = 100; // Inicialización</p>
+<p>int descuento = 20;</p>
+<p>// Uso del valor: el nombre 'saldo' se reemplaza por el valor 100 en
+la impresión.</p>
+<p>printf("Saldo inicial: %d\n", saldo);</p>
+<p>// Uso del valor: el nombre 'saldo' y 'descuento' se usan en una
+operación.</p>
+<p>int nuevo_saldo = saldo - descuento;</p>
+<p>printf("Nuevo saldo: %d\n", nuevo_saldo);</p>
+<p>return 0;</p>
+<p>}</p>
+<p><strong>2. Reasignación del Valor</strong></p>
+<p>La clave del término <strong>variable</strong> es que su valor
+<em>puede variar</em> durante la ejecución del programa. La
+<strong>reasignación</strong> es el proceso de cambiar el valor de una
+variable existente, y se realiza nuevamente con el <strong>operador de
+asignación</strong> (=).</p>
+<p>Cuando reasignas un valor:</p>
+<ol type="1">
+<li><p>La expresión a la <strong>derecha</strong> del = se evalúa
+primero.</p></li>
+<li><p>El resultado se almacena en la ubicación de memoria de la
+variable a la <strong>izquierda</strong> del =.</p></li>
+<li><p>El valor anterior de la variable se <strong>sobrescribe</strong>
+y se pierde.</p></li>
+</ol>
+<p><strong>Ejemplo de Reasignación:</strong></p>
+<p>C</p>
+<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
+<p>int main(void) {</p>
+<p>int contador = 1; // Inicialización</p>
+<p>printf("Contador (Inicio): %d\n", contador);</p>
+<p>// Reasignación 1: Cambia el valor a 5.</p>
+<p>contador = 5;</p>
+<p>printf("Contador (Primer cambio): %d\n", contador);</p>
+<p>// Reasignación 2: El nuevo valor se basa en el valor actual (5 +
+1).</p>
+<p>contador = contador + 1; // Ahora 'contador' vale 6</p>
+<p>printf("Contador (Segundo cambio): %d\n", contador);</p>
+<p>return 0;</p>
+<p>}</p>
+<p><strong>Salida Esperada:</strong></p>
+<p>Contador (Inicio): 1</p>
+<p>Contador (Primer cambio): 5</p>
+<p>Contador (Segundo cambio): 6</p>
+
+</div>
+</body>
+</html>
+

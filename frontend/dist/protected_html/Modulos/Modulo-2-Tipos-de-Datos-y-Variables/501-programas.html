@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" crossorigin href="/assets/content-01sust.css">
+</head>
+<body>
+<div class="main-content">
+<p><strong>Ejercicios: Límites, Rangos y Desbordamiento</strong></p>
+<p><strong>Ejercicio 1: Mostrando el Límite Máximo de int</strong></p>
+<p><strong>Instrucción:</strong> Incluye el <em>header</em>
+&lt;limits.h&gt; e imprime el valor exacto de la constante INT_MAX.</p>
+<p><strong>Solución en C:</strong></p>
+<p>C</p>
+<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
+<p>#<strong>include</strong> &lt;limits.h&gt;</p>
+<p>int main(void) {</p>
+<p>printf("El valor máximo de un int es: %d\n", INT_MAX);</p>
+<p>return 0;</p>
+<p>}</p>
+<p><strong>Output Esperado (Típico 32-bit):</strong></p>
+<p>El valor máximo de un int es: 2147483647</p>
+<p><strong>Ejercicio 2: Desbordamiento (<em>Overflow</em> y <em>Wrap
+Around</em>)</strong></p>
+<p><strong>Instrucción:</strong> Inicializa una variable int con el
+valor INT_MAX. Súmale 1 y luego imprime el resultado para demostrar el
+efecto de <em>wrap around</em> al límite negativo.</p>
+<p><strong>Solución en C:</strong></p>
+<p>C</p>
+<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
+<p>#<strong>include</strong> &lt;limits.h&gt;</p>
+<p>int main(void) {</p>
+<p>int contador = INT_MAX;</p>
+<p>printf("Valor inicial (INT_MAX): %d\n", contador);</p>
+<p>contador = contador + 1; // Causando Overflow</p>
+<p>printf("Valor después de +1: %d\n", contador);</p>
+<p>return 0;</p>
+<p>}</p>
+<p><strong>Output Esperado (Típico 32-bit):</strong></p>
+<p>Valor inicial (INT_MAX): 2147483647</p>
+<p>Valor después de +1: -2147483648</p>
+<p><strong>Ejercicio 3: Desbordamiento Inferior (<em>Underflow</em> de
+int)</strong></p>
+<p><strong>Instrucción:</strong> Inicializa una variable int con el
+valor INT_MIN. Réstale 1 y luego imprime el resultado para demostrar el
+efecto de <em>wrap around</em> al límite positivo.</p>
+<p><strong>Solución en C:</strong></p>
+<p>C</p>
+<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
+<p>#<strong>include</strong> &lt;limits.h&gt;</p>
+<p>int main(void) {</p>
+<p>int contador = INT_MIN;</p>
+<p>printf("Valor inicial (INT_MIN): %d\n", contador);</p>
+<p>contador = contador - 1; // Causando Underflow</p>
+<p>printf("Valor después de -1: %d\n", contador);</p>
+<p>return 0;</p>
+<p>}</p>
+<p><strong>Output Esperado (Típico 32-bit):</strong></p>
+<p>Valor inicial (INT_MIN): -2147483648</p>
+<p>Valor después de -1: 2147483647</p>
+<p><strong>Ejercicio 4: Uso de unsigned int (Sin Signo)</strong></p>
+<p><strong>Instrucción:</strong> Declara una variable como unsigned int
+llamada capacidad. Inicialízala con un valor grande (ej. 4,000,000,000).
+Imprime este valor usando el especificador %u.</p>
+<p><strong>Solución en C:</strong></p>
+<p>C</p>
+<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
+<p>int main(void) {</p>
+<p>// 4 mil millones (posible con 4 bytes, ya que no tiene signo)</p>
+<p>unsigned int capacidad = 4000000000U;</p>
+<p>printf("Capacidad máxima de almacenamiento: %u\n", capacidad);</p>
+<p>return 0;</p>
+<p>}</p>
+<p><strong>Output Esperado:</strong></p>
+<p>Capacidad máxima de almacenamiento: 4000000000</p>
+<p><strong>Ejercicio 5: unsigned y el Valor Negativo Ilegal</strong></p>
+<p><strong>Instrucción:</strong> Declara una variable unsigned int.
+Intenta asignarle un valor negativo (-1) y observa (imprime) el valor
+que el compilador le asigna debido al <em>wrap around</em>.</p>
+<p><strong>Solución en C:</strong></p>
+<p>C</p>
+<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
+<p>#<strong>include</strong> &lt;limits.h&gt;</p>
+<p>int main(void) {</p>
+<p>// Al asignar -1 a un unsigned int, se produce un overflow y salta a
+UINT_MAX.</p>
+<p>unsigned int error_valor = -1;</p>
+<p>printf("Valor asignado a unsigned int de -1: %u\n", error_valor);</p>
+<p>printf("--- Esto es UINT_MAX en el sistema. ---\n");</p>
+<p>return 0;</p>
+<p>}</p>
+<p><strong>Output Esperado (Típico 32-bit):</strong></p>
+<p>Valor asignado a unsigned int de -1: 4294967295</p>
+<p>--- Esto es UINT_MAX en el sistema. ---</p>
+<p><strong>Ejercicio 6: Rangos del Tipo char</strong></p>
+<p><strong>Instrucción:</strong> Usa CHAR_MAX y CHAR_MIN (del
+<em>header</em> &lt;limits.h&gt;) para imprimir el rango numérico de un
+char con signo en el sistema.</p>
+<p><strong>Solución en C:</strong></p>
+<p>C</p>
+<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
+<p>#<strong>include</strong> &lt;limits.h&gt;</p>
+<p>int main(void) {</p>
+<p>printf("Rango de char: %d a %d\n", CHAR_MIN, CHAR_MAX);</p>
+<p>return 0;</p>
+<p>}</p>
+<p><strong>Output Esperado (Típico, 8 bits):</strong></p>
+<p>Rango de char: -128 a 127</p>
+<p><strong>Ejercicio 7: Desbordamiento de unsigned int
+(Cíclico)</strong></p>
+<p><strong>Instrucción:</strong> Inicializa una variable unsigned int
+con UINT_MAX. Súmale 1 e imprime el resultado. (En unsigned, el <em>wrap
+around</em> es de UINT_MAX + 1 a 0).</p>
+<p><strong>Solución en C:</strong></p>
+<p>C</p>
+<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
+<p>#<strong>include</strong> &lt;limits.h&gt;</p>
+<p>int main(void) {</p>
+<p>unsigned int ciclo_up = UINT_MAX;</p>
+<p>printf("UINT_MAX: %u\n", ciclo_up);</p>
+<p>ciclo_up = ciclo_up + 1; // Causa wrap around a 0</p>
+<p>printf("UINT_MAX + 1 = %u\n", ciclo_up);</p>
+<p>return 0;</p>
+<p>}</p>
+<p><strong>Output Esperado (Típico 32-bit):</strong></p>
+<p>UINT_MAX: 4294967295</p>
+<p>UINT_MAX + 1 = 0</p>
+<p><strong>Ejercicio 8: Desbordamiento de unsigned int
+(Inverso)</strong></p>
+<p><strong>Instrucción:</strong> Inicializa una variable unsigned int
+con el valor 0. Réstale 1 e imprime el resultado. (El <em>wrap
+around</em> es de 0 - 1 a UINT_MAX).</p>
+<p><strong>Solución en C:</strong></p>
+<p>C</p>
+<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
+<p>#<strong>include</strong> &lt;limits.h&gt;</p>
+<p>int main(void) {</p>
+<p>unsigned int ciclo_down = 0;</p>
+<p>printf("Valor inicial: %u\n", ciclo_down);</p>
+<p>ciclo_down = ciclo_down - 1; // Causa wrap around a UINT_MAX</p>
+<p>printf("0 - 1 = %u\n", ciclo_down);</p>
+<p>return 0;</p>
+<p>}</p>
+<p><strong>Output Esperado (Típico 32-bit):</strong></p>
+<p>Valor inicial: 0</p>
+<p>0 - 1 = 4294967295</p>
+<p><strong>Ejercicio 9: Límites de float (Flotante)</strong></p>
+<p><strong>Instrucción:</strong> Incluye &lt;float.h&gt; e imprime el
+valor máximo representable para un float (FLT_MAX). (Usa el
+especificador de formato %e para notación científica).</p>
+<p><strong>Solución en C:</strong></p>
+<p>C</p>
+<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
+<p>#<strong>include</strong> &lt;float.h&gt;</p>
+<p>int main(void) {</p>
+<p>printf("Valor máximo de un float (FLT_MAX): %e\n", FLT_MAX);</p>
+<p>return 0;</p>
+<p>}</p>
+<p><strong>Output Esperado (Típico IEEE 754):</strong></p>
+<p>Valor máximo de un float (FLT_MAX): 3.402823e+38</p>
+<p><strong>Ejercicio 10: Límites de double</strong></p>
+<p><strong>Instrucción:</strong> Imprime el valor máximo representable
+para un double (DBL_MAX) usando el especificador %le.</p>
+<p><strong>Solución en C:</strong></p>
+<p>C</p>
+<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
+<p>#<strong>include</strong> &lt;float.h&gt;</p>
+<p>int main(void) {</p>
+<p>printf("Valor máximo de un double (DBL_MAX): %le\n", DBL_MAX);</p>
+<p>return 0;</p>
+<p>}</p>
+<p><strong>Output Esperado (Típico IEEE 754):</strong></p>
+<p>Valor máximo de un double (DBL_MAX): 1.797693e+308</p>
+<p><strong>Ejercicio 11: Mezcla de signed y unsigned
+(Peligro)</strong></p>
+<p><strong>Instrucción:</strong> Declara un signed int (-10) y un
+unsigned int (1). Réstalos y asigna el resultado a un signed int.
+Explica por qué el unsigned fuerza la operación a comportarse como sin
+signo.</p>
+<p><strong>Solución en C:</strong></p>
+<p>C</p>
+<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
+<p>int main(void) {</p>
+<p>int A = -10;</p>
+<p>unsigned int B = 1;</p>
+<p>// El 'int' A se convierte a 'unsigned int' durante la resta,</p>
+<p>// lo que resulta en un número positivo muy grande.</p>
+<p>int resultado = A - B;</p>
+<p>printf("A: %d\n", A);</p>
+<p>printf("B: %u\n", B);</p>
+<p>printf("Resultado (A - B): %d\n", resultado);</p>
+<p>return 0;</p>
+<p>}</p>
+<p><strong>Output Esperado (Resultado del cálculo a nivel de bits como
+unsigned):</strong></p>
+<p>A: -10</p>
+<p>B: 1</p>
+<p>Resultado (A - B): -11 // El resultado es -11, pero internamente la
+operación fue unsigned: 4294967286</p>
+<p><strong>Ejercicio 12: Usando signed char</strong></p>
+<p><strong>Instrucción:</strong> Define una variable como signed char e
+inicialízala con un valor cerca del límite positivo (ej. 120). Súmale 10
+y comprueba el <em>wrap around</em> al límite negativo de char.</p>
+<p><strong>Solución en C:</strong></p>
+<p>C</p>
+<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
+<p>#<strong>include</strong> &lt;limits.h&gt;</p>
+<p>int main(void) {</p>
+<p>// char MAX es 127. 120 + 10 = 130.</p>
+<p>signed char valor_char = 120;</p>
+<p>valor_char = valor_char + 10;</p>
+<p>printf("Límite de char: %d\n", CHAR_MAX);</p>
+<p>printf("120 + 10 (char overflow): %d\n", valor_char);</p>
+<p>return 0;</p>
+<p>}</p>
+<p><strong>Output Esperado (130 - 256 = -126):</strong></p>
+<p>Límite de char: 127</p>
+<p>120 + 10 (char overflow): -126</p>
+<p><strong>Ejercicio 13: Declaración Explícita de signed
+int</strong></p>
+<p><strong>Instrucción:</strong> Declara una variable usando el
+modificador signed int (aunque no sea necesario) e imprímela con un
+valor negativo, demostrando que signed es el estado natural.</p>
+<p><strong>Solución en C:</strong></p>
+<p>C</p>
+<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
+<p>int main(void) {</p>
+<p>signed int deuda = -1500;</p>
+<p>printf("Deuda con signed int: %d\n", deuda);</p>
+<p>return 0;</p>
+<p>}</p>
+<p><strong>Output Esperado:</strong></p>
+<p>Deuda con signed int: -1500</p>
+<p><strong>Ejercicio 14: Verificación de unsigned char</strong></p>
+<p><strong>Instrucción:</strong> Declara un unsigned char llamado
+byte_max e inicialízalo con su valor máximo (255). Imprime este valor
+usando el especificador %d.</p>
+<p><strong>Solución en C:</strong></p>
+<p>C</p>
+<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
+<p>int main(void) {</p>
+<p>// 255 es el valor máximo para 8 bits sin signo (0xFF).</p>
+<p>unsigned char byte_max = 255;</p>
+<p>printf("Máximo de unsigned char: %d\n", byte_max);</p>
+<p>return 0;</p>
+<p>}</p>
+<p><strong>Output Esperado:</strong></p>
+<p>Máximo de unsigned char: 255</p>
+<p><strong>Ejercicio 15: Desbordamiento de Punto Flotante
+(float)</strong></p>
+<p><strong>Instrucción:</strong> Inicializa una variable float con
+FLT_MAX (usando &lt;float.h&gt;). Multiplícala por 2.0f y observa el
+resultado. (El resultado del <em>overflow</em> de flotantes a menudo es
+inf (infinito)).</p>
+<p><strong>Solución en C:</strong></p>
+<p>C</p>
+<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
+<p>#<strong>include</strong> &lt;float.h&gt;</p>
+<p>int main(void) {</p>
+<p>float max_f = FLT_MAX;</p>
+<p>printf("Valor inicial (FLT_MAX): %e\n", max_f);</p>
+<p>// Multiplicar por 2.0f causará un desbordamiento.</p>
+<p>float resultado = max_f * 2.0f;</p>
+<p>printf("Resultado del Overflow: %f\n", resultado);</p>
+<p>return 0;</p>
+<p>}</p>
+<p><strong>Output Esperado (Típico IEEE 754):</strong></p>
+<p>Valor inicial (FLT_MAX): 3.402823e+38</p>
+<p>Resultado del Overflow: inf</p>
+
+
+</div>
+</body>
+</html>
+

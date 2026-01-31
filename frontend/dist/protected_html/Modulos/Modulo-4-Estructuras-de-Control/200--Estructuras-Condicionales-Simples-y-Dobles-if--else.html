@@ -1,0 +1,304 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" crossorigin href="/assets/content-01sust.css">
+</head>
+<body>
+<div class="main-content">
+<h1>2. Estructuras Condicionales Simples y Dobles (`if` `else`)</h1>
+<p><strong>Sintaxis y Uso de if (Condicional Simple)</strong></p>
+<p>La estructura <strong>if</strong> es la forma más fundamental de la
+Estructura de Decisión y permite que el programa ejecute un bloque de
+código <strong>solamente</strong> si una condición lógica resulta ser
+verdadera.</p>
+<p><strong>Sintaxis Básica</strong></p>
+<p>La sintaxis del condicional simple if se compone de la palabra clave
+if, seguida de la condición encerrada entre paréntesis (), y el bloque
+de código a ejecutar encerrado entre llaves {}.</p>
+<p>$$\text{if } (\text{condición}) \left\{ \right.
+\text{bloque\_de\_código} \left. \right\}$$</p>
+<p>C</p>
+<p>if (condicion_logica) {</p>
+<p>// Estas instrucciones se ejecutan SOLO si la condicion es
+VERDADERA.</p>
+<p>}</p>
+<p>// Si la condicion es FALSA, el programa salta este bloque y continua
+aqui.</p>
+<p><strong>El Motor de la Decisión: La Condición Lógica</strong></p>
+<p>La <strong>condición</strong> es una expresión que se evalúa a un
+resultado booleano:</p>
+<ul>
+<li><p><strong>Verdadero (True):</strong> En C, cualquier valor numérico
+<strong>distinto de cero</strong> (como $1$, $-5$, $0.001$, etc.) se
+interpreta como <strong>Verdadero</strong>.</p></li>
+<li><p><strong>Falso (False):</strong> Solo el valor <strong>cero
+($0$)</strong> se interpreta como <strong>Falso</strong>.</p></li>
+</ul>
+<p>Si la condición se evalúa a <strong>Verdadero</strong>, el flujo de
+ejecución entra en el bloque de llaves. Si se evalúa a
+<strong>Falso</strong> ($0$), el flujo salta el bloque.</p>
+<p><strong>Ejemplo de Uso:</strong></p>
+<p>C</p>
+<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
+<p>int main(void) {</p>
+<p>int saldo = 100;</p>
+<p>int retiro = 50;</p>
+<p>printf("Saldo actual: %d\n", saldo);</p>
+<p>// Condicion: ¿El saldo es suficiente para el retiro?</p>
+<p>if (saldo &gt;= retiro) {</p>
+<p>// Este bloque se ejecuta solo si la condicion es VERDADERA</p>
+<p>saldo = saldo - retiro;</p>
+<p>printf("Retiro exitoso. Nuevo saldo: %d\n", saldo);</p>
+<p>}</p>
+<p>return 0;</p>
+<p>}</p>
+<p>En este ejemplo, dado que $100 \ge 50$ es Verdadero, el retiro se
+ejecuta. Si el retiro fuera $200$, la condición sería Falsa, y el
+programa simplemente mostraría el saldo inicial sin ejecutar el bloque
+if.</p>
+<p><strong>La Condición Relacional y Lógica en if</strong></p>
+<p>El núcleo de toda estructura de decisión <strong>if</strong> es la
+<strong>condición</strong>, la expresión que el programa evalúa para
+determinar su camino de ejecución. Esta condición se construye
+utilizando los <strong>operadores relacionales</strong> y
+<strong>operadores lógicos</strong> estudiados en el Módulo 3.</p>
+<p><strong>1. Operadores Relacionales (Comparación)</strong></p>
+<p>Los operadores relacionales son la base de la mayoría de las
+condiciones. Comparan dos valores y siempre devuelven un resultado
+booleano: $1$ (Verdadero) o $0$ (Falso).</p>
+<table style="width:97%;">
+<colgroup>
+<col style="width: 19%" />
+<col style="width: 23%" />
+<col style="width: 24%" />
+<col style="width: 29%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>Operador</strong></th>
+<th style="text-align: left;"><strong>Significado</strong></th>
+<th style="text-align: left;"><strong>Uso en if (Ejemplo)</strong></th>
+<th style="text-align: left;"><strong>Resultado si edad=17</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">&gt;</td>
+<td style="text-align: left;">Mayor que</td>
+<td style="text-align: left;">if (edad &gt; 18)</td>
+<td style="text-align: left;">Falso ($0$)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">&gt;=</td>
+<td style="text-align: left;">Mayor o igual que</td>
+<td style="text-align: left;">if (edad &gt;= 18)</td>
+<td style="text-align: left;">Falso ($0$)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">==</td>
+<td style="text-align: left;">Igual a</td>
+<td style="text-align: left;">if (edad == 17)</td>
+<td style="text-align: left;">Verdadero ($1$)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">!=</td>
+<td style="text-align: left;">Diferente de</td>
+<td style="text-align: left;">if (saldo != 0)</td>
+<td style="text-align: left;">Verdadero ($1$) si saldo=10</td>
+</tr>
+</tbody>
+</table>
+<p><strong>2. Operadores Lógicos (Combinación de
+Condiciones)</strong></p>
+<p>Los operadores lógicos permiten combinar dos o más condiciones
+relacionales simples para formar una condición compleja.</p>
+<table style="width:97%;">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 28%" />
+<col style="width: 48%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>Operador</strong></th>
+<th style="text-align: left;"><strong>Significado</strong></th>
+<th style="text-align: left;"><strong>Uso en if (Ejemplo)</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">&amp;&amp;</td>
+<td style="text-align: left;">AND (Y Lógico)</td>
+<td style="text-align: left;">if (edad &gt;= 18 &amp;&amp;
+tiene_licencia == 1)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">`</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">`</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">!</td>
+<td style="text-align: left;">NOT (Negación)</td>
+<td style="text-align: left;">if (!es_admin)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Aplicación Práctica con Precedencia</strong></p>
+<p>Recuerda que, debido a la <strong>precedencia de operadores</strong>,
+las comparaciones relacionales se evalúan <strong>antes</strong> que los
+operadores lógicos.</p>
+<p><strong>Ejemplo de Condición Compuesta:</strong></p>
+<p>Queremos dar un descuento si la compra es mayor a $100
+<strong>Y</strong> si el cliente es de la región A.</p>
+<p>C</p>
+<p>float compra = 120.0;</p>
+<p>char region = 'A';</p>
+<p>// Condición: (compra &gt; 100) &amp;&amp; (region == 'A')</p>
+<p>if (compra &gt; 100.0 &amp;&amp; region == 'A') {</p>
+<p>printf("¡Descuento aplicado!\n");</p>
+<p>}</p>
+<ul>
+<li><p><strong>Paso 1 (Relacionales):</strong> Se evalúa compra &gt;
+100.0 (Verdadero, $1$) y region == 'A' (Verdadero, $1$).</p></li>
+<li><p><strong>Paso 2 (Lógico):</strong> Se evalúa 1 &amp;&amp; 1
+(Verdadero, $1$).</p></li>
+<li><p><strong>Decisión:</strong> El bloque if se ejecuta.</p></li>
+</ul>
+<p><strong>Sintaxis y Uso de if-else (Condicional Doble)</strong></p>
+<p>La estructura <strong>if-else</strong> es la forma más común y
+completa de la Estructura de Decisión. A diferencia del simple if (que
+solo actúa si la condición es Verdadera), if-else garantiza que
+<strong>siempre se ejecutará uno de dos bloques de código</strong>
+mutuamente excluyentes.</p>
+<p><strong>Sintaxis Básica de if-else</strong></p>
+<p>La estructura introduce la palabra clave <strong>else</strong> para
+definir el camino alternativo.</p>
+<p>$$\text{if } (\text{condición}) \left\{ \right. \text{Bloque A: Se
+ejecuta si es VERDADERO} \left. \right\} \text{ else } \left\{ \right.
+\text{Bloque B: Se ejecuta si es FALSO} \left. \right\}$$</p>
+<p>C</p>
+<p>if (condicion_logica) {</p>
+<p>// Bloque IF: Se ejecuta si la condicion es VERDADERA (distinto de
+0).</p>
+<p>} else {</p>
+<p>// Bloque ELSE: Se ejecuta AUTOMÁTICAMENTE si la condicion es FALSA
+(0).</p>
+<p>}</p>
+<p>// El programa continúa después de ejecutar uno de los dos
+bloques.</p>
+<p><strong>Funcionamiento y Caminos Excluyentes</strong></p>
+<ol type="1">
+<li><p><strong>Evaluación:</strong> El programa evalúa la
+condición_logica.</p></li>
+<li><p><strong>Camino Verdadero (if):</strong> Si la condición es
+<strong>Verdadera</strong> ($1$ o cualquier valor distinto de cero), se
+ejecuta el código dentro del bloque if. El bloque else se
+<strong>salta</strong> por completo.</p></li>
+<li><p><strong>Camino Falso (else):</strong> Si la condición es
+<strong>Falsa</strong> ($0$), el programa <strong>salta</strong> el
+bloque if y ejecuta el código dentro del bloque else.</p></li>
+</ol>
+<p>La ventaja de if-else es que siempre sabemos qué código se ejecutará,
+simplificando la lógica de manejo de errores o casos por defecto.</p>
+<p><strong>Ejemplo de Uso: Verificación de Estado</strong></p>
+<p>C</p>
+<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
+<p>int main(void) {</p>
+<p>int saldo = 100;</p>
+<p>int costo_compra = 150;</p>
+<p>// Condicion: ¿Hay suficientes fondos?</p>
+<p>if (saldo &gt;= costo_compra) {</p>
+<p>// Camino 1: Suficiente saldo (VERDADERO)</p>
+<p>saldo = saldo - costo_compra;</p>
+<p>printf("Compra exitosa. Nuevo saldo: %d\n", saldo);</p>
+<p>} else {</p>
+<p>// Camino 2: Saldo insuficiente (FALSO)</p>
+<p>printf("ERROR: Saldo insuficiente. Faltan %d unidades.\n",
+costo_compra - saldo);</p>
+<p>}</p>
+<p>return 0;</p>
+<p>}</p>
+<p>Dado que $100 \ge 150$ es Falso, el programa omite el bloque if y
+ejecuta el bloque <strong>else</strong>, imprimiendo el mensaje de
+error.</p>
+<p><strong>Condicionales de Una Sola Línea (Omisión de
+Llaves)</strong></p>
+<p>C permite una sintaxis abreviada y compacta para las estructuras
+condicionales (if o if-else) cuando el bloque de código a ejecutar
+<strong>consta de una única sentencia</strong> (una sola línea de
+instrucción). En estos casos, las llaves de bloque ({}) pueden ser
+omitidas.</p>
+<p><strong>Sintaxis Abreviada</strong></p>
+<p>Cuando el compilador encuentra un if o else sin llaves,
+automáticamente asume que <strong>solo la instrucción inmediatamente
+posterior</strong> pertenece a esa estructura condicional.</p>
+<table style="width:97%;">
+<colgroup>
+<col style="width: 40%" />
+<col style="width: 56%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>Condicional Simple
+(if)</strong></th>
+<th style="text-align: left;"><strong>Condicional Doble
+(if-else)</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">c if (condicion) sentencia_unica;</td>
+<td style="text-align: left;">c if (condicion) sentencia_A; else
+sentencia_B;</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Ejemplo Práctico:</strong></p>
+<p>C</p>
+<p>int saldo = 10;</p>
+<p>// Versión CON llaves (Recomendada)</p>
+<p>if (saldo &gt; 0) {</p>
+<p>printf("Saldo positivo.\n");</p>
+<p>} else {</p>
+<p>printf("Saldo negativo.\n");</p>
+<p>}</p>
+<p>// Versión SIN llaves (Abreviada)</p>
+<p>if (saldo &gt; 0)</p>
+<p>printf("¡Saldo positivo!\n");</p>
+<p>else</p>
+<p>printf("¡Saldo negativo!\n");</p>
+<p><strong>⚠️ ADVERTENCIA: La Peligrosa Omisión de Llaves</strong></p>
+<p>Aunque la sintaxis abreviada funciona y ahorra líneas de código, se
+considera una <strong>mala práctica</strong> en la programación
+profesional y académica debido a los riesgos que introduce:</p>
+<ol type="1">
+<li><p><strong>Dificultad de Lectura y Mantenimiento:</strong> El código
+se vuelve menos claro sobre qué instrucciones dependen del if y cuáles
+no.</p></li>
+<li><p><strong>Errores de Lógica (El Error de la Segunda
+Línea):</strong> Si, posteriormente, se añade una segunda instrucción al
+bloque sin recordar añadir las llaves, el compilador solo asociará la
+primera línea al if o else. La segunda línea se ejecutará
+<strong>siempre</strong>, sin importar la condición.</p></li>
+</ol>
+<p><strong>Ejemplo de Error Lógico Común:</strong></p>
+<p>C</p>
+<p>int edad = 17;</p>
+<p>if (edad &gt;= 18)</p>
+<p>printf("Acceso permitido.\n"); // Esta linea es la unica que
+pertenece al 'if'</p>
+<p>printf("Verificacion completada.\n"); // ¡ERROR! Esta línea se
+ejecuta SIEMPRE.</p>
+<p><strong>Regla de Oro:</strong> Se recomienda <strong>utilizar siempre
+las llaves ({})</strong> en todas las estructuras if y else, incluso si
+solo contienen una sentencia, para prevenir errores lógicos y garantizar
+la claridad del código.</p>
+
+
+</div>
+</body>
+</html>
+

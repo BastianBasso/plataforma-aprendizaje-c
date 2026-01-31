@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" crossorigin href="/assets/content-01sust.css">
+</head>
+<body>
+<div class="main-content">
+<h1>4. Entrada Estándar de Datos (Input): Captura de Valores</h1>
+<p><strong>printf() Avanzado: Múltiples Argumentos 🔄</strong></p>
+<p>La verdadera potencia de <strong>printf()</strong> reside en su
+capacidad para insertar los valores de múltiples variables o expresiones
+dentro de una única cadena de texto de salida. Esto se logra mediante
+una relación estricta de <strong>uno a uno</strong> entre los
+especificadores de formato y la lista de argumentos.</p>
+<p><strong>Relación Uno a Uno (Especificador $\leftrightarrow$
+Argumento)</strong></p>
+<p>Cuando usas printf(), el compilador sigue dos pasos cruciales:</p>
+<ol type="1">
+<li><p><strong>Busca el Especificador:</strong> Recorre la cadena de
+formato (el primer argumento, entre comillas) y encuentra los
+especificadores de formato (como %d, %.2f, %s).</p></li>
+<li><p><strong>Sustitución Secuencial:</strong> Por cada especificador
+encontrado, toma el siguiente valor de la lista de argumentos que le
+sigue a la coma y lo sustituye en ese punto de la cadena.</p></li>
+</ol>
+<p>La <strong>posición</strong> y el <strong>tipo</strong> son
+cruciales: el primer especificador sustituye al primer argumento, el
+segundo especificador sustituye al segundo argumento, y así
+sucesivamente.</p>
+<p>$$\text{printf}(\text{"Cadena de formato con \%tipo1 y \%tipo2", }
+\text{variable1, } \text{variable2})\text{;}$$</p>
+<p><strong>Ejemplo Práctico:</strong></p>
+<p>En este ejemplo, edad se sustituye en el lugar de %d y altura se
+sustituye en el lugar de %.2f.</p>
+<p>C</p>
+<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
+<p>int main(void) {</p>
+<p>int edad = 30;</p>
+<p>float altura = 1.75;</p>
+<p>// El orden es CRÍTICO: %d (1er espec.) toma edad (1er arg.)</p>
+<p>// %.2f (2do espec.) toma altura (2do arg.)</p>
+<p>printf("La edad es %d y la altura es %.2f metros.\n", edad,
+altura);</p>
+<p>return 0;</p>
+<p>}</p>
+<p><strong>Output Esperado:</strong></p>
+<p>La edad es 30 y la altura es 1.75 metros.</p>
+<p><strong>Advertencia Crucial: Desfase de Argumentos</strong></p>
+<p>Si la cantidad de especificadores no coincide con la cantidad de
+argumentos, o si el orden de los tipos no coincide (ej: intentas
+imprimir un float con %d), el programa generará un <strong>resultado
+inesperado</strong> o podría fallar, leyendo datos basura de la
+memoria.</p>
+<table style="width:97%;">
+<colgroup>
+<col style="width: 31%" />
+<col style="width: 66%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>Código Incorrecto</strong></th>
+<th style="text-align: left;"><strong>Problema</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">printf("Edad: %d\n", altura);</td>
+<td style="text-align: left;">El especificador %d espera un int pero
+recibe un float.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">printf("Edad y altura: %d y %.2f\n",
+edad);</td>
+<td style="text-align: left;">Se esperan dos argumentos, pero solo se
+proporciona uno (edad). El segundo valor será basura.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Control de Precisión y Ancho de Campo en printf()
+📊</strong></p>
+<p>Una de las capacidades más importantes de la función printf() es su
+habilidad para <strong>formatear la salida</strong>, controlando la
+cantidad de decimales mostrados (precisión) y el espacio total que ocupa
+el valor (ancho de campo o <em>padding</em>).</p>
+<p><strong>1. Control de Precisión (.n)</strong></p>
+<p>La <strong>precisión</strong> se usa principalmente para limitar el
+número de dígitos después del punto decimal en tipos de punto flotante
+(float y double). Se especifica con un punto seguido de un número
+entero, justo antes del especificador de formato.</p>
+<p>$$\text{\% . n f}$$</p>
+<table style="width:98%;">
+<colgroup>
+<col style="width: 16%" />
+<col style="width: 22%" />
+<col style="width: 21%" />
+<col style="width: 36%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>Formato</strong></th>
+<th style="text-align: left;"><strong>Ejemplo</strong></th>
+<th style="text-align: left;"><strong>Salida con float x =
+12.34567;</strong></th>
+<th style="text-align: left;"><strong>Propósito</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">%.2f</td>
+<td style="text-align: left;">printf("%.2f", x);</td>
+<td style="text-align: left;">12.35</td>
+<td style="text-align: left;"><strong>Moneda:</strong> Limita a dos
+decimales, redondeando el último dígito.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">%.0f</td>
+<td style="text-align: left;">printf("%.0f", x);</td>
+<td style="text-align: left;">12</td>
+<td style="text-align: left;">Muestra el número como entero, sin punto
+decimal, redondeando.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">%.4f</td>
+<td style="text-align: left;">printf("%.4f", x);</td>
+<td style="text-align: left;">12.3457</td>
+<td style="text-align: left;">Aumenta la precisión a cuatro
+decimales.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Nota:</strong> La precisión también afecta a otros tipos, por
+ejemplo, %.5s limita la salida de una cadena a sus primeros 5
+caracteres.</p>
+<p><strong>2. Control de Ancho de Campo (<em>Padding</em>)
+(w)</strong></p>
+<p>El <strong>ancho de campo</strong> (w) especifica la <strong>cantidad
+total mínima de caracteres</strong> que debe ocupar la salida. Si el
+número o texto es más corto que este ancho, printf() añade espacios a la
+izquierda (relleno o <em>padding</em>), logrando la alineación en
+columnas.</p>
+<p>$$\text{\% w . n f}$$</p>
+<table style="width:98%;">
+<colgroup>
+<col style="width: 16%" />
+<col style="width: 24%" />
+<col style="width: 25%" />
+<col style="width: 31%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>Formato</strong></th>
+<th style="text-align: left;"><strong>Ejemplo</strong></th>
+<th style="text-align: left;"><strong>Salida (donde _ es un
+espacio)</strong></th>
+<th style="text-align: left;"><strong>Propósito</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">%10d</td>
+<td style="text-align: left;">printf("%10d", 42);</td>
+<td style="text-align: left;">________42</td>
+<td style="text-align: left;">Alinea a la derecha en una columna de 10
+caracteres.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">%6.2f</td>
+<td style="text-align: left;">printf("%6.2f", 1.2);</td>
+<td style="text-align: left;">__1.20</td>
+<td style="text-align: left;">Combina ancho total de 6 con 2
+decimales.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">%-10s</td>
+<td style="text-align: left;">printf("%-10s", "Hola");</td>
+<td style="text-align: left;">Hola______</td>
+<td style="text-align: left;"><strong>Alineación a la izquierda</strong>
+(usando el signo negativo -).</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Ejemplo de Alineación (Ancho de Campo):</strong></p>
+<p>C</p>
+<p>printf("Producto | Precio\n");</p>
+<p>printf("-----------------\n");</p>
+<p>printf("%-10s | %6.2f\n", "Manzana", 0.75); // Alineación izquierda,
+ancho 10</p>
+<p>printf("%-10s | %6.2f\n", "Jugo", 5.50); // Alineación derecha, ancho
+6, 2 decimales</p>
+<p><strong>Output:</strong></p>
+<p>Producto | Precio</p>
+<p>-----------------</p>
+<p>Manzana | 0.75</p>
+<p>Jugo | 5.50</p>
+<p><strong>Especificadores de Caracteres (%c) y Cadenas
+(%s)</strong></p>
+<p>Aunque la mayoría de los especificadores se enfocan en números, las
+salidas de texto son esenciales. Los especificadores %c y %s se utilizan
+para mostrar caracteres individuales y secuencias de caracteres
+(cadenas), respectivamente.</p>
+<p><strong>1. El Especificador de Carácter (%c)</strong></p>
+<p>El especificador <strong>%c</strong> se utiliza para imprimir un
+<strong>único carácter</strong> almacenado en una variable de tipo
+char.</p>
+<table style="width:97%;">
+<colgroup>
+<col style="width: 26%" />
+<col style="width: 25%" />
+<col style="width: 45%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>Operación</strong></th>
+<th style="text-align: left;"><strong>Sintaxis</strong></th>
+<th style="text-align: left;"><strong>Salida</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Imprimir Carácter</td>
+<td style="text-align: left;">printf("%c", mi_char);</td>
+<td style="text-align: left;">Muestra el carácter literal.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Usar Código ASCII</td>
+<td style="text-align: left;">printf("%c", 65);</td>
+<td style="text-align: left;">Muestra la letra <strong>A</strong>
+(código ASCII 65).</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Ejemplo de Uso:</strong></p>
+<p>C</p>
+<p>char inicial = 'J';</p>
+<p>char simbolo = 36; // 36 es el código ASCII para $</p>
+<p>printf("Mi inicial es %c. El simbolo es %c.\n", inicial,
+simbolo);</p>
+<p><strong>Output:</strong> Mi inicial es J. El simbolo es $.</p>
+<p><strong>2. El Especificador de Cadena (%s)</strong></p>
+<p>El especificador <strong>%s</strong> se utiliza para imprimir una
+<strong>cadena completa</strong> de caracteres. En C, una cadena es una
+secuencia de caracteres que termina con el carácter nulo (\0).</p>
+<table style="width:97%;">
+<colgroup>
+<col style="width: 48%" />
+<col style="width: 48%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>Operación</strong></th>
+<th style="text-align: left;"><strong>Sintaxis</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Imprimir Cadena</td>
+<td style="text-align: left;">printf("%s", mi_cadena);</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Limitación (Precisión)</td>
+<td style="text-align: left;">printf("%.5s", mi_cadena);</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Ejemplo de Uso y Precisión:</strong></p>
+<p>C</p>
+<p>char nombre[20] = "Programacion";</p>
+<p>// Salida estándar</p>
+<p>printf("Palabra completa: %s\n", nombre);</p>
+<p>// Limitando la salida a 4 caracteres (precisión .n)</p>
+<p>printf("Solo 4 letras: %.4s\n", nombre);</p>
+<p><strong>Output:</strong></p>
+<p>Palabra completa: Programacion</p>
+<p>Solo 4 letras: Prog</p>
+<p><strong>Alineación con Cadenas:</strong> Se puede combinar %s con el
+ancho de campo (%w.s) para alinear texto en columnas. Por ejemplo, %-20s
+imprimirá la cadena alineada a la izquierda en una columna de 20
+espacios.</p>
+<p><strong>Alineación y Tabulación en printf() 📰</strong></p>
+<p>Para generar informes o salidas de consola que sean
+<strong>legibles</strong> y <strong>estructuradas</strong>, es esencial
+controlar la posición del texto. Esto se logra mediante el uso de
+<strong>secuencias de escape</strong> y las opciones de <strong>ancho de
+campo</strong> de printf().</p>
+<p><strong>1. Uso de Secuencias de Escape: \t (Tabulación)</strong></p>
+<p>La secuencia de escape \t (tabulación horizontal) inserta una
+cantidad variable de espacios en blanco hasta alcanzar el siguiente
+punto de tabulación predefinido por la consola.</p>
+<ul>
+<li><strong>Propósito:</strong> Es la forma más sencilla de
+<strong>separar columnas</strong> horizontalmente.</li>
+</ul>
+<p><strong>Ejemplo de Tabulación:</strong></p>
+<p>C</p>
+<p>printf("Nombre\tEdad\tCiudad\n");</p>
+<p>printf("Juan\t25\tMadrid\n");</p>
+<p>printf("Alejandra\t30\tValencia\n");</p>
+<p><strong>Output:</strong></p>
+<p>Nombre Edad Ciudad</p>
+<p>Juan 25 Madrid</p>
+<p>Alejandra 30 Valencia</p>
+<p>Observe que Juan y Alejandra tienen diferentes longitudes, pero Edad
+y 30 quedan aproximadamente alineados porque la tabulación busca el
+siguiente punto fijo.</p>
+<p><strong>2. Alineación con Ancho de Campo
+(<em>Padding</em>)</strong></p>
+<p>Para una <strong>alineación perfecta en columnas</strong>, la mejor
+técnica es usar el ancho de campo (%w...) en el especificador de
+formato, ya que permite definir exactamente cuántos caracteres debe
+ocupar cada columna.</p>
+<ul>
+<li><p><strong>Alineación por defecto (Derecha):</strong> Si solo se
+especifica el ancho (%10d), los datos se alinean a la
+<strong>derecha</strong> (útil para números).</p></li>
+<li><p><strong>Alineación a la Izquierda:</strong> Al añadir el signo de
+resta (-) antes del ancho (%-10s), los datos se alinean a la
+<strong>izquierda</strong> (útil para texto).</p></li>
+</ul>
+<p><strong>Ejemplo de Alineación Perfecta:</strong></p>
+<p>C</p>
+<p>float precio = 4.99;</p>
+<p>int unidades = 15;</p>
+<p>char producto[] = "Pan Integral";</p>
+<p>printf("%-20s | %5s | %8s\n", "PRODUCTO", "UNIDADES", "PRECIO");</p>
+<p>printf("---------------------|-------|---------\n");</p>
+<p>// %-20s (Texto, alineación izquierda) | %5d (Entero, derecha) |
+%8.2f (Float, derecha, 2 decimales)</p>
+<p>printf("%-20s | %5d | %8.2f\n", producto, unidades, precio);</p>
+<p><strong>Output:</strong></p>
+<p>PRODUCTO | UNIDADES | PRECIO</p>
+<p>---------------------|----------|----------</p>
+<p>Pan Integral | 15 | 4.99</p>
+<p>Esta técnica garantiza que las columnas se mantengan perfectamente
+verticales, independientemente de la longitud de los datos.</p>
+
+
+</div>
+</body>
+</html>
+

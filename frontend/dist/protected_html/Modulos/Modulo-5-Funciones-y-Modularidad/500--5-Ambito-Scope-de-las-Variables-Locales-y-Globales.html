@@ -1,0 +1,228 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" crossorigin href="/assets/content-01sust.css">
+</head>
+<body>
+<div class="main-content">
+<p>5. Ãmbito (Scope) de las Variables Locales y Globales</p>
+<p><strong>DefiniciÃ³n de Ãmbito (<em>Scope</em>)</strong></p>
+<p>El <strong>Ãmbito</strong> (<em>Scope</em>) es uno de los conceptos
+mÃ¡s importantes en C para comprender la visibilidad y el ciclo de vida
+de las variables.</p>
+<p>El <strong>Ãmbito</strong> se define como la <strong>regiÃ³n del
+programa</strong> donde una variable puede ser <strong>referenciada o
+accedida</strong> de forma vÃ¡lida.</p>
+<p>Imagina el cÃ³digo de tu programa como un territorio con fronteras. El
+Ã¡mbito de una variable determina <em>dentro de quÃ© fronteras</em> esa
+variable es conocida y utilizable. Fuera de su Ã¡mbito, la variable se
+considera <strong>indefinida</strong> y cualquier intento de acceder a
+ella generarÃ¡ un error de compilaciÃ³n.</p>
+<p><strong>El Criterio del Bloque</strong></p>
+<p>En el lenguaje C, el Ã¡mbito principal estÃ¡ definido por los
+<strong>bloques de cÃ³digo</strong>, los cuales son delimitados por las
+llaves curvas: {}.</p>
+<ul>
+<li><p>Una variable existe y es visible desde el punto en que se declara
+hasta el final del bloque donde fue definida.</p></li>
+<li><p>Cuando el flujo de ejecuciÃ³n sale de ese bloque, la variable
+local <strong>deja de existir</strong> y su espacio en memoria puede ser
+reutilizado.</p></li>
+</ul>
+<p>Este concepto de Ã¡mbito es la base para distinguir entre los dos
+tipos principales de variables que veremos a continuaciÃ³n:
+<strong>variables locales</strong> y <strong>variables
+globales</strong>.</p>
+<p><strong>Variables Locales (Ventajas)</strong></p>
+<p>Una <strong>variable local</strong> es aquella que se declara
+<strong>dentro de un bloque de cÃ³digo</strong> (delimitado por llaves
+{}), siendo el caso mÃ¡s comÃºn la declaraciÃ³n dentro de una
+<strong>funciÃ³n</strong> o un <strong>bucle</strong>.</p>
+<p><strong>CaracterÃ­sticas de las Variables Locales</strong></p>
+<ul>
+<li><p><strong>Ãmbito Limitado:</strong> Su Ã¡mbito comienza en la lÃ­nea
+donde son declaradas y termina cuando el flujo de ejecuciÃ³n sale del
+bloque que las contiene.</p></li>
+<li><p><strong>Ciclo de Vida:</strong> Solo existen mientras el bloque
+de cÃ³digo se estÃ¡ ejecutando. Al salir del bloque, la variable se
+<strong>destruye</strong> y la memoria que ocupaba puede ser
+liberada.</p></li>
+<li><p><strong>Visibilidad:</strong> Son accesibles y visibles
+Ãºnicamente dentro de su bloque. No pueden ser referenciadas por cÃ³digo
+que estÃ© fuera o en otros bloques de funciones.</p></li>
+</ul>
+<p><strong>Ejemplo de Ãmbito Local</strong></p>
+<p>C</p>
+<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
+<p>void mi_funcion() {</p>
+<p>int x = 10; // Variable LOCAL de mi_funcion</p>
+<p>printf("Dentro de la funciÃ³n, x es: %d\n", x);</p>
+<p>} // AquÃ­, la variable 'x' deja de existir.</p>
+<p>int main() {</p>
+<p>int y = 5; // Variable LOCAL de main</p>
+<p>mi_funcion();</p>
+<p>// printf("En main, x es: %d\n", x);</p>
+<p>// ^^^ ERROR DE COMPILACIÃ“N: 'x' no estÃ¡ definida aquÃ­.</p>
+<p>printf("En main, y es: %d\n", y);</p>
+<p>return 0;</p>
+<p>}</p>
+<p><strong>Ventajas Clave</strong></p>
+<p>Utilizar variables locales es la <strong>mejor prÃ¡ctica</strong> en
+la programaciÃ³n modular en C, ya que ofrecen beneficios fundamentales
+para la calidad del cÃ³digo:</p>
+<ol type="1">
+<li><p><strong>Aislamiento y ReducciÃ³n de Errores:</strong> Al ser
+invisibles fuera de su funciÃ³n, garantizan que los datos de una funciÃ³n
+no puedan ser accidentalmente leÃ­dos o modificados por otra funciÃ³n.
+Esto es un pilar de la <strong>modularidad</strong> y previene fallos de
+lÃ³gica.</p></li>
+<li><p><strong>PrevenciÃ³n de Colisiones de Nombres:</strong> Permiten
+usar el mismo nombre de variable (por ejemplo, i o temp) en diferentes
+funciones o bloques sin que haya conflictos. Cada uso de i es una
+variable separada e independiente de las demÃ¡s.</p></li>
+<li><p><strong>Eficiencia de Memoria:</strong> La memoria asignada a las
+variables locales se libera automÃ¡ticamente cuando la funciÃ³n termina (a
+travÃ©s de la pila de ejecuciÃ³n), lo que hace un uso eficiente de los
+recursos del sistema.</p></li>
+</ol>
+<p><strong>Variables Globales (Riesgos)</strong></p>
+<p>Una <strong>variable global</strong> es aquella que se declara
+<strong>fuera de cualquier funciÃ³n</strong>, incluyendo main(). A
+diferencia de las variables locales, su Ã¡mbito se extiende a todo el
+programa desde el punto de su declaraciÃ³n.</p>
+<p><strong>CaracterÃ­sticas de las Variables Globales</strong></p>
+<ul>
+<li><p><strong>Ãmbito Extendido:</strong> Una vez declarada, cualquier
+funciÃ³n dentro del mismo archivo fuente puede acceder y
+<strong>modificarla</strong> directamente.</p></li>
+<li><p><strong>Ciclo de Vida:</strong> Existen desde que comienza la
+ejecuciÃ³n del programa hasta que este finaliza. Nunca se destruyen al
+salir de una funciÃ³n.</p></li>
+<li><p><strong>InicializaciÃ³n:</strong> Si no se les asigna un valor
+explÃ­cito en la declaraciÃ³n, el compilador las inicializa
+automÃ¡ticamente a <strong>cero</strong> (o NULL para punteros, '\0' para
+caracteres, etc.), a diferencia de las variables locales que tienen
+valores indefinidos.</p></li>
+</ul>
+<p><strong>Riesgos Asociados a su Uso</strong></p>
+<p>Aunque las variables globales pueden parecer convenientes para
+compartir datos, su uso indiscriminado se considera una <strong>mala
+prÃ¡ctica</strong> en la programaciÃ³n modular debido a los graves riesgos
+que introducen:</p>
+<ol type="1">
+<li><p><strong>Dependencia Oculta (Falta de Aislamiento):</strong> Una
+funciÃ³n que utiliza una variable global no estÃ¡ verdaderamente aislada.
+Su resultado depende no solo de sus parÃ¡metros (entradas obvias), sino
+tambiÃ©n del estado actual de la variable global (una entrada oculta).
+Esto rompe el principio de <strong>modularidad</strong>.</p></li>
+<li><p><strong>Efectos Colaterales Inesperados:</strong> El riesgo mÃ¡s
+grande. Si la funciÃ³n A modifica una variable global que tambiÃ©n es
+utilizada por la funciÃ³n B, la funciÃ³n B puede fallar o producir
+resultados incorrectos sin que la funciÃ³n A o B tengan un error obvio.
+Estos errores son muy <strong>difÃ­ciles de rastrear y depurar</strong>
+porque la causa estÃ¡ lejos del lugar del efecto.</p></li>
+<li><p><strong>Colisiones de Nombres:</strong> Si varios programadores
+trabajan en el mismo proyecto, es fÃ¡cil que reutilicen un nombre de
+variable global sin saber que ya existe, causando conflictos.</p></li>
+</ol>
+<p><strong>Ejemplo Demostrativo del Riesgo</strong></p>
+<p>Observe cÃ³mo la funciÃ³n restar_contador() afecta el resultado de la
+funciÃ³n mostrar_contador() sin pasarle datos, simplemente modificando la
+variable global:</p>
+<p>C</p>
+<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
+<p>// Variable GLOBAL: Visible y modificable por CUALQUIER funciÃ³n.</p>
+<p>int contador_general = 10;</p>
+<p>void restar_contador() {</p>
+<p>// La funciÃ³n accede y modifica directamente la variable global.</p>
+<p>contador_general = contador_general - 3;</p>
+<p>printf(" -&gt; [Funcion 1] El contador se redujo a: %d\n",
+contador_general);</p>
+<p>}</p>
+<p>void mostrar_contador() {</p>
+<p>// La funciÃ³n lee la variable global.</p>
+<p>printf(" -&gt; [Funcion 2] El contador actual es: %d\n",
+contador_general);</p>
+<p>}</p>
+<p>int main() {</p>
+<p>printf("Valor inicial: %d\n", contador_general);</p>
+<p>restar_contador(); // Modifica la global de 10 a 7</p>
+<p>mostrar_contador(); // Lee el nuevo valor (7)</p>
+<p>// Si no conociÃ©ramos 'restar_contador', serÃ­a difÃ­cil saber por quÃ©
+'mostrar_contador' da 7.</p>
+<p>return 0;</p>
+<p>}</p>
+<p>En la programaciÃ³n moderna y modular en C, se prefiere la
+comunicaciÃ³n explÃ­cita a travÃ©s de <strong>parÃ¡metros</strong> y
+<strong>valores de retorno</strong> en lugar de depender de variables
+globales.</p>
+<p><strong>Precedencia de Ãmbito (Shadowing)</strong></p>
+<p>La <strong>Precedencia de Ãmbito</strong> (conocida en inglÃ©s como
+<em>Shadowing</em> o "ensombrecimiento") es la regla que determina quÃ©
+variable se utiliza cuando existe una <strong>variable local</strong>
+con el <strong>mismo nombre</strong> que una <strong>variable
+global</strong>.</p>
+<p><strong>La Regla de Precedencia</strong></p>
+<p>La regla es simple: <strong>el Ã¡mbito local siempre tiene precedencia
+sobre el Ã¡mbito global.</strong></p>
+<p>Cuando el flujo de ejecuciÃ³n entra en un bloque de cÃ³digo (como una
+funciÃ³n), si encuentra una declaraciÃ³n local con un nombre que ya existe
+en el Ã¡mbito global:</p>
+<ol type="1">
+<li><p><strong>Ensambramiento (<em>Shadowing</em>):</strong> La variable
+local <strong>ensombrece</strong> o esconde temporalmente el acceso a la
+variable global.</p></li>
+<li><p><strong>Uso Local:</strong> Cualquier referencia a ese nombre
+dentro de la funciÃ³n se referirÃ¡ a la <strong>variable
+local</strong>.</p></li>
+<li><p><strong>Aislamiento:</strong> La variable global permanece
+inalterada y es inaccesible hasta que la funciÃ³n termina y el Ã¡mbito
+local desaparece.</p></li>
+</ol>
+<p><strong>Ejemplo Demostrativo</strong></p>
+<p>En el siguiente ejemplo, la variable global contador es ensombrecida
+por la variable local contador dentro de incrementar_local().</p>
+<p>C</p>
+<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
+<p>// Variable GLOBAL: Visible por todas las funciones.</p>
+<p>int contador = 50;</p>
+<p>void incrementar_local() {</p>
+<p>// DeclaraciÃ³n de variable LOCAL: ENHOMBRECE a la variable global
+'contador'.</p>
+<p>int contador = 10;</p>
+<p>printf(" Dentro de la funciÃ³n: contador LOCAL = %d\n", contador); //
+Imprime 10</p>
+<p>contador = contador + 1; // Solo se modifica la variable LOCAL
+(11)</p>
+<p>printf(" Dentro de la funciÃ³n: contador LOCAL modificado = %d\n",
+contador); // Imprime 11</p>
+<p>} // Al salir, la variable local 'contador' (11) se destruye.</p>
+<p>int main() {</p>
+<p>printf("1. En main (Antes de la llamada): contador GLOBAL = %d\n",
+contador); // Imprime 50</p>
+<p>incrementar_local();</p>
+<p>// Al regresar, el Ã¡mbito local ya terminÃ³, y la global vuelve a ser
+visible e INALTERADA.</p>
+<p>printf("2. En main (DespuÃ©s de la llamada): contador GLOBAL = %d\n",
+contador); // Imprime 50</p>
+<p>return 0;</p>
+<p>}</p>
+<p><strong>Implicaciones PrÃ¡cticas</strong></p>
+<p>La precedencia de Ã¡mbito es una caracterÃ­stica del lenguaje que
+refuerza la seguridad y la modularidad de las funciones:</p>
+<ul>
+<li><p><strong>Evita Modificaciones Accidentales:</strong> Garantiza que
+si un programador utiliza un nombre de variable comÃºn dentro de una
+funciÃ³n (como contador o temp), no modificarÃ¡ accidentalmente una
+variable global sensible.</p></li>
+<li><p><strong>Aislamiento Garantizado:</strong> El cÃ³digo dentro de la
+funciÃ³n trabaja con sus propios datos sin afectar al estado global,
+incluso si los nombres coinciden.</p></li>
+</ul>
+
+</div>
+</body>
+</html>
+

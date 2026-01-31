@@ -1,0 +1,422 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" crossorigin href="/assets/content-01sust.css">
+</head>
+<body>
+<div class="main-content">
+<h2 id="diferencia-entre-archivos-de-texto-y-binarios">Diferencia entre
+Archivos de Texto y Binarios ðŸ’¾</h2>
+<p>La distinciÃ³n entre archivos de texto y archivos binarios radica
+fundamentalmente en cÃ³mo se representan y se almacenan los datos, y si
+se requiere alguna <strong>conversiÃ³n de formato</strong> durante las
+operaciones de lectura y escritura.</p>
+<hr />
+<h3 id="archivos-de-texto-conversiÃ³n-necesaria">Archivos de Texto
+(ConversiÃ³n Necesaria)</h3>
+<ul>
+<li><strong>RepresentaciÃ³n:</strong> Los datos se almacenan como
+secuencias de caracteres <strong>legibles por humanos</strong>
+(caracteres ASCII o Unicode).</li>
+<li><strong>ConversiÃ³n:</strong> Cuando escribes un nÃºmero (ej., el
+entero <code>101</code>) en un archivo de texto, el sistema debe
+<strong>convertir</strong> el patrÃ³n de bits binario del entero a la
+secuencia de caracteres ASCII que representa esos dÃ­gitos
+(<code>'1'</code>, <code>'0'</code>, <code>'1'</code>).</li>
+<li><strong>Terminadores:</strong> Utilizan caracteres especiales como
+el salto de lÃ­nea (<code>\n</code>) para marcar el final de una lÃ­nea o
+registro, que puede variar entre sistemas operativos (ej., LF en Unix,
+CRLF en Windows).</li>
+<li><strong>Eficiencia/PrecisiÃ³n:</strong> Son <strong>menos
+eficientes</strong> y pueden sufrir <strong>pÃ©rdida de
+precisiÃ³n</strong> (ej., al convertir un flotante a su representaciÃ³n
+decimal de caracteres), y el proceso de conversiÃ³n consume tiempo de
+CPU.</li>
+</ul>
+<hr />
+<h3 id="archivos-binarios-representaciÃ³n-directa">Archivos Binarios
+(RepresentaciÃ³n Directa)</h3>
+<ul>
+<li><strong>RepresentaciÃ³n:</strong> Los archivos binarios guardan la
+<strong>representaciÃ³n exacta de la memoria</strong> de los datos (el
+<em>bit pattern</em>). Si un entero ocupa 4 bytes en memoria, ocuparÃ¡
+exactamente 4 bytes en el archivo.</li>
+<li><strong>ConversiÃ³n:</strong> No se realiza ninguna conversiÃ³n de
+formato. El bloque de bytes se mueve <strong>directamente</strong> de la
+memoria del programa al archivo, y viceversa.</li>
+<li><strong>Terminadores:</strong> No usan terminadores de lÃ­nea ni
+marcas de fin de registro. Los registros se delimitan por el
+<strong>tamaÃ±o fijo</strong> conocido de la estructura de datos que se
+estÃ¡ almacenando (como un <code>struct</code>).</li>
+<li><strong>Eficiencia/PrecisiÃ³n:</strong>
+<ul>
+<li><strong>Son mÃ¡s eficientes:</strong> La E/S es mÃ¡s rÃ¡pida al evitar
+el procesamiento de formato
+(<code>fprintf</code>/<code>fscanf</code>).</li>
+<li><strong>Son mÃ¡s precisos:</strong> Ideales para almacenar
+estructuras de datos complejas (<code>structs</code>), nÃºmeros de punto
+flotante de alta precisiÃ³n, y cualquier dato que no deba ser alterado
+por la representaciÃ³n textual.</li>
+</ul></li>
+</ul>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">CaracterÃ­stica</th>
+<th style="text-align: center;">Archivo de Texto (<code>"r"</code>,
+<code>"w"</code>)</th>
+<th style="text-align: center;">Archivo Binario (<code>"rb"</code>,
+<code>"wb"</code>)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><strong>Almacenamiento</strong></td>
+<td style="text-align: center;">Caracteres ASCII/Unicode (Legible)</td>
+<td style="text-align: center;">PatrÃ³n de bits exacto (Ilegible)</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>ConversiÃ³n</strong></td>
+<td style="text-align: center;">SÃ (Ej: entero <code>101</code> <span
+class="math inline">â†’</span> caracteres
+<code>'1','0','1'$) | NO (Movimiento directo de bytes) | | **PrecisiÃ³n** | Puede variar (pÃ©rdida en flotantes) | MÃ¡xima (Exacta a la memoria) | | **Funciones TÃ­picas** |</code>fprintf<code>,</code>fscanf<code>,</code>fgets<code>,</code>fputs<code>| **</code>fwrite<code>**, **</code>fread`**</td>
+<td style="text-align: center;"></td>
+</tr>
+</tbody>
+</table>
+<h2 id="modos-binarios-de-operaciÃ³n-b">Modos Binarios de OperaciÃ³n
+(<code>b</code>) âš™ï¸</h2>
+<p>Los modos de operaciÃ³n binarios se utilizan para indicar al sistema
+que el archivo se manejarÃ¡ como una secuencia de bytes sin ninguna
+conversiÃ³n de formato. Esto significa que las funciones de E/S operarÃ¡n
+directamente con la representaciÃ³n de memoria de los datos.</p>
+<hr />
+<h3 id="inclusiÃ³n-del-modificador-b">InclusiÃ³n del Modificador
+<code>b</code></h3>
+<p>Para especificar un modo binario, simplemente se aÃ±ade la letra
+<strong><code>b</code></strong> al final del modo base de archivo. La
+lÃ³gica de truncamiento, creaciÃ³n, lectura y anexiÃ³n de los modos
+binarios es idÃ©ntica a la de los modos de texto:</p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Modo Binario</th>
+<th style="text-align: center;">DescripciÃ³n y Comportamiento</th>
+<th style="text-align: center;">Modo Base Equivalente</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><strong><code>"rb"</code></strong></td>
+<td style="text-align: center;"><strong>Lectura Binaria.</strong> El
+archivo debe existir. Falla si no existe. El puntero se sitÃºa al
+inicio.</td>
+<td style="text-align: center;"><code>"r"</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong><code>"wb"</code></strong></td>
+<td style="text-align: center;"><strong>Escritura Binaria.</strong> Crea
+el archivo si no existe. Si existe, <strong>trunca</strong> (borra todo
+el contenido). El puntero se sitÃºa al inicio.</td>
+<td style="text-align: center;"><code>"w"</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong><code>"ab"</code></strong></td>
+<td style="text-align: center;"><strong>AnexiÃ³n Binaria.</strong> Crea
+el archivo si no existe. Si existe, preserva el contenido y sitÃºa el
+puntero al <strong>final</strong> para la escritura.</td>
+<td style="text-align: center;"><code>"a"</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="modos-binarios-de-actualizaciÃ³n-b">Modos Binarios de
+ActualizaciÃ³n (<code>b+</code>)</h3>
+<p>Al igual que en los archivos de texto, el modificador <code>+</code>
+permite la lectura y escritura simultÃ¡nea.</p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Modo Binario <code>+</code></th>
+<th style="text-align: center;">Permisos y Comportamiento</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><strong><code>"rb+"</code></strong></td>
+<td style="text-align: center;"><strong>Lectura/Escritura.</strong> El
+archivo debe existir. No lo trunca.</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong><code>"wb+"</code></strong></td>
+<td style="text-align: center;"><strong>Escritura/Lectura.</strong> Lo
+crea o lo <strong>trunca</strong> (borra todo).</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong><code>"ab+"</code></strong></td>
+<td style="text-align: center;"><strong>AnexiÃ³n/Lectura.</strong> Lo
+crea o lo preserva. La escritura siempre ocurre al final.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="importancia-del-modificador-b">Importancia del Modificador
+<code>b</code></h3>
+<p>En la mayorÃ­a de los sistemas operativos modernos (como Linux y
+macOS), la inclusiÃ³n de la <code>b</code> <strong>no tiene un efecto
+prÃ¡ctico</strong> para la mayorÃ­a de los archivos. Sin embargo, en
+sistemas como <strong>Windows</strong>, el modo de texto realiza una
+traducciÃ³n automÃ¡tica del carÃ¡cter de nueva lÃ­nea:</p>
+<ul>
+<li><strong>Modo Texto:</strong> Convierte <code>\n</code> (LF) a
+<code>CRLF</code> (Carriage Return + Line Feed) al escribir, y viceversa
+al leer.</li>
+<li><strong>Modo Binario:</strong> La <code>b</code> le indica al
+sistema operativo que <strong>desactive esta traducciÃ³n</strong>,
+garantizando que cada byte escrito en el archivo es exactamente el mismo
+byte que se encontraba en la memoria. Esto es crucial para la integridad
+de los datos binarios y la portabilidad.</li>
+</ul>
+<h2 id="escritura-binaria-fwrite">Escritura Binaria
+(<code>fwrite</code>) ðŸ§±</h2>
+<p>La funciÃ³n <strong><code>fwrite()</code></strong> es la herramienta
+principal en C para realizar la <strong>escritura binaria</strong> de
+datos. A diferencia de <code>fprintf()</code>, que convierte los datos a
+texto legible, <code>fwrite()</code> toma un bloque de bytes de la
+memoria del programa y lo copia directamente al archivo, sin ninguna
+conversiÃ³n de formato.</p>
+<hr />
+<h3 id="sintaxis-y-propÃ³sito">1. Sintaxis y PropÃ³sito</h3>
+<p><code>fwrite()</code> se utiliza para escribir un nÃºmero especÃ­fico
+de elementos, cada uno de un tamaÃ±o determinado, desde una direcciÃ³n de
+memoria hacia el flujo de archivo binario.</p>
+<p><span class="math display">â€˜size_t fwrite(const void *ptr, size_t
+size, size_t count, FILE *stream);â€˜</span></p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">ParÃ¡metro</th>
+<th style="text-align: center;">Tipo</th>
+<th style="text-align: center;">DescripciÃ³n</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><strong><code>ptr</code></strong></td>
+<td style="text-align: center;"><code>const void *</code></td>
+<td style="text-align: center;">Puntero al <strong>bloque de datos en
+memoria</strong> (la fuente) que se va a escribir. TÃ­picamente, la
+direcciÃ³n de una variable o una estructura (<code>struct</code>).</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong><code>size</code></strong></td>
+<td style="text-align: center;"><code>size_t</code></td>
+<td style="text-align: center;">El <strong>tamaÃ±o de cada
+elemento</strong> a escribir, en bytes. Se usa el operador
+<code>sizeof()</code>.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong><code>count</code></strong></td>
+<td style="text-align: center;"><code>size_t</code></td>
+<td style="text-align: center;">La <strong>cantidad de
+elementos</strong> del tamaÃ±o especificado (<code>size</code>) que se
+desean escribir.</td>
+</tr>
+<tr class="even">
+<td
+style="text-align: center;"><strong><code>stream</code></strong></td>
+<td style="text-align: center;"><code>FILE *</code></td>
+<td style="text-align: center;">El puntero al flujo de archivo abierto
+en modo de escritura binaria (ej. <code>"wb"</code>, <code>"ab"</code>,
+<code>"wb+"</code>).</td>
+</tr>
+</tbody>
+</table>
+<h3 id="valor-de-retorno">2. Valor de Retorno</h3>
+<p>La funciÃ³n devuelve el <strong>nÃºmero de elementos escritos
+exitosamente</strong>, que deberÃ­a ser igual al parÃ¡metro
+<code>count</code>. Si el valor de retorno es menor a
+<code>count</code>, significa que ocurriÃ³ un error de escritura.</p>
+<h3 id="ejemplo-de-uso">3. Ejemplo de Uso</h3>
+<p>El uso mÃ¡s comÃºn de <code>fwrite()</code> es para guardar el
+contenido de una estructura (<code>struct</code>) completa en el
+disco.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdlib.h&gt;</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co">// DefiniciÃ³n de una estructura de datos</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="kw">typedef</span> <span class="kw">struct</span> <span class="op">{</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> id<span class="op">;</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="dt">char</span> nombre<span class="op">[</span><span class="dv">20</span><span class="op">];</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    <span class="dt">float</span> salario<span class="op">;</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> Empleado<span class="op">;</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    <span class="dt">FILE</span> <span class="op">*</span>archivo<span class="op">;</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    Empleado empleado1 <span class="op">=</span> <span class="op">{</span><span class="dv">101</span><span class="op">,</span> <span class="st">&quot;Sofia&quot;</span><span class="op">,</span> <span class="fl">55000.50</span><span class="bu">f</span><span class="op">};</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    <span class="dt">size_t</span> elementos_escritos<span class="op">;</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Abrir en modo de escritura binaria (&quot;wb&quot;)</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    archivo <span class="op">=</span> fopen<span class="op">(</span><span class="st">&quot;empleados.bin&quot;</span><span class="op">,</span> <span class="st">&quot;wb&quot;</span><span class="op">);</span> </span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>archivo <span class="op">==</span> NULL<span class="op">)</span> <span class="cf">return</span> EXIT_FAILURE<span class="op">;</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Escribir 1 elemento (empleado1) con el tamaÃ±o exacto de la estructura</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>    elementos_escritos <span class="op">=</span> fwrite<span class="op">(&amp;</span>empleado1<span class="op">,</span> </span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>                                <span class="kw">sizeof</span><span class="op">(</span>Empleado<span class="op">),</span> <span class="co">// TamaÃ±o de 1 elemento</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>                                <span class="dv">1</span><span class="op">,</span>                 <span class="co">// Cantidad de elementos</span></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>                                archivo<span class="op">);</span></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>                                </span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>elementos_escritos <span class="op">==</span> <span class="dv">1</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">&quot;Datos binarios del Empleado escritos correctamente.</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">&quot;Error: Solo se escribieron </span><span class="sc">%zu</span><span class="st"> elementos.</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">,</span> elementos_escritos<span class="op">);</span></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>    fclose<span class="op">(</span>archivo<span class="op">);</span></span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> EXIT_SUCCESS<span class="op">;</span></span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p>En este ejemplo, <code>fwrite()</code> escribe exactamente <span
+class="math inline">sizeof(Empleado)</span> bytes en el archivo. Esto
+asegura que el <code>struct</code> completo se almacena como una unidad
+en el disco, <strong>sin formato de texto</strong>, listo para ser leÃ­do
+de vuelta directamente en otra estructura.</p>
+<h2 id="lectura-binaria-fread">Lectura Binaria (<code>fread</code>)
+ðŸ“¥</h2>
+<p>La funciÃ³n <strong><code>fread()</code></strong> es la funciÃ³n
+principal utilizada en C para leer datos de archivos abiertos en modo
+binario. Realiza la operaciÃ³n inversa a <code>fwrite()</code>, copiando
+un bloque de bytes directamente desde el archivo al espacio de memoria
+especificado, <strong>sin interpretar ni convertir</strong> los
+datos.</p>
+<hr />
+<h3 id="sintaxis-y-propÃ³sito-1">1. Sintaxis y PropÃ³sito</h3>
+<p><code>fread()</code> toma bytes del flujo de archivo y los coloca
+directamente en una estructura o variable en la memoria de tu
+programa.</p>
+<p><span class="math display">â€˜size_t fread(void *ptr, size_t size,
+size_t count, FILE *stream);â€˜</span></p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">ParÃ¡metro</th>
+<th style="text-align: center;">Tipo</th>
+<th style="text-align: center;">DescripciÃ³n</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><strong><code>ptr</code></strong></td>
+<td style="text-align: center;"><code>void *</code></td>
+<td style="text-align: center;">Puntero al <strong>bloque de datos en
+memoria</strong> (el destino) donde se almacenarÃ¡n los bytes leÃ­dos.
+TÃ­picamente, la direcciÃ³n de un <code>struct</code> o un
+<em>array</em>.</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong><code>size</code></strong></td>
+<td style="text-align: center;"><code>size_t</code></td>
+<td style="text-align: center;">El <strong>tamaÃ±o de cada
+elemento</strong> a leer, en bytes (se utiliza
+<code>sizeof()</code>).</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong><code>count</code></strong></td>
+<td style="text-align: center;"><code>size_t</code></td>
+<td style="text-align: center;">La <strong>cantidad de
+elementos</strong> del tamaÃ±o especificado (<code>size</code>) que se
+desean leer.</td>
+</tr>
+<tr class="even">
+<td
+style="text-align: center;"><strong><code>stream</code></strong></td>
+<td style="text-align: center;"><code>FILE *</code></td>
+<td style="text-align: center;">El puntero al flujo de archivo abierto
+en modo de lectura binaria (ej. <code>"rb"</code>, <code>"rb+"</code>,
+<code>"ab+"</code>).</td>
+</tr>
+</tbody>
+</table>
+<h3 id="valor-de-retorno-1">2. Valor de Retorno</h3>
+<p>La funciÃ³n devuelve el <strong>nÃºmero de elementos leÃ­dos y asignados
+exitosamente</strong> al <em>buffer</em>.</p>
+<ul>
+<li>Si el valor de retorno es <strong>menor a
+<code>count</code></strong>, significa que <code>fread()</code> encontrÃ³
+el <strong>final del archivo (EOF)</strong> o ocurriÃ³ un error de
+lectura antes de poder completar la cantidad solicitada.</li>
+</ul>
+<h3 id="ejemplo-de-uso-1">3. Ejemplo de Uso</h3>
+<p>Este ejemplo demuestra cÃ³mo leer el registro de empleado que fue
+escrito previamente con <code>fwrite()</code> de vuelta a la
+memoria.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdlib.h&gt;</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co">// La estructura DEBE ser idÃ©ntica a la usada para la escritura</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="kw">typedef</span> <span class="kw">struct</span> <span class="op">{</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> id<span class="op">;</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="dt">char</span> nombre<span class="op">[</span><span class="dv">20</span><span class="op">];</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    <span class="dt">float</span> salario<span class="op">;</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> Empleado<span class="op">;</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    <span class="dt">FILE</span> <span class="op">*</span>archivo<span class="op">;</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    Empleado empleado_leido<span class="op">;</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    <span class="dt">size_t</span> elementos_leidos<span class="op">;</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Abrir en modo de lectura binaria (&quot;rb&quot;)</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>    archivo <span class="op">=</span> fopen<span class="op">(</span><span class="st">&quot;empleados.bin&quot;</span><span class="op">,</span> <span class="st">&quot;rb&quot;</span><span class="op">);</span> </span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>archivo <span class="op">==</span> NULL<span class="op">)</span> <span class="cf">return</span> EXIT_FAILURE<span class="op">;</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Leer 1 elemento con el tamaÃ±o exacto de la estructura</span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>    elementos_leidos <span class="op">=</span> fread<span class="op">(&amp;</span>empleado_leido<span class="op">,</span> </span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>                             <span class="kw">sizeof</span><span class="op">(</span>Empleado<span class="op">),</span> <span class="co">// TamaÃ±o de 1 elemento</span></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>                             <span class="dv">1</span><span class="op">,</span>                 <span class="co">// Cantidad de elementos</span></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>                             archivo<span class="op">);</span></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>                                </span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>elementos_leidos <span class="op">==</span> <span class="dv">1</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">&quot;Datos binarios leÃ­dos:</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">&quot;ID: </span><span class="sc">%d</span><span class="st">, Nombre: </span><span class="sc">%s</span><span class="st">, Salario: </span><span class="sc">%.2f\n</span><span class="st">&quot;</span><span class="op">,</span> </span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>               empleado_leido<span class="op">.</span>id<span class="op">,</span> empleado_leido<span class="op">.</span>nombre<span class="op">,</span> empleado_leido<span class="op">.</span>salario<span class="op">);</span></span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">&quot;Error de lectura o EOF alcanzado. Se leyeron solo </span><span class="sc">%zu</span><span class="st"> elementos.</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">,</span> elementos_leidos<span class="op">);</span></span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>    fclose<span class="op">(</span>archivo<span class="op">);</span></span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> EXIT_SUCCESS<span class="op">;</span></span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p><strong>Clave:</strong> Para que la lectura binaria funcione
+correctamente, el <strong>tamaÃ±o</strong> (<code>size</code>) y la
+<strong>estructura</strong> de los datos leÃ­dos deben coincidir
+exactamente con los datos que fueron escritos en el archivo.</p>
+
+</div>
+</body>
+</html>
+

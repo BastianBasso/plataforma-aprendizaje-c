@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Resumen</title>
+    <link rel="stylesheet" crossorigin href="/assets/content-01sust.css">
+    <style>
+        
+    .header-c { background: #fff; border-bottom: 1px solid #e5e7eb; }
+    .logo-c {
+      background: linear-gradient(135deg,#162047 60%, #3b2fa6 100%);
+      color: #fff;
+      font-weight: 900;
+      font-size: 1.7rem;
+      border-radius: 8px;
+      width: 38px; height: 38px;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 2px 8px rgba(59,47,166,0.08);
+      margin-right: 10px;
+    }
+    .user-profile {
+      display: flex; align-items: center; gap: 10px;
+      background: #e0e7ff;
+      border-radius: 999px;
+      padding: 6px 16px;
+      font-size: 1rem;
+      color: #3730a3;
+      font-weight: 600;
+    }
+    .content-title {
+      color: #3730a3;
+      font-size: 2.2rem;
+      font-weight: 800;
+      margin: 36px auto 10px auto;
+      text-align: center;
+      letter-spacing: 1px;
+    }
+    .progress-bar-container {
+      max-width: 700px;
+      margin: 0 auto 32px auto;
+      background: #e0e7ff;
+      border-radius: 999px;
+      padding: 8px 24px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #3730a3;
+      box-shadow: 0 2px 8px rgba(59,47,166,0.08);
+    }
+    .progress-bar {
+      flex: 1;
+      height: 16px;
+      background: #c7d2fe;
+      border-radius: 999px;
+      overflow: hidden;
+      position: relative;
+    }
+    .progress-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg,#2563eb,#3b2fa6);
+      border-radius: 999px;
+      width: 12%;
+      transition: width 0.4s;
+    }
+    .modules-list {
+      max-width: 900px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+    }
+    .module-card {
+      background: linear-gradient(135deg,#2563eb 60%, #3b2fa6 100%);
+      color: #fff;
+      border-radius: 18px;
+      box-shadow: 0 6px 24px rgba(59,47,166,0.10);
+      padding: 0;
+      display: flex;
+      align-items: stretch;
+      position: relative;
+      overflow: hidden;
+      min-height: 140px;
+    }
+    .module-progress-bar {
+      width: 18px;
+      background: #a5b4fc;
+      display: flex;
+      align-items: flex-end;
+      border-radius: 18px 0 0 18px;
+      margin-right: 0;
+      position: relative;
+    }
+    .module-progress-fill {
+      width: 100%;
+      background: #3730a3;
+      border-radius: 18px 0 0 18px;
+      transition: height 0.4s;
+    }
+    .module-content {
+      flex: 1;
+      padding: 24px 32px 24px 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .module-title {
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .module-desc {
+      font-size: 1rem;
+      color: #dbeafe;
+      margin-bottom: 10px;
+    }
+    .module-topics {
+      margin-left: 1.2em;
+      margin-bottom: 10px;
+      color: #e0e7ff;
+      font-size: 0.98rem;
+    }
+    .module-card .start-btn {
+      align-self: flex-end;
+      background: linear-gradient(90deg,#4f46e5,#2563eb);
+      color: #fff;
+      font-weight: 700;
+      border: none;
+      border-radius: 999px;
+      padding: 10px 28px;
+      font-size: 1rem;
+      box-shadow: 0 2px 8px rgba(37,99,235,0.18);
+      transition: background 0.2s;
+      cursor: pointer;
+      margin-top: 8px;
+    }
+    .module-card .start-btn:hover {
+      background: linear-gradient(90deg,#2563eb,#4f46e5);
+    }
+    .footer-c {
+      background: linear-gradient(90deg,#49b3af,#25a6d7 90%);
+      color: #fff;
+      padding: 36px 0 18px 0;
+      margin-top: 48px;
+    }
+    .footer-c .footer-content {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 32px;
+      justify-content: space-between;
+      align-items: flex-start;
+      padding: 0 32px;
+    }
+    .footer-c .footer-logo {
+      display: flex; align-items: center; gap: 10px;
+      font-size: 1.5rem; font-weight: 800;
+      letter-spacing: 1px;
+    }
+    .footer-c .footer-links, .footer-c .footer-newsletter {
+      min-width: 180px;
+    }
+    .footer-c .footer-links a {
+      color: #e0f2fe;
+      display: block;
+      margin-bottom: 8px;
+      text-decoration: none;
+      font-size: 1rem;
+      transition: color 0.2s;
+    }
+    .footer-c .footer-links a:hover {
+      color: #fff;
+    }
+    .footer-c .newsletter-form {
+      display: flex; gap: 8px; margin-top: 8px;
+    }
+    .footer-c .newsletter-form input[type="email"] {
+      border-radius: 999px 0 0 999px;
+      border: none;
+      padding: 8px 16px;
+      font-size: 1rem;
+      outline: none;
+      min-width: 0;
+    }
+    .footer-c .newsletter-form button {
+      border-radius: 0 999px 999px 0;
+      border: none;
+      background: #2563eb;
+      color: #fff;
+      font-weight: 700;
+      padding: 8px 18px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .footer-c .newsletter-form button:hover {
+      background: #1e40af;
+    }
+    .footer-c .copyright {
+      text-align: center;
+      color: #bae6fd;
+      font-size: 0.95rem;
+      margin-top: 24px;
+    }
+    @media (max-width: 900px) {
+      .footer-c .footer-content { flex-direction: column; gap: 18px; align-items: flex-start; }
+      .content-c, .hero-c { padding: 24px 10px; }
+    }
+    @media (max-width: 900px) {
+      .modules-list { padding: 0 8px; }
+      .module-content { padding: 18px 10px 18px 10px; }
+      .content-title { font-size: 1.5rem; }
+    }
+  </style>
+</head>
+
+
+<body>    
+<div class="main-content">
+
+<h1><strong>Resumen del Módulo 1: Fundamentos de Programación y C
+Básico</strong></h1>
+<h2><strong>1. Introducción a la Programación y Algoritmos
+🚀</strong></h2>
+<p>La <strong>programación</strong> es el arte de dar instrucciones
+precisas y lógicas a una computadora para resolver un problema o
+realizar una tarea. Las computadoras operan bajo un ciclo
+básico conocido como modelo <strong>IPO
+(Input-Process-Output)</strong>:</p>
+<ul>
+<li><p><strong>Entrada (Input):</strong> Recibe datos e instrucciones
+(ej. pulsaciones de teclas).</p></li>
+<li><p><strong>Procesamiento (Process):</strong> La CPU sigue las
+instrucciones del programa, manipula los datos y realiza
+cálculos.</p></li>
+<li><p><strong>Salida (Output):</strong> Entrega el resultado del
+procesamiento (ej. lo que se ve en pantalla).</p></li>
+</ul>
+<p>El <strong>algoritmo</strong> es la receta o el plan lógico que
+precede al código. Es una secuencia finita y ordenada de
+pasos inequívocos para cumplir una tarea específica. Un
+algoritmo funcional debe ser:</p>
+<ul>
+<li><p><strong>Finito:</strong> Debe terminar después de un número
+razonable de pasos.</p></li>
+<li><p><strong>Ordenado:</strong> Los pasos deben seguir una secuencia
+lógica crucial.</p></li>
+<li><p><strong>Preciso (Inequívoco):</strong> Cada instrucción debe ser
+clara y sin ambigüedades.</p></li>
+</ul>
+<h2><strong>2. Pensamiento Computacional (PC)</strong></h2>
+<p>El Pensamiento Computacional es el proceso mental para formular
+problemas y concebir soluciones de manera que puedan ser ejecutadas
+eficazmente por una computadora o un ser humano. Sus
+técnicas fundamentales son:</p>
+<ul>
+<li><p><strong>Descomposición:</strong> La capacidad de tomar un
+problema grande y complejo y dividirlo sistemáticamente en
+<strong>subproblemas</strong> o tareas más pequeñas que son más
+manejables e independientes (el principio de "Divide y
+vencerás"). En C, esto se manifiesta en la creación de
+<strong>funciones</strong>.</p></li>
+<li><p><strong>Abstracción:</strong> Tratar las operaciones complejas
+como una "caja negra" o una función que oculta los detalles internos de
+bajo nivel. Un ejemplo es la función printf(), donde no es
+necesario saber cómo el <em>hardware</em> dibuja el texto en la
+pantalla, solo que al llamarla, el texto
+aparecerá.</p></li>
+</ul>
+<h2><strong>3. Historia y Propósito del Lenguaje C</strong></h2>
+<ul>
+<li><p><strong>Origen:</strong> C fue creado por <strong>Dennis
+Ritchie</strong> en los <strong>Laboratorios Bell</strong> a principios
+de la década de <strong>1970</strong>.</p></li>
+<li><p><strong>Propósito Principal:</strong> Fue desarrollado como una
+evolución del lenguaje B para reescribir el <em>kernel</em> (núcleo) del
+sistema operativo <strong>UNIX</strong>.</p></li>
+<li><p><strong>Ventaja Revolucionaria:</strong> Permitió que UNIX fuera
+<strong>portable</strong>; es decir, el mismo código fuente podía ser
+compilado y ejecutado en diferentes arquitecturas de
+<em>hardware</em>.</p></li>
+<li><p><strong>Nivel del Lenguaje:</strong> C se considera un
+<strong>Lenguaje de Nivel Medio</strong>. Esto se debe a
+que combina la eficiencia y el control granular sobre el
+<em>hardware</em> y la memoria (cercano al Lenguaje Ensamblador) con
+estructuras de control y tipos de datos legibles (como los lenguajes de
+alto nivel).</p></li>
+<li><p><strong>Aplicaciones:</strong> C es esencial para el desarrollo
+de <strong>Sistemas Operativos</strong> (kernels), <strong>Sistemas
+Embebidos</strong> (IoT, microcontroladores), <strong>Bases de
+Datos</strong> (MySQL, PostgreSQL) e
+<strong>Intérpretes/Compiladores</strong> de otros
+lenguajes.</p></li>
+</ul>
+<h2><strong>4. El Ciclo de Compilación y Estructura Básica en
+C</strong></h2>
+<p><strong>Compilación: Compilados vs. Interpretados</strong></p>
+<p>El lenguaje C es un <strong>lenguaje compilado</strong>.
+Esto significa que un programa llamado <strong>Compilador</strong> (como
+GCC) traduce <strong>todo</strong> el <strong>Código Fuente</strong>
+(.c) a código máquina ejecutable (<strong>antes</strong> de la
+ejecución) de una sola vez. Esto resulta en una mayor
+<strong>velocidad de ejecución</strong> en comparación con los lenguajes
+interpretados, que se traducen línea por línea en tiempo
+real.</p>
+<p><strong>Las Cuatro Fases de la Compilación</strong></p>
+<p>El proceso de C, de archivo de texto a ejecutable, consta de cuatro
+fases secuenciales:</p>
+<ol type="1">
+<li><p><strong>I. Preprocesamiento:</strong> El
+<strong>Preprocesador</strong> gestiona las directivas, como #include
+(para incluir librerías).</p></li>
+<li><p><strong>II. Compilación:</strong> El <strong>Compilador</strong>
+transforma el código preprocesado en código ensamblador.</p></li>
+<li><p><strong>III. Ensamblado:</strong> El <strong>Ensamblador</strong>
+convierte el código ensamblador en <strong>Código Objeto</strong> (.o o
+.obj).</p></li>
+<li><p>IV. Enlazado (Linking): El <strong>Enlazador
+(<em>Linker</em>)</strong> toma los archivos de código objeto y los une
+con las funciones de las <strong>librerías</strong> externas para
+generar el <strong>Programa Ejecutable</strong>
+final.</p></li>
+</ol>
+<p><strong>Estructura Mínima del Código C y Primeros Pasos</strong></p>
+<ol type="1">
+<li><p><strong>Código Fuente:</strong> El programa se escribe en un
+archivo de texto plano con la extensión <strong>.c</strong> (ej.
+hola.c).</p></li>
+<li><p><strong>La Función main():</strong> Es el punto de inicio
+<strong>obligatorio</strong> de todo programa C. Es donde la ejecución
+comienza y generalmente devuelve un valor entero (int) al sistema
+operativo.</p></li>
+<li><p><strong>Directiva de Librería:</strong> Se utiliza la directiva
+del preprocesador <strong>#include</strong> para hacer disponibles las
+funciones de las librerías estándar.</p></li>
+<li><p><strong>Librería Estándar de Entrada/Salida (stdio.h):</strong>
+Es la cabecera (Header) de Entrada/Salida Estándar.
+Contiene las funciones necesarias para que el programa interactúe con el
+usuario y la consola (ej. el teclado y la
+pantalla).</p></li>
+<li><p><strong>Función de Salida (printf()):</strong> Significa "print
+formatted" y es la función estándar para <strong>mostrar texto</strong>
+o datos en la consola.</p></li>
+</ol>
+<p>Ejemplo de Programa Mínimo:</p>
+<p>El ciclo de desarrollo implica: Escribir (el código) → Guardar (como
+.c) → Compilar (ej. gcc hola.c -o mi_programa) → Ejecutar (ej.
+./mi_programa).</p>
+
+
+
+<!--
+<blockquote>
+<p>C</p>
+<p>// Incluye la librería estándar para usar printf()</p>
+<p># <strong>include</strong> &lt;stdio.h&gt;</p>
+<p>// La función principal, el punto de entrada</p>
+<p>int main(void) {</p>
+<p>// Imprime el mensaje de salida en la consola</p>
+<p>printf("¡Hola Mundo, mi primer programa en C!\n");</p>
+<p>// Indica que el programa finalizó con éxito</p>
+<p>return 0;</p>
+<p>}</p>
+</blockquote>
+-->
+<div class="c2h-code">
+  <div class="c2h-code-inner">
+    <table>
+      <tr><td>1</td><td><span class="c2h-comment">// Incluye la librería estándar para usar printf()</span></td></tr>  
+      <tr><td>2</td><td><span class="c2h-directive"># include</span> <span class="c2h-val-str">&lt;stdio.h&gt;</span></td></tr>
+      <tr><td>3</td><td><span class="c2h-comment">// La función principal, el punto de entrada</span></td></tr>        
+      <tr><td>4</td><td><span class="c2h-kword c2h-kword-int">int</span> <span class="c2h-identifier c2h-fdeclname">main</span>(<span class="c2h-kword c2h-kword-void">void</span>) {</td></tr>
+      <tr><td>5</td><td>    <span class="c2h-comment">// Imprime el mensaje de salida en la consola</span></td></tr>   
+      <tr><td>6</td><td>    <span class="c2h-identifier c2h-fcallname">printf</span>(<span class="c2h-val-str">"¡Hola Mundo, mi primer programa en C!\n"</span>);</td></tr>
+      <tr><td>7</td><td></td></tr>
+      <tr><td>8</td><td>    <span class="c2h-comment">// Indica que el programa finalizó con éxito</span></td></tr>    
+      <tr><td>9</td><td>    <span class="c2h-kword c2h-kword-return">return</span> <span class="c2h-val-int">0</span>;</td></tr>
+      <tr><td>10</td><td>}</td></tr>
+      
+    </table>
+  </div>
+</div>
+<br>
+
+</div>
+</body>
+

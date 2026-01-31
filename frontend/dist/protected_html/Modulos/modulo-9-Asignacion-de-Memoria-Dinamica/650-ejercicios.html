@@ -1,0 +1,197 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" crossorigin href="/assets/content-01sust.css">
+</head>
+<body>
+<div class="main-content">
+<h2 id="ejercicios-de-programaciÃ³n-detecciÃ³n-y-correcciÃ³n-de-fugas">10
+Ejercicios de ProgramaciÃ³n: DetecciÃ³n y CorrecciÃ³n de Fugas ðŸ’»</h2>
+<h3 id="ejercicio-1-fuga-por-reasignaciÃ³n-fÃ¡cil">Ejercicio 1: Fuga por
+ReasignaciÃ³n (FÃ¡cil)</h3>
+<p>Analiza el siguiente cÃ³digo e identifica la <strong>fuga de
+memoria</strong>. Luego, reescribe el fragmento para corregirla.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> crear_y_cambiar<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> <span class="op">*</span>a <span class="op">=</span> <span class="op">(</span><span class="dt">int</span> <span class="op">*)</span>malloc<span class="op">(</span><span class="kw">sizeof</span><span class="op">(</span><span class="dt">int</span><span class="op">));</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> <span class="op">*</span>b <span class="op">=</span> <span class="op">(</span><span class="dt">int</span> <span class="op">*)</span>malloc<span class="op">(</span><span class="kw">sizeof</span><span class="op">(</span><span class="dt">int</span><span class="op">));</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="op">*</span>a <span class="op">=</span> <span class="dv">10</span><span class="op">;</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="co">// El error ocurre aquÃ­:</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    a <span class="op">=</span> b<span class="op">;</span> </span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    <span class="co">// LiberaciÃ³n incompleta</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    free<span class="op">(</span>a<span class="op">);</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p><strong>Tarea:</strong> Identifica el bloque perdido y corrige el
+cÃ³digo para que no haya fugas.</p>
+<hr />
+<h3 id="ejercicio-2-fuga-por-pÃ©rdida-de-Ã¡mbito-fÃ¡cil">Ejercicio 2: Fuga
+por PÃ©rdida de Ãmbito (FÃ¡cil)</h3>
+<p>La funciÃ³n a continuaciÃ³n asigna memoria y la usa, pero causa una
+fuga.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> procesar_datos<span class="op">(</span><span class="dt">int</span> n<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> <span class="op">*</span>datos <span class="op">=</span> <span class="op">(</span><span class="dt">int</span> <span class="op">*)</span>calloc<span class="op">(</span>n<span class="op">,</span> <span class="kw">sizeof</span><span class="op">(</span><span class="dt">int</span><span class="op">));</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>datos <span class="op">==</span> NULL<span class="op">)</span> <span class="cf">return</span><span class="op">;</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> n<span class="op">;</span> i<span class="op">++)</span> <span class="op">{</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>        datos<span class="op">[</span>i<span class="op">]</span> <span class="op">=</span> i <span class="op">*</span> <span class="dv">2</span><span class="op">;</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Â¡Falta la liberaciÃ³n!</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    procesar_datos<span class="op">(</span><span class="dv">50</span><span class="op">);</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p><strong>Tarea:</strong> Modifica la funciÃ³n
+<code>procesar_datos</code> para cumplir con la <strong>Regla de
+Oro</strong> de C.</p>
+<hr />
+<h3 id="ejercicio-3-uso-inseguro-de-realloc">Ejercicio 3: Uso Inseguro
+de <code>realloc()</code></h3>
+<p>El siguiente cÃ³digo intenta expandir un <em>array</em>, pero tiene
+una fuga si la reasignaciÃ³n falla.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#define TAM_NUEVO </span><span class="dv">100</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> expandir_array<span class="op">(</span><span class="dt">int</span> <span class="op">**</span>puntero<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Si realloc falla, *puntero se convierte en NULL y se pierde la referencia original.</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="op">*</span>puntero <span class="op">=</span> <span class="op">(</span><span class="dt">int</span> <span class="op">*)</span>realloc<span class="op">(*</span>puntero<span class="op">,</span> TAM_NUEVO <span class="op">*</span> <span class="kw">sizeof</span><span class="op">(</span><span class="dt">int</span><span class="op">));</span> </span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p><strong>Tarea:</strong> Reescribe la funciÃ³n
+<code>expandir_array</code> utilizando un <strong>puntero
+temporal</strong> para prevenir la fuga si <code>realloc()</code>
+devuelve <code>NULL</code>.</p>
+<hr />
+<h3 id="ejercicio-4-puntero-colgante-y-doble-liberaciÃ³n">Ejercicio 4:
+Puntero Colgante y Doble LiberaciÃ³n</h3>
+<p>Identifica y corrige <strong>ambos</strong> errores en este cÃ³digo:
+el <em>Puntero Colgante</em> y el riesgo de <em>Doble
+LiberaciÃ³n</em>.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> <span class="op">*</span>crear_y_destruir<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> <span class="op">*</span>ptr <span class="op">=</span> <span class="op">(</span><span class="dt">int</span> <span class="op">*)</span>malloc<span class="op">(</span><span class="kw">sizeof</span><span class="op">(</span><span class="dt">int</span><span class="op">));</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>ptr <span class="op">==</span> NULL<span class="op">)</span> <span class="cf">return</span> NULL<span class="op">;</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="op">*</span>ptr <span class="op">=</span> <span class="dv">42</span><span class="op">;</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    free<span class="op">(</span>ptr<span class="op">);</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> ptr<span class="op">;</span> <span class="co">// El puntero retornado es colgante</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> <span class="op">*</span>ref <span class="op">=</span> crear_y_destruir<span class="op">();</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    <span class="co">// if (ref != NULL) free(ref); // Riesgo de doble free</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p><strong>Tarea:</strong> Corrige el error del puntero colgante en
+<code>crear_y_destruir()</code> y explica la prÃ¡ctica de seguridad que
+falta despuÃ©s de <code>free(ptr)</code>.</p>
+<hr />
+<h3 id="ejercicio-5-fuga-en-la-estructura-de-control">Ejercicio 5: Fuga
+en la Estructura de Control</h3>
+<p>La funciÃ³n a continuaciÃ³n puede tener una fuga de memoria bajo
+ciertas condiciones.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> <span class="op">*</span>asignar_y_validar<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> <span class="op">*</span>data <span class="op">=</span> <span class="op">(</span><span class="dt">int</span> <span class="op">*)</span>malloc<span class="op">(</span><span class="dv">10</span> <span class="op">*</span> <span class="kw">sizeof</span><span class="op">(</span><span class="dt">int</span><span class="op">));</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>data <span class="op">==</span> NULL<span class="op">)</span> <span class="cf">return</span> NULL<span class="op">;</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> error <span class="op">=</span> verificar_condicion<span class="op">();</span> <span class="co">// Imagina que esta funciÃ³n retorna 1 si hay error.</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>error<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Â¿QuÃ© pasa con &#39;data&#39; si salimos aquÃ­?</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> NULL<span class="op">;</span> </span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> data<span class="op">;</span> </span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p><strong>Tarea:</strong> Inserta la lÃ­nea de cÃ³digo necesaria dentro
+del <code>if (error)</code> para garantizar que no haya fugas.</p>
+<hr />
+<h3 id="ejercicio-6-regla-de-propiedad-anÃ¡lisis">Ejercicio 6: Regla de
+Propiedad (AnÃ¡lisis)</h3>
+<p>Tienes una funciÃ³n que crea un recurso y otra que lo consume.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">// FunciÃ³n CREADORA (Debe retornar la propiedad)</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> <span class="op">*</span>asignar_datos<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="op">(</span><span class="dt">int</span> <span class="op">*)</span>malloc<span class="op">(</span><span class="dv">10</span> <span class="op">*</span> <span class="kw">sizeof</span><span class="op">(</span><span class="dt">int</span><span class="op">));</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co">// FunciÃ³n CONSUMIDORA (Debe usar y liberar)</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> usar_datos<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> <span class="op">*</span>datos <span class="op">=</span> asignar_datos<span class="op">();</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>    <span class="co">// ...uso de datos...</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Â¿Falta algo aquÃ­ segÃºn la regla de propiedad?</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p><strong>Tarea:</strong> Indica quÃ© funciÃ³n debe tener la llamada a
+<code>free()</code> y quÃ© funciÃ³n debe asegurarse de que se llame.</p>
+<hr />
+<h3 id="ejercicio-7-detecciÃ³n-de-fugas-en-bucles">Ejercicio 7: DetecciÃ³n
+de Fugas en Bucles</h3>
+<p>El siguiente bucle crea una fuga masiva de memoria. Corrige el
+cÃ³digo.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Ejecutar esto causarÃ­a un gran problema de rendimiento</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> bucle_con_fuga<span class="op">(</span><span class="dt">int</span> iteraciones<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> <span class="op">*</span>p<span class="op">;</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> iteraciones<span class="op">;</span> i<span class="op">++)</span> <span class="op">{</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>        p <span class="op">=</span> <span class="op">(</span><span class="dt">int</span> <span class="op">*)</span>malloc<span class="op">(</span><span class="dv">1024</span><span class="op">);</span> <span class="co">// Asigna 1KB</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>        <span class="co">// ...uso de p...</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    free<span class="op">(</span>p<span class="op">);</span> <span class="co">// Solo libera el Ãºltimo bloque</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p><strong>Tarea:</strong> Mueve la llamada a <code>free()</code> para
+que se ejecute en el lugar correcto y libere <strong>todos</strong> los
+bloques asignados, o modifica el cÃ³digo para gestionar la memoria de
+forma diferente. (Asume que solo se necesita el Ãºltimo bloque si no se
+modifica el bucle).</p>
+<hr />
+<h3 id="ejercicio-8-liberaciÃ³n-incorrecta-no-base-pointer">Ejercicio 8:
+LiberaciÃ³n Incorrecta (No Base Pointer)</h3>
+<p>La funciÃ³n a continuaciÃ³n intenta liberar la memoria, pero comete un
+error fatal.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> liberar_mal<span class="op">(</span><span class="dt">int</span> n<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> <span class="op">*</span>arr <span class="op">=</span> <span class="op">(</span><span class="dt">int</span> <span class="op">*)</span>malloc<span class="op">(</span>n <span class="op">*</span> <span class="kw">sizeof</span><span class="op">(</span><span class="dt">int</span><span class="op">));</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>arr <span class="op">==</span> NULL<span class="op">)</span> <span class="cf">return</span><span class="op">;</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Mueve el puntero dentro del bloque</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    arr <span class="op">=</span> arr <span class="op">+</span> <span class="dv">1</span><span class="op">;</span> </span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Error fatal: no se libera desde el puntero base</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>    free<span class="op">(</span>arr<span class="op">);</span> </span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p><strong>Tarea:</strong> Corrige la funciÃ³n para que libere la memoria
+correctamente.</p>
+<hr />
+<h3 id="ejercicio-9-prevenciÃ³n-de-doble-liberaciÃ³n">Ejercicio 9:
+PrevenciÃ³n de Doble LiberaciÃ³n</h3>
+<p>Corrige el siguiente cÃ³digo para que sea <strong>seguro</strong>
+contra el error de <em>Doble LiberaciÃ³n</em>.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> liberar_doble_riesgo<span class="op">(</span><span class="dt">int</span> <span class="op">*</span>ptr<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    free<span class="op">(</span>ptr<span class="op">);</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">// ... Alguna lÃ³gica compleja ...</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">// AquÃ­ puede haber riesgo de que la misma direcciÃ³n sea liberada de nuevo</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p><strong>Tarea:</strong> Modifica la funciÃ³n
+<code>liberar_doble_riesgo</code> para que, si es llamada
+accidentalmente dos veces con el mismo puntero, la segunda llamada sea
+inofensiva.</p>
+<hr />
+<h3 id="ejercicio-10-anÃ¡lisis-con-herramientas-conceptual">Ejercicio 10:
+AnÃ¡lisis con Herramientas (Conceptual)</h3>
+<p>Si el <strong>Ejercicio 7</strong> (bucle con fuga) se ejecuta
+utilizando <strong>Valgrind</strong>, Â¿cuÃ¡l serÃ­a el resultado principal
+que reportarÃ­a la herramienta?</p>
+<ul>
+<li><strong>A.</strong> â€œUso de puntero colgante detectadoâ€.</li>
+<li><strong>B.</strong> <strong>â€œBloques asignados:
+<code>iteraciones</code>, Bloques perdidos: <code>iteraciones - 1</code>
+(fuga de memoria)â€</strong></li>
+<li><strong>C.</strong> â€œError de doble liberaciÃ³n detectadoâ€.</li>
+<li><strong>D.</strong> â€œFallo de segmentaciÃ³n al acceder al
+<em>Stack</em>â€.</li>
+</ul>
+<p><strong>Respuesta Correcta:</strong> B</p>
+
+</div>
+</body>
+</html>
+

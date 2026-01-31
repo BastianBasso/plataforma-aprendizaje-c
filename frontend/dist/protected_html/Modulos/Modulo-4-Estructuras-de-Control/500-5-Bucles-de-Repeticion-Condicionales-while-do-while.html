@@ -1,0 +1,284 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" crossorigin href="/assets/content-01sust.css">
+</head>
+<body>
+<div class="main-content">
+<h1>5. Bucles de Repetición Condicionales (`while` `do-while`)</h1>
+<p><strong>Bucle while: Repetición Previa Condición ⏳</strong></p>
+<p>El <strong>bucle while</strong> es la estructura de iteración más
+fundamental y general en C. Se utiliza para repetir un bloque de código
+<strong>mientras</strong> una condición lógica específica se mantenga
+<strong>Verdadera</strong>.</p>
+<p>A diferencia del bucle for, que es ideal para repeticiones por
+contador conocido, el while es perfecto cuando <strong>no se sabe de
+antemano cuántas veces</strong> se debe iterar, ya que la repetición
+depende de que se cumpla una condición externa o interna.</p>
+<p><strong>Sintaxis y Funcionamiento</strong></p>
+<p>El bucle while tiene una sintaxis simple que solo requiere la palabra
+clave while seguida de la condición entre paréntesis.</p>
+<p>$$\text{while } (\text{condición}) \left\{ \right. \text{Bloque de
+Código} \left. \right\}$$</p>
+<p>C</p>
+<p>while (condicion_logica) {</p>
+<p>// Este bloque de código se repite</p>
+<p>// mientras la 'condicion_logica' sea Verdadera.</p>
+<p>// **Asegurarse de que algo dentro cambie la condición</p>
+<p>// para evitar un bucle infinito.**</p>
+<p>}</p>
+<p>// El programa sale del bucle cuando la condicion se vuelve
+Falsa.</p>
+<p><strong>Principio Clave: Repetición Previa Condición (Cero o Más
+Veces)</strong></p>
+<p>La característica definitoria del while es que la condición se evalúa
+<strong>antes</strong> de ejecutar el bloque de código por primera
+vez.</p>
+<ol type="1">
+<li><p><strong>Evaluación Inicial:</strong> Se comprueba la
+condicion_logica.</p></li>
+<li><p><strong>Ejecución:</strong> Si es <strong>Verdadera</strong>, se
+ejecuta el bloque de código.</p></li>
+<li><p><strong>Repetición:</strong> Al finalizar el bloque, el programa
+vuelve al paso 1 y comprueba la condición nuevamente.</p></li>
+<li><p><strong>Terminación:</strong> Si la condición es
+<strong>Falsa</strong> desde el principio, el bloque de código
+<strong>nunca se ejecuta</strong> (cero veces).</p></li>
+</ol>
+<p><strong>Ejemplo Práctico: Iteración basada en un Límite</strong></p>
+<p>En este ejemplo, la variable contador se utiliza para controlar el
+número de iteraciones, pero el control primario reside en la condición
+contador &lt;= 5.</p>
+<p>C</p>
+<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
+<p>int main(void) {</p>
+<p>int contador = 1; // Inicialización fuera del bucle</p>
+<p>while (contador &lt;= 5) { // Condición (se comprueba antes)</p>
+<p>printf("Iteración %d\n", contador);</p>
+<p>contador++; // Actualización (para acercarse al punto de salida)</p>
+<p>}</p>
+<p>return 0;</p>
+<p>}</p>
+<p><strong>Bucle do-while: Repetición Posterior Condición
+🔄</strong></p>
+<p>El <strong>bucle do-while</strong> es una variación del bucle while
+que garantiza que el bloque de código dentro del ciclo se ejecute
+<strong>al menos una vez</strong>, sin importar el estado inicial de la
+condición.</p>
+<p>Esto se debe a que, a diferencia del while tradicional (que verifica
+la condición antes de entrar), el do-while evalúa la condición
+<strong>al final</strong> del bloque de código.</p>
+<p><strong>Sintaxis y Funcionamiento</strong></p>
+<p>El do-while comienza con la palabra clave <strong>do</strong> seguida
+del bloque de código, y la palabra clave <strong>while</strong> con la
+condición de continuación al final, terminando con un punto y coma
+(;).</p>
+<p>$$\text{do } \left\{ \right. \text{Bloque de Código} \left. \right\}
+\text{ while } (\text{condición});$$</p>
+<p>C</p>
+<p>do {</p>
+<p>// Este bloque de código SIEMPRE se ejecuta al menos una vez.</p>
+<p>// Aquí debe haber alguna instrucción que modifique</p>
+<p>// la variable usada en la condición.</p>
+<p>} while (condicion_logica); // La condición se comprueba aquí, al
+finalizar el bloque.</p>
+<p><strong>Principio Clave: Ejecución Garantizada (Uno o Más
+Veces)</strong></p>
+<p>La principal característica del do-while es su flujo de
+ejecución:</p>
+<ol type="1">
+<li><p><strong>Ejecución Inicial:</strong> El programa salta
+directamente al bloque do y ejecuta el código.</p></li>
+<li><p><strong>Evaluación:</strong> Solo después de que el bloque do ha
+terminado, se evalúa la condicion_logica en el while.</p></li>
+<li><p><strong>Repetición:</strong> Si la condición es
+<strong>Verdadera</strong>, el programa vuelve a ejecutar el bloque
+do.</p></li>
+<li><p><strong>Terminación:</strong> Si la condición es
+<strong>Falsa</strong>, el ciclo termina.</p></li>
+</ol>
+<p><strong>Ejemplo Práctico: Solicitud de Contraseña</strong></p>
+<p>El do-while es ideal para la <strong>validación de entrada</strong>
+donde el usuario debe ser forzado a intentar ingresar la información al
+menos una vez, y seguir intentándolo mientras la condición de error se
+cumpla.</p>
+<p>C</p>
+<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
+<p>#<strong>include</strong> &lt;string.h&gt; // Necesario para
+strcmp()</p>
+<p>int main(void) {</p>
+<p>char clave_ingresada[20];</p>
+<p>char clave_correcta[] = "1234";</p>
+<p>do {</p>
+<p>printf("Ingrese la clave: ");</p>
+<p>scanf("%s", clave_ingresada);</p>
+<p>// La condición es: (clave_ingresada NO es igual a
+clave_correcta)</p>
+<p>} while (strcmp(clave_ingresada, clave_correcta) != 0);</p>
+<p>printf("Acceso Concedido.\n");</p>
+<p>return 0;</p>
+<p>}</p>
+<p>En este caso, la solicitud de clave se muestra primero y luego se
+verifica si es correcta.</p>
+<p><strong>Diferencia Clave entre while y do-while ⚖️</strong></p>
+<p>Aunque ambos bucles (while y do-while) repiten un bloque de código
+basado en una condición, su diferencia fundamental radica en
+<strong>cuándo</strong> se evalúa dicha condición, lo que afecta el
+número mínimo de veces que se ejecuta el código.</p>
+<p><strong>Comparación Fundamental</strong></p>
+<table style="width:97%;">
+<colgroup>
+<col style="width: 26%" />
+<col style="width: 33%" />
+<col style="width: 37%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>Característica</strong></th>
+<th style="text-align: left;"><strong>Bucle while (Previa
+Condición)</strong></th>
+<th style="text-align: left;"><strong>Bucle do-while (Posterior
+Condición)</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>Punto de Control</strong></td>
+<td style="text-align: left;">La condición se verifica <strong>al
+principio</strong> del bucle.</td>
+<td style="text-align: left;">La condición se verifica <strong>al
+final</strong> del bucle.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Ejecución Mínima</strong></td>
+<td style="text-align: left;"><strong>Cero</strong> veces. Si la
+condición inicial es falsa, el cuerpo del bucle se salta por
+completo.</td>
+<td style="text-align: left;"><strong>Una</strong> vez. El cuerpo del
+bucle se ejecuta antes de la primera comprobación.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Uso Ideal</strong></td>
+<td style="text-align: left;">Iteraciones donde la ejecución es opcional
+(ej: procesar un archivo si existe).</td>
+<td style="text-align: left;">Iteraciones donde se garantiza al menos
+una acción (ej: solicitar <em>input</em> o mostrar un menú).</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Flujo de Control Visual</strong></p>
+<table>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>Bucle while</strong> <strong>Bucle
+do-while</strong></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<p><strong>Ejemplo Crítico: Menú de Usuario (Ejecución
+Garantizada)</strong></p>
+<p>La diferencia es crítica en casos donde se necesita interactuar con
+el usuario al menos una vez, como la presentación de un menú.</p>
+<p><strong>Escenario con do-while (Recomendado):</strong></p>
+<p>El do-while garantiza que el menú se muestre (se ejecuta el do) y
+luego pregunta al usuario si quiere repetir (condición while).</p>
+<p>C</p>
+<p>int opcion;</p>
+<p>do {</p>
+<p>printf("--- MENU ---\n");</p>
+<p>printf("1. Opción A\n");</p>
+<p>printf("2. Salir\n");</p>
+<p>printf("Seleccione una opción: ");</p>
+<p>scanf("%d", &amp;opcion);</p>
+<p>} while (opcion != 2); // Repetir mientras no seleccione Salir</p>
+<p>// Este código siempre muestra el menú al menos una vez.</p>
+<p><strong>Escenario con while (Menos Ideal para Menús):</strong></p>
+<p>Si usáramos while, necesitaríamos inicializar la variable de control
+(opcion) a un valor que fuerce la entrada al ciclo por primera vez.</p>
+<p>C</p>
+<p>int opcion = 0; // Se fuerza una inicialización para entrar al
+bucle.</p>
+<p>while (opcion != 2) {</p>
+<p>printf("--- MENU ---\n");</p>
+<p>// ...</p>
+<p>scanf("%d", &amp;opcion);</p>
+<p>}</p>
+<p>// Si la inicialización fuera 'opcion = 2', el menú no se mostraría
+nunca.</p>
+<p><strong>Conclusión:</strong> El <strong>do-while</strong> es
+estructuralmente más apropiado para las tareas de validación y menú
+porque su sintaxis misma <strong>garantiza la primera
+ejecución</strong>.</p>
+<p><strong>Bucles Infinitos y Terminación Controlada ⚠️</strong></p>
+<p>En los bucles condicionales (while y do-while), el riesgo principal
+es crear un <strong>bucle infinito</strong>. Esto ocurre cuando la
+condición lógica que controla la repetición <strong>nunca se vuelve
+Falsa</strong>, lo que provoca que el programa se ejecute
+indefinidamente, consumiendo recursos y bloqueando la ejecución
+posterior.</p>
+<p><strong>¿Qué es un Bucle Infinito?</strong></p>
+<p>Un bucle infinito es un error de lógica de programación donde el
+código de iteración no tiene una condición de salida adecuada.</p>
+<ul>
+<li><strong>Causa Principal:</strong> La variable o expresión utilizada
+en la condición del bucle <strong>no se modifica</strong> dentro del
+cuerpo del bucle de manera que se acerque al punto de terminación.</li>
+</ul>
+<p><strong>Ejemplo de Bucle Infinito Clásico:</strong></p>
+<p>C</p>
+<p>int contador = 1;</p>
+<p>while (contador &lt;= 10) {</p>
+<p>printf("¡Atrapado!\n");</p>
+<p>// ERROR: La variable 'contador' NUNCA cambia aquí.</p>
+<p>// La condición (1 &lt;= 10) siempre es Verdadera.</p>
+<p>}</p>
+<p>// El programa se queda imprimiendo "¡Atrapado!" eternamente.</p>
+<p><strong>Mecanismos para la Terminación Controlada</strong></p>
+<p>Para evitar los bucles infinitos y garantizar que el programa avance,
+es <strong>obligatorio</strong> que el cuerpo del bucle contenga código
+que eventualmente cambie la condición a Falsa. Hay dos enfoques
+principales:</p>
+<ol type="1">
+<li><p><strong>Modificación del Contador/Variable:</strong></p>
+<ul>
+<li><p>Si la condición depende de un contador (como en el ejemplo), es
+esencial incluir la línea de <strong>actualización</strong> (contador++
+o contador--) dentro del bloque.</p></li>
+<li><p>Si la condición depende de una variable de estado (ej:
+fin_programa), debe haber una lógica que cambie esa variable (ej:
+fin_programa = 1;) en algún momento.</p></li>
+</ul></li>
+<li><p><strong>Uso de break (Terminación Forzada):</strong></p>
+<ul>
+<li><p>Aunque es menos común que en for, se puede usar la sentencia
+<strong>break</strong> dentro de un if anidado dentro del bucle. Esto
+permite salir del ciclo de forma inmediata y forzada cuando se detecta
+una condición crítica.</p></li>
+<li><p>Esto es útil en bucles que se inician intencionalmente como
+infinitos (ej: while(1)) hasta que se encuentra un <em>input</em> o
+error específico.</p></li>
+</ul></li>
+</ol>
+<p>C</p>
+<p>int intento = 0;</p>
+<p>while (1) { // Bucle infinito intencional (siempre Verdadero)</p>
+<p>intento++;</p>
+<p>// ... Código de operación ...</p>
+<p>if (intento &gt;= 5) {</p>
+<p>printf("Número máximo de intentos alcanzado. Saliendo.\n");</p>
+<p>break; // Fuerza la salida del bucle while(1)</p>
+<p>}</p>
+<p>}</p>
+<p><strong>Consejo:</strong> Siempre examina la condición de tu bucle
+condicional y pregúntate: <strong>"¿Qué línea de código hará que esta
+condición sea Falsa?"</strong> Si no puedes encontrar esa línea, tienes
+un bucle infinito potencial.</p>
+
+
+</div>
+</body>
+</html>
+

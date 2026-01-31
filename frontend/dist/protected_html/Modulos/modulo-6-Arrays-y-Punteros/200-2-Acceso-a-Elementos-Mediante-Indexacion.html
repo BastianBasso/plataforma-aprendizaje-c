@@ -1,0 +1,309 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" crossorigin href="/assets/content-01sust.css">
+</head>
+<body>
+<div class="main-content">
+<h2 id="el-Ã­ndice-indexaciÃ³n-en-c">El Ãndice (IndexaciÃ³n en C) ðŸ”¢</h2>
+<p>El <strong>Ã­ndice</strong> es la herramienta esencial en C para
+acceder a los elementos individuales dentro de un <em>array</em> de
+manera precisa.</p>
+<h3 id="acceso-basado-en-la-posiciÃ³n">Acceso Basado en la PosiciÃ³n</h3>
+<p>Dado que los elementos de un <em>array</em> estÃ¡n almacenados de
+forma contigua en la memoria, el <strong>Ã­ndice</strong> actÃºa como la
+<strong>posiciÃ³n numÃ©rica</strong> de un elemento dentro de esa
+secuencia.</p>
+<ul>
+<li>El acceso a cada elemento se realiza mediante su Ã­ndice, que se
+especifica entre corchetes (<code>[]</code>).</li>
+<li><strong>Fundamento Crucial:</strong> En el lenguaje C (y la mayorÃ­a
+de los lenguajes de programaciÃ³n derivados), la <strong>indexaciÃ³n
+siempre comienza en 0</strong>.</li>
+</ul>
+<h3 id="rango-de-Ã­ndices">Rango de Ãndices</h3>
+<p>Si declaramos un <em>array</em> con un <strong>tamaÃ±o total</strong>
+de <span class="math inline"><em>N</em></span> elementos:</p>
+<ul>
+<li>El <strong>primer elemento</strong> siempre se encuentra en el
+Ã­ndice <strong>0</strong>.</li>
+<li>El <strong>Ãºltimo elemento</strong> siempre se encuentra en el
+Ã­ndice <strong><span
+class="math inline"><em>N</em>â€…âˆ’â€…1</span></strong>.</li>
+</ul>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">TamaÃ±o del Array (<span
+class="math inline"><em>N</em></span>)</th>
+<th style="text-align: center;">Ãndice del Primer Elemento</th>
+<th style="text-align: center;">Ãndice del Ãšltimo Elemento</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">10</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">9</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">4</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Ejemplo Conceptual:</strong></p>
+<p>Si tienes un array llamado <code>temperaturas</code> con 5
+posiciones:</p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">PosiciÃ³n (LÃ³gica)</th>
+<th style="text-align: center;"><strong>Ãndice (C)</strong></th>
+<th style="text-align: center;">Nombre del Elemento</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">Primera</td>
+<td style="text-align: center;"><strong>0</strong></td>
+<td style="text-align: center;"><code>temperaturas[0]</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Segunda</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;"><code>temperaturas[1]</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Tercera</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;"><code>temperaturas[2]</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Cuarta</td>
+<td style="text-align: center;">3</td>
+<td style="text-align: center;"><code>temperaturas[3]</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Quinta</td>
+<td style="text-align: center;"><strong>4</strong></td>
+<td style="text-align: center;"><code>temperaturas[4]</code></td>
+</tr>
+</tbody>
+</table>
+<p>Es vital acostumbrarse a esta convenciÃ³n de <strong>base
+cero</strong> (<span class="math inline">0</span>) para evitar errores
+de lÃ³gica, como los errores por uno (<em>off-by-one errors</em>).</p>
+<h2 id="sintaxis-de-acceso-y-modificaciÃ³n-de-elementos">Sintaxis de
+Acceso y ModificaciÃ³n de Elementos ðŸ› ï¸</h2>
+<p>Una vez que un <em>array</em> ha sido declarado e inicializado, la
+manipulaciÃ³n de sus elementos se realiza utilizando la sintaxis de
+<strong>indexaciÃ³n</strong> (<code>[]</code>).</p>
+<hr />
+<h3 id="acceso-lectura">Acceso (Lectura)</h3>
+<p>Para <strong>leer</strong> el valor almacenado en una posiciÃ³n
+especÃ­fica del <em>array</em>, se utiliza la siguiente sintaxis:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>valor <span class="op">=</span> nombre_array<span class="op">[</span>indice<span class="op">];</span></span></code></pre></div>
+<p>El valor del elemento ubicado en la posiciÃ³n indicada por el
+<code>indice</code> se copia en la variable de destino.</p>
+<p><strong>Ejemplo de Lectura:</strong></p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> puntajes<span class="op">[]</span> <span class="op">=</span> <span class="op">{</span><span class="dv">90</span><span class="op">,</span> <span class="dv">85</span><span class="op">,</span> <span class="dv">95</span><span class="op">,</span> <span class="dv">80</span><span class="op">,</span> <span class="dv">100</span><span class="op">};</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> tercer_puntaje<span class="op">;</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Leer el valor del elemento en el Ã­ndice 2 (el tercer elemento, valor 95).</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    tercer_puntaje <span class="op">=</span> puntajes<span class="op">[</span><span class="dv">2</span><span class="op">];</span> </span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;El tercer puntaje es: </span><span class="sc">%d\n</span><span class="st">&quot;</span><span class="op">,</span> tercer_puntaje<span class="op">);</span> <span class="co">// Imprime 95</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<h3 id="modificaciÃ³n-escritura">ModificaciÃ³n (Escritura)</h3>
+<p>Para <strong>modificar</strong> o <strong>asignar</strong> un nuevo
+valor a una posiciÃ³n especÃ­fica del <em>array</em>, se utiliza la
+sintaxis de asignaciÃ³n estÃ¡ndar, colocando el Ã­ndice a la izquierda del
+operador <code>=</code>:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>nombre_array<span class="op">[</span>indice<span class="op">]</span> <span class="op">=</span> valor<span class="op">;</span></span></code></pre></div>
+<p>El valor del elemento en la posiciÃ³n indicada es sobrescrito por el
+nuevo <code>valor</code>.</p>
+<p><strong>Ejemplo de ModificaciÃ³n:</strong></p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">float</span> precios<span class="op">[</span><span class="dv">4</span><span class="op">]</span> <span class="op">=</span> <span class="op">{</span><span class="fl">19.99</span><span class="bu">f</span><span class="op">,</span> <span class="fl">4.50</span><span class="bu">f</span><span class="op">,</span> <span class="fl">10.00</span><span class="bu">f</span><span class="op">,</span> <span class="fl">75.25</span><span class="bu">f</span><span class="op">};</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Modificar el valor del elemento en el Ã­ndice 0 (el primer elemento).</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    precios<span class="op">[</span><span class="dv">0</span><span class="op">]</span> <span class="op">=</span> <span class="fl">25.50</span><span class="bu">f</span><span class="op">;</span> </span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Modificar el Ãºltimo elemento (Ã­ndice 3).</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    precios<span class="op">[</span><span class="dv">3</span><span class="op">]</span> <span class="op">=</span> precios<span class="op">[</span><span class="dv">3</span><span class="op">]</span> <span class="op">*</span> <span class="dv">0</span><span class="er">.5f</span><span class="op">;</span> <span class="co">// Aplicar un descuento del 50%</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;Nuevo precio en [0]: </span><span class="sc">%.2f\n</span><span class="st">&quot;</span><span class="op">,</span> precios<span class="op">[</span><span class="dv">0</span><span class="op">]);</span>   <span class="co">// Imprime 25.50</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;Nuevo precio en [3]: </span><span class="sc">%.2f\n</span><span class="st">&quot;</span><span class="op">,</span> precios<span class="op">[</span><span class="dv">3</span><span class="op">]);</span>   <span class="co">// Imprime 37.63</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<blockquote>
+<p>ðŸ’¡ <strong>Nota:</strong> La expresiÃ³n
+<code>nombre_array[indice]</code> actÃºa exactamente como una variable
+individual de tipo <code>tipo</code> y puede usarse en cualquier lugar
+donde se usarÃ­a una variable de ese tipo (expresiones, llamadas a
+funciones, asignaciones, etc.).</p>
+</blockquote>
+<h2 id="recorrido-de-arrays-con-bucles">Recorrido de Arrays con Bucles
+ðŸ”„</h2>
+<p>La forma mÃ¡s comÃºn y eficiente de procesar cada elemento de un
+<em>array</em> de manera sistemÃ¡tica es mediante un
+<strong>bucle</strong>. Dada la naturaleza indexada y de tamaÃ±o fijo de
+los <em>arrays</em>, el bucle <strong><code>for</code></strong> es la
+herramienta ideal en C para esta tarea.</p>
+<hr />
+<h3 id="la-estrategia-del-bucle-for">La Estrategia del Bucle
+<code>for</code></h3>
+<p>El bucle <code>for</code> se adapta perfectamente al recorrido de
+<em>arrays</em> porque su estructura permite controlar con precisiÃ³n el
+rango de los Ã­ndices:</p>
+<ol type="1">
+<li><strong>InicializaciÃ³n:</strong> Se inicializa una <strong>variable
+de Ã­ndice</strong> (casi siempre llamada <code>i</code>) en <span
+class="math inline"><strong>0</strong></span>, que es el Ã­ndice del
+primer elemento.</li>
+<li><strong>CondiciÃ³n de ContinuaciÃ³n:</strong> El bucle continÃºa
+mientras la variable de Ã­ndice sea <strong>menor que el tamaÃ±o total del
+<em>array</em></strong> (<span
+class="math inline"><em>N</em></span>).</li>
+<li><strong>Incremento:</strong> El Ã­ndice se incrementa en
+<strong>1</strong> en cada iteraciÃ³n, asegurando que se acceda a la
+siguiente posiciÃ³n contigua.</li>
+</ol>
+<p>Si un <em>array</em> tiene un tamaÃ±o <span
+class="math inline"><em>N</em></span>, la variable <code>i</code> tomarÃ¡
+los valores: <span
+class="math inline">0,â€†1,â€†2,â€†â€¦,â€†<em>N</em>â€…âˆ’â€…1</span>.</p>
+<h3 id="ejemplo-de-recorrido-para-impresiÃ³n">Ejemplo de Recorrido para
+ImpresiÃ³n</h3>
+<p>El siguiente cÃ³digo muestra cÃ³mo usar un bucle <code>for</code> para
+iterar sobre un <em>array</em> de 5 elementos e imprimir el valor de
+cada uno:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#define TAMANO </span><span class="dv">5</span><span class="pp"> </span><span class="co">// Se define el tamaÃ±o como una constante</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> datos<span class="op">[</span>TAMANO<span class="op">]</span> <span class="op">=</span> <span class="op">{</span><span class="dv">10</span><span class="op">,</span> <span class="dv">20</span><span class="op">,</span> <span class="dv">30</span><span class="op">,</span> <span class="dv">40</span><span class="op">,</span> <span class="dv">50</span><span class="op">};</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;Recorriendo el array:</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>    <span class="co">// El bucle for itera desde el Ã­ndice 0 hasta el TAMANO - 1 (que es 4).</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> TAMANO<span class="op">;</span> i<span class="op">++)</span> <span class="op">{</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Acceso al elemento: datos[i]</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">&quot;Ãndice [</span><span class="sc">%d</span><span class="st">]: </span><span class="sc">%d\n</span><span class="st">&quot;</span><span class="op">,</span> i<span class="op">,</span> datos<span class="op">[</span>i<span class="op">]);</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<h3 id="ejemplo-de-recorrido-para-modificaciÃ³n">Ejemplo de Recorrido
+para ModificaciÃ³n</h3>
+<p>El bucle <code>for</code> tambiÃ©n se utiliza para modificar todos o
+algunos de los elementos del <em>array</em>.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> precios<span class="op">[</span><span class="dv">4</span><span class="op">]</span> <span class="op">=</span> <span class="op">{</span><span class="dv">100</span><span class="op">,</span> <span class="dv">200</span><span class="op">,</span> <span class="dv">300</span><span class="op">,</span> <span class="dv">400</span><span class="op">};</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> N <span class="op">=</span> <span class="dv">4</span><span class="op">;</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Aplicar un incremento del 10% a cada precio</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> N<span class="op">;</span> i<span class="op">++)</span> <span class="op">{</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>        <span class="co">// ModificaciÃ³n del elemento en el Ã­ndice &#39;i&#39;</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>        precios<span class="op">[</span>i<span class="op">]</span> <span class="op">=</span> precios<span class="op">[</span>i<span class="op">]</span> <span class="op">*</span> <span class="fl">1.10</span><span class="op">;</span> </span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Recorrido para verificar la modificaciÃ³n</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> N<span class="op">;</span> i<span class="op">++)</span> <span class="op">{</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">&quot;Nuevo Precio [</span><span class="sc">%d</span><span class="st">]: </span><span class="sc">%d\n</span><span class="st">&quot;</span><span class="op">,</span> i<span class="op">,</span> precios<span class="op">[</span>i<span class="op">]);</span></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p><strong>Salida esperada:</strong></p>
+<pre><code>Nuevo Precio [0]: 110
+Nuevo Precio [1]: 220
+Nuevo Precio [2]: 330
+Nuevo Precio [3]: 440</code></pre>
+<h2 id="error-de-desbordamiento-de-Ã­ndice-bounds-checking">Error de
+Desbordamiento de Ãndice (<em>Bounds Checking</em>) âš ï¸</h2>
+<p>Una de las <strong>advertencias mÃ¡s cruciales</strong> al trabajar
+con <em>arrays</em> en C es la ausencia de la verificaciÃ³n automÃ¡tica de
+lÃ­mites de Ã­ndice, conocida como <strong><em>Bounds
+Checking</em></strong>.</p>
+<h3 id="la-peligrosa-flexibilidad-de-c">La Peligrosa Flexibilidad de
+C</h3>
+<p>El lenguaje C, por diseÃ±o y para maximizar la velocidad, <strong>no
+verifica</strong> automÃ¡ticamente si el Ã­ndice que utilizas para acceder
+a un <em>array</em> se encuentra dentro del rango vÃ¡lido (<span
+class="math inline">0</span> a <span
+class="math inline"><em>N</em>â€…âˆ’â€…1</span>).</p>
+<ul>
+<li><strong>Ausencia de Error de CompilaciÃ³n:</strong> Si escribes un
+cÃ³digo que accede a un Ã­ndice fuera del lÃ­mite (ej:
+<code>mi_array[10]</code> cuando el tamaÃ±o es 5), el compilador
+<strong>no generarÃ¡ un error</strong>. El cÃ³digo compilarÃ¡ y se
+ejecutarÃ¡.</li>
+</ul>
+<h3 id="quÃ©-sucede-con-un-Ã­ndice-invÃ¡lido">Â¿QuÃ© Sucede con un Ãndice
+InvÃ¡lido?</h3>
+<p>Acceder a un Ã­ndice fuera del rango permitido (<span
+class="math inline">â€„&lt;â€„0</span> o <span
+class="math inline">â€„â‰¥â€„<em>N</em></span>) provoca un
+<strong>desbordamiento de Ã­ndice</strong> o <strong>acceso fuera de
+lÃ­mites</strong>. Dado que el <em>array</em> se almacena en memoria
+contigua:</p>
+<ol type="1">
+<li><strong>Lectura (Ãndice InvÃ¡lido):</strong> Si lees
+<code>mi_array[N]</code>, el programa accederÃ¡ a la posiciÃ³n de memoria
+inmediatamente <strong>despuÃ©s</strong> del final del <em>array</em> y
+leerÃ¡ lo que sea que estÃ© almacenado allÃ­ (datos de otra variable,
+direcciones de retorno de funciones, etc.). Este valor es basura para tu
+<em>array</em> y puede llevar a resultados ilÃ³gicos.</li>
+<li><strong>Escritura (Ãndice InvÃ¡lido):</strong> Si escribes en
+<code>mi_array[N] = valor;</code>, el programa sobrescribirÃ¡ el
+contenido de la posiciÃ³n de memoria contigua. Esto se conoce como
+<strong>Desbordamiento de BÃºfer (<em>Buffer
+Overflow</em>)</strong>.</li>
+</ol>
+<p>El desbordamiento de bÃºfer es extremadamente peligroso porque
+<strong>corrompe la memoria</strong> utilizada por otras variables o
+estructuras de control del programa, lo que puede llevar a:</p>
+<ul>
+<li><strong>Resultados Inesperados:</strong> Otras variables en el
+programa cambian de valor de manera inexplicable.</li>
+<li><strong>Bloqueos (<em>Crashes</em>):</strong> El programa intenta
+leer datos o ejecutar cÃ³digo a partir de la memoria corrupta, causando
+una falla inmediata (ej: <em>Segmentation Fault</em> o <em>Access
+Violation</em>).</li>
+<li><strong>Vulnerabilidades de Seguridad:</strong> En casos avanzados,
+un atacante puede explotar el <em>buffer overflow</em> para sobrescribir
+instrucciones cruciales del programa y ejecutar cÃ³digo malicioso.</li>
+</ul>
+<blockquote>
+<p><strong>Â¡Regla de Oro!</strong> Es <strong>responsabilidad total del
+programador</strong> garantizar que el Ã­ndice del <em>array</em> siempre
+se mantenga entre <span class="math inline"><strong>0</strong></span> y
+<span
+class="math inline"><strong>N</strong>â€…<strong>âˆ’</strong>â€…<strong>1</strong></span>.
+Esta es la principal fuente de errores de ejecuciÃ³n al inicio del
+aprendizaje de C.</p>
+</blockquote>
+
+</div>
+</body>
+</html>
+

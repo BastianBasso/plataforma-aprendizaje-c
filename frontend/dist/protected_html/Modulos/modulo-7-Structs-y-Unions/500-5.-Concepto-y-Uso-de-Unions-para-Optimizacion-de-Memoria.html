@@ -1,0 +1,351 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" crossorigin href="/assets/content-01sust.css">
+</head>
+<body>
+<div class="main-content">
+<h2 id="definiciÃ³n-de-union">DefiniciÃ³n de <code>union</code> ðŸ¤</h2>
+<p>La <strong><code>union</code></strong> es un tipo de dato compuesto
+en C que, a nivel de sintaxis, se asemeja mucho a la <code>struct</code>
+(estructura), pero su propÃ³sito y su impacto en la memoria son
+fundamentalmente diferentes.</p>
+<h3 id="el-concepto-de-memoria-compartida">El Concepto de Memoria
+Compartida</h3>
+<p>La caracterÃ­stica definitoria de una <code>union</code> es que
+<strong>todos sus miembros comienzan en la misma direcciÃ³n de
+memoria</strong>. Esto significa que:</p>
+<ul>
+<li><strong>Comparten Espacio:</strong> Los miembros de una
+<code>union</code> utilizan la <strong>misma ubicaciÃ³n fÃ­sica</strong>
+en la memoria del programa.</li>
+<li><strong>Solo uno a la vez:</strong> En cualquier momento dado, solo
+uno de los miembros puede almacenar datos vÃ¡lidos. Si se escribe en un
+miembro, ese dato <strong>sobrescribe</strong> o corrompe cualquier dato
+previamente almacenado en los otros miembros.</li>
+</ul>
+<p>Una analogÃ­a comÃºn es un <strong>casillero</strong> o <strong>caja de
+almacenamiento</strong> donde caben diferentes tipos de objetos (un
+libro, una pelota, un par de zapatos), pero solo uno de ellos puede
+estar dentro a la vez.</p>
+<h3 id="comparaciÃ³n-fundamental-con-struct">ComparaciÃ³n Fundamental con
+<code>struct</code></h3>
+<p>Para entender la <code>union</code>, es crucial contrastarla con la
+<code>struct</code>:</p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">CaracterÃ­stica</th>
+<th style="text-align: center;"><code>struct</code></th>
+<th style="text-align: center;"><code>union</code></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><strong>UbicaciÃ³n de
+Memoria</strong></td>
+<td style="text-align: center;">Los miembros tienen <strong>ubicaciones
+separadas</strong> y secuenciales.</td>
+<td style="text-align: center;">Los miembros <strong>comparten la misma
+ubicaciÃ³n</strong> de inicio.</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>TamaÃ±o Total</strong></td>
+<td style="text-align: center;">Es la suma de los tamaÃ±os de todos sus
+miembros (mÃ¡s <em>padding</em>).</td>
+<td style="text-align: center;">Es igual al tamaÃ±o de su <strong>miembro
+mÃ¡s grande</strong>.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>Datos VÃ¡lidos</strong></td>
+<td style="text-align: center;">Todos los miembros pueden contener datos
+vÃ¡lidos simultÃ¡neamente.</td>
+<td style="text-align: center;">Solo el <strong>Ãºltimo miembro
+escrito</strong> contiene datos vÃ¡lidos.</td>
+</tr>
+</tbody>
+</table>
+<p>En sintesis, la <code>union</code> se utiliza cuando se sabe que un
+campo de datos solo necesita almacenar <em>una cosa u otra</em> en un
+momento dado, lo que permite una <strong>optimizaciÃ³n de la
+memoria</strong> significativa.</p>
+<h2 id="optimizaciÃ³n-de-memoria-con-union">OptimizaciÃ³n de Memoria con
+<code>union</code> ðŸ’¾</h2>
+<p>El propÃ³sito principal de utilizar una <code>union</code> en lugar de
+una <code>struct</code> es la <strong>optimizaciÃ³n del uso de la
+memoria</strong>. Dado que todos los miembros de la <code>union</code>
+comparten el mismo espacio de almacenamiento, el tamaÃ±o total de la
+variable se reduce drÃ¡sticamente.</p>
+<hr />
+<h3 id="tamaÃ±o-de-la-union-el-miembro-mÃ¡s-grande">TamaÃ±o de la
+<code>union</code>: El Miembro mÃ¡s Grande</h3>
+<p>El compilador reserva una cantidad de memoria para la
+<code>union</code> que es exactamente igual al tamaÃ±o de su
+<strong>miembro mÃ¡s grande</strong> (incluyendo el <em>padding</em> si
+es necesario).</p>
+<p>Cuando se declara una <code>union</code>, el compilador identifica el
+tipo de dato que requiere el mayor nÃºmero de bytes y asigna ese espacio
+a la <code>union</code> completa.</p>
+<p><strong>Ejemplo Demostrativo de Ahorro de Memoria:</strong></p>
+<p>Consideremos una estructura y una uniÃ³n con los mismos miembros:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">typedef</span> <span class="kw">struct</span> <span class="op">{</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">char</span> tipo<span class="op">;</span>      <span class="co">// 1 byte</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> id_entero<span class="op">;</span>  <span class="co">// 4 bytes</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">float</span> valor_flotante<span class="op">;</span> <span class="co">// 4 bytes</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> StructDatos<span class="op">;</span> <span class="co">// TamaÃ±o total: 9 bytes (+ padding) â‰ˆ 12 bytes</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="kw">typedef</span> <span class="kw">union</span> <span class="op">{</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    <span class="dt">char</span> tipo<span class="op">;</span>      <span class="co">// 1 byte</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> id_entero<span class="op">;</span>  <span class="co">// 4 bytes</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    <span class="dt">float</span> valor_flotante<span class="op">;</span> <span class="co">// 4 bytes</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> UnionDatos<span class="op">;</span> <span class="co">// TamaÃ±o total: 4 bytes</span></span></code></pre></div>
+<table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Tipo</th>
+<th style="text-align: center;">Miembros</th>
+<th style="text-align: center;">TamaÃ±o Requerido (mÃ­nimo)</th>
+<th style="text-align: center;">Memoria Asignada</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td
+style="text-align: center;"><strong><code>StructDatos</code></strong></td>
+<td style="text-align: center;"><code>char</code>, <code>int</code>,
+<code>float</code></td>
+<td style="text-align: center;"><span
+class="math inline">1â€…+â€…4â€…+â€…4â€„=â€„9</span> bytes</td>
+<td style="text-align: center;"><strong>9-12 bytes</strong> (Suma de
+todos)</td>
+</tr>
+<tr class="even">
+<td
+style="text-align: center;"><strong><code>UnionDatos</code></strong></td>
+<td style="text-align: center;"><code>char</code>, <code>int</code>,
+<code>float</code></td>
+<td style="text-align: center;"><span class="math inline">4</span> bytes
+(el mayor)</td>
+<td style="text-align: center;"><strong>4 bytes</strong> (TamaÃ±o del
+<code>int</code> o <code>float</code>)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="el-costo-de-la-optimizaciÃ³n">El Costo de la OptimizaciÃ³n</h3>
+<p>Esta optimizaciÃ³n de tamaÃ±o viene con una condiciÃ³n estricta:
+<strong>solo un miembro puede ser vÃ¡lido a la vez.</strong></p>
+<p>Si se intenta leer un miembro diferente al que fue escrito por Ãºltima
+vez, el resultado serÃ¡ un <strong>dato corrupto o no
+significativo</strong> (ya que los bits del miembro mÃ¡s grande ahora
+estÃ¡n siendo interpretados bajo el formato del miembro mÃ¡s pequeÃ±o, o
+viceversa).</p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">OperaciÃ³n</th>
+<th style="text-align: center;">Memoria</th>
+<th style="text-align: center;">Resultado</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td
+style="text-align: center;"><code>mi_union.id_entero = 42;</code></td>
+<td style="text-align: center;">Los 4 bytes se llenan con la
+representaciÃ³n binaria de <code>42</code>.</td>
+<td
+style="text-align: center;"><strong><code>mi_union.id_entero</code></strong>
+es vÃ¡lido.</td>
+</tr>
+<tr class="even">
+<td
+style="text-align: center;"><code>mi_union.valor_flotante = 1.0f;</code></td>
+<td style="text-align: center;">Los 4 bytes se
+<strong>sobrescriben</strong> con la representaciÃ³n IEEE 754 de
+<code>1.0</code>.</td>
+<td
+style="text-align: center;"><strong><code>mi_union.id_entero</code></strong>
+ahora es basura.</td>
+</tr>
+</tbody>
+</table>
+<p>La <code>union</code> es ideal en escenarios donde se necesita una
+gran colecciÃ³n de registros y se sabe que muchos campos son
+<strong>mutuamente excluyentes</strong> (solo se usa uno de ellos en
+cada registro).</p>
+<h2 id="sintaxis-y-uso-bÃ¡sico-de-union">Sintaxis y Uso BÃ¡sico de
+<code>union</code> âš™ï¸</h2>
+<p>La sintaxis para definir y utilizar una <code>union</code> es
+<strong>prÃ¡cticamente idÃ©ntica</strong> a la de una <code>struct</code>,
+con la Ãºnica diferencia de que se utiliza la palabra clave
+<code>union</code>.</p>
+<hr />
+<h3 id="sintaxis-de-definiciÃ³n">1. Sintaxis de DefiniciÃ³n</h3>
+<p>Al igual que las estructuras, la <code>union</code> se define con un
+nombre de etiqueta y una lista de miembros entre llaves, terminando con
+un punto y coma.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">union</span> Nombre_Etiqueta <span class="op">{</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    Tipo1 miembro_1<span class="op">;</span> <span class="co">// Este miembro</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    Tipo2 miembro_2<span class="op">;</span> <span class="co">// y este miembro</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    Tipo3 miembro_3<span class="op">;</span> <span class="co">// y este, todos comparten el mismo espacio</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="op">};</span> <span class="co">// No olvidar el punto y coma final</span></span></code></pre></div>
+<h4 id="ejemplo-con-typedef">Ejemplo con <code>typedef</code></h4>
+<p>Es comÃºn usar <code>typedef</code> para crear un alias y simplificar
+la declaraciÃ³n de variables:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">typedef</span> <span class="kw">union</span> <span class="op">{</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> valor_entero<span class="op">;</span>     <span class="co">// 4 bytes (en sistemas de 32 bits)</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">float</span> valor_flotante<span class="op">;</span> <span class="co">// 4 bytes</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">char</span> valor_char<span class="op">;</span>      <span class="co">// 1 byte</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> TipoMixto<span class="op">;</span> <span class="co">// La uniÃ³n entera tendrÃ¡ un tamaÃ±o de 4 bytes</span></span></code></pre></div>
+<h3 id="declaraciÃ³n-y-acceso">2. DeclaraciÃ³n y Acceso</h3>
+<p>Una vez definida, se declara una variable de <code>union</code> y se
+accede a sus miembros utilizando el <strong>operador punto</strong>
+(<code>.</code>) o el <strong>operador flecha</strong>
+(<code>-&gt;</code>) si se utiliza un puntero, tal como se hace con las
+estructuras.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    TipoMixto datos<span class="op">;</span> <span class="co">// DeclaraciÃ³n de la variable union</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Acceso y asignaciÃ³n al miembro &#39;valor_entero&#39;</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    datos<span class="op">.</span>valor_entero <span class="op">=</span> <span class="dv">1024</span><span class="op">;</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Lectura del miembro</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;Entero: </span><span class="sc">%d\n</span><span class="st">&quot;</span><span class="op">,</span> datos<span class="op">.</span>valor_entero<span class="op">);</span> </span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<h3 id="la-advertencia-crÃ­tica-sobreescritura-de-datos">3. La
+Advertencia CrÃ­tica: Sobreescritura de Datos</h3>
+<p>El uso bÃ¡sico requiere entender la limitaciÃ³n fundamental de las
+<code>union</code>: <strong>escribir en un miembro invalida o
+sobrescribe los datos de todos los demÃ¡s miembros.</strong></p>
+<p>Si se intenta leer un miembro diferente al que se escribiÃ³ por Ãºltima
+vez, se produce una lectura del mismo bloque de bytes, pero interpretado
+con un tipo de dato diferente, lo que resulta en datos sin sentido
+(basura o <em>garbage</em>).</p>
+<p><strong>Ejemplo de Sobreescritura:</strong></p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    TipoMixto datos<span class="op">;</span> </span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Paso 1: Escribir en el entero</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    datos<span class="op">.</span>valor_entero <span class="op">=</span> <span class="dv">65</span><span class="op">;</span> </span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Ahora, el bloque de 4 bytes es &#39;65&#39; (en binario)</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;Paso 1 - Entero escrito: </span><span class="sc">%d\n</span><span class="st">&quot;</span><span class="op">,</span> datos<span class="op">.</span>valor_entero<span class="op">);</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Paso 2: Escribir en el char</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Esto sobrescribe el PRIMER byte de los 4 bytes compartidos</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>    datos<span class="op">.</span>valor_char <span class="op">=</span> <span class="ch">&#39;A&#39;</span><span class="op">;</span> </span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Ahora, el primer byte es la representaciÃ³n ASCII de &#39;A&#39; (65)</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;Paso 2 - Char escrito: </span><span class="sc">%c\n</span><span class="st">&quot;</span><span class="op">,</span> datos<span class="op">.</span>valor_char<span class="op">);</span> </span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Â¡Advertencia! Intentar leer el entero ahora es peligroso, </span></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>    <span class="co">// ya que su valor ha sido parcialmente sobrescrito/modificado.</span></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;Paso 2 - Entero despues de char: </span><span class="sc">%d\n</span><span class="st">&quot;</span><span class="op">,</span> datos<span class="op">.</span>valor_entero<span class="op">);</span> </span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>    <span class="co">// (Dependiendo del endianness, el entero podrÃ­a seguir siendo 65 o cambiar).</span></span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p>La <code>union</code> solo debe utilizarse cuando el programador
+tiene un <strong>mecanismo externo</strong> para saber quÃ© miembro
+contiene datos vÃ¡lidos en un momento dado.</p>
+<h2 id="aplicaciÃ³n-tipos-de-datos-mutuamente-excluyentes">AplicaciÃ³n:
+Tipos de Datos Mutuamente Excluyentes ðŸ”„</h2>
+<p>La aplicaciÃ³n mÃ¡s comÃºn y efectiva de las <code>union</code> es
+manejar <strong>tipos de datos mutuamente excluyentes</strong>. Esto
+ocurre cuando un registro o entidad necesita almacenar <strong>una de
+varias opciones posibles</strong>, pero se garantiza que <strong>solo
+una de ellas serÃ¡ vÃ¡lida</strong> en un momento dado.</p>
+<hr />
+<h3 id="ejemplo-prÃ¡ctico-datos-de-identificaciÃ³n">Ejemplo PrÃ¡ctico:
+Datos de IdentificaciÃ³n</h3>
+<p>Imaginemos un sistema de gestiÃ³n de archivos donde los elementos
+pueden ser identificados de dos maneras:</p>
+<ol type="1">
+<li>Por una <strong>ID NumÃ©rica</strong> simple (<code>int</code>).</li>
+<li>Por un <strong>Nombre de Archivo</strong> extenso
+(<code>char[]</code>).</li>
+</ol>
+<p>Dado que un archivo solo tendrÃ¡ <em>o</em> la ID <em>o</em> el
+nombre, pero nunca ambos a la vez, una <code>union</code> es perfecta
+para almacenar este campo, ahorrando espacio.</p>
+<h4 id="definiciÃ³n-de-la-union">1. DefiniciÃ³n de la
+<code>union</code></h4>
+<p>Definimos una <code>union</code> que contendrÃ¡ el miembro mÃ¡s grande
+de las opciones (<code>nombre_archivo</code>, que es de 50 bytes).</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">typedef</span> <span class="kw">union</span> <span class="op">{</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> id_numerica<span class="op">;</span>         <span class="co">// 4 bytes</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">char</span> nombre_archivo<span class="op">[</span><span class="dv">50</span><span class="op">];</span> <span class="co">// 50 bytes</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> Identificador<span class="op">;</span> <span class="co">// La union completa tendrÃ¡ un tamaÃ±o de 50 bytes.</span></span></code></pre></div>
+<h4 id="combinaciÃ³n-con-un-struct-manejo-de-contexto">2. CombinaciÃ³n con
+un <code>struct</code> (Manejo de Contexto)</h4>
+<p>Como la <code>union</code> no sabe quÃ© miembro es vÃ¡lido, se necesita
+una estructura (<code>struct</code>) que la acompaÃ±e. Esta estructura se
+llama a menudo <strong>etiqueta</strong> o
+<strong>discriminador</strong> y nos indica quÃ© miembro de la
+<code>union</code> debemos leer.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Estructura que envuelve a la union para proporcionar el contexto</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="kw">typedef</span> <span class="kw">struct</span> <span class="op">{</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> tipo_identificacion<span class="op">;</span> <span class="co">// 0 = ID NumÃ©rica, 1 = Nombre de Archivo</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    Identificador datos<span class="op">;</span>     <span class="co">// La union que almacena el valor real</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> Archivo<span class="op">;</span></span></code></pre></div>
+<h4 id="uso-y-ahorro-de-memoria">3. Uso y Ahorro de Memoria</h4>
+<p>Al usar la <code>union</code>, hemos evitado asignar espacio para la
+<code>id_numerica</code> <strong>y</strong> el
+<code>nombre_archivo</code> simultÃ¡neamente en cada registro. Solo se
+reservan 50 bytes para el campo <code>datos</code>, sin importar quÃ©
+valor se almacene en Ã©l.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;string.h&gt;</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co">// ... (Definiciones de Identificador y Archivo) ...</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    Archivo doc1<span class="op">;</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>    Archivo doc2<span class="op">;</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>    <span class="co">// --- Caso 1: ID NumÃ©rica ---</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>    doc1<span class="op">.</span>tipo_identificacion <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>    doc1<span class="op">.</span>datos<span class="op">.</span>id_numerica <span class="op">=</span> <span class="dv">5489</span><span class="op">;</span> <span class="co">// Escribir en &#39;id_numerica&#39;</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>    <span class="co">// --- Caso 2: Nombre de Archivo ---</span></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>    doc2<span class="op">.</span>tipo_identificacion <span class="op">=</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Escribir en &#39;nombre_archivo&#39; (sobrescribe cualquier dato previo en &#39;datos&#39;)</span></span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>    strcpy<span class="op">(</span>doc2<span class="op">.</span>datos<span class="op">.</span>nombre_archivo<span class="op">,</span> <span class="st">&quot;Reporte_Final_Q4.pdf&quot;</span><span class="op">);</span> </span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Lectura: Usamos la etiqueta para saber quÃ© leer</span></span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>doc2<span class="op">.</span>tipo_identificacion <span class="op">==</span> <span class="dv">1</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">&quot;Tipo de archivo: Nombre | Valor: </span><span class="sc">%s\n</span><span class="st">&quot;</span><span class="op">,</span> doc2<span class="op">.</span>datos<span class="op">.</span>nombre_archivo<span class="op">);</span></span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Si hubiÃ©ramos usado una struct simple, habrÃ­amos reservado 54 bytes (+ padding) </span></span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a>    <span class="co">// en lugar de 50 bytes (mÃ¡s el int del tipo_identificacion).</span></span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p>Este patrÃ³n de combinar una <code>union</code> con un campo de
+<code>struct</code> de tipo <em>etiqueta</em> o <em>discriminador</em>
+es el mÃ©todo estÃ¡ndar para manejar tipos de datos variantes y
+<strong>maximizar la eficiencia de la memoria</strong> en C.</p>
+
+</div>
+</body>
+</html>
+

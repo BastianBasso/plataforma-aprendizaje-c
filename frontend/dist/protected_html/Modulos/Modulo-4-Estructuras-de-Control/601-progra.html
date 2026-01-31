@@ -1,0 +1,608 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" crossorigin href="/assets/content-01sust.css">
+</head>
+<body>
+<div class="main-content">
+<h1><strong>15 Ejercicios: Control de Bucles (break y
+continue)</strong></h1>
+<p><strong>Bloque 1: Aplicación de break (Salida de Búsqueda)
+🚪</strong></p>
+<ol type="1">
+<li>Buscador Eficiente (Ejercicio Propuesto A)</li>
+</ol>
+<blockquote>
+<p>Itera los números del $1$ al $100$. Usa la sentencia break para
+detener la iteración inmediatamente y reportar un mensaje cuando
+encuentres el número $42$.</p>
+</blockquote>
+<ul>
+<li><strong>Output Esperado:</strong> El bucle se detiene en el número
+$42$.</li>
+</ul>
+<ol start="2" type="1">
+<li>Búsqueda de la Primera Vocal</li>
+</ol>
+<blockquote>
+<p>Usa un bucle for para recorrer una cadena de caracteres (ej:
+"xyzab"). Utiliza break para detener el bucle tan pronto como encuentres
+la primera vocal ('a', 'e', 'i', 'o', 'u') e indica su posición
+(índice).</p>
+</blockquote>
+<ul>
+<li><p><strong>Input de Ejemplo:</strong> "xyzab"</p></li>
+<li><p><strong>Output Esperado:</strong> Primera vocal 'a' encontrada en
+la posición $3$.</p></li>
+</ul>
+<ol start="3" type="1">
+<li>Límite de Intentos en while</li>
+</ol>
+<blockquote>
+<p>Usa un bucle while (1) (bucle infinito intencional) para simular una
+solicitud de PIN. Permite al usuario hasta $3$ intentos. Usa una
+variable contadora para rastrear los intentos y break para salir del
+bucle si el usuario ingresa el PIN correcto (ej: $1234$). Si excede los
+$3$ intentos, el bucle debe terminar.</p>
+</blockquote>
+<ul>
+<li><p><strong>Input de Ejemplo (fallo, fallo, éxito):</strong> $1111,
+2222, 1234$</p></li>
+<li><p><strong>Output Esperado:</strong> Ingreso exitoso en el intento
+$3$.</p></li>
+</ul>
+<ol start="4" type="1">
+<li>Detección de Número Primo</li>
+</ol>
+<blockquote>
+<p>Pide al usuario un número $N$. Itera con un bucle for desde $i=2$
+hasta $N/2$. Si en alguna iteración $N$ es divisible por $i$ (es decir,
+$N \% i == 0$), significa que $N$ no es primo. En ese momento, establece
+un flag y usa break para detener la comprobación. Imprime si el número
+es primo o no.</p>
+</blockquote>
+<ul>
+<li><p><strong>Input de Ejemplo:</strong> $9$</p></li>
+<li><p><strong>Output Esperado:</strong> $9$ no es primo.</p></li>
+</ul>
+<ol start="5" type="1">
+<li>Búsqueda en Arreglo y Reporte de Ausencia</li>
+</ol>
+<blockquote>
+<p>Define un arreglo de $5$ números. Pide al usuario un número a buscar.
+Itera sobre el arreglo. Si lo encuentras, usa break. Al finalizar el
+bucle, usa la variable contadora (i) y el tamaño del arreglo para
+determinar si el elemento fue encontrado o si el bucle terminó sin
+encontrarlo.</p>
+</blockquote>
+<ul>
+<li><p><strong>Input de Ejemplo:</strong> Arreglo $\{1, 5, 9, 12, 15\}$,
+Buscar $13$</p></li>
+<li><p><strong>Output Esperado:</strong> El número $13$ no fue
+encontrado.</p></li>
+</ul>
+<p><strong>Bloque 2: Aplicación de continue (Filtrado de Iteración)
+⏭️</strong></p>
+<ol start="6" type="1">
+<li>Filtro de Impares (Ejercicio Propuesto B)</li>
+</ol>
+<blockquote>
+<p>Itera los números del $1$ al $20$. Usa continue para saltar el
+procesamiento si el número es par, imprimiendo únicamente los números
+impares.</p>
+</blockquote>
+<ul>
+<li><strong>Output Esperado:</strong> $1, 3, 5, 7, 9, 11, 13, 15, 17,
+19$.</li>
+</ul>
+<ol start="7" type="1">
+<li>Cálculo de Promedio sin Cero</li>
+</ol>
+<blockquote>
+<p>Pide al usuario $5$ números enteros. Usa un bucle for y la sentencia
+continue para ignorar cualquier número que sea $0$ (cero) al calcular la
+suma total y el promedio.</p>
+</blockquote>
+<ul>
+<li><p><strong>Input de Ejemplo:</strong> $5, 0, 10, 0, 5$</p></li>
+<li><p><strong>Output Esperado:</strong> La suma es $20$. El promedio
+(basado en $3$ números válidos) es $6.67$.</p></li>
+</ul>
+<ol start="8" type="1">
+<li>Solo Múltiplos de 3</li>
+</ol>
+<blockquote>
+<p>Itera los números del $1$ al $15$. Usa la sentencia continue para
+asegurar que el código de impresión solo se ejecute para aquellos
+números que sean múltiplos de $3$ ($N \% 3 == 0$).</p>
+</blockquote>
+<ul>
+<li><strong>Output Esperado:</strong> $3, 6, 9, 12, 15$.</li>
+</ul>
+<ol start="9" type="1">
+<li>Contador de Vocales (Filtrando Consonantes)</li>
+</ol>
+<blockquote>
+<p>Usa un bucle for para iterar sobre una cadena (ej: "Programacion C").
+Usa continue para saltar la lógica de conteo si el carácter actual es
+una consonante o un espacio, de modo que solo se cuenten las
+vocales.</p>
+</blockquote>
+<ul>
+<li><p><strong>Input de Ejemplo:</strong> "Programacion C"</p></li>
+<li><p><strong>Output Esperado:</strong> Total de vocales encontradas:
+$5$.</p></li>
+</ul>
+<ol start="10" type="1">
+<li>Simulación de Errores con while</li>
+</ol>
+<blockquote>
+<p>Usa un bucle while para procesar $5$ entradas. Si el valor ingresado
+por el usuario es $-99$ (simulando un código de error), usa continue
+para saltar el procesamiento de ese valor y no contarlo en la suma, pero
+sigue pidiendo el siguiente número hasta completar las $5$ entradas.</p>
+</blockquote>
+<ul>
+<li><p><strong>Input de Ejemplo:</strong> $10, -99, 20, 30,
+-99$</p></li>
+<li><p><strong>Output Esperado:</strong> Suma de valores válidos:
+$60$.</p></li>
+</ul>
+<p><strong>Bloque 3: Uso Combinado y Avanzado (break y continue)
+⛓️</strong></p>
+<ol start="11" type="1">
+<li>Bucle de Carga con Errores</li>
+</ol>
+<blockquote>
+<p>Usa un bucle for para simular la carga de $10$ archivos (del $1$ al
+$10$). Si el número de archivo es par ($N \% 2 == 0$), usa continue para
+omitir ese "archivo dañado". Si el número de archivo es $9$, usa break
+para simular un fallo crítico y detener toda la carga.</p>
+</blockquote>
+<ul>
+<li><strong>Output Esperado:</strong> El procesamiento se detiene tras
+revisar el archivo $8$.</li>
+</ul>
+<ol start="12" type="1">
+<li>Validación con Doble Condición de Salida</li>
+</ol>
+<blockquote>
+<p>Usa un bucle do-while para pedir números al usuario. El bucle debe
+continuar mientras el número sea positivo. Sin embargo, si el usuario
+ingresa el número $-5$, usa break para salir del bucle inmediatamente
+(salida anticipada forzada). Si el número es $0$, usa continue para
+saltar la lógica de procesamiento pero seguir en el bucle.</p>
+</blockquote>
+<ul>
+<li><p><strong>Input de Ejemplo:</strong> $10, 0, 20, -5$</p></li>
+<li><p><strong>Output Esperado:</strong> El bucle se termina
+forzosamente al ingresar $-5$.</p></li>
+</ul>
+<ol start="13" type="1">
+<li>Conversión de Entrada con Filtro y Límite</li>
+</ol>
+<blockquote>
+<p>Pide al usuario que ingrese $10$ valores de temperatura. Usa un bucle
+for. Si la temperatura es negativa, usa continue para ignorarla
+(filtro). Si la temperatura es mayor a $50^\circ C$, usa break para
+detener la entrada de datos (límite de seguridad). Cuenta cuántos
+valores válidos se ingresaron.</p>
+</blockquote>
+<ul>
+<li><p><strong>Input de Ejemplo (válidos, filtro, break):</strong> $25,
+-5, 30, 60$</p></li>
+<li><p><strong>Output Esperado:</strong> El bucle se detiene en el valor
+$60$. Se ingresaron $2$ valores válidos.</p></li>
+</ul>
+<ol start="14" type="1">
+<li>Simulación de Recorrido de Matriz (2D)</li>
+</ol>
+<blockquote>
+<p>Usa un bucle for anidado para recorrer una matriz de $3 \times 3$.
+Usa continue para saltar la impresión si el número de fila es par. Usa
+break en el bucle exterior si el bucle interior (columnas) encuentra un
+$0$.</p>
+</blockquote>
+<ul>
+<li><strong>Output Esperado:</strong> La iteración principal se detiene
+si se encuentra un $0$ en cualquier fila.</li>
+</ul>
+<ol start="15" type="1">
+<li>Desafío: Contador de Palabras Excluyentes</li>
+</ol>
+<blockquote>
+<p>Pide al usuario una frase. Usa un bucle for para recorrer la frase.
+Usa continue para ignorar los espacios (' ') o los números ('0'-'9').
+Usa break si se encuentra el carácter 'z' para detener el conteo. Cuenta
+e imprime cuántas letras válidas (no espacios, no números, no 'z')
+fueron procesadas.</p>
+</blockquote>
+<ul>
+<li><p><strong>Input de Ejemplo:</strong> "Hola 123 mundo z"</p></li>
+<li><p><strong>Output Esperado:</strong> Se procesaron $9$ letras
+válidas antes de detenerse. (H, o, l, a, m, u, n, d, o).</p></li>
+</ul>
+<p><strong>Respuestas de los 15 Ejercicios: Control de Bucles (break y
+continue)</strong></p>
+<p>A continuación, se presenta la solución en código C para cada uno de
+los 15 ejercicios, utilizando las sentencias de control de flujo
+<strong>break</strong> y <strong>continue</strong>.</p>
+<p><strong>Bloque 1: Aplicación de break (Salida de Búsqueda)
+🚪</strong></p>
+<ol type="1">
+<li><strong>Buscador Eficiente (Ejercicio Propuesto A)</strong></li>
+</ol>
+<p>C</p>
+<p>// Iteración del 1 al 100</p>
+<p>for (int i = 1; i &lt;= 100; i++) {</p>
+<p>printf("Revisando número: %d\n", i);</p>
+<p>if (i == 42) {</p>
+<p>printf("¡Número 42 encontrado!\n");</p>
+<p>break; // Detiene el bucle inmediatamente</p>
+<p>}</p>
+<p>}</p>
+<p>printf("El bucle ha finalizado (en el 42).\n");</p>
+<p>// Output Esperado: El bucle se detiene en el número 42.</p>
+<ol start="2" type="1">
+<li><strong>Búsqueda de la Primera Vocal</strong></li>
+</ol>
+<p>C</p>
+<p>// Input de Ejemplo: "xyzab"</p>
+<p>char cadena[] = "xyzab";</p>
+<p>int longitud = 5;</p>
+<p>int i;</p>
+<p>for (i = 0; i &lt; longitud; i++) {</p>
+<p>char c = cadena[i];</p>
+<p>if (c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u') {</p>
+<p>printf("Primera vocal '%c' encontrada en la posición %d.\n", c,
+i);</p>
+<p>break; // Salida inmediata</p>
+<p>}</p>
+<p>}</p>
+<p>// Output Esperado: Primera vocal 'a' encontrada en la posición
+3.</p>
+<ol start="3" type="1">
+<li><strong>Límite de Intentos en while</strong></li>
+</ol>
+<p>C</p>
+<p>// Input de Ejemplo: 1111, 2222, 1234</p>
+<p>const int PIN_SECRETO = 1234;</p>
+<p>int pin_ingresado = 0;</p>
+<p>int intentos = 0;</p>
+<p>const int MAX_INTENTOS = 3;</p>
+<p>while (intentos &lt; MAX_INTENTOS) {</p>
+<p>printf("Intento %d. Ingrese PIN: ", intentos + 1);</p>
+<p>// Simulación de entrada:</p>
+<p>if (intentos == 0) pin_ingresado = 1111;</p>
+<p>else if (intentos == 1) pin_ingresado = 2222;</p>
+<p>else pin_ingresado = 1234;</p>
+<p>if (pin_ingresado == PIN_SECRETO) {</p>
+<p>printf("\n¡Acceso Concedido! Ingreso exitoso en el intento %d.\n",
+intentos + 1);</p>
+<p>break; // Sale si el PIN es correcto</p>
+<p>}</p>
+<p>intentos++;</p>
+<p>if (intentos &lt; MAX_INTENTOS) {</p>
+<p>printf("PIN incorrecto.\n");</p>
+<p>}</p>
+<p>}</p>
+<p>if (intentos == MAX_INTENTOS &amp;&amp; pin_ingresado != PIN_SECRETO)
+{</p>
+<p>printf("\nAcceso denegado. Se excedió el límite de %d intentos.\n",
+MAX_INTENTOS);</p>
+<p>}</p>
+<p>// Output Esperado: Ingreso exitoso en el intento 3.</p>
+<ol start="4" type="1">
+<li><strong>Detección de Número Primo</strong></li>
+</ol>
+<p>C</p>
+<p>// Input de Ejemplo: 9</p>
+<p>int N = 9;</p>
+<p>int es_primo = 1; // Flag: asumimos que es primo al inicio</p>
+<p>if (N &lt;= 1) {</p>
+<p>es_primo = 0;</p>
+<p>} else {</p>
+<p>// Solo necesitamos verificar divisores hasta la mitad de N</p>
+<p>for (int i = 2; i &lt;= N / 2; i++) {</p>
+<p>if (N % i == 0) {</p>
+<p>es_primo = 0; // Se encontró un divisor</p>
+<p>break; // Terminación inmediata: ya no es necesario seguir</p>
+<p>}</p>
+<p>}</p>
+<p>}</p>
+<p>if (es_primo) {</p>
+<p>printf("%d es un número primo.\n", N);</p>
+<p>} else {</p>
+<p>printf("%d no es primo.\n", N);</p>
+<p>}</p>
+<p>// Output Esperado (para 9): 9 no es primo.</p>
+<ol start="5" type="1">
+<li><strong>Búsqueda en Arreglo y Reporte de Ausencia</strong></li>
+</ol>
+<p>C</p>
+<p>// Input de Ejemplo: Arreglo {1, 5, 9, 12, 15}, Buscar 13</p>
+<p>int arreglo[] = {1, 5, 9, 12, 15};</p>
+<p>int tamano = 5;</p>
+<p>int buscar = 13;</p>
+<p>int i;</p>
+<p>for (i = 0; i &lt; tamano; i++) {</p>
+<p>if (arreglo[i] == buscar) {</p>
+<p>printf("El número %d fue encontrado en la posición %d.\n", buscar,
+i);</p>
+<p>break; // Detención si se encuentra</p>
+<p>}</p>
+<p>}</p>
+<p>// i &lt; tamano si el 'break' fue ejecutado</p>
+<p>if (i == tamano) {</p>
+<p>printf("El número %d no fue encontrado.\n", buscar);</p>
+<p>}</p>
+<p>// Output Esperado (para 13): El número 13 no fue encontrado.</p>
+<p><strong>Bloque 2: Aplicación de continue (Filtrado de Iteración)
+⏭️</strong></p>
+<ol start="6" type="1">
+<li><strong>Filtro de Impares (Ejercicio Propuesto B)</strong></li>
+</ol>
+<p>C</p>
+<p>printf("Números impares del 1 al 20:\n");</p>
+<p>for (int i = 1; i &lt;= 20; i++) {</p>
+<p>// Si el número es par, saltamos la impresión</p>
+<p>if (i % 2 == 0) {</p>
+<p>continue; // Pasa a la siguiente iteración (i++)</p>
+<p>}</p>
+<p>printf("%d ", i); // Solo se ejecuta si NO es par</p>
+<p>}</p>
+<p>printf("\n");</p>
+<p>// Output Esperado: 1 3 5 7 9 11 13 15 17 19</p>
+<ol start="7" type="1">
+<li><strong>Cálculo de Promedio sin Cero</strong></li>
+</ol>
+<p>C</p>
+<p>// Input de Ejemplo: 5, 0, 10, 0, 5</p>
+<p>int num;</p>
+<p>float suma = 0.0f;</p>
+<p>int contador_valido = 0;</p>
+<p>int total_entradas = 5;</p>
+<p>printf("Ingrese 5 números:\n");</p>
+<p>// Simulación de entrada:</p>
+<p>int entradas[] = {5, 0, 10, 0, 5};</p>
+<p>for (int i = 0; i &lt; total_entradas; i++) {</p>
+<p>// scanf("%d", &amp;num); // Uso real</p>
+<p>num = entradas[i]; // Simulación</p>
+<p>if (num == 0) {</p>
+<p>printf(" -&gt; Cero ignorado (continue).\n");</p>
+<p>continue; // Ignora el resto del código para este cero</p>
+<p>}</p>
+<p>suma += num;</p>
+<p>contador_valido++;</p>
+<p>}</p>
+<p>printf("La suma es %.0f. ", suma);</p>
+<p>if (contador_valido &gt; 0) {</p>
+<p>float promedio = suma / contador_valido;</p>
+<p>printf("El promedio (basado en %d números válidos) es %.2f.\n",
+contador_valido, promedio);</p>
+<p>}</p>
+<p>// Output Esperado: La suma es 20. El promedio (basado en 3 números
+válidos) es 6.67.</p>
+<ol start="8" type="1">
+<li><strong>Solo Múltiplos de 3</strong></li>
+</ol>
+<p>C</p>
+<p>printf("Múltiplos de 3 del 1 al 15:\n");</p>
+<p>for (int i = 1; i &lt;= 15; i++) {</p>
+<p>// Si NO es múltiplo de 3, saltamos la impresión</p>
+<p>if (i % 3 != 0) {</p>
+<p>continue;</p>
+<p>}</p>
+<p>printf("%d ", i); // Solo se ejecuta para múltiplos de 3</p>
+<p>}</p>
+<p>printf("\n");</p>
+<p>// Output Esperado: 3 6 9 12 15</p>
+<ol start="9" type="1">
+<li><strong>Contador de Vocales (Filtrando Consonantes)</strong></li>
+</ol>
+<p>C</p>
+<p>// Input de Ejemplo: "Programacion C"</p>
+<p>char frase[] = "Programacion C";</p>
+<p>int contador_vocales = 0;</p>
+<p>int longitud = 14;</p>
+<p>for (int i = 0; i &lt; longitud; i++) {</p>
+<p>char c = frase[i];</p>
+<p>// Convertir a minúscula para simplificar la comprobación</p>
+<p>if (c &gt;= 'A' &amp;&amp; c &lt;= 'Z') {</p>
+<p>c = c + 32; // ASCII: 'A' a 'a', etc.</p>
+<p>}</p>
+<p>// Filtro: Si NO es una vocal, saltamos la iteración</p>
+<p>if (c != 'a' &amp;&amp; c != 'e' &amp;&amp; c != 'i' &amp;&amp; c !=
+'o' &amp;&amp; c != 'u') {</p>
+<p>continue;</p>
+<p>}</p>
+<p>// Solo llegamos aquí si c ES una vocal</p>
+<p>contador_vocales++;</p>
+<p>}</p>
+<p>printf("Total de vocales encontradas: %d.\n", contador_vocales);</p>
+<p>// Output Esperado: Total de vocales encontradas: 5. (o, a, a, i,
+o)</p>
+<ol start="10" type="1">
+<li><strong>Simulación de Errores con while</strong></li>
+</ol>
+<p>C</p>
+<p>// Input de Ejemplo: 10, -99, 20, 30, -99</p>
+<p>int valor;</p>
+<p>int i = 0;</p>
+<p>int entradas_a_procesar = 5;</p>
+<p>long suma_valida = 0;</p>
+<p>printf("Ingrese 5 valores (el -99 es un error y se ignora):\n");</p>
+<p>// Simulación de entrada:</p>
+<p>int valores[] = {10, -99, 20, 30, -99};</p>
+<p>while (i &lt; entradas_a_procesar) {</p>
+<p>// scanf("%d", &amp;valor); // Uso real</p>
+<p>valor = valores[i]; // Simulación</p>
+<p>if (valor == -99) {</p>
+<p>i++; // Importante: debemos contar esta entrada como "procesada"</p>
+<p>printf(" -&gt; Error (-99) detectado y omitido (continue).\n");</p>
+<p>continue; // Salta el resto, pasa al siguiente ciclo</p>
+<p>}</p>
+<p>suma_valida += valor;</p>
+<p>i++; // Incrementamos el contador si es válido</p>
+<p>}</p>
+<p>printf("Suma de valores válidos: %ld.\n", suma_valida);</p>
+<p>// Output Esperado: Suma de valores válidos: 60.</p>
+<p><strong>Bloque 3: Uso Combinado y Avanzado (break y continue)
+⛓️</strong></p>
+<ol start="11" type="1">
+<li><strong>Bucle de Carga con Errores</strong></li>
+</ol>
+<p>C</p>
+<p>// Simulación de carga de 10 archivos</p>
+<p>for (int archivo = 1; archivo &lt;= 10; archivo++) {</p>
+<p>// 1. Condición de Filtro (continue)</p>
+<p>if (archivo % 2 == 0) {</p>
+<p>printf("Archivo %d: Ignorado (dañado).\n", archivo);</p>
+<p>continue; // Saltar el procesamiento para archivos pares</p>
+<p>}</p>
+<p>// 2. Condición de Salida (break)</p>
+<p>if (archivo == 9) {</p>
+<p>printf("--- Error Crítico en Archivo %d ---\n", archivo);</p>
+<p>break; // Detiene toda la carga inmediatamente</p>
+<p>}</p>
+<p>// Código de Procesamiento Normal (Solo impares &lt; 9)</p>
+<p>printf("Archivo %d: Procesado con éxito.\n", archivo);</p>
+<p>}</p>
+<p>printf("Proceso de carga finalizado.\n");</p>
+<p>// Output Esperado: El procesamiento se detiene tras revisar el
+archivo 8.</p>
+<ol start="12" type="1">
+<li><strong>Validación con Doble Condición de Salida</strong></li>
+</ol>
+<p>C</p>
+<p>// Input de Ejemplo: 10, 0, 20, -5</p>
+<p>int numero;</p>
+<p>do {</p>
+<p>printf("Ingrese un número positivo (-5 para salida forzada): ");</p>
+<p>// Simulación de entrada:</p>
+<p>static int intentos = 0;</p>
+<p>if (intentos == 0) numero = 10;</p>
+<p>else if (intentos == 1) numero = 0;</p>
+<p>else if (intentos == 2) numero = 20;</p>
+<p>else numero = -5;</p>
+<p>intentos++;</p>
+<p>// 1. Salida Forzada (break)</p>
+<p>if (numero == -5) {</p>
+<p>printf("\nSalida forzada por código -5.\n");</p>
+<p>break;</p>
+<p>}</p>
+<p>// 2. Filtro (continue)</p>
+<p>if (numero == 0) {</p>
+<p>printf("Cero omitido. Continuamos pidiendo.\n");</p>
+<p>continue; // Salta el procesamiento, vuelve a comprobar la
+condición</p>
+<p>}</p>
+<p>// Lógica de procesamiento</p>
+<p>if (numero &gt; 0) {</p>
+<p>printf("Número positivo procesado: %d.\n", numero);</p>
+<p>}</p>
+<p>} while (numero &gt; 0);</p>
+<p>// Output Esperado: El bucle se termina forzosamente al ingresar
+-5.</p>
+<ol start="13" type="1">
+<li><strong>Conversión de Entrada con Filtro y Límite</strong></li>
+</ol>
+<p>C</p>
+<p>// Input de Ejemplo: 25, -5, 30, 60</p>
+<p>float temp;</p>
+<p>int validos = 0;</p>
+<p>// Simulación de entrada:</p>
+<p>float entradas[] = {25.0f, -5.0f, 30.0f, 60.0f, 0.0f}; // 5 elementos
+simulados</p>
+<p>for (int i = 0; i &lt; 10; i++) { // Intentar 10 valores</p>
+<p>// float temp_input; scanf("%f", &amp;temp_input); // Uso real</p>
+<p>// Simulación:</p>
+<p>if (i &lt; 5) temp = entradas[i];</p>
+<p>else break; // Detener la simulación de entrada</p>
+<p>// 1. Condición de Salida (break)</p>
+<p>if (temp &gt; 50.0f) {</p>
+<p>printf("Temperatura %.1f C. ¡ALERTA! Deteniendo la entrada
+(break).\n", temp);</p>
+<p>break; // Detener la recopilación de datos</p>
+<p>}</p>
+<p>// 2. Condición de Filtro (continue)</p>
+<p>if (temp &lt; 0.0f) {</p>
+<p>printf("Temperatura negativa (%.1f C) ignorada (continue).\n",
+temp);</p>
+<p>continue; // Saltar el conteo y la conversión</p>
+<p>}</p>
+<p>// Procesamiento</p>
+<p>validos++;</p>
+<p>printf("Valor válido ingresado: %.1f C\n", temp);</p>
+<p>}</p>
+<p>printf("El bucle se detiene. Se ingresaron %d valores válidos.\n",
+validos);</p>
+<p>// Output Esperado: El bucle se detiene en el valor 60. Se ingresaron
+2 valores válidos (25 y 30).</p>
+<ol start="14" type="1">
+<li><strong>Simulación de Recorrido de Matriz (2D)</strong></li>
+</ol>
+<p>C</p>
+<p>// Matriz de 3x3 simulada</p>
+<p>int matriz[3][3] = {{1, 2, 3}, {4, 0, 6}, {7, 8, 9}};</p>
+<p>int filas = 3;</p>
+<p>int columnas = 3;</p>
+<p>for (int i = 0; i &lt; filas; i++) {</p>
+<p>printf("\n--- Revisando Fila %d ---\n", i);</p>
+<p>for (int j = 0; j &lt; columnas; j++) {</p>
+<p>// 1. Condición de Salida del BUCLE EXTERNO (break)</p>
+<p>if (matriz[i][j] == 0) {</p>
+<p>printf("¡Cero encontrado en [%d][%d]! Abortando matriz (break
+externo).\n", i, j);</p>
+<p>goto salir_matriz; // Uso de goto para salir de bucles anidados</p>
+<p>}</p>
+<p>// 2. Condición de Filtro del BUCLE EXTERNO (continue)</p>
+<p>if (i % 2 != 0) { // Si la fila es impar (Fila 1), filtramos el
+resto</p>
+<p>if (j == 0) printf(" -&gt; Fila impar (%d) omitida (continue).\n",
+i);</p>
+<p>continue;</p>
+<p>}</p>
+<p>// Procesamiento: Imprimir elemento (Solo en filas pares)</p>
+<p>printf("Elemento: %d ", matriz[i][j]);</p>
+<p>}</p>
+<p>}</p>
+<p>salir_matriz:; // Etiqueta para el goto (si se usa)</p>
+<p>printf("\n\nFin del recorrido.\n");</p>
+<p>// Output Esperado: El bucle externo se detiene cuando encuentra el 0
+en la Fila 1.</p>
+<ol start="15" type="1">
+<li><strong>Desafío: Contador de Palabras Excluyentes</strong></li>
+</ol>
+<p>C</p>
+<p>// Input de Ejemplo: "Hola 123 mundo z"</p>
+<p>char frase[] = "Hola 123 mundo z";</p>
+<p>int contador_letras = 0;</p>
+<p>for (int i = 0; frase[i] != '\0'; i++) {</p>
+<p>char c = frase[i];</p>
+<p>// 1. Condición de Salida (break)</p>
+<p>if (c == 'z' || c == 'Z') {</p>
+<p>printf("Carácter 'z' detectado. Deteniendo el conteo
+(break).\n");</p>
+<p>break;</p>
+<p>}</p>
+<p>// 2. Condición de Filtro (continue) - Excluir espacios y números</p>
+<p>if (c == ' ' || (c &gt;= '0' &amp;&amp; c &lt;= '9')) {</p>
+<p>continue;</p>
+<p>}</p>
+<p>// Procesamiento (Solo se llega aquí si es una letra distinta de
+'z')</p>
+<p>contador_letras++;</p>
+<p>// printf("Procesado: %c\n", c); // Debug</p>
+<p>}</p>
+<p>printf("Se procesaron %d letras válidas antes de detenerse.\n",
+contador_letras);</p>
+<p>// Output Esperado: Se procesaron 9 letras válidas antes de
+detenerse.</p>
+
+</div>
+</body>
+</html>
+

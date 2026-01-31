@@ -1,0 +1,282 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" crossorigin href="/assets/content-01sust.css">
+</head>
+<body>
+<div class="main-content">
+<h1><strong>15 Ejercicios: Operadores Relacionales y Lógicos</strong></h1>
+<p><strong>I. Operadores Relacionales (Ejercicios 1-6)</strong></p>
+<p><strong>Instrucción:</strong> Evalúa cada expresión de comparación e
+imprime el resultado numérico (1 para Verdadero, 0 para Falso).</p>
+<table style="width:97%;">
+<colgroup>
+<col style="width: 11%" />
+<col style="width: 42%" />
+<col style="width: 23%" />
+<col style="width: 20%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>#</strong></th>
+<th style="text-align: left;"><strong>Descripción</strong></th>
+<th style="text-align: left;"><strong>Código en C</strong></th>
+<th style="text-align: left;"><strong>Output Esperado</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>1</strong></td>
+<td style="text-align: left;"><strong>Igualdad (==):</strong> ¿Es 5
+igual a 5?</td>
+<td style="text-align: left;">int r = (5 == 5); printf("%d", r);</td>
+<td style="text-align: left;">1</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>2</strong></td>
+<td style="text-align: left;"><strong>Desigualdad (!=):</strong> ¿Es 10
+distinto de 8?</td>
+<td style="text-align: left;">int r = (10 != 8); printf("%d", r);</td>
+<td style="text-align: left;">1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>3</strong></td>
+<td style="text-align: left;"><strong>Menor que (&lt;):</strong> ¿Es 10
+menor que 5?</td>
+<td style="text-align: left;">int r = (10 &lt; 5); printf("%d", r);</td>
+<td style="text-align: left;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>4</strong></td>
+<td style="text-align: left;"><strong>Mayor o Igual (&gt;=):</strong>
+¿Es 20 mayor o igual que 20?</td>
+<td style="text-align: left;">int r = (20 &gt;= 20); printf("%d",
+r);</td>
+<td style="text-align: left;">1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>5</strong></td>
+<td style="text-align: left;"><strong>Mayor que (&gt;):</strong> ¿Es
+$-3$ mayor que $-1$?</td>
+<td style="text-align: left;">int r = (-3 &gt; -1); printf("%d",
+r);</td>
+<td style="text-align: left;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>6</strong></td>
+<td style="text-align: left;"><strong>Menor o Igual (&lt;=):</strong>
+¿Es la suma de $1+4$ menor o igual que $5$?</td>
+<td style="text-align: left;">int r = ((1 + 4) &lt;= 5); printf("%d",
+r);</td>
+<td style="text-align: left;">1</td>
+</tr>
+</tbody>
+</table>
+<p><strong>II. Falsedad/Verdad en C (Ejercicios 7-9)</strong></p>
+<p><strong>Instrucción:</strong> C evalúa cualquier valor distinto de 0
+como Verdadero (1) y 0 como Falso. Determina el resultado de las
+siguientes expresiones lógicas.</p>
+<table style="width:98%;">
+<colgroup>
+<col style="width: 11%" />
+<col style="width: 47%" />
+<col style="width: 21%" />
+<col style="width: 17%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>#</strong></th>
+<th style="text-align: left;"><strong>Descripción</strong></th>
+<th style="text-align: left;"><strong>Código en C</strong></th>
+<th style="text-align: left;"><strong>Output Esperado</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>7</strong></td>
+<td style="text-align: left;"><strong>Negación de Falso:</strong> Negar
+el valor 0.</td>
+<td style="text-align: left;">int r = !0; printf("%d", r);</td>
+<td style="text-align: left;">1</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>8</strong></td>
+<td style="text-align: left;"><strong>Negación de Verdadero:</strong>
+Negar un valor distinto de 0.</td>
+<td style="text-align: left;">int r = !15; printf("%d", r);</td>
+<td style="text-align: left;">0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>9</strong></td>
+<td style="text-align: left;"><strong>Asignación Evaluada:</strong>
+Asigna 5 a a y luego evalúa la expresión (Recuerda que la asignación (=)
+devuelve el valor asignado).</td>
+<td style="text-align: left;">int a; int r = (a = 5); printf("%d",
+r);</td>
+<td style="text-align: left;">5</td>
+</tr>
+</tbody>
+</table>
+<p><strong>III. Operador AND Lógico (&amp;&amp;) (Ejercicios
+10-12)</strong></p>
+<p><strong>Instrucción:</strong> Usa &amp;&amp; para combinar dos
+condiciones. Ambas deben ser 1 para que el resultado final sea 1.</p>
+<table style="width:97%;">
+<colgroup>
+<col style="width: 11%" />
+<col style="width: 41%" />
+<col style="width: 25%" />
+<col style="width: 19%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>#</strong></th>
+<th style="text-align: left;"><strong>Descripción</strong></th>
+<th style="text-align: left;"><strong>Código en C</strong></th>
+<th style="text-align: left;"><strong>Output Esperado</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>10</strong></td>
+<td style="text-align: left;"><strong>AND Verdadero:</strong> El número
+5 está en el rango $[1, 10]$.</td>
+<td style="text-align: left;">int r = (5 &gt;= 1) &amp;&amp; (5 &lt;=
+10); printf("%d", r);</td>
+<td style="text-align: left;">1</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>11</strong></td>
+<td style="text-align: left;"><strong>AND Falso (Primera
+Falla):</strong> El número 15 está en el rango $[1, 10]$.</td>
+<td style="text-align: left;">int r = (15 &gt;= 1) &amp;&amp; (15 &lt;=
+10); printf("%d", r);</td>
+<td style="text-align: left;">0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>12</strong></td>
+<td style="text-align: left;"><strong>AND Combinado:</strong> ¿$2 &lt;
+5$ <strong>Y</strong> $10 == 10$?</td>
+<td style="text-align: left;">int r = (2 &lt; 5) &amp;&amp; (10 == 10);
+printf("%d", r);</td>
+<td style="text-align: left;">1</td>
+</tr>
+</tbody>
+</table>
+<p><strong>IV. Operador OR Lógico (||) (Ejercicios 13-15)</strong></p>
+<p><strong>Instrucción:</strong> Usa || para combinar dos condiciones.
+El resultado final es 1 si al menos una condición es 1.</p>
+<table style="width:97%;">
+<colgroup>
+<col style="width: 11%" />
+<col style="width: 45%" />
+<col style="width: 19%" />
+<col style="width: 20%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>#</strong></th>
+<th style="text-align: left;"><strong>Descripción</strong></th>
+<th style="text-align: left;"><strong>Código en C</strong></th>
+<th style="text-align: left;"><strong>Output Esperado</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>13</strong></td>
+<td style="text-align: left;"><strong>OR Verdadero (Ambos):</strong> ¿Es
+$10 &gt; 5$ <strong>O</strong> $2 &lt; 8$?</td>
+<td style="text-align: left;">`int r = (10 &gt; 5)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>14</strong></td>
+<td style="text-align: left;"><strong>OR Verdadero (Uno Falso):</strong>
+¿Es $10 &gt; 20$ <strong>O</strong> $5 == 5$?</td>
+<td style="text-align: left;">`int r = (10 &gt; 20)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>15</strong></td>
+<td style="text-align: left;"><strong>OR Falso:</strong> ¿Es $100 &lt;
+50$ <strong>O</strong> $5 != 5$?</td>
+<td style="text-align: left;">`int r = (100 &lt; 50)</td>
+<td style="text-align: left;"></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Código Completo de las Respuestas</strong></p>
+<p>Aquí está el código completo para facilitar la comprobación de todos
+los ejercicios:</p>
+<p>C</p>
+<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
+<p>int main(void) {</p>
+<p>int r;</p>
+<p>int a;</p>
+<p>printf("--- Operadores Relacionales ---\n");</p>
+<p>r = (5 == 5); // 1. Igualdad</p>
+<p>printf("1. 5 == 5: %d\n", r);</p>
+<p>r = (10 != 8); // 2. Desigualdad</p>
+<p>printf("2. 10 != 8: %d\n", r);</p>
+<p>r = (10 &lt; 5); // 3. Menor que</p>
+<p>printf("3. 10 &lt; 5: %d\n", r);</p>
+<p>r = (20 &gt;= 20); // 4. Mayor o Igual</p>
+<p>printf("4. 20 &gt;= 20: %d\n", r);</p>
+<p>r = (-3 &gt; -1); // 5. Mayor que</p>
+<p>printf("5. -3 &gt; -1: %d\n", r);</p>
+<p>r = ((1 + 4) &lt;= 5); // 6. Menor o Igual</p>
+<p>printf("6. (1+4) &lt;= 5: %d\n", r);</p>
+<p>printf("\n--- Falsedad/Verdad en C ---\n");</p>
+<p>r = !0; // 7. Negación de Falso</p>
+<p>printf("7. !0: %d\n", r);</p>
+<p>r = !15; // 8. Negación de Verdadero</p>
+<p>printf("8. !15: %d\n", r);</p>
+<p>r = (a = 5); // 9. Asignación Evaluada</p>
+<p>printf("9. (a = 5): %d\n", r); // El resultado de la asignación es el
+valor asignado (5)</p>
+<p>printf("\n--- Operador AND (&amp;&amp;) ---\n");</p>
+<p>r = (5 &gt;= 1) &amp;&amp; (5 &lt;= 10); // 10. 1 &amp;&amp; 1 =
+1</p>
+<p>printf("10. 5 en [1,10]: %d\n", r);</p>
+<p>r = (15 &gt;= 1) &amp;&amp; (15 &lt;= 10); // 11. 1 &amp;&amp; 0 =
+0</p>
+<p>printf("11. 15 en [1,10]: %d\n", r);</p>
+<p>r = (2 &lt; 5) &amp;&amp; (10 == 10); // 12. 1 &amp;&amp; 1 = 1</p>
+<p>printf("12. (2&lt;5) &amp;&amp; (10==10): %d\n", r);</p>
+<p>printf("\n--- Operador OR (||) ---\n");</p>
+<p>r = (10 &gt; 5) || (2 &lt; 8); // 13. 1 || 1 = 1</p>
+<p>printf("13. (10&gt;5) || (2&lt;8): %d\n", r);</p>
+<p>r = (10 &gt; 20) || (5 == 5); // 14. 0 || 1 = 1</p>
+<p>printf("14. (10&gt;20) || (5==5): %d\n", r);</p>
+<p>r = (100 &lt; 50) || (5 != 5); // 15. 0 || 0 = 0</p>
+<p>printf("15. (100&lt;50) || (5!=5): %d\n", r);</p>
+<p>return 0;</p>
+<p>}</p>
+<p><strong>Output Consolidado Esperado:</strong></p>
+<p>--- Operadores Relacionales ---</p>
+<p>1. 5 == 5: 1</p>
+<p>2. 10 != 8: 1</p>
+<p>3. 10 &lt; 5: 0</p>
+<p>4. 20 &gt;= 20: 1</p>
+<p>5. -3 &gt; -1: 0</p>
+<p>6. (1+4) &lt;= 5: 1</p>
+<p>--- Falsedad/Verdad en C ---</p>
+<p>7. !0: 1</p>
+<p>8. !15: 0</p>
+<p>9. (a = 5): 5</p>
+<p>--- Operador AND (&amp;&amp;) ---</p>
+<p>10. 5 en [1,10]: 1</p>
+<p>11. 15 en [1,10]: 0</p>
+<p>12. (2&lt;5) &amp;&amp; (10==10): 1</p>
+<p>--- Operador OR (||) ---</p>
+<p>13. (10&gt;5) || (2&lt;8): 1</p>
+<p>14. (10&gt;20) || (5==5): 1</p>
+<p>15. (100&lt;50) || (5!=5): 0</p>
+
+
+</div>
+</body>
+</html>
+

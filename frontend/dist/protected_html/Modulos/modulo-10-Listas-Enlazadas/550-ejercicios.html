@@ -1,0 +1,458 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" crossorigin href="/assets/content-01sust.css">
+</head>
+<body>
+<div class="main-content">
+<h2 id="ejercicios-de-programaciÃ³n-recorrido-y-eliminaciÃ³n">ðŸ”Ÿ 10
+Ejercicios de ProgramaciÃ³n (Recorrido y EliminaciÃ³n) ðŸ§ </h2>
+<p>Asume la estructura <code>Nodo</code> y las funciones de ayuda
+necesarias (<code>crear_nodo</code>, etc.) ya estÃ¡n definidas.</p>
+<h3 id="bloque-1-recorrido-avanzado-on">Bloque 1: Recorrido Avanzado
+(<span class="math inline"><em>O</em>(<em>N</em>)</span>) ðŸ•µï¸</h3>
+<ol type="1">
+<li><strong>ImpresiÃ³n de la Lista en Orden Inverso (Sin
+Modificar)</strong>
+<ul>
+<li><strong>Tarea:</strong> Escribe una funciÃ³n
+<code>imprimir_en_reversa(Nodo *head)</code> que imprima los elementos
+de la lista desde el Ãºltimo nodo hasta el <code>HEAD</code>, <strong>sin
+modificar los punteros de la lista</strong>.</li>
+<li><strong>Requisito:</strong> No puedes usar <em>arrays</em>
+auxiliares. Debes lograrlo usando <strong>recursiÃ³n</strong> o una
+<strong>estructura de datos auxiliar</strong> (como una pila, si estÃ¡
+permitida).</li>
+</ul></li>
+<li><strong>BÃºsqueda del <span
+class="math inline"><em>K</em></span>-Ã©simo Nodo desde el Final</strong>
+<ul>
+<li><strong>Tarea:</strong> Escribe una funciÃ³n
+<code>Nodo *obtener_k_desde_final(Nodo *head, int k)</code> que retorne
+un puntero al nodo que se encuentra en la posiciÃ³n <span
+class="math inline"><em>k</em></span> contando desde el final de la
+lista.</li>
+<li><strong>Requisito:</strong> La lista solo debe ser recorrida
+<strong>una sola vez</strong> (<span
+class="math inline"><em>O</em>(<em>N</em>)</span> en una pasada). Esto
+requiere la tÃ©cnica de <strong>dos punteros</strong> separados por una
+distancia de <span class="math inline"><em>k</em></span> nodos.</li>
+</ul></li>
+<li><strong>VerificaciÃ³n de Orden Ascendente Estricto</strong>
+<ul>
+<li><strong>Tarea:</strong> Escribe una funciÃ³n
+<code>bool es_ordenada_estrictamente(Nodo *head)</code> que retorne
+<code>true</code> si cada nodo es <strong>estrictamente mayor</strong>
+que el nodo anterior, y <code>false</code> en caso contrario (incluyendo
+listas vacÃ­as o con un solo nodo).</li>
+<li><strong>Requisito:</strong> Implementa un bucle de recorrido que se
+detenga inmediatamente si detecta una violaciÃ³n de la regla de
+orden.</li>
+</ul></li>
+<li><strong>Suma Condicional de Nodos (O(N))</strong>
+<ul>
+<li><strong>Tarea:</strong> Escribe una funciÃ³n
+<code>int sumar_nodos_pares(Nodo *head)</code> que recorra la lista y
+calcule la suma total de los valores de los nodos que se encuentran en
+una <strong>posiciÃ³n par</strong> (es decir, el segundo nodo, el cuarto
+nodo, etc.).</li>
+<li><strong>Requisito:</strong> Utiliza un contador auxiliar y asegÃºrate
+de que el recorrido maneje correctamente si la lista es impar o par en
+longitud.</li>
+</ul></li>
+</ol>
+<hr />
+<h3 id="bloque-2-eliminaciÃ³n-compleja-y-gestiÃ³n-de-memoria">Bloque 2:
+EliminaciÃ³n Compleja y GestiÃ³n de Memoria ðŸ”ª</h3>
+<ol start="5" type="1">
+<li><strong>EliminaciÃ³n de Todas las Ocurrencias (<span
+class="math inline"><em>O</em>(<em>N</em>)</span>)</strong>
+<ul>
+<li><strong>Tarea:</strong> Escribe una funciÃ³n
+<code>void eliminar_todas_ocurrencias(Nodo **head_ref, int valor_a_eliminar)</code>
+que elimine <strong>todos</strong> los nodos que contengan el
+<code>valor_a_eliminar</code>.</li>
+<li><strong>Requisito:</strong> Debes manejar la eliminaciÃ³n si ocurre
+al inicio (mÃºltiples veces), en el medio y al final, garantizando que el
+<code>HEAD</code> se actualice correctamente y que la memoria sea
+liberada en cada caso.</li>
+</ul></li>
+<li><strong>EliminaciÃ³n del Ãšltimo Nodo (Final <span
+class="math inline"><em>O</em>(<em>N</em>)</span>)</strong>
+<ul>
+<li><strong>Tarea:</strong> Escribe una funciÃ³n
+<code>void eliminar_al_final(Nodo **head_ref)</code> que elimine y
+libere el Ãºltimo nodo de la lista.</li>
+<li><strong>Requisito:</strong> Esta operaciÃ³n es <span
+class="math inline"><em>O</em>(<em>N</em>)</span> porque requiere
+<strong>detener el recorrido justo en el nodo anterior</strong> al
+Ãºltimo. Debes manejar los casos lÃ­mite de lista vacÃ­a y lista con un
+solo nodo.</li>
+</ul></li>
+<li><strong>EliminaciÃ³n del Nodo del Medio</strong>
+<ul>
+<li><strong>Tarea:</strong> Escribe una funciÃ³n
+<code>void eliminar_nodo_del_medio(Nodo **head_ref)</code> que elimine
+el nodo ubicado en el centro exacto de la lista. Si hay dos nodos
+centrales (lista de longitud par), elimina el <strong>segundo</strong>
+de ellos.</li>
+<li><strong>Requisito:</strong> Utiliza la tÃ©cnica de <strong>punteros
+lento y rÃ¡pido</strong> (tortuga y liebre) para encontrar el nodo del
+medio en una sola pasada. Requiere el uso de un tercer puntero auxiliar
+para seguir al puntero lento.</li>
+</ul></li>
+<li><strong>ReorganizaciÃ³n y LiberaciÃ³n (Eliminar la Mitad)</strong>
+<ul>
+<li><strong>Tarea:</strong> Escribe una funciÃ³n
+<code>void truncar_lista_mitad(Nodo **head_ref)</code> que elimine y
+libere <strong>todos</strong> los nodos a partir de la mitad de la lista
+(incluyendo el nodo central).</li>
+<li><strong>Requisito:</strong> Encuentra el nodo anterior al punto de
+corte (mitad), establece su puntero <code>siguiente</code> a
+<code>NULL</code> para truncar la lista, y luego llama a una funciÃ³n
+auxiliar para liberar la memoria de la <strong>segunda mitad</strong> de
+manera segura.</li>
+</ul></li>
+<li><strong>LiberaciÃ³n Segura de Memoria (General)</strong>
+<ul>
+<li><strong>Tarea:</strong> Escribe la funciÃ³n final
+<code>void liberar_lista_segura(Nodo **head_ref)</code> que elimina
+todos los nodos de la lista y establece el <code>HEAD</code> a
+<code>NULL</code>.</li>
+<li><strong>Requisito:</strong> El recorrido y la llamada a
+<code>free()</code> deben hacerse de forma segura para evitar un
+<strong>puntero colgante</strong> (<em>dangling pointer</em>), guardando
+la direcciÃ³n del siguiente nodo <strong>antes</strong> de liberar el
+nodo actual.</li>
+</ul></li>
+<li><strong>CombinaciÃ³n de Operaciones: Dejar Solo Pares</strong>
+<ul>
+<li><strong>Tarea:</strong> Escribe una funciÃ³n
+<code>void mantener_solo_pares(Nodo **head_ref)</code> que recorra la
+lista y <strong>elimine</strong> cualquier nodo cuyo campo
+<code>dato</code> sea un nÃºmero impar.</li>
+<li><strong>Requisito:</strong> Esta es una combinaciÃ³n de recorrido y
+eliminaciÃ³n que requiere una lÃ³gica de dos punteros (anterior/actual)
+para los nodos intermedios, ademÃ¡s de manejar mÃºltiples eliminaciones
+consecutivas en <code>HEAD</code>.</li>
+</ul></li>
+</ol>
+<h2 id="soluciones-bloque-1---recorrido-avanzado-on">Soluciones: Bloque
+1 - Recorrido Avanzado (<span
+class="math inline"><em>O</em>(<em>N</em>)</span>) ðŸ•µï¸</h2>
+<h3 id="impresiÃ³n-de-la-lista-en-orden-inverso-recursiÃ³n">1. ImpresiÃ³n
+de la Lista en Orden Inverso (RecursiÃ³n)</h3>
+<p>La recursiÃ³n es la forma mÃ¡s limpia de lograr el orden inverso sin
+usar estructuras auxiliares ni modificar la lista, ya que la
+<strong>pila de llamadas</strong> gestiona el orden de impresiÃ³n.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> imprimir_en_reversa<span class="op">(</span>Nodo <span class="op">*</span>head<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Caso base: Si la lista estÃ¡ vacÃ­a, no hace nada.</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>head <span class="op">==</span> NULL<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span><span class="op">;</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="co">// 1. Llamada recursiva: Recorre hasta el final de la lista</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    imprimir_en_reversa<span class="op">(</span>head<span class="op">-&gt;</span>siguiente<span class="op">);</span> </span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    <span class="co">// 2. OperaciÃ³n: Imprime el dato SOLO despuÃ©s de que el sucesor haya sido procesado</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;</span><span class="sc">%d</span><span class="st"> &quot;</span><span class="op">,</span> head<span class="op">-&gt;</span>dato<span class="op">);</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p><strong>Para probarla en <code>main</code>:</strong></p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>printf<span class="op">(</span><span class="st">&quot;Lista en reversa: &quot;</span><span class="op">);</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>imprimir_en_reversa<span class="op">(</span>HEAD<span class="op">);</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>printf<span class="op">(</span><span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span></code></pre></div>
+<hr />
+<h3 id="bÃºsqueda-del-k-Ã©simo-nodo-desde-el-final-dos-punteros">2.
+BÃºsqueda del <span class="math inline"><em>K</em></span>-Ã©simo Nodo
+desde el Final (Dos Punteros)</h3>
+<p>Esta tÃ©cnica de <strong>dos punteros (lento y rÃ¡pido)</strong>
+mantiene una distancia fija de <span
+class="math inline"><em>K</em></span> nodos. Cuando el puntero rÃ¡pido
+llega al final (<code>NULL</code>), el puntero lento estarÃ¡ en el nodo
+<span class="math inline"><em>K</em></span>-Ã©simo.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>Nodo <span class="op">*</span>obtener_k_desde_final<span class="op">(</span>Nodo <span class="op">*</span>head<span class="op">,</span> <span class="dt">int</span> k<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>head <span class="op">==</span> NULL <span class="op">||</span> k <span class="op">&lt;=</span> <span class="dv">0</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> NULL<span class="op">;</span> <span class="co">// Lista vacÃ­a o K invÃ¡lido</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    Nodo <span class="op">*</span>rapido <span class="op">=</span> head<span class="op">;</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    Nodo <span class="op">*</span>lento <span class="op">=</span> head<span class="op">;</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    <span class="co">// 1. Mover el puntero rÃ¡pido K pasos por delante</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> k<span class="op">;</span> i<span class="op">++)</span> <span class="op">{</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span>rapido <span class="op">==</span> NULL<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>            <span class="co">// La lista es mÃ¡s corta que K</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> NULL<span class="op">;</span> </span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>        rapido <span class="op">=</span> rapido<span class="op">-&gt;</span>siguiente<span class="op">;</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>    <span class="co">// 2. Mover ambos punteros hasta que &#39;rapido&#39; llegue a NULL</span></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> <span class="op">(</span>rapido <span class="op">!=</span> NULL<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>        rapido <span class="op">=</span> rapido<span class="op">-&gt;</span>siguiente<span class="op">;</span></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>        lento <span class="op">=</span> lento<span class="op">-&gt;</span>siguiente<span class="op">;</span></span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>    <span class="co">// &#39;lento&#39; es ahora el k-Ã©simo nodo desde el final</span></span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> lento<span class="op">;</span></span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<hr />
+<h3 id="verificaciÃ³n-de-orden-ascendente-estricto">3. VerificaciÃ³n de
+Orden Ascendente Estricto</h3>
+<p>Esta funciÃ³n requiere que el bucle se ejecute hasta el
+<strong>penÃºltimo</strong> nodo para poder comparar el nodo actual con
+su sucesor.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdbool.h&gt;</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="dt">bool</span> es_ordenada_estrictamente<span class="op">(</span>Nodo <span class="op">*</span>head<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Listas vacÃ­as o con un solo nodo se consideran ordenadas.</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>head <span class="op">==</span> NULL <span class="op">||</span> head<span class="op">-&gt;</span>siguiente <span class="op">==</span> NULL<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="kw">true</span><span class="op">;</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    Nodo <span class="op">*</span>actual <span class="op">=</span> head<span class="op">;</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Recorrer hasta el penÃºltimo nodo (actual-&gt;siguiente != NULL)</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> <span class="op">(</span>actual<span class="op">-&gt;</span>siguiente <span class="op">!=</span> NULL<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>        <span class="co">// La condiciÃ³n de desorden estricto: el actual NO es menor que el siguiente.</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span>actual<span class="op">-&gt;</span>dato <span class="op">&gt;=</span> actual<span class="op">-&gt;</span>siguiente<span class="op">-&gt;</span>dato<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> <span class="kw">false</span><span class="op">;</span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>        actual <span class="op">=</span> actual<span class="op">-&gt;</span>siguiente<span class="op">;</span></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Si el bucle termina, toda la lista estÃ¡ ordenada.</span></span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="kw">true</span><span class="op">;</span></span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<hr />
+<h3 id="suma-condicional-de-nodos-posiciÃ³n-par">4. Suma Condicional de
+Nodos (PosiciÃ³n Par)</h3>
+<p>Se requiere un contador (o una bandera booleana) para rastrear la
+posiciÃ³n de cada nodo durante el recorrido.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> sumar_nodos_pares<span class="op">(</span>Nodo <span class="op">*</span>head<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>head <span class="op">==</span> NULL<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> suma <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    Nodo <span class="op">*</span>actual <span class="op">=</span> head<span class="op">;</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> posicion <span class="op">=</span> <span class="dv">1</span><span class="op">;</span> <span class="co">// El primer nodo es la posiciÃ³n 1 (impar)</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> <span class="op">(</span>actual <span class="op">!=</span> NULL<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>        <span class="co">// La posiciÃ³n par es el 2do, 4to, 6to, etc.</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span>posicion <span class="op">%</span> <span class="dv">2</span> <span class="op">==</span> <span class="dv">0</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>            suma <span class="op">+=</span> actual<span class="op">-&gt;</span>dato<span class="op">;</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>        actual <span class="op">=</span> actual<span class="op">-&gt;</span>siguiente<span class="op">;</span></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>        posicion<span class="op">++;</span></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> suma<span class="op">;</span></span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<h2
+id="soluciones-bloque-2---eliminaciÃ³n-compleja-y-gestiÃ³n-de-memoria">Soluciones:
+Bloque 2 - EliminaciÃ³n Compleja y GestiÃ³n de Memoria ðŸ”ª</h2>
+<h3 id="eliminaciÃ³n-de-todas-las-ocurrencias-on">5. EliminaciÃ³n de Todas
+las Ocurrencias (<span
+class="math inline"><em>O</em>(<em>N</em>)</span>)</h3>
+<p>Esta funciÃ³n es compleja porque debe manejar la posible eliminaciÃ³n
+de la <code>HEAD</code> en cada iteraciÃ³n y el salto del puntero
+<code>anterior</code> sin avanzar si la <code>HEAD</code> no se ha
+movido.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> eliminar_todas_ocurrencias<span class="op">(</span>Nodo <span class="op">**</span>head_ref<span class="op">,</span> <span class="dt">int</span> valor_a_eliminar<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    Nodo <span class="op">*</span>actual <span class="op">=</span> <span class="op">*</span>head_ref<span class="op">;</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    Nodo <span class="op">*</span>anterior <span class="op">=</span> NULL<span class="op">;</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    <span class="co">// El bucle avanza si &#39;actual&#39; no es NULL</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> <span class="op">(</span>actual <span class="op">!=</span> NULL<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>        <span class="co">// 1. Si encontramos el valor a eliminar</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span>actual<span class="op">-&gt;</span>dato <span class="op">==</span> valor_a_eliminar<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>            </span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>            <span class="co">// Si el nodo a eliminar es HEAD (anterior es NULL)</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> <span class="op">(</span>anterior <span class="op">==</span> NULL<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>                <span class="op">*</span>head_ref <span class="op">=</span> actual<span class="op">-&gt;</span>siguiente<span class="op">;</span> <span class="co">// Mover HEAD</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>                free<span class="op">(</span>actual<span class="op">);</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>                actual <span class="op">=</span> <span class="op">*</span>head_ref<span class="op">;</span> <span class="co">// &#39;actual&#39; avanza al nuevo HEAD</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>            <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>                <span class="co">// Nodo intermedio o final</span></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>                anterior<span class="op">-&gt;</span>siguiente <span class="op">=</span> actual<span class="op">-&gt;</span>siguiente<span class="op">;</span> <span class="co">// Saltar el nodo</span></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>                Nodo <span class="op">*</span>temp <span class="op">=</span> actual<span class="op">;</span> </span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>                actual <span class="op">=</span> actual<span class="op">-&gt;</span>siguiente<span class="op">;</span> <span class="co">// &#39;actual&#39; avanza</span></span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>                free<span class="op">(</span>temp<span class="op">);</span></span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>                <span class="co">// NOTA: &#39;anterior&#39; NO AVANZA, ya que su sucesor acaba de cambiar</span></span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>            <span class="op">}</span></span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>            <span class="co">// 2. Si NO encontramos el valor, ambos punteros avanzan normalmente</span></span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>            anterior <span class="op">=</span> actual<span class="op">;</span></span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>            actual <span class="op">=</span> actual<span class="op">-&gt;</span>siguiente<span class="op">;</span></span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<hr />
+<h3 id="eliminaciÃ³n-del-Ãºltimo-nodo-final-on">6. EliminaciÃ³n del Ãšltimo
+Nodo (Final <span
+class="math inline"><em>O</em>(<em>N</em>)</span>)</h3>
+<p>Se requiere detener el puntero <code>anterior</code> en el penÃºltimo
+nodo, que es el que necesita apuntar a <code>NULL</code>.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> eliminar_al_final<span class="op">(</span>Nodo <span class="op">**</span>head_ref<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Caso LÃ­mite 1: Lista vacÃ­a</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(*</span>head_ref <span class="op">==</span> NULL<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">&quot;Error: Lista vacÃ­a.</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span><span class="op">;</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    Nodo <span class="op">*</span>actual <span class="op">=</span> <span class="op">*</span>head_ref<span class="op">;</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>    Nodo <span class="op">*</span>anterior <span class="op">=</span> NULL<span class="op">;</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Caso LÃ­mite 2: Lista con un solo nodo</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>actual<span class="op">-&gt;</span>siguiente <span class="op">==</span> NULL<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>        free<span class="op">(</span>actual<span class="op">);</span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>        <span class="op">*</span>head_ref <span class="op">=</span> NULL<span class="op">;</span> <span class="co">// Lista vacÃ­a</span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span><span class="op">;</span></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Recorrido: Se detiene cuando &#39;actual&#39; es el Ãºltimo nodo.</span></span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> <span class="op">(</span>actual<span class="op">-&gt;</span>siguiente <span class="op">!=</span> NULL<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>        anterior <span class="op">=</span> actual<span class="op">;</span></span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>        actual <span class="op">=</span> actual<span class="op">-&gt;</span>siguiente<span class="op">;</span></span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>    <span class="co">// 1. &#39;anterior&#39; apunta al penÃºltimo nodo, &#39;actual&#39; al Ãºltimo.</span></span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a>    anterior<span class="op">-&gt;</span>siguiente <span class="op">=</span> NULL<span class="op">;</span> <span class="co">// Truncar el enlace</span></span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a>    <span class="co">// 2. Liberar el Ãºltimo nodo</span></span>
+<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a>    free<span class="op">(</span>actual<span class="op">);</span></span>
+<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;Ãšltimo nodo eliminado con Ã©xito.</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<hr />
+<h3 id="eliminaciÃ³n-del-nodo-del-medio">7. EliminaciÃ³n del Nodo del
+Medio</h3>
+<p>Usa la tÃ©cnica del puntero lento y rÃ¡pido, ademÃ¡s de un tercer
+puntero (<code>predecesor</code>) para re-enlazar.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> eliminar_nodo_del_medio<span class="op">(</span>Nodo <span class="op">**</span>head_ref<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(*</span>head_ref <span class="op">==</span> NULL<span class="op">)</span> <span class="cf">return</span><span class="op">;</span> </span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    Nodo <span class="op">*</span>lento <span class="op">=</span> <span class="op">*</span>head_ref<span class="op">;</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    Nodo <span class="op">*</span>rapido <span class="op">=</span> <span class="op">*</span>head_ref<span class="op">;</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    Nodo <span class="op">*</span>predecesor <span class="op">=</span> NULL<span class="op">;</span> <span class="co">// SeguirÃ¡ al lento, crucial para la eliminaciÃ³n</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>    <span class="co">// El puntero rÃ¡pido avanza dos veces mÃ¡s rÃ¡pido</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> <span class="op">(</span>rapido <span class="op">!=</span> NULL <span class="op">&amp;&amp;</span> rapido<span class="op">-&gt;</span>siguiente <span class="op">!=</span> NULL<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>        rapido <span class="op">=</span> rapido<span class="op">-&gt;</span>siguiente<span class="op">-&gt;</span>siguiente<span class="op">;</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>        predecesor <span class="op">=</span> lento<span class="op">;</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>        lento <span class="op">=</span> lento<span class="op">-&gt;</span>siguiente<span class="op">;</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>    <span class="co">// En este punto, &#39;lento&#39; es el nodo del medio (o el segundo de los dos centrales).</span></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Caso LÃ­mite: Lista de 1 nodo (el lento es HEAD y predecesor es NULL)</span></span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>predecesor <span class="op">==</span> NULL<span class="op">)</span> <span class="op">{</span> </span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>        <span class="op">*</span>head_ref <span class="op">=</span> lento<span class="op">-&gt;</span>siguiente<span class="op">;</span> <span class="co">// Mover HEAD (lento era el Ãºnico/primero)</span></span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Re-enlace: &#39;predecesor&#39; salta &#39;lento&#39; para apuntar a su sucesor</span></span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>        predecesor<span class="op">-&gt;</span>siguiente <span class="op">=</span> lento<span class="op">-&gt;</span>siguiente<span class="op">;</span></span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Liberar la memoria del nodo del medio</span></span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a>    free<span class="op">(</span>lento<span class="op">);</span></span>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;Nodo del medio eliminado.</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<hr />
+<h3 id="reorganizaciÃ³n-y-liberaciÃ³n-eliminar-la-mitad">8. ReorganizaciÃ³n
+y LiberaciÃ³n (Eliminar la Mitad)</h3>
+<p>Se combina la tÃ©cnica lento/rÃ¡pido para encontrar la mitad y luego un
+recorrido seguro para liberar la segunda parte.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> truncar_lista_mitad<span class="op">(</span>Nodo <span class="op">**</span>head_ref<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(*</span>head_ref <span class="op">==</span> NULL <span class="op">||</span> <span class="op">(*</span>head_ref<span class="op">)-&gt;</span>siguiente <span class="op">==</span> NULL<span class="op">)</span> <span class="cf">return</span><span class="op">;</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    Nodo <span class="op">*</span>lento <span class="op">=</span> <span class="op">*</span>head_ref<span class="op">;</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    Nodo <span class="op">*</span>rapido <span class="op">=</span> <span class="op">*</span>head_ref<span class="op">;</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    Nodo <span class="op">*</span>punto_corte_anterior <span class="op">=</span> NULL<span class="op">;</span> <span class="co">// Se detiene antes del nodo central</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Buscar el punto de corte (lento apunta al nodo central o predecesor del central)</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> <span class="op">(</span>rapido <span class="op">!=</span> NULL <span class="op">&amp;&amp;</span> rapido<span class="op">-&gt;</span>siguiente <span class="op">!=</span> NULL<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>        rapido <span class="op">=</span> rapido<span class="op">-&gt;</span>siguiente<span class="op">-&gt;</span>siguiente<span class="op">;</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>        punto_corte_anterior <span class="op">=</span> lento<span class="op">;</span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>        lento <span class="op">=</span> lento<span class="op">-&gt;</span>siguiente<span class="op">;</span></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>    <span class="co">// &#39;lento&#39; es el nodo de la mitad. &#39;punto_corte_anterior&#39; es el Ãºltimo nodo de la primera mitad.</span></span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>    Nodo <span class="op">*</span>segunda_mitad_head <span class="op">=</span> punto_corte_anterior<span class="op">-&gt;</span>siguiente<span class="op">;</span></span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>    <span class="co">// 1. Truncar el enlace: La primera mitad termina aquÃ­.</span></span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>    punto_corte_anterior<span class="op">-&gt;</span>siguiente <span class="op">=</span> NULL<span class="op">;</span> </span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>    <span class="co">// 2. Liberar la memoria de la segunda mitad (reutilizando la funciÃ³n de Ej. 9)</span></span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>    liberar_lista_segura<span class="op">(&amp;</span>segunda_mitad_head<span class="op">);</span> </span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;Lista truncada a la mitad. Segunda mitad liberada.</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<hr />
+<h3 id="liberaciÃ³n-segura-de-memoria-general">9. LiberaciÃ³n Segura de
+Memoria (General)</h3>
+<p>La tÃ©cnica mÃ¡s importante es usar un puntero temporal
+(<code>siguiente</code>) para guardar el enlace <strong>antes</strong>
+de llamar a <code>free()</code>, evitando acceder a memoria
+liberada.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> liberar_lista_segura<span class="op">(</span>Nodo <span class="op">**</span>head_ref<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    Nodo <span class="op">*</span>actual <span class="op">=</span> <span class="op">*</span>head_ref<span class="op">;</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    Nodo <span class="op">*</span>siguiente <span class="op">=</span> NULL<span class="op">;</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> <span class="op">(</span>actual <span class="op">!=</span> NULL<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>        <span class="co">// 1. Guardar la direcciÃ³n del siguiente nodo ANTES de liberar el actual</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>        siguiente <span class="op">=</span> actual<span class="op">-&gt;</span>siguiente<span class="op">;</span> </span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>        <span class="co">// 2. Liberar la memoria del nodo actual</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>        free<span class="op">(</span>actual<span class="op">);</span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>        <span class="co">// 3. Mover al siguiente nodo usando la direcciÃ³n guardada</span></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>        actual <span class="op">=</span> siguiente<span class="op">;</span></span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>    <span class="co">// 4. Asegurar que HEAD apunte a NULL al finalizar (buena prÃ¡ctica)</span></span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>    <span class="op">*</span>head_ref <span class="op">=</span> NULL<span class="op">;</span> </span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;Toda la memoria de la lista ha sido liberada.</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<hr />
+<h3 id="combinaciÃ³n-de-operaciones-dejar-solo-pares">10. CombinaciÃ³n de
+Operaciones: Dejar Solo Pares</h3>
+<p>Combina la lÃ³gica de la <strong>EliminaciÃ³n General (Ejercicio
+5)</strong> con una condiciÃ³n de valor par/impar.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> mantener_solo_pares<span class="op">(</span>Nodo <span class="op">**</span>head_ref<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>    Nodo <span class="op">*</span>actual <span class="op">=</span> <span class="op">*</span>head_ref<span class="op">;</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    Nodo <span class="op">*</span>anterior <span class="op">=</span> NULL<span class="op">;</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> <span class="op">(</span>actual <span class="op">!=</span> NULL<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Si el dato es IMPAR (debe ser eliminado)</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span>actual<span class="op">-&gt;</span>dato <span class="op">%</span> <span class="dv">2</span> <span class="op">!=</span> <span class="dv">0</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>            </span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>            <span class="co">// EliminaciÃ³n al inicio (HEAD)</span></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> <span class="op">(</span>anterior <span class="op">==</span> NULL<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>                <span class="op">*</span>head_ref <span class="op">=</span> actual<span class="op">-&gt;</span>siguiente<span class="op">;</span></span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>                free<span class="op">(</span>actual<span class="op">);</span></span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>                actual <span class="op">=</span> <span class="op">*</span>head_ref<span class="op">;</span> <span class="co">// Mover &#39;actual&#39; al nuevo inicio</span></span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>            <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>                <span class="co">// EliminaciÃ³n en medio o al final</span></span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>                anterior<span class="op">-&gt;</span>siguiente <span class="op">=</span> actual<span class="op">-&gt;</span>siguiente<span class="op">;</span></span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>                Nodo <span class="op">*</span>temp <span class="op">=</span> actual<span class="op">;</span></span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a>                actual <span class="op">=</span> actual<span class="op">-&gt;</span>siguiente<span class="op">;</span> <span class="co">// Mover &#39;actual&#39;</span></span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a>                free<span class="op">(</span>temp<span class="op">);</span></span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a>                <span class="co">// &#39;anterior&#39; se queda en su lugar</span></span>
+<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a>            <span class="op">}</span></span>
+<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
+<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a>            <span class="co">// Si el dato es PAR (conservar), avanzar ambos punteros</span></span>
+<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a>            anterior <span class="op">=</span> actual<span class="op">;</span></span>
+<span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a>            actual <span class="op">=</span> actual<span class="op">-&gt;</span>siguiente<span class="op">;</span></span>
+<span id="cb11-26"><a href="#cb11-26" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
+<span id="cb11-27"><a href="#cb11-27" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb11-28"><a href="#cb11-28" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;Nodos impares eliminados. Solo quedan pares.</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb11-29"><a href="#cb11-29" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+
+</div>
+</body>
+</html>
+

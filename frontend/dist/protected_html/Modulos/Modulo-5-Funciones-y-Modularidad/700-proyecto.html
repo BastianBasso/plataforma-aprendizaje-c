@@ -1,0 +1,371 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" crossorigin href="/assets/content-01sust.css">
+</head>
+<body>
+<div class="main-content">
+<p><strong>Proyecto de Laboratorio: MÃ³dulo de Utilidades Funcionales
+(MUF)</strong></p>
+<p><strong>Objetivo del Proyecto</strong></p>
+<p>DiseÃ±ar e implementar un programa modular en C que demuestre la
+organizaciÃ³n de un proyecto en <strong>tres archivos separados</strong>
+(.h, .c y main.c), aplicando rigurosamente los conceptos de funciones,
+tipos de retorno, Ã¡mbito y paso de argumentos.</p>
+<p><strong>Estructura Obligatoria del Proyecto</strong></p>
+<p>El proyecto debe constar de los siguientes archivos, respetando la
+<strong>Responsabilidad Ãšnica</strong> de cada uno:</p>
+<table style="width:98%;">
+<colgroup>
+<col style="width: 23%" />
+<col style="width: 39%" />
+<col style="width: 34%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>Archivo</strong></th>
+<th style="text-align: left;"><strong>Responsabilidad
+Principal</strong></th>
+<th style="text-align: left;"><strong>Conceptos a Aplicar</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>utilidades.h</strong></td>
+<td style="text-align: left;">Contener todos los
+<strong>Prototipos</strong> de las funciones y una <strong>Variable
+Global</strong> (si se requiere).</td>
+<td style="text-align: left;">Prototipos, #define (Opcional).</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>utilidades.c</strong></td>
+<td style="text-align: left;">Contener la <strong>DefiniciÃ³n</strong>
+(ImplementaciÃ³n) de todas las funciones.</td>
+<td style="text-align: left;">Definiciones de Funciones, return, void,
+Variables <strong>Locales</strong> e internos.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>main.c</strong></td>
+<td style="text-align: left;">Contener la funciÃ³n
+<strong>main()</strong> y el cÃ³digo que <strong>Llama</strong> a las
+funciones.</td>
+<td style="text-align: left;">Llamada de Funciones, AsignaciÃ³n de
+Valores Retornados, <strong>Ãmbito Local</strong> de main().</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Requisitos Funcionales por MÃ³dulo</strong></p>
+<p><strong>MÃ³dulo 1: Funciones de GeometrÃ­a (Uso de return y MÃºltiples
+ParÃ¡metros)</strong></p>
+<p>El archivo utilidades.h debe declarar, y utilidades.c debe definir,
+las siguientes funciones.</p>
+<p><strong>A. CÃ¡lculo de Volumen</strong></p>
+<ul>
+<li><p><strong>FunciÃ³n:</strong> float calcular_volumen_cubo(float
+lado)</p></li>
+<li><p><strong>Tipo de Retorno:</strong> float</p></li>
+<li><p><strong>Requisito:</strong> Debe usar la sentencia
+<strong>return</strong> para devolver el valor calculado del volumen
+(lado * lado * lado).</p></li>
+</ul>
+<p><strong>B. ConversiÃ³n de Unidades</strong></p>
+<ul>
+<li><p><strong>FunciÃ³n:</strong> int minutos_a_segundos(int
+minutos)</p></li>
+<li><p><strong>Tipo de Retorno:</strong> int</p></li>
+<li><p><strong>Requisito:</strong> Debe calcular y devolver el total de
+segundos.</p></li>
+</ul>
+<p><strong>MÃ³dulo 2: Funciones de ImpresiÃ³n (Uso de void y
+ParÃ¡metros)</strong></p>
+<p><strong>C. Reporte Simple</strong></p>
+<ul>
+<li><p><strong>FunciÃ³n:</strong> void imprimir_separador(char caracter,
+int longitud)</p></li>
+<li><p><strong>Tipo de Retorno:</strong> <strong>void</strong></p></li>
+<li><p><strong>Requisito:</strong> La funciÃ³n debe usar un bucle interno
+para imprimir el caracter recibido, la cantidad de veces que indique
+longitud. <strong>No debe usar return con valor.</strong></p></li>
+</ul>
+<p><strong>D. VerificaciÃ³n de Ãmbito</strong></p>
+<ul>
+<li><p><strong>Variable Global:</strong> Declara una variable
+<strong>int LOG_LEVEL = 1;</strong> en <strong>utilidades.h</strong> (o
+como constante en el .c si prefiere evitar globales, pero el .h facilita
+el ejercicio de Ã¡mbito).</p></li>
+<li><p><strong>FunciÃ³n:</strong> void mostrar_nivel_log(void)</p></li>
+<li><p><strong>Tipo de Retorno:</strong> <strong>void</strong></p></li>
+<li><p><strong>Requisito:</strong> Esta funciÃ³n debe acceder e imprimir
+el valor de <strong>LOG_LEVEL</strong>, demostrando el <strong>acceso de
+una variable global</strong> desde un archivo diferente.</p></li>
+</ul>
+<p><strong>ImplementaciÃ³n y VerificaciÃ³n en main.c</strong></p>
+<p>El archivo main.c debe probar todas las funciones, demostrando los
+siguientes conceptos:</p>
+<p><strong>1. Pruebas de Retorno y AsignaciÃ³n (MÃ³dulo 1)</strong></p>
+<ul>
+<li><p>Llamar a calcular_volumen_cubo(5.0f) y <strong>asignar el
+resultado</strong> a una variable local en main() llamada
+volumen_final.</p></li>
+<li><p>Llamar a minutos_a_segundos(3) y <strong>usar el valor retornado
+directamente</strong> como argumento para printf(), sin guardarlo en una
+variable intermedia.</p></li>
+</ul>
+<p><strong>2. Prueba de Control de Flujo con return (Estrategia de
+Salida Temprana)</strong></p>
+<ul>
+<li><p>Crea una nueva funciÃ³n en el mÃ³dulo utilidades.c:</p>
+<ul>
+<li><p><strong>Prototipo (en utilidades.h):</strong> float
+calcular_tasa_impuesto(int tipo_producto)</p></li>
+<li><p><strong>LÃ³gica (en utilidades.c):</strong></p>
+<ul>
+<li><p>Si tipo_producto es <strong>1</strong>, return 0.15f;.</p></li>
+<li><p>Si tipo_producto es <strong>2</strong>, return 0.05f;.</p></li>
+<li><p>Si es cualquier otro, debe imprimir un mensaje de error y
+ejecutar <strong>return 0.0f;</strong> (demostrando mÃºltiples return y
+<strong>Salida Temprana</strong>).</p></li>
+</ul></li>
+</ul></li>
+<li><p><strong>En main.c:</strong> Llama a esta funciÃ³n dos veces: una
+para un tipo vÃ¡lido (1 o 2) y otra para un tipo invÃ¡lido (ej:
+99).</p></li>
+</ul>
+<p><strong>3. Prueba de Ãmbito (Scope) ðŸ›¡ï¸</strong></p>
+<ul>
+<li><p><strong>Shadowing (Ensombramiento):</strong> Dentro de main(),
+declara una variable local llamada <strong>int LOG_LEVEL =
+50;</strong>.</p>
+<ul>
+<li><p>Imprime esta variable local <strong>antes</strong> de llamar a
+mostrar_nivel_log().</p></li>
+<li><p>Comenta el cÃ³digo explicando que esta variable local
+<strong>ensombra</strong> (shadowing) a la variable global del mismo
+nombre, y que los cambios realizados a esta variable local <strong>no
+afectan</strong> a la variable global.</p></li>
+</ul></li>
+</ul>
+<p><strong>4. Flujo de EjecuciÃ³n Modular</strong></p>
+<ul>
+<li><p>AsegÃºrate de que main.c incluya el archivo de encabezado:
+#include "utilidades.h".</p></li>
+<li><p>AsegÃºrate de que utilidades.c incluya su propio encabezado:
+#include "utilidades.h".</p></li>
+<li><p>Comenta brevemente la importancia de la <strong>DeclaraciÃ³n (en
+.h)</strong> para el Compilador y la <strong>DefiniciÃ³n (en .c)</strong>
+para el Enlazador (Linker), tal como se vio en el material del
+mÃ³dulo.</p></li>
+</ul>
+<p><strong>Criterios de AutoevaluaciÃ³n</strong></p>
+<ol type="1">
+<li><p><strong>OrganizaciÃ³n de Archivos (30%):</strong> Correcta
+separaciÃ³n de prototipos, definiciones y la funciÃ³n main() en los tres
+archivos, con las inclusiones (#include) correctas.</p></li>
+<li><p><strong>Uso de Funciones (30%):</strong> Correcta implementaciÃ³n
+de los tipos de retorno (float, int, void) y el uso estratÃ©gico de
+return para terminar la funciÃ³n.</p></li>
+<li><p><strong>GestiÃ³n de Ãmbito (30%):</strong> DemostraciÃ³n clara del
+<strong>Shadowing</strong> en main() y el acceso a la variable
+<strong>Global</strong> desde utilidades.c.</p></li>
+<li><p><strong>Estilo y DocumentaciÃ³n (10%):</strong> CÃ³digo claro, bien
+comentado y con un buen uso de los nombres de variables (cohesiÃ³n y
+legibilidad).</p></li>
+</ol>
+<p><strong>SoluciÃ³n del Laboratorio: MÃ³dulo de Utilidades Funcionales
+(MUF)</strong></p>
+<p>El proyecto se divide en tres archivos:</p>
+<p><strong>ðŸ“ 1. Archivo de Encabezado: utilidades.h</strong></p>
+<p>Este archivo contiene los <strong>prototipos</strong> de todas las
+funciones que el mÃ³dulo expone y la declaraciÃ³n de la <strong>variable
+global</strong> para el ejercicio de Ã¡mbito.</p>
+<p>C</p>
+<p>// utilidades.h</p>
+<p>#<strong>ifndef</strong> UTILIDADES_H</p>
+<p>#<strong>define</strong> UTILIDADES_H</p>
+<p>// Incluimos &lt;stdio.h&gt; aquÃ­ solo porque algunas funciones void
+la necesitan</p>
+<p>// para imprimir en la consola, aunque no es lo ideal para todas las
+librerÃ­as.</p>
+<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
+<p>// ***********************************************</p>
+<p>// 4. Prueba de Ãmbito: DeclaraciÃ³n de Variable GLOBAL</p>
+<p>// (Usaremos 'extern' para indicar que la definiciÃ³n real estÃ¡ en
+otro .c)</p>
+<p>extern int LOG_LEVEL;</p>
+<p>// ***********************************************</p>
+<p>// MÃ³dulo 1: Funciones de GeometrÃ­a y ConversiÃ³n (Con 'return')</p>
+<p>// ***********************************************</p>
+<p>// A. CÃ¡lculo de Volumen: Retorna el volumen de un cubo</p>
+<p>float calcular_volumen_cubo(float lado);</p>
+<p>// B. ConversiÃ³n de Unidades: Retorna la conversiÃ³n de minutos a
+segundos</p>
+<p>int minutos_a_segundos(int minutos);</p>
+<p>// 2. Prueba de Control de Flujo con return: Calcula la tasa de
+impuesto</p>
+<p>float calcular_tasa_impuesto(int tipo_producto);</p>
+<p>// ***********************************************</p>
+<p>// MÃ³dulo 2: Funciones de ImpresiÃ³n (Con 'void')</p>
+<p>// ***********************************************</p>
+<p>// C. Reporte Simple: Imprime un separador la cantidad de veces
+especificada</p>
+<p>void imprimir_separador(char caracter, int longitud);</p>
+<p>// D. VerificaciÃ³n de Ãmbito: Muestra el nivel de log (usa la global
+LOG_LEVEL)</p>
+<p>void mostrar_nivel_log(void);</p>
+<p>#<strong>endif</strong> // UTILIDADES_H</p>
+<p><strong>ðŸ“ 2. Archivo de ImplementaciÃ³n: utilidades.c</strong></p>
+<p>Este archivo contiene la <strong>definiciÃ³n</strong> (lÃ³gica) de
+todas las funciones y la <strong>inicializaciÃ³n</strong> de la variable
+global.</p>
+<p>C</p>
+<p>// utilidades.c</p>
+<p>#<strong>include</strong> "utilidades.h" // Importante incluir el
+propio encabezado</p>
+<p>// ***********************************************</p>
+<p>// 4. Prueba de Ãmbito: DefiniciÃ³n e InicializaciÃ³n de Variable
+GLOBAL</p>
+<p>// La variable 'LOG_LEVEL' se define e inicializa aquÃ­.</p>
+<p>int LOG_LEVEL = 1; // 1: INFO, 2: WARNING, 3: ERROR</p>
+<p>// ***********************************************</p>
+<p>// MÃ³dulo 1: Funciones de GeometrÃ­a y ConversiÃ³n (Con 'return')</p>
+<p>// ***********************************************</p>
+<p>float calcular_volumen_cubo(float lado) {</p>
+<p>// A. Uso de 'return' para devolver el valor float</p>
+<p>return lado * lado * lado;</p>
+<p>}</p>
+<p>int minutos_a_segundos(int minutos) {</p>
+<p>// B. Uso de 'return' para devolver el valor int</p>
+<p>return minutos * 60;</p>
+<p>}</p>
+<p>float calcular_tasa_impuesto(int tipo_producto) {</p>
+<p>// 2. Prueba de Control de Flujo con return (Salida Temprana)</p>
+<p>if (tipo_producto == 1) {</p>
+<p>printf(" [Impuesto] Producto Tipo 1. Tasa 15.0%%\n");</p>
+<p>return 0.15f; // Salida temprana exitosa</p>
+<p>} else if (tipo_producto == 2) {</p>
+<p>printf(" [Impuesto] Producto Tipo 2. Tasa 5.0%%\n");</p>
+<p>return 0.05f; // Salida temprana exitosa</p>
+<p>} else {</p>
+<p>printf(" [Impuesto] ERROR: Tipo de producto (%d) invÃ¡lido. Retornando
+0.0.\n", tipo_producto);</p>
+<p>return 0.0f; // Salida temprana de error</p>
+<p>}</p>
+<p>}</p>
+<p>// ***********************************************</p>
+<p>// MÃ³dulo 2: Funciones de ImpresiÃ³n (Con 'void')</p>
+<p>// ***********************************************</p>
+<p>void imprimir_separador(char caracter, int longitud) {</p>
+<p>// C. Uso de 'void': La funciÃ³n realiza una acciÃ³n (imprimir) y no
+devuelve valor.</p>
+<p>for (int i = 0; i &lt; longitud; i++) {</p>
+<p>printf("%c", caracter);</p>
+<p>}</p>
+<p>printf("\n");</p>
+<p>// No necesita 'return'</p>
+<p>}</p>
+<p>void mostrar_nivel_log(void) {</p>
+<p>// D. Accede a la variable global 'LOG_LEVEL' definida en este
+archivo</p>
+<p>printf(" [Log] Accediendo a variable GLOBAL desde utilidades.c -&gt;
+Nivel: %d\n", LOG_LEVEL);</p>
+<p>// Nota: El cambio a LOG_LEVEL se reflejarÃ­a en main.c</p>
+<p>}</p>
+<p><strong>ðŸ“ 3. Archivo Principal: main.c</strong></p>
+<p>Este archivo es el punto de entrada del programa (main()) y realiza
+todas las <strong>llamadas</strong> a las funciones implementadas en el
+mÃ³dulo utilidades.</p>
+<p>C</p>
+<p>// main.c</p>
+<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
+<p>#<strong>include</strong> "utilidades.h" // Necesario para acceder a
+los prototipos y la variable global</p>
+<p>int main() {</p>
+<p>imprimir_separador('=', 60);</p>
+<p>printf("PRUEBAS DE MODULARIDAD Y VALOR DE RETORNO\n");</p>
+<p>imprimir_separador('=', 60);</p>
+<p>// ***********************************************</p>
+<p>// 1. Pruebas de Retorno y AsignaciÃ³n (MÃ³dulo 1)</p>
+<p>// ***********************************************</p>
+<p>// Prueba A: Llamar y asignar el resultado a una variable local de
+main.c</p>
+<p>float lado_cubo = 5.0f;</p>
+<p>float volumen_final = calcular_volumen_cubo(lado_cubo);</p>
+<p>printf("1. Volumen de un cubo de lado %.1f: %.2f\n", lado_cubo,
+volumen_final);</p>
+<p>// Prueba B: Llamar y usar el valor retornado directamente en una
+expresiÃ³n</p>
+<p>int minutos = 4;</p>
+<p>printf("2. %d minutos a segundos (Uso Directo en printf): %d
+segundos\n",</p>
+<p>minutos,</p>
+<p>minutos_a_segundos(minutos) // Valor retornado usado como argumento
+de printf</p>
+<p>);</p>
+<p>imprimir_separador('-', 60);</p>
+<p>printf("2. PRUEBA DE CONTROL DE FLUJO CON RETURN (Salida
+Temprana)\n");</p>
+<p>imprimir_separador('-', 60);</p>
+<p>// Prueba de return con valor vÃ¡lido</p>
+<p>float impuesto_valido = calcular_tasa_impuesto(1);</p>
+<p>printf("3. Impuesto vÃ¡lido retornado: %.2f\n", impuesto_valido);</p>
+<p>// Prueba de return con valor invÃ¡lido (salida temprana de error)</p>
+<p>float impuesto_invalido = calcular_tasa_impuesto(99);</p>
+<p>printf("4. Impuesto invÃ¡lido retornado: %.2f\n",
+impuesto_invalido);</p>
+<p>imprimir_separador('*', 60);</p>
+<p>printf("3. PRUEBA DE ÃMBITO (SCOPE) DE VARIABLES\n");</p>
+<p>imprimir_separador('*', 60);</p>
+<p>// D. Prueba de Ãmbito (Shadowing)</p>
+<p>// Declaramos una variable LOCAL en main() con el mismo nombre que la
+global.</p>
+<p>// Esta variable SÃ“LO existe en el Ã¡mbito de main y ensombrece
+(shadowing) a la global.</p>
+<p>int LOG_LEVEL = 50;</p>
+<p>printf("5. Ãmbito de main: Mi variable LOCAL LOG_LEVEL es: %d\n",
+LOG_LEVEL); // Imprime 50</p>
+<p>// Llamamos a la funciÃ³n que accede a la variable global</p>
+<p>// NOTA: Esta funciÃ³n usarÃ¡ la variable global LOG_LEVEL=1, no la
+local LOG_LEVEL=50 de main.</p>
+<p>printf("6. Llamando a funcion 'mostrar_nivel_log()':\n");</p>
+<p>mostrar_nivel_log();</p>
+<p>printf("7. Ãmbito de main (despuÃ©s de la llamada): Mi variable LOCAL
+LOG_LEVEL sigue siendo: %d\n", LOG_LEVEL); // Imprime 50 (sin
+cambios)</p>
+<p>// ComprobaciÃ³n de funciÃ³n con tipo void</p>
+<p>printf("8. Llamando a funcion 'imprimir_separador()':\n");</p>
+<p>imprimir_separador('#', 20);</p>
+<p>return 0;</p>
+<p>}</p>
+<p><strong>ðŸ“œ Resultado Esperado</strong></p>
+<p>El resultado de la ejecuciÃ³n del programa, compilando correctamente
+main.c y utilidades.c juntos, serÃ¡ el siguiente:</p>
+<p>============================================================</p>
+<p>PRUEBAS DE MODULARIDAD Y VALOR DE RETORNO</p>
+<p>============================================================</p>
+<p>1. Volumen de un cubo de lado 5.0: 125.00</p>
+<p>2. 4 minutos a segundos (Uso Directo en printf): 240 segundos</p>
+<p>------------------------------------------------------------</p>
+<p>2. PRUEBA DE CONTROL DE FLUJO CON RETURN (Salida Temprana)</p>
+<p>------------------------------------------------------------</p>
+<p>[Impuesto] Producto Tipo 1. Tasa 15.0%</p>
+<p>3. Impuesto vÃ¡lido retornado: 0.15</p>
+<p>[Impuesto] ERROR: Tipo de producto (99) invÃ¡lido. Retornando 0.0.</p>
+<p>4. Impuesto invÃ¡lido retornado: 0.00</p>
+<p>************************************************************</p>
+<p>3. PRUEBA DE ÃMBITO (SCOPE) DE VARIABLES</p>
+<p>************************************************************</p>
+<p>5. Ãmbito de main: Mi variable LOCAL LOG_LEVEL es: 50</p>
+<p>6. Llamando a funcion 'mostrar_nivel_log()':</p>
+<p>[Log] Accediendo a variable GLOBAL desde utilidades.c -&gt; Nivel:
+1</p>
+<p>7. Ãmbito de main (despuÃ©s de la llamada): Mi variable LOCAL
+LOG_LEVEL sigue siendo: 50</p>
+<p>8. Llamando a funcion 'imprimir_separador()':</p>
+<p>####################</p>
+
+</div>
+</body>
+</html>
+

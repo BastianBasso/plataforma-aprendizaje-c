@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" crossorigin href="/assets/content-01sust.css">
+</head>
+<body>
+<div class="main-content">
+<p><strong>Ejercicios: Variables, Constantes y Conversión de
+Tipos</strong></p>
+<p><strong>Ejercicio 1: Constantes Tipadas (const)</strong></p>
+<p><strong>Instrucción:</strong> Define una constante entera const int
+LIMITE_MAXIMO = 50; y una variable int llamada puntuacion. Inicializa la
+variable con la constante. Imprime ambos valores.</p>
+<p><strong>Solución en C:</strong></p>
+<p>C</p>
+<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
+<p>int main(void) {</p>
+<p>// Definición de una constante tipada</p>
+<p>const int LIMITE_MAXIMO = 50;</p>
+<p>// Uso de la constante para inicializar una variable</p>
+<p>int puntuacion = LIMITE_MAXIMO;</p>
+<p>printf("Límite máximo definido: %d\n", LIMITE_MAXIMO);</p>
+<p>printf("Puntuación inicial: %d\n", puntuacion);</p>
+<p>return 0;</p>
+<p>}</p>
+<p><strong>Output Esperado:</strong></p>
+<p>Límite máximo definido: 50</p>
+<p>Puntuación inicial: 50</p>
+<p><strong>Ejercicio 2: Uso de Constantes Simbólicas
+(#define)</strong></p>
+<p><strong>Instrucción:</strong> Usa la directiva #define para crear una
+constante simbólica llamada DIAS_SEMANA con el valor 7. Usa esta
+constante para calcular el total de horas en tres semanas y guarda el
+resultado en una variable int.</p>
+<p><strong>Solución en C:</strong></p>
+<p>C</p>
+<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
+<p>#<strong>define</strong> DIAS_SEMANA 7</p>
+<p>int main(void) {</p>
+<p>const int HORAS_DIA = 24; // Constante usando 'const'</p>
+<p>// El preprocesador reemplaza DIAS_SEMANA por 7</p>
+<p>int horas_tres_semanas = DIAS_SEMANA * 3 * HORAS_DIA;</p>
+<p>printf("Horas en 3 semanas: %d\n", horas_tres_semanas);</p>
+<p>return 0;</p>
+<p>}</p>
+<p><strong>Output Esperado:</strong></p>
+<p>Horas en 3 semanas: 504</p>
+<p><strong>Ejercicio 3: Falla de Inmutabilidad (const)</strong></p>
+<p><strong>Instrucción:</strong> Define una constante const float PI =
+3.14159f;. Intenta, y observa el error, reasignar un nuevo valor a PI
+después de su inicialización. (Describe el error en lugar de ejecutar el
+código fallido).</p>
+<p>Explicación y Solución:</p>
+<p>El código siguiente causaría un error de compilación porque const
+previene cualquier reasignación, reforzando la inmutabilidad.</p>
+<p>C</p>
+<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
+<p>int main(void) {</p>
+<p>const float PI = 3.14159f;</p>
+<p>// PI = 3.14; // ¡ERROR DE COMPILACIÓN!</p>
+<p>printf("La constante PI fue definida de forma segura.\n");</p>
+<p>return 0;</p>
+<p>}</p>
+<p><strong>Output Esperado:</strong></p>
+<p>La constante PI fue definida de forma segura.</p>
+<p>// NOTA: Si descomentas 'PI = 3.14;', el compilador mostrará un error
+como:</p>
+<p>// error: assignment of read-only variable 'PI'</p>
+<p><strong>Ejercicio 4: Convención de Nomenclatura</strong></p>
+<p><strong>Instrucción:</strong> Define una constante de tasa de interés
+usando la convención de nomenclatura MAYUSCULAS_CON_GUION_BAJO (const
+float TASA_ANUAL = 0.05f;). Define una variable capitalInicial usando
+<em>camelCase</em>. Usa ambas para calcular el interés simple por un
+año.</p>
+<p><strong>Solución en C:</strong></p>
+<p>C</p>
+<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
+<p>int main(void) {</p>
+<p>const float TASA_ANUAL = 0.05f; // Constante (MAYÚSCULAS)</p>
+<p>float capitalInicial = 1000.0f; // Variable (camelCase)</p>
+<p>float interesGanado = capitalInicial * TASA_ANUAL;</p>
+<p>printf("Capital: %.2f\n", capitalInicial);</p>
+<p>printf("Interés ganado: %.2f\n", interesGanado);</p>
+<p>return 0;</p>
+<p>}</p>
+<p><strong>Output Esperado:</strong></p>
+<p>Capital: 1000.00</p>
+<p>Interés ganado: 50.00</p>
+<p><strong>Ejercicio 5: Conversión Implícita (int a float)</strong></p>
+<p><strong>Instrucción:</strong> Realiza una suma entre una variable int
+y una variable float. Asigna el resultado a un float. Explica por qué el
+int se convirtió automáticamente.</p>
+<p><strong>Solución en C:</strong></p>
+<p>C</p>
+<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
+<p>int main(void) {</p>
+<p>int numero_entero = 15;</p>
+<p>float numero_decimal = 2.5f;</p>
+<p>// Conversión Implícita: El 'numero_entero' (15) se promociona a
+float (15.0f)</p>
+<p>float resultado = numero_entero + numero_decimal;</p>
+<p>printf("Resultado (15 + 2.5): %.1f\n", resultado);</p>
+<p>return 0;</p>
+<p>}</p>
+<p><strong>Output Esperado:</strong></p>
+<p>Resultado (15 + 2.5): 17.5</p>
+<p><strong>Ejercicio 6: Conversión Implícita (char a int)</strong></p>
+<p><strong>Instrucción:</strong> Declara un char con el valor '1'.
+Súmale un int con el valor 5 y guarda el resultado en otro int. Imprime
+el resultado numérico.</p>
+<p><strong>Solución en C:</strong></p>
+<p>C</p>
+<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
+<p>int main(void) {</p>
+<p>char caracter_uno = '1'; // ASCII de '1' es 49</p>
+<p>int incremento = 5;</p>
+<p>// El 'caracter_uno' se convierte a su valor ASCII (49) antes de la
+suma</p>
+<p>int valor_final = caracter_uno + incremento;</p>
+<p>printf("Código ASCII de '1' + 5 es: %d\n", valor_final);</p>
+<p>return 0;</p>
+<p>}</p>
+<p><strong>Output Esperado:</strong></p>
+<p>Código ASCII de '1' + 5 es: 54</p>
+<p><strong>Ejercicio 7: División Entera (Sin Casting)</strong></p>
+<p><strong>Instrucción:</strong> Divide dos números enteros, num1 = 10 y
+num2 = 4, y guarda el resultado en un float. Imprime el resultado para
+mostrar cómo la división de enteros trunca el resultado antes de la
+asignación.</p>
+<p><strong>Solución en C:</strong></p>
+<p>C</p>
+<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
+<p>int main(void) {</p>
+<p>int num1 = 10;</p>
+<p>int num2 = 4;</p>
+<p>// C realiza la división de enteros (10 / 4 = 2) antes de asignarlo
+al float.</p>
+<p>float resultado_entero = num1 / num2;</p>
+<p>printf("Resultado de división entera (10 / 4): %.2f\n",
+resultado_entero);</p>
+<p>return 0;</p>
+<p>}</p>
+<p><strong>Output Esperado:</strong></p>
+<p>Resultado de división entera (10 / 4): 2.00</p>
+<p><strong>Ejercicio 8: Conversión Explícita (Casting para
+División)</strong></p>
+<p><strong>Instrucción:</strong> Usa las mismas variables del ejercicio
+anterior (num1 = 10, num2 = 4), pero aplica <strong>casting</strong> a
+uno de los operandos antes de la división para asegurar un resultado de
+punto flotante.</p>
+<p><strong>Solución en C:</strong></p>
+<p>C</p>
+<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
+<p>int main(void) {</p>
+<p>int num1 = 10;</p>
+<p>int num2 = 4;</p>
+<p>// Casting: (float) fuerza a num1 a ser 10.0f, lo que obliga a toda
+la</p>
+<p>// operación a realizarse en punto flotante.</p>
+<p>float resultado_decimal = (float)num1 / num2;</p>
+<p>printf("Resultado de división decimal (10 / 4): %.2f\n",
+resultado_decimal);</p>
+<p>return 0;</p>
+<p>}</p>
+<p><strong>Output Esperado:</strong></p>
+<p>Resultado de división decimal (10 / 4): 2.50</p>
+<p><strong>Ejercicio 9: Casting para Pérdida de Datos
+(Truncamiento)</strong></p>
+<p><strong>Instrucción:</strong> Inicializa un double con el valor
+99.98. Usa <strong>casting</strong> para asignarlo a una variable int.
+Imprime el valor resultante de la variable int para demostrar la pérdida
+de la parte decimal.</p>
+<p><strong>Solución en C:</strong></p>
+<p>C</p>
+<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
+<p>int main(void) {</p>
+<p>double valor_decimal = 99.98;</p>
+<p>// Casting: (int) fuerza la conversión, cortando la parte
+decimal.</p>
+<p>int valor_entero = (int)valor_decimal;</p>
+<p>printf("Valor double original: %.2lf\n", valor_decimal);</p>
+<p>printf("Valor entero resultante (truncado): %d\n", valor_entero);</p>
+<p>return 0;</p>
+<p>}</p>
+<p><strong>Output Esperado:</strong></p>
+<p>Valor double original: 99.98</p>
+<p>Valor entero resultante (truncado): 99</p>
+<p><strong>Ejercicio 10: Reasignación de Variable vs. Uso de
+Constante</strong></p>
+<p><strong>Instrucción:</strong> Declara una variable int llamada stock
+e inicialízala a 100. Define una constante const int CANTIDAD_VENDIDA =
+10;. Realiza una resta y reasigna el nuevo valor a stock. Imprime ambos
+valores al final.</p>
+<p><strong>Solución en C:</strong></p>
+<p>C</p>
+<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
+<p>int main(void) {</p>
+<p>int stock = 100;</p>
+<p>const int CANTIDAD_VENDIDA = 10; // Fijo</p>
+<p>// Uso de constante en la operación y reasignación en la variable</p>
+<p>stock = stock - CANTIDAD_VENDIDA;</p>
+<p>printf("Cantidad vendida (constante): %d\n", CANTIDAD_VENDIDA);</p>
+<p>printf("Stock restante (variable reasignada): %d\n", stock);</p>
+<p>return 0;</p>
+<p>}</p>
+<p><strong>Output Esperado:</strong></p>
+<p>Cantidad vendida (constante): 10</p>
+<p>Stock restante (variable reasignada): 90</p>
+<p><strong>Ejercicio 11: Múltiple Conversión Implícita</strong></p>
+<p><strong>Instrucción:</strong> Declara un char ('Z'), un int (100), y
+un double (0.5). Súmalos y guarda el resultado en una variable double.
+Explica por qué el double es el tipo final.</p>
+<p><strong>Solución en C:</strong></p>
+<p>C</p>
+<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
+<p>int main(void) {</p>
+<p>char letra_z = 'Z';</p>
+<p>int numero_grande = 100;</p>
+<p>double factor = 0.5;</p>
+<p>// Conversión implícita: char y int se promocionan a double porque es
+el tipo "más grande".</p>
+<p>double resultado = letra_z + numero_grande + factor;</p>
+<p>// ASCII de 'Z' es 90. Operación: 90 + 100 + 0.5 = 190.5</p>
+<p>printf("Resultado final (double): %.1lf\n", resultado);</p>
+<p>return 0;</p>
+<p>}</p>
+<p><strong>Output Esperado:</strong></p>
+<p>Resultado final (double): 190.5</p>
+<p><strong>Ejercicio 12: Casting para Forzar int</strong></p>
+<p><strong>Instrucción:</strong> Calcula el promedio de dos números
+float: 95.5f y 80.0f. Usa <strong>casting</strong> para forzar que el
+resultado final del promedio se guarde como un int (truncando el
+decimal).</p>
+<p><strong>Solución en C:</strong></p>
+<p>C</p>
+<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
+<p>int main(void) {</p>
+<p>float nota1 = 95.5f;</p>
+<p>float nota2 = 80.0f;</p>
+<p>float promedio_real = (nota1 + nota2) / 2.0f;</p>
+<p>// Casting: Fuerza el truncamiento del promedio real para obtener
+solo la parte entera.</p>
+<p>int promedio_entero = (int)promedio_real;</p>
+<p>printf("Promedio real: %.2f\n", promedio_real);</p>
+<p>printf("Promedio entero forzado: %d\n", promedio_entero);</p>
+<p>return 0;</p>
+<p>}</p>
+<p><strong>Output Esperado:</strong></p>
+<p>Promedio real: 87.75</p>
+<p>Promedio entero forzado: 87</p>
+<p><strong>Ejercicio 13: Definición Mixta de Constantes</strong></p>
+<p><strong>Instrucción:</strong> Define una constante de color (ej.
+"Rojo") usando #define y una constante de estado (ej. 301) usando const
+int. Imprime ambas para demostrar que cumplen la convención de
+mayúsculas.</p>
+<p><strong>Solución en C:</strong></p>
+<p>C</p>
+<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
+<p>#<strong>define</strong> COLOR_DEFAULT "ROJO" // Constante
+Simbólica</p>
+<p>int main(void) {</p>
+<p>const int CODIGO_ESTADO = 301; // Constante Tipada</p>
+<p>printf("Mensaje de estado: %d\n", CODIGO_ESTADO);</p>
+<p>printf("Color seleccionado: %s\n", COLOR_DEFAULT);</p>
+<p>return 0;</p>
+<p>}</p>
+<p><strong>Output Esperado:</strong></p>
+<p>Mensaje de estado: 301</p>
+<p>Color seleccionado: ROJO</p>
+<p><strong>Ejercicio 14: Casting para Uso de Memoria</strong></p>
+<p><strong>Instrucción:</strong> Inicializa un double con un valor
+grande (1234567.89). Usa casting para asignarlo a una variable float.
+Imprime ambos valores para observar una posible pérdida de precisión en
+el float debido a su menor tamaño de memoria (4 bytes vs 8 bytes).</p>
+<p><strong>Solución en C:</strong></p>
+<p>C</p>
+<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
+<p>int main(void) {</p>
+<p>double valor_alta_precision = 1234567.89; // 8 bytes</p>
+<p>// Casting: Pérdida de precisión al forzar 8 bytes a 4 bytes.</p>
+<p>float valor_baja_precision = (float)valor_alta_precision;</p>
+<p>printf("Double (8 bytes): %.10lf\n", valor_alta_precision);</p>
+<p>// El float puede no retener todos los decimales de forma
+precisa.</p>
+<p>printf("Float (4 bytes): %.10f\n", valor_baja_precision);</p>
+<p>return 0;</p>
+<p>}</p>
+<p><strong>Output Esperado (Observar la diferencia en los últimos
+dígitos):</strong></p>
+<p>Double (8 bytes): 1234567.8900000000</p>
+<p>Float (4 bytes): 1234567.8750000000 // El valor puede variar
+ligeramente según el sistema</p>
+<p><strong>Ejercicio 15: Evaluación de Expresión con
+Casting</strong></p>
+<p><strong>Instrucción:</strong> Dadas tres variables int (a=5, b=2,
+c=3), calcula el resultado de la expresión: $\text{Resultado} = a +
+(\text{casting a float de } b / c)$. Guarda el resultado en un
+float.</p>
+<p><strong>Solución en C:</strong></p>
+<p>C</p>
+<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
+<p>int main(void) {</p>
+<p>int a = 5;</p>
+<p>int b = 2;</p>
+<p>int c = 3;</p>
+<p>// Paso 1: b/c es división entera (2/3 = 0).</p>
+<p>// Paso 2: El casting (float) convierte ese '0' a 0.0f.</p>
+<p>// float resultado = a + (float)(b / c); // Esto daría 5.0</p>
+<p>// CORRECCIÓN: Para dividir 2.0 / 3.0, el casting debe aplicarse al
+numerador o denominador:</p>
+<p>float resultado = a + ((float)b / c);</p>
+<p>printf("Resultado (5 + 2.0/3.0): %.4f\n", resultado);</p>
+<p>return 0;</p>
+<p>}</p>
+<p><strong>Output Esperado:</strong></p>
+<p>Resultado (5 + 2.0/3.0): 5.6667</p>
+
+
+</div>
+</body>
+</html>
+

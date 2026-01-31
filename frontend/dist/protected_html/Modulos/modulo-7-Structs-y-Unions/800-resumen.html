@@ -1,0 +1,203 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" crossorigin href="/assets/content-01sust.css">
+</head>
+<body>
+<div class="main-content">
+<h2
+id="resumen-mÃ³dulo-tipos-de-datos-compuestos-y-optimizaciÃ³n-avanzada-de-memoria">ðŸ’¾
+Resumen MÃ³dulo: Tipos de Datos Compuestos y OptimizaciÃ³n Avanzada de
+Memoria</h2>
+<p>Este mÃ³dulo se centrÃ³ en la creaciÃ³n de <strong>Tipos de Datos
+Definidos por el Usuario</strong> para superar la limitaciÃ³n univalor de
+los tipos primitivos. Aprendiste a agrupar atributos heterogÃ©neos en
+entidades coherentes (<code>structs</code>) y a crear colecciones
+complejas (<strong>Arrays de Structs</strong>). El salto conceptual mÃ¡s
+importante fue la introducciÃ³n a la <strong>optimizaciÃ³n de
+memoria</strong> a nivel de bit y byte, con el uso de
+<strong><code>union</code></strong> y <strong>Campos de Bits</strong>,
+que otorga al programador el control granular esencial para sistemas
+embebidos y cÃ³digo de alto rendimiento.</p>
+<hr />
+<h3 id="tipos-de-datos-definidos-por-el-usuario-struct-y-typedef">1.
+Tipos de Datos Definidos por el Usuario (Struct y Typedef) ðŸ§±</h3>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Concepto</th>
+<th style="text-align: left;">PropÃ³sito en el MÃ³dulo</th>
+<th style="text-align: left;">CaracterÃ­stica Clave</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>Estructura
+(<code>struct</code>)</strong></td>
+<td style="text-align: left;">Agrupar variables de <strong>diferentes
+tipos</strong> bajo un solo nombre lÃ³gico, modelando una entidad
+completa.</td>
+<td style="text-align: left;">Sus miembros se almacenan en memoria de
+forma <strong>contigua</strong> y secuencial.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong><code>typedef</code></strong></td>
+<td style="text-align: left;">Crear un <strong>alias</strong>
+(sobrenombre) para una <code>struct</code> compleja o anÃ³nima.</td>
+<td style="text-align: left;">Simplifica la sintaxis de declaraciÃ³n,
+permitiendo usar el alias directamente sin la palabra clave
+<code>struct</code>.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="acceso-a-miembros-punteros-y-operadores">2. Acceso a Miembros:
+Punteros y Operadores ðŸ“Œ</h3>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Operador</th>
+<th style="text-align: left;">AplicaciÃ³n</th>
+<th style="text-align: left;">Equivalencia SintÃ¡ctica</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>Punto
+(<code>.</code>)</strong></td>
+<td style="text-align: left;">Accede a un miembro de una variable que es
+una <code>struct</code> <strong>declarada directamente</strong> (no es
+un puntero).</td>
+<td style="text-align: left;"><span
+class="math inline">â€˜variable.miembroâ€˜</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Flecha
+(<code>-&gt;</code>)</strong></td>
+<td style="text-align: left;">Accede a un miembro de una variable que es
+un <strong>puntero</strong> a una <code>struct</code>.</td>
+<td style="text-align: left;"><strong>Desreferencia + Punto</strong>:
+<span class="math inline">â€˜(*puntero).miembroâ€˜</span> (La flecha es la
+forma recomendada).</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Precedencia</strong></td>
+<td style="text-align: left;"><strong>El operador <code>.</code> tiene
+mayor precedencia que <code>*</code></strong>.</td>
+<td style="text-align: left;">El uso de parÃ©ntesis en <span
+class="math inline">â€˜(*puntero).miembroâ€˜</span> es
+<strong>obligatorio</strong> para garantizar la desreferencia correcta y
+evitar errores de compilaciÃ³n.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="colecciones-complejas-arrays-de-estructuras">3. Colecciones
+Complejas: Arrays de Estructuras ðŸ“¦</h3>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Concepto</th>
+<th style="text-align: left;">DefiniciÃ³n</th>
+<th style="text-align: left;">AplicaciÃ³n PrÃ¡ctica</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>Array de Structs</strong></td>
+<td style="text-align: left;">Una colecciÃ³n de elementos donde
+<strong>cada posiciÃ³n del array</strong> es una estructura completa, es
+decir, una entidad con mÃºltiples atributos.</td>
+<td style="text-align: left;">Crear <strong>Bases de Datos en
+Memoria</strong> (listas de registros, historiales de sensores,
+inventarios).</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Acceso a Datos</strong></td>
+<td style="text-align: left;">Combina la indexaciÃ³n del array con el
+acceso a miembros.</td>
+<td style="text-align: left;"><span
+class="math inline">â€˜array[indice].miembroâ€˜</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>InicializaciÃ³n</strong></td>
+<td style="text-align: left;">Se puede inicializar usando
+<strong>inicializaciÃ³n posicional</strong> (<code>{}</code>) o
+<strong>inicializaciÃ³n designada</strong>
+(<code>.nombre = valor</code>).</td>
+<td style="text-align: left;">Permite definir colecciones complejas con
+datos predefinidos de forma clara y segura.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="optimizaciÃ³n-avanzada-unions-campos-de-bits-y-alineaciÃ³n">4.
+OptimizaciÃ³n Avanzada: Unions, Campos de Bits y AlineaciÃ³n ðŸ’¾</h3>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Concepto</th>
+<th style="text-align: left;">FunciÃ³n Principal</th>
+<th style="text-align: left;">Impacto en la Memoria</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong><code>union</code></strong></td>
+<td style="text-align: left;">Tipo compuesto donde <strong>todos los
+miembros comparten la misma direcciÃ³n</strong> de inicio en
+memoria.</td>
+<td style="text-align: left;">Su tamaÃ±o es el del <strong>miembro mÃ¡s
+grande</strong>, logrando <strong>optimizaciÃ³n</strong> al almacenar
+solo un valor vÃ¡lido a la vez.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Campos de Bits</strong></td>
+<td style="text-align: left;">Declarar un miembro especificando su
+<strong>tamaÃ±o exacto en bits</strong> (<span
+class="math inline">â€˜:Nâ€˜</span>), generalmente dentro de un
+<code>int</code> o <code>unsigned int</code>.</td>
+<td style="text-align: left;">Permite al compilador
+<strong>empaquetar</strong> datos binarios (flags) en un byte o
+fracciÃ³n, <strong>minimizando el <code>Padding</code></strong>.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>AlineaciÃ³n de Datos</strong></td>
+<td style="text-align: left;">Requisito impuesto por el hardware para
+acceder a datos en direcciones de memoria que sean mÃºltiplos de su
+tamaÃ±o (ej. un <code>int</code> de 4 bytes debe empezar en una direcciÃ³n
+mÃºltiplo de 4).</td>
+<td style="text-align: left;">El compilador inserta <strong>Relleno
+(<code>Padding</code>)</strong> en las <code>structs</code> para
+asegurar el cumplimiento, aumentando el tamaÃ±o final de la
+estructura.</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</body>
+</html>
+

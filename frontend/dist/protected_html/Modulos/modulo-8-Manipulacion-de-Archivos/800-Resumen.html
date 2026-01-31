@@ -1,0 +1,260 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" crossorigin href="/assets/content-01sust.css">
+</head>
+<body>
+<div class="main-content">
+<h2
+id="resumen-mÃ³dulo-persistencia-de-datos-y-flujos-de-archivos-streams">ðŸ’¾
+Resumen MÃ³dulo: Persistencia de Datos y Flujos de Archivos
+(Streams)</h2>
+<p>Este mÃ³dulo se centrÃ³ en la <strong>Persistencia de Datos</strong>,
+el concepto fundamental que permite a la informaciÃ³n <strong>sobrevivir
+a la ejecuciÃ³n del programa</strong> al almacenarla en medios no
+volÃ¡tiles (como el disco duro o SSD). Aprendiste a manejar el
+<strong>Modelo de Flujos (<em>Streams</em>)</strong> en C, que actÃºa
+como una <strong>abstracciÃ³n</strong> para estandarizar la
+entrada/salida (I/O) hacia la consola, impresoras y, crucialmente, hacia
+archivos fÃ­sicos.</p>
+<hr />
+<h3 id="el-manejador-de-flujos-file-y-conexiÃ³n-lÃ³gica">1. El Manejador
+de Flujos (<code>FILE*</code> y ConexiÃ³n LÃ³gica) ðŸ“‚</h3>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Concepto</th>
+<th style="text-align: left;">PropÃ³sito en el MÃ³dulo</th>
+<th style="text-align: left;">CaracterÃ­stica Clave</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>Flujo
+(<code>Stream</code>)</strong></td>
+<td style="text-align: left;">Un canal lÃ³gico que conecta el programa
+(RAM) con un origen o destino (ej. Archivo en disco), permitiendo un
+flujo continuo de bytes.</td>
+<td style="text-align: left;">Unifica la I/O: los archivos se manejan de
+forma similar a <code>stdin</code> y <code>stdout</code>.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong><code>FILE*</code></strong></td>
+<td style="text-align: left;">Puntero a la estructura <code>FILE</code>
+que funciona como el <strong>identificador</strong> o <strong>manejador
+de flujo</strong>. Devuelto por <code>fopen()</code>.</td>
+<td style="text-align: left;">Mantiene el <strong>estado</strong> del
+archivo: puntero de posiciÃ³n actual, buffer asociado, modo de apertura,
+y banderas de error/EOF.</td>
+</tr>
+<tr class="odd">
+<td
+style="text-align: left;"><strong><code>fopen(nombre, modo)</code></strong></td>
+<td style="text-align: left;"><strong>Abre explÃ­citamente</strong> la
+conexiÃ³n lÃ³gica (el flujo) al archivo fÃ­sico, devolviendo un
+<code>FILE*</code> si es exitoso, o <strong><code>NULL</code></strong>
+si falla (archivo no existe, permisos, etc.).</td>
+<td style="text-align: left;">Es el paso inicial y obligatorio para la
+persistencia.</td>
+</tr>
+<tr class="even">
+<td
+style="text-align: left;"><strong><code>fclose(flujo)</code></strong></td>
+<td style="text-align: left;"><strong>Cierra</strong> la conexiÃ³n
+lÃ³gica, libera los recursos del sistema operativo y, lo mÃ¡s importante,
+realiza el <strong>volcado final (<em>flushing</em>)</strong> del
+<em>buffer</em> de salida a disco.</td>
+<td style="text-align: left;"><strong>Crucial:</strong> Si se omite, los
+Ãºltimos datos escritos en el buffer de RAM podrÃ­an
+<strong>perderse</strong> y no llegar al archivo.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="modos-de-operaciÃ³n-y-comportamiento-del-puntero">2. Modos de
+OperaciÃ³n y Comportamiento del Puntero âš™ï¸</h3>
+<p>Los modos de apertura definen las operaciones permitidas
+(lectura/escritura) y el comportamiento inicial del archivo
+(truncamiento).</p>
+<table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Modo</th>
+<th style="text-align: left;">PropÃ³sito</th>
+<th style="text-align: left;">Comportamiento en Archivo Existente</th>
+<th style="text-align: left;">PosiciÃ³n Inicial del Puntero</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong><code>"r"</code></strong></td>
+<td style="text-align: left;">Lectura de Texto</td>
+<td style="text-align: left;">Falla (<code>NULL</code>) si el archivo NO
+existe.</td>
+<td style="text-align: left;">Inicio del archivo (byte 0).</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong><code>"w"</code></strong></td>
+<td style="text-align: left;">Escritura de Texto</td>
+<td style="text-align: left;"><strong>Truncamiento:</strong> Borra todo
+el contenido existente a tamaÃ±o cero.</td>
+<td style="text-align: left;">Inicio del archivo (byte 0).</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong><code>"a"</code></strong></td>
+<td style="text-align: left;">AnexiÃ³n de Texto</td>
+<td style="text-align: left;">Preserva el contenido existente.</td>
+<td style="text-align: left;"><strong>Final</strong> del archivo.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong><code>"rb+"</code></strong></td>
+<td style="text-align: left;">ActualizaciÃ³n Binaria</td>
+<td style="text-align: left;"><strong>No trunca.</strong> Permite leer y
+escribir en cualquier posiciÃ³n.</td>
+<td style="text-align: left;">Inicio del archivo (byte 0).</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong><code>"a+"</code></strong></td>
+<td style="text-align: left;">AnexiÃ³n con Lectura</td>
+<td style="text-align: left;">Permite leer en cualquier posiciÃ³n, pero
+<strong>toda escritura siempre se fuerza al final</strong> del
+archivo.</td>
+<td style="text-align: left;">Inicio del archivo para lectura; final
+para escritura.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="io-de-texto-vs.-io-binaria">3. I/O de Texto vs.Â I/O Binaria
+âœï¸ðŸ§±</h3>
+<p>La principal diferencia es la <strong>conversiÃ³n de formato</strong>.
+Los archivos binarios guardan la representaciÃ³n exacta en memoria, lo
+que es <strong>mÃ¡s eficiente y preciso</strong> que los archivos de
+texto, que requieren convertir datos (ej. <code>int 101</code>) a
+caracteres ASCII (<code>'1'</code>, <code>'0'</code>,
+<code>'1'</code>).</p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">CaracterÃ­stica</th>
+<th style="text-align: left;">Archivos de Texto</th>
+<th style="text-align: left;">Archivos Binarios</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>ConversiÃ³n</strong></td>
+<td style="text-align: left;"><strong>SÃ­:</strong> Convierte el patrÃ³n
+de bits a caracteres legibles por humanos (<code>%d</code>,
+<code>%f</code>).</td>
+<td style="text-align: left;"><strong>No:</strong> Guarda la
+representaciÃ³n de la memoria (el <em>bit pattern</em>)
+directamente.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Funciones I/O</strong></td>
+<td style="text-align: left;"><strong><code>fprintf()</code></strong>,
+<strong><code>fscanf()</code></strong>,
+<strong><code>fputc()</code></strong>,
+<strong><code>fgets()</code></strong></td>
+<td style="text-align: left;"><strong><code>fwrite()</code></strong>,
+<strong><code>fread()</code></strong></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Eficiencia</strong></td>
+<td style="text-align: left;"><strong>Baja</strong> (por el
+<em>overhead</em> de la conversiÃ³n y el tamaÃ±o de almacenamiento).</td>
+<td style="text-align: left;"><strong>Alta</strong> (es el mÃ©todo mÃ¡s
+rÃ¡pido y compacto para estructuras de datos).</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Argumentos</strong></td>
+<td style="text-align: left;">Puntero a la variable (para lectura
+<code>fscanf</code>) o Valor de la variable (para escritura
+<code>fprintf</code>).</td>
+<td style="text-align: left;"><strong>DirecciÃ³n de Memoria
+(<code>&amp;variable</code>)</strong>, <code>sizeof(tipo)</code> y
+nÃºmero de elementos.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="detecciÃ³n-de-errores-y-acceso-avanzado">4. DetecciÃ³n de Errores
+y Acceso Avanzado ðŸš¨</h3>
+<p>Es fundamental no confiar Ãºnicamente en los valores de retorno de
+I/O. Las funciones de diagnÃ³stico se usan para determinar la causa del
+fallo (Error o Fin de Archivo).</p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Concepto</th>
+<th style="text-align: left;">PropÃ³sito</th>
+<th style="text-align: left;">Uso ComÃºn</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>Retorno de I/O</strong></td>
+<td style="text-align: left;">Comprobar si la operaciÃ³n de
+lectura/escritura fue exitosa.</td>
+<td
+style="text-align: left;"><code>while (fread(&amp;p, sizeof(P), 1, f) == 1)</code></td>
+</tr>
+<tr class="even">
+<td
+style="text-align: left;"><strong><code>feof(flujo)</code></strong></td>
+<td style="text-align: left;">Verifica si el indicador de <strong>Fin de
+Archivo (EOF)</strong> fue establecido (si la Ãºltima lectura
+<strong>fallÃ³</strong> por falta de datos).</td>
+<td style="text-align: left;">Se usa <strong>despuÃ©s</strong> de que una
+funciÃ³n de lectura indica un fallo.</td>
+</tr>
+<tr class="odd">
+<td
+style="text-align: left;"><strong><code>ferror(flujo)</code></strong></td>
+<td style="text-align: left;">Verifica si ocurriÃ³ un error de I/O real
+(ej. disco lleno, archivo corrupto).</td>
+<td style="text-align: left;">Se usa <strong>despuÃ©s</strong> de un
+fallo para distinguir entre EOF y un error crÃ­tico.</td>
+</tr>
+<tr class="even">
+<td
+style="text-align: left;"><strong><code>fseek(flujo, offset, origen)</code></strong></td>
+<td style="text-align: left;">Permite el <strong>Acceso Aleatorio
+(Random Access)</strong>: Mueve el puntero de posiciÃ³n a un <em>byte
+offset</em> especÃ­fico para leer/escribir un registro en
+particular.</td>
+<td style="text-align: left;">Crucial para la <strong>actualizaciÃ³n de
+registros</strong> en archivos binarios (<code>SEEK_SET</code>,
+<code>SEEK_CUR</code>, <code>SEEK_END</code>).</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</body>
+</html>
+

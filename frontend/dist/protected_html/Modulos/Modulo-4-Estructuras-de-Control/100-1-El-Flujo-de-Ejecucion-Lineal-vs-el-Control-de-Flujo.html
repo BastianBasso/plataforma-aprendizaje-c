@@ -1,0 +1,194 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" crossorigin href="/assets/content-01sust.css">
+</head>
+<body>
+<div class="main-content">
+<h1>Módulo 4: Estructuras de Control</h1>
+<ol type="1">
+<li>El Flujo de Ejecución Lineal vs. el Control de Flujo</li>
+</ol>
+<p><strong>Flujo de Ejecución Lineal (Secuencial)</strong></p>
+<p>El <strong>Flujo de Ejecución Lineal</strong>, o <strong>Flujo
+Secuencial</strong>, es el modelo de comportamiento predeterminado y más
+básico de cualquier programa en C.</p>
+<p>Consiste en que las instrucciones del código son ejecutadas por el
+procesador de forma <strong>estricta y rígida</strong>, <strong>una tras
+otra</strong>, siguiendo el orden exacto en el que fueron escritas
+dentro del código fuente (de arriba hacia abajo).</p>
+<p><strong>Características del Flujo Lineal:</strong></p>
+<ol type="1">
+<li><p><strong>Orden Estricto:</strong> La instrucción en la línea $N$
+siempre se ejecuta antes que la instrucción en la línea $N+1$.</p></li>
+<li><p><strong>No Hay Decisión:</strong> No existe la posibilidad de
+saltar o repetir ninguna parte del código.</p></li>
+<li><p><strong>Predictibilidad:</strong> El resultado del programa es
+totalmente predecible, siempre que el <em>Input</em> (entrada de datos)
+sea el mismo.</p></li>
+</ol>
+<p><strong>Ejemplo de Flujo Lineal</strong></p>
+<p>El código de entrada/salida que has trabajado hasta ahora sigue este
+flujo:</p>
+<p>C</p>
+<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
+<p>int main(void) {</p>
+<p>// Línea 1: Se ejecuta primero.</p>
+<p>int numero = 5;</p>
+<p>// Línea 2: Se ejecuta después de la Línea 1.</p>
+<p>printf("El valor inicial es %d\n", numero);</p>
+<p>// Línea 3: Se ejecuta después de la Línea 2.</p>
+<p>numero = numero * 2;</p>
+<p>// Línea 4: Se ejecuta por último.</p>
+<p>printf("El nuevo valor es %d\n", numero);</p>
+<p>return 0;</p>
+<p>}</p>
+<p>En este ejemplo, el programa <strong>siempre</strong> imprimirá el
+valor inicial y <strong>siempre</strong> calculará el doble y lo
+imprimirá, sin excepciones. Este es el comportamiento base del que
+partimos para entender el <strong>Control de Flujo</strong>.</p>
+<h3 id="definición-de-control-de-flujo-control-flow">Definición de
+Control de Flujo (Control Flow)</h3>
+<p>El <strong>Control de Flujo</strong> se refiere a la capacidad de un
+programa para <strong>alterar el orden secuencial</strong> (lineal) en
+que se ejecutan sus instrucciones. Es el mecanismo que permite que los
+programas no sean solo una lista rígida de comandos, sino que puedan
+adaptarse, tomar decisiones lógicas, y manejar tareas repetitivas de
+forma eficiente.</p>
+<p>Sin el Control de Flujo, los programas solo podrían realizar una
+secuencia fija de operaciones. Con él, adquieren
+<strong>inteligencia</strong> y <strong>dinamismo</strong>.</p>
+<h4 id="acciones-clave-del-control-de-flujo">Acciones Clave del Control
+de Flujo</h4>
+<p>El Control de Flujo se manifiesta en tres acciones principales que
+rompen la secuencia lineal:</p>
+<ol type="1">
+<li><p><strong>Toma de Decisiones (Selección):</strong> Permite al
+programa elegir qué bloque de código ejecutar basándose en una condición
+lógica.</p>
+<ul>
+<li><em>Ejemplo:</em> <strong>Si</strong> la cuenta es positiva,
+<strong>entonces</strong> realiza un pago; <strong>si no</strong>,
+muestra un error.</li>
+</ul></li>
+<li><p><strong>Salto de Instrucciones (Bifurcación):</strong> Permite
+omitir un bloque de código que no es relevante para el estado actual del
+programa.</p>
+<ul>
+<li><em>Ejemplo:</em> <strong>Si</strong> el usuario no tiene permisos
+de administrador, <strong>salta</strong> la sección de
+configuración.</li>
+</ul></li>
+<li><p><strong>Repetición (Iteración):</strong> Permite ejecutar un
+mismo bloque de código varias veces sin tener que escribirlo
+repetidamente.</p>
+<ul>
+<li><em>Ejemplo:</em> <strong>Mientras</strong> el contador sea menor
+que 10, <strong>repite</strong> la impresión de un saludo.</li>
+</ul></li>
+</ol>
+<p>Estas alteraciones al flujo lineal se implementan en C mediante las
+<strong>Estructuras de Control</strong>, que se clasifican en dos
+grandes grupos: Estructuras de Decisión y Estructuras de Repetición.</p>
+<p><strong>Estructuras de Decisión (Selección)</strong></p>
+<p>Las <strong>Estructuras de Decisión</strong> (o <strong>Estructuras
+de Selección</strong>) son el tipo de Control de Flujo que permite al
+programa <strong>bifurcar</strong> su camino de ejecución. Esto
+significa que el programa evalúa una condición lógica y, basándose en si
+esa condición es <strong>Verdadera</strong> o <strong>Falsa</strong>,
+elige ejecutar un bloque de código u otro.</p>
+<p>Esta capacidad es fundamental porque imita la toma de decisiones del
+mundo real, haciendo que el programa sea adaptable al <em>input</em>
+(entrada de datos) o a los estados internos de las variables.</p>
+<p><strong>Funcionamiento Básico</strong></p>
+<p>Las estructuras de decisión utilizan un resultado booleano (1 o 0)
+generado por operadores relacionales o lógicos como su motor:</p>
+<ul>
+<li><p>El flujo lineal se detiene cuando se encuentra la
+estructura.</p></li>
+<li><p>Se evalúa la <strong>condición</strong> (ej: edad &gt;=
+18).</p></li>
+<li><p><strong>Si</strong> la condición es <strong>Verdadera</strong>
+(el resultado es $1$), el programa sigue un camino.</p></li>
+<li><p><strong>Si</strong> la condición es <strong>Falsa</strong> (el
+resultado es $0$), el programa sigue un camino alternativo o salta el
+bloque de código.</p></li>
+</ul>
+<p><strong>Las Estructuras Principales en C</strong></p>
+<p>Las estructuras de selección más comunes y potentes en C son:</p>
+<ol type="1">
+<li><p><strong>if (Si):</strong> La forma más simple. Ejecuta un bloque
+de código <strong>solo si</strong> la condición es Verdadera.</p>
+<ul>
+<li><em>Ejemplo Conceptual:</em> <strong>Si</strong> (el saldo es
+negativo), <strong>entonces</strong> (aplica una penalización).</li>
+</ul></li>
+<li><p><strong>if-else (Si-Sino):</strong> Proporciona dos caminos
+mutuamente excluyentes. Si la condición es Verdadera, ejecuta el bloque
+if; si es Falsa, ejecuta el bloque else.</p>
+<ul>
+<li><em>Ejemplo Conceptual:</em> <strong>Si</strong> (hay suficientes
+fondos), <strong>entonces</strong> (realiza la compra);
+<strong>sino</strong> (muestra un mensaje de error).</li>
+</ul></li>
+</ol>
+<p>Estas estructuras se verán a detalle en la próxima sección.</p>
+<p><strong>Estructuras de Repetición (Iteración)</strong></p>
+<p>Las <strong>Estructuras de Repetición</strong> (también conocidas
+como <strong>Ciclos</strong> o <strong>Bucles</strong>) son el segundo
+gran grupo dentro del Control de Flujo. Su función principal es permitir
+que un programa ejecute el <strong>mismo bloque de código</strong>
+repetidamente, evitando tener que escribir la misma instrucción muchas
+veces.</p>
+<p>Este proceso de repetir un bloque de código se llama
+<strong>Iteración</strong>.</p>
+<p><strong>Funcionamiento Básico y Condición de Fin</strong></p>
+<p>Una estructura de repetición funciona basándose en una condición
+lógica, similar a las estructuras de decisión, pero con una diferencia
+clave:</p>
+<ol type="1">
+<li><p><strong>Evaluación Inicial:</strong> Se evalúa una condición
+lógica (ej: contador &lt; 10).</p></li>
+<li><p><strong>Ejecución del Bloque:</strong> <strong>Mientras</strong>
+la condición sea <strong>Verdadera</strong> ($1$), el bloque de código
+interno del ciclo se ejecuta.</p></li>
+<li><p><strong>Iteración y Reevaluación:</strong> Después de ejecutar el
+bloque, el control de flujo vuelve a evaluar la condición.</p></li>
+<li><p><strong>Terminación:</strong> Cuando la condición se vuelve
+<strong>Falsa</strong> ($0$), el ciclo termina y el control de flujo
+salta a la siguiente instrucción después de la estructura.</p></li>
+</ol>
+<p>El bloque de código debe incluir alguna instrucción que, en algún
+momento, <strong>modifique la condición de manera que se vuelva
+Falsa</strong>, evitando así un <strong>ciclo infinito</strong> (un
+error común donde el programa se repite indefinidamente).</p>
+<p><strong>Las Estructuras Principales en C</strong></p>
+<p>Las estructuras de repetición más utilizadas en C son:</p>
+<ol type="1">
+<li><p><strong>while (Mientras):</strong> Repite un bloque de código
+<strong>mientras</strong> una condición permanezca Verdadera. Es ideal
+cuando el número exacto de repeticiones es desconocido de antemano.</p>
+<ul>
+<li><em>Ejemplo Conceptual:</em> <strong>Mientras</strong> (el usuario
+no ingrese la contraseña correcta), <strong>repite</strong> (solicitar
+la contraseña).</li>
+</ul></li>
+<li><p><strong>for (Para):</strong> Está diseñado para una cantidad
+predeterminada de repeticiones. Es ideal cuando sabes exactamente
+cuántas veces debe ejecutarse el código.</p>
+<ul>
+<li><em>Ejemplo Conceptual:</em> <strong>Para</strong> (cada elemento
+del $1$ al $100$), <strong>repite</strong> (imprimir el número).</li>
+</ul></li>
+</ol>
+<p>Estas estructuras son cruciales para manejar colecciones de datos,
+realizar cálculos iterativos y gestionar la interacción continua con el
+usuario.</p>
+
+
+</div>
+</body>
+</html>
+

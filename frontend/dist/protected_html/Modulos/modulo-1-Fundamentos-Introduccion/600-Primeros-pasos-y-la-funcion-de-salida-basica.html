@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Primeros pasos y la funcion de salida basica</title>
+    <link rel="stylesheet" crossorigin href="/assets/content-01sust.css">
+    <style>
+        
+    .header-c { background: #fff; border-bottom: 1px solid #e5e7eb; }
+    .logo-c {
+      background: linear-gradient(135deg,#162047 60%, #3b2fa6 100%);
+      color: #fff;
+      font-weight: 900;
+      font-size: 1.7rem;
+      border-radius: 8px;
+      width: 38px; height: 38px;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 2px 8px rgba(59,47,166,0.08);
+      margin-right: 10px;
+    }
+    .user-profile {
+      display: flex; align-items: center; gap: 10px;
+      background: #e0e7ff;
+      border-radius: 999px;
+      padding: 6px 16px;
+      font-size: 1rem;
+      color: #3730a3;
+      font-weight: 600;
+    }
+    .content-title {
+      color: #3730a3;
+      font-size: 2.2rem;
+      font-weight: 800;
+      margin: 36px auto 10px auto;
+      text-align: center;
+      letter-spacing: 1px;
+    }
+    .progress-bar-container {
+      max-width: 700px;
+      margin: 0 auto 32px auto;
+      background: #e0e7ff;
+      border-radius: 999px;
+      padding: 8px 24px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #3730a3;
+      box-shadow: 0 2px 8px rgba(59,47,166,0.08);
+    }
+    .progress-bar {
+      flex: 1;
+      height: 16px;
+      background: #c7d2fe;
+      border-radius: 999px;
+      overflow: hidden;
+      position: relative;
+    }
+    .progress-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg,#2563eb,#3b2fa6);
+      border-radius: 999px;
+      width: 12%;
+      transition: width 0.4s;
+    }
+    .modules-list {
+      max-width: 900px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+    }
+    .module-card {
+      background: linear-gradient(135deg,#2563eb 60%, #3b2fa6 100%);
+      color: #fff;
+      border-radius: 18px;
+      box-shadow: 0 6px 24px rgba(59,47,166,0.10);
+      padding: 0;
+      display: flex;
+      align-items: stretch;
+      position: relative;
+      overflow: hidden;
+      min-height: 140px;
+    }
+    .module-progress-bar {
+      width: 18px;
+      background: #a5b4fc;
+      display: flex;
+      align-items: flex-end;
+      border-radius: 18px 0 0 18px;
+      margin-right: 0;
+      position: relative;
+    }
+    .module-progress-fill {
+      width: 100%;
+      background: #3730a3;
+      border-radius: 18px 0 0 18px;
+      transition: height 0.4s;
+    }
+    .module-content {
+      flex: 1;
+      padding: 24px 32px 24px 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .module-title {
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .module-desc {
+      font-size: 1rem;
+      color: #dbeafe;
+      margin-bottom: 10px;
+    }
+    .module-topics {
+      margin-left: 1.2em;
+      margin-bottom: 10px;
+      color: #e0e7ff;
+      font-size: 0.98rem;
+    }
+    .module-card .start-btn {
+      align-self: flex-end;
+      background: linear-gradient(90deg,#4f46e5,#2563eb);
+      color: #fff;
+      font-weight: 700;
+      border: none;
+      border-radius: 999px;
+      padding: 10px 28px;
+      font-size: 1rem;
+      box-shadow: 0 2px 8px rgba(37,99,235,0.18);
+      transition: background 0.2s;
+      cursor: pointer;
+      margin-top: 8px;
+    }
+    .module-card .start-btn:hover {
+      background: linear-gradient(90deg,#2563eb,#4f46e5);
+    }
+    .footer-c {
+      background: linear-gradient(90deg,#49b3af,#25a6d7 90%);
+      color: #fff;
+      padding: 36px 0 18px 0;
+      margin-top: 48px;
+    }
+    .footer-c .footer-content {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 32px;
+      justify-content: space-between;
+      align-items: flex-start;
+      padding: 0 32px;
+    }
+    .footer-c .footer-logo {
+      display: flex; align-items: center; gap: 10px;
+      font-size: 1.5rem; font-weight: 800;
+      letter-spacing: 1px;
+    }
+    .footer-c .footer-links, .footer-c .footer-newsletter {
+      min-width: 180px;
+    }
+    .footer-c .footer-links a {
+      color: #e0f2fe;
+      display: block;
+      margin-bottom: 8px;
+      text-decoration: none;
+      font-size: 1rem;
+      transition: color 0.2s;
+    }
+    .footer-c .footer-links a:hover {
+      color: #fff;
+    }
+    .footer-c .newsletter-form {
+      display: flex; gap: 8px; margin-top: 8px;
+    }
+    .footer-c .newsletter-form input[type="email"] {
+      border-radius: 999px 0 0 999px;
+      border: none;
+      padding: 8px 16px;
+      font-size: 1rem;
+      outline: none;
+      min-width: 0;
+    }
+    .footer-c .newsletter-form button {
+      border-radius: 0 999px 999px 0;
+      border: none;
+      background: #2563eb;
+      color: #fff;
+      font-weight: 700;
+      padding: 8px 18px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .footer-c .newsletter-form button:hover {
+      background: #1e40af;
+    }
+    .footer-c .copyright {
+      text-align: center;
+      color: #bae6fd;
+      font-size: 0.95rem;
+      margin-top: 24px;
+    }
+    @media (max-width: 900px) {
+      .footer-c .footer-content { flex-direction: column; gap: 18px; align-items: flex-start; }
+      .content-c, .hero-c { padding: 24px 10px; }
+    }
+    @media (max-width: 900px) {
+      .modules-list { padding: 0 8px; }
+      .module-content { padding: 18px 10px 18px 10px; }
+      .content-title { font-size: 1.5rem; }
+    }
+  </style>
+</head>
+
+
+<body>    
+<div class="main-content">
+
+<h1>6. Primeros pasos y la funcion de salida básica</h1>
+<p><strong>⚠️ Nota Importante:</strong> Esta sección asume que tienes un
+entorno de C previamente configurado, ya sea un <strong>IDE (Entorno de
+Desarrollo Integrado)</strong> como Code::Blocks o VS Code con la
+extensión C/C++, o que tienes el compilador <strong>GCC</strong>
+instalado y accesible desde la terminal de tu sistema operativo.</p>
+<h2><strong>1. Entorno Mínimo: Escribir, Guardar y Compilar
+🛠️</strong></h2>
+<p>Para que el código C se convierta en un programa que el ordenador
+pueda ejecutar, debemos completar el ciclo mínimo de desarrollo:
+<strong>Escribir $\rightarrow$ Guardar $\rightarrow$ Compilar</strong>.
+Esta es la primera práctica guiada y la forma en que pasarás de la
+teoría a la acción.</p>
+<p><strong>Paso 1: Escribir el Código Fuente</strong></p>
+<p>Comenzaremos con el programa más simple y esencial, que contiene solo
+lo obligatorio: la función main() y la sentencia de retorno.</p>
+<ol type="1">
+<li><p>Abre tu editor de código (o IDE).</p></li>
+<li><p>Crea un nuevo archivo y escribe el siguiente código:</p></li>
+</ol>
+<!--
+<blockquote>
+<p>C</p>
+<p>int main(void) {</p>
+<p>return 0;</p>
+<p>}</p>
+</blockquote>
+-->
+<div class="c2h-code">
+  <div class="c2h-code-inner">
+    <table>
+      <tr><td>1</td><td><span class="c2h-kword c2h-kword-int">int</span> <span class="c2h-identifier c2h-fdeclname">main</span>(<span class="c2h-kword c2h-kword-void">void</span>) {</td></tr>
+      <tr><td>2</td><td>    <span class="c2h-kword c2h-kword-return">return</span> <span class="c2h-val-int">0</span>;</td></tr>
+      <tr><td>3</td><td>}</td></tr>
+    </table>
+  </div>
+</div>
+<br>
+<p><strong>Paso 2: Guardar el Archivo (.c)</strong></p>
+<p>Debes guardar este texto plano como un archivo de código fuente de C
+para que el compilador lo reconozca.</p>
+<ol type="1">
+<li><p>Guarda el archivo con la extensión <strong>.c</strong>.</p></li>
+<li><p><strong>Nombre sugerido:</strong> minimo.c o hola.c.</p></li>
+</ol>
+<p><strong>Paso 3: Compilar el Código (Usando gcc)</strong></p>
+<p>Asumiendo que estás utilizando el compilador estándar
+<strong>GCC</strong> (GNU Compiler Collection) desde una terminal o
+línea de comandos, este proceso activa las cuatro fases de la
+compilación (Preprocesamiento, Compilación, Ensamblado y Enlazado):</p>
+<ol type="1">
+<li><p>Abre la terminal o <em>Command Prompt</em> en el directorio donde
+guardaste tu archivo.</p></li>
+<li><p>Ejecuta el siguiente comando:</p></li>
+</ol>
+<blockquote>
+<p>Bash</p>
+<p>gcc hola.c -o mi_programa</p>
+</blockquote>
+<ul>
+<li><p><strong>gcc hola.c</strong>: Le dice al compilador que tome el
+archivo de código fuente.</p></li>
+<li><p><strong>-o mi_programa</strong>: Es el argumento de salida
+(<em>output</em>) y le indica al compilador que llame al archivo
+ejecutable resultante <strong>mi_programa</strong> (en Windows, sería
+mi_programa.exe).</p></li>
+</ul>
+<p><strong>Paso 4: Ejecutar el Programa</strong></p>
+<p>Si la compilación fue exitosa (es decir, no hubo errores de sintaxis
+y se generó el archivo), puedes ejecutar el programa binario
+resultante:</p>
+<ol type="1">
+<li>Ejecuta el programa desde la terminal:</li>
+</ol>
+<blockquote>
+<p>Bash</p>
+<p>./mi_programa</p>
+<p>(O simplemente <strong>mi_programa</strong> en Windows).</p>
+</blockquote>
+<p>Este programa no hace nada visible, ya que solo devuelve un código de
+estado, pero es tu primera prueba exitosa de que el entorno y el
+compilador están funcionando correctamente.</p>
+<h2><strong>2. La Librería Estándar de Entrada/Salida
+(stdio.h)</strong></h2>
+<p>Antes de poder hacer que nuestro programa haga algo visible,
+necesitamos comunicarnos con el mundo exterior (la consola o terminal).
+Para esto, recurrimos a la <strong>Librería Estándar de
+Entrada/Salida</strong>.</p>
+<p><strong>¿Qué es stdio.h?</strong></p>
+<p>stdio.h significa <strong>Standard Input/Output Header</strong>
+(Cabecera de Entrada/Salida Estándar).</p>
+<ul>
+<li><p><strong>Propósito:</strong> Contiene las declaraciones de las
+funciones más comunes que permiten a un programa C interactuar con el
+usuario y el sistema operativo.</p></li>
+<li><p><strong>Funcionalidad clave:</strong> Proporciona los "puentes"
+entre tu código y los dispositivos de E/S (Entrada/Salida), como el
+<strong>teclado</strong> (entrada) y la <strong>pantalla</strong>
+(salida).</p></li>
+</ul>
+<p><strong>Cómo incluirla</strong></p>
+<p>Para poder usar las funciones de esta librería, debemos incluir su
+archivo de cabecera (.h) al inicio de nuestro código utilizando la
+directiva del preprocesador #include:</p>
+<!--
+<p>C</p>
+<p>#<strong>include</strong> &lt;stdio.h&gt; // Hacemos que las
+funciones como printf() estén disponibles</p>
+<p>int main(void) {</p>
+<p>// Aquí podemos usar printf()</p>
+<p>return 0;</p>
+<p>}</p>
+-->
+<div class="c2h-code">
+  <div class="c2h-code-inner">
+    <table>
+      <tr><td>1</td><td><span class="c2h-directive">#include</span> <span class="c2h-val-str">&lt;stdio.h&gt;</span> <span class="c2h-comment">// Hacemos que las funciones como printf() estén disponibles</span></td></tr>
+      <tr><td>2</td><td><span class="c2h-kword c2h-kword-int">int</span> <span class="c2h-identifier c2h-fdeclname">main</span>(<span class="c2h-kword c2h-kword-void">void</span>) {</td></tr>
+      <tr><td>3</td><td>    <span class="c2h-comment">// Aquí podemos usar printf()</span></td></tr>
+      <tr><td>4</td><td>    <span class="c2h-kword c2h-kword-return">return</span> <span class="c2h-val-int">0</span>;</td></tr>
+      <tr><td>5</td><td>}</td></tr>
+    </table>
+  </div>
+</div>
+<br>
+<p>Sin la línea #include &lt;stdio.h&gt;, el compilador <strong>no
+sabría</strong> cómo es la función printf() ni cómo usarla, lo que
+resultaría en un <strong>Error de Enlazado</strong> (Fase IV).</p>
+<h2><strong>3. La Función de Salida: printf() 🖥️</strong></h2>
+<p>Una vez que hemos incluido la librería stdio.h, podemos utilizar su
+función más importante y la que nos permite visualizar resultados:
+<strong>printf()</strong>.</p>
+<ul>
+<li><p><strong>Nombre:</strong> printf significa <strong>"print
+formatted"</strong> (imprimir formateado).</p></li>
+<li><p><strong>Propósito:</strong> Es la función de <strong>salida
+estándar</strong>. Su trabajo es tomar datos y presentarlos en la
+consola o terminal de forma legible para el usuario.</p></li>
+<li><p><strong>Sintaxis (Forma Básica):</strong> Al igual que main(),
+printf() es una función y requiere paréntesis.</p></li>
+</ul>
+<p>La función printf() toma el texto que deseamos mostrar y realiza todo
+el complejo trabajo de bajo nivel para comunicarlo al sistema operativo,
+que a su vez se encarga de mostrarlo en la pantalla. Esto es un claro
+ejemplo de <strong>abstracción</strong>.</p>
+<p><strong>Ejemplo de uso:</strong></p>
+
+<!--
+<p>C</p>
+<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
+<p>int main(void) {</p>
+<p>// Llama a la función printf() para mostrar el mensaje en la
+consola.</p>
+<p>printf("¡Hola desde C!");</p>
+<p>return 0;</p>
+<p>}</p>
+-->
+<div class="c2h-code">
+  <div class="c2h-code-inner">
+    <table>
+      <tr><td>1</td><td><span class="c2h-directive">#include</span> <span class="c2h-val-str">&lt;stdio.h&gt;</span></td></tr>
+      <tr><td>2</td><td></td></tr>
+      <tr><td>3</td><td><span class="c2h-kword c2h-kword-int">int</span> <span class="c2h-identifier c2h-fdeclname">main</span>(<span class="c2h-kword c2h-kword-void">void</span>) {</td></tr>
+      <tr><td>4</td><td></td></tr>
+      <tr><td>5</td><td>    <span class="c2h-comment">// Llama a la función printf() para mostrar el mensaje en la consola.</span></td></tr>
+      <tr><td>6</td><td>    <span class="c2h-identifier c2h-fcallname">printf</span>(<span class="c2h-val-str">"¡Hola desde C!"</span>);</td></tr>
+      <tr><td>7</td><td>    <span class="c2h-kword c2h-kword-return">return</span> <span class="c2h-val-int">0</span>;</td></tr>
+      <tr><td>8</td><td>}</td></tr>
+    </table>
+  </div>
+</div>
+<br>
+
+<h2><strong>4. El Argumento Básico: La Cadena de Control (String)
+💬</strong></h2>
+<p>Cuando utilizamos la función printf(), le debemos proporcionar
+información sobre lo que queremos que imprima. Esta información se llama
+<strong>argumento</strong>.</p>
+<p><strong>La Cadena de Control (String)</strong></p>
+<p>El argumento más simple y común que se le pasa a printf() es la
+<strong>cadena de control</strong> (o <em>control string</em>).</p>
+<ul>
+<li><p><strong>Definición:</strong> Es el texto que deseas mostrar en la
+consola.</p></li>
+<li><p><strong>Sintaxis:</strong> Una cadena de caracteres debe ir
+obligatoriamente entre <strong>comillas dobles</strong> (" "). Las
+comillas dobles le indican al compilador que todo lo que está dentro es
+un valor literal de texto y no código C.</p></li>
+</ul>
+<p><strong>Ejemplo:</strong></p>
+<!--
+<p>C</p>
+<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
+<p>int main(void) {</p>
+<p>// La cadena de control es: "Mi primer texto en C."</p>
+<p>printf("Mi primer texto en C.");</p>
+<p>// Otra cadena de control: "El lenguaje C es potente."</p>
+<p>printf("El lenguaje C es potente.");</p>
+<p>return 0;</p>
+<p>}</p>
+-->
+<div class="c2h-code">
+  <div class="c2h-code-inner">
+    <table>
+      <tr><td>1</td><td><span class="c2h-directive">#include</span> <span class="c2h-val-str">&lt;stdio.h&gt;</span></td></tr>
+      <tr><td>2</td><td></td></tr>
+      <tr><td>3</td><td><span class="c2h-kword c2h-kword-int">int</span> <span class="c2h-identifier c2h-fdeclname">main</span>(<span class="c2h-kword c2h-kword-void">void</span>) {</td></tr>
+      <tr><td>4</td><td>    <span class="c2h-comment">// La cadena de control es: "Mi primer texto en C."</span></td></tr>
+      <tr><td>5</td><td>    <span class="c2h-identifier c2h-fcallname">printf</span>(<span class="c2h-val-str">"Mi primer texto en C."</span>);    </td></tr>
+      <tr><td>6</td><td></td></tr>
+      <tr><td>7</td><td>    <span class="c2h-comment">// Otra cadena de control: "El lenguaje C es potente."</span></td></tr>
+      <tr><td>8</td><td>    <span class="c2h-identifier c2h-fcallname">printf</span>(<span class="c2h-val-str">"El lenguaje C es potente."</span>);</td></tr>
+      <tr><td>9</td><td>    <span class="c2h-kword c2h-kword-return">return</span> <span class="c2h-val-int">0</span>;</td></tr>
+      <tr><td>10</td><td>}</td></tr>
+    </table>
+  </div>
+</div>
+<br>
+<p>Al compilar y ejecutar este código, verías en la consola:</p>
+<blockquote>
+<p>Mi primer texto en C.El lenguaje C es potente.</p>
+</blockquote>
+<p><strong>Importante:</strong> Como puedes ver en el ejemplo, la
+función printf() imprime el texto de manera consecutiva. A diferencia de
+otros lenguajes, <strong>C no agrega automáticamente un salto de
+línea</strong> después de cada llamada a printf(). Para controlar el
+diseño de la salida, necesitamos usar <strong>Secuencias de
+Escape</strong>, lo cual se explica en el siguiente tema.</p>
+<h2><strong>5. Secuencias de Escape: \n y Caracteres Especiales
+✨</strong></h2>
+<p>Como vimos, la función printf() imprime texto de forma lineal. Para
+controlar el formato, espaciado y diseño de la salida en la consola,
+utilizamos las <strong>Secuencias de Escape</strong>.</p>
+<p>Una <strong>Secuencia de Escape</strong> es una combinación de
+caracteres que comienza con la barra invertida (<strong>\</strong>)
+seguida de una letra o un símbolo. Esta secuencia le indica al
+compilador que la combinación no debe imprimirse textualmente, sino que
+representa una acción o un carácter especial.</p>
+<p><strong>La Secuencia Esencial: Salto de Línea (\n)</strong></p>
+<p>La secuencia de escape más importante en C es el salto de línea:</p>
+<table style="width:97%;">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>Secuencia</strong></th>
+<th style="text-align: left;"><strong>Nombre</strong></th>
+<th style="text-align: left;"><strong>Propósito</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>\n</strong></td>
+<td style="text-align: left;"><strong>Newline</strong> (Nueva
+Línea)</td>
+<td style="text-align: left;"><strong>Mueve el cursor a la siguiente
+línea</strong> de la consola. Es indispensable para que la salida se vea
+organizada.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Ejemplo de Uso de \n:</strong></p>
+<!--
+<p>C</p>
+<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
+<p>int main(void) {</p>
+<p>// Primera llamada: termina con salto de línea.</p>
+<p>printf("Esta es la primera linea.\n");</p>
+<p>// Segunda llamada: aparecerá en la siguiente línea.</p>
+<p>printf("Esta es la segunda linea.");</p>
+<p>return 0;</p>
+<p>}</p>
+-->
+<div class="c2h-code">
+  <div class="c2h-code-inner">
+    <table>
+      <tr><td>1</td><td><span class="c2h-directive">#include</span> <span class="c2h-val-str">&lt;stdio.h&gt;</span></td></tr>
+      <tr><td>2</td><td></td></tr>
+      <tr><td>3</td><td><span class="c2h-kword c2h-kword-int">int</span> <span class="c2h-identifier c2h-fdeclname">main</span>(<span class="c2h-kword c2h-kword-void">void</span>) {</td></tr>
+      <tr><td>4</td><td>    <span class="c2h-comment">// Primera llamada: termina con salto de línea.</span></td></tr> 
+      <tr><td>5</td><td>    <span class="c2h-identifier c2h-fcallname">printf</span>(<span class="c2h-val-str">"Esta es la primera linea.\n"</span>);</td></tr>
+      <tr><td>6</td><td></td></tr>
+      <tr><td>7</td><td>    <span class="c2h-comment">// Segunda llamada: aparecerá en la siguiente línea.</span></td></tr>
+      <tr><td>8</td><td>    <span class="c2h-identifier c2h-fcallname">printf</span>(<span class="c2h-val-str">"Esta es la segunda linea."</span>);</td></tr>
+      <tr><td>9</td><td>    <span class="c2h-kword c2h-kword-return">return</span> <span class="c2h-val-int">0</span>;</td></tr>
+      <tr><td>10</td><td>}</td></tr>
+    </table>
+  </div>
+</div>
+<br>
+<p><strong>Salida en la Consola:</strong></p>
+<blockquote>
+<p>Esta es la primera linea.</p>
+<p>Esta es la segunda linea.</p>
+</blockquote>
+<p><strong>Otras Secuencias Comunes</strong></p>
+<p>También existen secuencias para otros propósitos de formato y
+representación de caracteres:</p>
+<table style="width:97%;">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>Secuencia</strong></th>
+<th style="text-align: left;"><strong>Nombre</strong></th>
+<th style="text-align: left;"><strong>Propósito</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>\t</strong></td>
+<td style="text-align: left;"><strong>Tab</strong> (Tabulación)</td>
+<td style="text-align: left;">Inserta un <strong>espacio de tabulación
+horizontal</strong> (varios espacios).</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>\"</strong></td>
+<td style="text-align: left;">Comillas Dobles</td>
+<td style="text-align: left;">Imprime un carácter de comillas dobles.
+(Necesario para imprimir comillas dentro de una cadena ya delimitada por
+comillas dobles).</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>\\</strong></td>
+<td style="text-align: left;">Barra Invertida</td>
+<td style="text-align: left;">Imprime el carácter literal de barra
+invertida.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Ejemplo con Tabulación y Comillas:</strong></p>
+<!--
+<p>C</p>
+<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
+<p>int main(void) {</p>
+<p>printf("Nombre:\t\tValor\n"); // Usa \t para alinear</p>
+<p>printf("El curso se llama: \"Fundamentos de C\".\n"); // Usa \" para
+imprimir comillas</p>
+<p>return 0;</p>
+<p>}</p>
+-->
+<div class="c2h-code">
+  <div class="c2h-code-inner">
+    <table>
+      <tr><td>1</td><td><span class="c2h-directive">#include</span> <span class="c2h-val-str">&lt;stdio.h&gt;</span></td></tr>
+      <tr><td>2</td><td><span class="c2h-kword c2h-kword-int">int</span> <span class="c2h-identifier c2h-fdeclname">main</span>(<span class="c2h-kword c2h-kword-void">void</span>) {</td></tr>
+      <tr><td>3</td><td>    <span class="c2h-identifier c2h-fcallname">printf</span>(<span class="c2h-val-str">"Nombre:\t\tValor\n"</span>); <span class="c2h-comment">// Usa \t para alinear</span></td></tr>
+      <tr><td>4</td><td>    <span class="c2h-identifier c2h-fcallname">printf</span>(<span class="c2h-val-str">"El curso se llama: \"Fundamentos de C\".\n"</span>); <span class="c2h-comment">// Usa \" para imprimir comillas</span></td></tr>
+      <tr><td>5</td><td>    <span class="c2h-kword c2h-kword-return">return</span> <span class="c2h-val-int">0</span>;</td></tr>
+      <tr><td>6</td><td>}</td></tr>
+    </table>
+  </div>
+</div>
+<br>
+<p><strong>Salida en la Consola:</strong></p>
+<blockquote>
+<p>Nombre: Valor</p>
+<p>El curso se llama: "Fundamentos de C".</p>
+</blockquote>
+<h2><strong>6. Errores Comunes de Principiante 🐛</strong></h2>
+<p>Al escribir tus primeros programas en C, es natural cometer errores.
+El compilador C es muy estricto y cualquier desviación de la sintaxis
+provocará un <strong>Error de Compilación</strong> que te impedirá
+generar el ejecutable. Aprender a identificar y corregir estos fallos es
+la habilidad más importante al inicio.</p>
+<p><strong>A. Errores de Sintaxis Clásicos</strong></p>
+<p>Estos errores son detectados en la <strong>Fase II:
+Compilación</strong>.</p>
+<ol type="1">
+<li>Olvidar el Punto y Coma (;):</li>
+</ol>
+<p>Este es el error más común. C utiliza el punto y coma como
+    delimitador de sentencias. Si lo omites, el compilador no sabrá dónde
+    termina una instrucción y dónde comienza la siguiente.</p>
+    
+<!--
+<blockquote>
+<p>C</p>
+<p>// ❌ INCORRECTO: Falta el ;</p>
+<p>printf("Hola Mundo")</p>
+<p>// ✅ CORRECTO: La sentencia termina correctamente</p>
+<p>printf("Hola Mundo");</p>
+</blockquote>
+-->
+<div class="c2h-code">
+  <div class="c2h-code-inner">
+    <table>
+      <tr><td>1</td><td><span class="c2h-comment">// ❌ INCORRECTO: Falta el ;</span></td></tr>
+      <tr><td>2</td><td><span class="c2h-identifier c2h-fdeclname">printf</span>(<span class="c2h-val-str">"Hola Mundo"</span>)</td></tr>
+      <tr><td>3</td><td></td></tr>
+      <tr><td>4</td><td><span class="c2h-comment">// ✅ CORRECTO: La sentencia termina correctamente</span></td></tr>   
+      <tr><td>5</td><td><span class="c2h-identifier c2h-fdeclname">printf</span>(<span class="c2h-val-str">"Hola Mundo"</span>);</td></tr>
+    </table>
+  </div>
+</div>
+<ol start="2" type="1">
+<li>Errores de Tipeo o Mayúsculas en Funciones:</li>
+</ol>
+
+<p>C es un lenguaje sensible a mayúsculas y minúsculas (case-sensitive).
+    Si usas mayúsculas donde no van, el compilador no reconocerá la
+    función.</p>
+<!--
+<blockquote>
+<p>C</p>
+<p>// ❌ INCORRECTO: 'Printf' no existe; la función es 'printf'</p>
+<p>Printf("Mi texto");</p>
+<p>// ✅ CORRECTO: Usando el nombre exacto de la función</p>
+<p>printf("Mi texto");</p>
+</blockquote>
+-->
+<div class="c2h-code">
+  <div class="c2h-code-inner">
+    <table>
+      <tr><td>1</td><td><span class="c2h-comment">// ❌ INCORRECTO: 'Printf' no existe; la función es 'printf'</span></td></tr>
+      <tr><td>2</td><td><span class="c2h-identifier c2h-fdeclname">Printf</span>(<span class="c2h-val-str">"Mi texto"</span>);</td></tr>
+      <tr><td>3</td><td></td></tr>
+      <tr><td>4</td><td><span class="c2h-comment">// ✅ CORRECTO: Usando el nombre exacto de la función</span></td></tr>      <tr><td>5</td><td><span class="c2h-identifier c2h-fdeclname">printf</span>(<span class="c2h-val-str">"Mi texto"</span>);</td></tr>
+      
+    </table>
+  </div>
+</div>
+<br>
+
+<p><strong>B. Errores Lógicos de printf()</strong></p>
+<p>Estos errores no detienen la compilación, pero causan un desorden en
+la salida.</p>
+<ol type="1">
+<li>Olvidar las Comillas Dobles (" ") en la Cadena de Control:</li>
+</ol>
+
+<p>La cadena de texto debe estar siempre entrecomillada. Si las olvidas,
+    el compilador intentará interpretar el texto como una variable o una
+    instrucción de código.</p>
+<!--
+<blockquote>
+<p>C</p>
+<p>// ❌ INCORRECTO: El compilador ve "Este texto" como código
+inválido</p>
+<p>printf(Este texto);</p>
+<p>// ✅ CORRECTO: El compilador lo reconoce como texto literal</p>
+<p>printf("Este texto");</p>
+</blockquote>
+-->
+<div class="c2h-code">
+  <div class="c2h-code-inner">
+    <table>
+      <tr><td>1</td><td><span class="c2h-comment">// ❌ INCORRECTO: El compilador ve "Este texto" como código inválido</span></td></tr>
+      <tr><td>2</td><td><span class="c2h-identifier c2h-fdeclname">printf</span>(<span class="c2h-identifier">Este</span> <span class="c2h-identifier">texto</span>);</td></tr>
+      <tr><td>3</td><td></td></tr>
+      <tr><td>4</td><td><span class="c2h-comment">// ✅ CORRECTO: El compilador lo reconoce como texto literal</span></td></tr>
+      <tr><td>5</td><td><span class="c2h-identifier c2h-fdeclname">printf</span>(<span class="c2h-val-str">"Este texto"</span>);</td></tr>
+    </table>
+  </div>
+</div>
+<br>
+<ol start="2" type="1">
+<li>Ausencia del Salto de Línea (\n):</li>
+</ol>
+<blockquote>
+<p>Si olvidas el \n, la salida se amontonará en una sola línea, lo que
+dificulta la lectura del programa en la consola.</p>
+<p>C</p>
+<p>// Código sin \n</p>
+<p>printf("Linea Uno.");</p>
+<p>printf("Linea Dos.");</p>
+<p>// Salida desordenada</p>
+<p>// Linea Uno.Linea Dos.</p>
+</blockquote>
+<p><strong>Recuerda:</strong> Siempre que el compilador te muestre un
+mensaje de error, revisa la línea indicada y busca los errores de
+sintaxis comunes, especialmente los puntos y comas y las
+mayúsculas/minúsculas.</p>
+<h2><strong>7. Primer Programa Completo (El "Hola Mundo"
+Canónico)</strong></h2>
+<p>Ahora que hemos desglosado cada parte, estamos listos para construir
+y ejecutar el programa más famoso en la historia de la programación: el
+<strong>"Hola Mundo"</strong>. Este programa combina la estructura
+esencial de C con la función de salida básica para interactuar por
+primera vez con el usuario.</p>
+<p>El siguiente código es la <strong>plantilla mínima y
+funcional</strong> de todo lo que hemos aprendido hasta ahora.</p>
+<p><strong>Código Fuente: hola_mundo.c</strong></p>
+<!--
+<p>C</p>
+<p>// 1. DIRECTIVA DE PREPROCESADOR: Incluimos la librería de
+Entrada/Salida para usar printf().</p>
+<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
+<p>// 2. FUNCIÓN PRINCIPAL: El punto de inicio del programa, devuelve un
+entero (int).</p>
+<p>int main(void) {</p>
+<p>// 3. SENTENCIA DE SALIDA:</p>
+<p>// Llamamos a la función printf() con una Cadena de Control.</p>
+<p>// Usamos '\n' para garantizar un salto de línea después del
+mensaje.</p>
+<p>printf("¡Hola Mundo, mi primer programa en C!\n");</p>
+<p>// 4. VALOR DE RETORNO: Indicamos al sistema operativo que la
+ejecución fue exitosa.</p>
+<p>return 0;</p>
+<p>} // FIN de la función main()</p>
+-->
+<div class="c2h-code">
+  <div class="c2h-code-inner">
+    <table>
+      <tr><td>1</td><td><span class="c2h-comment">// 1. DIRECTIVA DE PREPROCESADOR: Incluimos la librería de Entrada/Salida para usar printf().</span></td></tr>
+      <tr><td>2</td><td><span class="c2h-directive">#include</span> <span class="c2h-val-str">&lt;stdio.h&gt;</span></td></tr>
+      <tr><td>3</td><td></td></tr>
+      <tr><td>4</td><td><span class="c2h-comment">// 2. FUNCIÓN PRINCIPAL: El punto de inicio del programa, devuelve un entero (int).</span></td></tr>
+      <tr><td>5</td><td><span class="c2h-kword c2h-kword-int">int</span> <span class="c2h-identifier c2h-fdeclname">main</span>(<span class="c2h-kword c2h-kword-void">void</span>) {</td></tr>
+      <tr><td>6</td><td>    <span class="c2h-comment">// 3. SENTENCIA DE SALIDA:</span></td></tr>
+      <tr><td>7</td><td>    <span class="c2h-comment">// Llamamos a la función printf() con una Cadena de Control.</span></td></tr>
+      <tr><td>8</td><td>    <span class="c2h-comment">// Usamos '\n' para garantizar un salto de línea después del mensaje.</span></td></tr>
+      <tr><td>9</td><td></td></tr>
+      <tr><td>10</td><td>    <span class="c2h-identifier c2h-fcallname">printf</span>(<span class="c2h-val-str">"¡Hola Mundo, mi primer programa en C!\n"</span>);</td></tr>
+      <tr><td>11</td><td>    <span class="c2h-comment">// 4. VALOR DE RETORNO: Indicamos al sistema operativo que la ejecución fue exitosa.</span></td></tr>
+      <tr><td>12</td><td>    <span class="c2h-kword c2h-kword-return">return</span> <span class="c2h-val-int">0</span>;</td></tr>
+      <tr><td>13</td><td>} <span class="c2h-comment">// FIN de la función main()</span></td></tr>
+    </table>
+  </div>
+</div>
+
+<br>
+<p><strong>Proceso Final</strong></p>
+<ol type="1">
+<li><p><strong>Guarda</strong> el código anterior como
+hola_mundo.c.</p></li>
+<li><p><strong>Compila</strong> el código (usando gcc o tu
+IDE):</p></li>
+</ol>
+<blockquote>
+<p>Bash</p>
+<p>gcc hola_mundo.c -o hola_mundo</p>
+</blockquote>
+<ol start="3" type="1">
+<li><strong>Ejecuta</strong> el programa resultante:</li>
+</ol>
+<blockquote>
+<p>Bash</p>
+<p>./hola_mundo</p>
+</blockquote>
+<p><strong>Salida en la Consola:</strong></p>
+<blockquote>
+<p>¡Hola Mundo, mi primer programa en C!</p>
+</blockquote>
+<p>¡Felicidades! Has completado tu primer ciclo de desarrollo C: desde
+el código fuente hasta el ejecutable, utilizando la estructura básica y
+la abstracción de la librería estándar.</p>
+
+</div>
+</body>
+

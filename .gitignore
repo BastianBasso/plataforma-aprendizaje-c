@@ -25,7 +25,7 @@ node_modules/
 vendor/
 
 # Build / output
-dist/
+# dist/
 build/
 out/
 target/

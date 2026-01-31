@@ -1,0 +1,415 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" crossorigin href="/assets/content-01sust.css">
+</head>
+<body>
+<div class="main-content">
+
+<h1><strong>💻 15 Ejercicios: Estructuras Condicionales
+Múltiples</strong></h1>
+<p><strong>Bloque 1: Cadena de Decisión (else if)</strong></p>
+<p><strong>1) Clasificador de Estaciones 🍂</strong></p>
+<p>Pide un número de mes (int, 1 a 12). Usa una cadena else if para
+imprimir la estación correspondiente: "Verano" (1-3), "Otoño" (4-6),
+"Invierno" (7-9), "Primavera" (10-12). Usa un else final para "Mes
+inválido".</p>
+<p>Input de Ejemplo: 5</p>
+<p>Output Esperado: Otoño</p>
+<p><strong>**2) Clasificador de Notas (Escala de A a F) **</strong></p>
+<p>Pide una nota (int, 0 a 100). Usa else if para clasificarla: "A"
+($\ge 90$), "B" ($\ge 80$), "C" ($\ge 70$), "D" ($\ge 60$), y else para
+"Falla/Reprobado".</p>
+<p>Input de Ejemplo: 82</p>
+<p>Output Esperado: Clasificacion: B</p>
+<p><strong>3) Determinar Tipo de Triángulo</strong></p>
+<p>Pide las longitudes de los tres lados (int, A, B, C) de un triángulo.
+Usa else if para determinar si es: "Equilátero" (todos los lados
+iguales), "Isósceles" (solo dos lados iguales), o "Escaleno" (ningún
+lado igual).</p>
+<p>Input de Ejemplo: 3, 4, 3</p>
+<p>Output Esperado: Triángulo Isósceles</p>
+<p><strong>4) Sistema de Impuestos por Ingreso</strong></p>
+<p>Pide el ingreso anual (float). Usa else if para mostrar el porcentaje
+de impuesto a aplicar: $10\%$ (si $&lt; 20000$), $20\%$ (si $\ge 20000$
+y $&lt; 50000$), $30\%$ (si $\ge 50000$).</p>
+<p>Input de Ejemplo: 60000.0</p>
+<p>Output Esperado: Impuesto a aplicar: 30%</p>
+<p><strong>5) Desafío de Rango (Optimización con else if)</strong></p>
+<p>Pide un número entero. Usa else if para imprimir el rango: "Rango
+0-10", "Rango 11-20", "Rango 21-30", o "Otro rango".</p>
+<p>Input de Ejemplo: 15</p>
+<p>Output Esperado: Rango 11-20</p>
+<p><strong>Bloque 2: Anidamiento de if (<em>Nested if</em>)</strong></p>
+<p><strong>6) Aprobación con Requisitos Dobles</strong></p>
+<p>Pide la calificación final (float) y el porcentaje de asistencia
+(int). Usa un <strong>if anidado</strong> para:</p>
+<ul>
+<li><p>Si la Asistencia $\ge 80\%$ (Condición Externa).</p>
+<ul>
+<li><p><strong>Y</strong> la Calificación $\ge 7.0$ (Condición Interna):
+Imprimir "Aprobación Final".</p></li>
+<li><p><strong>Si no</strong> (Calificación baja): Imprimir "Suspendido
+por nota".</p></li>
+</ul></li>
+<li><p>Si la Asistencia $&lt; 80\%$ (else Externo): Imprimir "Suspendido
+por asistencia".</p></li>
+</ul>
+<blockquote>
+<p>Input de Ejemplo: 7.5 (Nota), 70 (Asistencia)</p>
+<p>Output Esperado: Suspendido por asistencia</p>
+</blockquote>
+<p><strong>7) Acceso a Contenido Premium</strong></p>
+<p>Pide el nivel de membresía (int, 1=Básico, 2=Premium) y si el pago
+está al día (int, 1=Sí, 0=No). Usa un if-else <strong>anidado</strong>
+para:</p>
+<ul>
+<li><p>Si la Membresía es Premium (Condición Externa).</p>
+<ul>
+<li><p><strong>Y</strong> el Pago está al día: Imprimir "Acceso a
+Contenido 4K".</p></li>
+<li><p><strong>Si no</strong> (Pago pendiente): Imprimir "Acceso
+suspendido, pague su cuota".</p></li>
+</ul></li>
+<li><p>Si la Membresía NO es Premium (else Externo): Imprimir "Acceso
+Básico".</p></li>
+</ul>
+<blockquote>
+<p>Input de Ejemplo: 2 (Membresía), 0 (Pago)</p>
+<p>Output Esperado: Acceso suspendido, pague su cuota</p>
+</blockquote>
+<p><strong>8) Validación de Usuario y Clave (Anidamiento)</strong></p>
+<p>Pide un ID de usuario (int) y una clave (int). Usa anidamiento:</p>
+<ul>
+<li><p>Si el ID es $100$: Imprimir "ID correcto.".</p>
+<ul>
+<li><p><strong>Y</strong> si la clave es $999$: Imprimir "Login
+Exitoso".</p></li>
+<li><p><strong>Si no</strong> (Clave incorrecta): Imprimir "Clave
+incorrecta.".</p></li>
+</ul></li>
+<li><p>Si el ID no es $100$ (else externo): Imprimir "ID no
+encontrado.".</p></li>
+</ul>
+<blockquote>
+<p>Input de Ejemplo: 100 (ID), 000 (Clave)</p>
+<p>Output Esperado: ID correcto. Clave incorrecta.</p>
+</blockquote>
+<p><strong>9) Descuento por Volumen y VIP</strong></p>
+<p>Pide el total de la compra (float) y si el cliente es VIP (char, 'S'
+o 'N'). Usa anidamiento para:</p>
+<ul>
+<li><p>Si la Compra $\ge 500$:</p>
+<ul>
+<li><p><strong>Y</strong> es VIP: Descuento total del $15\%$.</p></li>
+<li><p><strong>Si no</strong> es VIP: Descuento del $10\%$.</p></li>
+</ul></li>
+<li><p>Si la Compra $&lt; 500$: Descuento $0\%$.</p></li>
+</ul>
+<blockquote>
+<p>Input de Ejemplo: 600.0, 'N'</p>
+<p>Output Esperado: Descuento aplicado: 10%. Total: 540.00</p>
+</blockquote>
+<p><strong>10) Anidamiento de Tres Niveles (Advertencia)</strong></p>
+<p>Define tres variables booleanas (int): C1, C2, C3. Usa tres niveles
+de anidamiento. Imprime "OK" solo si C1 es Verdadero, C2 es Falso y C3
+es Verdadero. En el else externo, imprime "Falló en C1". (Usa if (!C2)
+para la segunda condición).</p>
+<p>Input de Ejemplo: C1=1, C2=0, C3=1</p>
+<p>Output Esperado: OK</p>
+<p><strong>Bloque 3: Estructura switch</strong></p>
+<p><strong>11) Menú de Opciones Básico</strong></p>
+<p>Pide un número de opción (int, 1-3). Usa switch para: case 1: "Opción
+A seleccionada"; case 2: "Opción B seleccionada"; case 3: "Opción C
+seleccionada"; default: "Opción no válida".</p>
+<p>Input de Ejemplo: 2</p>
+<p>Output Esperado: Opción B seleccionada</p>
+<p><strong>12) Días de la Semana (Uso de Múltiples case)</strong></p>
+<p>Pide un número de día (int, 1 a 7). Usa switch para: case 1-5: "Día
+laboral"; case 6, case 7: "Fin de semana". Usa el fall-through
+intencional para los días laborales.</p>
+<p>Input de Ejemplo: 6</p>
+<p>Output Esperado: Fin de semana</p>
+<p><strong>13) Conversor de Carácter a Color</strong></p>
+<p>Pide un carácter (char). Usa switch para: 'R': "Rojo"; 'G': "Verde";
+'B': "Azul"; default: "Otro Color".</p>
+<p>Input de Ejemplo: B</p>
+<p>Output Esperado: Azul</p>
+<p><strong>14) Manejo de Errores con default</strong></p>
+<p>Simula un código de error (int, 100, 200, 500). Usa switch para
+imprimir una descripción: 100: "Información"; 200: "Éxito"; default:
+"Error Grave Desconocido".</p>
+<p>Input de Ejemplo: 404</p>
+<p>Output Esperado: Error Grave Desconocido</p>
+<p><strong>15) Desafío de Operador (Conversión Lógica a
+switch)</strong></p>
+<p>Pide dos números enteros A y B, y un operador (char: '+', '-', '*').
+Usa switch para realizar la operación correspondiente e imprimir el
+resultado. Usa default si el operador no es válido.</p>
+<p>Input de Ejemplo: 10, 5, *</p>
+<p>Output Esperado: Resultado: 50</p>
+<p><strong>✅ Respuestas de los 15 Ejercicios de
+Programación</strong></p>
+<p>A continuación, se presenta la solución en código C para cada uno de
+los 15 ejercicios, utilizando las estructuras condicionales múltiples
+(else if, <strong>anidamiento</strong>, y switch).</p>
+<p><strong>Bloque 1: Cadena de Decisión (else if)</strong></p>
+<p><strong>1) Clasificador de Estaciones</strong></p>
+<p>C</p>
+<p>// Entrada: mes = 5</p>
+<p>int mes = 5;</p>
+<p>if (mes &gt;= 10 &amp;&amp; mes &lt;= 12) {</p>
+<p>printf("Estación: Primavera\n");</p>
+<p>} else if (mes &gt;= 7 &amp;&amp; mes &lt;= 9) {</p>
+<p>printf("Estación: Invierno\n");</p>
+<p>} else if (mes &gt;= 4 &amp;&amp; mes &lt;= 6) {</p>
+<p>printf("Estación: Otoño\n"); // Se ejecuta</p>
+<p>} else if (mes &gt;= 1 &amp;&amp; mes &lt;= 3) {</p>
+<p>printf("Estación: Verano\n");</p>
+<p>} else {</p>
+<p>printf("Mes inválido\n");</p>
+<p>}</p>
+<p>// Output: Estación: Otoño</p>
+<p><strong>2) Clasificador de Notas (Escala de A a F)</strong></p>
+<p>C</p>
+<p>// Entrada: nota = 82</p>
+<p>int nota = 82;</p>
+<p>if (nota &gt;= 90) {</p>
+<p>printf("Clasificación: A\n");</p>
+<p>} else if (nota &gt;= 80) {</p>
+<p>printf("Clasificación: B\n"); // Se ejecuta</p>
+<p>} else if (nota &gt;= 70) {</p>
+<p>printf("Clasificación: C\n");</p>
+<p>} else if (nota &gt;= 60) {</p>
+<p>printf("Clasificación: D\n");</p>
+<p>} else {</p>
+<p>printf("Clasificación: Falla/Reprobado\n");</p>
+<p>}</p>
+<p>// Output: Clasificación: B</p>
+<p><strong>3) Determinar Tipo de Triángulo</strong></p>
+<p>C</p>
+<p>// Entrada: A=3, B=4, C=3</p>
+<p>int A = 3, B = 4, C = 3;</p>
+<p>if (A == B &amp;&amp; B == C) {</p>
+<p>printf("Triángulo Equilátero\n");</p>
+<p>} else if (A == B || B == C || A == C) {</p>
+<p>printf("Triángulo Isósceles\n"); // Se ejecuta</p>
+<p>} else {</p>
+<p>printf("Triángulo Escaleno\n");</p>
+<p>}</p>
+<p>// Output: Triángulo Isósceles</p>
+<p><strong>4) Sistema de Impuestos por Ingreso</strong></p>
+<p>C</p>
+<p>// Entrada: ingreso = 60000.0</p>
+<p>float ingreso = 60000.0f;</p>
+<p>if (ingreso &gt;= 50000.0f) {</p>
+<p>printf("Impuesto a aplicar: 30%%\n"); // Se ejecuta</p>
+<p>} else if (ingreso &gt;= 20000.0f) {</p>
+<p>printf("Impuesto a aplicar: 20%%\n");</p>
+<p>} else {</p>
+<p>printf("Impuesto a aplicar: 10%%\n");</p>
+<p>}</p>
+<p>// Output: Impuesto a aplicar: 30%</p>
+<p><strong>5) Desafío de Rango (Optimización con else if)</strong></p>
+<p>C</p>
+<p>// Entrada: num = 15</p>
+<p>int num = 15;</p>
+<p>if (num &lt;= 10) {</p>
+<p>printf("Rango 0-10\n");</p>
+<p>} else if (num &lt;= 20) {</p>
+<p>printf("Rango 11-20\n"); // Se ejecuta</p>
+<p>} else if (num &lt;= 30) {</p>
+<p>printf("Rango 21-30\n");</p>
+<p>} else {</p>
+<p>printf("Otro rango\n");</p>
+<p>}</p>
+<p>// Output: Rango 11-20</p>
+<p><strong>Bloque 2: Anidamiento de if (<em>Nested if</em>)</strong></p>
+<p><strong>6) Aprobación con Requisitos Dobles</strong></p>
+<p>C</p>
+<p>// Entrada: calificacion = 7.5, asistencia = 70</p>
+<p>float calificacion = 7.5f;</p>
+<p>int asistencia = 70;</p>
+<p>if (asistencia &gt;= 80) { // Condición Externa: Falsa (70 &lt;
+80)</p>
+<p>if (calificacion &gt;= 7.0f) {</p>
+<p>printf("Aprobación Final\n");</p>
+<p>} else {</p>
+<p>printf("Suspendido por nota\n");</p>
+<p>}</p>
+<p>} else {</p>
+<p>printf("Suspendido por asistencia\n"); // Se ejecuta</p>
+<p>}</p>
+<p>// Output: Suspendido por asistencia</p>
+<p><strong>7) Acceso a Contenido Premium</strong></p>
+<p>C</p>
+<p>// Entrada: membresia = 2, pago_al_dia = 0</p>
+<p>int membresia = 2;</p>
+<p>int pago_al_dia = 0;</p>
+<p>if (membresia == 2) { // Membresía Premium: Verdadera</p>
+<p>if (pago_al_dia == 1) {</p>
+<p>printf("Acceso a Contenido 4K\n");</p>
+<p>} else {</p>
+<p>printf("Acceso suspendido, pague su cuota\n"); // Se ejecuta</p>
+<p>}</p>
+<p>} else {</p>
+<p>printf("Acceso Básico\n");</p>
+<p>}</p>
+<p>// Output: Acceso suspendido, pague su cuota</p>
+<p><strong>8) Validación de Usuario y Clave (Anidamiento)</strong></p>
+<p>C</p>
+<p>// Entrada: id_usuario = 100, clave = 000</p>
+<p>int id_usuario = 100;</p>
+<p>int clave = 0; // Usamos 000 como 0</p>
+<p>if (id_usuario == 100) { // ID correcto: Verdadero</p>
+<p>printf("ID correcto.\n");</p>
+<p>if (clave == 999) {</p>
+<p>printf("Login Exitoso\n");</p>
+<p>} else {</p>
+<p>printf("Clave incorrecta.\n"); // Se ejecuta</p>
+<p>}</p>
+<p>} else {</p>
+<p>printf("ID no encontrado.\n");</p>
+<p>}</p>
+<p>// Output: ID correcto. Clave incorrecta.</p>
+<p><strong>9) Descuento por Volumen y VIP</strong></p>
+<p>C</p>
+<p>// Entrada: compra = 600.0, es_vip = 'N'</p>
+<p>float compra = 600.0f;</p>
+<p>char es_vip = 'N';</p>
+<p>float descuento = 0.0f;</p>
+<p>if (compra &gt;= 500.0f) { // Compra &gt;= 500: Verdadera</p>
+<p>if (es_vip == 'S') {</p>
+<p>descuento = 0.15f; // 15%</p>
+<p>} else {</p>
+<p>descuento = 0.10f; // 10% (Se ejecuta)</p>
+<p>}</p>
+<p>}</p>
+<p>// No se usa 'else' externo, descuento se mantiene 0.0f si la compra
+es baja</p>
+<p>printf("Descuento aplicado: %.0f%%. Total: %.2f\n",</p>
+<p>descuento * 100, compra * (1.0f - descuento));</p>
+<p>// Output: Descuento aplicado: 10%. Total: 540.00</p>
+<p><strong>10) Anidamiento de Tres Niveles (Advertencia)</strong></p>
+<p>C</p>
+<p>// Entrada: C1=1, C2=0, C3=1</p>
+<p>int C1 = 1;</p>
+<p>int C2 = 0;</p>
+<p>int C3 = 1;</p>
+<p>if (C1 == 1) { // Nivel 1: C1 es Verdadero</p>
+<p>if (!C2) { // Nivel 2: C2 es Falso (!0 es 1, Verdadero)</p>
+<p>if (C3 == 1) { // Nivel 3: C3 es Verdadero</p>
+<p>printf("OK\n"); // Se ejecuta</p>
+<p>}</p>
+<p>}</p>
+<p>} else {</p>
+<p>printf("Falló en C1\n");</p>
+<p>}</p>
+<p>// Output: OK</p>
+<p><strong>Bloque 3: Estructura switch</strong></p>
+<p><strong>11) Menú de Opciones Básico</strong></p>
+<p>C</p>
+<p>// Entrada: opcion = 2</p>
+<p>int opcion = 2;</p>
+<p>switch (opcion) {</p>
+<p>case 1:</p>
+<p>printf("Opción A seleccionada\n");</p>
+<p>break;</p>
+<p>case 2:</p>
+<p>printf("Opción B seleccionada\n"); // Se ejecuta</p>
+<p>break;</p>
+<p>case 3:</p>
+<p>printf("Opción C seleccionada\n");</p>
+<p>break;</p>
+<p>default:</p>
+<p>printf("Opción no válida\n");</p>
+<p>}</p>
+<p>// Output: Opción B seleccionada</p>
+<p><strong>12) Días de la Semana (Uso de Múltiples case)</strong></p>
+<p>C</p>
+<p>// Entrada: dia = 6</p>
+<p>int dia = 6;</p>
+<p>switch (dia) {</p>
+<p>case 1:</p>
+<p>case 2:</p>
+<p>case 3:</p>
+<p>case 4:</p>
+<p>case 5:</p>
+<p>printf("Día laboral\n");</p>
+<p>break;</p>
+<p>case 6: // Se ejecuta y continúa hasta el break</p>
+<p>case 7:</p>
+<p>printf("Fin de semana\n"); // Se ejecuta</p>
+<p>break;</p>
+<p>default:</p>
+<p>printf("Número de día inválido\n");</p>
+<p>}</p>
+<p>// Output: Fin de semana</p>
+<p><strong>13) Conversor de Carácter a Color</strong></p>
+<p>C</p>
+<p>// Entrada: color_char = 'B'</p>
+<p>char color_char = 'B';</p>
+<p>switch (color_char) {</p>
+<p>case 'R':</p>
+<p>printf("Rojo\n");</p>
+<p>break;</p>
+<p>case 'G':</p>
+<p>printf("Verde\n");</p>
+<p>break;</p>
+<p>case 'B':</p>
+<p>printf("Azul\n"); // Se ejecuta</p>
+<p>break;</p>
+<p>default:</p>
+<p>printf("Otro Color\n");</p>
+<p>}</p>
+<p>// Output: Azul</p>
+<p><strong>14) Manejo de Errores con default</strong></p>
+<p>C</p>
+<p>// Entrada: codigo_error = 404</p>
+<p>int codigo_error = 404;</p>
+<p>switch (codigo_error) {</p>
+<p>case 100:</p>
+<p>printf("Información\n");</p>
+<p>break;</p>
+<p>case 200:</p>
+<p>printf("Éxito\n");</p>
+<p>break;</p>
+<p>case 500:</p>
+<p>printf("Error del Servidor\n");</p>
+<p>break;</p>
+<p>default:</p>
+<p>printf("Error Grave Desconocido\n"); // Se ejecuta</p>
+<p>}</p>
+<p>// Output: Error Grave Desconocido</p>
+<p><strong>15) Desafío de Operador (Conversión Lógica a
+switch)</strong></p>
+<p>C</p>
+<p>// Entrada: num_A = 10, num_B = 5, operador = '*'</p>
+<p>int num_A = 10;</p>
+<p>int num_B = 5;</p>
+<p>char operador = '*';</p>
+<p>int resultado = 0;</p>
+<p>switch (operador) {</p>
+<p>case '+':</p>
+<p>resultado = num_A + num_B;</p>
+<p>break;</p>
+<p>case '-':</p>
+<p>resultado = num_A - num_B;</p>
+<p>break;</p>
+<p>case '*':</p>
+<p>resultado = num_A * num_B; // Se ejecuta</p>
+<p>break;</p>
+<p>default:</p>
+<p>printf("Operador no válido.\n");</p>
+<p>return 1; // Termina el programa si es inválido</p>
+<p>}</p>
+<p>printf("Resultado: %d\n", resultado);</p>
+<p>// Output: Resultado: 50</p>
+
+
+</div>
+</body>
+</html>
+

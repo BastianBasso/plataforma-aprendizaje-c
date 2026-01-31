@@ -1,0 +1,220 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" crossorigin href="/assets/content-01sust.css">
+</head>
+<body>
+<div class="main-content">
+<h1><strong>Proyecto del Módulo 2: Calculadora de Inversión
+Financiera</strong></h1>
+<p>Este proyecto desafiante está diseñado para que apliques y consolides
+<strong>todos los conceptos</strong> aprendidos en el Módulo 2:
+<strong>Tipos de Datos, Variables, Constantes, Límites y Conversión de
+Tipos (Casting)</strong>.</p>
+<p>El objetivo es construir una calculadora que determine el valor
+futuro de una inversión, manejando las entradas del usuario y asegurando
+que los cálculos sean precisos y que el manejo de datos sea seguro.</p>
+<p><strong>Objetivo del Proyecto: Cálculo de Valor Futuro (Interés
+Compuesto)</strong></p>
+<p>Implementar un programa en C que calcule el valor futuro de una
+inversión utilizando la fórmula de interés compuesto. El programa debe
+gestionar los tipos de datos cuidadosamente para evitar desbordamientos
+y asegurar la precisión decimal.</p>
+<p>$$\text{Valor Futuro} = \text{Capital Inicial} \times (1 + \text{Tasa
+de Interés})^{\text{Años}}$$</p>
+<p><strong>Requisitos de Implementación</strong></p>
+<p>El programa debe cumplir con los siguientes puntos, aplicando las
+buenas prácticas y conceptos aprendidos:</p>
+<p><strong>1. Gestión de Constantes y Nomenclatura (Secciones 4 y
+6)</strong></p>
+<ul>
+<li><p><strong>Constante de Tasa Fija:</strong> Define una constante
+para la <strong>tasa de interés base</strong> (ej. $0.05$ para $5\%$).
+Utiliza el calificador <strong>const</strong> y la convención de
+nomenclatura <strong>MAYÚSCULAS_CON_GUION_BAJO</strong> (ej.,
+TASA_INTERES_BASE).</p></li>
+<li><p><strong>Constante Simbólica:</strong> Define el <strong>número
+máximo de años</strong> para la inversión (ej., $50$) usando
+<strong>#define</strong> (ej., MAX_ANOS).</p></li>
+</ul>
+<p><strong>2. Manejo de Variables y Tipos (Secciones 1, 2 y
+6)</strong></p>
+<ul>
+<li><p><strong>Entradas del Usuario:</strong> Declara variables para
+almacenar:</p>
+<ul>
+<li><p><strong>Capital Inicial:</strong> Utiliza el tipo
+<strong>double</strong> para asegurar alta precisión y un gran rango de
+capital.</p></li>
+<li><p><strong>Años de Inversión:</strong> Utiliza un tipo
+<strong>int</strong> o <strong>unsigned int</strong> (argumenta por qué
+eliges uno sobre el otro en los comentarios).</p></li>
+</ul></li>
+<li><p><strong>Salida del Resultado:</strong> La variable valor_futuro
+debe ser de tipo <strong>double</strong>.</p></li>
+<li><p><strong>Buenas Prácticas:</strong></p>
+<ul>
+<li><p>Utiliza <strong>Snake Case</strong> (capital_inicial) para todas
+las variables.</p></li>
+<li><p>Asegúrate de que las variables se declaren lo <strong>más cerca
+posible de su uso</strong> (estilo C99+).</p></li>
+</ul></li>
+</ul>
+<p><strong>3. Validación y Desbordamiento (Sección 5)</strong></p>
+<ul>
+<li><p><strong>Protección contra Overflow:</strong> Incluye el
+<em>header</em> <strong>&lt;limits.h&gt;</strong>. Antes de calcular el
+valor futuro, crea una condición que compruebe si el número de años
+introducido por el usuario excede la constante <strong>MAX_ANOS</strong>
+o si es negativo. Si lo hace, imprime un mensaje de error y finaliza el
+programa.</p></li>
+<li><p><strong>Uso de long double (Desafío Extra):</strong> Para el
+cálculo del Valor Futuro, realiza el cálculo intermedio utilizando
+<strong>long double</strong> (el tipo con mayor rango) para demostrar
+que puedes manejar la máxima precisión posible, y luego asigna el
+resultado final a la variable valor_futuro de tipo double.</p></li>
+</ul>
+<p><strong>4. Conversión y Precisión (Casting - Sección Extra
+4)</strong></p>
+<ul>
+<li><p><strong>Casting para Impresión:</strong> Al imprimir el resultado
+final (valor_futuro), utiliza el especificador %lf o %le para mostrar la
+precisión.</p></li>
+<li><p><strong>Desafío de la Tasa:</strong> Si el usuario ingresa la
+tasa como un <strong>porcentaje entero</strong> (ej. $5$), usa
+<strong>Casting Explícito</strong> para convertir ese entero a su valor
+decimal correcto (ej. $\text{tasa}/100.0$) antes de usarlo en la
+fórmula.</p></li>
+</ul>
+<p><strong>Instrucciones de Entrega</strong></p>
+<ol type="1">
+<li><p>El código debe compilar sin advertencias ni errores con el
+estándar C99 o superior.</p></li>
+<li><p>Cada sección de código que implemente un concepto del módulo
+(constantes, <em>casting</em>, límites) debe ir acompañada de un
+<strong>comentario explicativo</strong> que justifique la elección del
+tipo o la práctica utilizada.</p></li>
+<li><p>Incluye una prueba donde el programa muestre un resultado válido
+y otra donde muestre el mensaje de error por exceder MAX_ANOS.</p></li>
+</ol>
+<p><strong>Ejemplo de Interacción Esperada</strong></p>
+<p>Calculadora de Inversión</p>
+<p>========================</p>
+<p>Tasa de interés base: 5.00%</p>
+<p>Ingrese capital inicial (ej. 10000.00): 10000.00</p>
+<p>Ingrese años de inversión (máx. 50): 10</p>
+<p>Calculando...</p>
+<p>El valor futuro de la inversión es: 16288.95 double</p>
+<p><strong>Solución Propuesta: Calculadora de Valor Futuro</strong></p>
+<p>Este código utiliza las librerías stdio.h para entrada/salida, math.h
+para la función de potencia, y limits.h para la validación de
+límites.</p>
+<p><strong>Código Fuente en C</strong></p>
+<p>C</p>
+<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
+<p>#<strong>include</strong> &lt;math.h&gt; // Necesario para la función
+pow()</p>
+<p>#<strong>include</strong> &lt;limits.h&gt; // Necesario para la
+validación de límites</p>
+<p>// 1. Constante Simbólica (Uso de #define para un límite fijo)</p>
+<p>#<strong>define</strong> MAX_ANOS 50</p>
+<p>// 2. Constante Tipada (Uso de 'const' con Snake Case Mayúsculas)</p>
+<p>const double TASA_INTERES_BASE = 0.05; // 5%</p>
+<p>int main(void) {</p>
+<p>// Variables declaradas cerca del uso (Estilo C99+) y usando Snake
+Case</p>
+<p>printf("==========================================\n");</p>
+<p>printf(" Calculadora de Inversión (Módulo 2) \n");</p>
+<p>printf("==========================================\n");</p>
+<p>printf("Tasa de interés base: %.2f%%\n", TASA_INTERES_BASE *
+100);</p>
+<p>// Declaración de variables para entradas</p>
+<p>double capital_inicial; // Tipo double para gran precisión en
+dinero</p>
+<p>int anos_inversion; // Tipo int para contar años</p>
+<p>// 3. Lectura del Capital Inicial</p>
+<p>printf("Ingrese capital inicial (ej. 10000.00): ");</p>
+<p>if (scanf("%lf", &amp;capital_inicial) != 1 || capital_inicial &lt;=
+0) {</p>
+<p>fprintf(stderr, "Error: Capital inicial inválido.\n");</p>
+<p>return 1;</p>
+<p>}</p>
+<p>// 4. Lectura de Años de Inversión</p>
+<p>printf("Ingrese años de inversión (máx. %d): ", MAX_ANOS);</p>
+<p>if (scanf("%d", &amp;anos_inversion) != 1) {</p>
+<p>fprintf(stderr, "Error: Entrada de años inválida.\n");</p>
+<p>return 1;</p>
+<p>}</p>
+<p>// 5. Protección contra Overflow y Validación</p>
+<p>if (anos_inversion &lt; 0) {</p>
+<p>fprintf(stderr, "\nERROR: Los años de inversión no pueden ser
+negativos (violación de rango).\n");</p>
+<p>return 1;</p>
+<p>}</p>
+<p>if (anos_inversion &gt; MAX_ANOS) {</p>
+<p>// Validación contra la constante simbólica</p>
+<p>fprintf(stderr, "\nERROR: El número de años excede el límite (%d
+años).\n", MAX_ANOS);</p>
+<p>return 1;</p>
+<p>}</p>
+<p>// 6. Cálculo del Valor Futuro con long double para máxima precisión
+intermedia</p>
+<p>// Uso del tipo long double, el tipo flotante con mayor rango y
+precisión en C.</p>
+<p>long double factor_interes = 1.0 + TASA_INTERES_BASE;</p>
+<p>long double potencia = pow(factor_interes, (long
+double)anos_inversion);</p>
+<p>// 7. Casting Explícito (Conversión de tipo)</p>
+<p>// Se fuerza el cálculo a double para la variable final.</p>
+<p>double valor_futuro = (double)capital_inicial * potencia;</p>
+<p>printf("\nCalculando...\n");</p>
+<p>printf("El factor de potencia (1 + 0.05)^%d es: %.6Lf\n",
+anos_inversion, potencia);</p>
+<p>// 8. Impresión del Resultado Final</p>
+<p>// Usando %lf para imprimir el resultado de tipo double</p>
+<p>printf("El valor futuro de la inversión es: %.2lf\n",
+valor_futuro);</p>
+<p>return 0;</p>
+<p>}</p>
+<p><strong>Pruebas y Outputs Esperados</strong></p>
+<p><strong>Prueba 1: Escenario Válido</strong></p>
+<p><strong>Entrada del Usuario:</strong></p>
+<ul>
+<li><p>Capital Inicial: 10000.00</p></li>
+<li><p>Años de Inversión: 10</p></li>
+</ul>
+<p><strong>Cálculo:</strong> $10000 \times (1 + 0.05)^{10} \approx
+16288.946$</p>
+<p><strong>Output Esperado:</strong></p>
+<p>==========================================</p>
+<p>Calculadora de Inversión (Módulo 2)</p>
+<p>==========================================</p>
+<p>Tasa de interés base: 5.00%</p>
+<p>Ingrese capital inicial (ej. 10000.00): 10000.00</p>
+<p>Ingrese años de inversión (máx. 50): 10</p>
+<p>Calculando...</p>
+<p>El factor de potencia (1 + 0.05)^10 es: 1.628895</p>
+<p>El valor futuro de la inversión es: 16288.95</p>
+<p><strong>Prueba 2: Violación de Límites (<em>Overflow</em>
+Lógico)</strong></p>
+<p><strong>Entrada del Usuario:</strong></p>
+<ul>
+<li><p>Capital Inicial: 10000.00</p></li>
+<li><p>Años de Inversión: 51 (Excede MAX_ANOS = 50)</p></li>
+</ul>
+<p><strong>Output Esperado:</strong></p>
+<p>==========================================</p>
+<p>Calculadora de Inversión (Módulo 2)</p>
+<p>==========================================</p>
+<p>Tasa de interés base: 5.00%</p>
+<p>Ingrese capital inicial (ej. 10000.00): 10000.00</p>
+<p>Ingrese años de inversión (máx. 50): 51</p>
+<p>ERROR: El número de años excede el límite (50 años).</p>
+
+
+</div>
+</body>
+</html>
+

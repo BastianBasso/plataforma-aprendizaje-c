@@ -1,0 +1,155 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" crossorigin href="/assets/content-01sust.css">
+</head>
+<body>
+<div class="main-content">
+<h2 id="definici-n-de-array-arreglo-">DefiniciÃ³n de Array (Arreglo)</h2>
+<p>Un <strong>Array</strong> o <strong>Arreglo</strong> es una estructura de datos fundamental en C utilizada para agrupar y almacenar mÃºltiples valores bajo un mismo nombre.</p>
+<hr>
+<h3 id="concepto-y-caracter-sticas-clave">Concepto y CaracterÃ­sticas Clave</h3>
+<p>Un <strong>Array</strong> se define como una <strong>colecciÃ³n de elementos del mismo tipo de dato</strong> almacenados en <strong>posiciones de memoria contiguas (seguidas)</strong>.</p>
+<ul>
+<li><strong>ColecciÃ³n HomogÃ©nea:</strong> Todos los elementos dentro de un <em>array</em> deben ser del <strong>mismo tipo de dato</strong> (ej: todos deben ser <code>int</code>, todos <code>float</code>, o todos <code>char</code>). No se pueden mezclar tipos de datos diferentes dentro del mismo <em>array</em>.</li>
+<li><strong>ContigÃ¼idad en Memoria:</strong> Los elementos del <em>array</em> se guardan uno inmediatamente despuÃ©s del otro en la memoria de la computadora. Esta caracterÃ­stica es crucial porque permite un <strong>acceso rÃ¡pido y eficiente</strong> a cualquier elemento mediante el uso de Ã­ndices. </li>
+<li><strong>Nombre Ãšnico:</strong> El <em>array</em> completo es referenciado por un Ãºnico nombre de variable.</li>
+</ul>
+<h3 id="la-importancia-de-la-contig-idad">La Importancia de la ContigÃ¼idad</h3>
+<p>Dado que los elementos estÃ¡n almacenados en posiciones de memoria consecutivas, el lenguaje C puede determinar la ubicaciÃ³n exacta de cualquier elemento con una simple operaciÃ³n matemÃ¡tica:</p>
+<p>$$\text{DirecciÃ³n del Elemento}[i] = \text{DirecciÃ³n Base} + (i \times \text{TamaÃ±o del Tipo de Dato})$$</p>
+<p>Esto permite acceder a cualquier elemento con la misma velocidad, sin importar si es el primero o el Ãºltimo, lo que se conoce como <strong>Acceso Directo</strong> (o indexado).</p>
+<h2 id="sintaxis-de-declaraci-n-de-arrays">Sintaxis de DeclaraciÃ³n de Arrays</h2>
+<p>La declaraciÃ³n de un <strong>Array Unidimensional</strong> en C es sencilla y sigue un formato estricto que especifica el tipo de elementos, el nombre de la colecciÃ³n y su capacidad mÃ¡xima.</p>
+<h3 id="formato-b-sico">Formato BÃ¡sico</h3>
+<p>La sintaxis bÃ¡sica para declarar un <em>array</em> es la siguiente:</p>
+<pre><code class="lang-c">tipo nombre[tamaÃ±o]<span class="hljs-comment">;</span>
+</code></pre>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Parte</th>
+<th style="text-align:left">DescripciÃ³n</th>
+<th style="text-align:left">Ejemplo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><strong><code>tipo</code></strong></td>
+<td style="text-align:left">El tipo de dato de <strong>todos</strong> los elementos del array (ej: <code>int</code>, <code>float</code>, <code>char</code>).</td>
+<td style="text-align:left"><code>int</code></td>
+</tr>
+<tr>
+<td style="text-align:left"><strong><code>nombre</code></strong></td>
+<td style="text-align:left">El identificador que usaremos para referenciar la colecciÃ³n completa.</td>
+<td style="text-align:left"><code>edades</code></td>
+</tr>
+<tr>
+<td style="text-align:left"><strong><code>[tamaÃ±o]</code></strong></td>
+<td style="text-align:left">Un nÃºmero entero positivo que define la <strong>cantidad de elementos</strong> que puede almacenar el array.</td>
+<td style="text-align:left"><code>[50]</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="requisito-del-tama-o">Requisito del TamaÃ±o</h3>
+<p>Al declarar un <em>array</em> en el Ã¡mbito global o como variable local estÃ¡ndar (no VLA, que es un concepto avanzado), el valor especificado para el <strong><code>tamaÃ±o</code></strong> debe ser conocido por el compilador en tiempo de compilaciÃ³n.</p>
+<p>Esto significa que el tamaÃ±o debe ser:</p>
+<ol>
+<li><strong>Una Constante Entera Literal:</strong> Un nÃºmero fijo escrito directamente.<pre><code class="lang-c"><span class="hljs-keyword">int</span> calificaciones[<span class="hljs-number">10</span>]; <span class="hljs-comment">// 10 es un literal constante.</span>
+</code></pre>
+</li>
+<li><p><strong>Una Constante SimbÃ³lica:</strong> Definida usando <code>#define</code> o la palabra clave <code>const</code>.</p>
+<pre><code class="lang-c"><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> MAX_ITEMS 20</span>
+<span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> NUM_COLUMNAS = <span class="hljs-number">5</span>;
+
+<span class="hljs-keyword">float</span> productos[MAX_ITEMS];      <span class="hljs-comment">// VÃ¡lido</span>
+<span class="hljs-keyword">char</span> matriz[NUM_COLUMNAS];       <span class="hljs-comment">// VÃ¡lido</span>
+</code></pre>
+</li>
+</ol>
+<blockquote>
+<p><strong>Nota Importante:</strong> <strong>No se permite</strong> usar una variable normal (cuyo valor se determina durante la ejecuciÃ³n del programa) para especificar el tamaÃ±o de un array declarado estÃ¡ticamente. El compilador debe reservar el espacio de memoria antes de que el programa se ejecute.</p>
+</blockquote>
+<h2 id="inicializaci-n-de-arrays">InicializaciÃ³n de Arrays</h2>
+<p>La <strong>inicializaciÃ³n</strong> de un <em>array</em> en C se refiere a asignar valores a sus elementos al mismo tiempo que se declara la variable. Esto se realiza utilizando llaves curvas, <code>{}</code>.</p>
+<hr>
+<h3 id="1-inicializaci-n-completa">1. InicializaciÃ³n Completa</h3>
+<p>Para inicializar completamente un <em>array</em>, se enumeran los valores deseados para cada posiciÃ³n, separados por comas, dentro de las llaves <code>{}</code>.</p>
+<pre><code class="lang-c"><span class="hljs-comment">// Array de 5 enteros inicializado completamente.</span>
+int puntajes[<span class="hljs-number">5</span>] = {<span class="hljs-number">90</span>, <span class="hljs-number">85</span>, <span class="hljs-number">95</span>, <span class="hljs-number">80</span>, <span class="hljs-number">100</span>};
+
+<span class="hljs-comment">// Array de 3 caracteres (sin contar el terminador nulo).</span>
+char iniciales[<span class="hljs-number">3</span>] = {'A', 'B', 'C'};
+</code></pre>
+<p>El nÃºmero de valores dentro de las llaves debe coincidir con el <strong>tamaÃ±o</strong> declarado del <em>array</em>.</p>
+<h3 id="2-omisi-n-del-tama-o-inicializaci-n-impl-cita-">2. OmisiÃ³n del TamaÃ±o (InicializaciÃ³n ImplÃ­cita)</h3>
+<p>Si se inicializa el <em>array</em> completamente, se puede <strong>omitir el tamaÃ±o</strong> dentro de los corchetes <code>[]</code>. El compilador calcularÃ¡ automÃ¡ticamente el tamaÃ±o basÃ¡ndose en la cantidad de elementos proporcionados.</p>
+<pre><code class="lang-c"><span class="hljs-comment">// El compilador calcula el tamaÃ±o: 4 elementos</span>
+<span class="hljs-type">float</span> precios[] = {<span class="hljs-number">19.99</span>f, <span class="hljs-number">4.50</span>f, <span class="hljs-number">10.00</span>f, <span class="hljs-number">75.25</span>f}; 
+
+<span class="hljs-comment">// En este caso, 'precios' tendrÃ¡ un tamaÃ±o de 4.</span>
+</code></pre>
+<p>Esta tÃ©cnica se usa comÃºnmente para declarar cadenas de caracteres literales, donde el compilador calcula la longitud de la cadena mÃ¡s el carÃ¡cter nulo (<code>\0</code>).</p>
+<h3 id="3-inicializaci-n-parcial">3. InicializaciÃ³n Parcial</h3>
+<p>Es posible proporcionar <strong>menos valores</strong> en la lista de inicializaciÃ³n de los que caben en el tamaÃ±o declarado del <em>array</em>. Esto se conoce como <strong>inicializaciÃ³n parcial</strong>.</p>
+<ul>
+<li>Los elementos inicializados reciben los valores explÃ­citos.</li>
+<li>Todos los elementos <strong>restantes</strong> que no fueron inicializados explÃ­citamente se inicializan automÃ¡ticamente a <strong>cero</strong> (o a su equivalente nulo, como <code>0.0f</code> para <code>float</code> o <code>\0</code> para <code>char</code>).</li>
+</ul>
+<!-- end list -->
+<pre><code class="lang-c"><span class="hljs-comment">// Array de 6 elementos. Solo se inicializan los primeros 3.</span>
+int datos[<span class="hljs-number">6</span>] = {<span class="hljs-number">10</span>, <span class="hljs-number">20</span>, <span class="hljs-number">30</span>};
+
+<span class="hljs-comment">// Resultado en memoria:</span>
+<span class="hljs-comment">// datos[0] = 10</span>
+<span class="hljs-comment">// datos[1] = 20</span>
+<span class="hljs-comment">// datos[2] = 30</span>
+<span class="hljs-comment">// datos[3] = 0   &lt;-- Inicializado a cero</span>
+<span class="hljs-comment">// datos[4] = 0   &lt;-- Inicializado a cero</span>
+<span class="hljs-comment">// datos[5] = 0   &lt;-- Inicializado a cero</span>
+</code></pre>
+<blockquote>
+<p>ðŸ’¡ <strong>Tip:</strong> Para inicializar un <em>array</em> grande a cero rÃ¡pidamente, simplemente inicializa el primer elemento a cero y omite los demÃ¡s: <code>int mi_array[100] = {0};</code>. Todos los 99 elementos restantes serÃ¡n automÃ¡ticamente cero.</p>
+</blockquote>
+<h2 id="tama-o-fijo-y-limitaciones-naturaleza-est-tica-">TamaÃ±o Fijo y Limitaciones (Naturaleza EstÃ¡tica)</h2>
+<p>Una caracterÃ­stica esencial de los <strong>Arrays</strong> en C, tal como se han estudiado, es su naturaleza <strong>estÃ¡tica</strong>. Comprender esta limitaciÃ³n es clave para entender la necesidad de estructuras de datos mÃ¡s avanzadas.</p>
+<hr>
+<h3 id="la-limitaci-n-del-tama-o-est-tico">La LimitaciÃ³n del TamaÃ±o EstÃ¡tico</h3>
+<p>El tamaÃ±o de un <em>array</em> declarado con la sintaxis bÃ¡sica (<code>tipo nombre[tamaÃ±o];</code>) es <strong>estÃ¡tico</strong>; esto significa que es <strong>fijo</strong> y se determina en el momento de la <strong>compilaciÃ³n</strong> del programa.</p>
+<ul>
+<li><strong>Inmutabilidad:</strong> Una vez que declaras <code>int calificaciones[10];</code>, este <em>array</em> tendrÃ¡ espacio para <strong>exactamente 10 enteros</strong> durante toda la ejecuciÃ³n del programa.</li>
+<li><strong>Imposibilidad de RedimensiÃ³n:</strong> No puedes, en tiempo de ejecuciÃ³n (mientras el programa se estÃ¡ ejecutando), decirle al <em>array</em> que ahora necesita espacio para 15 elementos o que solo necesita 5. El tamaÃ±o es inamovible.</li>
+<li><strong>Problema de Sobrecarga (<em>Overflow</em>):</strong> Si intentas almacenar un undÃ©cimo elemento en el <em>array</em> de 10, estarÃ¡s escribiendo en una posiciÃ³n de memoria inmediatamente despuÃ©s del <em>array</em>. Este comportamiento se conoce como <strong>desbordamiento de bÃºfer (<em>buffer overflow</em>)</strong> y es una fuente comÃºn de errores de programaciÃ³n y de vulnerabilidades de seguridad graves en C.</li>
+</ul>
+<h3 id="implicaciones-pr-cticas">Implicaciones PrÃ¡cticas</h3>
+<p>La rigidez del tamaÃ±o estÃ¡tico presenta varios desafÃ­os:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Escenario</th>
+<th style="text-align:left">Problema</th>
+<th style="text-align:left">ImplicaciÃ³n</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><strong>Poca Capacidad</strong></td>
+<td style="text-align:left">Necesitas almacenar 15 elementos, pero el <em>array</em> fue declarado con 10.</td>
+<td style="text-align:left">Ocurre un <strong>desbordamiento</strong> de memoria y corrupciÃ³n de datos.</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Exceso de Capacidad</strong></td>
+<td style="text-align:left">Declara un <em>array</em> de 1000 elementos &quot;por si acaso&quot;, pero solo usa 5.</td>
+<td style="text-align:left">Hay un desperdicio significativo de memoria RAM que podrÃ­a ser utilizada por otras partes del programa.</td>
+</tr>
+</tbody>
+</table>
+<p>Esta limitaciÃ³n estricta de no poder ajustar la memoria de un <em>array</em> durante la ejecuciÃ³n es la principal razÃ³n por la que en programaciÃ³n avanzada se evita depender Ãºnicamente de <em>arrays</em> estÃ¡ticos.</p>
+<p><strong>PrÃ³ximo Paso:</strong> Esta limitaciÃ³n se abordarÃ¡ y resolverÃ¡ completamente en mÃ³dulos posteriores (tÃ­picamente en el <strong>MÃ³dulo 10: AsignaciÃ³n DinÃ¡mica de Memoria</strong>), donde se aprenderÃ¡ a usar <strong>punteros</strong> y funciones como <code>malloc()</code> y <code>free()</code> para crear estructuras de datos cuyo tamaÃ±o puede <strong>cambiar dinÃ¡micamente</strong> en tiempo de ejecuciÃ³n.</p>
+
+</div>
+</body>
+</html>
+

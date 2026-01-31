@@ -1,0 +1,201 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" crossorigin href="/assets/content-01sust.css">
+</head>
+<body>
+<div class="main-content">
+<h2 id="recorrido-de-la-lista-traversals">Recorrido de la Lista
+(Traversals) ðŸš¶</h2>
+<p>El <strong>Recorrido</strong> es una operaciÃ³n fundamental en las
+Listas Enlazadas que permite acceder secuencialmente a cada nodo desde
+el principio hasta el final. Esta operaciÃ³n es la base para imprimir la
+lista, buscar un elemento o prepararse para una inserciÃ³n o eliminaciÃ³n
+compleja.</p>
+<hr />
+<h3 id="mecanismo-del-recorrido">Mecanismo del Recorrido</h3>
+<p>Debido a que los nodos no estÃ¡n contiguos en la memoria, el acceso se
+realiza Ãºnicamente a travÃ©s de los punteros de enlace.</p>
+<ol type="1">
+<li><strong>Puntero Auxiliar:</strong> Se declara e inicializa un
+<strong>puntero auxiliar</strong> (comÃºnmente llamado
+<code>actual</code>, <code>temp</code> o <code>ptr</code>) para que
+apunte al mismo lugar que <strong><code>HEAD</code></strong>. El puntero
+auxiliar es necesario porque no se debe modificar nunca el
+<code>HEAD</code> original durante el recorrido.</li>
+<li><strong>CondiciÃ³n de Avance:</strong> Dentro de un bucle, el puntero
+avanza de un nodo al siguiente reasignÃ¡ndose a sÃ­ mismo con el valor de
+su propio campo de enlace (<code>siguiente</code>).</li>
+<li><strong>CondiciÃ³n de Parada:</strong> El bucle continÃºa mientras el
+puntero auxiliar <strong>no sea <code>NULL</code></strong>. Cuando el
+puntero auxiliar alcanza el valor <code>NULL</code>, significa que ha
+pasado el Ãºltimo nodo de la lista y el recorrido debe finalizar.</li>
+</ol>
+<h3 id="lÃ³gica-en-cÃ³digo-c">LÃ³gica en CÃ³digo C</h3>
+<p>La lÃ³gica del recorrido se implementa tÃ­picamente con un bucle
+<code>while</code>:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Asumimos &#39;Nodo&#39; ya estÃ¡ definido y &#39;head&#39; es la cabeza de la lista</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> recorrer_lista<span class="op">(</span>Nodo <span class="op">*</span>head<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">// 1. Inicializar el puntero auxiliar</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    Nodo <span class="op">*</span>actual <span class="op">=</span> head<span class="op">;</span> </span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="co">// 2. Bucle: Mientras el puntero no sea NULL (mientras haya un nodo)</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> <span class="op">(</span>actual <span class="op">!=</span> NULL<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>        <span class="co">// ** (AquÃ­ se realiza la operaciÃ³n deseada: imprimir, buscar, etc.) **</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>        <span class="co">// 3. CondiciÃ³n de Avance</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>        actual <span class="op">=</span> actual<span class="op">-&gt;</span>siguiente<span class="op">;</span> </span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<h2 id="funciÃ³n-de-impresiÃ³nrecorrido-debugging">FunciÃ³n de
+ImpresiÃ³n/Recorrido (Debugging) ðŸ“</h2>
+<p>La <strong>FunciÃ³n de ImpresiÃ³n</strong> es una aplicaciÃ³n directa y
+esencial del recorrido de la lista. Su propÃ³sito es visitar cada nodo e
+imprimir su campo de datos, lo cual es fundamental para
+<strong>depurar</strong> y verificar el estado lÃ³gico de la lista
+despuÃ©s de cada operaciÃ³n de inserciÃ³n o eliminaciÃ³n.</p>
+<hr />
+<h3 id="implementaciÃ³n-prÃ¡ctica">ImplementaciÃ³n PrÃ¡ctica</h3>
+<p>La funciÃ³n recibe el puntero <strong><code>HEAD</code></strong> (por
+valor, ya que no se necesita modificar la lista) e utiliza un puntero
+auxiliar para iterar.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Asumimos &#39;Nodo&#39; ya estÃ¡ definido</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> imprimir_lista<span class="op">(</span>Nodo <span class="op">*</span>head<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">// 1. Inicializar el puntero auxiliar en HEAD</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    Nodo <span class="op">*</span>actual <span class="op">=</span> head<span class="op">;</span> </span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;Lista: &quot;</span><span class="op">);</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    <span class="co">// 2. Recorrido: Bucle mientras &#39;actual&#39; no sea NULL</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> <span class="op">(</span>actual <span class="op">!=</span> NULL<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>        <span class="co">// 3. OperaciÃ³n (ImpresiÃ³n): Acceder al campo de datos</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">&quot;</span><span class="sc">%d</span><span class="st"> -&gt; &quot;</span><span class="op">,</span> actual<span class="op">-&gt;</span>dato<span class="op">);</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>        <span class="co">// 4. Avance: Mover al siguiente nodo</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>        actual <span class="op">=</span> actual<span class="op">-&gt;</span>siguiente<span class="op">;</span> </span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Indica el final de la lista</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;NULL</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span> </span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Ejemplo de salida: Lista: 5 -&gt; 10 -&gt; 15 -&gt; NULL</span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p><strong>Nota:</strong> Es buena prÃ¡ctica imprimir â€œNULLâ€ al final
+para visualizar claramente dÃ³nde termina la secuencia lÃ³gica de la lista
+enlazada. ## EliminaciÃ³n de un Nodo (Inicio) ðŸ—‘ï¸</p>
+<p>La eliminaciÃ³n del primer nodo de la lista es, junto con la inserciÃ³n
+al inicio, la operaciÃ³n de modificaciÃ³n <strong>mÃ¡s sencilla</strong> de
+realizar, con una eficiencia de tiempo constante, <strong><span
+class="math inline"><em>O</em>(1)</span></strong>.</p>
+<hr />
+<h3 id="mecanismo-y-flujo-de-punteros">Mecanismo y Flujo de
+Punteros</h3>
+<p>El proceso se enfoca en actualizar el puntero
+<strong><code>HEAD</code></strong> y, crucialmente, liberar la memoria
+del nodo que se va a eliminar:</p>
+<ol type="1">
+<li><strong>Puntero de Respaldo:</strong> Se declara un puntero auxiliar
+(<code>nodo_a_eliminar</code>) que guarda la direcciÃ³n del nodo actual
+de la <strong><code>HEAD</code></strong>.</li>
+<li><strong>ReasignaciÃ³n de <code>HEAD</code>:</strong> El puntero
+<strong><code>HEAD</code></strong> se actualiza para que apunte al
+<strong>segundo nodo</strong> de la lista (es decir, el nodo al que
+apunta <code>HEAD-&gt;siguiente</code>). Si la lista solo tenÃ­a un nodo,
+<code>HEAD</code> se convierte en <code>NULL</code>.</li>
+<li><strong>LiberaciÃ³n de Memoria:</strong> Se utiliza la funciÃ³n
+<strong><code>free()</code></strong> sobre el puntero de respaldo
+(<code>nodo_a_eliminar</code>) para devolver el espacio ocupado por el
+nodo original al <em>Heap</em>.</li>
+</ol>
+<h3 id="lÃ³gica-en-cÃ³digo-c-1">LÃ³gica en CÃ³digo C</h3>
+<div class="sourceCode" id="cb3"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Asumimos &#39;Nodo&#39; ya estÃ¡ definido</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> eliminar_al_inicio<span class="op">(</span>Nodo <span class="op">**</span>head_ref<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Caso LÃ­mite: Lista vacÃ­a</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(*</span>head_ref <span class="op">==</span> NULL<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">&quot;Error: La lista estÃ¡ vacÃ­a, no se puede eliminar.</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span><span class="op">;</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    <span class="co">// 1. Guardar el nodo actual de HEAD para liberarlo</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    Nodo <span class="op">*</span>nodo_a_eliminar <span class="op">=</span> <span class="op">*</span>head_ref<span class="op">;</span> </span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    <span class="co">// 2. Mover HEAD al siguiente nodo (el segundo)</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>    <span class="op">*</span>head_ref <span class="op">=</span> <span class="op">(*</span>head_ref<span class="op">)-&gt;</span>siguiente<span class="op">;</span> </span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>    <span class="co">// 3. Liberar la memoria del nodo original</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>    free<span class="op">(</span>nodo_a_eliminar<span class="op">);</span> </span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;EliminaciÃ³n exitosa al inicio (O(1)).</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<h2 id="eliminaciÃ³n-de-un-nodo-general">EliminaciÃ³n de un Nodo (General)
+ðŸ”ª</h2>
+<p>La eliminaciÃ³n de un nodo en una posiciÃ³n arbitraria (intermedia o al
+final) es la operaciÃ³n mÃ¡s compleja de la lista enlazada, con una
+eficiencia de tiempo de <strong><span
+class="math inline"><em>O</em>(<em>N</em>)</span></strong> debido a la
+bÃºsqueda previa del nodo. La clave es utilizar <strong>dos punteros
+auxiliares</strong> para reconfigurar el enlace de la lista.</p>
+<hr />
+<h3 id="mecanismo-de-los-dos-punteros">Mecanismo de los Dos
+Punteros</h3>
+<p>Para eliminar un nodo <code>B</code> que se encuentra entre un nodo
+<code>A</code> (anterior) y un nodo <code>C</code> (siguiente), el nodo
+<code>A</code> debe ser re-enlazado para apuntar directamente al nodo
+<code>C</code>.</p>
+<p>El uso de <strong>dos punteros auxiliares</strong> facilita esta
+tarea:</p>
+<ol type="1">
+<li><strong>Puntero <code>anterior</code>:</strong> Siempre apunta al
+nodo <strong>predecesor</strong> del nodo a eliminar. Este puntero es
+esencial porque es el que debe ser modificado para â€œsaltarâ€ el
+nodo.</li>
+<li><strong>Puntero <code>actual</code>:</strong> Apunta al nodo
+<strong>a eliminar</strong>.</li>
+</ol>
+<h3 id="lÃ³gica-en-cÃ³digo-c-eliminar-por-valor">LÃ³gica en CÃ³digo C
+(Eliminar por Valor)</h3>
+<p>La bÃºsqueda debe avanzar hasta que el puntero <code>actual</code>
+apunte al nodo que contiene el valor a eliminar, mientras que
+<code>anterior</code> lo sigue:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Asumimos &#39;Nodo&#39; ya estÃ¡ definido</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> eliminar_por_valor<span class="op">(</span>Nodo <span class="op">**</span>head_ref<span class="op">,</span> <span class="dt">int</span> valor<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    Nodo <span class="op">*</span>actual <span class="op">=</span> <span class="op">*</span>head_ref<span class="op">;</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    Nodo <span class="op">*</span>anterior <span class="op">=</span> NULL<span class="op">;</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="co">// 1. Caso LÃ­mite: El nodo a eliminar es HEAD (O(1))</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>actual <span class="op">!=</span> NULL <span class="op">&amp;&amp;</span> actual<span class="op">-&gt;</span>dato <span class="op">==</span> valor<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>        <span class="op">*</span>head_ref <span class="op">=</span> actual<span class="op">-&gt;</span>siguiente<span class="op">;</span> <span class="co">// HEAD apunta al segundo nodo</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>        free<span class="op">(</span>actual<span class="op">);</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">&quot;Eliminado </span><span class="sc">%d</span><span class="st"> (era HEAD).</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">,</span> valor<span class="op">);</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span><span class="op">;</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>    <span class="co">// 2. Recorrido O(N): Buscar el nodo a eliminar</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> <span class="op">(</span>actual <span class="op">!=</span> NULL <span class="op">&amp;&amp;</span> actual<span class="op">-&gt;</span>dato <span class="op">!=</span> valor<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>        anterior <span class="op">=</span> actual<span class="op">;</span></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>        actual <span class="op">=</span> actual<span class="op">-&gt;</span>siguiente<span class="op">;</span></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>    <span class="co">// 3. Caso LÃ­mite: Nodo no encontrado</span></span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>actual <span class="op">==</span> NULL<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">&quot;Error: Valor </span><span class="sc">%d</span><span class="st"> no encontrado en la lista.</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">,</span> valor<span class="op">);</span></span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span><span class="op">;</span></span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>    <span class="co">// 4. Re-enlace (O(1)): Saltar el nodo a eliminar</span></span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>    <span class="co">// El nodo anterior (anterior) ahora apunta al nodo que seguÃ­a al eliminado (actual-&gt;siguiente).</span></span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>    anterior<span class="op">-&gt;</span>siguiente <span class="op">=</span> actual<span class="op">-&gt;</span>siguiente<span class="op">;</span></span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>    <span class="co">// 5. LiberaciÃ³n de memoria</span></span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>    free<span class="op">(</span>actual<span class="op">);</span></span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;Eliminado </span><span class="sc">%d</span><span class="st"> (posiciÃ³n intermedia).</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">,</span> valor<span class="op">);</span></span>
+<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+
+</div>
+</body>
+</html>
+

@@ -1,0 +1,238 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" crossorigin href="/assets/content-01sust.css">
+</head>
+<body>
+<div class="main-content">
+<p><strong>MÃ³dulo 5: Funciones y Modularidad</strong></p>
+<p><strong>2. DefiniciÃ³n, DeclaraciÃ³n y Llamada de
+Funciones</strong></p>
+<p><strong>DefiniciÃ³n de la FunciÃ³n (Cuerpo)</strong></p>
+<p>La <strong>DefiniciÃ³n</strong> de una funciÃ³n es la parte del cÃ³digo
+que contiene las <strong>instrucciones reales</strong> que se ejecutarÃ¡n
+cuando la funciÃ³n sea llamada. Es el "cuerpo" que especifica <strong>lo
+que la funciÃ³n hace</strong>.</p>
+<p>Una definiciÃ³n de funciÃ³n consta de dos partes principales: el
+<strong>encabezado</strong> y el <strong>cuerpo</strong>.</p>
+<p><strong>1. El Encabezado de la FunciÃ³n (Signature)</strong></p>
+<p>El encabezado define la <strong>interfaz</strong> completa de la
+funciÃ³n y debe coincidir exactamente con el prototipo (declaraciÃ³n).
+EstÃ¡ compuesto por:</p>
+<ul>
+<li><p><strong>Tipo de Retorno:</strong> El tipo de dato que la funciÃ³n
+devolverÃ¡ al mÃ³dulo que la llamÃ³ (ej: int, float, void).</p></li>
+<li><p><strong>Nombre de la FunciÃ³n:</strong> El identificador Ãºnico por
+el cual serÃ¡ invocada (ej: calcular_iva).</p></li>
+<li><p><strong>Lista de ParÃ¡metros:</strong> La lista de variables de
+entrada que la funciÃ³n necesita para operar, junto con sus tipos (ej:
+(float precio, float tasa)).</p></li>
+</ul>
+<p><strong>2. El Cuerpo de la FunciÃ³n (Bloque de CÃ³digo)</strong></p>
+<p>El cuerpo es el conjunto de instrucciones encerradas entre llaves
+<strong>{}</strong>. Esta es la lÃ³gica de la funciÃ³n.</p>
+<ul>
+<li><p>AquÃ­ es donde se declaran las <strong>variables locales</strong>
+y se implementan las estructuras de control (if, for, while) necesarias
+para realizar la tarea del mÃ³dulo.</p></li>
+<li><p>Si la funciÃ³n tiene un tipo de retorno distinto de void, debe
+incluir la sentencia <strong>return</strong> para devolver el valor
+resultante al punto donde fue llamada.</p></li>
+</ul>
+<p><strong>Ejemplo de DefiniciÃ³n (Cuerpo):</strong></p>
+<p>C</p>
+<p>// Encabezado: La funciÃ³n retorna un entero, se llama sumar, y recibe
+dos enteros</p>
+<p>int sumar(int a, int b) {</p>
+<p>// Inicio del Cuerpo</p>
+<p>int resultado; // Variable Local</p>
+<p>resultado = a + b; // LÃ³gica de la funciÃ³n</p>
+<p>return resultado; // Retorno del valor al llamador</p>
+<p>} // Fin del Cuerpo</p>
+<p><strong>DeclaraciÃ³n del Prototipo (Firma)</strong></p>
+<p>La <strong>DeclaraciÃ³n de una FunciÃ³n</strong>, tambiÃ©n conocida como
+<strong>Prototipo</strong> o <strong>Firma de la FunciÃ³n</strong>, es
+una lÃ­nea de cÃ³digo esencial en C que actÃºa como un aviso o
+<strong>promesa</strong> para el compilador.</p>
+<p>El propÃ³sito fundamental del prototipo es informar al compilador
+sobre la existencia de una funciÃ³n <strong>antes</strong> de que esta
+sea utilizada (llamada), especialmente si su <strong>DefiniciÃ³n</strong>
+(el cuerpo completo) se encuentra ubicada despuÃ©s de la funciÃ³n
+main().</p>
+<p><strong>Estructura y Componentes del Prototipo</strong></p>
+<p>El prototipo solo incluye la <strong>interfaz</strong> de la funciÃ³n
+y termina con un <strong>punto y coma (;)</strong>:</p>
+<ol type="1">
+<li><p><strong>Tipo de Retorno:</strong> Indica el tipo de dato que la
+funciÃ³n devolverÃ¡ (ej: int).</p></li>
+<li><p><strong>Nombre de la FunciÃ³n:</strong> El identificador
+Ãºnico.</p></li>
+<li><p><strong>Lista de Tipos de ParÃ¡metros:</strong> Indica los tipos
+de datos que la funciÃ³n espera recibir como entrada, encerrados entre
+parÃ©ntesis (ej: (int, int)). Los nombres de los parÃ¡metros son
+opcionales en el prototipo, pero se recomienda incluirlos para mayor
+claridad.</p></li>
+</ol>
+<p><strong>Sintaxis del Prototipo:</strong></p>
+<p>C</p>
+<p>// [Tipo_Retorno] [Nombre_Funcion] ([Tipo1] [Nombre1], [Tipo2]
+[Nombre2], ...);</p>
+<p>// Ejemplo: Prototipo para una funciÃ³n que suma dos enteros</p>
+<p>int sumar(int a, int b);</p>
+<p>// Opcional, pero vÃ¡lido:</p>
+<p>int sumar(int, int);</p>
+<p><strong>UbicaciÃ³n EstratÃ©gica</strong></p>
+<p>Para que el compilador sepa cÃ³mo generar correctamente la instrucciÃ³n
+de llamada a la funciÃ³n (cuÃ¡nta memoria reservar para los argumentos y
+quÃ© valor esperar de vuelta), el prototipo <strong>debe colocarse antes
+de cualquier llamada a esa funciÃ³n</strong>.</p>
+<p>La prÃ¡ctica estÃ¡ndar y mÃ¡s comÃºn es colocar todos los prototipos de
+funciones:</p>
+<ul>
+<li><p><strong>Antes de la funciÃ³n main():</strong> Esto asegura que el
+compilador conozca la interfaz de todas las funciones que se van a
+utilizar en el programa.</p></li>
+<li><p><strong>En un archivo de encabezado (.h):</strong> En proyectos
+mÃ¡s grandes, los prototipos se agrupan en archivos de encabezado para su
+fÃ¡cil inclusiÃ³n y reutilizaciÃ³n.</p></li>
+</ul>
+<p><strong>Ejemplo de UbicaciÃ³n:</strong></p>
+<p>C</p>
+<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
+<p>// DECLARACIÃ“N / PROTOTIPO: Colocado ANTES de main()</p>
+<p>int multiplicar(int num1, int num2);</p>
+<p>int main() {</p>
+<p>int resultado;</p>
+<p>// LLAMADA: El compilador ya conoce 'multiplicar'</p>
+<p>resultado = multiplicar(5, 3);</p>
+<p>printf("Resultado: %d\n", resultado);</p>
+<p>return 0;</p>
+<p>}</p>
+<p>// DEFINICIÃ“N / CUERPO: Colocado DESPUÃ‰S de main()</p>
+<p>int multiplicar(int num1, int num2) {</p>
+<p>return num1 * num2;</p>
+<p>}</p>
+<p>Si la definiciÃ³n de multiplicar se pusiera <strong>antes</strong> de
+main(), el prototipo serÃ­a opcional, ya que el compilador conocerÃ­a la
+funciÃ³n antes de que main() la llamara. Sin embargo, usar prototipos
+garantiza la modularidad y el orden.</p>
+<p><strong>Llamada de la FunciÃ³n (Uso) ðŸ“ž</strong></p>
+<p>La <strong>Llamada de una FunciÃ³n</strong> es el acto de invocar o
+ejecutar la funciÃ³n desde otra parte del cÃ³digo, generalmente desde la
+funciÃ³n main() o desde el cuerpo de otra funciÃ³n. Este es el mecanismo
+que permite la <strong>reutilizaciÃ³n</strong> y la ejecuciÃ³n del cÃ³digo
+modularizado.</p>
+<p><strong>Mecanismo de InvocaciÃ³n</strong></p>
+<p>Para llamar a una funciÃ³n, se debe utilizar su
+<strong>nombre</strong> seguido de parÃ©ntesis, dentro de los cuales se
+listan los valores o variables que actÃºan como argumentos para los
+parÃ¡metros de la funciÃ³n.</p>
+<ol type="1">
+<li><p><strong>Nombre y Argumentos:</strong> Se utiliza el nombre exacto
+de la funciÃ³n tal como fue declarada.</p></li>
+<li><p><strong>Transferencia de Control:</strong> Al encontrarse la
+lÃ­nea de la llamada, el flujo de ejecuciÃ³n del programa se
+<strong>detiene temporalmente</strong> en la funciÃ³n actual (la funciÃ³n
+llamadora) y se <strong>transfiere inmediatamente</strong> al inicio de
+la funciÃ³n invocada (la funciÃ³n llamada).</p></li>
+<li><p><strong>EjecuciÃ³n:</strong> La funciÃ³n llamada ejecuta todas las
+instrucciones de su cuerpo.</p></li>
+<li><p><strong>Retorno:</strong> Una vez que la funciÃ³n llamada
+encuentra la sentencia return (o llega al final del cuerpo si es void),
+el flujo de control <strong>regresa</strong> al punto exacto donde fue
+invocada en la funciÃ³n llamadora.</p></li>
+</ol>
+<p><strong>Tipos de Llamada</strong></p>
+<p>La forma en que se invoca la funciÃ³n depende de si esta devuelve un
+valor (tipo de retorno distinto de void) o no (void).</p>
+<p><strong>1. Llamada con Retorno de Valor (AsignaciÃ³n)</strong></p>
+<p>Si la funciÃ³n retorna un valor (ej: int, float), la llamada se
+utiliza en una expresiÃ³n o se <strong>asigna a una variable</strong>
+para capturar el resultado:</p>
+<p>C</p>
+<p>// Supongamos que 'multiplicar' retorna un int</p>
+<p>int num1 = 5;</p>
+<p>int num2 = 3;</p>
+<p>int resultado;</p>
+<p>// Llamada: La ejecuciÃ³n salta a 'multiplicar(5, 3)' y el valor
+retornado se guarda en 'resultado'.</p>
+<p>resultado = multiplicar(num1, num2);</p>
+<p>printf("El producto es: %d\n", resultado);</p>
+<p><strong>2. Llamada sin Retorno de Valor (void)</strong></p>
+<p>Si la funciÃ³n no devuelve un valor (void), la llamada se realiza como
+una <strong>sentencia independiente</strong>, finalizada con un punto y
+coma (;). La funciÃ³n realiza una acciÃ³n (ej: imprimir algo, guardar un
+archivo).</p>
+<p>C</p>
+<p>// Supongamos que 'imprimir_saludo' no retorna nada (void)</p>
+<p>char nombre[] = "Carlos";</p>
+<p>// Llamada: Ejecuta la funciÃ³n, realiza la acciÃ³n interna y el flujo
+regresa.</p>
+<p>imprimir_saludo(nombre);</p>
+<p><strong>Es crucial que el nÃºmero y tipo de los argumentos en la
+llamada coincidan con los parÃ¡metros definidos en el prototipo de la
+funciÃ³n.</strong></p>
+<p><strong>Flujo de Control con Funciones ðŸŒŠ</strong></p>
+<p>El flujo de control de un programa en C es la secuencia en la que se
+ejecutan las sentencias. Cuando se trabaja con funciones, este flujo se
+vuelve dinÃ¡mico, ya que <strong>salta</strong> entre el cÃ³digo de la
+funciÃ³n que llama y el cÃ³digo de la funciÃ³n llamada.</p>
+<p>Este mecanismo es fundamental para la modularidad, ya que permite que
+el programa principal delegue temporalmente la ejecuciÃ³n de una tarea a
+un mÃ³dulo externo.</p>
+<p><strong>Mecanismo de Salto y Retorno</strong></p>
+<p>La secuencia de ejecuciÃ³n con funciones sigue los siguientes
+pasos:</p>
+<ol type="1">
+<li><p><strong>Inicio de la Llamada:</strong> La ejecuciÃ³n avanza
+secuencialmente en la <strong>funciÃ³n llamadora</strong> (por ejemplo,
+main()). Cuando se encuentra la lÃ­nea que contiene la
+<strong>llamada</strong> a otra funciÃ³n (ejemplo: resultado = sumar(a,
+b);), el flujo se detiene inmediatamente en ese punto.</p></li>
+<li><p><strong>Transferencia de Control:</strong> El flujo de ejecuciÃ³n
+salta al inicio de la <strong>DefiniciÃ³n</strong> de la <strong>funciÃ³n
+llamada</strong> (sumar(a, b)). En este momento, los valores de los
+argumentos se copian a los parÃ¡metros de la funciÃ³n llamada.</p></li>
+<li><p><strong>EjecuciÃ³n del Cuerpo:</strong> La funciÃ³n llamada ejecuta
+todas las instrucciones contenidas en su cuerpo
+<strong>{}</strong>.</p></li>
+<li><p><strong>Retorno al Llamador:</strong> Al encontrarse la sentencia
+<strong>return</strong> (o al finalizar el cuerpo de la funciÃ³n si es
+void), el valor de retorno se transfiere de vuelta a la funciÃ³n
+llamadora. El flujo de ejecuciÃ³n <strong>regresa exactamente a la lÃ­nea
+donde ocurriÃ³ la llamada</strong>.</p></li>
+<li><p><strong>ContinuaciÃ³n:</strong> La funciÃ³n llamadora retoma la
+ejecuciÃ³n de la sentencia pendiente (por ejemplo, asignando el valor
+retornado a la variable resultado) y continÃºa con la siguiente lÃ­nea de
+cÃ³digo.</p></li>
+</ol>
+<p><strong>Ejemplo PrÃ¡ctico del Flujo</strong></p>
+<p>Considerando el ejemplo de la suma:</p>
+<p>C</p>
+<p>// [Paso 3] La funciÃ³n 'sumar' ejecuta su lÃ³gica</p>
+<p>int sumar(int a, int b) {</p>
+<p>// ...</p>
+<p>return a + b; // [Paso 4] Devuelve el valor (8) y regresa el
+control</p>
+<p>}</p>
+<p>int main() {</p>
+<p>int x = 3;</p>
+<p>int y = 5;</p>
+<p>// [Paso 1] La ejecuciÃ³n estÃ¡ aquÃ­.</p>
+<p>int resultado = sumar(x, y); // [Paso 2] El flujo salta a la funciÃ³n
+'sumar'.</p>
+<p>// [Paso 5] El flujo regresa aquÃ­ y se asigna 8 a 'resultado'.</p>
+<p>printf("La suma es: %d\n", resultado);</p>
+<p>// ...</p>
+<p>return 0;</p>
+<p>}</p>
+<p>Este mecanismo garantiza que las funciones puedan realizar sus tareas
+de forma aislada y devolver el resultado, permitiendo que el programa
+principal mantenga la coherencia en su secuencia lÃ³gica.</p>
+
+</div>
+</body>
+</html>
+

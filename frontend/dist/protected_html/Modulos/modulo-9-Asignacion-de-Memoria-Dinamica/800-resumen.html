@@ -1,0 +1,194 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" crossorigin href="/assets/content-01sust.css">
+</head>
+<body>
+<div class="main-content">
+<h2
+id="resumen-mÃ³dulo-control-absoluto-del-heap-y-gestiÃ³n-del-ciclo-de-vida">ðŸ’¾
+Resumen MÃ³dulo: Control Absoluto del Heap y GestiÃ³n del Ciclo de Vida
+ðŸ§ </h2>
+<p>Este mÃ³dulo marca el ascenso de la <strong>GestiÃ³n
+AutomÃ¡tica</strong> (<em>Stack</em>) a la <strong>GestiÃ³n Manual y
+Absoluta</strong> de la memoria en el <em>Heap</em> (MontÃ³n). El
+programador experto en C debe ver el <em>Heap</em> como un recurso
+ilimitado, pero que exige una <strong>responsabilidad total</strong>
+sobre el ciclo de vida de cada bloque, desde su asignaciÃ³n hasta su
+liberaciÃ³n final, para garantizar la robustez y seguridad del
+sistema.</p>
+<hr />
+<h3 id="memoria-dinÃ¡mica-heap-o-montÃ³n">1. Memoria DinÃ¡mica
+(<em>Heap</em> o MontÃ³n) ðŸ—ï¸</h3>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">CaracterÃ­stica</th>
+<th style="text-align: left;">PropÃ³sito</th>
+<th style="text-align: left;">ImplicaciÃ³n CrÃ­tica</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>UbicaciÃ³n</strong></td>
+<td style="text-align: left;">Memoria de gran tamaÃ±o utilizada para
+variables cuya vida debe <strong>superar el Ã¡mbito de una
+funciÃ³n</strong> (variables locales) y estructuras de tamaÃ±o
+variable.</td>
+<td style="text-align: left;">El bloque de memoria <strong>no tiene
+nombre de variable</strong>; solo se accede a Ã©l a travÃ©s de un
+<strong>puntero</strong> que reside en el <em>Stack</em>.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>AsignaciÃ³n</strong></td>
+<td style="text-align: left;">Manual, a travÃ©s de funciones de la
+biblioteca <code>&lt;stdlib.h&gt;</code>. El tamaÃ±o se determina en
+<strong>tiempo de ejecuciÃ³n</strong>.</td>
+<td style="text-align: left;">Permite implementar estructuras de datos
+que <strong>crecen y decrecen</strong> (listas, Ã¡rboles, vectores
+dinÃ¡micos).</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Velocidad</strong></td>
+<td style="text-align: left;">MÃ¡s lenta que el <em>Stack</em>, ya que el
+sistema debe buscar y coordinar el espacio disponible en el
+<em>Heap</em>.</td>
+<td style="text-align: left;">Se debe minimizar la cantidad de
+asignaciones dinÃ¡micas y liberaciones en bucles cerrados.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="funciones-de-asignaciÃ³n-y-redimensiÃ³n">2. Funciones de
+AsignaciÃ³n y RedimensiÃ³n ðŸ› ï¸</h3>
+<p>El control del <em>Heap</em> se logra mediante estas
+herramientas:</p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">FunciÃ³n</th>
+<th style="text-align: left;">PropÃ³sito y Argumentos</th>
+<th style="text-align: left;">CaracterÃ­stica Clave</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td
+style="text-align: left;"><strong><code>malloc(size)</code></strong></td>
+<td style="text-align: left;">Solicita un bloque contiguo de
+<code>size</code> bytes.</td>
+<td style="text-align: left;">Devuelve un puntero (<code>void *</code>)
+a la direcciÃ³n. El contenido de la memoria es <strong>basura</strong>
+(valores aleatorios).</td>
+</tr>
+<tr class="even">
+<td
+style="text-align: left;"><strong><code>calloc(n, size)</code></strong></td>
+<td style="text-align: left;">Solicita memoria para <code>n</code>
+elementos de <code>size</code> bytes cada uno.</td>
+<td style="text-align: left;"><strong>Inicializa todos los bits a
+cero</strong> (garantizando <code>0</code> para nÃºmeros y
+<strong><code>NULL</code></strong> para punteros) (Ver archivo
+400).</td>
+</tr>
+<tr class="odd">
+<td
+style="text-align: left;"><strong><code>realloc(ptr, new_size)</code></strong></td>
+<td style="text-align: left;"><strong>Cambia el tamaÃ±o</strong> de un
+bloque previamente asignado (Ver archivo 300).</td>
+<td style="text-align: left;"><strong>Preserva el contenido</strong>
+existente. Puede devolver un puntero <strong>diferente</strong> al
+original si el bloque debe ser reubicado.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Retorno
+<code>NULL</code></strong></td>
+<td style="text-align: left;">Todas las funciones devuelven
+<code>NULL</code> si la asignaciÃ³n falla por falta de memoria.</td>
+<td style="text-align: left;">La <strong>ComprobaciÃ³n de
+<code>NULL</code></strong> es esencial para evitar un <strong>Fallo de
+SegmentaciÃ³n</strong> (<em>Segmentation Fault</em>) (Ver archivo
+200).</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="liberaciÃ³n-y-seguridad-del-puntero">3. LiberaciÃ³n y Seguridad
+del Puntero ðŸ§¹</h3>
+<p>El fallo en la liberaciÃ³n de memoria es la principal causa de
+inestabilidad en programas C a largo plazo.</p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Concepto</th>
+<th style="text-align: left;">Mecanismo de Fallo</th>
+<th style="text-align: left;">PrevenciÃ³n y Buenas PrÃ¡cticas</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>Fuga de Memoria</strong>
+(<em>Memory Leak</em>)</td>
+<td style="text-align: left;">Ocurre cuando se pierde la Ãºnica
+referencia (<strong>puntero</strong>) al bloque del <em>Heap</em>
+<strong>antes</strong> de llamar a <code>free()</code> (Ver archivo
+600).</td>
+<td style="text-align: left;"><strong>Regla de Oro:</strong> Todo
+<code>malloc/calloc/realloc</code> debe tener un <code>free()</code>
+correspondiente. Utilizar herramientas como <strong>Valgrind</strong>
+para el rastreo.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Puntero Colgante</strong>
+(<em>Dangling Pointer</em>)</td>
+<td style="text-align: left;">Ocurre cuando se llama a
+<strong><code>free(ptr)</code></strong>, pero el puntero
+<code>ptr</code> aÃºn contiene la direcciÃ³n liberada.</td>
+<td style="text-align: left;"><strong>Liberar y Anular:</strong> DespuÃ©s
+de <code>free(ptr)</code>, se debe asignar inmediatamente
+<strong><code>ptr = NULL;</code></strong> (Ver archivo 500).</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Doble LiberaciÃ³n</strong>
+(<em>Double Free</em>)</td>
+<td style="text-align: left;">Ocurre al intentar llamar a
+<code>free()</code> sobre una direcciÃ³n de memoria que ya ha sido
+liberada.</td>
+<td style="text-align: left;">La prÃ¡ctica de anular el puntero a
+<strong><code>NULL</code></strong> previene el <em>Double Free</em>, ya
+que <strong><code>free(NULL)</code></strong> es una operaciÃ³n segura
+definida por el estÃ¡ndar (Ver archivo 500 y 550).</td>
+</tr>
+<tr class="even">
+<td
+style="text-align: left;"><strong><code>free(ptr + offset)</code></strong></td>
+<td style="text-align: left;">Intentar liberar una direcciÃ³n que no es
+el inicio exacto del bloque original.</td>
+<td style="text-align: left;">Es un <strong>error fatal</strong> que
+corrompe la estructura de control interno del <em>Heap</em> (Ver archivo
+550).</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</body>
+</html>
+

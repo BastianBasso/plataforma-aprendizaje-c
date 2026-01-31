@@ -1,0 +1,364 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" crossorigin href="/assets/content-01sust.css">
+</head>
+<body>
+<div class="main-content">
+<p><strong>15 ejercicios de ProgramaciÃ³n: Paso de Argumentos y
+ParÃ¡metros</strong></p>
+<p>Estos ejercicios se enfocan en los conceptos clave de la comunicaciÃ³n
+de datos: distinguir entre <strong>Argumentos y ParÃ¡metros</strong>,
+comprender el <strong>Paso por Valor</strong> y practicar la
+<strong>Coincidencia de Tipos</strong> con mÃºltiples parÃ¡metros.</p>
+<p><strong>Bloque 1: ParÃ¡metros, Argumentos y Coincidencia de Tipo
+ðŸ—£ï¸</strong></p>
+<ol type="1">
+<li><p><strong>IdentificaciÃ³n de TÃ©rminos</strong></p>
+<ul>
+<li><p><strong>Tarea:</strong> Dada la definiciÃ³n void saludo(char
+inicial, int edad); y la llamada saludo('M', 25);, identifica claramente
+cuÃ¡les son los <strong>parÃ¡metros</strong> y cuÃ¡les son los
+<strong>argumentos</strong>.</p></li>
+<li><p><strong>Requisito:</strong> Explicar brevemente dÃ³nde reside cada
+uno (prototipo vs.Â llamada).</p></li>
+</ul></li>
+<li><p><strong>ValidaciÃ³n de Llamada</strong></p>
+<ul>
+<li><p><strong>Tarea:</strong> Define la funciÃ³n float
+calcular_promedio(int a, int b, int c);. Luego, escribe dos llamadas en
+main(): una <strong>correcta</strong> y una <strong>incorrecta</strong>
+(intercambiando un int por un float).</p></li>
+<li><p><strong>Requisito:</strong> En la llamada incorrecta, comenta por
+quÃ© viola la <strong>Coincidencia de Tipo</strong>.</p></li>
+</ul></li>
+<li><p><strong>Truncamiento por CoerciÃ³n ImplÃ­cita</strong></p>
+<ul>
+<li><p><strong>FunciÃ³n:</strong> void mostrar_entero(int
+entero_recibido)</p></li>
+<li><p><strong>Tarea:</strong> Llama a la funciÃ³n desde main() usando el
+argumento 3.14159f.</p></li>
+<li><p><strong>Requisito:</strong> Imprime el valor recibido dentro de
+la funciÃ³n y explica en un comentario en main() el fenÃ³meno del
+<strong>truncamiento</strong> (float a int).</p></li>
+</ul></li>
+<li><p><strong>CÃ¡lculo con Argumentos Literales</strong></p>
+<ul>
+<li><p><strong>FunciÃ³n:</strong> float multiplicar(float x, float
+y)</p></li>
+<li><p><strong>Tarea:</strong> Llama a la funciÃ³n usando directamente
+<strong>literales</strong> como argumentos (ej: multiplicar(10.5f,
+2.0f);) y asigna el resultado a una variable en main().</p></li>
+<li><p><strong>Requisito:</strong> Muestra que los literales tambiÃ©n
+actÃºan como argumentos.</p></li>
+</ul></li>
+<li><p><strong>ConversiÃ³n Segura (Casting ExplÃ­cito)</strong></p>
+<ul>
+<li><p><strong>FunciÃ³n:</strong> void imprimir_letra_ascii(char
+caracter_recibido)</p></li>
+<li><p><strong>Tarea:</strong> Llama a la funciÃ³n intentando pasar la
+variable entera int codigo = 65;.</p></li>
+<li><p><strong>Requisito:</strong> Utiliza el <strong>casting
+explÃ­cito</strong> (char) en el argumento de la llamada para asegurar la
+conversiÃ³n correcta de int a char.</p></li>
+</ul></li>
+</ol>
+<p><strong>Bloque 2: Paso por Valor (Aislamiento e Inmutabilidad)
+ðŸ“¦</strong></p>
+<ol start="6" type="1">
+<li><p><strong>DemostraciÃ³n de Inmutabilidad</strong></p>
+<ul>
+<li><p><strong>FunciÃ³n:</strong> void incrementar_valor(int
+numero)</p></li>
+<li><p><strong>Tarea:</strong> La funciÃ³n debe incrementar el parÃ¡metro
+numero en $10$ dentro de su cuerpo.</p></li>
+<li><p><strong>Requisito:</strong> En main(), declara una variable base
+= 5. Llama a la funciÃ³n e imprime base antes y despuÃ©s de la llamada
+para probar que el <strong>valor original no cambia</strong>.</p></li>
+</ul></li>
+<li><p><strong>ModificaciÃ³n del ParÃ¡metro Local</strong></p>
+<ul>
+<li><p><strong>FunciÃ³n:</strong> void duplicar(int valor_local)</p></li>
+<li><p><strong>Tarea:</strong> Dentro de la funciÃ³n, multiplica el
+parÃ¡metro valor_local por $2$ y lo imprime.</p></li>
+<li><p><strong>Requisito:</strong> En la llamada, usa una variable como
+argumento. Observa que el cambio solo afecta a la copia local.</p></li>
+</ul></li>
+<li><p><strong>PÃ©rdida de Resultado sin return</strong></p>
+<ul>
+<li><p><strong>FunciÃ³n:</strong> void sumar_dos(int n)</p></li>
+<li><p><strong>Tarea:</strong> La funciÃ³n calcula n = n + 2; pero no
+tiene sentencia return.</p></li>
+<li><p><strong>Requisito:</strong> Llama a la funciÃ³n con un argumento
+en main(). Intenta capturar el resultado. Explica en un comentario por
+quÃ© la modificaciÃ³n de n se pierde completamente.</p></li>
+</ul></li>
+<li><p><strong>FunciÃ³n que Retorna la ModificaciÃ³n</strong></p>
+<ul>
+<li><p><strong>FunciÃ³n:</strong> int obtener_incremento(int
+valor)</p></li>
+<li><p><strong>Tarea:</strong> Recibe un valor, lo incrementa en $5$ y
+usa <strong>return</strong> para devolver el nuevo valor.</p></li>
+<li><p><strong>Requisito:</strong> Demuestra que la <strong>Ãºnica
+forma</strong> de que el cambio afecte al main() es capturando el valor
+retornado (int original = obtener_incremento(original);).</p></li>
+</ul></li>
+<li><p><strong>Aislamiento en CÃ¡lculos Flotantes</strong></p>
+<ul>
+<li><p><strong>FunciÃ³n:</strong> void aplicar_descuento(float
+precio)</p></li>
+<li><p><strong>Tarea:</strong> Resta $10$ al parÃ¡metro precio y lo
+imprime dentro de la funciÃ³n.</p></li>
+<li><p><strong>Requisito:</strong> Utiliza una variable precio_base =
+50.0f en main(). Imprime precio_base antes y despuÃ©s de la llamada para
+confirmar que sigue siendo $50.0f$.</p></li>
+</ul></li>
+</ol>
+<p><strong>Bloque 3: MÃºltiples ParÃ¡metros y Orden ðŸ“</strong></p>
+<ol start="11" type="1">
+<li><p><strong>Calculadora Simple (Dos ParÃ¡metros)</strong></p>
+<ul>
+<li><p><strong>FunciÃ³n:</strong> float restar(float a, float b)</p></li>
+<li><p><strong>Tarea:</strong> La funciÃ³n debe restar el segundo
+parÃ¡metro del primero ($a - b$) y retornar el resultado.</p></li>
+<li><p><strong>Requisito:</strong> Define la funciÃ³n y haz una llamada
+donde el <strong>orden</strong> es crucial (ej: restar(20.0f, 5.0f) debe
+ser $15.0f$, no $-15.0f$).</p></li>
+</ul></li>
+<li><p><strong>FunciÃ³n de Registro de Usuario (MÃºltiples
+Tipos)</strong></p>
+<ul>
+<li><p><strong>FunciÃ³n:</strong> void registrar_datos(char inicial, int
+id, float saldo_inicial)</p></li>
+<li><p><strong>Tarea:</strong> La funciÃ³n simplemente imprime los tres
+datos recibidos.</p></li>
+<li><p><strong>Requisito:</strong> Define la funciÃ³n con los tres tipos
+de parÃ¡metros y haz una llamada en main() con argumentos de diferentes
+tipos en el orden correcto.</p></li>
+</ul></li>
+<li><p><strong>ViolaciÃ³n del Orden (Resultado LÃ³gico
+ErrÃ³neo)</strong></p>
+<ul>
+<li><p><strong>FunciÃ³n:</strong> float calcular_interes(float capital,
+float tasa)</p></li>
+<li><p><strong>Tarea:</strong> Calcula el interÃ©s simple (capital *
+tasa).</p></li>
+<li><p><strong>Requisito:</strong> Llama a la funciÃ³n intercambiando los
+argumentos.</p>
+<ul>
+<li><p><strong>Llamada Correcta:</strong> calcular_interes(100.0f,
+0.05f) (Resultado: $5.0f$).</p></li>
+<li><p><strong>Llamada Incorrecta:</strong> calcular_interes(0.05f,
+100.0f) (Resultado: $5.0f$). Explica por quÃ©, aunque el resultado
+matemÃ¡tico es el mismo en este caso, la <strong>asignaciÃ³n
+lÃ³gica</strong> de los parÃ¡metros (capital y tasa) fue violada.</p></li>
+</ul></li>
+</ul></li>
+<li><p><strong>FunciÃ³n de ConversiÃ³n de Tiempo (Tres ParÃ¡metros
+int)</strong></p>
+<ul>
+<li><p><strong>FunciÃ³n:</strong> int convertir_a_segundos(int horas, int
+minutos, int segundos)</p></li>
+<li><p><strong>Tarea:</strong> Calcula la cantidad total de segundos y
+la retorna.</p></li>
+<li><p><strong>Requisito:</strong> Implementa la lÃ³gica de conversiÃ³n y
+realiza una llamada en main().</p></li>
+</ul></li>
+<li><p><strong>Uso Completo (Prototipo, DefiniciÃ³n, Llamada y Paso por
+Valor)</strong></p>
+<ul>
+<li><p><strong>FunciÃ³n:</strong> float obtener_precio_final(float
+precio_base, float iva_tasa, float descuento)</p></li>
+<li><p><strong>Tarea:</strong> La funciÃ³n calcula el precio final:
+(precio_base * (1 + iva_tasa)) - descuento.</p></li>
+<li><p><strong>Requisito:</strong></p>
+<ul>
+<li><p>Asegura el <strong>prototipo</strong> antes de main().</p></li>
+<li><p>Usa <strong>tres argumentos</strong> en la llamada.</p></li>
+<li><p>Verifica en la llamada que la variable precio_base original
+<strong>no se modifique</strong> (Paso por Valor).</p></li>
+</ul></li>
+</ul></li>
+</ol>
+<p><strong>15 Ejercicios de ProgramaciÃ³n: Paso de Argumentos y
+ParÃ¡metros</strong></p>
+<p>Estos ejercicios se enfocan en los conceptos clave de la comunicaciÃ³n
+de datos: distinguir entre <strong>Argumentos y ParÃ¡metros</strong>,
+comprender el <strong>Paso por Valor</strong> y practicar la
+<strong>Coincidencia de Tipos</strong> con mÃºltiples parÃ¡metros.</p>
+<p><strong>Bloque 1: ParÃ¡metros, Argumentos y Coincidencia de Tipo
+ðŸ—£ï¸</strong></p>
+<ol type="1">
+<li><p><strong>IdentificaciÃ³n de TÃ©rminos</strong></p>
+<ul>
+<li><p><strong>Tarea:</strong> Dada la definiciÃ³n void saludo(char
+inicial, int edad); y la llamada saludo('M', 25);, identifica claramente
+cuÃ¡les son los <strong>parÃ¡metros</strong> y cuÃ¡les son los
+<strong>argumentos</strong>.</p></li>
+<li><p><strong>Requisito:</strong> Explicar brevemente dÃ³nde reside cada
+uno (prototipo vs.Â llamada).</p></li>
+</ul></li>
+<li><p><strong>ValidaciÃ³n de Llamada</strong></p>
+<ul>
+<li><p><strong>Tarea:</strong> Define la funciÃ³n float
+calcular_promedio(int a, int b, int c);. Luego, escribe dos llamadas en
+main(): una <strong>correcta</strong> y una <strong>incorrecta</strong>
+(intercambiando un int por un float).</p></li>
+<li><p><strong>Requisito:</strong> En la llamada incorrecta, comenta por
+quÃ© viola la <strong>Coincidencia de Tipo</strong>.</p></li>
+</ul></li>
+<li><p><strong>Truncamiento por CoerciÃ³n ImplÃ­cita</strong></p>
+<ul>
+<li><p><strong>FunciÃ³n:</strong> void mostrar_entero(int
+entero_recibido)</p></li>
+<li><p><strong>Tarea:</strong> Llama a la funciÃ³n desde main() usando el
+argumento 3.14159f.</p></li>
+<li><p><strong>Requisito:</strong> Imprime el valor recibido dentro de
+la funciÃ³n y explica en un comentario en main() el fenÃ³meno del
+<strong>truncamiento</strong> (float a int).</p></li>
+</ul></li>
+<li><p><strong>CÃ¡lculo con Argumentos Literales</strong></p>
+<ul>
+<li><p><strong>FunciÃ³n:</strong> float multiplicar(float x, float
+y)</p></li>
+<li><p><strong>Tarea:</strong> Llama a la funciÃ³n usando directamente
+<strong>literales</strong> como argumentos (ej: multiplicar(10.5f,
+2.0f);) y asigna el resultado a una variable en main().</p></li>
+<li><p><strong>Requisito:</strong> Muestra que los literales tambiÃ©n
+actÃºan como argumentos.</p></li>
+</ul></li>
+<li><p><strong>ConversiÃ³n Segura (Casting ExplÃ­cito)</strong></p>
+<ul>
+<li><p><strong>FunciÃ³n:</strong> void imprimir_letra_ascii(char
+caracter_recibido)</p></li>
+<li><p><strong>Tarea:</strong> Llama a la funciÃ³n intentando pasar la
+variable entera int codigo = 65;.</p></li>
+<li><p><strong>Requisito:</strong> Utiliza el <strong>casting
+explÃ­cito</strong> (char) en el argumento de la llamada para asegurar la
+conversiÃ³n correcta de int a char.</p></li>
+</ul></li>
+</ol>
+<p><strong>Bloque 2: Paso por Valor (Aislamiento e Inmutabilidad)
+ðŸ“¦</strong></p>
+<ol start="6" type="1">
+<li><p><strong>DemostraciÃ³n de Inmutabilidad</strong></p>
+<ul>
+<li><p><strong>FunciÃ³n:</strong> void incrementar_valor(int
+numero)</p></li>
+<li><p><strong>Tarea:</strong> La funciÃ³n debe incrementar el parÃ¡metro
+numero en $10$ dentro de su cuerpo.</p></li>
+<li><p><strong>Requisito:</strong> En main(), declara una variable base
+= 5. Llama a la funciÃ³n e imprime base antes y despuÃ©s de la llamada
+para probar que el <strong>valor original no cambia</strong>.</p></li>
+</ul></li>
+<li><p><strong>ModificaciÃ³n del ParÃ¡metro Local</strong></p>
+<ul>
+<li><p><strong>FunciÃ³n:</strong> void duplicar(int valor_local)</p></li>
+<li><p><strong>Tarea:</strong> Dentro de la funciÃ³n, multiplica el
+parÃ¡metro valor_local por $2$ y lo imprime.</p></li>
+<li><p><strong>Requisito:</strong> En la llamada, usa una variable como
+argumento. Observa que el cambio solo afecta a la copia local.</p></li>
+</ul></li>
+<li><p><strong>PÃ©rdida de Resultado sin return</strong></p>
+<ul>
+<li><p><strong>FunciÃ³n:</strong> void sumar_dos(int n)</p></li>
+<li><p><strong>Tarea:</strong> La funciÃ³n calcula n = n + 2; pero no
+tiene sentencia return.</p></li>
+<li><p><strong>Requisito:</strong> Llama a la funciÃ³n con un argumento
+en main(). Intenta capturar el resultado. Explica en un comentario por
+quÃ© la modificaciÃ³n de n se pierde completamente.</p></li>
+</ul></li>
+<li><p><strong>FunciÃ³n que Retorna la ModificaciÃ³n</strong></p>
+<ul>
+<li><p><strong>FunciÃ³n:</strong> int obtener_incremento(int
+valor)</p></li>
+<li><p><strong>Tarea:</strong> Recibe un valor, lo incrementa en $5$ y
+usa <strong>return</strong> para devolver el nuevo valor.</p></li>
+<li><p><strong>Requisito:</strong> Demuestra que la <strong>Ãºnica
+forma</strong> de que el cambio afecte al main() es capturando el valor
+retornado (int original = obtener_incremento(original);).</p></li>
+</ul></li>
+<li><p><strong>Aislamiento en CÃ¡lculos Flotantes</strong></p>
+<ul>
+<li><p><strong>FunciÃ³n:</strong> void aplicar_descuento(float
+precio)</p></li>
+<li><p><strong>Tarea:</strong> Resta $10$ al parÃ¡metro precio y lo
+imprime dentro de la funciÃ³n.</p></li>
+<li><p><strong>Requisito:</strong> Utiliza una variable precio_base =
+50.0f en main(). Imprime precio_base antes y despuÃ©s de la llamada para
+confirmar que sigue siendo $50.0f$.</p></li>
+</ul></li>
+</ol>
+<p><strong>Bloque 3: MÃºltiples ParÃ¡metros y Orden ðŸ“</strong></p>
+<ol start="11" type="1">
+<li><p><strong>Calculadora Simple (Dos ParÃ¡metros)</strong></p>
+<ul>
+<li><p><strong>FunciÃ³n:</strong> float restar(float a, float b)</p></li>
+<li><p><strong>Tarea:</strong> La funciÃ³n debe restar el segundo
+parÃ¡metro del primero ($a - b$) y retornar el resultado.</p></li>
+<li><p><strong>Requisito:</strong> Define la funciÃ³n y haz una llamada
+donde el <strong>orden</strong> es crucial (ej: restar(20.0f, 5.0f) debe
+ser $15.0f$, no $-15.0f$).</p></li>
+</ul></li>
+<li><p><strong>FunciÃ³n de Registro de Usuario (MÃºltiples
+Tipos)</strong></p>
+<ul>
+<li><p><strong>FunciÃ³n:</strong> void registrar_datos(char inicial, int
+id, float saldo_inicial)</p></li>
+<li><p><strong>Tarea:</strong> La funciÃ³n simplemente imprime los tres
+datos recibidos.</p></li>
+<li><p><strong>Requisito:</strong> Define la funciÃ³n con los tres tipos
+de parÃ¡metros y haz una llamada en main() con argumentos de diferentes
+tipos en el orden correcto.</p></li>
+</ul></li>
+<li><p><strong>ViolaciÃ³n del Orden (Resultado LÃ³gico
+ErrÃ³neo)</strong></p>
+<ul>
+<li><p><strong>FunciÃ³n:</strong> float calcular_interes(float capital,
+float tasa)</p></li>
+<li><p><strong>Tarea:</strong> Calcula el interÃ©s simple (capital *
+tasa).</p></li>
+<li><p><strong>Requisito:</strong> Llama a la funciÃ³n intercambiando los
+argumentos.</p>
+<ul>
+<li><p><strong>Llamada Correcta:</strong> calcular_interes(100.0f,
+0.05f) (Resultado: $5.0f$).</p></li>
+<li><p><strong>Llamada Incorrecta:</strong> calcular_interes(0.05f,
+100.0f) (Resultado: $5.0f$). Explica por quÃ©, aunque el resultado
+matemÃ¡tico es el mismo en este caso, la <strong>asignaciÃ³n
+lÃ³gica</strong> de los parÃ¡metros (capital y tasa) fue violada.</p></li>
+</ul></li>
+</ul></li>
+<li><p><strong>FunciÃ³n de ConversiÃ³n de Tiempo (Tres ParÃ¡metros
+int)</strong></p>
+<ul>
+<li><p><strong>FunciÃ³n:</strong> int convertir_a_segundos(int horas, int
+minutos, int segundos)</p></li>
+<li><p><strong>Tarea:</strong> Calcula la cantidad total de segundos y
+la retorna.</p></li>
+<li><p><strong>Requisito:</strong> Implementa la lÃ³gica de conversiÃ³n y
+realiza una llamada en main().</p></li>
+</ul></li>
+<li><p><strong>Uso Completo (Prototipo, DefiniciÃ³n, Llamada y Paso por
+Valor)</strong></p>
+<ul>
+<li><p><strong>FunciÃ³n:</strong> float obtener_precio_final(float
+precio_base, float iva_tasa, float descuento)</p></li>
+<li><p><strong>Tarea:</strong> La funciÃ³n calcula el precio final:
+(precio_base * (1 + iva_tasa)) - descuento.</p></li>
+<li><p><strong>Requisito:</strong></p>
+<ul>
+<li><p>Asegura el <strong>prototipo</strong> antes de main().</p></li>
+<li><p>Usa <strong>tres argumentos</strong> en la llamada.</p></li>
+<li><p>Verifica en la llamada que la variable precio_base original
+<strong>no se modifique</strong> (Paso por Valor).</p></li>
+</ul></li>
+</ul></li>
+</ol>
+
+</div>
+</body>
+</html>
+

@@ -1,0 +1,264 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" crossorigin href="/assets/content-01sust.css">
+</head>
+<body>
+<div class="main-content">
+<h2 id="memoria-estÃ¡tica-stack-o-pila">Memoria EstÃ¡tica (<em>Stack</em>
+o Pila) ðŸ—ï¸</h2>
+<p>La <strong>memoria estÃ¡tica</strong>, comÃºnmente conocida como el
+<em>Stack</em> (Pila), es el tipo de memoria mÃ¡s comÃºn utilizado por los
+programas en C y otros lenguajes. Se caracteriza por un mecanismo de
+gestiÃ³n de memoria de <strong>Ãºltimo en entrar, primero en salir
+(LIFO)</strong>.</p>
+<hr />
+<h3 id="caracterÃ­sticas-principales">1. CaracterÃ­sticas Principales</h3>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">CaracterÃ­stica</th>
+<th style="text-align: center;">DescripciÃ³n</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><strong>AsignaciÃ³n</strong></td>
+<td style="text-align: center;">La memoria se asigna
+<strong>automÃ¡ticamente</strong> en tiempo de compilaciÃ³n o tan pronto
+como se llama a la funciÃ³n que contiene la variable.</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>UbicaciÃ³n</strong></td>
+<td style="text-align: center;">Contiene <strong>variables
+locales</strong> (definidas dentro de funciones) y punteros a los
+parÃ¡metros de la funciÃ³n.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>Velocidad</strong></td>
+<td style="text-align: center;">Es <strong>muy rÃ¡pida</strong> porque el
+compilador sabe exactamente cuÃ¡nto espacio se necesita para las
+variables locales, lo que permite una asignaciÃ³n y liberaciÃ³n
+instantÃ¡neas mediante el simple movimiento de un puntero.</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>TamaÃ±o</strong></td>
+<td style="text-align: center;">Es de <strong>tamaÃ±o limitado</strong>
+(generalmente unos pocos megabytes). Si se intenta asignar demasiado
+espacio, ocurre un error conocido como <em>Stack Overflow</em>.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>LiberaciÃ³n</strong></td>
+<td style="text-align: center;">El espacio se <strong>libera
+automÃ¡ticamente</strong> (desasigna) tan pronto como la funciÃ³n que la
+contiene termina su ejecuciÃ³n. La vida de la variable estÃ¡ ligada al
+ciclo de vida de la funciÃ³n.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="variables-de-pila">2. Variables de Pila</h3>
+<p>Un ejemplo tÃ­pico de una variable almacenada en el <em>Stack</em> es
+una <strong>variable local simple</strong> o un <em>array</em> de tamaÃ±o
+fijo:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> mi_funcion<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">// &#39;entero_local&#39; se guarda en el Stack. </span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Se libera cuando mi_funcion() termina.</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> entero_local <span class="op">=</span> <span class="dv">10</span><span class="op">;</span> </span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="co">// &#39;array_fijo&#39; se guarda en el Stack.</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Su tamaÃ±o (100) debe ser conocido en tiempo de compilaciÃ³n.</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    <span class="dt">char</span> array_fijo<span class="op">[</span><span class="dv">100</span><span class="op">];</span> </span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p>La pila es eficiente para datos temporales y de tamaÃ±o predecible,
+pero no es adecuada cuando se necesita un almacenamiento flexible o
+persistente mÃ¡s allÃ¡ de la duraciÃ³n de una funciÃ³n.</p>
+<h2 id="memoria-dinÃ¡mica-heap-o-montÃ³n">Memoria DinÃ¡mica (<em>Heap</em>
+o MontÃ³n) ðŸ§±</h2>
+<p>La <strong>memoria dinÃ¡mica</strong>, conocida como el <em>Heap</em>
+(MontÃ³n), es un Ã¡rea de memoria de libre disposiciÃ³n que su programa
+puede solicitar y utilizar durante la <strong>ejecuciÃ³n</strong>. Es
+esencial para manejar datos cuyo tamaÃ±o o existencia no se conocen al
+momento de la compilaciÃ³n.</p>
+<hr />
+<h3 id="caracterÃ­sticas-principales-1">1. CaracterÃ­sticas
+Principales</h3>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">CaracterÃ­stica</th>
+<th style="text-align: center;">DescripciÃ³n</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><strong>AsignaciÃ³n</strong></td>
+<td style="text-align: center;">La memoria se asigna
+<strong>manualmente</strong> en <strong>tiempo de ejecuciÃ³n</strong>
+(cuando el programa se estÃ¡ ejecutando) mediante funciones como
+<code>malloc()</code>, <code>calloc()</code>, y
+<code>realloc()</code>.</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>UbicaciÃ³n</strong></td>
+<td style="text-align: center;">Es una gran â€œpiscinaâ€ de memoria
+disponible para todos los componentes del programa.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>Velocidad</strong></td>
+<td style="text-align: center;">Es <strong>mÃ¡s lenta</strong> que la
+memoria <em>Stack</em> porque el sistema operativo debe buscar un bloque
+de memoria disponible, lo que requiere mÃ¡s tiempo de procesamiento.</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>Flexibilidad</strong></td>
+<td style="text-align: center;">El espacio es <strong>altamente
+flexible</strong>. Se puede solicitar cualquier cantidad de bytes
+(limitado solo por la memoria fÃ­sica disponible) y se puede
+redimensionar.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>LiberaciÃ³n</strong></td>
+<td style="text-align: center;">El espacio <strong>debe ser gestionado
+manualmente</strong> por el programador usando la funciÃ³n
+<strong><code>free()</code></strong>. Si olvida liberar la memoria, se
+produce una <strong>fuga de memoria</strong> (<em>Memory
+Leak</em>).</td>
+</tr>
+</tbody>
+</table>
+<h3 id="variables-del-heap">2. Variables del <em>Heap</em></h3>
+<p>Las variables del <em>Heap</em> son ideales para datos que deben
+persistir a lo largo de mÃºltiples funciones o para estructuras de datos
+complejas y de tamaÃ±o variable (como listas enlazadas, Ã¡rboles o
+<em>arrays</em> grandes).</p>
+<p>La memoria dinÃ¡mica permite crear <em>arrays</em> cuyo tamaÃ±o es
+especificado por el usuario:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Supongamos que &#39;tamano&#39; se lee del usuario en tiempo de ejecuciÃ³n</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> tamano <span class="op">=</span> <span class="dv">10000</span><span class="op">;</span> </span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co">// Se solicita memoria para el array en el Heap</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> <span class="op">*</span>array_dinamico <span class="op">=</span> <span class="op">(</span><span class="dt">int</span> <span class="op">*)</span>malloc<span class="op">(</span>tamano <span class="op">*</span> <span class="kw">sizeof</span><span class="op">(</span><span class="dt">int</span><span class="op">));</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co">// ... usar array_dinamico ...</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="co">// Es obligatorio liberar la memoria al finalizar</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>free<span class="op">(</span>array_dinamico<span class="op">);</span> </span></code></pre></div>
+<p>El control total sobre la vida Ãºtil de la memoria es la principal
+ventaja y la principal responsabilidad del <em>Heap</em>.</p>
+<h2 id="cuÃ¡ndo-usar-la-memoria-dinÃ¡mica-heap">Â¿CuÃ¡ndo Usar la Memoria
+DinÃ¡mica (<em>Heap</em>)? ðŸ¤”</h2>
+<p>La asignaciÃ³n de memoria dinÃ¡mica es crucial en C cuando la gestiÃ³n
+de memoria automÃ¡tica del <em>Stack</em> no es suficiente. Su uso se
+justifica principalmente en dos escenarios:</p>
+<hr />
+<h3 id="tamaÃ±o-desconocido-en-compilaciÃ³n">1. TamaÃ±o Desconocido en
+CompilaciÃ³n</h3>
+<p>La razÃ³n principal para recurrir al <em>Heap</em> es cuando el
+<strong>tamaÃ±o requerido para una estructura de datos no se puede
+determinar</strong> antes de que el programa se ejecute. Esto permite
+que el programa se adapte a las necesidades del usuario o del sistema en
+tiempo real.</p>
+<ul>
+<li><p><strong>Arrays de TamaÃ±o Variable:</strong> Si necesita crear un
+<em>array</em> cuyo tamaÃ±o es solicitado al usuario (ej., â€œÂ¿CuÃ¡ntos
+elementos desea almacenar?â€), debe usar memoria dinÃ¡mica. El
+<em>Stack</em> requiere que el tamaÃ±o sea una constante literal conocida
+por el compilador. &gt; <strong>Ejemplo:</strong> Crear un
+<em>buffer</em> o un <em>array</em> de clientes cuyo nÃºmero se lee de un
+archivo o se ingresa por teclado.</p></li>
+<li><p><strong>Flexibilidad en Tiempo de EjecuciÃ³n:</strong> Esto es
+vital para estructuras de datos que crecen o se encogen dinÃ¡micamente,
+como las <strong>listas enlazadas, Ã¡rboles o grafos</strong>, donde el
+compilador no puede predecir cuÃ¡ntos nodos se necesitarÃ¡n.</p></li>
+</ul>
+<hr />
+<h3 id="persistencia-del-dato-vida-Ãºtil-extendida">2. Persistencia del
+Dato (Vida Ãštil Extendida)</h3>
+<p>La memoria dinÃ¡mica es necesaria cuando la vida Ãºtil de los datos
+debe <strong>extenderse mÃ¡s allÃ¡ de la ejecuciÃ³n de la funciÃ³n</strong>
+que los creÃ³.</p>
+<ul>
+<li><strong>Datos que Sobreviven a la FunciÃ³n:</strong> Si una funciÃ³n
+crea un <em>array</em> o una estructura de datos y necesita
+<strong>devolverla</strong> para que otra parte del programa la siga
+utilizando, esa memoria debe ser asignada en el <em>Heap</em>.
+<ul>
+<li>Si se intenta devolver la direcciÃ³n de una variable local del
+<em>Stack</em>, esa memoria se liberarÃ¡ automÃ¡ticamente al finalizar la
+funciÃ³n, resultando en un <strong>puntero colgante</strong>
+(<em>dangling pointer</em>), lo cual es un error grave.</li>
+</ul></li>
+<li><strong>Recursos Globales:</strong> El <em>Heap</em> se utiliza para
+almacenar datos que deben ser <strong>accesibles y consistentes</strong>
+a lo largo de toda la ejecuciÃ³n del programa, actuando como un almacÃ©n
+de recursos a largo plazo.</li>
+</ul>
+<h2 id="la-necesidad-imperativa-del-puntero-en-el-heap">La Necesidad
+Imperativa del Puntero en el <em>Heap</em> ðŸ”—</h2>
+<p>La asignaciÃ³n de memoria dinÃ¡mica en el <em>Heap</em>
+(<strong>MontÃ³n</strong>) estÃ¡ intrÃ­nsecamente ligada al uso de
+<strong>punteros</strong>. Un puntero no es solo un medio de acceso,
+sino la <strong>Ãºnica forma</strong> que tiene el programa para
+interactuar con la memoria una vez que ha sido solicitada.</p>
+<hr />
+<h3 id="el-puntero-como-identificador-Ãºnico">1. El Puntero como
+Identificador Ãšnico</h3>
+<p>Cuando utilizas funciones de asignaciÃ³n dinÃ¡mica como
+<code>malloc()</code>, <code>calloc()</code>, o <code>realloc()</code>,
+el sistema operativo realiza dos tareas cruciales:</p>
+<ol type="1">
+<li><strong>Encuentra Espacio:</strong> Localiza un bloque de bytes
+contiguo disponible en el <em>Heap</em> (una gran Ã¡rea de memoria).</li>
+<li><strong>Devuelve la DirecciÃ³n:</strong> La funciÃ³n de asignaciÃ³n
+<strong>no devuelve los datos</strong>, sino la <strong>direcciÃ³n de
+inicio</strong> (la referencia) de ese bloque de memoria reciÃ©n
+reservado.</li>
+</ol>
+<p>Esta direcciÃ³n de inicio es lo que debes almacenar en una
+<strong>variable puntero</strong>.</p>
+<p><span class="math display">â€˜int *ptr = (int *)malloc(sizeof(int) *
+N);â€˜</span></p>
+<ul>
+<li><strong>Puntero (<code>ptr</code>):</strong> Es la â€œllaveâ€ y el
+â€œmapaâ€ que le indica al programa dÃ³nde comenzar a leer o escribir en ese
+bloque de memoria del <em>Heap</em>.</li>
+</ul>
+<h3 id="gestiÃ³n-exclusiva-a-travÃ©s-del-puntero">2. GestiÃ³n Exclusiva a
+TravÃ©s del Puntero</h3>
+<p>La memoria en el <em>Heap</em> <strong>no tiene nombre de
+variable</strong> asociado (a diferencia de las variables del
+<em>Stack</em>). Por lo tanto, el puntero es responsable de toda la
+gestiÃ³n del ciclo de vida de esa memoria:</p>
+<ul>
+<li><strong>Acceso y ModificaciÃ³n:</strong> Utilizas el operador de
+desreferencia (<code>*</code> o <code>-&gt;</code>) con el puntero para
+leer o modificar los datos almacenados en el <em>Heap</em>.</li>
+<li><strong>LiberaciÃ³n Obligatoria:</strong> Debes usar la funciÃ³n
+<strong><code>free()</code></strong> y pasarle el mismo puntero que
+recibiste de la funciÃ³n de asignaciÃ³n. Sin el puntero original, la
+memoria no puede ser liberada, lo que resulta en una <strong>fuga de
+memoria</strong> (<em>Memory Leak</em>).</li>
+</ul>
+<blockquote>
+<p><strong>Recuerda:</strong> El puntero en sÃ­ mismo (la variable
+<code>ptr</code> de nuestro ejemplo) reside en la <strong>Pila</strong>
+(<em>Stack</em>), pero el espacio de memoria al que apunta
+(<code>*ptr</code>) reside en el <strong>MontÃ³n</strong>
+(<em>Heap</em>). Si pierdes la referencia al puntero original, la
+memoria queda inaccesible para el programa.</p>
+</blockquote>
+
+</div>
+</body>
+</html>
+

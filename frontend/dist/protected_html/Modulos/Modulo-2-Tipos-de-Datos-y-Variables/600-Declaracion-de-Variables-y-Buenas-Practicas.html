@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" crossorigin href="/assets/content-01sust.css">
+</head>
+<body>
+<div class="main-content">
+<h1>6. Declaración de Variables y Buenas Prácticas</h1>
+<p><strong>Nombres de Variables Descriptivos</strong></p>
+<p>La elección de un buen nombre para una variable es una de las
+primeras y más importantes buenas prácticas de programación. Un nombre
+descriptivo mejora la <strong>legibilidad</strong> y
+<strong>mantenibilidad</strong> del código de manera exponencial.</p>
+<p><strong>El Principio Clave: Claridad sobre Brevedad</strong></p>
+<p>El objetivo principal al nombrar una variable no es la brevedad (usar
+solo una o dos letras), sino la <strong>claridad inmediata</strong>
+sobre el propósito del dato que almacena.</p>
+<table style="width:97%;">
+<colgroup>
+<col style="width: 27%" />
+<col style="width: 29%" />
+<col style="width: 40%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>Mal Ejemplo (No
+descriptivo)</strong></th>
+<th style="text-align: left;"><strong>Buen Ejemplo
+(Descriptivo)</strong></th>
+<th style="text-align: left;"><strong>¿Por qué es Mejor?</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">i</td>
+<td style="text-align: left;">indice_producto</td>
+<td style="text-align: left;">Indica <em>qué</em> se está
+indexando.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">v</td>
+<td style="text-align: left;">velocidad_actual</td>
+<td style="text-align: left;">Indica <em>qué</em> valor de velocidad es
+(no el límite o la inicial).</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">tmp</td>
+<td style="text-align: left;">temperatura_sensor</td>
+<td style="text-align: left;">Evita la ambigüedad, no es solo una
+variable "temporal".</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">x</td>
+<td style="text-align: left;">total_empleados</td>
+<td style="text-align: left;">Comunica inmediatamente la naturaleza del
+valor.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Importancia de la Claridad</strong></p>
+<ol type="1">
+<li><p><strong>Reducción de Errores:</strong> Cuando un nombre es claro,
+se reduce la necesidad de revisar constantemente la declaración para
+recordar qué almacena la variable, minimizando los errores
+lógicos.</p></li>
+<li><p><strong>Mantenimiento Futuro:</strong> Si tú, o un colega,
+revisan el código seis meses después, un nombre como
+saldo_restante_cliente es autoexplicativo, mientras que un nombre como s
+requiere un análisis profundo.</p></li>
+<li><p><strong>Depuración (Debugging):</strong> Al depurar, si el
+programa falla en una línea que usa total_ventas, sabes exactamente qué
+dato está fallando. Si falla con t, la tarea es mucho más
+difícil.</p></li>
+</ol>
+<p><strong>Regla de Oro:</strong> Una variable debe ser nombrada de tal
+manera que, si la ves en cualquier parte del programa, puedas entender
+su propósito <strong>sin tener que leer el comentario o el código
+circundante</strong>.</p>
+<p><strong>Reglas de Nomenclatura en C</strong></p>
+<p>El lenguaje C impone reglas estrictas sobre cómo puedes nombrar tus
+identificadores (como variables y funciones). Estas reglas son manejadas
+por el compilador y <strong>deben ser respetadas</strong> para que tu
+código sea válido.</p>
+<p><strong>Reglas Obligatorias del Lenguaje C</strong></p>
+<p>Para nombrar una variable de manera válida, debes cumplir con las
+siguientes restricciones:</p>
+<ol type="1">
+<li><p><strong>Carácter Inicial:</strong> El nombre <strong>no puede
+comenzar con un dígito</strong> (0-9). Debe comenzar con una letra
+(mayúscula o minúscula) o un guion bajo (_).</p>
+<ul>
+<li><p><strong>Válido:</strong> _contador, Ajuste1</p></li>
+<li><p><strong>Inválido:</strong> 1_mes, 8veces</p></li>
+</ul></li>
+<li><p><strong>Espacios y Caracteres Especiales:</strong> Los nombres
+<strong>no pueden contener espacios</strong> ni la mayoría de los
+caracteres especiales (como !, @, #, %, &amp;, -, etc.). Solo se permite
+el <strong>guion bajo</strong> (_).</p>
+<ul>
+<li><p><strong>Válido:</strong> limite_superior</p></li>
+<li><p><strong>Inválido:</strong> limite-superior (el guion medio - es
+un operador de resta), limite superior</p></li>
+</ul></li>
+<li><p><strong>Palabras Reservadas:</strong> El nombre <strong>no puede
+ser una palabra reservada</strong> (o <em>keyword</em>) del lenguaje C.
+Estas palabras tienen un significado predefinido para el
+compilador.</p></li>
+<li><p><strong>Sensibilidad a Mayúsculas y Minúsculas:</strong> C es un
+lenguaje <strong>sensible a mayúsculas y minúsculas</strong>
+(<em>case-sensitive</em>). Esto significa que el compilador trata total
+y Total como dos variables completamente diferentes.</p></li>
+</ol>
+<p><strong>Palabras Reservadas (Keywords)</strong></p>
+<p>Debes memorizar las siguientes palabras reservadas para evitar
+usarlas como nombres de variables. El compilador generará un error si
+intentas hacerlo.</p>
+<table style="width:97%;">
+<colgroup>
+<col style="width: 97%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>Palabras Reservadas del Lenguaje C
+(ANSI C y C99/C11)</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">auto, break, case, char, const, continue,
+default, do, double, else, enum, extern, float, for, goto, if, inline
+(C99), int, long, register, restrict (C99), return, short, signed,
+sizeof, static, struct, switch, typedef, union, unsigned, void,
+volatile, while, _Bool (C99), _Complex (C99), _Imaginary
+(C99)<sup>1</sup></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Advertencia sobre _:</strong> Aun<sup>2</sup>que los nombres
+que comienzan con un guion bajo (_) son válidos (ej: _temp), se
+recomienda <strong>evitar su uso</strong> ya que se reservan
+convencionalmente para identificadores internos del sistema o de la
+librería estándar, lo que podría causar conflictos.</p>
+<p><strong>Convenciones de Estilo: Snake Case 🐍</strong></p>
+<p>Una vez que conocemos las reglas obligatorias de nomenclatura en C,
+el siguiente paso es adoptar una <strong>convención de estilo</strong>
+que haga nuestro código más consistente y legible. La convención más
+ampliamente aceptada para variables y funciones en el lenguaje C es el
+<strong>Snake Case</strong>.</p>
+<p><strong>¿Qué es el Snake Case?</strong></p>
+<p>El <em>Snake Case</em> (o "Caso Serpiente") es un estilo de escritura
+donde las palabras en un identificador se separan con <strong>guiones
+bajos</strong> (_) y todas las letras están en
+<strong>minúsculas</strong>.</p>
+<table style="width:98%;">
+<colgroup>
+<col style="width: 35%" />
+<col style="width: 35%" />
+<col style="width: 27%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>Característica</strong></th>
+<th style="text-align: left;"><strong>Descripción</strong></th>
+<th style="text-align: left;"><strong>Ejemplo</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>Separador</strong></td>
+<td style="text-align: left;">Guion bajo (_)</td>
+<td style="text-align: left;">primer_nombre</td>
+</tr>
+<tr class="even">
+<td
+style="text-align: left;"><strong>Mayúsculas/Minúsculas</strong></td>
+<td style="text-align: left;">Todo en minúsculas</td>
+<td style="text-align: left;">total_acumulado</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Uso Principal</strong></td>
+<td style="text-align: left;">Variables y nombres de funciones.</td>
+<td style="text-align: left;">calcular_promedio()</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Contraste con Camel Case</strong></p>
+<p>Aunque otros lenguajes (como Java o JavaScript) prefieren el
+<em>Camel Case</em> para variables, esta convención es menos común en la
+comunidad C.</p>
+<table style="width:97%;">
+<colgroup>
+<col style="width: 29%" />
+<col style="width: 24%" />
+<col style="width: 43%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>Estilo</strong></th>
+<th style="text-align: left;"><strong>Ejemplo</strong></th>
+<th style="text-align: left;"><strong>Uso en C</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>Snake Case</strong>
+(Recomendado)</td>
+<td style="text-align: left;">limite_productos</td>
+<td style="text-align: left;">Variables y funciones.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Camel Case</strong> (<em>Lower
+Camel</em>)</td>
+<td style="text-align: left;">limiteProductos</td>
+<td style="text-align: left;">Menos común; a veces se usa para tipos de
+datos o estructuras.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Ventajas de Adoptar Snake Case en C</strong></p>
+<ol type="1">
+<li><p><strong>Uniformidad Histórica:</strong> La biblioteca estándar de
+C y la mayoría de los proyectos <em>open source</em> importantes
+escritos en C (como el núcleo de Linux) utilizan consistentemente el
+<em>Snake Case</em>.</p></li>
+<li><p><strong>Claridad Visual:</strong> El guion bajo actúa como un
+separador claro, lo que muchos desarrolladores encuentran más legible
+que las mayúsculas internas del <em>Camel Case</em>, especialmente para
+identificadores largos.</p></li>
+<li><p><strong>Diferenciación:</strong> Permite distinguir fácilmente
+las <strong>variables</strong> (que están en <em>snake case</em>
+minúsculas) de las <strong>constantes simbólicas</strong> (que están en
+<em>snake case</em> mayúsculas, como LIMITE_MAXIMO).</p></li>
+</ol>
+<p><strong>Ejemplo de Aplicación:</strong></p>
+<p>C</p>
+<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
+<p>int main(void) {</p>
+<p>// ✅ Snake Case para la variable</p>
+<p>int edad_usuario_registrado = 30;</p>
+<p>// ❌ Evitar Camel Case en la mayoría de proyectos C</p>
+<p>// int edadUsuarioRegistrado = 30;</p>
+<p>printf("Edad: %d\n", edad_usuario_registrado);</p>
+<p>return 0;</p>
+<p>}</p>
+<p><strong>Declaración Cerca del Uso (Ámbito Local)</strong></p>
+<p>En las versiones más antiguas de C (C89/ANSI C), era obligatorio
+declarar todas las variables al <strong>inicio de un bloque de
+código</strong> (generalmente al inicio de la función main o cualquier
+otra función), antes de cualquier sentencia ejecutable. Sin embargo, las
+versiones modernas de C (C99 en adelante) han adoptado una práctica que
+mejora significativamente la legibilidad: la <strong>declaración tardía
+o cerca del uso</strong>.</p>
+<p><strong>¿En qué Consiste la Práctica?</strong></p>
+<p>La recomendación moderna es declarar una variable lo más
+<strong>cerca posible</strong> del punto en el código donde se le asigna
+su valor inicial o donde se utiliza por primera vez.</p>
+<table style="width:97%;">
+<colgroup>
+<col style="width: 23%" />
+<col style="width: 31%" />
+<col style="width: 42%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>Estilo</strong></th>
+<th style="text-align: left;"><strong>Código (C89/ANSI C) - Menos
+preferido</strong></th>
+<th style="text-align: left;"><strong>Código (C99+) -
+Recomendado</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>Declaración</strong></td>
+<td style="text-align: left;">c int i; int resultado; int total; //
+Mucho código... for (i = 0; i &lt; 10; i++) { ... } resultado = a *
+b;</td>
+<td style="text-align: left;">c // Declarada al inicio del bucle donde
+se usa for (int i = 0; i &lt; 10; i++) { ... } // Declarada justo antes
+de su cálculo int resultado = a * b;</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Ventajas de Declarar Cerca del Uso</strong></p>
+<ol type="1">
+<li><p><strong>Mejora la Legibilidad:</strong> Cuando una variable se
+declara justo antes de usarse, el lector del código no necesita
+retroceder a la primera línea del bloque para saber de qué tipo es la
+variable. El <strong>contexto de la declaración y la
+inicialización</strong> están juntos.</p></li>
+<li><p><strong>Optimiza el Ámbito (<em>Scope</em>):</strong></p>
+<ul>
+<li><p>Una variable declarada al inicio existe en memoria durante todo
+el bloque de código, incluso si solo se usa en un segmento
+pequeño.</p></li>
+<li><p>Una variable declarada cerca del uso puede tener un
+<strong>ámbito (scope) más reducido</strong> (por ejemplo, una variable
+declarada dentro de un bucle for existe solo dentro de ese
+bucle).</p></li>
+</ul></li>
+<li><p><strong>Prevención de Errores (Valores Basura):</strong> Al
+declarar e inicializar la variable justo antes de usarla, reduces la
+posibilidad de que se lea un <strong>valor basura</strong> de una
+declaración anterior o de que se olvide inicializarla en un punto
+posterior.</p></li>
+</ol>
+<p><strong>Clave para el Módulo 5 (Scope):</strong> Esta práctica ayuda
+a limitar el <strong>ámbito</strong> de la variable. Una variable solo
+debe "existir" en la porción de código donde es relevante, lo que
+facilita el seguimiento de la memoria y la lógica.</p>
+
+
+</div>
+</body>
+</html>
+

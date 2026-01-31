@@ -1,0 +1,327 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" crossorigin href="/assets/content-01sust.css">
+</head>
+<body>
+<div class="main-content">
+<h1> 6. Implementación Práctica de un Ciclo
+Input-Procesamiento-Output</h1>
+<p><strong>El Modelo I-P-O: Arquitectura Mínima de un Programa
+🔄</strong></p>
+<p>El <strong>Modelo I-P-O (Input-Procesamiento-Output)</strong> es el
+concepto fundamental que describe la secuencia lógica de pasos que sigue
+prácticamente cualquier programa o algoritmo computacional, desde la
+aplicación más simple hasta los sistemas operativos complejos.</p>
+<p><strong>Conceptualización del Ciclo I-P-O</strong></p>
+<p>El ciclo I-P-O establece que un programa debe:</p>
+<ol type="1">
+<li><p><strong>I - Input (Entrada):</strong> Recibir datos del mundo
+exterior (el usuario, un archivo, un sensor, etc.).</p></li>
+<li><p><strong>P - Procesamiento:</strong> Realizar operaciones lógicas,
+aritméticas o de manipulación con esos datos.</p></li>
+<li><p><strong>O - Output (Salida):</strong> Entregar el resultado del
+procesamiento al mundo exterior (la consola, un archivo, una base de
+datos, etc.).</p></li>
+</ol>
+<p><strong>I-P-O en la Práctica de C</strong></p>
+<p>En el contexto del lenguaje C, cada fase del ciclo se relaciona
+directamente con las herramientas de E/S y los operadores que hemos
+estudiado:</p>
+<table style="width:97%;">
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 45%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>Fase</strong></th>
+<th style="text-align: left;"><strong>Herramienta Principal en
+C</strong></th>
+<th style="text-align: left;"><strong>Propósito</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>Input</strong></td>
+<td style="text-align: left;"><strong>scanf()</strong></td>
+<td style="text-align: left;">Captura valores del usuario y los almacena
+en variables.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Procesamiento</strong></td>
+<td style="text-align: left;"><strong>Operadores</strong> (+, -, *, /,
+&amp;&amp;, `</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Output</strong></td>
+<td style="text-align: left;"><strong>printf()</strong></td>
+<td style="text-align: left;">Muestra el resultado final (el valor
+procesado) al usuario, a menudo con formato.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Ejemplo Básico:</strong> Calcular el doble de un número.</p>
+<ol type="1">
+<li><p><strong>Input:</strong> Capturar el número (scanf("%d",
+&amp;num);).</p></li>
+<li><p><strong>Procesamiento:</strong> Multiplicar el número por 2
+(resultado = num * 2;).</p></li>
+<li><p><strong>Output:</strong> Mostrar el resultado (printf("El doble
+es: %d", resultado);).</p></li>
+</ol>
+<p>Comprender y seguir el modelo I-P-O garantiza que el código sea
+estructurado, predecible y cumpla con su objetivo.</p>
+<p><strong>Fase 1: Input (Entrada de Datos) ⌨️</strong></p>
+<p>La fase de <strong>Input</strong> es el punto de partida del ciclo
+I-P-O, donde el programa se detiene para recibir la información
+necesaria que le permitirá realizar su tarea.</p>
+<p>La herramienta clave para esta fase es la función
+<strong>scanf()</strong>.</p>
+<p><strong>Guía Esencial: El Mensaje de Instrucción
+(Prompt)</strong></p>
+<p>Para que un programa sea <em>amigable</em> y funcional, la entrada de
+datos debe ir precedida de un mensaje claro, conocido como
+<em>prompt</em>, que oriente al usuario. Este mensaje siempre se genera
+con <strong>printf()</strong> inmediatamente antes de la llamada a
+scanf().</p>
+<table style="width:97%;">
+<colgroup>
+<col style="width: 22%" />
+<col style="width: 18%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>Acción</strong></th>
+<th style="text-align: left;"><strong>Función Clave</strong></th>
+<th style="text-align: left;"><strong>Justificación</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>Instrucción</strong></td>
+<td style="text-align: left;"><strong>printf()</strong></td>
+<td style="text-align: left;">Indica al usuario qué dato debe ingresar y
+en qué formato.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Captura</strong></td>
+<td style="text-align: left;"><strong>scanf()</strong></td>
+<td style="text-align: left;">Detiene la ejecución y espera el dato del
+teclado, guardándolo en la dirección de la variable (&amp;).</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Ejemplo de Práctica Recomendada:</strong></p>
+<p>C</p>
+<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
+<p>int main(void) {</p>
+<p>int cantidad;</p>
+<p>// 1. Mensaje (Prompt) usando printf()</p>
+<p>printf("Ingrese la cantidad de productos a comprar: ");</p>
+<p>// 2. Captura (Input) usando scanf() con &amp;</p>
+<p>scanf("%d", &amp;cantidad);</p>
+<p>// El programa ahora tiene un valor en 'cantidad' para la Fase 2
+(Procesamiento).</p>
+<p>return 0;</p>
+<p>}</p>
+<p>La práctica de usar un <em>prompt</em> asegura que el usuario no
+quede mirando una pantalla en blanco, preguntándose si el programa está
+esperando una acción de su parte. <strong>Un buen <em>prompt</em> es la
+base de una buena experiencia de usuario en la consola.</strong></p>
+<p><strong>Fase 2: Procesamiento (Lógica y Fórmulas) 🧠</strong></p>
+<p>Una vez que los datos han sido capturados exitosamente en la
+<strong>Fase 1 (Input)</strong> y se encuentran almacenados en
+variables, el programa entra en la fase de
+<strong>Procesamiento</strong>. Esta es la etapa central donde se aplica
+la <strong>lógica</strong> y se ejecutan los <strong>cálculos</strong>
+necesarios para resolver el problema.</p>
+<p>La Fase 2 utiliza de manera intensiva todos los
+<strong>operadores</strong> que has estudiado en este módulo:</p>
+<ul>
+<li><p><strong>Operadores Aritméticos</strong> (+, -, *, /, %): Se
+utilizan para realizar cálculos matemáticos, como sumar totales,
+calcular promedios, o aplicar descuentos.</p></li>
+<li><p><strong>Operadores de Asignación</strong> (=, +=, -=): Se emplean
+para almacenar el resultado de una operación en una nueva variable o
+para actualizar el valor de una variable existente.</p></li>
+<li><p><strong>Operadores Relacionales</strong> (&lt;, &gt;, ==, !=):
+Aunque se usan principalmente en estructuras de control (módulos
+futuros), pueden ser utilizados aquí para generar resultados booleanos
+(1 o 0) a partir de la comparación de los datos de entrada.</p></li>
+<li><p><strong>Operadores Lógicos</strong> (&amp;&amp;, ||, !): Permiten
+combinar resultados relacionales o evaluar condiciones para producir un
+resultado final que será la base de la salida.</p></li>
+</ul>
+<p><strong>Ejemplo de Aplicación</strong></p>
+<p>Considera que en la Fase 1 se capturaron dos valores de tipo float:
+precio_bruto y tasa_impuesto.</p>
+<p>C</p>
+<p>// Supongamos que ya se capturaron los valores...</p>
+<p>float precio_bruto = 100.0;</p>
+<p>float tasa_impuesto = 0.15; // 15%</p>
+<p>// 1. Calcular el monto del impuesto (Operador Aritmético: *)</p>
+<p>float monto_impuesto = precio_bruto * tasa_impuesto;</p>
+<p>// 2. Calcular el precio total (Operador Aritmético: +)</p>
+<p>float precio_final = precio_bruto + monto_impuesto;</p>
+<p>// 3. Evaluar una condición (Operadores Relacional y de
+Asignación)</p>
+<p>int es_costoso = (precio_final &gt; 110.0); // Asigna 1 si la
+condición es verdadera, 0 si es falsa.</p>
+<p>El resultado de esta fase (precio\_final y es\_costoso) será la
+materia prima para la siguiente etapa, la <strong>Fase 3:
+Output</strong>.</p>
+<p><strong>Fase 3: Output (Presentación de Resultados) 🖥️</strong></p>
+<p>La fase de <strong>Output</strong> es la etapa final del ciclo I-P-O
+y su propósito es comunicar el resultado del
+<strong>Procesamiento</strong> de vuelta al usuario. Un programa puede
+ser perfectamente funcional en su lógica, pero si no presenta el
+resultado de manera clara, su utilidad se reduce drásticamente.</p>
+<p>La herramienta fundamental para esta fase es la función
+<strong>printf()</strong>, la cual debe usarse aquí con las técnicas de
+formateo avanzadas aprendidas para asegurar la
+<strong>legibilidad</strong> y el <strong>profesionalismo</strong> del
+informe final.</p>
+<p><strong>Principios de un Output Legible</strong></p>
+<ol type="1">
+<li><p><strong>Contextualización:</strong> El resultado debe ir
+acompañado de texto descriptivo que explique qué significa el valor que
+se está mostrando. Nunca imprimas solo un número.</p></li>
+<li><p><strong>Formato (Precisión y Alineación):</strong> Utiliza los
+especificadores de formato de printf() para presentar los datos de la
+mejor manera posible:</p>
+<ul>
+<li><p><strong>Moneda/Costo:</strong> Usa %.2f para asegurar dos
+decimales.</p></li>
+<li><p><strong>Tablas:</strong> Usa \t o \%w.nf para alinear
+columnas.</p></li>
+</ul></li>
+<li><p><strong>Unidades:</strong> Incluye siempre las unidades de medida
+pertinentes (dólares, metros, kilómetros, etc.).</p></li>
+</ol>
+<p><strong>Ejemplo de Salida Formateada</strong></p>
+<p>Retomando el ejemplo de la Fase 2, donde se calculó el precio_final y
+la variable es_costoso:</p>
+<p>C</p>
+<p>// Supongamos que el Procesamiento dio:</p>
+<p>float precio_final = 115.0;</p>
+<p>int es_costoso = 1; // 1 (Verdadero)</p>
+<p>// 1. Mostrar el resultado numérico con formato (2 decimales y el
+símbolo $)</p>
+<p>printf("Costo Total Final: $%.2f\n", precio_final);</p>
+<p>// 2. Mostrar el resultado lógico con texto descriptivo</p>
+<p>printf("¿El producto supera el límite de costo? %s\n",</p>
+<p>es_costoso ? "Sí" : "No"); // Uso del operador ternario para mostrar
+"Sí" o "No"</p>
+<p>// 3. Imprimir el resumen final</p>
+<p>printf("\n*** Transaccion Completada. ***\n");</p>
+<p>La Fase 3 transforma los datos crudos de las variables en información
+valiosa y fácil de entender para el usuario final.</p>
+<p><strong>Mini-Proyecto de Simulación: Calculadora de Descuento (I-P-O
+Integrado) 🛒</strong></p>
+<p>Este mini-proyecto sirve como ejemplo completo de cómo integrar las
+tres fases del <strong>Ciclo I-P-O</strong> (Input-Procesamiento-Output)
+usando todas las herramientas vistas en el módulo:
+<strong>printf()</strong>, <strong>scanf()</strong>, operadores
+aritméticos y control de formato.</p>
+<p>El objetivo del programa es calcular el <strong>Precio Final</strong>
+de un artículo después de aplicar una tasa de impuesto y un descuento
+fijo.</p>
+<p><strong>Fase 1: Input (Captura de Datos)</strong></p>
+<p>Esta fase solicita y almacena los tres valores iniciales requeridos
+para el cálculo. Se usan mensajes de guía (printf) para la experiencia
+del usuario y el operador de dirección (&amp;) con scanf.</p>
+<p>C</p>
+<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
+<p>int main(void) {</p>
+<p>// Declaración de variables para las tres fases</p>
+<p>float precio_base;</p>
+<p>float tasa_impuesto;</p>
+<p>float monto_final_a_pagar;</p>
+<p>// Constante (Descuento del 10%)</p>
+<p>const float DESCUENTO = 0.10f;</p>
+<p>// Mensajes de guía y captura de datos (Input)</p>
+<p>printf("--- Calculadora de Descuento e Impuestos ---\n");</p>
+<p>printf("1. Ingrese el precio base del articulo: $");</p>
+<p>scanf("%f", &amp;precio_base);</p>
+<p>printf("2. Ingrese la tasa de impuesto (ej. 0.16 para 16%%): ");</p>
+<p>scanf("%f", &amp;tasa_impuesto);</p>
+<p>// ... La ejecucion avanza a la Fase 2 ...</p>
+<p><strong>Fase 2: Procesamiento (Lógica de Negocio)</strong></p>
+<p>Aquí se aplican las fórmulas de precedencia y los operadores
+aritméticos para calcular el total antes y después de aplicar el
+descuento.</p>
+<p>C</p>
+<p>// Cálculo del precio bruto (Impuestos aplicados)</p>
+<p>float impuesto_calculado = precio_base * tasa_impuesto;</p>
+<p>float precio_con_impuesto = precio_base + impuesto_calculado;</p>
+<p>// Cálculo del monto del descuento</p>
+<p>float monto_descuento = precio_con_impuesto * DESCUENTO;</p>
+<p>// Cálculo final (El resultado del procesamiento)</p>
+<p>monto_final_a_pagar = precio_con_impuesto - monto_descuento;</p>
+<p>// ... La ejecucion avanza a la Fase 3 ...</p>
+<p><strong>Fase 3: Output (Presentación Formateada)</strong></p>
+<p>Se utiliza printf() con un formato claro, incluyendo precisión (%.2f)
+y alineación (%w.nf) para presentar el resultado final.</p>
+<p>C</p>
+<p>// Salida Formateada</p>
+<p>printf("\n--- Resumen de la Transaccion ---\n");</p>
+<p>printf("%-20s : $%.2f\n", "Precio Base", precio_base);</p>
+<p>printf("%-20s : $%.2f\n", "Impuesto (%.0f%%)", tasa_impuesto * 100,
+impuesto_calculado);</p>
+<p>printf("----------------------------------\n");</p>
+<p>printf("%-20s : $%.2f\n", "Subtotal con Impuesto",
+precio_con_impuesto);</p>
+<p>printf("%-20s : -$%.2f\n", "Descuento Aplicado (10%)",
+monto_descuento);</p>
+<p>printf("==================================\n");</p>
+<p>printf("%-20s : $%.2f\n", "TOTAL FINAL A PAGAR",
+monto_final_a_pagar);</p>
+<p>printf("==================================\n");</p>
+<p>return 0;</p>
+<p>}</p>
+<p><strong>Interacción Completa y Output de Ejemplo</strong></p>
+<table style="width:98%;">
+<colgroup>
+<col style="width: 82%" />
+<col style="width: 15%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>Consola de
+Interacción</strong></th>
+<th style="text-align: left;"><strong>Explicación</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>Input del Usuario:</strong> 1.
+Ingrese el precio base del articulo: $150.0 2. Ingrese la tasa de
+impuesto (ej. 0.16 para 16%): 0.10</td>
+<td style="text-align: left;">El programa captura <strong>150.0</strong>
+y <strong>0.10</strong>.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Output Final:</strong> --- Resumen
+de la Transaccion ---&lt;br&gt;Precio Base : $150.00&lt;br&gt;Impuesto
+(10%) :
+$15.00&lt;br&gt;----------------------------------&lt;br&gt;Subtotal con
+Impuesto: $165.00&lt;br&gt;Descuento Aplicado (10%):
+-$16.50&lt;br&gt;==================================&lt;br&gt;TOTAL FINAL
+A PAGAR : $148.50&lt;br&gt;==================================</td>
+<td style="text-align: left;">Se muestra el resultado del procesamiento,
+formateado con alineación y dos decimales.</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</body>
+</html>
+

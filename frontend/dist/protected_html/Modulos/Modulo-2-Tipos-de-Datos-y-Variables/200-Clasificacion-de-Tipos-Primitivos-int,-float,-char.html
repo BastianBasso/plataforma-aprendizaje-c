@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Clasificación de tipos primitivos</title>
+    <link rel="stylesheet" crossorigin href="/assets/content-01sust.css">
+    <style>
+        
+    .header-c { background: #fff; border-bottom: 1px solid #e5e7eb; }
+    .logo-c {
+      background: linear-gradient(135deg,#162047 60%, #3b2fa6 100%);
+      color: #fff;
+      font-weight: 900;
+      font-size: 1.7rem;
+      border-radius: 8px;
+      width: 38px; height: 38px;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 2px 8px rgba(59,47,166,0.08);
+      margin-right: 10px;
+    }
+    .user-profile {
+      display: flex; align-items: center; gap: 10px;
+      background: #e0e7ff;
+      border-radius: 999px;
+      padding: 6px 16px;
+      font-size: 1rem;
+      color: #3730a3;
+      font-weight: 600;
+    }
+    .content-title {
+      color: #3730a3;
+      font-size: 2.2rem;
+      font-weight: 800;
+      margin: 36px auto 10px auto;
+      text-align: center;
+      letter-spacing: 1px;
+    }
+    .progress-bar-container {
+      max-width: 700px;
+      margin: 0 auto 32px auto;
+      background: #e0e7ff;
+      border-radius: 999px;
+      padding: 8px 24px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #3730a3;
+      box-shadow: 0 2px 8px rgba(59,47,166,0.08);
+    }
+    .progress-bar {
+      flex: 1;
+      height: 16px;
+      background: #c7d2fe;
+      border-radius: 999px;
+      overflow: hidden;
+      position: relative;
+    }
+    .progress-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg,#2563eb,#3b2fa6);
+      border-radius: 999px;
+      width: 12%;
+      transition: width 0.4s;
+    }
+    .modules-list {
+      max-width: 900px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+    }
+    .module-card {
+      background: linear-gradient(135deg,#2563eb 60%, #3b2fa6 100%);
+      color: #fff;
+      border-radius: 18px;
+      box-shadow: 0 6px 24px rgba(59,47,166,0.10);
+      padding: 0;
+      display: flex;
+      align-items: stretch;
+      position: relative;
+      overflow: hidden;
+      min-height: 140px;
+    }
+    .module-progress-bar {
+      width: 18px;
+      background: #a5b4fc;
+      display: flex;
+      align-items: flex-end;
+      border-radius: 18px 0 0 18px;
+      margin-right: 0;
+      position: relative;
+    }
+    .module-progress-fill {
+      width: 100%;
+      background: #3730a3;
+      border-radius: 18px 0 0 18px;
+      transition: height 0.4s;
+    }
+    .module-content {
+      flex: 1;
+      padding: 24px 32px 24px 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .module-title {
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .module-desc {
+      font-size: 1rem;
+      color: #dbeafe;
+      margin-bottom: 10px;
+    }
+    .module-topics {
+      margin-left: 1.2em;
+      margin-bottom: 10px;
+      color: #e0e7ff;
+      font-size: 0.98rem;
+    }
+    .module-card .start-btn {
+      align-self: flex-end;
+      background: linear-gradient(90deg,#4f46e5,#2563eb);
+      color: #fff;
+      font-weight: 700;
+      border: none;
+      border-radius: 999px;
+      padding: 10px 28px;
+      font-size: 1rem;
+      box-shadow: 0 2px 8px rgba(37,99,235,0.18);
+      transition: background 0.2s;
+      cursor: pointer;
+      margin-top: 8px;
+    }
+    .module-card .start-btn:hover {
+      background: linear-gradient(90deg,#2563eb,#4f46e5);
+    }
+    .footer-c {
+      background: linear-gradient(90deg,#49b3af,#25a6d7 90%);
+      color: #fff;
+      padding: 36px 0 18px 0;
+      margin-top: 48px;
+    }
+    .footer-c .footer-content {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 32px;
+      justify-content: space-between;
+      align-items: flex-start;
+      padding: 0 32px;
+    }
+    .footer-c .footer-logo {
+      display: flex; align-items: center; gap: 10px;
+      font-size: 1.5rem; font-weight: 800;
+      letter-spacing: 1px;
+    }
+    .footer-c .footer-links, .footer-c .footer-newsletter {
+      min-width: 180px;
+    }
+    .footer-c .footer-links a {
+      color: #e0f2fe;
+      display: block;
+      margin-bottom: 8px;
+      text-decoration: none;
+      font-size: 1rem;
+      transition: color 0.2s;
+    }
+    .footer-c .footer-links a:hover {
+      color: #fff;
+    }
+    .footer-c .newsletter-form {
+      display: flex; gap: 8px; margin-top: 8px;
+    }
+    .footer-c .newsletter-form input[type="email"] {
+      border-radius: 999px 0 0 999px;
+      border: none;
+      padding: 8px 16px;
+      font-size: 1rem;
+      outline: none;
+      min-width: 0;
+    }
+    .footer-c .newsletter-form button {
+      border-radius: 0 999px 999px 0;
+      border: none;
+      background: #2563eb;
+      color: #fff;
+      font-weight: 700;
+      padding: 8px 18px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .footer-c .newsletter-form button:hover {
+      background: #1e40af;
+    }
+    .footer-c .copyright {
+      text-align: center;
+      color: #bae6fd;
+      font-size: 0.95rem;
+      margin-top: 24px;
+    }
+    @media (max-width: 900px) {
+      .footer-c .footer-content { flex-direction: column; gap: 18px; align-items: flex-start; }
+      .content-c, .hero-c { padding: 24px 10px; }
+    }
+    @media (max-width: 900px) {
+      .modules-list { padding: 0 8px; }
+      .module-content { padding: 18px 10px 18px 10px; }
+      .content-title { font-size: 1.5rem; }
+    }
+  </style>
+</head>
+
+<!-- Header -->
+  <header class="header-c px-6 py-4 flex items-center justify-between">
+    <div class="flex items-center">
+      <div class="logo-c" aria-label="Logo C">C</div>
+      <span class="font-bold text-blue-700 text-lg tracking-wide">Plataforma C</span>
+    </div>
+    <div class="user-profile">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20 21V19C20 17.9391 19.5786 16.9217 18.8284 16.1716C18.0783 15.4214 17.0609 15 16 15H8C6.93913 15 5.92172 15.4214 5.17157 16.1716C4.42143 16.9217 4 17.9391 4 19V21" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="7" r="4"/></svg>
+      <span>Usuario</span>
+    </div>
+  </header>
+
+<body>
+    
+<div class="main-content">
+
+<h1>### 2. Clasificación de Tipos Primitivos (`int`, `float`, `char`)</h1>
+<h2><strong>Tipos Primitivos vs. Derivados (Clasificación Inicial)
+🗂️</strong></h2>
+<p>En C, los tipos de datos se clasifican según si son fundamentales
+para el lenguaje o si se construyen a partir de ellos.</p>
+<table style="width:98%;">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 37%" />
+<col style="width: 20%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>Categoría</strong></th>
+<th style="text-align: left;"><strong>Tipos</strong></th>
+<th style="text-align: left;"><strong>Descripción</strong></th>
+<th style="text-align: left;"><strong>Ejemplos Principales</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>Tipos Primitivos</strong></td>
+<td style="text-align: left;">Fundamentales</td>
+<td style="text-align: left;">Son los tipos <strong>básicos e
+inherentes</strong> que C proporciona para manejar las unidades de
+información más simples. Son los "ladrillos" del lenguaje.</td>
+<td style="text-align: left;">int, float, double, char.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Tipos Derivados</strong></td>
+<td style="text-align: left;">Compuestos</td>
+<td style="text-align: left;">Son tipos <strong>más complejos</strong>
+que se <em>construyen</em> usando uno o más tipos primitivos. Permiten
+almacenar colecciones de datos o estructuras con nombre.</td>
+<td style="text-align: left;"><em>Arrays</em> (arreglos),
+<em>Punteros</em> y <em>Estructuras</em> (struct).</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Enfoque del Módulo</strong></p>
+<p>En este módulo, nos enfocaremos únicamente en los <strong>Tipos
+Primitivos</strong>.</p>
+<p>El <strong>Tipo Primitivo</strong> es crucial porque le indica al
+compilador exactamente:</p>
+<ol type="1">
+<li><p><strong>Cuántos bytes</strong> debe reservar en la memoria
+RAM.</p></li>
+<li><p><strong>Cómo interpretar</strong> el patrón de $0$s y $1$s
+almacenado en esos bytes (por ejemplo, si los bits representan un número
+entero, un número decimal o un carácter).</p></li>
+</ol>
+<p>Dominar estos tipos de datos individuales es el paso necesario antes
+de trabajar con colecciones de datos más grandes como los
+<em>Arrays</em> (Tipos Derivados).</p>
+<h2><strong>Tipo int (Enteros)</strong></h2>
+<p>El tipo de dato int es el tipo primitivo más común y fundamental en
+C. Se utiliza para representar números <strong>enteros</strong>, es
+decir, números sin ninguna parte decimal o fraccionaria.</p>
+<ul>
+<li><p><strong>Uso:</strong> Contadores, edades, cantidades discretas,
+códigos de estado, índices de arreglos.</p></li>
+<li><p><strong>Sintaxis:</strong> Se declara usando la palabra clave
+int.</p></li>
+</ul>
+<p>C</p>
+<p>int edad_usuario = 30;</p>
+<p>int numero_de_intentos = 5;</p>
+<p>int temperatura_ambiente = -12;</p>
+<h2><strong>El Rango de Valores y el Tamaño en Bytes</strong></h2>
+<p>La cantidad de números que un int puede almacenar está determinada
+directamente por la <strong>cantidad de <em>bytes</em> que el compilador
+le asigna</strong> en la memoria RAM.</p>
+<ol type="1">
+<li><p><strong>Tamaño (Común):</strong> En la mayoría de los sistemas
+modernos (arquitecturas de 32 y 64 bits), el tipo int ocupa <strong>4
+bytes</strong> (o 32 bits).</p></li>
+<li><p>Cálculo del Rango: Un int de 4 bytes puede almacenar $2^{32}$
+valores únicos. Dado que los int por defecto pueden ser positivos o
+negativos (signed), ese rango de valores se divide:</p></li>
+</ol>
+<blockquote>
+<p>$$\text{Rango Aproximado} \approx \text{de } -2.14 \text{ billones a
+} +2.14 \text{ billones}$$</p>
+</blockquote>
+<ol start="3" type="1">
+<li><strong>Dependencia de la Máquina:</strong> Es importante recordar
+que el estándar C garantiza un tamaño <strong>mínimo</strong>, pero el
+tamaño exacto de un int puede variar ligeramente entre diferentes
+arquitecturas y compiladores (aunque 4 bytes es la norma hoy en
+día).</li>
+</ol>
+<p>Si intentas almacenar un número que exceda este rango (algo que
+veremos en el tema de Desbordamiento), el resultado será un valor
+inesperado e incorrecto. Por ello, la elección del tipo de dato es clave
+para la precisión de tu programa.</p>
+<h2><strong>Tipos float y double (Punto Flotante)</strong></h2>
+<p>Mientras que el tipo int es ideal para números enteros, necesitamos
+los tipos de <strong>Punto Flotante</strong> para representar números
+<strong>reales</strong>, es decir, aquellos que tienen una parte decimal
+o fraccionaria. Son esenciales para cálculos científicos, monetarios, y
+mediciones.</p>
+<h2><strong>Almacenamiento y Precisión</strong></h2>
+<p>Los tipos de punto flotante se almacenan de una manera completamente
+diferente a los enteros, utilizando la notación científica para
+representar un valor y su exponente. La principal diferencia entre float
+y double es la <strong>precisión</strong> y el <strong>tamaño de la
+memoria</strong> que ocupan:</p>
+<table style="width:97%;">
+<colgroup>
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 30%" />
+<col style="width: 34%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>Tipo</strong></th>
+<th style="text-align: left;"><strong>Tamaño (Común)</strong></th>
+<th style="text-align: left;"><strong>Precisión Aproximada</strong></th>
+<th style="text-align: left;"><strong>Uso</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>float</strong></td>
+<td style="text-align: left;"><strong>4 bytes</strong> (32 bits)</td>
+<td style="text-align: left;">Aproximadamente <strong>6-7
+dígitos</strong> decimales significativos.</td>
+<td style="text-align: left;">Suficiente para cálculos rápidos o donde
+la precisión no es crítica.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>double</strong></td>
+<td style="text-align: left;"><strong>8 bytes</strong> (64 bits)</td>
+<td style="text-align: left;">Aproximadamente <strong>15-16
+dígitos</strong> decimales significativos.</td>
+<td style="text-align: left;">Estándar para la mayoría de cálculos
+matemáticos, financieros o científicos, donde la precisión es
+crucial.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Uso en Código</strong></p>
+<p>En C, por defecto, cualquier número decimal que escribas (como 3.14)
+se trata como un double. Si deseas asignar explícitamente un valor a un
+float, debes añadir el sufijo <strong>f</strong> al número:</p>
+<p>C</p>
+<p>// float: Simple precisión (4 bytes).</p>
+<p>float velocidad = 9.8f; // Se usa la 'f' para indicar que es un
+float.</p>
+<p>// double: Doble precisión (8 bytes).</p>
+<p>double pi = 3.1415926535; // Valor por defecto en C.</p>
+<p>double saldo_cuenta = 1250.75;</p>
+<p><strong>Nota:</strong> Es una buena práctica usar
+<strong>double</strong> a menos que tengas una razón específica (como
+optimización de memoria en sistemas muy limitados) para usar float, ya
+que double ofrece mucha más precisión y es el tipo nativo en muchos
+procesadores modernos.</p>
+<h2><strong>Tipo char (Caracteres)</strong></h2>
+<p>El tipo de dato <strong>char</strong> (abreviatura de
+<em>character</em>) se utiliza para almacenar un <strong>solo
+carácter</strong> tipográfico, como una letra, un dígito, un signo de
+puntuación o un símbolo especial.</p>
+<ul>
+<li><p><strong>Uso:</strong> Almacenar la inicial de un nombre, la
+calificación de un examen ('A', 'B'), o una respuesta binaria ('S' o
+'N').</p></li>
+<li><p><strong>Tamaño:</strong> Históricamente, el tipo char ocupa
+<strong>1 byte</strong> (8 bits), lo cual es suficiente para almacenar
+256 valores diferentes.</p></li>
+</ul>
+<p><strong>Caracteres como Números Enteros (Código ASCII)</strong></p>
+<p>El concepto más importante sobre char en C es que
+<strong>internamente es tratado como un tipo de dato numérico
+entero</strong> pequeño.</p>
+<ul>
+<li><p><strong>ASCII:</strong> La computadora no entiende directamente
+lo que es la letra 'A'. En su lugar, utiliza un estándar llamado
+<strong>código ASCII</strong> (<em>American Standard Code for
+Information Interchange</em>) para mapear cada carácter a un número
+entero único.</p>
+<ul>
+<li><p>La letra 'A' se mapea al número decimal
+<strong>65</strong>.</p></li>
+<li><p>El número '0' se mapea al número decimal
+<strong>48</strong>.</p></li>
+<li><p>El signo de exclamación '!' se mapea al número decimal
+<strong>33</strong>.</p></li>
+</ul></li>
+</ul>
+<p>Por lo tanto, cuando declaras char letra = 'A';, la variable letra en
+realidad está almacenando el valor entero <strong>65</strong> en la
+memoria. Esto permite que se realicen operaciones aritméticas con
+caracteres (aunque con cuidado).</p>
+<p><strong>Uso en Código</strong></p>
+<p>A diferencia de las cadenas de control (printf()) que usan comillas
+dobles, los valores de tipo char deben ir encerrados entre
+<strong>comillas simples</strong> (' ').</p>
+<p>C</p>
+<p>// Se almacena la letra 'L', que internamente es el número 76
+(ASCII).</p>
+<p>char inicial = 'L';</p>
+<p>// Se almacena el carácter de signo de dólar.</p>
+<p>char simbolo = '$';</p>
+<p>// Esto es totalmente válido en C (suma de códigos ASCII):</p>
+<p>char siguiente_letra = 'A' + 1; // 'A' (65) + 1 = 66, que es 'B'</p>
+<p>El tipo char es la base para construir tipos derivados más complejos,
+como las <strong>cadenas de caracteres</strong> (<em>strings</em> o
+texto), que son simplemente arreglos de muchos char.</p>
+<h2><strong>Uso del Operador sizeof</strong></h2>
+<p>El operador <strong>sizeof</strong> es una herramienta esencial en C
+para la gestión de memoria. Nos permite determinar <strong>exactamente
+cuántos bytes</strong> de memoria reserva un tipo de dato o una variable
+en la máquina específica donde se está compilando el programa.</p>
+<p><strong>¿Qué es sizeof?</strong></p>
+<ul>
+<li><p><strong>Definición:</strong> sizeof no es una función, sino un
+<strong>operador unario</strong> incorporado en el lenguaje. Su
+propósito es devolver el tamaño, en <em>bytes</em>, de su
+operando.</p></li>
+<li><p><strong>Importancia:</strong> Aunque hemos dado tamaños comunes
+(ej., int son 4 bytes), C permite flexibilidad en la arquitectura.
+sizeof elimina la ambigüedad y proporciona el tamaño real en tu
+sistema.</p></li>
+</ul>
+<p><strong>Sintaxis y Uso</strong></p>
+<p>sizeof se puede aplicar a dos cosas: a un <strong>tipo de
+dato</strong> o a una <strong>variable</strong>.</p>
+<ol type="1">
+<li><strong>Aplicado a un Tipo de Dato:</strong> Se escribe el tipo
+entre paréntesis.</li>
+</ol>
+<blockquote>
+<p>C</p>
+<p>sizeof(int); // Retorna el tamaño en bytes del tipo int.</p>
+<p>sizeof(float); // Retorna el tamaño en bytes del tipo float.</p>
+</blockquote>
+<ol start="2" type="1">
+<li><strong>Aplicado a una Variable:</strong> Se puede usar con o sin
+paréntesis.</li>
+</ol>
+<blockquote>
+<p>C</p>
+<p>int edad = 25;</p>
+<p>sizeof(edad); // Retorna el tamaño en bytes de la variable
+'edad'.</p>
+<p>// Opcional: sizeof edad;</p>
+</blockquote>
+<p><strong>Demostración Empírica en C</strong></p>
+<p>Podemos usar sizeof junto con printf() para mostrar el tamaño de los
+tipos primitivos en la consola:</p>
+<p>C</p>
+<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
+<p>int main(void) {</p>
+<p>// El operador sizeof retorna un valor de tipo size_t (entero sin
+signo)</p>
+<p>// Usamos el especificador de formato %zu para imprimir el
+resultado.</p>
+<p>printf("Tamaño de char: %zu bytes\n", sizeof(char));</p>
+<p>printf("Tamaño de int: %zu bytes\n", sizeof(int));</p>
+<p>printf("Tamaño de float: %zu bytes\n", sizeof(float));</p>
+<p>printf("Tamaño de double: %zu bytes\n", sizeof(double));</p>
+<p>return 0;</p>
+<p>}</p>
+<p><strong>Salida Típica (Sistema de 64 bits):</strong></p>
+<p>Tamaño de char: 1 bytes</p>
+<p>Tamaño de int: 4 bytes</p>
+<p>Tamaño de float: 4 bytes</p>
+<p>Tamaño de double: 8 bytes</p>
+<p>Con sizeof, no tienes que confiar en la documentación externa; puedes
+preguntarle directamente a tu compilador.</p>
+
+</div>
+
+
+</body>
+
+
+
+</html>

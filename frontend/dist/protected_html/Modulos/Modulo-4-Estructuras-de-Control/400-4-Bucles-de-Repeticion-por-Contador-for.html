@@ -1,0 +1,322 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" crossorigin href="/assets/content-01sust.css">
+</head>
+<body>
+<div class="main-content">
+<h1>4. Bucles de Repetición por Contador (`for`)</h1>
+<p><strong>Concepto de Iteración por Contador (Bucle for)
+🔢</strong></p>
+<p>La <strong>Iteración por Contador</strong> es un tipo de
+<strong>Control de Flujo de Repetición</strong> que se emplea cuando el
+número de veces que se necesita ejecutar un bloque de código <strong>es
+conocido o predecible</strong> antes de que el ciclo comience.</p>
+<p>La herramienta ideal en C para este tipo de repetición es el
+<strong>bucle for</strong>.</p>
+<p><strong>¿Qué es el Bucle for?</strong></p>
+<p>El bucle for es una estructura de control diseñada específicamente
+para gestionar la repetición controlada por un
+<strong>contador</strong>.</p>
+<p>En términos simples, el for indica: <strong>"Para un número
+específico de repeticiones (ej. de 1 a 10), ejecuta este código en cada
+paso"</strong>.</p>
+<p><strong>Ventajas Clave del Bucle for</strong></p>
+<ul>
+<li><p><strong>Idoneidad:</strong> Es la estructura preferida cuando se
+requiere que la repetición ocurra un número fijo de veces, como recorrer
+los $10$ elementos de una lista, imprimir los números del $1$ al $100$,
+o calcular la tabla de multiplicar de un número.</p></li>
+<li><p><strong>Sintaxis Compacta:</strong> El for agrupa los tres
+elementos necesarios para el control del contador en una sola línea
+(inicialización, condición y actualización), haciendo el código más
+ordenado y menos propenso a errores de ciclos infinitos.</p></li>
+</ul>
+<table style="width:97%;">
+<colgroup>
+<col style="width: 59%" />
+<col style="width: 37%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>Repetición por
+Contador</strong></th>
+<th style="text-align: left;"><strong>Estructura C Ideal</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">El número de vueltas es fijo.</td>
+<td style="text-align: left;"><strong>for</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">El número de vueltas es desconocido
+(basado en una condición).</td>
+<td style="text-align: left;"><strong>while</strong> (se verá en la
+siguiente sección)</td>
+</tr>
+</tbody>
+</table>
+<p>El bucle for es, por lo tanto, la base para automatizar tareas
+repetitivas y es fundamental en la programación.</p>
+<p><strong>Estructura del Bucle for 🏗️</strong></p>
+<p>El bucle for se distingue por agrupar los tres elementos necesarios
+para controlar un ciclo de repetición en una única línea de código,
+haciéndolo muy robusto y fácil de leer.</p>
+<p>La sintaxis del bucle for se descompone en <strong>tres partes
+obligatorias</strong> separadas por puntos y comas (;), seguidas por el
+bloque de código a repetir:</p>
+<p>$$\text{for } (\text{1. Inicialización}; \text{ 2. Condición}; \text{
+3. Actualización}) \left\{ \right. \text{Bloque de Código} \left.
+\right\}$$</p>
+<p><strong>Descomposición de las Tres Partes</strong></p>
+<table style="width:98%;">
+<colgroup>
+<col style="width: 14%" />
+<col style="width: 24%" />
+<col style="width: 18%" />
+<col style="width: 25%" />
+<col style="width: 14%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>Parte</strong></th>
+<th style="text-align: left;"><strong>Nombre</strong></th>
+<th style="text-align: left;"><strong>Ejecución</strong></th>
+<th style="text-align: left;"><strong>Propósito</strong></th>
+<th style="text-align: left;"><strong>Ejemplo Típico</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>1</strong></td>
+<td style="text-align: left;"><strong>Inicialización</strong></td>
+<td style="text-align: left;"><strong>Una única vez</strong>, antes de
+la primera iteración.</td>
+<td style="text-align: left;">Se utiliza para declarar y/o asignar el
+valor inicial a la <strong>variable contadora</strong> (ej. $i$).</td>
+<td style="text-align: left;">int i = 1</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>2</strong></td>
+<td style="text-align: left;"><strong>Condición</strong></td>
+<td style="text-align: left;"><strong>Antes</strong> de cada
+iteración.</td>
+<td style="text-align: left;">Es la expresión lógica que, si resulta
+<strong>Verdadera</strong> (distinto de 0), permite que el bucle
+continúe. Si es Falsa (0), el ciclo termina.</td>
+<td style="text-align: left;">i &lt;= 10</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>3</strong></td>
+<td style="text-align: left;"><strong>Actualización</strong></td>
+<td style="text-align: left;"><strong>Al final</strong> de cada
+iteración, después de que el bloque de código se ha ejecutado.</td>
+<td style="text-align: left;">Modifica la variable contadora
+(generalmente incrementándola o decrementándola) para acercarla al punto
+de terminación del bucle.</td>
+<td style="text-align: left;">i++ o i = i + 1</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Flujo de Ejecución del Bucle for</strong></p>
+<p>El orden de ejecución de un bucle for es fundamental para entender su
+comportamiento:</p>
+<ol type="1">
+<li><p><strong>Paso 1:</strong> Se ejecuta la
+<strong>Inicialización</strong> (solo la primera vez).</p></li>
+<li><p><strong>Paso 2:</strong> Se evalúa la
+<strong>Condición</strong>.</p></li>
+<li><p><strong>Paso 3:</strong> Si la Condición es
+<strong>Verdadera</strong>:</p>
+<ul>
+<li><p>Se ejecuta el <strong>Bloque de Código</strong> dentro de las
+llaves.</p></li>
+<li><p>Se ejecuta la <strong>Actualización</strong> (incremento o
+decremento).</p></li>
+<li><p>El proceso regresa al <strong>Paso 2</strong>.</p></li>
+</ul></li>
+<li><p><strong>Paso 4:</strong> Si la Condición es
+<strong>Falsa</strong>, el ciclo termina y el programa continúa con la
+siguiente instrucción después del bucle.</p></li>
+</ol>
+<p><strong>Ejemplo de Código</strong></p>
+<p>Este código imprime los números del $1$ al $5$.</p>
+<p>C</p>
+<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
+<p>int main(void) {</p>
+<p>// 1. Inicializa i en 1; 2. Continúa MIENTRAS i &lt;= 5; 3.
+Incrementa i en 1.</p>
+<p>for (int i = 1; i &lt;= 5; i++) {</p>
+<p>printf("%d\n", i);</p>
+<p>}</p>
+<p>return 0;</p>
+<p>}</p>
+<p><strong>Contadores y Acumuladores en el Bucle for ➕</strong></p>
+<p>El bucle for no solo sirve para ejecutar código repetidamente, sino
+que también es la herramienta principal para implementar dos conceptos
+clave en programación: los <strong>contadores</strong> y los
+<strong>acumuladores</strong>. Ambos son variables que se modifican en
+cada iteración, pero tienen propósitos distintos.</p>
+<p><strong>1. Variables Contadoras (Variables de Control)</strong></p>
+<p>La <strong>variable contadora</strong> es una variable cuyo valor se
+incrementa o decrementa en una <strong>cantidad fija y
+constante</strong> (generalmente $1$) en cada paso del bucle.</p>
+<ul>
+<li><p><strong>Propósito:</strong> Llevar la cuenta de <strong>cuántas
+veces</strong> se ha repetido el ciclo o indicar la posición actual
+dentro de la secuencia.</p></li>
+<li><p><strong>Implementación:</strong> En el bucle for, la variable de
+control (i en el ejemplo anterior) actúa como el contador. Su
+actualización se realiza en la tercera sección del for (ej: i++ o
+i--).</p></li>
+</ul>
+<p><strong>Ejemplo:</strong> Imprimir los números del 1 al 10.</p>
+<p>C</p>
+<p>// La variable 'i' es el contador que va de 1 en 1</p>
+<p>for (int i = 1; i &lt;= 10; i++) {</p>
+<p>printf("%d ", i); // Imprime el valor actual del contador</p>
+<p>}</p>
+<p><strong>2. Variables Acumuladoras</strong></p>
+<p>Una <strong>variable acumuladora</strong> es una variable cuyo valor
+se incrementa o decrementa en una <strong>cantidad variable</strong> en
+cada iteración.</p>
+<ul>
+<li><p><strong>Propósito:</strong> Almacenar la <strong>suma
+total</strong> o el <strong>producto total</strong> de una serie de
+operaciones. Se utiliza para generar totales parciales o finales a
+partir de los datos procesados en el bucle.</p></li>
+<li><p><strong>Implementación:</strong> Se inicializa <em>fuera</em> del
+bucle (generalmente a $0$ para sumas o $1$ para productos) y se
+actualiza <em>dentro</em> del cuerpo del bucle usando un operador de
+asignación compuesta (ej: suma += valor o producto *= valor).</p></li>
+</ul>
+<p><strong>Ejemplo:</strong> Calcular la suma de los números del 1 al
+5.</p>
+<p>C</p>
+<p>int suma = 0; // Inicializamos el acumulador a 0 FUERA del bucle</p>
+<p>for (int i = 1; i &lt;= 5; i++) {</p>
+<p>suma += i; // El acumulador suma el valor actual del contador 'i'</p>
+<p>// Esto es equivalente a: suma = suma + i;</p>
+<p>}</p>
+<p>printf("Suma total: %d\n", suma); // Output: Suma total: 15
+(1+2+3+4+5)</p>
+<table style="width:97%;">
+<colgroup>
+<col style="width: 22%" />
+<col style="width: 37%" />
+<col style="width: 37%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>Concepto</strong></th>
+<th style="text-align: left;"><strong>Variación por
+Iteración</strong></th>
+<th style="text-align: left;"><strong>Uso Principal</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>Contador</strong></td>
+<td style="text-align: left;"><strong>Constante</strong> (ej: $+1$,
+$-1$, $+2$)</td>
+<td style="text-align: left;">Controlar las vueltas del ciclo.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Acumulador</strong></td>
+<td style="text-align: left;"><strong>Variable</strong> (un valor,
+resultado o input)</td>
+<td style="text-align: left;">Almacenar un total o resultado final.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Iteración en Sentido Inverso (Cuenta Regresiva)</strong></p>
+<p>El bucle for no solo puede contar de forma ascendente ($1, 2, 3,
+...$); es igualmente útil para realizar una <strong>iteración en sentido
+inverso</strong> o una <strong>cuenta regresiva</strong>.</p>
+<p>Para lograr que el bucle for cuente hacia atrás, es necesario ajustar
+las tres partes de su estructura: la <strong>inicialización</strong>, la
+<strong>condición</strong> y la <strong>actualización</strong>.</p>
+<p><strong>Ajuste de las Tres Partes para la Cuenta
+Regresiva</strong></p>
+<table style="width:97%;">
+<colgroup>
+<col style="width: 24%" />
+<col style="width: 23%" />
+<col style="width: 23%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>Parte</strong></th>
+<th style="text-align: left;"><strong>Sentido Ascendente
+(Normal)</strong></th>
+<th style="text-align: left;"><strong>Sentido Inverso
+(Regresivo)</strong></th>
+<th style="text-align: left;"><strong>Razón</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>1. Inicialización</strong></td>
+<td style="text-align: left;">Se inicia en el valor <strong>más
+bajo</strong> (ej: i = 1).</td>
+<td style="text-align: left;">Se inicia en el valor <strong>más
+alto</strong> (ej: i = 10).</td>
+<td style="text-align: left;">El ciclo debe empezar donde termina la
+cuenta.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>2. Condición</strong></td>
+<td style="text-align: left;">Se repite <strong>mientras</strong> sea
+menor o igual al límite (ej: i &lt;= 10).</td>
+<td style="text-align: left;">Se repite <strong>mientras</strong> sea
+mayor o igual al límite (ej: i &gt;= 1).</td>
+<td style="text-align: left;">La condición debe ser Verdadera mientras
+el contador no llegue al límite inferior.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>3. Actualización</strong></td>
+<td style="text-align: left;"><strong>Incrementa</strong> el contador
+(ej: i++ o i = i + 1).</td>
+<td style="text-align: left;"><strong>Decrementa</strong> el contador
+(ej: i-- o i = i - 1).</td>
+<td style="text-align: left;">El contador debe acercarse al punto de
+terminación (el límite inferior).</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Ejemplo de Código: Cuenta Regresiva de 5 a 1</strong></p>
+<p>Este ejemplo simula el inicio de un lanzamiento, contando desde $5$
+hasta $1$.</p>
+<p>C</p>
+<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
+<p>int main(void) {</p>
+<p>// 1. Inicializa i en 5; 2. Continúa MIENTRAS i &gt;= 1; 3.
+Decrementa i en 1.</p>
+<p>for (int i = 5; i &gt;= 1; i--) {</p>
+<p>printf("Cuenta: %d\n", i);</p>
+<p>}</p>
+<p>printf("¡Lanzamiento!\n");</p>
+<p>return 0;</p>
+<p>}</p>
+<p><strong>Resultado de la Ejecución:</strong></p>
+<p>Cuenta: 5</p>
+<p>Cuenta: 4</p>
+<p>Cuenta: 3</p>
+<p>Cuenta: 2</p>
+<p>Cuenta: 1</p>
+<p>¡Lanzamiento!</p>
+<p><strong>Nota:</strong> Es crucial que la <strong>condición</strong> y
+la <strong>actualización</strong> estén sincronizadas. Si se inicia en
+un valor alto y se incrementa, o se inicia en un valor bajo y se
+decrementa, la condición nunca se hará Falsa, resultando en un
+<strong>ciclo infinito</strong>.</p>
+
+
+</div>
+</body>
+</html>
+

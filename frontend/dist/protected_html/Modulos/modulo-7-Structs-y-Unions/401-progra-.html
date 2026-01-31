@@ -1,0 +1,517 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" crossorigin href="/assets/content-01sust.css">
+</head>
+<body>
+<div class="main-content">
+<h2 id="ejercicios-arrays-de-estructuras-colecciones-complejas">10
+Ejercicios: Arrays de Estructuras (Colecciones Complejas) ðŸ“š</h2>
+<h3 id="bloque-1-declaraciÃ³n-e-inicializaciÃ³n">Bloque 1: DeclaraciÃ³n e
+InicializaciÃ³n</h3>
+<p><strong>1) DefiniciÃ³n y DeclaraciÃ³n de Array</strong> Define una
+estructura <code>Punto3D</code> con tres miembros enteros:
+<code>x</code>, <code>y</code> y <code>z</code>. Utiliza
+<code>typedef</code> para crear el alias <code>Vector</code>. Declara un
+array llamado <code>trayectoria</code> que pueda almacenar
+<strong>50</strong> de estas estructuras.</p>
+<p>Input de Ejemplo: (Ninguna)</p>
+<p>Output Esperado: (CompilaciÃ³n exitosa. El array
+<code>trayectoria</code> reserva memoria para 50 Vectores).</p>
+<p><strong>2) InicializaciÃ³n Posicional BÃ¡sica</strong> Define una
+estructura <code>Fecha</code> con <code>int dia</code>,
+<code>int mes</code>, <code>int anio</code>. Declara e inicializa un
+array llamado <code>dias_festivos</code> con <strong>tres</strong>
+elementos usando la <strong>inicializaciÃ³n posicional</strong>
+(<code>{}</code>). * Elemento 1: 1, 1, 2024 * Elemento 2: 25, 12, 2024 *
+Elemento 3: 18, 9, 2024 Imprime el <code>mes</code> del segundo elemento
+(<code>dias_festivos[1].mes</code>).</p>
+<p>Input de Ejemplo: (Ninguna)</p>
+<p>Output Esperado: Mes del segundo festivo: 12</p>
+<p><strong>3) InicializaciÃ³n Designada en Array</strong> Define una
+estructura <code>Empleado</code> con <code>int id</code>,
+<code>float salario</code> y <code>char puesto[20]</code>. Declara e
+inicializa un array <code>equipo</code> con dos miembros usando la
+<strong>inicializaciÃ³n designada</strong>
+(<code>.miembro = valor</code>). AsegÃºrate de omitir el miembro
+<code>salario</code> del segundo empleado.</p>
+<ul>
+<li>Empleado 1: <code>id = 101</code>, <code>puesto = "Gerente"</code>,
+<code>salario = 80000.0f</code></li>
+<li>Empleado 2: <code>id = 102</code>, <code>puesto = "TÃ©cnico"</code>
+(salario omitido) Imprime el <code>salario</code> del segundo empleado
+(debe ser 0.0f).</li>
+</ul>
+<p>Input de Ejemplo: (Ninguna)</p>
+<p>Output Esperado: Salario del Tecnico: 0.00</p>
+<hr />
+<h3 id="bloque-2-recorrido-y-acceso-con-bucles-for">Bloque 2: Recorrido
+y Acceso con Bucles <code>for</code></h3>
+<p><strong>4) Recorrido e ImpresiÃ³n Simple</strong> Define la
+<code>struct Fecha</code> del Ejercicio 2. Inicializa un array
+<code>aniversarios</code> con dos fechas: <code>{15, 5, 2020}</code> y
+<code>{20, 10, 2021}</code>. Utiliza un bucle
+<strong><code>for</code></strong> para recorrer el array e imprimir el
+<code>anio</code> de cada elemento.</p>
+<p>Input de Ejemplo: (Ninguna)</p>
+<p>Output Esperado: AÃ±o 1: 2020 AÃ±o 2: 2021</p>
+<p><strong>5) CÃ¡lculo Agregado (Suma)</strong> Define una estructura
+<code>Costo</code> con <code>int cantidad</code> y
+<code>float precio_unitario</code>. Inicializa un array
+<code>compra</code> con tres elementos: <code>{2, 10.50f}</code>,
+<code>{1, 5.00f}</code>, <code>{5, 2.00f}</code>. Usa un bucle
+<strong><code>for</code></strong> para calcular y mostrar el
+<strong>costo total</strong> de toda la compra.</p>
+<p>Input de Ejemplo: (Ninguna)</p>
+<p>Output Esperado: Costo total de la compra: 36.00</p>
+<p><strong>6) ModificaciÃ³n de Miembros al Recorrer</strong> Define una
+<code>struct Persona</code> con <code>int id</code> y
+<code>int edad</code>. Inicializa un array <code>usuarios</code> con
+tres personas, todas con <code>edad=20</code>. Recorre el array con un
+bucle <code>for</code> y <strong>modifica</strong> la <code>edad</code>
+de cada persona <strong>sumÃ¡ndole 10</strong>. Finalmente, imprime la
+nueva edad del primer elemento (<code>usuarios[0].edad</code>).</p>
+<p>Input de Ejemplo: (Ninguna)</p>
+<p>Output Esperado: Nueva edad de usuario[0]: 30</p>
+<p><strong>7) BÃºsqueda con Array de Structs</strong> Define una
+<code>struct Articulo</code> con <code>int id</code> y
+<code>char nombre[30]</code>. Inicializa un array <code>catalogo</code>
+con tres artÃ­culos. Usa un bucle <strong><code>for</code></strong> para
+buscar el artÃ­culo con <code>id = 2</code>. Cuando lo encuentres,
+imprime su <code>nombre</code>.</p>
+<p>Input de Ejemplo: (Ninguna)</p>
+<p>Output Esperado: Articulo encontrado: Monitor</p>
+<hr />
+<h3 id="bloque-3-aplicaciÃ³n-y-manipulaciÃ³n-avanzada">Bloque 3:
+AplicaciÃ³n y ManipulaciÃ³n Avanzada</h3>
+<p><strong>8) InicializaciÃ³n Parcial y Llenado DinÃ¡mico</strong> Define
+una <code>struct Tarea</code> con <code>char descripcion[50]</code> y
+<code>int completada</code> (0 o 1). Declara un array
+<code>lista_tareas</code> de tamaÃ±o 3. <strong>Inicializa solo el primer
+elemento</strong> con <code>descripcion = "Comprar leche"</code> y
+<code>completada = 0</code>. Luego, usa el acceso indexado para llenar
+manualmente los otros dos elementos. Imprime la descripciÃ³n del tercer
+elemento.</p>
+<p>Input de Ejemplo: (Ninguna)</p>
+<p>Output Esperado: Tarea 3: Pagar cuentas</p>
+<p><strong>9) Contar Registros con CondiciÃ³n</strong> Utiliza la
+<code>struct Tarea</code> del Ejercicio 8. Inicializa un array
+<code>pendientes</code> con los siguientes estados:
+<code>completada = 1</code>, <code>completada = 0</code>,
+<code>completada = 1</code>, <code>completada = 0</code>. Recorre el
+array y usa una condiciÃ³n <code>if</code> para <strong>contar</strong>
+cuÃ¡ntas tareas tienen el estado <code>completada = 0</code>.</p>
+<p>Input de Ejemplo: (Ninguna)</p>
+<p>Output Esperado: Tareas pendientes: 2</p>
+<p><strong>10) CÃ¡lculo del TamaÃ±o del Array (Utilidad
+<code>sizeof</code>)</strong> Define una <code>struct Bloque</code> con
+un solo miembro <code>char data[64]</code>. Inicializa un array
+<code>buffer</code> con 5 elementos (solo las llaves anidadas vacÃ­as:
+<code>{{}, {}, {}, {}, {}}</code>). Calcula el <strong>tamaÃ±o total en
+bytes</strong> del array <code>buffer</code> y el <strong>nÃºmero de
+elementos</strong> usando la tÃ©cnica de divisiÃ³n
+<code>sizeof(array) / sizeof(array[0])</code>.</p>
+<p>Input de Ejemplo: (Ninguna)</p>
+<p>Output Esperado: TamaÃ±o total del buffer: 320 bytes NÃºmero de
+bloques: 5</p>
+<p>AquÃ­ tienes las soluciones con el cÃ³digo completo y las salidas
+esperadas para los 10 ejercicios que cubren los <strong>Arrays de
+Estructuras</strong> en C.</p>
+<hr />
+<h2 id="soluciones-arrays-de-estructuras-colecciones-complejas">âœ…
+Soluciones: Arrays de Estructuras (Colecciones Complejas)</h2>
+<h3 id="bloque-1-declaraciÃ³n-e-inicializaciÃ³n-1">Bloque 1: DeclaraciÃ³n e
+InicializaciÃ³n</h3>
+<h4 id="definiciÃ³n-y-declaraciÃ³n-de-array">1) DefiniciÃ³n y DeclaraciÃ³n
+de Array</h4>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Input de Ejemplo</th>
+<th style="text-align: center;">Output Esperado</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">(Ninguna)</td>
+<td style="text-align: center;">(CompilaciÃ³n exitosa. El array
+<code>trayectoria</code> reserva memoria para 50 Vectores).</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb1"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="kw">typedef</span> <span class="kw">struct</span> <span class="op">{</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> x<span class="op">;</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> y<span class="op">;</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> z<span class="op">;</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> Vector<span class="op">;</span> <span class="co">// Alias creado</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    <span class="co">// DeclaraciÃ³n de un array de 50 estructuras &#39;Vector&#39;</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    Vector trayectoria<span class="op">[</span><span class="dv">50</span><span class="op">];</span> </span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Este cÃ³digo simplemente reserva el espacio en memoria</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<h4 id="inicializaciÃ³n-posicional-bÃ¡sica">2) InicializaciÃ³n Posicional
+BÃ¡sica</h4>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Input de Ejemplo</th>
+<th style="text-align: center;">Output Esperado</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">(Ninguna)</td>
+<td style="text-align: center;">Mes del segundo festivo: 12</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb2"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="kw">typedef</span> <span class="kw">struct</span> <span class="op">{</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> dia<span class="op">;</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> mes<span class="op">;</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> anio<span class="op">;</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> Fecha<span class="op">;</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    <span class="co">// InicializaciÃ³n posicional del array con llaves anidadas</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    Fecha dias_festivos<span class="op">[]</span> <span class="op">=</span> <span class="op">{</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>        <span class="op">{</span><span class="dv">1</span><span class="op">,</span> <span class="dv">1</span><span class="op">,</span> <span class="dv">2024</span><span class="op">},</span>    <span class="co">// Elemento [0]</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>        <span class="op">{</span><span class="dv">25</span><span class="op">,</span> <span class="dv">12</span><span class="op">,</span> <span class="dv">2024</span><span class="op">},</span>  <span class="co">// Elemento [1]</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>        <span class="op">{</span><span class="dv">18</span><span class="op">,</span> <span class="dv">9</span><span class="op">,</span> <span class="dv">2024</span><span class="op">}</span>    <span class="co">// Elemento [2]</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>    <span class="op">};</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Acceso al miembro &#39;mes&#39; del segundo elemento (Ã­ndice 1)</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;Mes del segundo festivo: </span><span class="sc">%d\n</span><span class="st">&quot;</span><span class="op">,</span> dias_festivos<span class="op">[</span><span class="dv">1</span><span class="op">].</span>mes<span class="op">);</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<h4 id="inicializaciÃ³n-designada-en-array">3) InicializaciÃ³n Designada
+en Array</h4>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Input de Ejemplo</th>
+<th style="text-align: center;">Output Esperado</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">(Ninguna)</td>
+<td style="text-align: center;">Salario del Tecnico: 0.00</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb3"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="kw">typedef</span> <span class="kw">struct</span> <span class="op">{</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> id<span class="op">;</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">float</span> salario<span class="op">;</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">char</span> puesto<span class="op">[</span><span class="dv">20</span><span class="op">];</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> Empleado<span class="op">;</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    <span class="co">// InicializaciÃ³n designada: el salario del segundo empleado se omite (se inicializa a 0.0f)</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    Empleado equipo<span class="op">[]</span> <span class="op">=</span> <span class="op">{</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>        <span class="op">{.</span>id <span class="op">=</span> <span class="dv">101</span><span class="op">,</span> <span class="op">.</span>puesto <span class="op">=</span> <span class="st">&quot;Gerente&quot;</span><span class="op">,</span> <span class="op">.</span>salario <span class="op">=</span> <span class="fl">80000.0</span><span class="bu">f</span><span class="op">},</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>        <span class="op">{.</span>id <span class="op">=</span> <span class="dv">102</span><span class="op">,</span> <span class="op">.</span>puesto <span class="op">=</span> <span class="st">&quot;TÃ©cnico&quot;</span><span class="op">}</span> <span class="co">// Salario es 0.0f</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>    <span class="op">};</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Acceso al salario del segundo empleado (Ã­ndice 1)</span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;Salario del Tecnico: </span><span class="sc">%.2f\n</span><span class="st">&quot;</span><span class="op">,</span> equipo<span class="op">[</span><span class="dv">1</span><span class="op">].</span>salario<span class="op">);</span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<hr />
+<h3 id="bloque-2-recorrido-y-acceso-con-bucles-for-1">Bloque 2:
+Recorrido y Acceso con Bucles <code>for</code></h3>
+<h4 id="recorrido-e-impresiÃ³n-simple">4) Recorrido e ImpresiÃ³n
+Simple</h4>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Input de Ejemplo</th>
+<th style="text-align: center;">Output Esperado</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">(Ninguna)</td>
+<td style="text-align: center;">AÃ±o 1: 2020<br>AÃ±o 2: 2021</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb4"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="kw">typedef</span> <span class="kw">struct</span> <span class="op">{</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> dia<span class="op">;</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> mes<span class="op">;</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> anio<span class="op">;</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> Fecha<span class="op">;</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    Fecha aniversarios<span class="op">[]</span> <span class="op">=</span> <span class="op">{{</span><span class="dv">15</span><span class="op">,</span> <span class="dv">5</span><span class="op">,</span> <span class="dv">2020</span><span class="op">},</span> <span class="op">{</span><span class="dv">20</span><span class="op">,</span> <span class="dv">10</span><span class="op">,</span> <span class="dv">2021</span><span class="op">}};</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    <span class="co">// CÃ¡lculo del tamaÃ±o del array</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> tamano <span class="op">=</span> <span class="kw">sizeof</span><span class="op">(</span>aniversarios<span class="op">)</span> <span class="op">/</span> <span class="kw">sizeof</span><span class="op">(</span>aniversarios<span class="op">[</span><span class="dv">0</span><span class="op">]);</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Recorrido e impresiÃ³n</span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> tamano<span class="op">;</span> i<span class="op">++)</span> <span class="op">{</span></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">&quot;AÃ±o </span><span class="sc">%d</span><span class="st">: </span><span class="sc">%d\n</span><span class="st">&quot;</span><span class="op">,</span> i <span class="op">+</span> <span class="dv">1</span><span class="op">,</span> aniversarios<span class="op">[</span>i<span class="op">].</span>anio<span class="op">);</span></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<h4 id="cÃ¡lculo-agregado-suma">5) CÃ¡lculo Agregado (Suma)</h4>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Input de Ejemplo</th>
+<th style="text-align: center;">Output Esperado</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">(Ninguna)</td>
+<td style="text-align: center;">Costo total de la compra: 36.00</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb5"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="kw">typedef</span> <span class="kw">struct</span> <span class="op">{</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> cantidad<span class="op">;</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">float</span> precio_unitario<span class="op">;</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> Costo<span class="op">;</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>    Costo compra<span class="op">[]</span> <span class="op">=</span> <span class="op">{{</span><span class="dv">2</span><span class="op">,</span> <span class="fl">10.50</span><span class="bu">f</span><span class="op">},</span> <span class="op">{</span><span class="dv">1</span><span class="op">,</span> <span class="fl">5.00</span><span class="bu">f</span><span class="op">},</span> <span class="op">{</span><span class="dv">5</span><span class="op">,</span> <span class="fl">2.00</span><span class="bu">f</span><span class="op">}};</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> tamano <span class="op">=</span> <span class="kw">sizeof</span><span class="op">(</span>compra<span class="op">)</span> <span class="op">/</span> <span class="kw">sizeof</span><span class="op">(</span>compra<span class="op">[</span><span class="dv">0</span><span class="op">]);</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>    <span class="dt">float</span> costo_total <span class="op">=</span> <span class="dv">0</span><span class="er">.0f</span><span class="op">;</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Recorrido para calcular la suma de costos</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> tamano<span class="op">;</span> i<span class="op">++)</span> <span class="op">{</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>        costo_total <span class="op">+=</span> compra<span class="op">[</span>i<span class="op">].</span>cantidad <span class="op">*</span> compra<span class="op">[</span>i<span class="op">].</span>precio_unitario<span class="op">;</span></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;Costo total de la compra: </span><span class="sc">%.2f\n</span><span class="st">&quot;</span><span class="op">,</span> costo_total<span class="op">);</span></span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<h4 id="modificaciÃ³n-de-miembros-al-recorrer">6) ModificaciÃ³n de
+Miembros al Recorrer</h4>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Input de Ejemplo</th>
+<th style="text-align: center;">Output Esperado</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">(Ninguna)</td>
+<td style="text-align: center;">Nueva edad de usuario[0]: 30</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb6"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="kw">typedef</span> <span class="kw">struct</span> <span class="op">{</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> id<span class="op">;</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> edad<span class="op">;</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> Persona<span class="op">;</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>    Persona usuarios<span class="op">[]</span> <span class="op">=</span> <span class="op">{{</span><span class="dv">1</span><span class="op">,</span> <span class="dv">20</span><span class="op">},</span> <span class="op">{</span><span class="dv">2</span><span class="op">,</span> <span class="dv">20</span><span class="op">},</span> <span class="op">{</span><span class="dv">3</span><span class="op">,</span> <span class="dv">20</span><span class="op">}};</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> tamano <span class="op">=</span> <span class="kw">sizeof</span><span class="op">(</span>usuarios<span class="op">)</span> <span class="op">/</span> <span class="kw">sizeof</span><span class="op">(</span>usuarios<span class="op">[</span><span class="dv">0</span><span class="op">]);</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Recorrido para modificar la edad de cada struct</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> tamano<span class="op">;</span> i<span class="op">++)</span> <span class="op">{</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>        usuarios<span class="op">[</span>i<span class="op">].</span>edad <span class="op">+=</span> <span class="dv">10</span><span class="op">;</span> <span class="co">// Acceso y modificaciÃ³n con el operador punto</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;Nueva edad de usuario[0]: </span><span class="sc">%d\n</span><span class="st">&quot;</span><span class="op">,</span> usuarios<span class="op">[</span><span class="dv">0</span><span class="op">].</span>edad<span class="op">);</span></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<h4 id="bÃºsqueda-con-array-de-structs">7) BÃºsqueda con Array de
+Structs</h4>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Input de Ejemplo</th>
+<th style="text-align: center;">Output Esperado</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">(Ninguna)</td>
+<td style="text-align: center;">Articulo encontrado: Monitor</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb7"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;string.h&gt;</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="kw">typedef</span> <span class="kw">struct</span> <span class="op">{</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> id<span class="op">;</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">char</span> nombre<span class="op">[</span><span class="dv">30</span><span class="op">];</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> Articulo<span class="op">;</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>    Articulo catalogo<span class="op">[]</span> <span class="op">=</span> <span class="op">{</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>        <span class="op">{</span><span class="dv">1</span><span class="op">,</span> <span class="st">&quot;Teclado&quot;</span><span class="op">},</span> </span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>        <span class="op">{</span><span class="dv">2</span><span class="op">,</span> <span class="st">&quot;Monitor&quot;</span><span class="op">},</span> </span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>        <span class="op">{</span><span class="dv">3</span><span class="op">,</span> <span class="st">&quot;Mouse&quot;</span><span class="op">}</span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>    <span class="op">};</span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> tamano <span class="op">=</span> <span class="kw">sizeof</span><span class="op">(</span>catalogo<span class="op">)</span> <span class="op">/</span> <span class="kw">sizeof</span><span class="op">(</span>catalogo<span class="op">[</span><span class="dv">0</span><span class="op">]);</span></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> id_buscado <span class="op">=</span> <span class="dv">2</span><span class="op">;</span></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> tamano<span class="op">;</span> i<span class="op">++)</span> <span class="op">{</span></span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span>catalogo<span class="op">[</span>i<span class="op">].</span>id <span class="op">==</span> id_buscado<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>            printf<span class="op">(</span><span class="st">&quot;Articulo encontrado: </span><span class="sc">%s\n</span><span class="st">&quot;</span><span class="op">,</span> catalogo<span class="op">[</span>i<span class="op">].</span>nombre<span class="op">);</span></span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>            <span class="cf">break</span><span class="op">;</span> </span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<hr />
+<h3 id="bloque-3-aplicaciÃ³n-y-manipulaciÃ³n-avanzada-1">Bloque 3:
+AplicaciÃ³n y ManipulaciÃ³n Avanzada</h3>
+<h4 id="inicializaciÃ³n-parcial-y-llenado-dinÃ¡mico">8) InicializaciÃ³n
+Parcial y Llenado DinÃ¡mico</h4>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Input de Ejemplo</th>
+<th style="text-align: center;">Output Esperado</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">(Ninguna)</td>
+<td style="text-align: center;">Tarea 3: Pagar cuentas</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb8"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;string.h&gt;</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="kw">typedef</span> <span class="kw">struct</span> <span class="op">{</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">char</span> descripcion<span class="op">[</span><span class="dv">50</span><span class="op">];</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> completada<span class="op">;</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> Tarea<span class="op">;</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>    Tarea lista_tareas<span class="op">[</span><span class="dv">3</span><span class="op">]</span> <span class="op">=</span> <span class="op">{</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>        <span class="op">{</span><span class="st">&quot;Comprar leche&quot;</span><span class="op">,</span> <span class="dv">0</span><span class="op">}</span> <span class="co">// Inicializa solo el primer elemento</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>    <span class="op">};</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Llenado manual del elemento [1]</span></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>    strcpy<span class="op">(</span>lista_tareas<span class="op">[</span><span class="dv">1</span><span class="op">].</span>descripcion<span class="op">,</span> <span class="st">&quot;Estudiar C&quot;</span><span class="op">);</span></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>    lista_tareas<span class="op">[</span><span class="dv">1</span><span class="op">].</span>completada <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Llenado manual del elemento [2]</span></span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>    strcpy<span class="op">(</span>lista_tareas<span class="op">[</span><span class="dv">2</span><span class="op">].</span>descripcion<span class="op">,</span> <span class="st">&quot;Pagar cuentas&quot;</span><span class="op">);</span></span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>    lista_tareas<span class="op">[</span><span class="dv">2</span><span class="op">].</span>completada <span class="op">=</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;Tarea 3: </span><span class="sc">%s\n</span><span class="st">&quot;</span><span class="op">,</span> lista_tareas<span class="op">[</span><span class="dv">2</span><span class="op">].</span>descripcion<span class="op">);</span></span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<h4 id="contar-registros-con-condiciÃ³n">9) Contar Registros con
+CondiciÃ³n</h4>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Input de Ejemplo</th>
+<th style="text-align: center;">Output Esperado</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">(Ninguna)</td>
+<td style="text-align: center;">Tareas pendientes: 2</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb9"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="kw">typedef</span> <span class="kw">struct</span> <span class="op">{</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> completada<span class="op">;</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> Tarea<span class="op">;</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>    Tarea pendientes<span class="op">[]</span> <span class="op">=</span> <span class="op">{</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>        <span class="op">{.</span>completada <span class="op">=</span> <span class="dv">1</span><span class="op">},</span> </span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>        <span class="op">{.</span>completada <span class="op">=</span> <span class="dv">0</span><span class="op">},</span> </span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>        <span class="op">{.</span>completada <span class="op">=</span> <span class="dv">1</span><span class="op">},</span> </span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>        <span class="op">{.</span>completada <span class="op">=</span> <span class="dv">0</span><span class="op">}</span></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>    <span class="op">};</span></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> tamano <span class="op">=</span> <span class="kw">sizeof</span><span class="op">(</span>pendientes<span class="op">)</span> <span class="op">/</span> <span class="kw">sizeof</span><span class="op">(</span>pendientes<span class="op">[</span><span class="dv">0</span><span class="op">]);</span></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> tareas_pendientes <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> tamano<span class="op">;</span> i<span class="op">++)</span> <span class="op">{</span></span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>        <span class="co">// CondiciÃ³n de bÃºsqueda</span></span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span>pendientes<span class="op">[</span>i<span class="op">].</span>completada <span class="op">==</span> <span class="dv">0</span><span class="op">)</span> <span class="op">{</span> </span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>            tareas_pendientes<span class="op">++;</span></span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;Tareas pendientes: </span><span class="sc">%d\n</span><span class="st">&quot;</span><span class="op">,</span> tareas_pendientes<span class="op">);</span></span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<h4 id="cÃ¡lculo-del-tamaÃ±o-del-array-utilidad-sizeof">10) CÃ¡lculo del
+TamaÃ±o del Array (Utilidad <code>sizeof</code>)</h4>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Input de Ejemplo</th>
+<th style="text-align: center;">Output Esperado</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">(Ninguna)</td>
+<td style="text-align: center;">TamaÃ±o total del buffer: 320
+bytes<br>NÃºmero de bloques: 5</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb10"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="kw">typedef</span> <span class="kw">struct</span> <span class="op">{</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">char</span> data<span class="op">[</span><span class="dv">64</span><span class="op">];</span> <span class="co">// 64 bytes por bloque</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> Bloque<span class="op">;</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Array de 5 bloques, inicializados con valores por defecto</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>    Bloque buffer<span class="op">[</span><span class="dv">5</span><span class="op">]</span> <span class="op">=</span> <span class="op">{{},</span> <span class="op">{},</span> <span class="op">{},</span> <span class="op">{},</span> <span class="op">{}};</span> </span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>    <span class="co">// El tamaÃ±o de un Bloque es 64 bytes</span></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>    <span class="dt">size_t</span> tamano_bloque <span class="op">=</span> <span class="kw">sizeof</span><span class="op">(</span>Bloque<span class="op">);</span> </span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>    <span class="co">// El tamaÃ±o total del array es 5 * 64 = 320 bytes</span></span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>    <span class="dt">size_t</span> tamano_total <span class="op">=</span> <span class="kw">sizeof</span><span class="op">(</span>buffer<span class="op">);</span> </span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>    <span class="co">// CÃ¡lculo del nÃºmero de elementos</span></span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>    <span class="dt">size_t</span> num_elementos <span class="op">=</span> tamano_total <span class="op">/</span> tamano_bloque<span class="op">;</span></span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;TamaÃ±o total del buffer: </span><span class="sc">%zu</span><span class="st"> bytes</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">,</span> tamano_total<span class="op">);</span></span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;NÃºmero de bloques: </span><span class="sc">%zu\n</span><span class="st">&quot;</span><span class="op">,</span> num_elementos<span class="op">);</span></span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+
+</div>
+</body>
+</html>
+

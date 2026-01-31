@@ -1,0 +1,531 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" crossorigin href="/assets/content-01sust.css">
+</head>
+<body>
+<div class="main-content">
+<h2 id="nota">Nota:</h2>
+<p>Utilizaremos la siguiente estructura para los ejercicios de archivos
+binarios:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">typedef</span> <span class="kw">struct</span> <span class="op">{</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> id<span class="op">;</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">float</span> monto<span class="op">;</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">char</span> descripcion<span class="op">[</span><span class="dv">30</span><span class="op">];</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> Transaccion<span class="op">;</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="pp">#define TAMANO_REGISTRO </span><span class="kw">sizeof</span><span class="op">(</span><span class="pp">Transaccion</span><span class="op">)</span></span></code></pre></div>
+<hr />
+<h2 id="ejercicios-detecciÃ³n-de-errores-eof-y-posicionamiento">10
+Ejercicios: DetecciÃ³n de Errores, EOF y Posicionamiento ðŸ§­ðŸ›‘</h2>
+<h3 id="bloque-1-comprobaciÃ³n-de-fin-de-archivo-feof">Bloque 1:
+ComprobaciÃ³n de Fin de Archivo (<code>feof</code>)</h3>
+<p><strong>1. DemostraciÃ³n de Bucle Inseguro con
+<code>feof</code></strong> Escribe un programa que: a. Cree un archivo
+binario llamado <strong><code>datos_feof.bin</code></strong> y escriba
+exactamente 3 estructuras <code>Transaccion</code> usando
+<code>fwrite()</code>. b. Abra el archivo en modo <code>"rb"</code>.
+c.Â Use un bucle <strong><code>while (!feof(archivo))</code></strong>
+para intentar leer y procesar los registros. d.Â <strong>Pregunta a
+Responder:</strong> Observa la salida. Â¿Por quÃ© el cÃ³digo intenta
+procesar datos una vez mÃ¡s despuÃ©s de leer el Ãºltimo registro vÃ¡lido?
+(El <code>feof</code> solo se activa despuÃ©s de que la lectura ha
+fallado).</p>
+<p><strong>2. Uso Correcto y ConfirmaciÃ³n de <code>feof</code></strong>
+Modifica el programa anterior para que: a. Use el patrÃ³n de lectura
+seguro:
+<strong><code>while (fread(&amp;t, TAMANO_REGISTRO, 1, archivo) == 1)</code></strong>.
+b. DespuÃ©s de que el bucle termine, usa una declaraciÃ³n <code>if</code>
+con <strong><code>feof(archivo)</code></strong> para imprimir el
+mensaje: <code>"La lectura finalizÃ³ por alcanzar el EOF."</code></p>
+<hr />
+<h3 id="bloque-2-detecciÃ³n-de-errores-ferror-y-limpieza">Bloque 2:
+DetecciÃ³n de Errores (<code>ferror</code>) y Limpieza</h3>
+<p><strong>3. VerificaciÃ³n de Error en Escritura con
+<code>ferror</code></strong> Escribe una funciÃ³n llamada
+<code>verificar_escritura(FILE *f, size_t esperados, size_t escritos)</code>
+que, si el nÃºmero de elementos escritos (<code>escritos</code>) no
+coincide con el nÃºmero de elementos esperados (<code>esperados</code>):
+a. Utilice <strong><code>ferror(f)</code></strong> para verificar si la
+causa del fallo fue un error de E/S. b. Si <code>ferror</code> es
+verdadero, imprima un mensaje de error crÃ­tico
+(<code>"ERROR DE E/S DETECTADO"</code>) y use <code>perror()</code> para
+un diagnÃ³stico del sistema.</p>
+<p><strong>4. Uso de <code>ferror</code> y
+<code>clearerr</code></strong> Escribe un programa que: a. Abra un
+archivo en modo lectura y escritura binaria (<code>"rb+"</code>). b.
+Intenta realizar una operaciÃ³n de lectura o escritura que sepas que
+fallarÃ¡ (por ejemplo, intentar leer un archivo binario de texto). Aunque
+es difÃ­cil simular un error I/O real, despuÃ©s de una operaciÃ³n fallida,
+comprueba el estado con <strong><code>ferror()</code></strong>. c.Â Si
+<code>ferror</code> devuelve verdadero, imprime el estado del error y
+luego llama a <strong><code>clearerr(archivo)</code></strong>. d.Â Vuelve
+a comprobar el estado con <code>ferror()</code> e imprime un mensaje que
+confirme que el indicador de error ha sido reiniciado.</p>
+<hr />
+<h3 id="bloque-3-posicionamiento-de-puntero-fseek">Bloque 3:
+Posicionamiento de Puntero (<code>fseek</code>)</h3>
+<p><strong>5. Acceso Aleatorio Absoluto (<code>SEEK_SET</code>)</strong>
+Escribe un programa que: a. Escriba 5 registros <code>Transaccion</code>
+diferentes en un archivo binario
+<strong><code>data_seek.bin</code></strong>. b. Usa
+<strong><code>fseek()</code></strong> con el modo
+<strong><code>SEEK_SET</code></strong> para posicionar el puntero
+exactamente al inicio del <strong>cuarto registro</strong> (Ã­ndice 3).
+c.Â Lee solo ese registro con <code>fread()</code> e imprime sus datos
+para verificar que el posicionamiento fue correcto.</p>
+<p><strong>6. Acceso Aleatorio Relativo (<code>SEEK_CUR</code>)</strong>
+Modifica el programa anterior para que: a. Lea el primer registro
+(<code>Transaccion 0</code>). b. Usa
+<strong><code>fseek()</code></strong> con el modo
+<strong><code>SEEK_CUR</code></strong> y un desplazamiento que sea <span
+class="math inline">2â€…Ã—â€…TAMANO_REGISTRO</span> (dos registros
+completos). c.Â Lee el siguiente registro (<code>Transaccion 3</code>) e
+imprime sus datos, demostrando que se saltaron dos registros desde la
+posiciÃ³n actual.</p>
+<p><strong>7. Lectura del Ãšltimo Registro
+(<code>SEEK_END</code>)</strong> Escribe un programa que: a. Abra el
+archivo <strong><code>data_seek.bin</code></strong> (con 5 registros) en
+modo lectura binaria. b. Usa <strong><code>fseek()</code></strong> con
+el modo <strong><code>SEEK_END</code></strong> y un desplazamiento
+negativo igual a <span
+class="math inline">â€…âˆ’â€…1â€…Ã—â€…TAMANO_REGISTRO</span>. c.Â Lee el registro en
+esa posiciÃ³n (<code>Transaccion 4</code>) e imprime sus datos.</p>
+<hr />
+<h3 id="bloque-4-patrÃ³n-de-bucle-seguro-y-chequeo-combinado">Bloque 4:
+PatrÃ³n de Bucle Seguro y Chequeo Combinado</h3>
+<p><strong>8. PatrÃ³n Seguro con <code>fread</code> y
+Post-Chequeo</strong> Escribe un programa que: a. Escriba 4 estructuras
+<code>Transaccion</code> en un archivo binario. b. Lea los 4 registros
+utilizando el <strong>patrÃ³n de bucle seguro</strong>
+(<code>while (fread(...) == 1)</code>). c.Â DespuÃ©s de que el bucle
+termine, utiliza una combinaciÃ³n de <code>if (ferror(f))</code> y
+<code>else if (feof(f))</code> para diagnosticar si la salida fue por un
+error o por el fin legÃ­timo del archivo.</p>
+<p><strong>9. PatrÃ³n Seguro con <code>fscanf</code></strong> Crea un
+archivo de texto llamado <strong><code>numeros.txt</code></strong> con 5
+lÃ­neas, cada una con un entero y un flotante separados por coma (ej:
+<code>10, 5.5</code>). a. Escribe un programa que lea estos datos
+utilizando el patrÃ³n seguro:
+<strong><code>while (fscanf(f, "%d, %f", &amp;i, &amp;f) == 2)</code></strong>.
+b. Imprime un mensaje si <code>fscanf</code> fallÃ³ por no encontrar los
+dos campos esperados (lectura parcial).</p>
+<p><strong>10. FunciÃ³n de DiagnÃ³stico Combinada</strong> Crea una
+enumeraciÃ³n (enum)
+<code>EstadoLectura { OK_EOF, ERROR_IO, ERROR_FORMATO };</code>. Escribe
+una funciÃ³n <code>EstadoLectura diagnosticar_fin(FILE *f)</code> que,
+despuÃ©s de un bucle de lectura fallido, use <code>feof()</code> y
+<code>ferror()</code> para devolver el estado correcto:</p>
+<ul>
+<li><code>ERROR_IO</code> si <code>ferror()</code> es verdadero.</li>
+<li><code>OK_EOF</code> si <code>feof()</code> es verdadero (y
+<code>ferror</code> es falso).</li>
+<li><code>ERROR_FORMATO</code> en cualquier otro caso (indica que la
+lectura fallÃ³ antes de EOF o error).</li>
+</ul>
+<hr />
+<h2 id="soluciones-detecciÃ³n-de-errores-eof-y-posicionamiento">âœ…
+Soluciones: DetecciÃ³n de Errores, EOF y Posicionamiento</h2>
+<p>Utilizaremos la siguiente estructura:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdlib.h&gt;</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="kw">typedef</span> <span class="kw">struct</span> <span class="op">{</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> id<span class="op">;</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">float</span> monto<span class="op">;</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="dt">char</span> descripcion<span class="op">[</span><span class="dv">30</span><span class="op">];</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> Transaccion<span class="op">;</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="pp">#define TAMANO_REGISTRO </span><span class="kw">sizeof</span><span class="op">(</span><span class="pp">Transaccion</span><span class="op">)</span></span></code></pre></div>
+<h3 id="bloque-1-comprobaciÃ³n-de-fin-de-archivo-feof-1">Bloque 1:
+ComprobaciÃ³n de Fin de Archivo (<code>feof</code>)</h3>
+<p><strong>1. DemostraciÃ³n de Bucle Inseguro con
+<code>feof</code></strong></p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">// **EJERCICIO 1: DEMOSTRACION DE BUCLE INSEGURO**</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> escribir_datos_para_feof<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">FILE</span> <span class="op">*</span>f <span class="op">=</span> fopen<span class="op">(</span><span class="st">&quot;datos_feof.bin&quot;</span><span class="op">,</span> <span class="st">&quot;wb&quot;</span><span class="op">);</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    Transaccion t1 <span class="op">=</span> <span class="op">{</span><span class="dv">1</span><span class="op">,</span> <span class="fl">10.0</span><span class="bu">f</span><span class="op">,</span> <span class="st">&quot;Compra A&quot;</span><span class="op">};</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    Transaccion t2 <span class="op">=</span> <span class="op">{</span><span class="dv">2</span><span class="op">,</span> <span class="fl">20.0</span><span class="bu">f</span><span class="op">,</span> <span class="st">&quot;Compra B&quot;</span><span class="op">};</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    Transaccion t3 <span class="op">=</span> <span class="op">{</span><span class="dv">3</span><span class="op">,</span> <span class="fl">30.0</span><span class="bu">f</span><span class="op">,</span> <span class="st">&quot;Compra C&quot;</span><span class="op">};</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>f<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>        fwrite<span class="op">(&amp;</span>t1<span class="op">,</span> TAMANO_REGISTRO<span class="op">,</span> <span class="dv">1</span><span class="op">,</span> f<span class="op">);</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>        fwrite<span class="op">(&amp;</span>t2<span class="op">,</span> TAMANO_REGISTRO<span class="op">,</span> <span class="dv">1</span><span class="op">,</span> f<span class="op">);</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>        fwrite<span class="op">(&amp;</span>t3<span class="op">,</span> TAMANO_REGISTRO<span class="op">,</span> <span class="dv">1</span><span class="op">,</span> f<span class="op">);</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>        fclose<span class="op">(</span>f<span class="op">);</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main_e1<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>    escribir_datos_para_feof<span class="op">();</span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>    <span class="dt">FILE</span> <span class="op">*</span>f <span class="op">=</span> fopen<span class="op">(</span><span class="st">&quot;datos_feof.bin&quot;</span><span class="op">,</span> <span class="st">&quot;rb&quot;</span><span class="op">);</span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>    Transaccion t<span class="op">;</span></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> contador <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;</span><span class="sc">\n</span><span class="st">Ejercicio 1: Bucle Inseguro con while(!feof(f))</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>    <span class="co">// El bucle lee el Ãºltimo registro, pero feof() aÃºn es falso.</span></span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>    <span class="co">// En la siguiente iteraciÃ³n, fread() falla y luego feof() se activa.</span></span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>    <span class="co">// El cuerpo del bucle se ejecuta con la data antigua/basura.</span></span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> <span class="op">(!</span>feof<span class="op">(</span>f<span class="op">))</span> <span class="op">{</span> </span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>        <span class="dt">size_t</span> leidos <span class="op">=</span> fread<span class="op">(&amp;</span>t<span class="op">,</span> TAMANO_REGISTRO<span class="op">,</span> <span class="dv">1</span><span class="op">,</span> f<span class="op">);</span></span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span>leidos <span class="op">==</span> <span class="dv">1</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>            contador<span class="op">++;</span></span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>            printf<span class="op">(</span><span class="st">&quot;Procesando (Exito): ID </span><span class="sc">%d</span><span class="st">, Monto </span><span class="sc">%.2f</span><span class="st">. Contador: </span><span class="sc">%d\n</span><span class="st">&quot;</span><span class="op">,</span> t<span class="op">.</span>id<span class="op">,</span> t<span class="op">.</span>monto<span class="op">,</span> contador<span class="op">);</span></span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>            <span class="co">// Este bloque se ejecuta en la Ãºltima iteraciÃ³n</span></span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a>            printf<span class="op">(</span><span class="st">&quot;Procesando (Fallo): Se intenta procesar la data de la ultima lectura exitosa (ID </span><span class="sc">%d</span><span class="st">) o basura.</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">,</span> t<span class="op">.</span>id<span class="op">);</span></span>
+<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
+<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a>    fclose<span class="op">(</span>f<span class="op">);</span></span>
+<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Respuesta: El cÃ³digo procesa datos una vez mÃ¡s porque feof() solo se activa *despuÃ©s* de que la funciÃ³n de lectura falla.</span></span>
+<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> EXIT_SUCCESS<span class="op">;</span></span>
+<span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p><strong>2. Uso Correcto y ConfirmaciÃ³n de
+<code>feof</code></strong></p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">// **EJERCICIO 2: USO CORRECTO DE FEOF**</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main_e2<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    escribir_datos_para_feof<span class="op">();</span> <span class="co">// Usamos el archivo de 3 registros</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">FILE</span> <span class="op">*</span>f <span class="op">=</span> fopen<span class="op">(</span><span class="st">&quot;datos_feof.bin&quot;</span><span class="op">,</span> <span class="st">&quot;rb&quot;</span><span class="op">);</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    Transaccion t<span class="op">;</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">size_t</span> leidos<span class="op">;</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>f <span class="op">==</span> NULL<span class="op">)</span> <span class="cf">return</span> EXIT_FAILURE<span class="op">;</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;</span><span class="sc">\n</span><span class="st">Ejercicio 2: Bucle Seguro (Post-Chequeo feof)</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    <span class="co">// PatrÃ³n seguro: el bucle se controla con el resultado de la lectura.</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> <span class="op">((</span>leidos <span class="op">=</span> fread<span class="op">(&amp;</span>t<span class="op">,</span> TAMANO_REGISTRO<span class="op">,</span> <span class="dv">1</span><span class="op">,</span> f<span class="op">))</span> <span class="op">==</span> <span class="dv">1</span><span class="op">)</span> <span class="op">{</span> </span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">&quot;Leido y Procesado: ID </span><span class="sc">%d</span><span class="st">, Monto </span><span class="sc">%.2f\n</span><span class="st">&quot;</span><span class="op">,</span> t<span class="op">.</span>id<span class="op">,</span> t<span class="op">.</span>monto<span class="op">);</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>    <span class="co">// AquÃ­ el bucle terminÃ³. Ahora comprobamos la causa.</span></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>ferror<span class="op">(</span>f<span class="op">))</span> <span class="op">{</span></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>        perror<span class="op">(</span><span class="st">&quot;ERROR: Fallo de I/O detectado&quot;</span><span class="op">);</span></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span> <span class="cf">else</span> <span class="cf">if</span> <span class="op">(</span>feof<span class="op">(</span>f<span class="op">))</span> <span class="op">{</span></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">&quot;FIN: La lectura finalizo por alcanzar el EOF.</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">&quot;Advertencia: Lectura parcial o error de formato.</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>    fclose<span class="op">(</span>f<span class="op">);</span></span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> EXIT_SUCCESS<span class="op">;</span></span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<hr />
+<h3 id="bloque-2-detecciÃ³n-de-errores-ferror-y-limpieza-1">Bloque 2:
+DetecciÃ³n de Errores (<code>ferror</code>) y Limpieza</h3>
+<p><strong>3. VerificaciÃ³n de Error en Escritura con
+<code>ferror</code></strong></p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">// **EJERCICIO 3: VERIFICACION DE ERROR EN ESCRITURA**</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> verificar_escritura<span class="op">(</span><span class="dt">FILE</span> <span class="op">*</span>f<span class="op">,</span> <span class="dt">size_t</span> esperados<span class="op">,</span> <span class="dt">size_t</span> escritos<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>escritos <span class="op">!=</span> esperados<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">&quot;</span><span class="sc">\n</span><span class="st">ADVERTENCIA: Solo se escribieron </span><span class="sc">%zu</span><span class="st"> de </span><span class="sc">%zu</span><span class="st"> registros.</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">,</span> escritos<span class="op">,</span> esperados<span class="op">);</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Comprobar la causa del fallo: Â¿Fue un error de sistema?</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span>ferror<span class="op">(</span>f<span class="op">))</span> <span class="op">{</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>            printf<span class="op">(</span><span class="st">&quot;ERROR CRITICO: Fallo de E/S DETECTADO en el flujo.</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>            perror<span class="op">(</span><span class="st">&quot;Diagnostico del sistema&quot;</span><span class="op">);</span> <span class="co">// Imprime el error real del SO</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>            <span class="co">// AquÃ­ se deberÃ­a aÃ±adir lÃ³gica para cerrar el programa o el archivo.</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>            printf<span class="op">(</span><span class="st">&quot;Causa no critica (posiblemente disco lleno, pero sin error de I/O directo).</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">&quot;Escritura completada exitosamente.</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main_e3<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>    <span class="dt">FILE</span> <span class="op">*</span>f <span class="op">=</span> fopen<span class="op">(</span><span class="st">&quot;critical_data.bin&quot;</span><span class="op">,</span> <span class="st">&quot;wb&quot;</span><span class="op">);</span></span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>    Transaccion t <span class="op">=</span> <span class="op">{</span><span class="dv">10</span><span class="op">,</span> <span class="fl">999.99</span><span class="bu">f</span><span class="op">,</span> <span class="st">&quot;Carga critica&quot;</span><span class="op">};</span></span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>    <span class="dt">size_t</span> esperados <span class="op">=</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>    <span class="dt">size_t</span> escritos<span class="op">;</span></span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>f <span class="op">==</span> NULL<span class="op">)</span> <span class="cf">return</span> EXIT_FAILURE<span class="op">;</span></span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a>    escritos <span class="op">=</span> fwrite<span class="op">(&amp;</span>t<span class="op">,</span> TAMANO_REGISTRO<span class="op">,</span> esperados<span class="op">,</span> f<span class="op">);</span></span>
+<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a>    verificar_escritura<span class="op">(</span>f<span class="op">,</span> esperados<span class="op">,</span> escritos<span class="op">);</span></span>
+<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a>    fclose<span class="op">(</span>f<span class="op">);</span></span>
+<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> EXIT_SUCCESS<span class="op">;</span></span>
+<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p><strong>4. Uso de <code>ferror</code> y
+<code>clearerr</code></strong></p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;errno.h&gt;</span><span class="pp"> </span><span class="co">// Necesario para errno</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co">// **EJERCICIO 4: FERROR Y CLEARERR**</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main_e4<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Abrir en modo lectura/escritura binaria</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">FILE</span> <span class="op">*</span>f <span class="op">=</span> fopen<span class="op">(</span><span class="st">&quot;estado.bin&quot;</span><span class="op">,</span> <span class="st">&quot;rb+&quot;</span><span class="op">);</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>f <span class="op">==</span> NULL<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Si el archivo no existe, crearlo para el test</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>        f <span class="op">=</span> fopen<span class="op">(</span><span class="st">&quot;estado.bin&quot;</span><span class="op">,</span> <span class="st">&quot;wb+&quot;</span><span class="op">);</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span>f <span class="op">==</span> NULL<span class="op">)</span> <span class="cf">return</span> EXIT_FAILURE<span class="op">;</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>    <span class="co">// 1. Simular un error forzando una operaciÃ³n invÃ¡lida o leyendo fuera de lÃ­mites</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>    <span class="co">// o simplemente forzando el error (solo para demostraciÃ³n, NO es prÃ¡ctica real)</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>    errno <span class="op">=</span> EIO<span class="op">;</span> <span class="co">// Establecer el nÃºmero de error I/O (simulaciÃ³n)</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>    <span class="co">// El ferror() se establece despuÃ©s de que una funciÃ³n de E/S lo detecta.</span></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Usaremos una funciÃ³n que puede fallar. En sistemas reales, esto es un error de disco.</span></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>    fseek<span class="op">(</span>f<span class="op">,</span> <span class="dv">999999999</span><span class="bu">L</span><span class="op">,</span> SEEK_SET<span class="op">);</span> <span class="co">// Intentar ir muy lejos (puede causar error)</span></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;</span><span class="sc">\n</span><span class="st">Ejercicio 4: ferror y clearerr</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>    <span class="co">// 2. Comprobar el estado con ferror()</span></span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>ferror<span class="op">(</span>f<span class="op">))</span> <span class="op">{</span></span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">&quot;1. ERROR detectado: El indicador de error esta en TRUE.</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>        <span class="co">// 3. Llamar a clearerr(archivo) para restablecer la bandera</span></span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>        clearerr<span class="op">(</span>f<span class="op">);</span></span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">&quot;   Llamando a clearerr(f)...</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>        <span class="co">// 4. Volver a comprobar el estado</span></span>
+<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(!</span>ferror<span class="op">(</span>f<span class="op">))</span> <span class="op">{</span></span>
+<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a>            printf<span class="op">(</span><span class="st">&quot;2. El indicador de error ha sido REINICIADO (FALSE).</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
+<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
+<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">&quot;No se detecto ningun error I/O antes de clearerr.</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb6-36"><a href="#cb6-36" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb6-37"><a href="#cb6-37" aria-hidden="true" tabindex="-1"></a>    fclose<span class="op">(</span>f<span class="op">);</span></span>
+<span id="cb6-38"><a href="#cb6-38" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> EXIT_SUCCESS<span class="op">;</span></span>
+<span id="cb6-39"><a href="#cb6-39" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<hr />
+<h3 id="bloque-3-posicionamiento-de-puntero-fseek-1">Bloque 3:
+Posicionamiento de Puntero (<code>fseek</code>)</h3>
+<p><strong>5. Acceso Aleatorio Absoluto
+(<code>SEEK_SET</code>)</strong></p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">// **EJERCICIO 5: FSEEK CON SEEK_SET**</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> escribir_5_registros<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">FILE</span> <span class="op">*</span>f <span class="op">=</span> fopen<span class="op">(</span><span class="st">&quot;data_seek.bin&quot;</span><span class="op">,</span> <span class="st">&quot;wb&quot;</span><span class="op">);</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>f<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> <span class="dv">5</span><span class="op">;</span> i<span class="op">++)</span> <span class="op">{</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>            Transaccion t <span class="op">=</span> <span class="op">{</span><span class="dv">10</span> <span class="op">+</span> i<span class="op">,</span> <span class="fl">50.0</span><span class="bu">f</span> <span class="op">*</span> <span class="op">(</span>i <span class="op">+</span> <span class="dv">1</span><span class="op">),</span> <span class="st">&quot;Registro generico&quot;</span><span class="op">};</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>            fwrite<span class="op">(&amp;</span>t<span class="op">,</span> TAMANO_REGISTRO<span class="op">,</span> <span class="dv">1</span><span class="op">,</span> f<span class="op">);</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>        fclose<span class="op">(</span>f<span class="op">);</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main_e5<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>    escribir_5_registros<span class="op">();</span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>    <span class="dt">FILE</span> <span class="op">*</span>f <span class="op">=</span> fopen<span class="op">(</span><span class="st">&quot;data_seek.bin&quot;</span><span class="op">,</span> <span class="st">&quot;rb&quot;</span><span class="op">);</span></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>    Transaccion t<span class="op">;</span></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>f <span class="op">==</span> NULL<span class="op">)</span> <span class="cf">return</span> EXIT_FAILURE<span class="op">;</span></span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Queremos el cuarto registro (Ã­ndice 3)</span></span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>    <span class="dt">long</span> indice_deseado <span class="op">=</span> <span class="dv">3</span><span class="op">;</span> </span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>    <span class="dt">long</span> desplazamiento <span class="op">=</span> indice_deseado <span class="op">*</span> TAMANO_REGISTRO<span class="op">;</span></span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;</span><span class="sc">\n</span><span class="st">Ejercicio 5: Posicionamiento Absoluto (SEEK_SET)</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Mover puntero desde el INICIO (SEEK_SET)</span></span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>fseek<span class="op">(</span>f<span class="op">,</span> desplazamiento<span class="op">,</span> SEEK_SET<span class="op">)</span> <span class="op">==</span> <span class="dv">0</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">&quot;Puntero movido a byte </span><span class="sc">%ld</span><span class="st"> (Inicio del 4to registro).</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">,</span> desplazamiento<span class="op">);</span></span>
+<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Leer el registro en esa posiciÃ³n</span></span>
+<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span>fread<span class="op">(&amp;</span>t<span class="op">,</span> TAMANO_REGISTRO<span class="op">,</span> <span class="dv">1</span><span class="op">,</span> f<span class="op">)</span> <span class="op">==</span> <span class="dv">1</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a>            printf<span class="op">(</span><span class="st">&quot;Registro leido: ID: </span><span class="sc">%d</span><span class="st">, Monto: </span><span class="sc">%.2f\n</span><span class="st">&quot;</span><span class="op">,</span> t<span class="op">.</span>id<span class="op">,</span> t<span class="op">.</span>monto<span class="op">);</span></span>
+<span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
+<span id="cb7-34"><a href="#cb7-34" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb7-35"><a href="#cb7-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-36"><a href="#cb7-36" aria-hidden="true" tabindex="-1"></a>    fclose<span class="op">(</span>f<span class="op">);</span></span>
+<span id="cb7-37"><a href="#cb7-37" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> EXIT_SUCCESS<span class="op">;</span></span>
+<span id="cb7-38"><a href="#cb7-38" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p><strong>6. Acceso Aleatorio Relativo
+(<code>SEEK_CUR</code>)</strong></p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">// **EJERCICIO 6: FSEEK CON SEEK_CUR**</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main_e6<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Archivo con 5 registros</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">FILE</span> <span class="op">*</span>f <span class="op">=</span> fopen<span class="op">(</span><span class="st">&quot;data_seek.bin&quot;</span><span class="op">,</span> <span class="st">&quot;rb&quot;</span><span class="op">);</span> </span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    Transaccion t<span class="op">;</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>f <span class="op">==</span> NULL<span class="op">)</span> <span class="cf">return</span> EXIT_FAILURE<span class="op">;</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;</span><span class="sc">\n</span><span class="st">Ejercicio 6: Posicionamiento Relativo (SEEK_CUR)</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>    <span class="co">// 1. Leer el primer registro (toma 1 byte de Transaccion 0)</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>    fread<span class="op">(&amp;</span>t<span class="op">,</span> TAMANO_REGISTRO<span class="op">,</span> <span class="dv">1</span><span class="op">,</span> f<span class="op">);</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;1. Leido Transaccion 0 (ID: </span><span class="sc">%d</span><span class="st">).</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">,</span> t<span class="op">.</span>id<span class="op">);</span></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Queremos saltar los registros 1 y 2.</span></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>    <span class="dt">long</span> saltar_bytes <span class="op">=</span> <span class="dv">2</span> <span class="op">*</span> TAMANO_REGISTRO<span class="op">;</span> </span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>    <span class="co">// 2. Mover puntero 2 registros hacia adelante desde la POSICIÃ“N ACTUAL (SEEK_CUR)</span></span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>fseek<span class="op">(</span>f<span class="op">,</span> saltar_bytes<span class="op">,</span> SEEK_CUR<span class="op">)</span> <span class="op">==</span> <span class="dv">0</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">&quot;2. Puntero movido </span><span class="sc">%ld</span><span class="st"> bytes desde la posicion actual (saltando 2 registros).</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">,</span> saltar_bytes<span class="op">);</span></span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>        <span class="co">// El puntero ahora apunta al registro 3.</span></span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span>fread<span class="op">(&amp;</span>t<span class="op">,</span> TAMANO_REGISTRO<span class="op">,</span> <span class="dv">1</span><span class="op">,</span> f<span class="op">)</span> <span class="op">==</span> <span class="dv">1</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>            printf<span class="op">(</span><span class="st">&quot;3. Leido Transaccion 3 (ID: </span><span class="sc">%d</span><span class="st">, Monto: </span><span class="sc">%.2f</span><span class="st">).</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">,</span> t<span class="op">.</span>id<span class="op">,</span> t<span class="op">.</span>monto<span class="op">);</span></span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a>    fclose<span class="op">(</span>f<span class="op">);</span></span>
+<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> EXIT_SUCCESS<span class="op">;</span></span>
+<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p><strong>7. Lectura del Ãšltimo Registro
+(<code>SEEK_END</code>)</strong></p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">// **EJERCICIO 7: FSEEK CON SEEK_END**</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main_e7<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Archivo con 5 registros</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">FILE</span> <span class="op">*</span>f <span class="op">=</span> fopen<span class="op">(</span><span class="st">&quot;data_seek.bin&quot;</span><span class="op">,</span> <span class="st">&quot;rb&quot;</span><span class="op">);</span> </span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    Transaccion t<span class="op">;</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>f <span class="op">==</span> NULL<span class="op">)</span> <span class="cf">return</span> EXIT_FAILURE<span class="op">;</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;</span><span class="sc">\n</span><span class="st">Ejercicio 7: Posicionamiento al Final (SEEK_END)</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Desplazamiento negativo: -1 * TAMANO_REGISTRO</span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>    <span class="dt">long</span> desplazamiento_negativo <span class="op">=</span> <span class="op">-</span><span class="dv">1</span> <span class="op">*</span> <span class="op">(</span><span class="dt">long</span><span class="op">)</span>TAMANO_REGISTRO<span class="op">;</span> </span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Mover puntero desde el FINAL (SEEK_END)</span></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>fseek<span class="op">(</span>f<span class="op">,</span> desplazamiento_negativo<span class="op">,</span> SEEK_END<span class="op">)</span> <span class="op">==</span> <span class="dv">0</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">&quot;Puntero movido </span><span class="sc">%ld</span><span class="st"> bytes desde el final (inicio del ultimo registro).</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">,</span> desplazamiento_negativo<span class="op">);</span></span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Leer el registro en esa posiciÃ³n (Registro 4)</span></span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span>fread<span class="op">(&amp;</span>t<span class="op">,</span> TAMANO_REGISTRO<span class="op">,</span> <span class="dv">1</span><span class="op">,</span> f<span class="op">)</span> <span class="op">==</span> <span class="dv">1</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>            printf<span class="op">(</span><span class="st">&quot;Registro leido: ID: </span><span class="sc">%d</span><span class="st">, Monto: </span><span class="sc">%.2f\n</span><span class="st">&quot;</span><span class="op">,</span> t<span class="op">.</span>id<span class="op">,</span> t<span class="op">.</span>monto<span class="op">);</span></span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>    fclose<span class="op">(</span>f<span class="op">);</span></span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> EXIT_SUCCESS<span class="op">;</span></span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<hr />
+<h3 id="bloque-4-patrÃ³n-de-bucle-seguro-y-chequeo-combinado-1">Bloque 4:
+PatrÃ³n de Bucle Seguro y Chequeo Combinado</h3>
+<p><strong>8. PatrÃ³n Seguro con <code>fread</code> y
+Post-Chequeo</strong></p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co">// **EJERCICIO 8: PATRON SEGURO CON FREAD**</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main_e8<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    escribir_5_registros<span class="op">();</span> <span class="co">// Usa el archivo con 5 registros</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">FILE</span> <span class="op">*</span>f <span class="op">=</span> fopen<span class="op">(</span><span class="st">&quot;data_seek.bin&quot;</span><span class="op">,</span> <span class="st">&quot;rb&quot;</span><span class="op">);</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    Transaccion t<span class="op">;</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> registros_procesados <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>f <span class="op">==</span> NULL<span class="op">)</span> <span class="cf">return</span> EXIT_FAILURE<span class="op">;</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;</span><span class="sc">\n</span><span class="st">Ejercicio 8: PatrÃ³n Seguro (fread)</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Bucle controlado por el valor de retorno (debe ser 1)</span></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> <span class="op">(</span>fread<span class="op">(&amp;</span>t<span class="op">,</span> TAMANO_REGISTRO<span class="op">,</span> <span class="dv">1</span><span class="op">,</span> f<span class="op">)</span> <span class="op">==</span> <span class="dv">1</span><span class="op">)</span> <span class="op">{</span> </span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>        registros_procesados<span class="op">++;</span></span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Procesamiento solo con datos vÃ¡lidos</span></span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">&quot;Procesado: ID </span><span class="sc">%d\n</span><span class="st">&quot;</span><span class="op">,</span> t<span class="op">.</span>id<span class="op">);</span></span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;Total de registros procesados: </span><span class="sc">%d</span><span class="st">.</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">,</span> registros_procesados<span class="op">);</span></span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Chequeo combinado secundario</span></span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>ferror<span class="op">(</span>f<span class="op">))</span> <span class="op">{</span></span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a>        perror<span class="op">(</span><span class="st">&quot;ERROR CRITICO: Fallo de I/O durante la lectura&quot;</span><span class="op">);</span></span>
+<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span> <span class="cf">else</span> <span class="cf">if</span> <span class="op">(</span>feof<span class="op">(</span>f<span class="op">))</span> <span class="op">{</span></span>
+<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">&quot;DIAGNOSTICO: La lectura termino por EOF legÃ­timo.</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
+<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">&quot;ADVERTENCIA: Fallo por lectura parcial o error de formato.</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb10-28"><a href="#cb10-28" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb10-29"><a href="#cb10-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-30"><a href="#cb10-30" aria-hidden="true" tabindex="-1"></a>    fclose<span class="op">(</span>f<span class="op">);</span></span>
+<span id="cb10-31"><a href="#cb10-31" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> EXIT_SUCCESS<span class="op">;</span></span>
+<span id="cb10-32"><a href="#cb10-32" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p><strong>9. PatrÃ³n Seguro con <code>fscanf</code></strong></p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co">// **EJERCICIO 9: PATRON SEGURO CON FSCANF**</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> escribir_datos_texto<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">FILE</span> <span class="op">*</span>f <span class="op">=</span> fopen<span class="op">(</span><span class="st">&quot;numeros.txt&quot;</span><span class="op">,</span> <span class="st">&quot;w&quot;</span><span class="op">);</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>f<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>        fprintf<span class="op">(</span>f<span class="op">,</span> <span class="st">&quot;10, 5.5</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>        fprintf<span class="op">(</span>f<span class="op">,</span> <span class="st">&quot;20, 10.1</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>        fprintf<span class="op">(</span>f<span class="op">,</span> <span class="st">&quot;30, 15.6</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>        fprintf<span class="op">(</span>f<span class="op">,</span> <span class="st">&quot;99, </span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span> <span class="co">// LÃ­nea incompleta (falla de lectura parcial)</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>        fclose<span class="op">(</span>f<span class="op">);</span></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main_e9<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>    escribir_datos_texto<span class="op">();</span></span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>    <span class="dt">FILE</span> <span class="op">*</span>f <span class="op">=</span> fopen<span class="op">(</span><span class="st">&quot;numeros.txt&quot;</span><span class="op">,</span> <span class="st">&quot;r&quot;</span><span class="op">);</span></span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> i<span class="op">;</span></span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>    <span class="dt">float</span> fl<span class="op">;</span></span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>f <span class="op">==</span> NULL<span class="op">)</span> <span class="cf">return</span> EXIT_FAILURE<span class="op">;</span></span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;</span><span class="sc">\n</span><span class="st">Ejercicio 9: PatrÃ³n Seguro (fscanf)</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a>    <span class="co">// El bucle se ejecuta SOLO si fscanf encuentra EXACTAMENTE 2 elementos</span></span>
+<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> <span class="op">(</span>fscanf<span class="op">(</span>f<span class="op">,</span> <span class="st">&quot;</span><span class="sc">%d</span><span class="st">, </span><span class="sc">%f</span><span class="st">&quot;</span><span class="op">,</span> <span class="op">&amp;</span>i<span class="op">,</span> <span class="op">&amp;</span>fl<span class="op">)</span> <span class="op">==</span> <span class="dv">2</span><span class="op">)</span> <span class="op">{</span> </span>
+<span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">&quot;Leido con exito: Int: </span><span class="sc">%d</span><span class="st">, Float: </span><span class="sc">%.1f\n</span><span class="st">&quot;</span><span class="op">,</span> i<span class="op">,</span> fl<span class="op">);</span></span>
+<span id="cb11-26"><a href="#cb11-26" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb11-27"><a href="#cb11-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-28"><a href="#cb11-28" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Chequeo post-bucle</span></span>
+<span id="cb11-29"><a href="#cb11-29" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>ferror<span class="op">(</span>f<span class="op">))</span> <span class="op">{</span></span>
+<span id="cb11-30"><a href="#cb11-30" aria-hidden="true" tabindex="-1"></a>        perror<span class="op">(</span><span class="st">&quot;ERROR CRITICO: Fallo de I/O&quot;</span><span class="op">);</span></span>
+<span id="cb11-31"><a href="#cb11-31" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span> <span class="cf">else</span> <span class="cf">if</span> <span class="op">(</span>feof<span class="op">(</span>f<span class="op">))</span> <span class="op">{</span></span>
+<span id="cb11-32"><a href="#cb11-32" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">&quot;FIN: Lectura finalizada por EOF.</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb11-33"><a href="#cb11-33" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
+<span id="cb11-34"><a href="#cb11-34" aria-hidden="true" tabindex="-1"></a>        <span class="co">// En este caso, fallÃ³ al leer la lÃ­nea &quot;99, \n&quot; (solo leyÃ³ 1 elemento, no 2)</span></span>
+<span id="cb11-35"><a href="#cb11-35" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">&quot;ADVERTENCIA: La lectura fallo por formato (se esperaba 2 elementos, pero se leyeron menos).</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb11-36"><a href="#cb11-36" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb11-37"><a href="#cb11-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-38"><a href="#cb11-38" aria-hidden="true" tabindex="-1"></a>    fclose<span class="op">(</span>f<span class="op">);</span></span>
+<span id="cb11-39"><a href="#cb11-39" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> EXIT_SUCCESS<span class="op">;</span></span>
+<span id="cb11-40"><a href="#cb11-40" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p><strong>10. FunciÃ³n de DiagnÃ³stico Combinada</strong></p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co">// **EJERCICIO 10: FUNCION DE DIAGNOSTICO COMBINADA**</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="kw">typedef</span> <span class="kw">enum</span> <span class="op">{</span> </span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>    OK_EOF<span class="op">,</span> </span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>    ERROR_IO<span class="op">,</span> </span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>    ERROR_FORMATO </span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> EstadoLectura<span class="op">;</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>EstadoLectura diagnosticar_fin<span class="op">(</span><span class="dt">FILE</span> <span class="op">*</span>f<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>ferror<span class="op">(</span>f<span class="op">))</span> <span class="op">{</span></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Error de sistema (hardware, permisos)</span></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> ERROR_IO<span class="op">;</span> </span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span> <span class="cf">else</span> <span class="cf">if</span> <span class="op">(</span>feof<span class="op">(</span>f<span class="op">))</span> <span class="op">{</span></span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Lectura completa y EOF alcanzado</span></span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> OK_EOF<span class="op">;</span> </span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Lectura incompleta (ej. fscanf esperaba 2 campos y leyÃ³ 1)</span></span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> ERROR_FORMATO<span class="op">;</span> </span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main_e10<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a>    escribir_datos_texto<span class="op">();</span></span>
+<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a>    <span class="dt">FILE</span> <span class="op">*</span>f <span class="op">=</span> fopen<span class="op">(</span><span class="st">&quot;numeros.txt&quot;</span><span class="op">,</span> <span class="st">&quot;r&quot;</span><span class="op">);</span></span>
+<span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> i<span class="op">;</span></span>
+<span id="cb12-26"><a href="#cb12-26" aria-hidden="true" tabindex="-1"></a>    <span class="dt">float</span> fl<span class="op">;</span></span>
+<span id="cb12-27"><a href="#cb12-27" aria-hidden="true" tabindex="-1"></a>    EstadoLectura resultado<span class="op">;</span></span>
+<span id="cb12-28"><a href="#cb12-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-29"><a href="#cb12-29" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>f <span class="op">==</span> NULL<span class="op">)</span> <span class="cf">return</span> EXIT_FAILURE<span class="op">;</span></span>
+<span id="cb12-30"><a href="#cb12-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-31"><a href="#cb12-31" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;</span><span class="sc">\n</span><span class="st">Ejercicio 10: Funcion de Diagnostico Combinada</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb12-32"><a href="#cb12-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-33"><a href="#cb12-33" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Ejecutar la lectura fallida intencional (simulando el bucle)</span></span>
+<span id="cb12-34"><a href="#cb12-34" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> <span class="op">(</span>fscanf<span class="op">(</span>f<span class="op">,</span> <span class="st">&quot;</span><span class="sc">%d</span><span class="st">, </span><span class="sc">%f</span><span class="st">&quot;</span><span class="op">,</span> <span class="op">&amp;</span>i<span class="op">,</span> <span class="op">&amp;</span>fl<span class="op">)</span> <span class="op">==</span> <span class="dv">2</span><span class="op">);</span></span>
+<span id="cb12-35"><a href="#cb12-35" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb12-36"><a href="#cb12-36" aria-hidden="true" tabindex="-1"></a>    resultado <span class="op">=</span> diagnosticar_fin<span class="op">(</span>f<span class="op">);</span></span>
+<span id="cb12-37"><a href="#cb12-37" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb12-38"><a href="#cb12-38" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;Resultado del diagnostico: &quot;</span><span class="op">);</span></span>
+<span id="cb12-39"><a href="#cb12-39" aria-hidden="true" tabindex="-1"></a>    <span class="cf">switch</span> <span class="op">(</span>resultado<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb12-40"><a href="#cb12-40" aria-hidden="true" tabindex="-1"></a>        <span class="cf">case</span> OK_EOF<span class="op">:</span></span>
+<span id="cb12-41"><a href="#cb12-41" aria-hidden="true" tabindex="-1"></a>            printf<span class="op">(</span><span class="st">&quot;OK_EOF (Final normal del archivo).</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb12-42"><a href="#cb12-42" aria-hidden="true" tabindex="-1"></a>            <span class="cf">break</span><span class="op">;</span></span>
+<span id="cb12-43"><a href="#cb12-43" aria-hidden="true" tabindex="-1"></a>        <span class="cf">case</span> ERROR_IO<span class="op">:</span></span>
+<span id="cb12-44"><a href="#cb12-44" aria-hidden="true" tabindex="-1"></a>            printf<span class="op">(</span><span class="st">&quot;ERROR_IO (Fallo grave de lectura/escritura).</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb12-45"><a href="#cb12-45" aria-hidden="true" tabindex="-1"></a>            <span class="cf">break</span><span class="op">;</span></span>
+<span id="cb12-46"><a href="#cb12-46" aria-hidden="true" tabindex="-1"></a>        <span class="cf">case</span> ERROR_FORMATO<span class="op">:</span></span>
+<span id="cb12-47"><a href="#cb12-47" aria-hidden="true" tabindex="-1"></a>            printf<span class="op">(</span><span class="st">&quot;ERROR_FORMATO (El formato no coincidio o lectura parcial).</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb12-48"><a href="#cb12-48" aria-hidden="true" tabindex="-1"></a>            <span class="cf">break</span><span class="op">;</span></span>
+<span id="cb12-49"><a href="#cb12-49" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb12-50"><a href="#cb12-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-51"><a href="#cb12-51" aria-hidden="true" tabindex="-1"></a>    fclose<span class="op">(</span>f<span class="op">);</span></span>
+<span id="cb12-52"><a href="#cb12-52" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> EXIT_SUCCESS<span class="op">;</span></span>
+<span id="cb12-53"><a href="#cb12-53" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+
+</div>
+</body>
+</html>
+

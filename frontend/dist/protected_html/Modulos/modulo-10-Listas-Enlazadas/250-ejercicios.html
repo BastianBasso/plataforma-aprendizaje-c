@@ -1,0 +1,191 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" crossorigin href="/assets/content-01sust.css">
+</head>
+<body>
+<div class="main-content">
+<p>Â¡Absolutamente! La mejor manera de aprender la estructura de un Nodo
+es escribiendo y manipulando el cÃ³digo C directamente.</p>
+<p>AquÃ­ tienes <strong>10 ejercicios de programaciÃ³n</strong> prÃ¡cticos
+que cubren la definiciÃ³n del <code>struct Nodo</code>, la gestiÃ³n del
+puntero <code>HEAD</code> y la manipulaciÃ³n bÃ¡sica de sus campos,
+utilizando el formato de texto plano que necesitas.</p>
+<hr />
+<h2 id="ejercicios-de-programaciÃ³n-estructura-de-nodos-y-head">10
+Ejercicios de ProgramaciÃ³n: Estructura de Nodos y HEAD ðŸ—ï¸</h2>
+<h3
+id="ejercicio-1-definiciÃ³n-fundamental-del-nodo-estructura-autorreferenciada">Ejercicio
+1: DefiniciÃ³n Fundamental del Nodo (Estructura autorreferenciada)</h3>
+<p><strong>Tarea:</strong> Escribe el cÃ³digo C para definir la
+estructura de un nodo (<code>struct Nodo</code>) que contenga un campo
+para un nÃºmero entero (<code>int dato</code>) y el campo de enlace
+(<code>siguiente</code>) que apunte a un nodo del mismo tipo.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">// SoluciÃ³n Ejercicio 1</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="kw">struct</span> Nodo <span class="op">{</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> dato<span class="op">;</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">struct</span> Nodo <span class="op">*</span>siguiente<span class="op">;</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span></code></pre></div>
+<hr />
+<h3 id="ejercicio-2-definiciÃ³n-limpia-con-typedef">Ejercicio 2:
+DefiniciÃ³n Limpia con <code>typedef</code></h3>
+<p><strong>Tarea:</strong> Modifica la definiciÃ³n del ejercicio anterior
+utilizando la palabra clave <code>typedef</code> para permitir el uso
+del alias <code>Nodo</code> sin tener que escribir
+<code>struct Nodo</code> repetidamente.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">// SoluciÃ³n Ejercicio 2</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="kw">typedef</span> <span class="kw">struct</span> Nodo <span class="op">{</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> dato<span class="op">;</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">struct</span> Nodo <span class="op">*</span>siguiente<span class="op">;</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> Nodo<span class="op">;</span> </span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co">// Ahora puedes usar &#39;Nodo *&#39; en lugar de &#39;struct Nodo *&#39;</span></span></code></pre></div>
+<hr />
+<h3
+id="ejercicio-3-declaraciÃ³n-e-inicializaciÃ³n-del-puntero-head">Ejercicio
+3: DeclaraciÃ³n e InicializaciÃ³n del Puntero HEAD</h3>
+<p><strong>Tarea:</strong> Declara una variable de tipo puntero a nodo
+(usando la definiciÃ³n del Ej. 2) llamada <code>HEAD</code> que actÃºe
+como el punto de inicio de la lista. InicialÃ­zala correctamente para
+representar una <strong>Lista Enlazada vacÃ­a</strong>.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">// SoluciÃ³n Ejercicio 3</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>Nodo <span class="op">*</span>HEAD <span class="op">=</span> NULL<span class="op">;</span></span></code></pre></div>
+<hr />
+<h3 id="ejercicio-4-creaciÃ³n-de-un-nodo-estÃ¡tico-stack">Ejercicio 4:
+CreaciÃ³n de un Nodo EstÃ¡tico (Stack)</h3>
+<p><strong>Tarea:</strong> Dentro de una funciÃ³n, declara una variable
+de tipo nodo en el <strong>Stack</strong> (memoria local) y asÃ­gnale el
+valor <span class="math inline">15</span> a su campo de datos. Configura
+su puntero de enlace para que sea el marcador de <strong>fin de
+lista</strong>.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">// SoluciÃ³n Ejercicio 4</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> crear_nodo_stack<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    Nodo nodo_local<span class="op">;</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    nodo_local<span class="op">.</span>dato <span class="op">=</span> <span class="dv">15</span><span class="op">;</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    nodo_local<span class="op">.</span>siguiente <span class="op">=</span> NULL<span class="op">;</span> <span class="co">// Marca el final de la lista o un enlace nulo</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<hr />
+<h3 id="ejercicio-5-asignaciÃ³n-dinÃ¡mica-de-un-nodo-heap">Ejercicio 5:
+AsignaciÃ³n DinÃ¡mica de un Nodo (Heap)</h3>
+<p><strong>Tarea:</strong> Escribe una funciÃ³n llamada
+<code>crear_nodo_dinamico</code> que utilice <code>malloc()</code> para
+asignar memoria para un nuevo nodo en el <strong>Heap</strong>. Asigna
+el valor <span class="math inline">100</span> a su campo de datos y
+devuelve el puntero al nodo. <strong>AsegÃºrate de verificar si la
+asignaciÃ³n fue exitosa.</strong></p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Asumimos &#39;Nodo&#39; definido con typedef</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>Nodo <span class="op">*</span>crear_nodo_dinamico<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    Nodo <span class="op">*</span>nuevo_nodo <span class="op">=</span> <span class="op">(</span>Nodo <span class="op">*)</span>malloc<span class="op">(</span><span class="kw">sizeof</span><span class="op">(</span>Nodo<span class="op">));</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>nuevo_nodo <span class="op">==</span> NULL<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> NULL<span class="op">;</span> <span class="co">// Manejo de error de asignaciÃ³n</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>    nuevo_nodo<span class="op">-&gt;</span>dato <span class="op">=</span> <span class="dv">100</span><span class="op">;</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>    nuevo_nodo<span class="op">-&gt;</span>siguiente <span class="op">=</span> NULL<span class="op">;</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> nuevo_nodo<span class="op">;</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<hr />
+<h3 id="ejercicio-6-conexiÃ³n-de-un-nodo-a-la-cabeza-head">Ejercicio 6:
+ConexiÃ³n de un Nodo a la Cabeza (<code>HEAD</code>)</h3>
+<p><strong>Tarea:</strong> Partiendo de la definiciÃ³n
+<code>HEAD = NULL</code>, escribe el cÃ³digo necesario para crear un nodo
+dinÃ¡mico con el valor <span class="math inline">5</span> y hacer que el
+puntero <code>HEAD</code> apunte a este nuevo nodo.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">// SoluciÃ³n Ejercicio 6 (Asumiendo que &#39;HEAD&#39; ya estÃ¡ declarado como NULL)</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> conectar_primer_nodo<span class="op">(</span>Nodo <span class="op">**</span>head_ref<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    Nodo <span class="op">*</span>nuevo_nodo <span class="op">=</span> <span class="op">(</span>Nodo <span class="op">*)</span>malloc<span class="op">(</span><span class="kw">sizeof</span><span class="op">(</span>Nodo<span class="op">));</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>nuevo_nodo <span class="op">==</span> NULL<span class="op">)</span> <span class="cf">return</span><span class="op">;</span> </span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    nuevo_nodo<span class="op">-&gt;</span>dato <span class="op">=</span> <span class="dv">5</span><span class="op">;</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    nuevo_nodo<span class="op">-&gt;</span>siguiente <span class="op">=</span> NULL<span class="op">;</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>    <span class="op">*</span>head_ref <span class="op">=</span> nuevo_nodo<span class="op">;</span> <span class="co">// HEAD ahora apunta al nuevo nodo</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<hr />
+<h3 id="ejercicio-7-acceso-a-campos-de-un-nodo-dinÃ¡mico">Ejercicio 7:
+Acceso a Campos de un Nodo DinÃ¡mico</h3>
+<p><strong>Tarea:</strong> Si tienes un puntero dinÃ¡mico a un nodo
+llamado <code>nuevo_nodo</code>, escribe las lÃ­neas de cÃ³digo para
+asignar el valor <span class="math inline">20</span> a su campo
+<code>dato</code> y luego acceder a su campo <code>siguiente</code>
+usando el operador de flecha (<code>-&gt;</code>).</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">// SoluciÃ³n Ejercicio 7</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>Nodo <span class="op">*</span>nuevo_nodo <span class="op">=</span> crear_nodo_dinamico<span class="op">();</span> <span class="co">// ... puntero a un nodo</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co">// Asignar el dato:</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>nuevo_nodo<span class="op">-&gt;</span>dato <span class="op">=</span> <span class="dv">20</span><span class="op">;</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="co">// Acceder al puntero siguiente:</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>Nodo <span class="op">*</span>siguiente_nodo <span class="op">=</span> nuevo_nodo<span class="op">-&gt;</span>siguiente<span class="op">;</span></span></code></pre></div>
+<hr />
+<h3 id="ejercicio-8-detecciÃ³n-de-lista-vacÃ­a">Ejercicio 8: DetecciÃ³n de
+Lista VacÃ­a</h3>
+<p><strong>Tarea:</strong> Escribe una funciÃ³n simple
+<code>esta_vacia</code> que reciba el puntero <code>HEAD</code> de la
+lista y retorne un entero (<span class="math inline">1</span> si estÃ¡
+vacÃ­a, <span class="math inline">0</span> si no lo estÃ¡). La funciÃ³n
+debe basarse en el valor del puntero <code>HEAD</code>.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">// SoluciÃ³n Ejercicio 8</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> esta_vacia<span class="op">(</span>Nodo <span class="op">*</span>head<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>head <span class="op">==</span> NULL<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="dv">1</span><span class="op">;</span> <span class="co">// Lista vacÃ­a</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span> <span class="co">// Lista con al menos un nodo</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Simplificado: return head == NULL;</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<hr />
+<h3
+id="ejercicio-9-enlace-simple-crear-dos-nodos-y-conectarlos">Ejercicio
+9: Enlace Simple (Crear dos Nodos y Conectarlos)</h3>
+<p><strong>Tarea:</strong> Crea <strong>dos</strong> nodos dinÃ¡micos,
+uno con valor <span class="math inline">1</span> (<code>nodo1</code>) y
+otro con valor <span class="math inline">2</span> (<code>nodo2</code>).
+Conecta estos nodos de tal manera que <code>HEAD</code> apunte a
+<code>nodo1</code> y <code>nodo1</code> apunte a <code>nodo2</code>.
+AsegÃºrate de terminar la lista.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">// SoluciÃ³n Ejercicio 9</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>Nodo <span class="op">*</span>HEAD <span class="op">=</span> NULL<span class="op">;</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>Nodo <span class="op">*</span>nodo1 <span class="op">=</span> crear_nodo_dinamico<span class="op">();</span> <span class="co">// Asume que crea un nodo seguro con dato=100</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>Nodo <span class="op">*</span>nodo2 <span class="op">=</span> crear_nodo_dinamico<span class="op">();</span> <span class="co">// Asume que crea un nodo seguro con dato=100</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="co">// 1. Configurar datos (para el ejemplo)</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>nodo1<span class="op">-&gt;</span>dato <span class="op">=</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>nodo2<span class="op">-&gt;</span>dato <span class="op">=</span> <span class="dv">2</span><span class="op">;</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="co">// 2. Establecer la secuencia lÃ³gica</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>nodo1<span class="op">-&gt;</span>siguiente <span class="op">=</span> nodo2<span class="op">;</span> <span class="co">// nodo1 enlaza con nodo2</span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>nodo2<span class="op">-&gt;</span>siguiente <span class="op">=</span> NULL<span class="op">;</span>  <span class="co">// nodo2 es el final de la lista</span></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a><span class="co">// 3. Establecer el punto de acceso</span></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>HEAD <span class="op">=</span> nodo1<span class="op">;</span></span></code></pre></div>
+<hr />
+<h3
+id="ejercicio-10-fuga-de-memoria-por-pÃ©rdida-de-head-anÃ¡lisis">Ejercicio
+10: Fuga de Memoria por PÃ©rdida de <code>HEAD</code> (AnÃ¡lisis)</h3>
+<p><strong>Pregunta:</strong> Si se tienen <span
+class="math inline">100</span> nodos en una lista enlazada, y el puntero
+<code>HEAD</code> es reasignado con la siguiente lÃ­nea, Â¿cuÃ¡l es la
+consecuencia?</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>Nodo <span class="op">*</span>HEAD <span class="op">=</span> <span class="co">/* ... primer nodo de la lista ... */</span><span class="op">;</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co">// ...</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>HEAD <span class="op">=</span> NULL<span class="op">;</span> <span class="co">// LÃ­nea de reasignaciÃ³n</span></span></code></pre></div>
+<ul>
+<li><strong>A.</strong> La lista se libera correctamente de la
+memoria.</li>
+<li><strong>B.</strong> Solo el primer nodo se pierde.</li>
+<li><strong>C.</strong> <strong>Se produce una Fuga de Memoria masiva,
+ya que se pierde el Ãºnico punto de acceso a los 100 nodos asignados
+dinÃ¡micamente.</strong></li>
+<li><strong>D.</strong> El compilador corrige automÃ¡ticamente el
+error.</li>
+</ul>
+<p><strong>Respuesta Correcta:</strong> C</p>
+
+</div>
+</body>
+</html>
+

@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Estructura basica de un programa C, la funcion main</title>
+    <link rel="stylesheet" crossorigin href="/assets/content-01sust.css">
+
+</head>
+
+
+
+<body>    
+<div class="main-content">
+
+<h1>4. Anatomía y Estructura Esencial de un Programa C (La Función
+main)</h1>
+<h2><strong>1. El Concepto de Archivo Fuente</strong></h2>
+<p>Todo programa en C comienza como un simple <strong>archivo de
+texto</strong>. Este archivo es el <strong>Código Fuente</strong>, el
+lugar donde resides tus instrucciones lógicas escritas según la sintaxis
+del lenguaje C.</p>
+<ul>
+<li><p><strong>Definición:</strong> El archivo fuente es la
+<strong>entrada principal</strong> para el proceso de compilación. Es lo
+que escribes, modificas y mantienes como programador.</p></li>
+<li><p><strong>Extensión Estándar:</strong> Los archivos fuente de C se
+identifican universalmente con la extensión <strong>.c</strong> (por
+ejemplo, calculadora.c o main.c).</p></li>
+</ul>
+<p><strong>Unidad de Trabajo</strong></p>
+<p>Un programa C puede ser tan simple como un solo archivo .c, lo cual
+es común para ejercicios y programas pequeños. Sin embargo, los
+proyectos de <em>software</em> grandes y complejos se organizan
+típicamente en <strong>múltiples archivos fuente</strong>.</p>
+<p>Aunque el programa final se compila y enlaza en un único ejecutable,
+el código se divide en diferentes archivos .c para:</p>
+<ol type="1">
+<li><p><strong>Modularidad:</strong> Organizar el código por
+funcionalidad (ej. un archivo para operaciones matemáticas, otro para el
+manejo de archivos).</p></li>
+<li><p><strong>Mantenimiento:</strong> Facilitar la lectura, corrección
+de errores y colaboración en equipo.</p></li>
+</ol>
+<p>Independientemente de cuántos archivos .c compongan el proyecto,
+todos ellos deben pasar por el ciclo de compilación (preprocesamiento,
+compilación, ensamblado y enlazado) para convertirse en el programa
+final.</p>
+<h2 id="nuestro-primer-contacto-con-c-el-hola-mundo">1.5. Nuestro Primer
+Contacto con C: El "Hola Mundo"</h2>
+<p>Antes de sumergirnos en la anatomía de un programa C, es crucial
+tener una visión de conjunto. El programa más simple y tradicionalmente
+el primero que todo programador escribe es el "Hola Mundo". Este pequeño
+fragmento de código contiene todos los elementos que estudiaremos en
+este módulo:</p>
+<!--
+<div class="code">
+  <div class="code-inner">
+    <table>
+      <tr><td>1</td><td><span class="kword kword-int">int</span> <span class="identifier fdeclname">main</span>() {</td></tr>
+      <tr><td>2</td><td>  <span class="kword kword-int">int</span> <span class="identifier">a</span> <span class="operator">=</span> <span class="val-int">5</span>;</td></tr>
+      <tr><td>3</td><td>  <span class="kword kword-return">return</span> <span class="val-int">0</span>;</td></tr>
+      <tr><td>4</td><td>}</td></tr>
+      <tr><td>5</td><td></td></tr>
+    </table>
+  </div>
+</div>
+-->
+
+
+<div class="c2h-code">
+  <div class="c2h-code-inner">
+    <table>
+      <tr><td>1</td><td><span class="c2h-directive">#include</span> <span class="c2h-val-str">&lt;stdio.h&gt;</span></td></tr>
+      <tr><td>2</td><td></td></tr>
+      <tr><td>3</td><td> </td></tr>
+      <tr><td>4</td><td></td></tr>
+      <tr><td>5</td><td><span class="c2h-kword c2h-kword-int">int</span> <span class="c2h-identifier c2h-fdeclname">main</span>(<span class="c2h-kword c2h-kword-void">void</span>)</td></tr>
+      <tr><td>6</td><td>{</td></tr>
+      <tr><td>7</td><td></td></tr>
+      <tr><td>8</td><td>    <span class="c2h-identifier c2h-fcallname">printf</span>(<span class="c2h-val-str">"¡Hola Mundo, estoy listo para programar!\n"</span>);</td></tr>
+      <tr><td>9</td><td></td></tr>
+      <tr><td>10</td><td>   <span class="c2h-kword c2h-kword-return">return</span> <span class="c2h-val-int">0</span>;</td></tr>
+      <tr><td>11</td><td></td></tr>
+      <tr><td>12</td><td>}</td></tr>
+      <tr><td>13</td><td></td></tr>
+    </table>
+  </div>
+</div>
+
+
+
+
+
+
+<!--
+<blockquote>
+<p>#include &lt;stdio.h&gt;</p>
+<p> </p>
+<p>int main(void)</p>
+<p>{</p>
+<p>    printf("¡Hola Mundo, estoy listo para programar!\n");</p>
+<p>    return 0;</p>
+<p>}</p>
+</blockquote>
+-->
+<br>
+<p>Este programa es el punto de partida. Es un texto que, una vez
+compilado, le pide a tu computadora que imprima la frase ¡Hola Mundo,
+estoy listo para programar! en tu pantalla.</p>
+<p>A continuación, desglosaremos cada línea de este código para entender
+su propósito exacto: desde las directivas que preparan el código hasta
+la función obligatoria que le da inicio al programa.</p>
+<h2><strong>2. La Directiva de Preprocesador #include</strong></h2>
+<p>Cuando empezamos a escribir código, rápidamente nos damos cuenta de
+que necesitamos usar funciones y herramientas que otros programadores ya
+han creado. Aquí es donde la directiva <strong>#include</strong> se
+vuelve esencial.</p>
+<p>Como vimos en la fase de Compilación, el #include es una
+<strong>directiva del preprocesador</strong> (el primer paso).</p>
+<p><strong>Rol y Mecanismo</strong></p>
+<ul>
+<li><p><strong>Rol:</strong> La directiva #include le ordena al
+preprocesador <strong>insertar</strong> el contenido completo de un
+archivo externo (llamado archivo de cabecera o <em>header</em>) en la
+posición donde se escribe la directiva.</p></li>
+<li><p><strong>Mecanismo:</strong> Es una operación de <strong>copiar y
+pegar</strong> masiva y literal. Antes de que el compilador revise el
+código, el preprocesador se asegura de que todas las declaraciones de
+funciones y macros de la librería externa estén disponibles en nuestro
+archivo .c.</p></li>
+</ul>
+<p><strong>La Librería Esencial: &lt;stdio.h&gt;</strong></p>
+<p>La librería más fundamental y la que usarás en casi todos tus
+programas es la <strong>Librería Estándar de
+Entrada/Salida</strong>:</p>
+<ul>
+<li><p><strong>Nombre:</strong> stdio.h (por <em>Standard Input/Output
+Header</em>).</p></li>
+<li><p><strong>Propósito:</strong> Proporciona las funciones clave para
+la <strong>interacción básica</strong> del programa con el usuario y la
+consola. Esto incluye:</p>
+<ul>
+<li><p><strong>Salida:</strong> La función printf() para mostrar texto
+en pantalla.</p></li>
+<li><p><strong>Entrada:</strong> La función scanf() para leer datos que
+el usuario ingresa por teclado.</p></li>
+</ul></li>
+</ul>
+<p><strong>Sintaxis:</strong></p>
+<!--<p>#include &lt;stdio.h&gt; // Incluye la librería estándar</p>-->
+<div class="c2h-code">
+  <div class="c2h-code-inner">
+    <table>
+      <tr><td>1</td><td><span class="c2h-directive">#include</span> <span class="c2h-val-str">&lt;stdio.h&gt;</span> <span class="c2h-comment">// Incluye la librería estándar</span></td></tr>
+    </table>
+  </div>
+</div>
+<p>Al incluir &lt;stdio.h&gt;, le decimos al compilador: "Oye, necesito
+usar las funciones de entrada y salida estándar, asegúrate de que el
+código binario de printf() y scanf() esté disponible cuando vayas a
+enlazar (Fase IV)".</p>
+<h2><strong>3. La Función main(): El Punto de Partida</strong></h2>
+<p>Si un programa es como una obra de teatro, la función
+<strong>main()</strong> es el telón que se levanta. Es la pieza más
+crucial y obligatoria de todo programa C.</p>
+<ul>
+<li><p><strong>Punto de Entrada:</strong> La función main() es el
+<strong>punto de entrada</strong> (o <em>entry point</em>). Cuando el
+sistema operativo (SO) ejecuta tu archivo binario, el SO sabe por
+convención que debe <strong>comenzar a leer las instrucciones</strong>
+precisamente desde el inicio de la función main().</p></li>
+<li><p><strong>Punto de Salida:</strong> Además de ser el inicio, main()
+también es el <strong>punto de salida</strong>. Una vez que se ejecutan
+todas las instrucciones dentro de main(), el control regresa al sistema
+operativo, indicando que la tarea del programa ha finalizado.</p></li>
+</ul>
+<p><strong>Regla Universal de C</strong></p>
+<p><strong>Todo programa C válido debe contener una y solo una función
+main()</strong>.</p>
+<p>Sin main(), el sistema operativo no sabría dónde comenzar, y el
+Enlazador (Fase IV) fallaría al intentar crear el ejecutable. La
+existencia de main() es lo que transforma un conjunto de código en una
+aplicación funcional.</p>
+
+<h2><strong>4. Definición de main(): Retorno y Paréntesis</strong></h2>
+<p>La función main() debe ser declarada siguiendo una sintaxis estricta
+que informa al compilador sobre cómo interactúa el programa con el
+sistema operativo.</p>
+<p><strong>La Sintaxis Común</strong></p>
+<p>La declaración más habitual de la función principal es:</p>
+<!--
+<p>C</p>
+<p>int main(void) {</p>
+<p>    // Bloque de código...</p>
+<p>}</p>
+-->
+<div class="c2h-code">
+  <div class="c2h-code-inner">
+    <table>
+      <tr><td>1</td><td><span class="c2h-kword c2h-kword-int">int</span> <span class="c2h-identifier c2h-fdeclname">main</span>(<span class="c2h-kword c2h-kword-void">void</span>) {</td></tr>
+      <tr><td>2</td><td></td></tr>
+      <tr><td>3</td><td>    <span class="c2h-comment">// Bloque de código...</span></td></tr>
+      <tr><td>4</td><td></td></tr>
+      <tr><td>5</td><td>}</td></tr>
+    </table>
+  </div>
+</div>
+
+<p>Analicemos los tres componentes clave: int, main, y (void).</p>
+<p><strong>El Tipo de Retorno: int</strong></p>
+<p>El prefijo <strong>int</strong> (de <em>integer</em>, entero) indica
+el <strong>tipo de dato</strong> que la función main() devolverá al
+sistema operativo (SO) una vez que el programa termine.</p>
+<ul>
+<li><p><strong>Función:</strong> El valor que se devuelve es un
+<strong>código de estado</strong>. El SO lee este número para saber si
+el programa se ejecutó de forma correcta o si encontró un problema
+grave.</p></li>
+<li><p><strong>Obligatorio:</strong> En la programación C moderna, se
+considera una buena práctica y, a menudo, es obligatorio que main()
+devuelva un int.</p></li>
+</ul>
+<p><strong>Los Paréntesis: (void) o ()</strong></p>
+<p>Los paréntesis que siguen al nombre de la función (main) se utilizan
+para especificar los <strong>argumentos</strong> o
+<strong>parámetros</strong> que la función recibe.</p>
+<ul>
+<li><p><strong>void:</strong> El uso de <strong>void</strong> dentro de
+los paréntesis (es decir, main(void)) es una forma explícita de decirle
+al compilador que la función main() no recibirá <strong>ningún
+argumento</strong> cuando el sistema operativo la llame.</p></li>
+<li><p><strong>Vacío:</strong> Dejar los paréntesis vacíos (main()) a
+menudo tiene el mismo significado en los compiladores modernos.</p></li>
+</ul>
+<p>Por ahora, en este módulo introductorio, utilizaremos int main(void)
+o int main() como la sintaxis estándar.</p>
+<h2><strong>5. Bloques de Código: Llaves y Sentencias</strong></h2>
+<p>Una vez que has declarado la función main() con su tipo de retorno
+(int) y sus parámetros (void), necesitas definir qué es lo que hará
+exactamente. Esto se logra mediante el <strong>Bloque de Código</strong>
+y las <strong>Sentencias</strong>.</p>
+<p><strong>El Bloque de Código: Las Llaves {}</strong></p>
+<p>El Bloque de Código, también llamado el <strong>Cuerpo de la
+Función</strong>, es la sección que contiene todas las instrucciones que
+se ejecutarán cuando la función main() sea llamada por el sistema
+operativo.</p>
+<ul>
+<li><p><strong>Sintaxis:</strong> El bloque se delimita con un par de
+<strong>llaves</strong>: una llave de apertura <strong>{</strong> marca
+el inicio del cuerpo, y una llave de cierre <strong>}</strong> marca su
+final.</p></li>
+<li><p><strong>Propósito:</strong> Todo el código escrito dentro de
+estas llaves será ejecutado secuencialmente, instrucción por
+instrucción.</p></li>
+</ul>
+<p><strong>Ejemplo:</strong></p>
+<!--
+<p>int main(void)</p>
+<p>{ // &lt;-- INICIO del Bloque de Código</p>
+<p>    // Aquí van las instrucciones (Sentencias)</p>
+<p>} // &lt;-- FIN del Bloque de Código</p>
+-->
+<div class="c2h-code">
+  <div class="c2h-code-inner">
+    <table>
+      <tr><td>1</td><td><span class="c2h-kword c2h-kword-int">int</span> <span class="c2h-identifier c2h-fdeclname">main</span>(<span class="c2h-kword c2h-kword-void">void</span>)</td></tr>
+      <tr><td>2</td><td>{ <span class="c2h-comment">// &lt;-- INICIO del Bloque de Código</span></td></tr>
+      <tr><td>3</td><td></td></tr>
+      <tr><td>4</td><td>    <span class="c2h-comment">// Aquí van las instrucciones (Sentencias)</span></td></tr>      
+      <tr><td>5</td><td></td></tr>
+      <tr><td>6</td><td>} <span class="c2h-comment">// &lt;-- FIN del Bloque de Código</span></td></tr>
+    </table>
+  </div>
+</div>
+<br>
+<p><strong>Las Sentencias: El Punto y Coma ;</strong></p>
+<p>Una <strong>Sentencia</strong> es la unidad de trabajo más pequeña y
+completa en C. Es una orden única y específica que le das a la
+computadora (por ejemplo, "sumar dos números" o "mostrar un texto en
+pantalla").</p>
+<ul>
+<li><p><strong>Delimitador:</strong> En C, una sentencia debe terminar
+obligatoriamente con un <strong>punto y coma</strong>
+(<strong>;</strong>).</p></li>
+<li><p><strong>Función:</strong> El punto y coma actúa como un
+<strong>delimitador</strong> que le indica al compilador que esa
+instrucción específica ha finalizado y que la siguiente línea de código
+(o el fin del bloque) es una instrucción nueva.</p></li>
+</ul>
+<p><strong>Ejemplo de Sentencias dentro del Bloque:</strong></p>
+<!--
+<p>int main(void)</p>
+<p>{</p>
+<p>    int numero = 5;       // Sentencia 1: Crea una variable y le
+asigna el valor 5.</p>
+<p>    printf("Hola Mundo"); // Sentencia 2: Llama a la función
+printf.</p>
+<p>    return 0;             // Sentencia 3: Termina el programa.</p>
+<p>}</p>
+-->
+<div class="c2h-code">
+  <div class="c2h-code-inner">
+    <table>
+      <tr><td>1</td><td><span class="c2h-kword c2h-kword-int">int</span> <span class="c2h-identifier c2h-fdeclname">main</span>(<span class="c2h-kword c2h-kword-void">void</span>)</td></tr>
+      <tr><td>2</td><td>{</td></tr>
+      <tr><td>3</td><td></td></tr>
+      <tr><td>4</td><td>    <span class="c2h-kword c2h-kword-int">int</span> <span class="c2h-identifier">numero</span> <span class="c2h-operator">=</span> <span class="c2h-val-int">5</span>; <span class="c2h-comment">// Sentencia 1: Crea una variable y le asigna el valor 5.</span></td></tr>
+      <tr><td>5</td><td></td></tr>
+      <tr><td>6</td><td>    <span class="c2h-identifier c2h-fcallname">printf</span>(<span class="c2h-val-str">"Hola Mundo"</span>); <span class="c2h-comment">// Sentencia 2: Llama a la función printf.</span></td></tr>
+      <tr><td>7</td><td></td></tr>
+      <tr><td>8</td><td>    <span class="c2h-kword c2h-kword-return">return</span> <span class="c2h-val-int">0</span>; <span class="c2h-comment">// Sentencia 3: Termina el programa.</span></td></tr>
+      <tr><td>9</td><td>}</td></tr>
+      <tr><td>10</td><td></td></tr>
+    </table>
+  </div>
+</div>
+<br>
+<p>Si omites el punto y coma, el Compilador (Fase II) generará un
+<strong>Error de Sintaxis</strong>, ya que intentará interpretar la
+siguiente línea de código como parte de la instrucción anterior.</p>
+<h2><strong>6. El Valor de Retorno: return 0;</strong></h2>
+<p>Como ya establecimos, la función main() fue declarada con el tipo de
+retorno <strong>int</strong>, lo que significa que al finalizar, debe
+devolver un número entero al sistema operativo (SO).</p>
+<p>La sentencia <strong>return 0;</strong> es, por convención, la última
+línea que se ejecuta dentro del cuerpo de la función main().</p>
+<p><strong>El Propósito del return 0;</strong></p>
+<p>La sentencia return 0; tiene dos funciones críticas:</p>
+<ol type="1">
+<li><p><strong>Finalizar la Ejecución:</strong> Detiene la ejecución de
+las instrucciones dentro de main() y le devuelve el control al sistema
+operativo.</p></li>
+<li><p><strong>Reportar el Estado:</strong> El número devuelto
+(<strong>0</strong>) actúa como un <strong>código de estado</strong> (o
+código de salida) que el SO utiliza para determinar cómo terminó el
+programa.</p></li>
+</ol>
+<table style="width:97%;">
+<colgroup>
+<col style="width: 29%" />
+<col style="width: 67%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>Valor de Retorno</strong></th>
+<th style="text-align: left;"><strong>Significado
+Convencional</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>return 0;</strong></td>
+<td style="text-align: left;"><strong>Éxito</strong>. Indica al SO que
+el programa se ejecutó y finalizó <strong>correctamente</strong> sin
+errores.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>return 1; (o cualquier otro valor
+distinto de cero)</strong></td>
+<td style="text-align: left;"><strong>Error</strong>. Indica al SO que
+el programa terminó, pero que ocurrió algún tipo de
+<strong>fallo</strong> o problema durante su ejecución (ej. no se pudo
+abrir un archivo o faltó memoria).</td>
+</tr>
+</tbody>
+</table>
+<p><strong>return 0; en el Código Básico</strong></p>
+<p>En un programa simple de "Hola Mundo", la inclusión de return 0; es
+esencial para comunicar al entorno que la tarea se completó según lo
+previsto.</p>
+<!--
+<p>int main(void)</p>
+<p>{</p>
+<p>    printf("¡Mi primer programa C!"); // Se ejecuta la
+instrucción</p>
+<p>    return 0;                       // &lt;-- El programa reporta
+éxito y finaliza.</p>
+<p>}</p>
+-->
+<div class="c2h-code">
+  <div class="c2h-code-inner">
+    <table>
+      <tr><td>1</td><td><span class="c2h-kword c2h-kword-int">int</span> <span class="c2h-identifier c2h-fdeclname">main</span>(<span class="c2h-kword c2h-kword-void">void</span>)</td></tr>
+      <tr><td>2</td><td>{</td></tr>
+      <tr><td>3</td><td>    </td></tr>
+      <tr><td>4</td><td>    <span class="c2h-identifier c2h-fcallname">printf</span>(<span class="c2h-val-str">"¡Mi primer programa C!"</span>); <span class="c2h-comment">// Se ejecuta la instrucción</span></td></tr>
+      <tr><td>5</td><td>    <span class="c2h-kword c2h-kword-return">return</span> <span class="c2h-val-int">0</span>; <span class="c2h-comment">// &lt;-- El programa reporta éxito y finaliza.</span></td></tr>       
+      <tr><td>6</td><td>}</td></tr>
+      <tr><td>7</td><td></td></tr>
+    </table>
+  </div>
+</div>
+<br>
+<p><strong>Nota sobre Estándares:</strong> Aunque el estándar C moderno
+permite omitir return 0; al final de main() (el compilador lo añadirá
+implícitamente), incluirlo es considerado una <strong>mejor
+práctica</strong> para la claridad del código y para mantener la
+compatibilidad con compiladores más antiguos.</p>
+<h2><strong>7. Uso de Comentarios</strong></h2>
+<p>En la programación, no solo escribes código para que la computadora
+lo ejecute; también escribes código para que otros programadores
+(incluido tu yo futuro) puedan entenderlo. Los
+<strong>Comentarios</strong> son la herramienta principal para la
+<strong>documentación</strong> dentro del código fuente.</p>
+<p><strong>Propósito de los Comentarios</strong></p>
+<p>Un comentario es texto que se inserta en el código fuente con el
+único propósito de ser leído por un humano.</p>
+<ul>
+<li><p><strong>Explicación:</strong> Ayudan a explicar la lógica
+compleja, el propósito de una función, o por qué se tomó una decisión de
+diseño específica.</p></li>
+<li><p><strong>Ignorados por el Compilador:</strong> La característica
+más importante es que los comentarios son <strong>ignorados
+completamente</strong> por el compilador. Cuando el Preprocesador (Fase
+I) procesa el archivo, los comentarios son eliminados y no llegan a
+formar parte del código máquina, por lo que no afectan el rendimiento ni
+el tamaño final del ejecutable.</p></li>
+</ul>
+<p><strong>Tipos de Comentarios en C</strong></p>
+<p>Existen dos formatos principales para añadir comentarios en C, aunque
+el segundo fue introducido formalmente en el estándar C99.</p>
+<ol type="1">
+<li><p><strong>Comentarios de Bloque (/* ... */)</strong></p>
+<ul>
+<li><p><strong>Uso:</strong> Ideal para documentar bloques de código
+grandes, escribir párrafos explicativos, o incluir encabezados de
+archivo con información de autoría y derechos de autor.</p></li>
+<li><p><strong>Sintaxis:</strong> Empieza con /* y termina con
+*/.</p></li>
+
+</ul></li>
+<!--
+<li><p>/*</p></li>
+<li><p>* Este es un comentario</p></li>
+<li><p>* de múltiples líneas.</p></li>
+<li><p>* El compilador lo omitirá.</p></li>
+<li><p>*/</p></li>
+<li><p><strong>Comentarios de Línea Simple (//)</strong></p>
+-->
+<div class="c2h-code">
+  <div class="c2h-code-inner">
+    <table>
+      <tr><td>1</td><td><span class="c2h-comment">/*</span></td></tr>
+      <tr><td>2</td><td><span class="c2h-comment"></span></td></tr>
+      <tr><td>3</td><td><span class="c2h-comment">* Este es un comentario</span></td></tr>
+      <tr><td>4</td><td><span class="c2h-comment"></span></td></tr>
+      <tr><td>5</td><td><span class="c2h-comment">* de múltiples líneas.</span></td></tr>
+      <tr><td>6</td><td><span class="c2h-comment"></span></td></tr>
+      <tr><td>7</td><td><span class="c2h-comment">* El compilador lo omitirá.</span></td></tr>
+      <tr><td>8</td><td><span class="c2h-comment"></span></td></tr>
+      <tr><td>9</td><td><span class="c2h-comment">*/</span></td></tr>
+      <tr><td>10</td><td></td></tr>
+    </table>
+  </div>
+</div>
+
+<ul>
+<li><p><strong>Uso:</strong> Más común para anotaciones rápidas o para
+explicar una línea de código específica.</p></li>
+<li><p><strong>Sintaxis:</strong> Empieza con // y continúa hasta el
+final de esa misma línea.</p></li>
+</ul></li>
+</ol>
+<p>int edad = 25; // Define la edad del usuario</p>
+<p>El uso disciplinado de comentarios es un pilar de la <strong>buena
+práctica de programación</strong>, haciendo tu código legible y fácil de
+mantener.</p>
+</div>
+</body>
+

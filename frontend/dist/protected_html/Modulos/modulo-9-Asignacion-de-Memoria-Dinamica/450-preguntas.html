@@ -1,0 +1,188 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" crossorigin href="/assets/content-01sust.css">
+</head>
+<body>
+<div class="main-content">
+<h2 id="ejercicios-inicializaciÃ³n-de-memoria-con-calloc">10 Ejercicios:
+InicializaciÃ³n de Memoria con <code>calloc()</code></h2>
+<h3 id="pregunta-1-propÃ³sito-fundamental">Pregunta 1: PropÃ³sito
+Fundamental</h3>
+<p><strong>Pregunta:</strong> Â¿CuÃ¡l es el <strong>doble propÃ³sito
+fundamental</strong> de la funciÃ³n <code>calloc()</code>?</p>
+<ul>
+<li><strong>A.</strong> Asignar memoria en el <em>Stack</em> e
+inicializar solo los primeros 4 bytes a cero.</li>
+<li><strong>B.</strong> Asignar un bloque contiguo de memoria del
+<em>Heap</em> y devolver su direcciÃ³n, como <code>malloc()</code>.</li>
+<li><strong>C.</strong> <strong>Asignar memoria contigua del
+<em>Heap</em> e inicializar todos los bits del bloque asignado a
+cero.</strong></li>
+<li><strong>D.</strong> Asignar memoria, inicializarla a cero, y liberar
+automÃ¡ticamente la memoria despuÃ©s de que la funciÃ³n termina.</li>
+</ul>
+<p><strong>Respuesta Correcta:</strong> C</p>
+<hr />
+<h3 id="pregunta-2-garantÃ­a-de-inicializaciÃ³n">Pregunta 2: GarantÃ­a de
+InicializaciÃ³n</h3>
+<p><strong>Pregunta:</strong> Â¿QuÃ© garantiza <code>calloc()</code>
+inmediatamente despuÃ©s de la asignaciÃ³n de memoria, a diferencia de
+<code>malloc()</code>?</p>
+<ul>
+<li><strong>A.</strong> Que la memoria serÃ¡ de un tamaÃ±o menor al
+solicitado para optimizar el espacio.</li>
+<li><strong>B.</strong> Que el bloque de memoria contendrÃ¡ valores
+aleatorios (â€˜basuraâ€™) para mejorar el rendimiento.</li>
+<li><strong>C.</strong> <strong>Que todos los elementos numÃ©ricos en el
+bloque asignado tendrÃ¡n el valor de <span class="math inline">0</span>,
+y los punteros tendrÃ¡n el valor de <code>NULL</code>.</strong></li>
+<li><strong>D.</strong> Que la memoria estarÃ¡ protegida contra accesos
+no autorizados por otras funciones.</li>
+</ul>
+<p><strong>Respuesta Correcta:</strong> C</p>
+<hr />
+<h3 id="pregunta-3-sintaxis-correcta">Pregunta 3: Sintaxis Correcta</h3>
+<p><strong>Pregunta:</strong> Si se desea asignar dinÃ¡micamente memoria
+para un <em>array</em> de <span class="math inline">50</span> enteros
+(<code>int</code>), Â¿cuÃ¡l es la <strong>sintaxis correcta</strong>
+usando <code>calloc()</code>?</p>
+<ul>
+<li><strong>A.</strong>
+<code>int *p = (int *)calloc(50 * sizeof(int));</code></li>
+<li><strong>B.</strong>
+<code>int *p = (int *)calloc(sizeof(int), 50);</code></li>
+<li><strong>C.</strong>
+<code>int *p = (int *)malloc(50, sizeof(int));</code></li>
+<li><strong>D.</strong>
+<strong><code>int *p = (int *)calloc(50, sizeof(int));</code></strong></li>
+</ul>
+<p><strong>Respuesta Correcta:</strong> D</p>
+<hr />
+<h3 id="pregunta-4-escenario-de-uso-recomendado">Pregunta 4: Escenario
+de Uso Recomendado</h3>
+<p><strong>Pregunta:</strong> Â¿En quÃ© escenario se recomienda
+explÃ­citamente el uso de <code>calloc()</code> sobre
+<code>malloc()</code>?</p>
+<ul>
+<li><strong>A.</strong> Cuando se necesita que la asignaciÃ³n de memoria
+sea lo mÃ¡s rÃ¡pida posible y el contenido inicial no importa.</li>
+<li><strong>B.</strong> Cuando se asigna memoria para una sola variable
+(no un <em>array</em>).</li>
+<li><strong>C.</strong> <strong>Cuando se asigna un <em>array</em> de
+contadores o banderas booleanas que deben comenzar con el valor <span
+class="math inline">0</span> o <code>Falso</code>.</strong></li>
+<li><strong>D.</strong> Cuando se redimensiona un bloque de memoria
+previamente asignado.</li>
+</ul>
+<p><strong>Respuesta Correcta:</strong> C</p>
+<hr />
+<h3 id="pregunta-5-inicializaciÃ³n-de-punteros-en-structs">Pregunta 5:
+InicializaciÃ³n de Punteros en <em>Structs</em></h3>
+<p><strong>Pregunta:</strong> Si una estructura asignada con
+<code>calloc()</code> contiene un campo puntero, Â¿cuÃ¡l serÃ¡ el valor
+inicial de ese campo puntero?</p>
+<ul>
+<li><strong>A.</strong> La direcciÃ³n inicial del bloque de memoria
+contigua en el <em>Heap</em>.</li>
+<li><strong>B.</strong> Un valor aleatorio o â€˜basuraâ€™ (Garbage
+Value).</li>
+<li><strong>C.</strong> <strong><code>NULL</code>.</strong></li>
+<li><strong>D.</strong> La direcciÃ³n de la primera variable local en el
+<em>Stack</em>.</li>
+</ul>
+<p><strong>Respuesta Correcta:</strong> C</p>
+<hr />
+<h3 id="pregunta-6-desventaja-de-rendimiento">Pregunta 6: Desventaja de
+Rendimiento</h3>
+<p><strong>Pregunta:</strong> Â¿CuÃ¡l de las siguientes es una
+<strong>desventaja</strong> de usar <code>calloc()</code> en comparaciÃ³n
+con <code>malloc()</code>?</p>
+<ul>
+<li><strong>A.</strong> Es mÃ¡s difÃ­cil de liberar con
+<code>free()</code>.</li>
+<li><strong>B.</strong> La asignaciÃ³n puede fallar mÃ¡s fÃ¡cilmente.</li>
+<li><strong>C.</strong> <strong>Requiere un ligero tiempo de
+procesamiento adicional para establecer todos los bits de la memoria a
+cero.</strong></li>
+<li><strong>D.</strong> No se puede usar para asignar memoria a
+estructuras, solo a tipos primitivos.</li>
+</ul>
+<p><strong>Respuesta Correcta:</strong> C</p>
+<hr />
+<h3 id="pregunta-7-cÃ¡lculo-del-tamaÃ±o-total">Pregunta 7: CÃ¡lculo del
+TamaÃ±o Total</h3>
+<p><strong>Pregunta:</strong> Si se desea asignar un bloque de memoria
+para <span class="math inline">10</span> estructuras
+<code>Registro</code> usando <code>calloc()</code>, Â¿cuÃ¡ntos bytes
+totales intentarÃ¡ asignar la funciÃ³n?</p>
+<ul>
+<li><strong>A.</strong> La suma de los tamaÃ±os de <span
+class="math inline">10</span> estructuras <code>Registro</code>.</li>
+<li><strong>B.</strong> <strong><span
+class="math inline">10â€…Ã—â€…sizeof(Registro)</span> bytes.</strong></li>
+<li><strong>C.</strong> El tamaÃ±o de un puntero multiplicado por <span
+class="math inline">10</span>.</li>
+<li><strong>D.</strong> Un valor aleatorio dependiente de la
+arquitectura del sistema.</li>
+</ul>
+<p><strong>Respuesta Correcta:</strong> B</p>
+<hr />
+<h3 id="pregunta-8-riesgo-de-malloc">Pregunta 8: Riesgo de
+<code>malloc()</code></h3>
+<p><strong>Pregunta:</strong> Â¿Por quÃ© es riesgoso utilizar un valor
+inmediatamente despuÃ©s de asignarlo con <code>malloc()</code> si no ha
+sido inicializado manualmente?</p>
+<ul>
+<li><strong>A.</strong> Porque el puntero asignado se vuelve
+<code>NULL</code>.</li>
+<li><strong>B.</strong> <strong>Porque el valor puede ser un â€˜valor
+basuraâ€™ (contenido de una asignaciÃ³n anterior), lo que lleva a un
+comportamiento indefinido del programa.</strong></li>
+<li><strong>C.</strong> Porque <code>malloc()</code> es mÃ¡s lento que
+<code>calloc()</code> para <em>arrays</em> grandes.</li>
+<li><strong>D.</strong> Porque la memoria se libera automÃ¡ticamente de
+forma prematura.</li>
+</ul>
+<p><strong>Respuesta Correcta:</strong> B</p>
+<hr />
+<h3 id="pregunta-9-estructura-de-argumentos">Pregunta 9: Estructura de
+Argumentos</h3>
+<p><strong>Pregunta:</strong> Â¿CuÃ¡l de las siguientes afirmaciones sobre
+la sintaxis de <code>calloc()</code> es <strong>CORRECTA</strong>?</p>
+<ul>
+<li><strong>A.</strong> El primer argumento es el tamaÃ±o total en bytes
+y el segundo es un puntero al tipo de dato.</li>
+<li><strong>B.</strong> <strong>La funciÃ³n calcula el tamaÃ±o total
+necesario multiplicando sus dos argumentos: cantidad de elementos por el
+tamaÃ±o del elemento.</strong></li>
+<li><strong>C.</strong> La funciÃ³n retorna un puntero de tipo
+<code>int*</code> por defecto, lo que elimina la necesidad de
+casteo.</li>
+<li><strong>D.</strong> Ambos argumentos deben ser siempre nÃºmeros
+enteros literales (no variables).</li>
+</ul>
+<p><strong>Respuesta Correcta:</strong> B</p>
+<hr />
+<h3 id="pregunta-10-manejo-de-errores">Pregunta 10: Manejo de
+Errores</h3>
+<p><strong>Pregunta:</strong> Al igual que <code>malloc()</code>, si
+<code>calloc()</code> falla al encontrar suficiente memoria para el
+tamaÃ±o solicitado, Â¿quÃ© valor retorna el puntero resultante?</p>
+<ul>
+<li><strong>A.</strong> Un valor de <span
+class="math inline">â€…âˆ’â€…1</span>.</li>
+<li><strong>B.</strong> La direcciÃ³n de la primera variable local en el
+<em>Stack</em> para indicar que la memoria estÃ¡ agotada.</li>
+<li><strong>C.</strong> <strong><code>NULL</code>.</strong></li>
+<li><strong>D.</strong> Un puntero al Ãºltimo bloque de memoria
+disponible.</li>
+</ul>
+<p><strong>Respuesta Correcta:</strong> C</p>
+
+</div>
+</body>
+</html>
+

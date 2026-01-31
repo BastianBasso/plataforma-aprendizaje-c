@@ -1,0 +1,219 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" crossorigin href="/assets/content-01sust.css">
+</head>
+<body>
+<div class="main-content">
+<h2 id="cuestionario-de-fundamentos-de-punteros-mÃ³dulo-6-secciÃ³n-4">ðŸ§ 
+Cuestionario de Fundamentos de Punteros (MÃ³dulo 6, SecciÃ³n 4)</h2>
+<h3 id="definiciÃ³n-y-valor-de-un-puntero">1. DefiniciÃ³n y Valor de un
+Puntero</h3>
+<p><strong>Pregunta 1:</strong> Â¿CuÃ¡l es la <strong>funciÃ³n
+esencial</strong> de una variable puntero en el lenguaje C?</p>
+<p>A. Almacenar el valor de cualquier variable (int, float, char) para
+su uso futuro. B. Declarar una variable constante cuyo valor no puede
+ser modificado. C. Almacenar una <strong>direcciÃ³n de memoria</strong>
+que identifica la ubicaciÃ³n de otra variable. D. Realizar operaciones
+aritmÃ©ticas con nÃºmeros enteros muy grandes.</p>
+<hr />
+<h3 id="sintaxis-de-declaraciÃ³n">2. Sintaxis de DeclaraciÃ³n</h3>
+<p><strong>Pregunta 2:</strong> Si necesitas declarar un puntero llamado
+<code>p_datos</code> que almacenarÃ¡ la direcciÃ³n de una variable de tipo
+<code>long long</code>, Â¿cuÃ¡l es la sintaxis de declaraciÃ³n
+correcta?</p>
+<p>A. <code>long long p_datos;</code> B.
+<code>long long &amp;p_datos;</code> C. <code>long long* p_datos;</code>
+D. <code>puntero p_datos;</code></p>
+<hr />
+<h3 id="la-importancia-del-tipo">3. La Importancia del Tipo</h3>
+<p><strong>Pregunta 3:</strong> El tipo de un puntero (ejemplo:
+<code>char*</code> vs.Â <code>int*</code>) es vital porque le indica al
+compilador el <strong>tamaÃ±o</strong> del dato apuntado. Si un puntero
+es de tipo <code>float*</code>, Â¿cuÃ¡ntos bytes moverÃ¡ el puntero si se
+realiza la operaciÃ³n de <strong>incremento</strong> (<code>p++</code>),
+asumiendo que un <code>float</code> ocupa 4 bytes?</p>
+<p>A. 1 byte B. 2 bytes C. 4 bytes D. 8 bytes</p>
+<hr />
+<h3 id="coincidencia-de-tipos">4. Coincidencia de Tipos</h3>
+<p><strong>Pregunta 4:</strong> Â¿Por quÃ© un puntero que va a almacenar
+la direcciÃ³n de una variable <code>char</code> (<strong>1 byte</strong>)
+debe ser de tipo <code>char*</code>?</p>
+<p>A. Porque cualquier otro tipo de puntero causarÃ­a un error de
+compilaciÃ³n. B. Porque le asegura al compilador que, al acceder al
+valor, debe manipular <strong>exactamente 1 byte</strong> de datos. C.
+Porque <code>char*</code> es el Ãºnico tipo de puntero que puede
+inicializarse a <code>NULL</code>. D. Porque en C, las direcciones de
+memoria de variables <code>char</code> son mÃ¡s pequeÃ±as.</p>
+<hr />
+<h3 id="declaraciÃ³n-mÃºltiple">5. DeclaraciÃ³n MÃºltiple</h3>
+<p><strong>Pregunta 5:</strong> Observa la siguiente lÃ­nea de cÃ³digo:
+<code>int* p1, p2, *p3;</code>. Â¿CuÃ¡les de estas variables <strong>son
+punteros</strong> que almacenan direcciones de memoria?</p>
+<p>A. Solo <code>p1</code>. B. <code>p1</code> y <code>p2</code>. C.
+<code>p1</code> y <code>p3</code>. D. Las tres (<code>p1</code>,
+<code>p2</code> y <code>p3</code>).</p>
+<hr />
+<h3 id="propÃ³sito-de-null">6. PropÃ³sito de <code>NULL</code></h3>
+<p><strong>Pregunta 6:</strong> Â¿CuÃ¡l es el propÃ³sito mÃ¡s importante de
+inicializar un puntero a <strong><code>NULL</code></strong> (ej:
+<code>int* p = NULL;</code>)?</p>
+<p>A. Asignar el valor cero a la variable a la que apunta. B. Declarar
+el puntero como constante e inmutable. C. Marcar el puntero como
+<strong>desvinculado de cualquier direcciÃ³n vÃ¡lida</strong>, evitando el
+uso de punteros salvajes. D. Optimizar la velocidad de acceso al dato
+apuntado.</p>
+<hr />
+<h3 id="consecuencia-de-null">7. Consecuencia de <code>NULL</code></h3>
+<p><strong>Pregunta 7:</strong> Si un programa intenta
+<strong>desreferenciar</strong> un puntero que contiene el valor
+<code>NULL</code> (acceder a <code>*p</code> cuando <code>p</code> es
+<code>NULL</code>), Â¿quÃ© error de ejecuciÃ³n comÃºn ocurrirÃ¡?</p>
+<p>A. Desbordamiento de BÃºfer (<em>Buffer Overflow</em>). B. Error de
+Tipo ImplÃ­cito. C. Falta de Memoria (<em>Out of Memory</em>). D.
+<strong>Fallo de SegmentaciÃ³n</strong> (<em>Segmentation
+Fault</em>).</p>
+<hr />
+<h3 id="puntero-vs.-contenido">8. Puntero vs.Â Contenido</h3>
+<p><strong>Pregunta 8:</strong> Si tienes el cÃ³digo conceptual
+<code>int valor = 5; int* p_val = &amp;valor;</code>. Â¿QuÃ© contiene
+exactamente la variable <code>p_val</code>?</p>
+<p>A. El nÃºmero entero <code>5</code>. B. El tipo de dato
+<code>int</code>. C. La <strong>direcciÃ³n de memoria</strong> donde estÃ¡
+almacenado el nÃºmero <code>5</code>. D. El valor <code>NULL</code> por
+ser una direcciÃ³n inicial.</p>
+<hr />
+<h3 id="la-peligrosidad-de-un-puntero-sin-inicializar">9. La
+Peligrosidad de un Puntero sin Inicializar</h3>
+<p><strong>Pregunta 9:</strong> Un <strong>puntero salvaje</strong>
+(<em>wild pointer</em>) es aquel que no se inicializa (ni con
+<code>NULL</code> ni con una direcciÃ³n vÃ¡lida). Â¿QuÃ© valor almacena
+tÃ­picamente en su interior?</p>
+<p>A. La direcciÃ³n cero (<code>0</code>), igual que <code>NULL</code>.
+B. La direcciÃ³n del <em>heap</em> mÃ¡s cercana. C. Un valor arbitrario o
+<strong>basura de memoria</strong>, haciendo su destino impredecible. D.
+La direcciÃ³n de la funciÃ³n <code>main</code>.</p>
+<hr />
+<h3 id="referencia-indirecta">10. Referencia Indirecta</h3>
+<p><strong>Pregunta 10:</strong> Los punteros permiten la
+<strong>referencia indirecta</strong>. Â¿QuÃ© significa esto en la
+prÃ¡ctica?</p>
+<p>A. Solo pueden acceder a variables declaradas en el Ã¡mbito global. B.
+Que se accede al valor de una variable utilizando su
+<strong>direcciÃ³n</strong> (el valor del puntero) en lugar de su nombre.
+C. Que la variable apuntada es siempre de tipo <code>void</code>. D. Que
+el puntero solo puede leer el valor, no modificarlo.</p>
+<h2 id="respuestas-del-cuestionario-de-fundamentos-de-punteros">âœ…
+Respuestas del Cuestionario de Fundamentos de Punteros</h2>
+<p>AquÃ­ tienes las respuestas correctas para el cuestionario sobre la
+<strong>SecciÃ³n 4: Concepto de Puntero y DirecciÃ³n de
+Memoria</strong>.</p>
+<hr />
+<h3 id="definiciÃ³n-y-valor-de-un-puntero-1">1. DefiniciÃ³n y Valor de un
+Puntero</h3>
+<p><strong>Pregunta 1:</strong> Â¿CuÃ¡l es la <strong>funciÃ³n
+esencial</strong> de una variable puntero en el lenguaje C?</p>
+<ul>
+<li><strong>Respuesta Correcta: C.</strong> Almacenar una
+<strong>direcciÃ³n de memoria</strong> que identifica la ubicaciÃ³n de
+otra variable.</li>
+</ul>
+<h3 id="sintaxis-de-declaraciÃ³n-1">2. Sintaxis de DeclaraciÃ³n</h3>
+<p><strong>Pregunta 2:</strong> Si necesitas declarar un puntero llamado
+<code>p_datos</code> que almacenarÃ¡ la direcciÃ³n de una variable de tipo
+<code>long long</code>, Â¿cuÃ¡l es la sintaxis de declaraciÃ³n
+correcta?</p>
+<ul>
+<li><strong>Respuesta Correcta: C.</strong>
+<code>long long* p_datos;</code></li>
+</ul>
+<hr />
+<h3 id="la-importancia-del-tipo-1">3. La Importancia del Tipo</h3>
+<p><strong>Pregunta 3:</strong> Si un puntero es de tipo
+<code>float*</code>, Â¿cuÃ¡ntos bytes moverÃ¡ el puntero si se realiza la
+operaciÃ³n de <strong>incremento</strong> (<code>p++</code>), asumiendo
+que un <code>float</code> ocupa 4 bytes?</p>
+<ul>
+<li><strong>Respuesta Correcta: C.</strong> <strong>4 bytes</strong> (Se
+mueve el tamaÃ±o del tipo de dato apuntado, garantizando que apunte al
+siguiente <code>float</code> en memoria).</li>
+</ul>
+<h3 id="coincidencia-de-tipos-1">4. Coincidencia de Tipos</h3>
+<p><strong>Pregunta 4:</strong> Â¿Por quÃ© un puntero que va a almacenar
+la direcciÃ³n de una variable <code>char</code> (<strong>1 byte</strong>)
+debe ser de tipo <code>char*</code>?</p>
+<ul>
+<li><strong>Respuesta Correcta: B.</strong> Porque le asegura al
+compilador que, al acceder al valor, debe manipular <strong>exactamente
+1 byte</strong> de datos.</li>
+</ul>
+<hr />
+<h3 id="declaraciÃ³n-mÃºltiple-1">5. DeclaraciÃ³n MÃºltiple</h3>
+<p><strong>Pregunta 5:</strong> Observa la siguiente lÃ­nea de cÃ³digo:
+<code>int* p1, p2, *p3;</code>. Â¿CuÃ¡les de estas variables <strong>son
+punteros</strong> que almacenan direcciones de memoria?</p>
+<ul>
+<li><strong>Respuesta Correcta: C.</strong> <code>p1</code> y
+<code>p3</code>.
+<ul>
+<li>(<code>p2</code> es una variable <code>int</code> normal, ya que el
+asterisco (<code>*</code>) solo aplica a la variable que precede o le
+sigue directamente, segÃºn el estilo).</li>
+</ul></li>
+</ul>
+<hr />
+<h3 id="propÃ³sito-de-null-1">6. PropÃ³sito de <code>NULL</code></h3>
+<p><strong>Pregunta 6:</strong> Â¿CuÃ¡l es el propÃ³sito mÃ¡s importante de
+inicializar un puntero a <strong><code>NULL</code></strong> (ej:
+<code>int* p = NULL;</code>)?</p>
+<ul>
+<li><strong>Respuesta Correcta: C.</strong> Marcar el puntero como
+<strong>desvinculado de cualquier direcciÃ³n vÃ¡lida</strong>, evitando el
+uso de punteros salvajes.</li>
+</ul>
+<h3 id="consecuencia-de-null-1">7. Consecuencia de
+<code>NULL</code></h3>
+<p><strong>Pregunta 7:</strong> Si un programa intenta
+<strong>desreferenciar</strong> un puntero que contiene el valor
+<code>NULL</code> (acceder a <code>*p</code> cuando <code>p</code> es
+<code>NULL</code>), Â¿quÃ© error de ejecuciÃ³n comÃºn ocurrirÃ¡?</p>
+<ul>
+<li><strong>Respuesta Correcta: D.</strong> <strong>Fallo de
+SegmentaciÃ³n</strong> (<em>Segmentation Fault</em>).</li>
+</ul>
+<hr />
+<h3 id="puntero-vs.-contenido-1">8. Puntero vs.Â Contenido</h3>
+<p><strong>Pregunta 8:</strong> Si tienes el cÃ³digo conceptual
+<code>int valor = 5; int* p_val = &amp;valor;</code>. Â¿QuÃ© contiene
+exactamente la variable <code>p_val</code>?</p>
+<ul>
+<li><strong>Respuesta Correcta: C.</strong> La <strong>direcciÃ³n de
+memoria</strong> donde estÃ¡ almacenado el nÃºmero <code>5</code>.</li>
+</ul>
+<h3 id="la-peligrosidad-de-un-puntero-sin-inicializar-1">9. La
+Peligrosidad de un Puntero sin Inicializar</h3>
+<p><strong>Pregunta 9:</strong> Un <strong>puntero salvaje</strong>
+(<em>wild pointer</em>) es aquel que no se inicializa (ni con
+<code>NULL</code> ni con una direcciÃ³n vÃ¡lida). Â¿QuÃ© valor almacena
+tÃ­picamente en su interior?</p>
+<ul>
+<li><strong>Respuesta Correcta: C.</strong> Un valor arbitrario o
+<strong>basura de memoria</strong>, haciendo su destino
+impredecible.</li>
+</ul>
+<h3 id="referencia-indirecta-1">10. Referencia Indirecta</h3>
+<p><strong>Pregunta 10:</strong> Los punteros permiten la
+<strong>referencia indirecta</strong>. Â¿QuÃ© significa esto en la
+prÃ¡ctica?</p>
+<ul>
+<li><strong>Respuesta Correcta: B.</strong> Que se accede al valor de
+una variable utilizando su <strong>direcciÃ³n</strong> (el valor del
+puntero) en lugar de su nombre.</li>
+</ul>
+
+</div>
+</body>
+</html>
+

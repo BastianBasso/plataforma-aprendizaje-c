@@ -1,0 +1,144 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" crossorigin href="/assets/content-01sust.css">
+</head>
+<body>
+<div class="main-content">
+<h2 id="proyecto-gestor-de-catÃ¡logo-binario-avanzado">ðŸš€ Proyecto :
+Gestor de CatÃ¡logo Binario Avanzado</h2>
+<p>El objetivo es desarrollar un <strong>Sistema de GestiÃ³n de CatÃ¡logo
+de Productos</strong> que utiliza un archivo <strong>binario</strong>
+para el almacenamiento principal y soporta funcionalidades avanzadas
+como la actualizaciÃ³n de registros en su lugar original.</p>
+<h3 id="la-estructura-de-datos-el-registro">1. La Estructura de Datos
+(El Registro)</h3>
+<p>Debes definir la siguiente estructura para representar un producto.
+Este serÃ¡ el bloque fundamental de datos que se leerÃ¡ y escribirÃ¡ en el
+archivo binario.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#define MAX_NOMBRE </span><span class="dv">50</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="kw">typedef</span> <span class="kw">struct</span> <span class="op">{</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> id_producto<span class="op">;</span>             <span class="co">// Clave Ãºnica del producto (debe ser incremental)</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">char</span> nombre<span class="op">[</span>MAX_NOMBRE<span class="op">];</span>     <span class="co">// Nombre descriptivo del producto</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> cantidad_stock<span class="op">;</span>          <span class="co">// Cantidad disponible</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="dt">float</span> precio_unidad<span class="op">;</span>         <span class="co">// Precio por unidad</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Â¡Opcional para extra-puntos! Agregar un campo de fecha o estado.</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> Producto<span class="op">;</span></span></code></pre></div>
+<h3 id="requisitos-de-io-y-funcionalidad">2. Requisitos de I/O y
+Funcionalidad âš™ï¸</h3>
+<p>Este proyecto debe integrar las siguientes tÃ©cnicas avanzadas de
+manipulaciÃ³n de archivos:</p>
+<h4 id="a.-almacenamiento-binario-y-acceso-directo">A. Almacenamiento
+Binario y Acceso Directo</h4>
+<ol type="1">
+<li><strong>Archivo Primario:</strong> El catÃ¡logo debe guardarse en un
+archivo binario llamado <strong><code>catalogo.dat</code></strong>.</li>
+<li><strong>Modo Crucial:</strong> Para la funcionalidad de
+<strong>ActualizaciÃ³n</strong>, el archivo debe abrirse en el modo de
+<strong>actualizaciÃ³n binaria (<code>"rb+"</code>)</strong>. Este modo
+permite leer y escribir, y <strong>no borra el contenido</strong> si el
+archivo ya existe.</li>
+<li><strong>Acceso a Registros:</strong> Utiliza las funciones
+<strong><code>fwrite()</code></strong> y
+<strong><code>fread()</code></strong> junto con el operador
+<strong><code>sizeof(Producto)</code></strong> para manipular registros
+completos de la estructura, garantizando la mÃ¡xima eficiencia.</li>
+</ol>
+<h4 id="b.-flujos-y-posicionamiento-avanzado">B. Flujos y
+Posicionamiento Avanzado</h4>
+<ol type="1">
+<li><strong>ActualizaciÃ³n de Registros:</strong> Implementa la funciÃ³n
+de actualizaciÃ³n de stock. Para esto, deberÃ¡s:
+<ul>
+<li>Leer secuencialmente el archivo con <code>fread</code> hasta
+encontrar el <code>id_producto</code> deseado.</li>
+<li>Una vez encontrado, usar <strong><code>fseek()</code></strong> para
+mover el puntero de archivo <strong>exactamente a la posiciÃ³n del
+registro encontrado</strong> (retrocediendo
+<code>sizeof(Producto)</code> bytes).</li>
+<li>Escribir el nuevo registro modificado en esa misma posiciÃ³n con
+<strong><code>fwrite()</code></strong>.</li>
+</ul></li>
+<li><strong>Listado:</strong> Implementa una funciÃ³n para recorrer el
+archivo desde el inicio, usando <strong><code>rewind()</code></strong> o
+<strong><code>fseek(f, 0, SEEK_SET)</code></strong> para asegurar que la
+lectura comience siempre desde el primer byte.</li>
+</ol>
+<h4 id="c.-interoperabilidad-archivos-de-texto">C. Interoperabilidad
+(Archivos de Texto)</h4>
+<ol type="1">
+<li><strong>ExportaciÃ³n CSV:</strong> Crea una funciÃ³n que lea todos los
+productos del <code>catalogo.dat</code> y genere un archivo de texto
+llamado <strong><code>exportacion.csv</code></strong>. Debe usar
+<strong><code>fprintf()</code></strong> para escribir cada registro en
+formato CSV (ej: <code>ID,Nombre,Cantidad,Precio\n</code>).</li>
+<li><strong>GeneraciÃ³n de Reporte:</strong> Crea un reporte de texto
+<strong>formateado</strong> y legible (<code>reporte.txt</code>) que
+liste todos los productos.</li>
+</ol>
+<h4 id="d.-manejo-de-errores-riguroso">D. Manejo de Errores
+Riguroso</h4>
+<p>Asegura que tu cÃ³digo no es frÃ¡gil. Cada operaciÃ³n de archivo
+(apertura, lectura, escritura) debe incluir:</p>
+<ul>
+<li><strong>VerificaciÃ³n de <code>fopen()</code>:</strong> Si devuelve
+<code>NULL</code>, imprime un mensaje de error y termina la
+operaciÃ³n.</li>
+<li><strong>VerificaciÃ³n de I/O:</strong> Comprueba el valor de retorno
+de <strong><code>fread()</code></strong> y
+<strong><code>fwrite()</code></strong> para confirmar que el nÃºmero de
+elementos leÃ­dos/escritos es exactamente <code>1</code> (o el
+esperado).</li>
+</ul>
+<hr />
+<h3 id="funcionalidades-a-implementar-menÃº">3. Funcionalidades a
+Implementar (MenÃº)</h3>
+<p>El programa debe presentar un menÃº con las siguientes opciones,
+implementadas en funciones separadas:</p>
+<ol type="1">
+<li><code>agregar_producto()</code>: Solicita los datos, asigna un
+<code>ID</code> Ãºnico (puede ser <code>contador_registros + 1</code>) y
+lo escribe al final del archivo (<code>"ab"</code>).</li>
+<li><code>mostrar_catalogo()</code>: Muestra todos los registros del
+archivo, leyendo secuencialmente con un bucle
+<code>while(fread(...) == 1)</code>.</li>
+<li><code>actualizar_stock()</code>: FunciÃ³n que implementa el
+<strong>acceso directo</strong> para modificar la cantidad de stock de
+un producto por su ID. (<strong><em>Â¡Este es el punto mÃ¡s
+difÃ­cil!</em></strong>)</li>
+<li><code>exportar_csv()</code>: Genera el archivo
+<code>exportacion.csv</code>.</li>
+<li><code>salir()</code>: Cierra todos los flujos y termina el
+programa.</li>
+</ol>
+<hr />
+<h3 id="consejo-de-profesor-el-punto-crÃ­tico">ðŸ’¡ Consejo de Profesor (El
+Punto CrÃ­tico)</h3>
+<p>El desafÃ­o principal radica en la funciÃ³n
+<code>actualizar_stock()</code>. Recuerda estas fÃ³rmulas cruciales:</p>
+<ol type="1">
+<li><p><strong>Posicionamiento de Lectura:</strong> Leer un registro es
+simple:
+<code>fread(&amp;producto, sizeof(Producto), 1, flujo)</code>.</p></li>
+<li><p><strong>Posicionamiento de Escritura para
+Sobreescritura:</strong> Una vez que <code>fread</code> lee exitosamente
+un registro, el puntero de archivo ya avanzÃ³ al inicio del
+<em>siguiente</em> registro. Para escribir sobre el que acabas de leer,
+debes retroceder:</p>
+<p><span class="math display">â€˜fseek(flujo, -sizeof(Producto),
+SEEK_CUR);â€˜</span></p>
+<ul>
+<li><code>SEEK_CUR</code> significa moverse desde la <strong>posiciÃ³n
+actual</strong>.</li>
+<li>El signo negativo (<code>-</code>) indica
+<strong>retroceder</strong>.</li>
+</ul></li>
+</ol>
+
+</div>
+</body>
+</html>
+
