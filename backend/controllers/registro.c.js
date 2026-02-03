@@ -8,14 +8,14 @@ const crypto = require('crypto');
 const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-        user: 'soportepcmultimedia@gmail.com', 
-        pass: 'vdpa kfsw bbpx bhgq' 
+        user: 'soporteplatafomac@gmail.com', 
+        pass: 'tpkt ladi ygrf rjss' 
     }
 });
 
-/**
- * Registra un nuevo usuario en el sistema
- */
+
+ // Registra un nuevo usuario en el sistema
+ 
 const register = async (req, res) => {
     console.log("Cuerpo de la solicitud (req.body):", req.body);
     const { text, email, password } = req.body; // 'text' es el nombre de usuario desde el frontend
@@ -69,70 +69,10 @@ const register = async (req, res) => {
     }
 };
 
-/**
- * Inicia sesión del usuario
- */
-const login = async (req, res) => {
-    const { user, password } = req.body;
 
-    const query = 'SELECT ID, Usuario, Contraseña FROM Usuario WHERE Usuario = $1';
-    
-    try {
-        const results = await db.query(query, [user]);
-        const rows = results.rows; 
 
-        if (rows.length > 0) {
-            const foundUser = rows[0];
-
-            const isMatch = await bcrypt.compare(password, foundUser.contraseña);
-
-            if (isMatch) {
-                // Actualizar último acceso
-                const userIdToUpdate = foundUser.id;
-                const updateLoginQuery = 'UPDATE Usuario SET Ultimo_acceso = CURRENT_TIMESTAMP WHERE ID = $1';
-
-                try {
-                    await db.query(updateLoginQuery, [userIdToUpdate]);
-                    console.log(`Fecha de último inicio de sesión actualizada para el usuario ID: ${userIdToUpdate}`);
-                } catch (updateErr) {
-                    console.error('Error al actualizar la fecha de último inicio de sesión para el usuario', userIdToUpdate, ':', updateErr);
-                }
-
-                // Establecer sesión
-                req.session.userId = foundUser.id;
-                req.session.username = foundUser.usuario;
-                req.session.loggedIn = true;
-
-                res.status(200).json({ success: true, message: 'Inicio de sesión exitoso.', userId: foundUser.id });
-                
-            } else {
-                res.status(401).json({ success: false, message: 'Credenciales inválidas (usuario o contraseña incorrecta).' });
-            }
-        } else {
-            res.status(404).json({ success: false, message: 'Credenciales inválidas (usuario o contraseña incorrecta).' });
-        }
-    } catch (err) {
-        console.error('Error de base de datos al buscar usuario (login):', err);
-        return res.status(500).json({ success: false, message: 'Error del servidor. Por favor, inténtalo de nuevo más tarde.' });
-    }
-};
-
-/**
- * Cierra la sesión del usuario
- */
-const logout = (req, res) => {
-    req.session.destroy(err => {
-        if (err) {
-            return res.status(500).json({ success: false, message: 'No se pudo cerrar la sesión.' });
-        }
-        res.clearCookie('connect.sid');
-        res.status(200).json({ success: true, message: 'Sesión cerrada exitosamente.' });
-    });
-};
-
-/**
- * Procesa solicitud de recuperación de contraseña
- */
+ // Procesa solicitud de recuperación de contraseña
+ 
 const forgotPassword = async (req, res) => {
     const { email } = req.body;
 
@@ -153,7 +93,7 @@ const forgotPassword = async (req, res) => {
         const token = crypto.randomBytes(32).toString('hex');
         const expiresAt = new Date(Date.now() + 600000); // Token expira en 10 minutos
 
-        const insertTokenQuery = 'INSERT INTO tokens_recuperar_contraseña (user_id, token, expira) VALUES ($1, $2, $3)';
+        const insertTokenQuery = 'INSERT INTO recuperar_contraseña (user_id, token, expira) VALUES ($1, $2, $3)';
         
         try {
             await db.query(insertTokenQuery, [user.id, token, expiresAt]);
@@ -162,10 +102,10 @@ const forgotPassword = async (req, res) => {
             return res.status(500).json({ success: false, message: 'Error interno del servidor al generar el enlace.' });
         }
 
-        const resetLink = `http://localhost:8080/react/restore-password?token=${token}`;
+        const resetLink = `http://localhost:8080/restore-password.html?token=${token}`;
 
         const mailOptions = {
-            from: 'soportepcmultimedia@gmail.com',
+            from: 'soporteplatafomac@gmail.com',
             to: user.correo,
             subject: 'Restablecimiento de Contraseña',
             html: `<p>Hola ${user.usuario},</p>
@@ -190,9 +130,9 @@ const forgotPassword = async (req, res) => {
     }
 };
 
-/**
- * Restablece la contraseña usando un token válido
- */
+
+ //Restablece la contraseña usando un token válido
+
 const restorePassword = async (req, res) => {
     const { token, newPassword, confirmPassword } = req.body;
 
@@ -215,7 +155,7 @@ const restorePassword = async (req, res) => {
     }
 
     try {
-        const selectTokenQuery = 'SELECT user_id, expira FROM tokens_recuperar_contraseña WHERE token = $1';
+        const selectTokenQuery = 'SELECT user_id, expira FROM recuperar_contraseña WHERE token = $1';
         const tokenResults = await db.query(selectTokenQuery, [token]);
         const tokenRecord = tokenResults.rows[0];
 
@@ -227,7 +167,7 @@ const restorePassword = async (req, res) => {
         const now = new Date();
         if (now > tokenRecord.expira) { 
             console.warn(`Intento de restablecimiento con token expirado: ${token}`);
-            db.query('DELETE FROM tokens_recuperar_contraseña WHERE token = $1', [token]).catch(deleteErr => {
+            db.query('DELETE FROM recuperar_contraseña WHERE token = $1', [token]).catch(deleteErr => {
                 if (deleteErr) console.error('Error al eliminar token expirado:', deleteErr);
             });
             return res.status(400).json({ success: false, message: 'El token de restablecimiento ha expirado. Por favor, solicita uno nuevo.' });
@@ -237,7 +177,7 @@ const restorePassword = async (req, res) => {
         const updatePasswordQuery = 'UPDATE Usuario SET Contraseña = $1 WHERE ID = $2';
         await db.query(updatePasswordQuery, [hashedPassword, tokenRecord.user_id]);
 
-        const deleteTokenQuery = 'DELETE FROM tokens_recuperar_contraseña WHERE token = $1';
+        const deleteTokenQuery = 'DELETE FROM recuperar_contraseña WHERE token = $1';
         db.query(deleteTokenQuery, [token]).then(() => {
             console.log('Token de restablecimiento eliminado correctamente.');
         }).catch(deleteErr => {
@@ -254,8 +194,6 @@ const restorePassword = async (req, res) => {
 
 module.exports = {
     register,
-    login,
-    logout,
     forgotPassword,
     restorePassword
 };
