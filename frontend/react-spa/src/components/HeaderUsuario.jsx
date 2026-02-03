@@ -5,7 +5,8 @@ export function HeaderUsuario() {
   const { status, user, logout } = useSession();
   const navigate = useNavigate();
 
-  const username = status === 'authenticated' ? user?.username : null;
+  const isAuthenticated = status === 'authenticated';
+  const username = isAuthenticated ? user?.username : null;
 
   async function onLogout() {
     await logout();
@@ -17,10 +18,12 @@ export function HeaderUsuario() {
       <div className="app-header-inner">
         <Link className="app-header-brand" to="/">Plataforma C</Link>
 
-        <nav className="app-header-nav" aria-label="Navegación">
-          <Link to="/cursos">Cursos</Link>
-          <Link to="/configuracion">Configuración</Link>
-        </nav>
+        {isAuthenticated ? (
+          <nav className="app-header-nav" aria-label="Navegación">
+            <Link to="/cursos">Cursos</Link>
+            <Link to="/configuracion">Configuración</Link>
+          </nav>
+        ) : null}
 
         <div className="app-header-user" aria-label="Usuario">
           {username ? (
@@ -30,7 +33,8 @@ export function HeaderUsuario() {
             </>
           ) : (
             <>
-              <span className="app-header-username">Invitado</span>
+              {// <span className="app-header-username">Invitado</span>
+              }
               <Link className="app-header-btn" to="/login">Login</Link>
             </>
           )}
