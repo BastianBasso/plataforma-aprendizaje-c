@@ -38,6 +38,16 @@ export function Login() {
         return;
       }
 
+      // Persistimos el userId para llamadas a progreso (/api/*).
+      // Se guarda por pestaña (sessionStorage) para no romper la sesión.
+      if (json?.userId != null) {
+        try {
+          sessionStorage.setItem('userId', String(json.userId));
+        } catch {
+          // ignore
+        }
+      }
+
       await refresh();
       navigate(from, { replace: true });
     } catch {

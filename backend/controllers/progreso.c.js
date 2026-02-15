@@ -121,8 +121,11 @@ exports.obtenerProgresoCurso = async (req, res) => {
         SELECT
             COUNT(l.ID) AS Total_Pasos,
             COUNT(pp.Leccion_ID) AS Pasos_Completados,
-            COALESCE(ROUND((CAST(COUNT(pp.Leccion_ID) AS NUMERIC) * 100) / NULLIF(COUNT(l.ID), 0), 2), 0)
-            FROM Leccion l
+            COALESCE(
+                ROUND((CAST(COUNT(pp.Leccion_ID) AS NUMERIC) * 100) / NULLIF(COUNT(l.ID), 0), 2),
+                0
+            ) AS Porcentaje
+        FROM Leccion l
         JOIN Modulo m ON m.ID = l.Modulo_ID
         LEFT JOIN Progreso pp ON pp.Leccion_ID = l.ID AND pp.Usuario_ID = $1
         WHERE m.Curso_ID = $2;
@@ -149,8 +152,11 @@ exports.obtenerProgresoModulo = async (req, res) => {
         SELECT
             COUNT(l.ID) AS Total_Pasos,
             COUNT(pp.Leccion_ID) AS Pasos_Completados,
-            COALESCE(ROUND((CAST(COUNT(pp.Leccion_ID) AS NUMERIC) * 100) / NULLIF(COUNT(l.ID), 0), 2), 0)
-            FROM Leccion l
+            COALESCE(
+                ROUND((CAST(COUNT(pp.Leccion_ID) AS NUMERIC) * 100) / NULLIF(COUNT(l.ID), 0), 2),
+                0
+            ) AS Porcentaje
+        FROM Leccion l
         LEFT JOIN Progreso pp ON pp.Leccion_ID = l.ID AND pp.Usuario_ID = $1
         WHERE l.Modulo_ID = $2; 
     `;

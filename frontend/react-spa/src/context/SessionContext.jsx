@@ -38,6 +38,11 @@ export function SessionProvider({ children }) {
 
   const logout = useCallback(async () => {
     await fetchJson('/logout', { method: 'POST' });
+    try {
+      sessionStorage.removeItem('userId');
+    } catch {
+      // ignore
+    }
     await refresh();
   }, [refresh]);
 

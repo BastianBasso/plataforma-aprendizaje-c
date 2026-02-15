@@ -5,6 +5,7 @@ const session = require('express-session');
 
 // Importar rutas modularizadas
 const authRoutes = require('./routes/registro'); // rutas de autenticación
+const loginRoutes = require('./routes/login.r.js');
 const userRoutes = require('./routes/userRoutes'); // rutas de usuario  
 const staticRoutes = require('./routes/staticRoutes'); // rutas estáticas
 const progresoRoutes = require('./routes/progreso.r.js');
@@ -40,6 +41,7 @@ app.use('/react', express.static(reactDist));
 
 // Montar rutas
 app.use('/', authRoutes); // mantiene compatibilidad con frontend existente
+app.use('/', loginRoutes); // login/logout (API)
 app.use('/', userRoutes); // rutas de usuario
 app.use('/', staticRoutes); // rutas estáticas
 app.use('/api', progresoRoutes);
