@@ -7,6 +7,8 @@ const session = require('express-session');
 const authRoutes = require('./routes/registro'); // rutas de autenticación
 const userRoutes = require('./routes/userRoutes'); // rutas de usuario  
 const staticRoutes = require('./routes/staticRoutes'); // rutas estáticas
+const progresoRoutes = require('./routes/progreso.r.js');
+
 
 // Configuración de sesión
 app.use(session({
@@ -40,6 +42,7 @@ app.use('/react', express.static(reactDist));
 app.use('/', authRoutes); // mantiene compatibilidad con frontend existente
 app.use('/', userRoutes); // rutas de usuario
 app.use('/', staticRoutes); // rutas estáticas
+app.use('/api', progresoRoutes);
 
 // Fallback SPA para React (Express 5 compatible)
 app.get(/^\/react(\/.*)?$/, (req, res) => {
