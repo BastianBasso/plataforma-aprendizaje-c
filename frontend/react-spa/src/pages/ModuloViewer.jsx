@@ -76,7 +76,8 @@ export function ModuloViewer({ modulosIndex }) {
   const handleNextClick = useCallback(() => {
     const usuarioId = getStoredUserId();
     const moduloId = inferModuloId(modulosIndex?.[mi]?.modulo);
-    const leccionId = inferLeccionIdFromFilename(file?.nombre);
+    const codigoArchivo = inferLeccionIdFromFilename(file?.nombre);
+    const leccionId = Number(`${moduloId}${codigoArchivo}`);
     void tryRegisterNextProgress({ usuarioId, moduloId, leccionId });
   }, [file?.nombre, modulosIndex, mi]);
 

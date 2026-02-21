@@ -48,8 +48,8 @@ moduloDirs.forEach((moduloDir) => {
 
 
 fs.writeFileSync(
-  path.join(__dirname, '../js-spa/data/modulosIndex.js'),
-  'export const modulosIndex = ' + JSON.stringify(output, null, 2) + ';'
+  path.join(__dirname, '../react-spa/public/data/modulosIndex.json'),
+  JSON.stringify(output, null, 2)
 );
 
 fs.writeFileSync(
