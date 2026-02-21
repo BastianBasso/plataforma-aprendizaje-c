@@ -43,7 +43,7 @@ const login = async (req, res) => {
                 res.status(401).json({ success: false, message: 'Credenciales inválidas (usuario o contraseña incorrecta).' });
             }
         } else {
-            res.status(404).json({ success: false, message: 'Credenciales inválidas (usuario o contraseña incorrecta).' });
+            res.status(401).json({ success: false, message: 'Credenciales inválidas (usuario o contraseña incorrecta).' });
         }
     } catch (err) {
         console.error('Error de base de datos al buscar usuario (login):', err);

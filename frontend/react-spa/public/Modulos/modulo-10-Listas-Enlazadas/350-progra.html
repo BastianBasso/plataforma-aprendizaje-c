@@ -1,0 +1,266 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" crossorigin href="/assets/content-01sust.css">
+</head>
+<body>
+<div class="main-content">
+<h2
+id="ejercicios-de-programaciÃ³n-creaciÃ³n-y-gestiÃ³n-bÃ¡sica-de-listas">ðŸ’»
+10 Ejercicios de ProgramaciÃ³n: CreaciÃ³n y GestiÃ³n BÃ¡sica de Listas</h2>
+<p>Asumiremos que la siguiente estructura ya estÃ¡ definida para todos
+los ejercicios:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdlib.h&gt;</span><span class="pp"> </span><span class="co">// Para malloc y free</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="kw">typedef</span> <span class="kw">struct</span> Nodo <span class="op">{</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> dato<span class="op">;</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">struct</span> Nodo <span class="op">*</span>siguiente<span class="op">;</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> Nodo<span class="op">;</span></span></code></pre></div>
+<hr />
+<h3 id="bloque-1-asignaciÃ³n-segura-y-funciÃ³n-creadora">Bloque 1:
+AsignaciÃ³n Segura y FunciÃ³n Creadora ðŸ­</h3>
+<ol type="1">
+<li><p><strong>FunciÃ³n Creadora con InicializaciÃ³n</strong></p>
+<ul>
+<li><strong>Tarea:</strong> Escribe la funciÃ³n completa
+<code>Nodo *crear_nodo(int valor)</code>.</li>
+<li><strong>Requisito:</strong> Debe asignar memoria en el
+<strong>Heap</strong>, asignar <code>valor</code> al campo
+<code>dato</code> y <strong>siempre</strong> inicializar el campo
+<code>siguiente</code> a <code>NULL</code>.</li>
+</ul></li>
+<li><p><strong>Manejo de Errores en la FÃ¡brica</strong></p>
+<ul>
+<li><strong>Tarea:</strong> Modifica la funciÃ³n <code>crear_nodo</code>
+del ejercicio anterior.</li>
+<li><strong>Requisito:</strong> Si <code>malloc()</code> retorna
+<code>NULL</code>, la funciÃ³n debe imprimir un mensaje de error en la
+consola: â€œError: No se pudo asignar memoria para el nodo.â€ y luego
+retornar <code>NULL</code>.</li>
+</ul></li>
+<li><p><strong>ComparaciÃ³n Stack vs.Â Heap (AnÃ¡lisis)</strong></p>
+<ul>
+<li><strong>Contexto:</strong> Un estudiante escribiÃ³ el siguiente
+cÃ³digo.
+<code>c     Nodo *crear_nodo_stack(int valor) {         Nodo n;         n.dato = valor;         n.siguiente = NULL;         return &amp;n; // Â¡Error!     }</code></li>
+<li><strong>Requisito:</strong> Explica por quÃ© el puntero devuelto por
+<code>crear_nodo_stack</code> es peligroso y cuÃ¡l es el error
+fundamental relacionado con la <strong>persistencia en el
+Heap</strong>.</li>
+</ul></li>
+</ol>
+<hr />
+<h3 id="bloque-2-inserciÃ³n-y-manejo-del-puntero-head">Bloque 2:
+InserciÃ³n y Manejo del Puntero <code>HEAD</code> ðŸ“Œ</h3>
+<ol start="4" type="1">
+<li><p><strong>InicializaciÃ³n de la Lista</strong></p>
+<ul>
+<li><strong>Tarea:</strong> Dentro de la funciÃ³n <code>main</code>,
+declara el puntero <code>HEAD</code> y muestra su inicializaciÃ³n
+correcta para representar una lista vacÃ­a.</li>
+<li><strong>Requisito:</strong> Llama a <code>crear_nodo(10)</code> y
+asigna su resultado a <code>HEAD</code> para crear la lista singleton
+(un solo nodo).</li>
+</ul></li>
+<li><p><strong>FunciÃ³n de InserciÃ³n al Inicio (Caso Base)</strong></p>
+<ul>
+<li><strong>Tarea:</strong> Escribe la funciÃ³n
+<code>void insertar_al_inicio(Nodo **head_ref, int valor)</code>.</li>
+<li><strong>Requisito:</strong> Dentro de la funciÃ³n, si
+<code>*head_ref</code> (el puntero <code>HEAD</code>) es
+<code>NULL</code>, el nuevo nodo debe convertirse en el
+<code>HEAD</code>. (Asume el uso de la funciÃ³n <code>crear_nodo</code>
+segura).</li>
+</ul></li>
+<li><p><strong>FunciÃ³n de InserciÃ³n al Inicio (Caso
+Completo)</strong></p>
+<ul>
+<li><strong>Tarea:</strong> Completa la funciÃ³n
+<code>insertar_al_inicio</code> del ejercicio 5.</li>
+<li><strong>Requisito:</strong> Si la lista <strong>no estÃ¡
+vacÃ­a</strong>, el nuevo nodo debe apuntar primero al nodo actual de la
+cabeza, y luego <code>HEAD</code> debe actualizarse para apuntar al
+nuevo nodo.</li>
+</ul></li>
+<li><p><strong>CreaciÃ³n de una Lista de 3 Nodos</strong></p>
+<ul>
+<li><strong>Tarea:</strong> Usando la funciÃ³n
+<code>insertar_al_inicio</code> (del Ej. 6) en el <code>main</code>,
+crea una lista con los valores <span
+class="math inline">5,â€†10,â€†15</span>, insertÃ¡ndolos en ese orden.</li>
+<li><strong>Requisito:</strong> Escribe el cÃ³digo de las tres llamadas a
+la funciÃ³n e indica el <strong>orden final</strong> de los nodos en la
+memoria (de <code>HEAD</code> al final).</li>
+</ul></li>
+</ol>
+<hr />
+<h3 id="bloque-3-buenas-prÃ¡cticas-y-anÃ¡lisis-de-errores">Bloque 3:
+Buenas PrÃ¡cticas y AnÃ¡lisis de Errores ðŸ›¡ï¸</h3>
+<ol start="8" type="1">
+<li><p><strong>VerificaciÃ³n de Puntero Doble</strong></p>
+<ul>
+<li><strong>Contexto:</strong> En el Ejercicio 6, si
+<code>crear_nodo</code> falla y devuelve <code>NULL</code>, el cÃ³digo
+posterior intentarÃ­a usar <code>NULL-&gt;siguiente</code>.</li>
+<li><strong>Requisito:</strong> Modifica tu cÃ³digo de
+<code>insertar_al_inicio</code> para que <strong>verifique</strong> si
+el nodo creado es <code>NULL</code> y salga de la funciÃ³n antes de
+intentar acceder a sus campos, previniendo un fallo de
+segmentaciÃ³n.</li>
+</ul></li>
+<li><p><strong>Rol del Puntero Doble</strong></p>
+<ul>
+<li><strong>Contexto:</strong> Analiza la firma de la funciÃ³n:
+<code>void insertar_al_inicio(Nodo **head_ref, int valor)</code>.</li>
+<li><strong>Requisito:</strong> Explica en una lÃ­nea por quÃ© es
+necesario pasar la <strong>direcciÃ³n de <code>HEAD</code>
+(<code>&amp;HEAD</code>)</strong> (un puntero doble) y no solo el valor
+de <code>HEAD</code> (un puntero simple).</li>
+</ul></li>
+<li><p><strong>DetecciÃ³n de Fuga de Memoria</strong></p>
+<ul>
+<li><p><strong>Contexto:</strong> Un estudiante escribe el siguiente
+cÃ³digo para insertar un nodo en una lista de <span
+class="math inline">10</span> elementos.</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode c"><code class="sourceCode c"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> insertar_error<span class="op">(</span>Nodo <span class="op">*</span>head<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    Nodo <span class="op">*</span>nuevo <span class="op">=</span> crear_nodo<span class="op">(</span><span class="dv">50</span><span class="op">);</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    head <span class="op">=</span> nuevo<span class="op">;</span> <span class="co">// Intenta asignar el nuevo nodo a la cabeza</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="co">// ... Lista de 10 nodos ya creada y HEAD apunta al primero ...</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    insertar_error<span class="op">(</span>HEAD<span class="op">);</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div></li>
+<li><p><strong>Requisito:</strong> Explica por quÃ© el cÃ³digo
+<strong>falla en modificar</strong> la lista y, peor aÃºn, <strong>causa
+una Fuga de Memoria</strong> masiva.</p></li>
+</ul></li>
+</ol>
+<h2 id="respuestas-creaciÃ³n-y-gestiÃ³n-bÃ¡sica-de-listas">Respuestas:
+CreaciÃ³n y GestiÃ³n BÃ¡sica de Listas ðŸ› ï¸</h2>
+<h3 id="ejercicio-1-funciÃ³n-creadora-con-inicializaciÃ³n">Ejercicio 1:
+FunciÃ³n Creadora con InicializaciÃ³n</h3>
+<div class="sourceCode" id="cb3"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>Nodo <span class="op">*</span>crear_nodo<span class="op">(</span><span class="dt">int</span> valor<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    Nodo <span class="op">*</span>nuevo_nodo <span class="op">=</span> <span class="op">(</span>Nodo <span class="op">*)</span>malloc<span class="op">(</span><span class="kw">sizeof</span><span class="op">(</span>Nodo<span class="op">));</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">// VerificaciÃ³n de error de memoria (del Ej. 2)</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>nuevo_nodo <span class="op">==</span> NULL<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>        fprintf<span class="op">(</span>stderr<span class="op">,</span> <span class="st">&quot;Error: No se pudo asignar memoria para el nodo.</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> NULL<span class="op">;</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    nuevo_nodo<span class="op">-&gt;</span>dato <span class="op">=</span> valor<span class="op">;</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    nuevo_nodo<span class="op">-&gt;</span>siguiente <span class="op">=</span> NULL<span class="op">;</span> <span class="co">// InicializaciÃ³n crucial</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> nuevo_nodo<span class="op">;</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<hr />
+<h3 id="ejercicio-2-manejo-de-errores-en-la-fÃ¡brica">Ejercicio 2: Manejo
+de Errores en la FÃ¡brica</h3>
+<p><strong>(Respuesta incluida en el cÃ³digo del Ejercicio 1)</strong>:
+La verificaciÃ³n y el mensaje de error se encuentran al inicio de la
+funciÃ³n <code>crear_nodo</code>.</p>
+<hr />
+<h3 id="ejercicio-3-comparaciÃ³n-stack-vs.-heap-anÃ¡lisis">Ejercicio 3:
+ComparaciÃ³n Stack vs.Â Heap (AnÃ¡lisis)</h3>
+<p>El puntero devuelto por <code>crear_nodo_stack</code> es peligroso
+porque apunta a una variable (<code>Nodo n</code>) que fue declarada en
+el <strong>Stack</strong> (Pila). Cuando la funciÃ³n
+<code>crear_nodo_stack</code> termina, la memoria de <code>n</code> se
+libera automÃ¡ticamente. El puntero devuelto es un <strong>puntero
+colgante</strong> (<em>Dangling Pointer</em>), y la lista no persiste,
+rompiendo el propÃ³sito de la <strong>asignaciÃ³n dinÃ¡mica</strong> en el
+<em>Heap</em>.</p>
+<hr />
+<h3 id="ejercicio-4-inicializaciÃ³n-de-la-lista">Ejercicio 4:
+InicializaciÃ³n de la Lista</h3>
+<div class="sourceCode" id="cb4"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    Nodo <span class="op">*</span>HEAD <span class="op">=</span> NULL<span class="op">;</span> <span class="co">// InicializaciÃ³n correcta: lista vacÃ­a</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">// CreaciÃ³n de lista singleton (un solo nodo)</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    HEAD <span class="op">=</span> crear_nodo<span class="op">(</span><span class="dv">10</span><span class="op">);</span> </span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="co">// ...</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<hr />
+<h3 id="ejercicio-5-y-6-inserciÃ³n-al-inicio-completa-y-segura">Ejercicio
+5 y 6: InserciÃ³n al Inicio (Completa y Segura)</h3>
+<div class="sourceCode" id="cb5"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> insertar_al_inicio<span class="op">(</span>Nodo <span class="op">**</span>head_ref<span class="op">,</span> <span class="dt">int</span> valor<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    Nodo <span class="op">*</span>nuevo_nodo <span class="op">=</span> crear_nodo<span class="op">(</span>valor<span class="op">);</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Paso 1: VerificaciÃ³n de Puntero Doble (Ej. 8)</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>nuevo_nodo <span class="op">==</span> NULL<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span><span class="op">;</span> <span class="co">// Sale si la asignaciÃ³n fallÃ³ (previene Seg Fault)</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Caso 1: Lista VacÃ­a (Ej. 5)</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(*</span>head_ref <span class="op">==</span> NULL<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>        <span class="op">*</span>head_ref <span class="op">=</span> nuevo_nodo<span class="op">;</span> <span class="co">// El nuevo nodo es HEAD</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Caso 2: Lista No VacÃ­a (Ej. 6)</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>        nuevo_nodo<span class="op">-&gt;</span>siguiente <span class="op">=</span> <span class="op">*</span>head_ref<span class="op">;</span> <span class="co">// El nuevo nodo apunta al HEAD actual</span></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>        <span class="op">*</span>head_ref <span class="op">=</span> nuevo_nodo<span class="op">;</span>            <span class="co">// HEAD se convierte en el nuevo nodo</span></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<hr />
+<h3 id="ejercicio-7-creaciÃ³n-de-una-lista-de-3-nodos">Ejercicio 7:
+CreaciÃ³n de una Lista de 3 Nodos</h3>
+<div class="sourceCode" id="cb6"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    Nodo <span class="op">*</span>HEAD <span class="op">=</span> NULL<span class="op">;</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    insertar_al_inicio<span class="op">(&amp;</span>HEAD<span class="op">,</span> <span class="dv">5</span><span class="op">);</span>  <span class="co">// HEAD apunta a 5</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    insertar_al_inicio<span class="op">(&amp;</span>HEAD<span class="op">,</span> <span class="dv">10</span><span class="op">);</span> <span class="co">// HEAD apunta a 10, que apunta a 5</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    insertar_al_inicio<span class="op">(&amp;</span>HEAD<span class="op">,</span> <span class="dv">15</span><span class="op">);</span> <span class="co">// HEAD apunta a 15, que apunta a 10</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Orden final de los datos (de HEAD al final): 15 -&gt; 10 -&gt; 5 -&gt; NULL</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>    <span class="co">// (En un programa real, se liberarÃ­a la lista aquÃ­)</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<hr />
+<h3 id="ejercicio-8-verificaciÃ³n-de-puntero-doble">Ejercicio 8:
+VerificaciÃ³n de Puntero Doble</h3>
+<p><strong>(Respuesta incluida en el cÃ³digo del Ejercicio 5 y
+6)</strong>: La verificaciÃ³n
+<code>if (nuevo_nodo == NULL) { return; }</code> es necesaria justo
+despuÃ©s de llamar a <code>crear_nodo</code> para asegurar que el
+programa <strong>no intente usar <code>-&gt;dato</code> o
+<code>-&gt;siguiente</code> en un puntero nulo</strong>, previniendo un
+fallo de segmentaciÃ³n si la memoria se agota.</p>
+<hr />
+<h3 id="ejercicio-9-rol-del-puntero-doble">Ejercicio 9: Rol del Puntero
+Doble</h3>
+<p>Se utiliza un <strong>puntero doble</strong>
+(<code>Nodo **head_ref</code>) porque la funciÃ³n necesita modificar el
+valor de la variable <code>HEAD</code> que estÃ¡ definida en la funciÃ³n
+llamadora (<code>main</code>). Un puntero simple solo permitirÃ­a
+modificar el contenido del nodo al que apunta <code>HEAD</code>, no al
+propio puntero <code>HEAD</code>. Al pasar la <strong>direcciÃ³n de
+<code>HEAD</code></strong>, la funciÃ³n puede actualizar su valor para
+que apunte al nuevo primer nodo.</p>
+<hr />
+<h3 id="ejercicio-10-detecciÃ³n-de-fuga-de-memoria">Ejercicio 10:
+DetecciÃ³n de Fuga de Memoria</h3>
+<p>El cÃ³digo <strong>falla en modificar</strong> la lista porque pasa
+<code>HEAD</code> por valor (<code>Nodo *head</code>). Dentro de
+<code>insertar_error</code>, se crea una copia local de
+<code>HEAD</code>. La lÃ­nea <code>head = nuevo;</code> solo modifica
+esta copia local, no el <code>HEAD</code> original de
+<code>main</code>.</p>
+<p>El cÃ³digo <strong>causa una Fuga de Memoria</strong> masiva porque el
+<code>HEAD</code> original de la lista de 10 nodos se mantiene sin
+cambios, pero el nuevo nodo (<code>nuevo</code>) se asigna y su puntero
+se pierde cuando la funciÃ³n <code>insertar_error</code> termina, dejando
+el nodo (<code>nuevo</code>) <strong>inaccesible</strong> en el
+<em>Heap</em>.</p>
+
+</div>
+</body>
+</html>
+

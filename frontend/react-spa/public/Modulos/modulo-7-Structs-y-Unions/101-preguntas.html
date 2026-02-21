@@ -1,0 +1,219 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" crossorigin href="/assets/content-01sust.css">
+</head>
+<body>
+<div class="main-content">
+<h2
+id="cuestionario-concepto-de-tipo-de-dato-definido-por-el-usuario-structs-y-unions">Cuestionario:
+Concepto de Tipo de Dato Definido por el Usuario (Structs y Unions)
+ðŸ§©</h2>
+<h3 id="preguntas-de-alternativas">Preguntas de Alternativas</h3>
+<hr />
+<p><strong>1. LimitaciÃ³n de Tipos Primitivos</strong> Â¿CuÃ¡l es la
+principal limitaciÃ³n que presentan los tipos de datos primitivos
+(<code>int</code>, <code>float</code>, <code>char</code>) en el lenguaje
+C?</p>
+<p>A. No permiten el uso de aritmÃ©tica de punteros. B. <strong>Cada
+variable primitiva solo puede almacenar un valor individual a la
+vez.</strong> C. Su tamaÃ±o en memoria no es fijo y puede cambiar durante
+la ejecuciÃ³n. D. Solo pueden ser declarados dentro de la funciÃ³n
+<code>main()</code>.</p>
+<hr />
+<p><strong>2. Necesidad de Modelado</strong> Si se desea modelar un
+objeto del mundo real, como un â€œEstudianteâ€, que requiere almacenar
+nombre (<code>char[]</code>), edad (<code>int</code>) y promedio
+(<code>float</code>), Â¿cuÃ¡l es el problema principal de usar variables
+primitivas separadas?</p>
+<p>A. El programa se compilarÃ¡ mÃ¡s lento debido a la gran cantidad de
+variables. B. <strong>Los datos estÃ¡n aislados y no hay una conexiÃ³n
+intrÃ­nseca que los agrupe lÃ³gicamente bajo una Ãºnica entidad.</strong>
+C. El tipo <code>char[]</code> no es compatible con <code>int</code> y
+<code>float</code>. D. Los tipos primitivos no pueden ser pasados a
+funciones.</p>
+<hr />
+<p><strong>3. Concepto de Tipo Compuesto</strong> Â¿QuÃ© tÃ©rmino se
+utiliza para describir un tipo de dato cuya estructura es establecida y
+definida por el programador para agrupar variables relacionadas?</p>
+<p>A. Tipo de dato fundamental. B. Tipo de dato abstracto. C. Tipo de
+dato atÃ³mico. D. <strong>Tipo de dato compuesto o definido por el
+usuario.</strong></p>
+<hr />
+<p><strong>4. PropÃ³sito de Modelado</strong> Â¿Por quÃ© se vuelve
+â€œinmanejableâ€ y â€œpropenso a erroresâ€ manejar los mÃºltiples atributos de
+un objeto real (como un <code>Libro</code>) con variables primitivas
+declaradas por separado?</p>
+<p>A. Los arrays no se pueden usar para almacenar cadenas de texto. B.
+La sintaxis de C no permite declarar variables con el mismo tipo de
+dato. C. <strong>No existe un mecanismo que garantice que todos esos
+atributos (ej. tÃ­tulo, pÃ¡ginas y precio) pertenezcan al mismo
+objeto.</strong> D. Las variables primitivas siempre deben ser
+inicializadas a cero.</p>
+<hr />
+<p><strong>5. Herramienta Fundamental</strong> Â¿CuÃ¡l es la herramienta o
+estructura fundamental en C que permite crear el â€œmoldeâ€ o â€œplantillaâ€
+para definir un tipo de dato compuesto?</p>
+<p>A. <code>typedef</code> B. <code>union</code> C. <code>class</code>
+D. <strong><code>struct</code> (Estructura)</strong></p>
+<hr />
+<p><strong>6. Modelado de Datos</strong> Â¿QuÃ© implica el proceso de
+<strong>modelado de datos</strong> en el contexto de la
+programaciÃ³n?</p>
+<p>A. Definir la lÃ³gica de la aplicaciÃ³n usando bucles y condiciones. B.
+Calcular el tamaÃ±o exacto de la memoria RAM requerida para el programa.
+C. <strong>Definir una estructura que encapsule todos los atributos
+relacionados de una entidad bajo un solo nombre lÃ³gico.</strong> D.
+Utilizar Ãºnicamente tipos de datos enteros.</p>
+<hr />
+<p><strong>7. Naturaleza de los Datos Agrupados</strong> Una de las
+necesidades clave para crear un tipo de dato compuesto es agrupar
+atributos que son deâ€¦</p>
+<p>A. El mismo tipo de dato (homogÃ©neos), como se hace en los arrays. B.
+<strong>Diferente tipo de dato (heterogÃ©neos).</strong> C. Solo de tipo
+puntero. D. Ãšnicamente de tipo <code>char</code>.</p>
+<hr />
+<p><strong>8. DefiniciÃ³n vs.Â Variable</strong> Al
+<strong>definir</strong> una estructura
+(<code>struct Libro { ... };</code>), Â¿quÃ© estÃ¡ creando el
+programador?</p>
+<p>A. Una variable lista para usar en la memoria. B. <strong>Una
+plantilla o receta para crear variables futuras del tipo
+<code>Libro</code>.</strong> C. Un puntero constante. D. Una
+funciÃ³n.</p>
+<hr />
+<p><strong>9. AnalogÃ­a del Molde</strong> La metÃ¡fora de un tipo de dato
+compuesto como un <strong>â€œmoldeâ€</strong> o
+<strong>â€œplantillaâ€</strong> se refiere a que:</p>
+<p>A. El tipo se adapta automÃ¡ticamente a cualquier valor. B. El
+compilador verifica si la estructura sigue un formato predefinido. C.
+<strong>Establece la forma y los atributos que todas las variables de
+ese tipo deberÃ¡n contener.</strong> D. Solo se puede usar una vez en el
+programa.</p>
+<hr />
+<p><strong>10. La RestricciÃ³n Univalor</strong> La tabla que muestra que
+<code>int edad = 30;</code> solo almacena un valor subraya la limitaciÃ³n
+de los tipos primitivos al compararlos con:</p>
+<p>A. Tipos de retorno de funciones. B. Direcciones de memoria. C.
+<strong>Entidades del mundo real que tienen mÃºltiples
+atributos.</strong> D. Los lÃ­mites de los rangos numÃ©ricos.</p>
+<hr />
+<p><strong>11. Tipo de Datos de los Miembros</strong> Los miembros
+(variables) que componen una <code>struct</code> pueden ser:</p>
+<p>A. Solo de tipos primitivos (<code>int</code>, <code>char</code>,
+<code>float</code>). B. Solo arrays. C. Solo punteros. D. <strong>De
+cualquier tipo, incluyendo primitivos, arrays y otras
+estructuras.</strong></p>
+<hr />
+<p><strong>12. OrganizaciÃ³n de Datos</strong> Â¿CÃ³mo se espera que los
+datos agrupados por una estructura (<code>struct</code>) se manejen en
+el cÃ³digo?</p>
+<p>A. De forma aislada, utilizando sus nombres individuales. B. Solo
+pueden ser accedidos mediante punteros. C. <strong>Como una Ãºnica unidad
+coherente bajo el nombre del tipo compuesto.</strong> D. Se acceden
+mediante Ã­ndices numÃ©ricos como en un array.</p>
+<hr />
+<p><strong>13. Tipo de Dato Nativo vs.Â Compuesto</strong> Â¿CuÃ¡l es la
+principal diferencia conceptual entre <code>int</code> y
+<code>struct Empleado</code>?</p>
+<p>A. <code>int</code> es un valor, mientras que
+<code>struct Empleado</code> es una direcciÃ³n. B. <code>int</code>
+almacena mÃºltiples valores; <code>struct Empleado</code> almacena uno.
+C. <strong><code>int</code> es un tipo nativo del lenguaje, mientras que
+<code>struct Empleado</code> es un tipo definido por el
+programador.</strong> D. <code>int</code> se usa en <code>main</code>,
+<code>struct Empleado</code> se usa solo en funciones.</p>
+<hr />
+<p><strong>14. Miembros de la Estructura</strong> Dentro de una
+<code>struct</code>, Â¿cÃ³mo se denominan las variables que agrupa, como
+<code>edad</code> o <code>salario</code>?</p>
+<p>A. Tipos base. B. Declaraciones. C. <strong>Miembros.</strong> D.
+Componentes.</p>
+<hr />
+<p><strong>15. AgrupaciÃ³n LÃ³gica</strong> La necesidad de
+<strong>agrupar lÃ³gicamente</strong> datos de diferente tipo se debe a
+que:</p>
+<p>A. Se busca reducir el uso de variables globales. B. C obliga a que
+todos los datos se almacenen en una <code>struct</code>. C. <strong>Se
+requiere crear una representaciÃ³n coherente y organizada de entidades
+complejas.</strong> D. La memoria solo permite almacenar datos
+contiguos.</p>
+<hr />
+<h3 id="respuestas-correctas">Respuestas Correctas</h3>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Pregunta</th>
+<th style="text-align: center;">Respuesta Correcta</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">1</td>
+<td style="text-align: center;"><strong>B</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">2</td>
+<td style="text-align: center;"><strong>B</strong></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">3</td>
+<td style="text-align: center;"><strong>D</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">4</td>
+<td style="text-align: center;"><strong>C</strong></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">5</td>
+<td style="text-align: center;"><strong>D</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">6</td>
+<td style="text-align: center;"><strong>C</strong></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">7</td>
+<td style="text-align: center;"><strong>B</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">8</td>
+<td style="text-align: center;"><strong>B</strong></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">9</td>
+<td style="text-align: center;"><strong>C</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">10</td>
+<td style="text-align: center;"><strong>C</strong></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">11</td>
+<td style="text-align: center;"><strong>D</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">12</td>
+<td style="text-align: center;"><strong>C</strong></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">13</td>
+<td style="text-align: center;"><strong>C</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">14</td>
+<td style="text-align: center;"><strong>C</strong></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">15</td>
+<td style="text-align: center;"><strong>C</strong></td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</body>
+</html>
+

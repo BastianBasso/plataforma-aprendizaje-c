@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Pensamiento Computacional, Descompocicion y abstraccion</title>
+    <link rel="stylesheet" crossorigin href="/assets/content-01sust.css">
+    <style>
+        
+    .header-c { background: #fff; border-bottom: 1px solid #e5e7eb; }
+    .logo-c {
+      background: linear-gradient(135deg,#162047 60%, #3b2fa6 100%);
+      color: #fff;
+      font-weight: 900;
+      font-size: 1.7rem;
+      border-radius: 8px;
+      width: 38px; height: 38px;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 2px 8px rgba(59,47,166,0.08);
+      margin-right: 10px;
+    }
+    .user-profile {
+      display: flex; align-items: center; gap: 10px;
+      background: #e0e7ff;
+      border-radius: 999px;
+      padding: 6px 16px;
+      font-size: 1rem;
+      color: #3730a3;
+      font-weight: 600;
+    }
+    .content-title {
+      color: #3730a3;
+      font-size: 2.2rem;
+      font-weight: 800;
+      margin: 36px auto 10px auto;
+      text-align: center;
+      letter-spacing: 1px;
+    }
+    .progress-bar-container {
+      max-width: 700px;
+      margin: 0 auto 32px auto;
+      background: #e0e7ff;
+      border-radius: 999px;
+      padding: 8px 24px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #3730a3;
+      box-shadow: 0 2px 8px rgba(59,47,166,0.08);
+    }
+    .progress-bar {
+      flex: 1;
+      height: 16px;
+      background: #c7d2fe;
+      border-radius: 999px;
+      overflow: hidden;
+      position: relative;
+    }
+    .progress-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg,#2563eb,#3b2fa6);
+      border-radius: 999px;
+      width: 12%;
+      transition: width 0.4s;
+    }
+    .modules-list {
+      max-width: 900px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+    }
+    .module-card {
+      background: linear-gradient(135deg,#2563eb 60%, #3b2fa6 100%);
+      color: #fff;
+      border-radius: 18px;
+      box-shadow: 0 6px 24px rgba(59,47,166,0.10);
+      padding: 0;
+      display: flex;
+      align-items: stretch;
+      position: relative;
+      overflow: hidden;
+      min-height: 140px;
+    }
+    .module-progress-bar {
+      width: 18px;
+      background: #a5b4fc;
+      display: flex;
+      align-items: flex-end;
+      border-radius: 18px 0 0 18px;
+      margin-right: 0;
+      position: relative;
+    }
+    .module-progress-fill {
+      width: 100%;
+      background: #3730a3;
+      border-radius: 18px 0 0 18px;
+      transition: height 0.4s;
+    }
+    .module-content {
+      flex: 1;
+      padding: 24px 32px 24px 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .module-title {
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .module-desc {
+      font-size: 1rem;
+      color: #dbeafe;
+      margin-bottom: 10px;
+    }
+    .module-topics {
+      margin-left: 1.2em;
+      margin-bottom: 10px;
+      color: #e0e7ff;
+      font-size: 0.98rem;
+    }
+    .module-card .start-btn {
+      align-self: flex-end;
+      background: linear-gradient(90deg,#4f46e5,#2563eb);
+      color: #fff;
+      font-weight: 700;
+      border: none;
+      border-radius: 999px;
+      padding: 10px 28px;
+      font-size: 1rem;
+      box-shadow: 0 2px 8px rgba(37,99,235,0.18);
+      transition: background 0.2s;
+      cursor: pointer;
+      margin-top: 8px;
+    }
+    .module-card .start-btn:hover {
+      background: linear-gradient(90deg,#2563eb,#4f46e5);
+    }
+    .footer-c {
+      background: linear-gradient(90deg,#49b3af,#25a6d7 90%);
+      color: #fff;
+      padding: 36px 0 18px 0;
+      margin-top: 48px;
+    }
+    .footer-c .footer-content {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 32px;
+      justify-content: space-between;
+      align-items: flex-start;
+      padding: 0 32px;
+    }
+    .footer-c .footer-logo {
+      display: flex; align-items: center; gap: 10px;
+      font-size: 1.5rem; font-weight: 800;
+      letter-spacing: 1px;
+    }
+    .footer-c .footer-links, .footer-c .footer-newsletter {
+      min-width: 180px;
+    }
+    .footer-c .footer-links a {
+      color: #e0f2fe;
+      display: block;
+      margin-bottom: 8px;
+      text-decoration: none;
+      font-size: 1rem;
+      transition: color 0.2s;
+    }
+    .footer-c .footer-links a:hover {
+      color: #fff;
+    }
+    .footer-c .newsletter-form {
+      display: flex; gap: 8px; margin-top: 8px;
+    }
+    .footer-c .newsletter-form input[type="email"] {
+      border-radius: 999px 0 0 999px;
+      border: none;
+      padding: 8px 16px;
+      font-size: 1rem;
+      outline: none;
+      min-width: 0;
+    }
+    .footer-c .newsletter-form button {
+      border-radius: 0 999px 999px 0;
+      border: none;
+      background: #2563eb;
+      color: #fff;
+      font-weight: 700;
+      padding: 8px 18px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .footer-c .newsletter-form button:hover {
+      background: #1e40af;
+    }
+    .footer-c .copyright {
+      text-align: center;
+      color: #bae6fd;
+      font-size: 0.95rem;
+      margin-top: 24px;
+    }
+    @media (max-width: 900px) {
+      .footer-c .footer-content { flex-direction: column; gap: 18px; align-items: flex-start; }
+      .content-c, .hero-c { padding: 24px 10px; }
+    }
+    @media (max-width: 900px) {
+      .modules-list { padding: 0 8px; }
+      .module-content { padding: 18px 10px 18px 10px; }
+      .content-title { font-size: 1.5rem; }
+    }
+  </style>
+</head>
+
+
+<body>    
+<div class="main-content">
+<h1>5. Pensamiento Computacional: Descomposicion y Abstracción</h1>
+<h2><strong>1. Definición de Pensamiento Computacional (PC)</strong></h2>
+<p>El <strong>Pensamiento Computacional</strong> (PC) no se trata de
+programar, sino de <strong>cómo pensar como un programador</strong>. Es
+una habilidad fundamental para cualquier ingeniero de <em>software</em>
+o persona que desee resolver problemas de manera estructurada, lógica y
+eficiente.</p>
+<ul>
+<li><p><strong>Definición:</strong> El Pensamiento Computacional es el
+<strong>proceso mental</strong> utilizado para formular un problema y
+concebir una solución de manera que pueda ser eficazmente ejecutada por
+un agente de procesamiento de información, como una <strong>computadora
+o un ser humano</strong>.</p></li>
+<li><p><strong>Enfoque:</strong> Se basa en una serie de técnicas
+analíticas y lógicas que nos ayudan a pasar de una situación vaga y
+compleja a un conjunto de instrucciones claras y precisas.</p></li>
+</ul>
+<p>En esencia, es la habilidad de <strong>estructurar el caos</strong>.
+Es lo que nos permite traducir una necesidad del mundo real (ej.
+"Necesito una aplicación para manejar mis gastos") en los pasos
+algorítmicos (ej. leer datos, validar entrada, sumar, guardar) que el
+lenguaje C (o cualquier otro) puede ejecutar.</p>
+<h2 id="descomposición-dividir-para-conquistar"><strong>2. Descomposición:
+Dividir para Conquistar</strong></h2>
+<p>La <strong>Descomposición</strong> es la primera técnica crítica del
+Pensamiento Computacional y la base de la ingeniería de
+<em>software</em> moderna. Se resume con la frase "Divide y
+vencerás".</p>
+<ul>
+<li><strong>Definición:</strong> La Descomposición es la capacidad de
+tomar un <strong>problema grande y complejo</strong> y dividirlo
+sistemáticamente en <strong>subproblemas</strong> o tareas más pequeñas
+que son <strong>manejables, independientes y más fáciles de
+resolver</strong> individualmente.</li>
+</ul>
+<h4 id="por-qué-descomponer">¿Por qué Descomponer?</h4>
+<ol type="1">
+<li><p><strong>Manejo de la Complejidad:</strong> Un problema grande
+(ej. construir un sistema de inventario para un almacén) puede resultar
+abrumador. Al descomponerlo, solo te enfocas en una pequeña pieza a la
+vez (ej. solo el módulo de "Añadir Producto").</p></li>
+<li><p><strong>Modularidad:</strong> Los subproblemas se convierten en
+módulos de código independientes (como funciones). Si un módulo falla,
+es mucho más fácil aislar y corregir el error sin afectar el resto del
+sistema.</p></li>
+<li><p><strong>Colaboración:</strong> Permite que un equipo trabaje
+simultáneamente en diferentes partes del proyecto.</p></li>
+</ol>
+<p>En C, la Descomposición se aplica constantemente al definir
+<strong>funciones</strong>. Cada función que escribimos (que veremos en
+módulos posteriores) es una manifestación de la Descomposición,
+encapsulando una tarea específica y resolviéndola de forma aislada.</p>
+<h2 id="aplicación-de-la-descomposición">3. Aplicación de la
+Descomposición</h2>
+<p>En la práctica de la programación, la <strong>Descomposición</strong>
+se traduce en la creación de <strong>módulos y funciones</strong> (o
+subrutinas). Es el paso lógico que va de "Quiero hacer un programa" a
+"Voy a escribir esta función primero, y luego esta otra".</p>
+<h3 id="ejemplo-práctico-cálculo-de-nómina-de-una-empresa">Ejemplo
+Práctico: Cálculo de Nómina de una Empresa</h3>
+<p>Imagina que recibes la tarea de crear un programa que calcule la
+nómina mensual para todos los empleados de una pequeña empresa. Si miras
+la tarea completa como un solo bloque, parece desalentadora:</p>
+<p><strong>Problema Complejo:</strong> "Calcular y generar los recibos
+de nómina mensuales."</p>
+<p>Aplicando la <strong>Descomposición</strong>, dividimos esta gran
+tarea en subproblemas <strong>independientes</strong> y ordenados:</p>
+<table style="width:97%;">
+<colgroup>
+<col style="width: 26%" />
+<col style="width: 39%" />
+<col style="width: 31%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>Tarea Original</strong></th>
+<th style="text-align: left;"><strong>Subproblema (Módulo)</strong></th>
+<th style="text-align: left;"><strong>Código C (Función)</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">1. Entrada de Datos</td>
+<td style="text-align: left;">Recopilar las horas trabajadas, el salario
+base y las deducciones.</td>
+<td style="text-align: left;">LeerDatosEmpleado()</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2. Cálculo de Salario Bruto</td>
+<td style="text-align: left;">Multiplicar horas por tarifa.</td>
+<td style="text-align: left;">CalcularSalarioBruto()</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">3. Cálculo de Impuestos y Deducciones</td>
+<td style="text-align: left;">Aplicar el porcentaje de impuestos,
+seguridad social y otras deducciones.</td>
+<td style="text-align: left;">CalcularImpuestos()</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">4. Cálculo de Salario Neto</td>
+<td style="text-align: left;">Restar las deducciones del salario
+bruto.</td>
+<td style="text-align: left;">CalcularSalarioNeto()</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">5. Salida de Resultados</td>
+<td style="text-align: left;">Imprimir el recibo en pantalla o guardarlo
+en un archivo.</td>
+<td style="text-align: left;">ImprimirRecibo()</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Ventaja Clave:</strong> Si tienes un error en cómo se
+calculan los impuestos, solo tienes que revisar y corregir la función
+<strong>CalcularImpuestos()</strong>, sin tocar ni preocuparte por la
+función <strong>LeerDatosEmpleado()</strong> o
+<strong>ImprimirRecibo()</strong>. Esto hace que la solución sea
+escalable, mantenible y mucho más fácil de depurar.</p>
+<h3
+id="pseudocódigo-aplicación-de-la-descomposición-cálculo-de-nómina">Pseudocódigo:
+Aplicación de la Descomposición (Cálculo de Nómina)</h3>
+<p>El pseudocódigo muestra cómo se ve esta Descomposición en términos de
+lógica de programación. Se divide el código en un <strong>Flujo
+Principal</strong> (que orquesta las llamadas) y los
+<strong>Submódulos</strong> (que realizan la tarea específica).</p>
+<h3 id="flujo-principal-el-orquestador">1. Flujo Principal (El
+Orquestador)</h3>
+<p>El flujo principal simplemente se encarga de llamar a los submódulos
+en el orden correcto, utilizando los resultados de una función como
+entrada para la siguiente.</p>
+<p>Fragmento de código:</p>
+<blockquote>
+<p>PROGRAMA PRINCIPAL</p>
+<p>// 1. Descomposición: Obtiene los datos necesarios</p>
+<p>Llamar a LeerDatosEmpleado(Horas, Tarifa)</p>
+<p>// 2. Descomposición: Calcula el salario base</p>
+<p>SalarioBruto = Llamar a CalcularSalarioBruto(Horas, Tarifa)</p>
+<p>// 3. Descomposición: Calcula las deducciones</p>
+<p>Deducciones = Llamar a CalcularImpuestos(SalarioBruto)</p>
+<p>// 4. Descomposición: Determina el pago final</p>
+<p>SalarioNeto = SalarioBruto - Deducciones</p>
+<p>// 5. Descomposición: Muestra el resultado</p>
+<p>Llamar a ImprimirRecibo(SalarioBruto, Deducciones, SalarioNeto)</p>
+<p>FIN PROGRAMA PRINCIPAL</p>
+</blockquote>
+<h3 id="submódulos-las-piezas-independientes">2. Submódulos (Las Piezas
+Independientes)</h3>
+<p>Cada submódulo resuelve solo su parte del problema. El flujo
+principal no necesita saber cómo se calcula el impuesto, solo que la
+función CalcularImpuestos le devolverá el valor correcto.</p>
+<p>Fragmento de código:</p>
+<blockquote>
+<p>// Submódulo 1: Obtiene datos del usuario.</p>
+<p>FUNCIÓN LeerDatosEmpleado(H, T):</p>
+<p>MOSTRAR "Ingrese horas trabajadas:"</p>
+<p>LEER H</p>
+<p>MOSTRAR "Ingrese tarifa por hora:"</p>
+<p>LEER T</p>
+<p>RETORNAR H, T</p>
+<p>// Submódulo 2: Calcula el salario bruto.</p>
+<p>FUNCIÓN CalcularSalarioBruto(Horas, Tarifa):</p>
+<p>SalarioBruto = Horas * Tarifa</p>
+<p>RETORNAR SalarioBruto</p>
+<p>// Submódulo 3: Calcula impuestos (ejemplo: 15%).</p>
+<p>FUNCIÓN CalcularImpuestos(Bruto):</p>
+<p>Impuesto = Bruto * 0.15</p>
+<p>RETORNAR Impuesto</p>
+<p>// Submódulo 4: Muestra la información final.</p>
+<p>FUNCIÓN ImprimirRecibo(Bruto, Ded, Neto):</p>
+<p>MOSTRAR "---------------------------"</p>
+<p>MOSTRAR "SALARIO BRUTO: " + Bruto</p>
+<p>MOSTRAR "DEDUCCIONES: " + Ded</p>
+<p>MOSTRAR "---------------------------"</p>
+<p>MOSTRAR "SALARIO NETO: " + Neto</p>
+<p>FIN FUNCIÓN</p>
+</blockquote>
+<h2 id="abstracción-ocultar-la-complejidad">4. Abstracción: Ocultar la
+Complejidad </h2>
+<p>Si la Descomposición es el arte de dividir un problema en piezas
+pequeñas, la <strong>Abstracción</strong> es el arte de
+<strong>simplificar</strong> esas piezas para que sean fáciles de usar,
+ignorando la complejidad interna.</p>
+<ul>
+<li><p><strong>Definición:</strong> La Abstracción es el acto de
+<strong>enfocarse únicamente en los detalles esenciales</strong> de un
+objeto o proceso, mientras que se <strong>ignoran o se ocultan</strong>
+todos los detalles internos, la complejidad subyacente o la información
+irrelevante para el usuario.</p></li>
+<li><p><strong>Propósito:</strong> La Abstracción crea una
+<strong>interfaz simple y clara</strong>. En programación, crea una
+"caja negra" que hace algo útil sin obligar al usuario a saber
+<em>cómo</em> lo hace.</p></li>
+</ul>
+<h4 id="la-clave-de-las-herramientas-utilizables">La Clave de las
+Herramientas Utilizables</h4>
+<p>La Abstracción es lo que permite que una tecnología sea utilizada por
+millones de personas. Si tuvieras que entender cada detalle mecánico,
+eléctrico y de <em>software</em> de un teléfono inteligente antes de
+hacer una llamada, la tecnología no sería escalable.</p>
+<p>Al usar la Abstracción, el programador define:</p>
+<ol type="1">
+<li><p><strong>Qué se puede hacer</strong> (las funciones o
+métodos).</p></li>
+<li><p><strong>Qué se necesita</strong> (las entradas o
+parámetros).</p></li>
+<li><p><strong>Qué se obtiene</strong> (la salida o el
+resultado).</p></li>
+</ol>
+<p>Todo el proceso interno, largo y complejo, permanece oculto detrás de
+una interfaz simple.</p>
+<h2><strong>5. Abstracción en la Vida Cotidiana</strong></h2>
+<p>La <strong>Abstracción</strong> no es solo un concepto de
+programación; la usamos constantemente en nuestra vida diaria para
+manejar sistemas complejos de manera simple.</p>
+<p>La mejor analogía para ilustrar la Abstracción es la
+<strong>conducción de un automóvil</strong>:</p>
+<ol type="1">
+<li><p><strong>La Interfaz (La Abstracción):</strong> El conductor
+interactúa con una interfaz simple: el pedal del acelerador. El
+conductor solo necesita saber que al presionar el pedal, el coche avanza
+más rápido.</p></li>
+<li><p><strong>La Complejidad Oculta (Los Detalles
+Irrelevantes):</strong> Detrás del pedal, ocurre una enorme cascada de
+procesos mecánicos, electrónicos y físicos: el sensor de posición del
+acelerador envía una señal a la ECU (unidad de control del motor), la
+ECU calcula la mezcla óptima de aire y combustible, ajusta la inyección
+de combustible, modifica el tiempo de encendido, etc.</p></li>
+<li><p><strong>El Beneficio:</strong> Para usar el coche, el conductor
+<strong>no necesita</strong> un título en ingeniería automotriz. El
+proceso complejo está <strong>abstraído</strong> y oculto, dejando solo
+el control esencial (el pedal).</p></li>
+</ol>
+<p>De manera similar, en programación, cuando usas una función, te
+beneficias de la abstracción: solo ves el "pedal" (el nombre de la
+función y sus parámetros), y el compilador o la librería se encarga de
+todo el "motor" interno.</p>
+<p>¡Claro! Añadiremos código simple en C para ejemplificar la
+<strong>Abstracción</strong> a través de las funciones.</p>
+<h2 id="aplicación-de-la-abstracción-en-c-funciones">6. Aplicación de la
+Abstracción en C (Funciones) 📦</h2>
+<p>En el Lenguaje C, el concepto de <strong>Abstracción</strong> se
+materializa principalmente a través de las
+<strong>Funciones</strong>.</p>
+<p>Una función es la herramienta de C que encapsula una tarea específica
+(resultado de la Descomposición) y la presenta al resto del programa
+como una <strong>"caja negra"</strong> simple y bien definida.</p>
+<h4 id="la-función-como-caja-negra">La Función como "Caja Negra"</h4>
+<p>Cuando se utiliza una función, el programador solo necesita enfocarse
+en tres aspectos:</p>
+<ol type="1">
+<li><p><strong>Entrada (<em>Input</em>):</strong> ¿Qué datos necesita la
+función para trabajar? (Los <strong>parámetros</strong> o
+argumentos).</p></li>
+<li><p><strong>Proceso (Abstraído):</strong> ¿Qué hace la función? (El
+código interno, que permanece oculto).</p></li>
+<li><p><strong>Salida (<em>Output</em>):</strong> ¿Qué resultado
+devuelve la función? (El valor de <strong>retorno</strong>).</p></li>
+</ol>
+<p><strong>Ejemplo de Abstracción en Código C:</strong></p>
+<p>Considera el problema de calcular el área de un círculo. El detalle
+(la fórmula matemática) se oculta dentro de una función simple que solo
+requiere el radio.</p>
+<!--
+<p>#include &lt;stdio.h&gt;</p>
+<p>// 1. Declaración de la función (Interfaz):</p>
+<p>// El usuario sabe que necesita un 'float' (radio) y obtendrá un
+'float' (área).</p>
+<p>float calcularAreaCirculo(float radio) {</p>
+<p>    // 2. Proceso (Complejidad Oculta/Abstracción):</p>
+<p>    // El usuario no necesita ver ni entender esta fórmula
+interna.</p>
+<p>    const float PI = 3.14159;</p>
+<p>    float area = PI * radio * radio;</p>
+<p>    return area;</p>
+<p>}</p>
+<p>int main(void) {</p>
+<p>    float radio_ejemplo = 5.0;</p>
+<p>    // 3. Uso de la Abstracción:</p>
+<p>    // Llamamos a la función sin preocuparnos por la fórmula
+interna.</p>
+<p>    float resultado = calcularAreaCirculo(radio_ejemplo);</p>
+<p>   </p>
+<p>    printf("El área de un círculo con radio %.2f es: %.2f\n",
+radio_ejemplo, resultado);</p>
+<p>   </p>
+<p>    return 0;</p>
+<p>}</p>
+-->
+<div class="c2h-code">
+  <div class="c2h-code-inner">
+    <table>
+      <tr><td>1</td><td><span class="c2h-directive">#include</span> <span class="c2h-val-str">&lt;stdio.h&gt;</span></td></tr>
+      <tr><td>2</td><td></td></tr>
+      <tr><td>3</td><td><span class="c2h-comment">// 1. Declaración de la función (Interfaz):</span></td></tr>
+      <tr><td>4</td><td><span class="c2h-comment">      // El usuario sabe que necesita un 'float' (radio) y obtendrá un 'float' (área).</span></td></tr>
+      <tr><td>5</td><td></td></tr>
+      <tr><td>6</td><td><span class="c2h-kword c2h-kword-float">float</span> <span class="c2h-identifier c2h-fdeclname">calcularAreaCirculo</span>(<span class="c2h-kword c2h-kword-float">float</span> <span class="c2h-identifier">radio</span>) {</td></tr>
+      <tr><td>7</td><td></td></tr>
+      <tr><td>8</td><td>    <span class="c2h-comment">// 2. Proceso (Complejidad Oculta/Abstracción):</span></td></tr> 
+      <tr><td>9</td><td>    <span class="c2h-comment">      // El usuario no necesita ver ni entender esta fórmula interna.</span></td></tr>
+      <tr><td>10</td><td>    <span class="c2h-kword c2h-kword-const">const</span> <span class="c2h-kword c2h-kword-float">float</span> <span class="c2h-identifier">PI</span> <span class="c2h-operator">=</span> <span class="c2h-val-flt">3.14159</span>;</td></tr>
+      <tr><td>11</td><td>    <span class="c2h-kword c2h-kword-float">float</span> <span class="c2h-identifier">area</span> <span class="c2h-operator">=</span> <span class="c2h-identifier">PI</span> <span class="c2h-operator">*</span> <span class="c2h-identifier">radio</span> <span class="c2h-operator">*</span> <span class="c2h-identifier">radio</span>;</td></tr>
+      <tr><td>12</td><td>    <span class="c2h-kword c2h-kword-return">return</span> <span class="c2h-identifier">area</span>;</td></tr>
+      <tr><td>13</td><td></td></tr>
+      <tr><td>14</td><td>}</td></tr>
+      <tr><td>15</td><td></td></tr>
+      <tr><td>16</td><td><span class="c2h-kword c2h-kword-int">int</span> <span class="c2h-identifier c2h-fdeclname">main</span>(<span class="c2h-kword c2h-kword-void">void</span>) {</td></tr>
+      <tr><td>17</td><td></td></tr>
+      <tr><td>18</td><td>    <span class="c2h-kword c2h-kword-float">float</span> <span class="c2h-identifier">radio_ejemplo</span> <span class="c2h-operator">=</span> <span class="c2h-val-flt">5.0</span>;</td></tr>
+      <tr><td>19</td><td></td></tr>
+      <tr><td>20</td><td>    <span class="c2h-comment">// 3. Uso de la Abstracción:</span></td></tr>
+      <tr><td>21</td><td>    <span class="c2h-comment">     // Llamamos a la función sin preocuparnos por la fórmula interna.</span></td></tr>
+      <tr><td>22</td><td>    <span class="c2h-kword c2h-kword-float">float</span> <span class="c2h-identifier">resultado</span> <span class="c2h-operator">=</span> <span class="c2h-identifier c2h-fcallname">calcularAreaCirculo</span>(<span class="c2h-identifier">radio_ejemplo</span>);</td></tr>
+      <tr><td>23</td><td></td></tr>
+      <tr><td>24</td><td>    <span class="c2h-identifier c2h-fcallname">printf</span>(<span class="c2h-val-str">"El área de un círculo con radio %.2f es: %.2f\n"</span>, <span class="c2h-identifier">radio_ejemplo</span>, <span class="c2h-identifier">resultado</span>);</td></tr>
+      <tr><td>25</td><td></td></tr>
+      <tr><td>26</td><td>    <span class="c2h-kword c2h-kword-return">return</span> <span class="c2h-val-int">0</span>;</td></tr>
+      <tr><td>27</td><td>}</td></tr>
+      <tr><td>28</td><td></td></tr>
+    </table>
+  </div>
+</div>
+
+<br>
+
+<p>Esta delegación de la complejidad al cuerpo de la función es la
+<strong>Abstracción</strong> en su forma más pura dentro de C,
+permitiendo que el código sea modular, legible y fácil de
+reutilizar.</p>
+<h2 id="abstracción-a-través-de-librerías">7. Abstracción a Través de
+Librerías</h2>
+<p>La forma más común y poderosa de experimentar la
+<strong>Abstracción</strong> en el Lenguaje C es a través del uso de
+<strong>Librerías</strong>.</p>
+<p>Una <strong>Librería Estándar</strong> (como stdio.h) es una
+colección de funciones preescritas que resuelven tareas comunes y
+complejas. Al incluirlas, se delega el trabajo de bajo nivel a código
+que ya fue escrito y probado.</p>
+<h4 id="printf-la-abstracción-en-acción">printf(): La Abstracción en
+Acción</h4>
+<p>Considera la función que ya conocemos, printf(), que utilizamos para
+mostrar texto en la consola:</p>
+<ol type="1">
+<li><p><strong>La Complejidad Oculta:</strong> ¿Qué tan difícil es
+realmente hacer que un texto aparezca en la pantalla? El proceso real
+implica:</p>
+<ul>
+<li><p>Manejo de la memoria de video.</p></li>
+<li><p>Interacción directa con el sistema operativo.</p></li>
+<li><p>Conversión de caracteres en píxeles.</p></li>
+<li><p>Sincronización con el <em>hardware</em> del monitor.</p></li>
+</ul></li>
+<li><p><strong>La Abstracción Simple:</strong> Como programadores, no
+escribimos el código de bajo nivel para interactuar con el monitor o la
+tarjeta gráfica. Simplemente usamos la función printf().</p></li>
+</ol>
+<p>Al usar la directiva <strong>#include &lt;stdio.h&gt;</strong>,
+estamos solicitando al preprocesador que haga accesible esta
+abstracción.</p>
+<!--
+<p>#include &lt;stdio.h&gt; // Hacemos la ABSTRACCIÓN disponible</p>
+<p>int main(void) {</p>
+<p>    // Usamos la abstracción 'printf' como una 'caja negra'.</p>
+<p>    // No necesitamos saber CÓMO se dibuja el texto en la
+pantalla,</p>
+<p>    // solo que al darle una cadena, el texto aparecerá.</p>
+<p>    printf("¡Estoy usando una abstracción de la librería
+estándar!\n");</p>
+<p>   </p>
+<p>    return 0;</p>
+<p>}</p>
+-->
+<div class="c2h-code">
+  <div class="c2h-code-inner">
+    <table>
+      <tr><td>1</td><td><span class="c2h-directive">#include</span> <span class="c2h-val-str">&lt;stdio.h&gt;</span> <span class="c2h-comment">// Hacemos la ABSTRACCIÓN disponible</span></td></tr>
+      <tr><td>2</td><td></td></tr>
+      <tr><td>3</td><td><span class="c2h-kword c2h-kword-int">int</span> <span class="c2h-identifier c2h-fdeclname">main</span>(<span class="c2h-kword c2h-kword-void">void</span>) {</td></tr>
+      <tr><td>4</td><td>    <span class="c2h-comment">// Usamos la abstracción 'printf' como una 'caja negra'.</span></td></tr>
+      <tr><td>5</td><td>    <span class="c2h-comment">// No necesitamos saber CÓMO se dibuja el texto en la pantalla,</span></td></tr>
+      <tr><td>6</td><td>    <span class="c2h-comment">// solo que al darle una cadena, el texto aparecerá.</span></td></tr>
+      <tr><td>7</td><td>    <span class="c2h-identifier c2h-fcallname">printf</span>(<span class="c2h-val-str">"¡Estoy usando una abstracción de la librería estándar!\n"</span>);</td></tr>
+      <tr><td>8</td><td>    <span class="c2h-kword c2h-kword-return">return</span> <span class="c2h-val-int">0</span>;</td></tr>
+      <tr><td>9</td><td>}</td></tr>
+      <tr><td>10</td><td></td></tr>
+    </table>
+  </div>
+</div>
+<br>
+<p>Al final, la Abstracción nos permite ser mucho más productivos. En
+lugar de resolver el complejo problema de <strong>comunicación con la
+pantalla</strong>, nos enfocamos en el problema de
+<strong>lógica</strong> que realmente queremos resolver (ej. calcular la
+nómina o gestionar un juego).</p>
+
+</div>
+</body>
+

@@ -1,0 +1,546 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" crossorigin href="/assets/content-01sust.css">
+</head>
+<body>
+<div class="main-content">
+<p><strong>15 Ejercicios de ProgramaciÃ³n: Ãmbito (Scope) de
+Variables</strong></p>
+<p>Estos ejercicios cubren la definiciÃ³n de <strong>Ãmbito</strong>, la
+distinciÃ³n entre <strong>Variables Locales</strong> y <strong>Variables
+Globales</strong>, el manejo de sus riesgos, y la <strong>Precedencia de
+Ãmbito</strong> (Shadowing).</p>
+<p><strong>Bloque 1: Ãmbito Local y DetecciÃ³n de Errores ðŸ”’</strong></p>
+<ol type="1">
+<li><p><strong>DetecciÃ³n de Error de Ãmbito Local</strong></p>
+<ul>
+<li><p><strong>Tarea:</strong> Escribe una funciÃ³n obtener_edad() donde
+declares la variable edad_local = 30; y luego uses return
+edad_local;.</p></li>
+<li><p><strong>Requisito:</strong> En main(), intenta imprimir
+directamente la variable <strong>edad_local</strong> (sin llamar a la
+funciÃ³n).</p></li>
+<li><p><strong>Resultado Esperado:</strong> Comenta que esto generarÃ­a
+un <strong>error de compilaciÃ³n</strong> porque edad_local es local a la
+funciÃ³n y no visible en main().</p></li>
+</ul></li>
+<li><p><strong>Ãmbito de Bucle (for)</strong></p>
+<ul>
+<li><p><strong>Tarea:</strong> En main(), crea un bucle for y declara la
+variable de control int i = 0; dentro del for.</p></li>
+<li><p><strong>Requisito:</strong> DespuÃ©s del bucle, intenta imprimir
+la variable <strong>i</strong>.</p></li>
+<li><p><strong>Resultado Esperado:</strong> Comenta que en C moderno,
+esto generarÃ­a un error de compilaciÃ³n, demostrando que el Ã¡mbito de i
+se limita al bloque del bucle.</p></li>
+</ul></li>
+<li><p><strong>ColisiÃ³n de Nombres Segura</strong></p>
+<ul>
+<li><p><strong>Tarea:</strong> Crea dos funciones, funcion_a() y
+funcion_b(). Declara int contador = 1; dentro de cada una.</p></li>
+<li><p><strong>Requisito:</strong> Haz que cada funciÃ³n imprima su
+contador. Demuestra que el uso del mismo nombre <strong>no genera
+conflicto</strong> debido al Ã¡mbito local.</p></li>
+</ul></li>
+<li><p><strong>Ciclo de Vida Local</strong></p>
+<ul>
+<li><p><strong>FunciÃ³n:</strong> void inicializar_local()</p></li>
+<li><p><strong>Tarea:</strong> Declara int temp = 100; e
+imprÃ­mela.</p></li>
+<li><p><strong>Requisito:</strong> Explica que al finalizar la ejecuciÃ³n
+de inicializar_local(), la variable temp se <strong>destruye</strong> y
+su valor se pierde, no pudiendo ser accedido por main().</p></li>
+</ul></li>
+<li><p><strong>Ãmbito Anidado</strong></p>
+<ul>
+<li><p><strong>Tarea:</strong> En main(), declara int fuera = 5;. Luego,
+abre un nuevo bloque de cÃ³digo con {} (como un if o simplemente un
+bloque suelto). Dentro de ese bloque, declara int dentro = 10;.</p></li>
+<li><p><strong>Requisito:</strong> Imprime fuera y dentro dentro del
+bloque. Luego, intenta imprimir <strong>dentro</strong> fuera del
+bloque.</p></li>
+<li><p><strong>Resultado Esperado:</strong> fuera es visible en ambos
+lados, pero dentro solo lo es dentro de las llaves anidadas.</p></li>
+</ul></li>
+</ol>
+<p><strong>Bloque 2: Riesgos y Uso de Variables Globales ðŸŒ</strong></p>
+<ol start="6" type="1">
+<li><p><strong>Acceso MÃºltiple a Variable Global</strong></p>
+<ul>
+<li><p><strong>Tarea:</strong> Declara una variable
+<strong>global</strong> float precio_base = 50.0f;.</p></li>
+<li><p><strong>Requisito:</strong> Crea dos funciones: sumar_iva() y
+restar_descuento(). Haz que ambas accedan y modifiquen
+<strong>precio_base</strong>. Llama a las funciones en main() y muestra
+el valor final.</p></li>
+<li><p><strong>Advertencia:</strong> Comenta que esta es una
+<strong>dependencia oculta</strong> y un riesgo de efectos
+colaterales.</p></li>
+</ul></li>
+<li><p><strong>InicializaciÃ³n por Defecto</strong></p>
+<ul>
+<li><p><strong>Tarea:</strong> Declara una variable
+<strong>global</strong> int estado; sin asignarle ningÃºn valor.</p></li>
+<li><p><strong>Requisito:</strong> En main(), imprime directamente el
+valor de estado.</p></li>
+<li><p><strong>Resultado Esperado:</strong> El valor debe ser
+<strong>0</strong>, demostrando la inicializaciÃ³n automÃ¡tica de las
+variables globales.</p></li>
+</ul></li>
+<li><p><strong>Riesgo de void y Globales</strong></p>
+<ul>
+<li><p><strong>Tarea:</strong> Declara una global int error_code =
+0;.</p></li>
+<li><p><strong>FunciÃ³n:</strong> void realizar_operacion_riesgosa(int
+divisor)</p></li>
+<li><p><strong>Requisito:</strong> Si divisor es 0, la funciÃ³n debe
+modificar la variable global a error_code = 404;. En main(), llama a la
+funciÃ³n con divisor = 0 e imprime error_code despuÃ©s.</p></li>
+<li><p><strong>Concepto Clave:</strong> Muestra cÃ³mo una funciÃ³n void
+puede comunicar un resultado (un "efecto colateral") a travÃ©s de una
+global.</p></li>
+</ul></li>
+<li><p><strong>Dependencia Oculta</strong></p>
+<ul>
+<li><p><strong>Tarea:</strong> Crea una global int factor = 2;.</p></li>
+<li><p><strong>FunciÃ³n:</strong> int calcular(int x) (retorna x *
+factor).</p></li>
+<li><p><strong>Requisito:</strong> En main(), imprime calcular(10).
+Luego, cambia el valor de la global a factor = 5; e imprime calcular(10)
+de nuevo.</p></li>
+<li><p><strong>ConclusiÃ³n:</strong> Muestra que el resultado de
+calcular() cambia sin que sus parÃ¡metros de entrada hayan cambiado
+(dependencia oculta en la global).</p></li>
+</ul></li>
+<li><p><strong>Global char Array (Riesgo de ColisiÃ³n)</strong></p>
+<ul>
+<li><p><strong>Tarea:</strong> Declara una variable global char
+buffer[100];.</p></li>
+<li><p><strong>Requisito:</strong> Define una funciÃ³n void
+leer_entrada() que use este buffer. Comenta que si otra funciÃ³n en el
+mismo o diferente archivo usara una global llamada buffer sin saberlo,
+esto generarÃ­a un riesgo de <strong>colisiÃ³n y corrupciÃ³n de
+datos</strong>.</p></li>
+</ul></li>
+</ol>
+<p><strong>Bloque 3: Precedencia de Ãmbito (Shadowing) ðŸŒ‘</strong></p>
+<ol start="11" type="1">
+<li><p><strong>Shadowing Simple</strong></p>
+<ul>
+<li><p><strong>Tarea:</strong> Declara una global int vida =
+100;.</p></li>
+<li><p><strong>FunciÃ³n:</strong> void aplicar_danio()</p></li>
+<li><p><strong>Requisito:</strong> Dentro de la funciÃ³n, declara una
+local int vida = 50;. Luego, imprime la variable vida dentro de la
+funciÃ³n. DespuÃ©s, imprime la variable vida en main().</p></li>
+<li><p><strong>Resultado:</strong> La funciÃ³n usa el 50 (local), y
+main() mantiene el 100 (global).</p></li>
+</ul></li>
+<li><p><strong>ModificaciÃ³n con Shadowing</strong></p>
+<ul>
+<li><p><strong>Tarea:</strong> Usa la global int valor = 10;.</p></li>
+<li><p><strong>FunciÃ³n:</strong> void modificar_valor()</p></li>
+<li><p><strong>Requisito:</strong> Dentro de la funciÃ³n, declara int
+valor = 5; y luego realiza valor = valor + 20;. Imprime el valor en la
+funciÃ³n. Luego, imprime el valor en main().</p></li>
+<li><p><strong>ConclusiÃ³n:</strong> El valor global (10) permanece sin
+cambios, mientras que el valor local (5) se modificÃ³ a 25.</p></li>
+</ul></li>
+<li><p><strong>Shadowing y ParÃ¡metros</strong></p>
+<ul>
+<li><p><strong>Tarea:</strong> Usa la global float tasa =
+0.5f;.</p></li>
+<li><p><strong>FunciÃ³n:</strong> void calcular_tasa_local(float
+tasa)</p></li>
+<li><p><strong>Requisito:</strong> La funciÃ³n recibe un parÃ¡metro
+llamado <strong>tasa</strong>. Imprime este parÃ¡metro dentro de la
+funciÃ³n. Luego, imprime la global tasa en main().</p></li>
+<li><p><strong>Concepto Clave:</strong> El parÃ¡metro
+<strong>tasa</strong> actÃºa como una variable local y tambiÃ©n ensombrece
+a la global.</p></li>
+</ul></li>
+<li><p><strong>Acceso Sin Shadowing</strong></p>
+<ul>
+<li><p><strong>Tarea:</strong> Usa la global char tipo = 'G';.</p></li>
+<li><p><strong>FunciÃ³n:</strong> void imprimir_tipo()</p></li>
+<li><p><strong>Requisito:</strong> La funciÃ³n <strong>no</strong>
+declara una variable local llamada tipo. Imprime la variable tipo dentro
+de la funciÃ³n.</p></li>
+<li><p><strong>Resultado:</strong> La funciÃ³n accederÃ¡ y mostrarÃ¡
+correctamente la variable <strong>global</strong> tipo, ya que no hay
+ninguna local que la ensombrezca.</p></li>
+</ul></li>
+<li><p><strong>Doble Shadowing (Local Anidada)</strong></p>
+<ul>
+<li><p><strong>Tarea:</strong></p>
+<ol type="1">
+<li><p>Global: int nivel = 1;</p></li>
+<li><p>FunciÃ³n main(): int nivel = 2; (Shadowing 1)</p></li>
+<li><p>Bloque anidado dentro de main(): int nivel = 3; (Shadowing</p>
+<ol start="2" type="1">
+<li></li>
+</ol></li>
+</ol></li>
+<li><p><strong>Requisito:</strong> Imprime nivel despuÃ©s de cada
+declaraciÃ³n.</p></li>
+<li><p><strong>ConclusiÃ³n:</strong> Muestra cÃ³mo el Ã¡mbito mÃ¡s interno
+(3) siempre tiene precedencia, y al salir de un bloque, se revela el
+Ã¡mbito inmediatamente superior (2, y finalmente 1).</p></li>
+</ul></li>
+</ol>
+<p><strong>Respuestas de los 15 Ejercicios: Ãmbito (Scope) de
+Variables</strong></p>
+<p>AquÃ­ estÃ¡n las soluciones en cÃ³digo C para los ejercicios,
+demostrando la visibilidad, el ciclo de vida, y las interacciones entre
+variables <strong>locales</strong> y <strong>globales</strong>.</p>
+<p><strong>Bloque 1: Ãmbito Local y DetecciÃ³n de Errores ðŸ”’</strong></p>
+<ol type="1">
+<li><strong>DetecciÃ³n de Error de Ãmbito Local</strong></li>
+</ol>
+<blockquote>
+<p>C</p>
+<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
+<p>int obtener_edad() {</p>
+<p>int edad_local = 30; // Variable LOCAL de obtener_edad()</p>
+<p>return edad_local;</p>
+<p>} // edad_local deja de existir aquÃ­.</p>
+<p>int main() {</p>
+<p>// int edad_recibida = obtener_edad(); // SoluciÃ³n correcta</p>
+<p>// Â¡ERROR! La variable 'edad_local' no es visible en este Ã¡mbito.</p>
+<p>// printf("La edad local es: %d\n", edad_local);</p>
+<p>// GenerarÃ­a un error de compilaciÃ³n: error: â€˜edad_localâ€™ undeclared
+(first use in this function)</p>
+<p>printf("El error ha sido comentado. Para acceder, se debe usar el
+valor retornado.\n");</p>
+<p>return 0;</p>
+<p>}</p>
+</blockquote>
+<ol start="2" type="1">
+<li><strong>Ãmbito de Bucle (for)</strong></li>
+</ol>
+<blockquote>
+<p>C</p>
+<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
+<p>int main() {</p>
+<p>for (int i = 0; i &lt; 3; i++) { // 'i' es LOCAL al bloque del
+for</p>
+<p>printf("Dentro del bucle, i = %d\n", i);</p>
+<p>} // 'i' deja de existir aquÃ­ (Ãmbito limitado por el bloque).</p>
+<p>// Â¡ERROR! 'i' no es accesible fuera del bucle.</p>
+<p>// printf("Fuera del bucle, i = %d\n", i);</p>
+<p>// GenerarÃ­a un error de compilaciÃ³n.</p>
+<p>printf("El Ã¡mbito de la variable 'i' terminÃ³ al salir del
+bucle.\n");</p>
+<p>return 0;</p>
+<p>}</p>
+</blockquote>
+<ol start="3" type="1">
+<li><strong>ColisiÃ³n de Nombres Segura</strong></li>
+</ol>
+<blockquote>
+<p>C</p>
+<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
+<p>void funcion_a() {</p>
+<p>int contador = 1; // LOCAL e independiente</p>
+<p>printf(" [Funcion A] Contador: %d\n", contador);</p>
+<p>}</p>
+<p>void funcion_b() {</p>
+<p>int contador = 50; // LOCAL e independiente (no choca con el contador
+de A)</p>
+<p>printf(" [Funcion B] Contador: %d\n", contador);</p>
+<p>}</p>
+<p>int main() {</p>
+<p>printf("Las variables con el mismo nombre NO colisionan gracias al
+Ãmbito Local.\n");</p>
+<p>funcion_a();</p>
+<p>funcion_b();</p>
+<p>return 0;</p>
+<p>}</p>
+</blockquote>
+<ol start="4" type="1">
+<li><strong>Ciclo de Vida Local</strong></li>
+</ol>
+<blockquote>
+<p>C</p>
+<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
+<p>void inicializar_local() {</p>
+<p>int temp = 100; // Se crea 'temp'</p>
+<p>printf(" [FUNCIÃ“N] El valor de temp es: %d\n", temp);</p>
+<p>} // Al finalizar, la memoria de 'temp' se libera (se destruye).</p>
+<p>int main() {</p>
+<p>printf("Llamando a la funciÃ³n para crear y destruir la variable
+local.\n");</p>
+<p>inicializar_local();</p>
+<p>printf("El ciclo de vida de 'temp' ha terminado; no se puede acceder
+aquÃ­.\n");</p>
+<p>return 0;</p>
+<p>}</p>
+</blockquote>
+<ol start="5" type="1">
+<li><strong>Ãmbito Anidado</strong></li>
+</ol>
+<blockquote>
+<p>C</p>
+<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
+<p>int main() {</p>
+<p>int fuera = 5; // Ãmbito externo (main)</p>
+<p>printf("1. Fuera del bloque anidado: 'fuera' = %d\n", fuera); //
+'fuera' es visible</p>
+<p>{ // Inicio del bloque anidado (Nuevo Ã¡mbito)</p>
+<p>int dentro = 10; // Ãmbito anidado (mÃ¡s interno)</p>
+<p>printf("2. Dentro del bloque anidado: 'fuera' = %d\n", fuera); //
+'fuera' sigue siendo visible</p>
+<p>printf("3. Dentro del bloque anidado: 'dentro' = %d\n", dentro); //
+'dentro' es visible aquÃ­</p>
+<p>} // Fin del bloque anidado. 'dentro' deja de existir.</p>
+<p>// Â¡ERROR! 'dentro' no estÃ¡ definida en este Ã¡mbito.</p>
+<p>// printf("4. Fuera del bloque anidado: 'dentro' = %d\n",
+dentro);</p>
+<p>printf("4. La variable 'dentro' no es visible al salir del bloque
+anidado.\n");</p>
+<p>return 0;</p>
+<p>}</p>
+</blockquote>
+<p><strong>Bloque 2: Riesgos y Uso de Variables Globales ðŸŒ</strong></p>
+<ol start="6" type="1">
+<li><strong>Acceso MÃºltiple a Variable Global</strong></li>
+</ol>
+<blockquote>
+<p>C</p>
+<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
+<p>// Variable GLOBAL</p>
+<p>float precio_base = 50.0f;</p>
+<p>void sumar_iva() {</p>
+<p>// Modifica la global: 50.0f * 1.10 = 55.0f</p>
+<p>precio_base = precio_base * 1.10f;</p>
+<p>printf(" [IVA] Precio despuÃ©s de IVA: %.2f\n", precio_base);</p>
+<p>}</p>
+<p>void restar_descuento() {</p>
+<p>// Modifica la global: 55.0f - 5.0f = 50.0f</p>
+<p>precio_base = precio_base - 5.0f;</p>
+<p>printf(" [DESC] Precio despuÃ©s de descuento: %.2f\n",
+precio_base);</p>
+<p>}</p>
+<p>int main() {</p>
+<p>printf("Precio inicial: %.2f\n", precio_base); // 50.0f</p>
+<p>sumar_iva();</p>
+<p>restar_descuento();</p>
+<p>printf("Precio final (GLOBAL modificado): %.2f\n", precio_base); //
+50.0f</p>
+<p>// Advertencia: Ambas funciones tienen una dependencia oculta en
+'precio_base'.</p>
+<p>return 0;</p>
+<p>}</p>
+</blockquote>
+<ol start="7" type="1">
+<li><strong>InicializaciÃ³n por Defecto</strong></li>
+</ol>
+<blockquote>
+<p>C</p>
+<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
+<p>// Variable GLOBAL declarada, pero SIN inicializaciÃ³n explÃ­cita.</p>
+<p>int estado;</p>
+<p>int main() {</p>
+<p>// Las variables globales son inicializadas por defecto a cero por el
+compilador.</p>
+<p>printf("El valor por defecto de la variable global 'estado' es:
+%d\n", estado); // Imprime 0</p>
+<p>return 0;</p>
+<p>}</p>
+</blockquote>
+<ol start="8" type="1">
+<li><strong>Riesgo de void y Globales</strong></li>
+</ol>
+<blockquote>
+<p>C</p>
+<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
+<p>// Global para comunicar el estado de error</p>
+<p>int error_code = 0;</p>
+<p>// FunciÃ³n void que produce un EFECTO COLATERAL (cambiar la
+global)</p>
+<p>void realizar_operacion_riesgosa(int divisor) {</p>
+<p>if (divisor == 0) {</p>
+<p>printf(" [ERROR] Intento de divisiÃ³n por cero detectado.\n");</p>
+<p>error_code = 404; // Comunica el error modificando la variable
+global.</p>
+<p>return;</p>
+<p>}</p>
+<p>printf(" OperaciÃ³n exitosa.\n");</p>
+<p>}</p>
+<p>int main() {</p>
+<p>printf("CÃ³digo de error inicial: %d\n", error_code); // 0</p>
+<p>realizar_operacion_riesgosa(0); // Llama a la funciÃ³n que modifica la
+global</p>
+<p>printf("CÃ³digo de error final (leÃ­do desde la global): %d\n",
+error_code); // 404</p>
+<p>// Riesgo: El resultado (404) no se obtuvo por return, sino por una
+modificaciÃ³n oculta.</p>
+<p>return 0;</p>
+<p>}</p>
+</blockquote>
+<ol start="9" type="1">
+<li><strong>Dependencia Oculta</strong></li>
+</ol>
+<blockquote>
+<p>C</p>
+<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
+<p>// Global que actÃºa como factor de cÃ¡lculo</p>
+<p>int factor = 2;</p>
+<p>// FunciÃ³n que depende de la variable global 'factor'</p>
+<p>int calcular(int x) {</p>
+<p>return x * factor;</p>
+<p>}</p>
+<p>int main() {</p>
+<p>// 1. Primer cÃ¡lculo (factor = 2)</p>
+<p>printf("CÃ¡lculo 1 (factor 2): %d\n", calcular(10)); // 20</p>
+<p>// Se cambia el estado GLOBAL sin que 'calcular()' lo sepa.</p>
+<p>factor = 5;</p>
+<p>// 2. Segundo cÃ¡lculo (factor = 5)</p>
+<p>printf("CÃ¡lculo 2 (factor 5): %d\n", calcular(10)); // 50</p>
+<p>// ConclusiÃ³n: La funciÃ³n 'calcular(10)' dio resultados diferentes
+sin que su argumento (10) cambiara.</p>
+<p>return 0;</p>
+<p>}</p>
+</blockquote>
+<ol start="10" type="1">
+<li><strong>Global char Array (Riesgo de ColisiÃ³n)</strong></li>
+</ol>
+<blockquote>
+<p>C</p>
+<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
+<p>#<strong>include</strong> &lt;string.h&gt;</p>
+<p>// Global que es vulnerable a colisiones de nombres.</p>
+<p>char buffer[100] = "Datos iniciales";</p>
+<p>void leer_entrada() {</p>
+<p>printf(" [Funcion] Antes de leer: %s\n", buffer);</p>
+<p>strcpy(buffer, "Nuevos datos leÃ­dos"); // Modifica la global</p>
+<p>}</p>
+<p>int main() {</p>
+<p>printf("Main lee antes: %s\n", buffer);</p>
+<p>leer_entrada();</p>
+<p>printf("Main lee despuÃ©s: %s\n", buffer);</p>
+<p>// Comentario: Si otra parte del programa declara accidentalmente una
+global 'char buffer[50]',</p>
+<p>// podrÃ­a haber una colisiÃ³n, causando errores difÃ­ciles de rastrear
+o corrupciÃ³n de memoria.</p>
+<p>return 0;</p>
+<p>}</p>
+</blockquote>
+<p><strong>Bloque 3: Precedencia de Ãmbito (Shadowing) ðŸŒ‘</strong></p>
+<ol start="11" type="1">
+<li><strong>Shadowing Simple</strong></li>
+</ol>
+<blockquote>
+<p>C</p>
+<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
+<p>// Global: int vida = 100</p>
+<p>int vida = 100;</p>
+<p>void aplicar_danio() {</p>
+<p>// LOCAL: Ensombra a la global</p>
+<p>int vida = 50;</p>
+<p>printf(" [FUNCIÃ“N] La variable 'vida' LOCAL es: %d\n", vida); //
+Imprime 50</p>
+<p>}</p>
+<p>int main() {</p>
+<p>printf("1. En main: 'vida' GLOBAL es: %d\n", vida); // Imprime
+100</p>
+<p>aplicar_danio();</p>
+<p>// Al regresar, la global es visible de nuevo.</p>
+<p>printf("2. En main: 'vida' GLOBAL sigue siendo: %d\n", vida); //
+Imprime 100</p>
+<p>return 0;</p>
+<p>}</p>
+</blockquote>
+<ol start="12" type="1">
+<li><strong>ModificaciÃ³n con Shadowing</strong></li>
+</ol>
+<blockquote>
+<p>C</p>
+<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
+<p>int valor = 10; // GLOBAL</p>
+<p>void modificar_valor() {</p>
+<p>int valor = 5; // LOCAL, Ensombramiento</p>
+<p>valor = valor + 20; // Modifica el LOCAL: 5 + 20 = 25</p>
+<p>printf(" [FUNCIÃ“N] 'valor' LOCAL modificado a: %d\n", valor); //
+Imprime 25</p>
+<p>}</p>
+<p>int main() {</p>
+<p>printf("Valor GLOBAL inicial: %d\n", valor); // 10</p>
+<p>modificar_valor();</p>
+<p>// El global se mantuvo intacto.</p>
+<p>printf("Valor GLOBAL final: %d\n", valor); // 10</p>
+<p>return 0;</p>
+<p>}</p>
+</blockquote>
+<ol start="13" type="1">
+<li><strong>Shadowing y ParÃ¡metros</strong></li>
+</ol>
+<blockquote>
+<p>C</p>
+<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
+<p>float tasa = 0.5f; // GLOBAL (50%)</p>
+<p>// El parÃ¡metro 'tasa' actÃºa como una variable LOCAL y ensombra a la
+global.</p>
+<p>void calcular_tasa_local(float tasa) {</p>
+<p>printf(" [FUNCIÃ“N] Usando la 'tasa' LOCAL (parÃ¡metro): %.2f\n",
+tasa); // Imprime 0.10</p>
+<p>// Cualquier cambio aquÃ­ afectarÃ­a al parÃ¡metro, no a la global.</p>
+<p>}</p>
+<p>int main() {</p>
+<p>printf("Tasa GLOBAL inicial: %.2f\n", tasa); // 0.50</p>
+<p>calcular_tasa_local(0.10f); // El argumento 0.10f se copia al
+parÃ¡metro 'tasa'.</p>
+<p>printf("Tasa GLOBAL final: %.2f\n", tasa); // 0.50 (Sin cambios)</p>
+<p>return 0;</p>
+<p>}</p>
+</blockquote>
+<ol start="14" type="1">
+<li><strong>Acceso Sin Shadowing</strong></li>
+</ol>
+<blockquote>
+<p>C</p>
+<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
+<p>char tipo = 'G'; // GLOBAL</p>
+<p>void imprimir_tipo() {</p>
+<p>// NO hay declaraciÃ³n local llamada 'tipo'. Se usa la global.</p>
+<p>printf(" [FUNCIÃ“N] Accediendo a 'tipo' GLOBAL: %c\n", tipo); //
+Imprime G</p>
+<p>}</p>
+<p>int main() {</p>
+<p>printf("Tipo GLOBAL antes: %c\n", tipo); // G</p>
+<p>imprimir_tipo();</p>
+<p>// Si la funciÃ³n hubiera modificado 'tipo', el cambio se reflejarÃ­a
+aquÃ­.</p>
+<p>return 0;</p>
+<p>}</p>
+</blockquote>
+<ol start="15" type="1">
+<li><strong>Doble Shadowing (Local Anidada)</strong></li>
+</ol>
+<blockquote>
+<p>C</p>
+<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
+<p>int nivel = 1; // 1. GLOBAL</p>
+<p>int main() {</p>
+<p>int nivel = 2; // 2. LOCAL de main (Ensombra al global)</p>
+<p>printf("1. Ãmbito de main (Nivel 2): %d\n", nivel);</p>
+<p>{ // Inicio del bloque anidado</p>
+<p>int nivel = 3; // 3. LOCAL del bloque (Ensombra al nivel 2 y 1)</p>
+<p>printf("2. Ãmbito Anidado (Nivel 3): %d\n", nivel);</p>
+<p>} // Fin del bloque anidado. Nivel 3 desaparece.</p>
+<p>printf("3. Ãmbito de main (Nivel 2 otra vez): %d\n", nivel); //
+Vuelve a ser 2.</p>
+<p>// Acceder a la variable global es complejo y no se recomienda.</p>
+<p>// La variable global 'nivel' (1) no es accesible por su nombre
+aquÃ­.</p>
+<p>return 0;</p>
+<p>}</p>
+</blockquote>
+
+</div>
+</body>
+</html>
+

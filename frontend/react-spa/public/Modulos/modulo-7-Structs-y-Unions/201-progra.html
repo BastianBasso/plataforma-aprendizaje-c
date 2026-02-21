@@ -1,0 +1,482 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" crossorigin href="/assets/content-01sust.css">
+</head>
+<body>
+<div class="main-content">
+<h2 id="ejercicios-sintaxis-declaraciÃ³n-e-inicializaciÃ³n-de-structs">10
+Ejercicios: Sintaxis, DeclaraciÃ³n e InicializaciÃ³n de Structs</h2>
+<h3 id="bloque-1-definiciÃ³n-y-declaraciÃ³n-bÃ¡sica">Bloque 1: DefiniciÃ³n y
+DeclaraciÃ³n BÃ¡sica</h3>
+<p><strong>1) DefiniciÃ³n de una Estructura Simple
+(<code>struct</code>)</strong> Define una estructura con la etiqueta
+<code>Fecha</code> que contenga tres miembros enteros: <code>dia</code>,
+<code>mes</code> y <code>anio</code>. Dentro de la funciÃ³n
+<code>main()</code>, declara una variable llamada
+<code>fecha_actual</code> del tipo <code>struct Fecha</code>.</p>
+<p>Input de Ejemplo: (Ninguna)</p>
+<p>Output Esperado: (CompilaciÃ³n exitosa. No hay salida en consola).</p>
+<p><strong>2) Estructura con Miembro Array</strong> Define una
+estructura con la etiqueta <code>Producto</code> que contenga un
+<code>int id_producto</code> y un <code>char nombre[40]</code> (para el
+nombre del producto). Dentro de <code>main()</code>, declara dos
+variables de este tipo: <code>item1</code> y <code>item2</code>.</p>
+<p>Input de Ejemplo: (Ninguna)</p>
+<p>Output Esperado: (CompilaciÃ³n exitosa. Se reservaron 2 espacios de
+memoria para Producto).</p>
+<p><strong>3) DeclaraciÃ³n y Acceso BÃ¡sico a Miembros</strong> Define una
+<code>struct Circulo</code> con un miembro <code>float radio</code>.
+Declara una variable <code>c1</code> y asÃ­gnale el valor
+<code>5.5</code> al miembro <code>radio</code> (usando el operador
+<code>.</code>). Imprime el valor asignado.</p>
+<p>Input de Ejemplo: (Ninguna)</p>
+<p>Output Esperado: Radio del circulo: 5.50</p>
+<h3 id="bloque-2-mÃ©todos-de-inicializaciÃ³n">Bloque 2: MÃ©todos de
+InicializaciÃ³n</h3>
+<p><strong>4) InicializaciÃ³n Posicional (<code>{}</code>)</strong>
+Define una <code>struct Horario</code> con los miembros
+<code>int horas</code>, <code>int minutos</code> y
+<code>int segundos</code>. Inicializa una variable
+<code>inicio_clase</code> usando la <strong>inicializaciÃ³n
+posicional</strong> (<code>{}</code>) con los valores 10, 30, y 0,
+respectivamente. Imprime los valores.</p>
+<p>Input de Ejemplo: (Ninguna)</p>
+<p>Output Esperado: Hora de inicio: 10:30:00</p>
+<p><strong>5) InicializaciÃ³n Designada
+(<code>.miembro = valor</code>)</strong> Utiliza la estructura
+<code>Horario</code> del ejercicio anterior. Inicializa una variable
+<code>fin_clase</code> usando la <strong>inicializaciÃ³n
+designada</strong>, especificando los valores en el siguiente orden:
+<code>minutos = 45</code>, <code>horas = 12</code>,
+<code>segundos = 0</code>. Imprime los valores.</p>
+<p>Input de Ejemplo: (Ninguna)</p>
+<p>Output Esperado: Hora de fin: 12:45:00</p>
+<p><strong>6) InicializaciÃ³n Parcial Designada</strong> Define una
+<code>struct Venta</code> con <code>int factura_id</code>,
+<code>float monto_total</code> y <code>int items_vendidos</code>.
+Inicializa una variable <code>transaccion</code> usando
+<strong>inicializaciÃ³n designada</strong>, pero <strong>omite</strong>
+el miembro <code>monto_total</code>. Imprime los tres miembros.
+(Verifica que el miembro omitido se inicialice a 0.0f).</p>
+<p>Input de Ejemplo: (Ninguna)</p>
+<p>Output Esperado: ID Factura: 500, Items: 5, Monto: 0.00</p>
+<h3 id="bloque-3-uso-de-typedef-para-aliasing">Bloque 3: Uso de
+<code>typedef</code> para Aliasing</h3>
+<p><strong>7) CreaciÃ³n de Alias con <code>typedef</code></strong> Define
+una <code>struct Coordenada</code> con miembros <code>int x</code> y
+<code>int y</code>. Utiliza <code>typedef</code> para crear un alias mÃ¡s
+simple llamado <code>Coord</code>. Declara dos variables:
+<code>pos_a</code> y <code>pos_b</code> usando el <strong>alias
+<code>Coord</code></strong>.</p>
+<p>Input de Ejemplo: (Ninguna)</p>
+<p>Output Esperado: (CompilaciÃ³n exitosa. No hay salida en consola).</p>
+<p><strong>8) Combinando <code>typedef</code> e InicializaciÃ³n
+Designada</strong> Define una <code>struct</code> llamada
+<code>Dimension</code> que contenga <code>int ancho</code> y
+<code>int alto</code>, y utiliza <code>typedef</code> para crear el
+alias <code>Dim</code>. Declara e inicializa una variable
+<code>pantalla</code> usando el alias <code>Dim</code> y la
+<strong>inicializaciÃ³n designada</strong> con <code>ancho = 1920</code>
+y <code>alto = 1080</code>. Imprime el alto.</p>
+<p>Input de Ejemplo: (Ninguna)</p>
+<p>Output Esperado: Altura de la pantalla: 1080</p>
+<p><strong>9) <code>typedef</code> en Arrays de Estructuras</strong>
+Define una <code>struct</code> para un color RGB
+(<code>int rojo, verde, azul</code>) y usa <code>typedef</code> para
+crear el alias <code>Color</code>. Declara un <strong>array</strong>
+llamado <code>paleta</code> de tamaÃ±o 3, usando el alias
+<code>Color</code>. Inicializa el primer elemento del array
+(<code>paleta[0]</code>) con los valores <code>255, 0, 0</code> (usando
+inicializaciÃ³n posicional). Imprime el valor de <code>rojo</code> del
+primer elemento.</p>
+<p>Input de Ejemplo: (Ninguna)</p>
+<p>Output Esperado: Valor Rojo en paleta[0]: 255</p>
+<p><strong>10) Refuerzo de Sintaxis con y sin
+<code>typedef</code></strong> Define una estructura simple
+<code>struct Animal</code> con un miembro <code>int edad</code>.</p>
+<ol type="1">
+<li>Declara una variable <code>perro</code> usando la <strong>sintaxis
+larga y obligatoria</strong> (<code>struct Animal</code>).</li>
+<li>Ahora, define la misma estructura <code>struct Animal</code> <em>de
+nuevo</em> pero envuelta en un <code>typedef</code> para crear el alias
+<code>Mascota</code>.</li>
+<li>Declara una variable <code>gato</code> usando el <strong>alias
+<code>Mascota</code></strong>. Asigna e imprime la edad de ambas
+variables.</li>
+</ol>
+<p>Input de Ejemplo: (Ninguna)</p>
+<p>Output Esperado: Edad del perro: 5 Edad del gato: 3</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Pista para el ejercicio:</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co">// struct Animal perro;</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co">// typedef struct { ... } Mascota;</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co">// Mascota gato;</span></span></code></pre></div>
+<h2 id="soluciones-sintaxis-declaraciÃ³n-e-inicializaciÃ³n-de-structs">âœ…
+Soluciones: Sintaxis, DeclaraciÃ³n e InicializaciÃ³n de Structs</h2>
+<h3 id="bloque-1-definiciÃ³n-y-declaraciÃ³n-bÃ¡sica-1">Bloque 1: DefiniciÃ³n
+y DeclaraciÃ³n BÃ¡sica</h3>
+<h4 id="definiciÃ³n-de-una-estructura-simple-struct">1) DefiniciÃ³n de una
+Estructura Simple (<code>struct</code>)</h4>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Input de Ejemplo</th>
+<th style="text-align: center;">Output Esperado</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">(Ninguna)</td>
+<td style="text-align: center;">(CompilaciÃ³n exitosa. No hay salida en
+consola).</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb2"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co">// DefiniciÃ³n de la estructura</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="kw">struct</span> Fecha <span class="op">{</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> dia<span class="op">;</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> mes<span class="op">;</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> anio<span class="op">;</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="op">};</span> <span class="co">// Â¡Punto y coma obligatorio!</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    <span class="co">// DeclaraciÃ³n de una variable usando la sintaxis larga</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    <span class="kw">struct</span> Fecha fecha_actual<span class="op">;</span> </span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<h4 id="estructura-con-miembro-array">2) Estructura con Miembro
+Array</h4>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Input de Ejemplo</th>
+<th style="text-align: center;">Output Esperado</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">(Ninguna)</td>
+<td style="text-align: center;">(CompilaciÃ³n exitosa. Se reservaron 2
+espacios de memoria para Producto).</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb3"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co">// DefiniciÃ³n de la estructura con un array (cadena)</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="kw">struct</span> Producto <span class="op">{</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> id_producto<span class="op">;</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">char</span> nombre<span class="op">[</span><span class="dv">40</span><span class="op">];</span> <span class="co">// Array de caracteres para el nombre</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="op">};</span> </span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    <span class="co">// DeclaraciÃ³n de dos variables del tipo struct Producto</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    <span class="kw">struct</span> Producto item1<span class="op">;</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    <span class="kw">struct</span> Producto item2<span class="op">;</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<h4 id="declaraciÃ³n-y-acceso-bÃ¡sico-a-miembros">3) DeclaraciÃ³n y Acceso
+BÃ¡sico a Miembros</h4>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Input de Ejemplo</th>
+<th style="text-align: center;">Output Esperado</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">(Ninguna)</td>
+<td style="text-align: center;">Radio del circulo: 5.50</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb4"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="kw">struct</span> Circulo <span class="op">{</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">float</span> radio<span class="op">;</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="op">};</span> </span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    <span class="kw">struct</span> Circulo c1<span class="op">;</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Acceso y asignaciÃ³n de valor al miembro &#39;radio&#39; usando el operador punto (.)</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    c1<span class="op">.</span>radio <span class="op">=</span> <span class="fl">5.5</span><span class="bu">f</span><span class="op">;</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;Radio del circulo: </span><span class="sc">%.2f\n</span><span class="st">&quot;</span><span class="op">,</span> c1<span class="op">.</span>radio<span class="op">);</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<hr />
+<h3 id="bloque-2-mÃ©todos-de-inicializaciÃ³n-1">Bloque 2: MÃ©todos de
+InicializaciÃ³n</h3>
+<h4 id="inicializaciÃ³n-posicional">4) InicializaciÃ³n Posicional
+(<code>{}</code>)</h4>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Input de Ejemplo</th>
+<th style="text-align: center;">Output Esperado</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">(Ninguna)</td>
+<td style="text-align: center;">Hora de inicio: 10:30:00</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb5"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="kw">struct</span> Horario <span class="op">{</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> horas<span class="op">;</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> minutos<span class="op">;</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> segundos<span class="op">;</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>    <span class="co">// InicializaciÃ³n por orden: {horas, minutos, segundos}</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>    <span class="kw">struct</span> Horario inicio_clase <span class="op">=</span> <span class="op">{</span><span class="dv">10</span><span class="op">,</span> <span class="dv">30</span><span class="op">,</span> <span class="dv">0</span><span class="op">};</span> </span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;Hora de inicio: </span><span class="sc">%d</span><span class="st">:</span><span class="sc">%02d</span><span class="st">:</span><span class="sc">%02d\n</span><span class="st">&quot;</span><span class="op">,</span> </span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>           inicio_clase<span class="op">.</span>horas<span class="op">,</span> </span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>           inicio_clase<span class="op">.</span>minutos<span class="op">,</span> </span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>           inicio_clase<span class="op">.</span>segundos<span class="op">);</span></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<h4 id="inicializaciÃ³n-designada-.miembro-valor">5) InicializaciÃ³n
+Designada (<code>.miembro = valor</code>)</h4>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Input de Ejemplo</th>
+<th style="text-align: center;">Output Esperado</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">(Ninguna)</td>
+<td style="text-align: center;">Hora de fin: 12:45:00</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb6"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="kw">struct</span> Horario <span class="op">{</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> horas<span class="op">;</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> minutos<span class="op">;</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> segundos<span class="op">;</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>    <span class="co">// InicializaciÃ³n designada: el orden no importa, se nombra cada campo.</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>    <span class="kw">struct</span> Horario fin_clase <span class="op">=</span> <span class="op">{</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>        <span class="op">.</span>minutos <span class="op">=</span> <span class="dv">45</span><span class="op">,</span> </span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>        <span class="op">.</span>horas <span class="op">=</span> <span class="dv">12</span><span class="op">,</span> </span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>        <span class="op">.</span>segundos <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>    <span class="op">};</span></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;Hora de fin: </span><span class="sc">%d</span><span class="st">:</span><span class="sc">%02d</span><span class="st">:</span><span class="sc">%02d\n</span><span class="st">&quot;</span><span class="op">,</span> </span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>           fin_clase<span class="op">.</span>horas<span class="op">,</span> </span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>           fin_clase<span class="op">.</span>minutos<span class="op">,</span> </span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>           fin_clase<span class="op">.</span>segundos<span class="op">);</span></span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<h4 id="inicializaciÃ³n-parcial-designada">6) InicializaciÃ³n Parcial
+Designada</h4>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Input de Ejemplo</th>
+<th style="text-align: center;">Output Esperado</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">(Ninguna)</td>
+<td style="text-align: center;">ID Factura: 500, Items: 5, Monto:
+0.00</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb7"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="kw">struct</span> Venta <span class="op">{</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> factura_id<span class="op">;</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">float</span> monto_total<span class="op">;</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> items_vendidos<span class="op">;</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>    <span class="co">// InicializaciÃ³n parcial: .monto_total se omite y se inicializa a 0.0f</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>    <span class="kw">struct</span> Venta transaccion <span class="op">=</span> <span class="op">{</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>        <span class="op">.</span>factura_id <span class="op">=</span> <span class="dv">500</span><span class="op">,</span> </span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>        <span class="op">.</span>items_vendidos <span class="op">=</span> <span class="dv">5</span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>    <span class="op">};</span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;ID Factura: </span><span class="sc">%d</span><span class="st">, Items: </span><span class="sc">%d</span><span class="st">, Monto: </span><span class="sc">%.2f\n</span><span class="st">&quot;</span><span class="op">,</span> </span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>           transaccion<span class="op">.</span>factura_id<span class="op">,</span> </span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>           transaccion<span class="op">.</span>items_vendidos<span class="op">,</span> </span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>           transaccion<span class="op">.</span>monto_total<span class="op">);</span></span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<hr />
+<h3 id="bloque-3-uso-de-typedef-para-aliasing-1">Bloque 3: Uso de
+<code>typedef</code> para Aliasing</h3>
+<h4 id="creaciÃ³n-de-alias-con-typedef">7) CreaciÃ³n de Alias con
+<code>typedef</code></h4>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Input de Ejemplo</th>
+<th style="text-align: center;">Output Esperado</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">(Ninguna)</td>
+<td style="text-align: center;">(CompilaciÃ³n exitosa. No hay salida en
+consola).</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb8"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co">// Uso de typedef para crear un alias mÃ¡s simple</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="kw">typedef</span> <span class="kw">struct</span> Coordenada <span class="op">{</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> x<span class="op">;</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> y<span class="op">;</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> Coord<span class="op">;</span> <span class="co">// Alias creado</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>    <span class="co">// DeclaraciÃ³n usando el alias (mÃ¡s limpio)</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>    Coord pos_a<span class="op">;</span> </span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>    Coord pos_b<span class="op">;</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<h4 id="combinando-typedef-e-inicializaciÃ³n-designada">8) Combinando
+<code>typedef</code> e InicializaciÃ³n Designada</h4>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Input de Ejemplo</th>
+<th style="text-align: center;">Output Esperado</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">(Ninguna)</td>
+<td style="text-align: center;">Altura de la pantalla: 1080</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb9"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="kw">typedef</span> <span class="kw">struct</span> Dimension <span class="op">{</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> ancho<span class="op">;</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> alto<span class="op">;</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> Dim<span class="op">;</span> <span class="co">// Alias &#39;Dim&#39;</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>    <span class="co">// DeclaraciÃ³n usando el alias e InicializaciÃ³n Designada</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>    Dim pantalla <span class="op">=</span> <span class="op">{</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>        <span class="op">.</span>ancho <span class="op">=</span> <span class="dv">1920</span><span class="op">,</span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>        <span class="op">.</span>alto <span class="op">=</span> <span class="dv">1080</span></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>    <span class="op">};</span></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;Altura de la pantalla: </span><span class="sc">%d\n</span><span class="st">&quot;</span><span class="op">,</span> pantalla<span class="op">.</span>alto<span class="op">);</span></span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<h4 id="typedef-en-arrays-de-estructuras">9) <code>typedef</code> en
+Arrays de Estructuras</h4>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Input de Ejemplo</th>
+<th style="text-align: center;">Output Esperado</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">(Ninguna)</td>
+<td style="text-align: center;">Valor Rojo en paleta[0]: 255</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb10"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="co">// Alias &#39;Color&#39; para la estructura RGB</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="kw">typedef</span> <span class="kw">struct</span> <span class="op">{</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> rojo<span class="op">;</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> verde<span class="op">;</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> azul<span class="op">;</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> Color<span class="op">;</span> </span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>    <span class="co">// DeclaraciÃ³n de un array de 3 elementos usando el alias &#39;Color&#39;</span></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>    Color paleta<span class="op">[</span><span class="dv">3</span><span class="op">];</span></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>    <span class="co">// InicializaciÃ³n posicional del primer elemento (Rojo puro)</span></span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>    paleta<span class="op">[</span><span class="dv">0</span><span class="op">]</span> <span class="op">=</span> <span class="op">(</span>Color<span class="op">){</span><span class="dv">255</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">0</span><span class="op">};</span> </span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;Valor Rojo en paleta[0]: </span><span class="sc">%d\n</span><span class="st">&quot;</span><span class="op">,</span> paleta<span class="op">[</span><span class="dv">0</span><span class="op">].</span>rojo<span class="op">);</span></span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<h4 id="refuerzo-de-sintaxis-con-y-sin-typedef">10) Refuerzo de Sintaxis
+con y sin <code>typedef</code></h4>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Input de Ejemplo</th>
+<th style="text-align: center;">Output Esperado</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">(Ninguna)</td>
+<td style="text-align: center;">Edad del perro: 5<br>Edad del gato:
+3</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb11"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="co">// 1. Estructura sin typedef</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="kw">struct</span> Animal <span class="op">{</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> edad<span class="op">;</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="co">// 2. Estructura con typedef</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="kw">typedef</span> <span class="kw">struct</span> <span class="op">{</span></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> edad<span class="op">;</span></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> Mascota<span class="op">;</span> <span class="co">// Alias &#39;Mascota&#39;</span></span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>    <span class="co">// 1. DeclaraciÃ³n usando la sintaxis larga</span></span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>    <span class="kw">struct</span> Animal perro<span class="op">;</span> </span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>    perro<span class="op">.</span>edad <span class="op">=</span> <span class="dv">5</span><span class="op">;</span></span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a>    <span class="co">// 2. DeclaraciÃ³n usando el alias</span></span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a>    Mascota gato<span class="op">;</span> </span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a>    gato<span class="op">.</span>edad <span class="op">=</span> <span class="dv">3</span><span class="op">;</span></span>
+<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;Edad del perro: </span><span class="sc">%d\n</span><span class="st">&quot;</span><span class="op">,</span> perro<span class="op">.</span>edad<span class="op">);</span></span>
+<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;Edad del gato: </span><span class="sc">%d\n</span><span class="st">&quot;</span><span class="op">,</span> gato<span class="op">.</span>edad<span class="op">);</span></span>
+<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb11-26"><a href="#cb11-26" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+
+</div>
+</body>
+</html>
+

@@ -1,0 +1,243 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" crossorigin href="/assets/content-01sust.css">
+</head>
+<body>
+<div class="main-content">
+<p><strong>Resumen MÃ³dulo: Funciones y Modularidad</strong></p>
+<p>Este mÃ³dulo se centrÃ³ en los principios fundamentales de la
+<strong>Modularidad</strong> y la <strong>AbstracciÃ³n</strong> en C.
+Aprendiste a descomponer programas grandes en componentes funcionales
+mÃ¡s pequeÃ±os y reutilizables, permitiendo un cÃ³digo mÃ¡s legible,
+mantenible y robusto. La herramienta clave para esto son las
+<strong>Funciones</strong>.</p>
+<p><strong>1. Conceptos Fundamentales de la FunciÃ³n</strong></p>
+<table style="width:97%;">
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 39%" />
+<col style="width: 32%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>Concepto</strong></th>
+<th style="text-align: left;"><strong>PropÃ³sito en el
+MÃ³dulo</strong></th>
+<th style="text-align: left;"><strong>AplicaciÃ³n Clave</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>Modularidad</strong></td>
+<td style="text-align: left;">Dividir el programa en partes
+independientes (mÃ³dulos) con <strong>Alta CohesiÃ³n</strong>
+(responsabilidad Ãºnica).</td>
+<td style="text-align: left;">Evitar el "cÃ³digo monolÃ­tico" y aislar
+errores.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>AbstracciÃ³n</strong></td>
+<td style="text-align: left;">Ocultar los detalles de implementaciÃ³n de
+una tarea (el "cÃ³mo") y exponer solo la interfaz (el "quÃ©").</td>
+<td style="text-align: left;">Tratar a una funciÃ³n como una
+<strong>"Caja Negra"</strong>: solo nos importa la entrada y la
+salida.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>ReutilizaciÃ³n</strong></td>
+<td style="text-align: left;">Escribir un cÃ³digo una sola vez y usarlo
+mÃºltiples veces en el mismo o diferentes proyectos.</td>
+<td style="text-align: left;">Mejora la confiabilidad y optimiza el
+desarrollo.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>2. Ciclo de Vida de una FunciÃ³n</strong></p>
+<p>Toda funciÃ³n pasa por tres etapas esenciales en la vida del
+programa:</p>
+<table style="width:97%;">
+<colgroup>
+<col style="width: 24%" />
+<col style="width: 41%" />
+<col style="width: 31%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>Etapa</strong></th>
+<th style="text-align: left;"><strong>DefiniciÃ³n</strong></th>
+<th style="text-align: left;"><strong>DÃ³nde se Ubica
+ComÃºnmente</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>1. DeclaraciÃ³n</strong>
+(Prototipo)</td>
+<td style="text-align: left;">Especifica la <strong>firma</strong> de la
+funciÃ³n: tipo de retorno, nombre y lista de parÃ¡metros.</td>
+<td style="text-align: left;">Archivos de <strong>Encabezado
+(.h)</strong>.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>2. DefiniciÃ³n</strong>
+(Cuerpo)</td>
+<td style="text-align: left;">Contiene el <strong>bloque de cÃ³digo
+({})</strong> con la lÃ³gica que la funciÃ³n ejecuta.</td>
+<td style="text-align: left;">Archivos de <strong>ImplementaciÃ³n
+(.c)</strong>.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>3. Llamada</strong>
+(InvocaciÃ³n)</td>
+<td style="text-align: left;">InstrucciÃ³n que <strong>detiene</strong>
+la ejecuciÃ³n actual y <strong>transfiere el control</strong> a la
+funciÃ³n.</td>
+<td style="text-align: left;">FunciÃ³n main() u otras funciones.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>3. ComunicaciÃ³n y Control de Flujo Funcional</strong></p>
+<table style="width:97%;">
+<colgroup>
+<col style="width: 19%" />
+<col style="width: 18%" />
+<col style="width: 31%" />
+<col style="width: 27%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>Concepto</strong></th>
+<th style="text-align: left;"><strong>Tipo de Retorno</strong></th>
+<th style="text-align: left;"><strong>Mecanismo</strong></th>
+<th style="text-align: left;"><strong>PropÃ³sito de return</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>Devolver Valor</strong></td>
+<td style="text-align: left;">int, float, char, etc.</td>
+<td style="text-align: left;">La sentencia <strong>return
+VALOR;</strong> envÃ­a un valor del tipo especificado de vuelta al
+llamador.</td>
+<td style="text-align: left;">Permite que el cÃ³digo llamador use el
+resultado del procesamiento.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Solo AcciÃ³n</strong></td>
+<td style="text-align: left;"><strong>void</strong></td>
+<td style="text-align: left;">La funciÃ³n realiza una tarea (ej:
+imprimir, modificar una global) y <strong>no devuelve un
+valor</strong>.</td>
+<td style="text-align: left;">Se usa return; (sin valor) solo para
+forzar la terminaciÃ³n temprana.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Flujo de Control</strong></td>
+<td style="text-align: left;">Cualquiera</td>
+<td style="text-align: left;">La ejecuciÃ³n de <strong>return</strong>
+termina la funciÃ³n <strong>inmediatamente</strong> y devuelve el control
+al punto de la llamada.</td>
+<td style="text-align: left;">Permite la <strong>Salida
+Temprana</strong> para manejar errores o condiciones especiales.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>4. Ãmbito (Scope) y Variables</strong></p>
+<p>El <strong>Ãmbito</strong> define la regiÃ³n del cÃ³digo donde una
+variable es accesible y vÃ¡lida. Esto es crucial para la modularidad.</p>
+<table style="width:97%;">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 26%" />
+<col style="width: 23%" />
+<col style="width: 26%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>Tipo de Variable</strong></th>
+<th style="text-align: left;"><strong>Ãmbito</strong></th>
+<th style="text-align: left;"><strong>Visibilidad</strong></th>
+<th style="text-align: left;"><strong>Concepto Clave</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>Local</strong></td>
+<td style="text-align: left;">Solo dentro del <strong>Bloque</strong>
+({}) donde fue declarada (ej: dentro de main() o de un bucle).</td>
+<td style="text-align: left;">Baja. Se destruye al salir del
+bloque.</td>
+<td style="text-align: left;"><strong>Aislamiento</strong> de datos; no
+puede ser modificada accidentalmente desde fuera.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Global</strong></td>
+<td style="text-align: left;">Desde su punto de declaraciÃ³n hasta el
+final del archivo y visible en otros archivos (si se usa extern).</td>
+<td style="text-align: left;">Alta. <strong>Persiste</strong> durante
+toda la ejecuciÃ³n del programa.</td>
+<td style="text-align: left;">Debe usarse con moderaciÃ³n debido al
+riesgo de modificaciÃ³n accidental.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Shadowing</strong></td>
+<td style="text-align: left;">FenÃ³meno donde una variable
+<strong>local</strong> con el mismo nombre que una
+<strong>global</strong> toma precedencia, volviendo la global invisible
+dentro del Ã¡mbito local.</td>
+<td style="text-align: left;">El compilador prioriza siempre el Ã¡mbito
+<strong>mÃ¡s cercano</strong> (el local).</td>
+<td style="text-align: left;">Evita la modificaciÃ³n accidental de la
+variable global desde dentro de una funciÃ³n.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>5. Estructura de Proyectos Modulares (.h y .c)</strong></p>
+<p>La separaciÃ³n del cÃ³digo en mÃºltiples archivos es el paso final para
+lograr la modularidad en proyectos grandes, dividiendo el trabajo de los
+procesos de compilaciÃ³n y enlazado.</p>
+<table style="width:97%;">
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 29%" />
+<col style="width: 41%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>Archivo</strong></th>
+<th style="text-align: left;"><strong>Contenido</strong></th>
+<th style="text-align: left;"><strong>Rol en el Proceso</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>Encabezado (.h)</strong></td>
+<td style="text-align: left;"><strong>Prototipos</strong> de funciones y
+declaraciones (extern) de variables globales.</td>
+<td style="text-align: left;"><strong>Contrato</strong> para el
+<strong>Compilador</strong>. Le dice "quÃ©" existe.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>ImplementaciÃ³n (.c)</strong></td>
+<td style="text-align: left;"><strong>Definiciones</strong> (cuerpo) de
+las funciones.</td>
+<td style="text-align: left;"><strong>ImplementaciÃ³n</strong> real. Se
+compila a un archivo objeto (.o).</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Proceso de Enlazado</strong></td>
+<td style="text-align: left;">N/A</td>
+<td style="text-align: left;">El <strong>Linker</strong> toma todos los
+archivos objeto (.o) y el cÃ³digo de main() y une todas las referencias
+para crear un Ãºnico <strong>Ejecutable</strong>.</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</body>
+</html>
+

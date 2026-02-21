@@ -1,0 +1,328 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" crossorigin href="/assets/content-01sust.css">
+</head>
+<body>
+<div class="main-content">
+<h2 id="definiciÃ³n-de-array-de-estructuras-structs">DefiniciÃ³n de Array
+de Estructuras (Structs) ðŸ“¦</h2>
+<p>Un <strong>Array de Estructuras</strong> es la combinaciÃ³n natural de
+dos conceptos fundamentales de C:</p>
+<ol type="1">
+<li><strong>Estructura (<code>struct</code>):</strong> Permite agrupar
+atributos de diferente tipo para formar una entidad compleja (ej: un
+Ãºnico registro de empleado).</li>
+<li><strong>Array:</strong> Permite almacenar una colecciÃ³n de elementos
+del mismo tipo (ej: una lista).</li>
+</ol>
+<p>Al unirlos, creamos una <strong>ColecciÃ³n Compleja</strong>, donde
+cada elemento de la lista es, a su vez, una estructura completa.</p>
+<hr />
+<h3 id="la-colecciÃ³n-de-entidades">La ColecciÃ³n de Entidades</h3>
+<p>Mientras que un array de enteros (<code>int numeros[50];</code>)
+almacena 50 valores simples, un array de estructuras
+(<code>struct Empleado equipo[50];</code>) almacena <strong>50 entidades
+completas</strong>.</p>
+<p>Cada posiciÃ³n del array (<code>equipo[0]</code>,
+<code>equipo[1]</code>, etc.) es un registro independiente con todos los
+miembros definidos en la estructura original.</p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Tipo de Array</th>
+<th style="text-align: center;">Contenido por Elemento</th>
+<th style="text-align: center;">RepresentaciÃ³n</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">Array de Primitivos</td>
+<td style="text-align: center;">Un solo valor (<code>int</code>,
+<code>float</code>)</td>
+<td style="text-align: center;"><code>numeros[i]</code> solo contiene
+<strong>un</strong> nÃºmero.</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>Array de Structs</strong></td>
+<td style="text-align: center;">MÃºltiples atributos (<code>int</code>,
+<code>char[]</code>, <code>float</code>)</td>
+<td style="text-align: center;"><code>equipo[i]</code> contiene el
+<strong>nombre, ID y salario</strong> de un empleado.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="aplicaciÃ³n-prÃ¡ctica-listas-de-registros">AplicaciÃ³n PrÃ¡ctica:
+Listas de Registros</h3>
+<p>El Array de Estructuras es la forma mÃ¡s sencilla en C de manejar una
+<strong>lista de entidades lÃ³gicamente relacionadas</strong>, como:</p>
+<ul>
+<li><strong>Inventario:</strong> Una lista de 100 productos, cada uno
+con un ID, nombre y precio.</li>
+<li><strong>GestiÃ³n de Usuarios:</strong> Una colecciÃ³n de 50 usuarios,
+cada uno con nombre, contraseÃ±a y fecha de registro.</li>
+<li><strong>Sistema de Juegos:</strong> Una lista de jugadores con
+nombre, puntaje y nivel.</li>
+</ul>
+<p>Esta tÃ©cnica permite gestionar grandes volÃºmenes de datos complejos
+de forma organizada y con <strong>acceso indexado</strong>, utilizando
+la notaciÃ³n de corchetes que ya conocemos.</p>
+<h2 id="declaraciÃ³n-e-inicializaciÃ³n-de-arrays-de-structs">DeclaraciÃ³n e
+InicializaciÃ³n de Arrays de Structs ðŸ“</h2>
+<p>La sintaxis para manejar un Array de Estructuras es una combinaciÃ³n
+del proceso de declaraciÃ³n de una estructura y la declaraciÃ³n de un
+array normal.</p>
+<hr />
+<h3 id="declaraciÃ³n-del-array">1. DeclaraciÃ³n del Array</h3>
+<p>Una vez que se ha definido una estructura (por ejemplo, con el alias
+<code>Producto</code>), la declaraciÃ³n del array es idÃ©ntica a la de
+cualquier otro tipo de dato, simplemente especificando el tamaÃ±o entre
+corchetes (<code>[]</code>).</p>
+<p><strong>Sintaxis:</strong></p>
+<p><span class="math display">â€˜Nombre_Struct_o_Alias nombre_array
+[tamaÃ±o];â€˜</span></p>
+<p><strong>Ejemplo:</strong></p>
+<p>Si tenemos una estructura <code>Punto</code> con <code>int x</code> y
+<code>int y</code>, declaramos una lista de 10 puntos asÃ­:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">typedef</span> <span class="kw">struct</span> <span class="op">{</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> x<span class="op">;</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> y<span class="op">;</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> Punto<span class="op">;</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="co">// DeclaraciÃ³n: &#39;mapa&#39; ahora contiene espacio para 10 estructuras &#39;Punto&#39;.</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    Punto mapa<span class="op">[</span><span class="dv">10</span><span class="op">];</span> </span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Cada elemento (mapa[0], mapa[1], ...) es una struct &#39;Punto&#39; completa.</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    <span class="co">// ...</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<h3 id="inicializaciÃ³n-con-llaves-anidadas">2. InicializaciÃ³n con Llaves
+Anidadas</h3>
+<p>Para inicializar un Array de Estructuras en el momento de su
+declaraciÃ³n, se utiliza un conjunto principal de llaves
+(<code>{}</code>) que contiene, a su vez, bloques de llaves
+<code>{}</code> <strong>anidadas</strong> para cada elemento del
+array.</p>
+<p>Cada bloque de llaves anidado representa la inicializaciÃ³n de una
+estructura individual.</p>
+<p><strong>Sintaxis General:</strong></p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>TipoArray nombre_array<span class="op">[]</span> <span class="op">=</span> <span class="op">{</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="op">{</span>valor1_e1<span class="op">,</span> valor2_e1<span class="op">,</span> <span class="op">...},</span> <span class="co">// InicializaciÃ³n del Elemento [0]</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="op">{</span>valor1_e2<span class="op">,</span> valor2_e2<span class="op">,</span> <span class="op">...},</span> <span class="co">// InicializaciÃ³n del Elemento [1]</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="op">{</span>valor1_e3<span class="op">,</span> valor2_e3<span class="op">,</span> <span class="op">...}</span>  <span class="co">// InicializaciÃ³n del Elemento [2]</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="co">// ...</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span></code></pre></div>
+<p><strong>Ejemplo PrÃ¡ctico: Inventario</strong></p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="kw">typedef</span> <span class="kw">struct</span> <span class="op">{</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> id<span class="op">;</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">float</span> precio<span class="op">;</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> Producto<span class="op">;</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Array de 3 structs inicializado</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    Producto inventario<span class="op">[]</span> <span class="op">=</span> <span class="op">{</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Elemento 0</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>        <span class="op">{</span><span class="dv">101</span><span class="op">,</span> <span class="fl">5.99</span><span class="bu">f</span><span class="op">},</span> </span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Elemento 1</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>        <span class="op">{</span><span class="dv">205</span><span class="op">,</span> <span class="fl">12.50</span><span class="bu">f</span><span class="op">},</span> </span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Elemento 2</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>        <span class="op">{</span><span class="dv">300</span><span class="op">,</span> <span class="fl">20.00</span><span class="bu">f</span><span class="op">}</span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>    <span class="op">};</span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>    <span class="co">// El tamaÃ±o del array (3) es inferido por el nÃºmero de inicializadores.</span></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;ID del segundo producto: </span><span class="sc">%d\n</span><span class="st">&quot;</span><span class="op">,</span> inventario<span class="op">[</span><span class="dv">1</span><span class="op">].</span>id<span class="op">);</span></span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<h4 id="inicializaciÃ³n-designada-en-arrays">InicializaciÃ³n Designada en
+Arrays</h4>
+<p>Al igual que con las estructuras individuales, es posible usar la
+<strong>inicializaciÃ³n designada</strong>
+(<code>.miembro = valor</code>) dentro de los bloques anidados, lo cual
+es altamente recomendado para arrays grandes, ya que hace el cÃ³digo
+mucho mÃ¡s fÃ¡cil de auditar.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>Producto inventario_seguro<span class="op">[]</span> <span class="op">=</span> <span class="op">{</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="op">{.</span>id <span class="op">=</span> <span class="dv">101</span><span class="op">,</span> <span class="op">.</span>precio <span class="op">=</span> <span class="fl">5.99</span><span class="bu">f</span><span class="op">},</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="op">{.</span>precio <span class="op">=</span> <span class="fl">12.50</span><span class="bu">f</span><span class="op">,</span> <span class="op">.</span>id <span class="op">=</span> <span class="dv">205</span><span class="op">}</span> <span class="co">// El orden es irrelevante aquÃ­</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span></code></pre></div>
+<h2 id="recorrido-y-acceso-a-arrays-de-structs">Recorrido y Acceso a
+Arrays de Structs ðŸš¶</h2>
+<p>Para trabajar con los datos almacenados en un Array de Estructuras
+(como un inventario de productos), la forma mÃ¡s eficiente de acceder y
+manipular cada registro es utilizando <strong>bucles</strong>
+(<code>for</code>) y la notaciÃ³n de <strong>Ã­ndices</strong> del array
+junto con el <strong>operador punto</strong> (<code>.</code>).</p>
+<hr />
+<h3 id="iteraciÃ³n-con-el-bucle-for">IteraciÃ³n con el Bucle
+<code>for</code></h3>
+<p>El bucle <code>for</code> permite iterar desde el Ã­ndice
+<code>0</code> hasta el final del array. Dentro del bucle, la clave es
+acceder al elemento actual usando el Ã­ndice <code>i</code>, y luego usar
+el operador punto para obtener un miembro especÃ­fico.</p>
+<p><span class="math display">â€˜nombre_array[i] .
+nombre_miembroâ€˜</span></p>
+<p><strong>Desglose del Acceso:</strong></p>
+<ol type="1">
+<li><strong><code>nombre_array[i]</code></strong>: Selecciona la
+<strong>estructura completa</strong> en la posiciÃ³n actual del array
+(ej: <code>inventario[2]</code>).</li>
+<li><strong><code>.nombre_miembro</code></strong>: Una vez que tenemos
+la estructura (<code>inventario[2]</code>), se usa el operador punto
+para acceder al miembro deseado dentro de ella (ej:
+<code>inventario[2].precio</code>).</li>
+</ol>
+<h3 id="ejemplo-prÃ¡ctico-cÃ¡lculo-de-valor-total">Ejemplo PrÃ¡ctico:
+CÃ¡lculo de Valor Total</h3>
+<p>En este ejemplo, definimos un array de estructuras
+<code>Producto</code> y lo recorremos para calcular el valor total del
+inventario.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co">// DefiniciÃ³n de la estructura y su alias</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="kw">typedef</span> <span class="kw">struct</span> <span class="op">{</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> id<span class="op">;</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">float</span> precio<span class="op">;</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> stock<span class="op">;</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> Producto<span class="op">;</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>    <span class="co">// DeclaraciÃ³n e inicializaciÃ³n del array de structs</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>    Producto inventario<span class="op">[]</span> <span class="op">=</span> <span class="op">{</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>        <span class="op">{.</span>id <span class="op">=</span> <span class="dv">101</span><span class="op">,</span> <span class="op">.</span>precio <span class="op">=</span> <span class="fl">5.00</span><span class="bu">f</span><span class="op">,</span> <span class="op">.</span>stock <span class="op">=</span> <span class="dv">10</span><span class="op">},</span> <span class="co">// Total: 50.00</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>        <span class="op">{.</span>id <span class="op">=</span> <span class="dv">205</span><span class="op">,</span> <span class="op">.</span>precio <span class="op">=</span> <span class="fl">12.00</span><span class="bu">f</span><span class="op">,</span> <span class="op">.</span>stock <span class="op">=</span> <span class="dv">5</span><span class="op">},</span>  <span class="co">// Total: 60.00</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>        <span class="op">{.</span>id <span class="op">=</span> <span class="dv">300</span><span class="op">,</span> <span class="op">.</span>precio <span class="op">=</span> <span class="fl">20.00</span><span class="bu">f</span><span class="op">,</span> <span class="op">.</span>stock <span class="op">=</span> <span class="dv">2</span><span class="op">}</span>   <span class="co">// Total: 40.00</span></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>    <span class="op">};</span></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> tamano <span class="op">=</span> <span class="kw">sizeof</span><span class="op">(</span>inventario<span class="op">)</span> <span class="op">/</span> <span class="kw">sizeof</span><span class="op">(</span>inventario<span class="op">[</span><span class="dv">0</span><span class="op">]);</span></span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>    <span class="dt">float</span> valor_total <span class="op">=</span> <span class="dv">0</span><span class="er">.0f</span><span class="op">;</span></span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;--- Listado de Productos ---</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Recorrido del Array de Structs</span></span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> tamano<span class="op">;</span> i<span class="op">++)</span> <span class="op">{</span></span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Acceso para lectura</span></span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">&quot;ID </span><span class="sc">%d</span><span class="st">: Precio </span><span class="sc">%.2f</span><span class="st"> | Stock </span><span class="sc">%d\n</span><span class="st">&quot;</span><span class="op">,</span> </span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a>               inventario<span class="op">[</span>i<span class="op">].</span>id<span class="op">,</span>    <span class="co">// Accede al ID del elemento i</span></span>
+<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a>               inventario<span class="op">[</span>i<span class="op">].</span>precio<span class="op">,</span> <span class="co">// Accede al precio del elemento i</span></span>
+<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a>               inventario<span class="op">[</span>i<span class="op">].</span>stock<span class="op">);</span>  <span class="co">// Accede al stock del elemento i</span></span>
+<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Acceso para cÃ¡lculo (multiplicaciÃ³n)</span></span>
+<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a>        valor_total <span class="op">+=</span> inventario<span class="op">[</span>i<span class="op">].</span>precio <span class="op">*</span> inventario<span class="op">[</span>i<span class="op">].</span>stock<span class="op">;</span></span>
+<span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb5-34"><a href="#cb5-34" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Acceso para modificaciÃ³n (ejemplo: reducir el stock del primero)</span></span>
+<span id="cb5-35"><a href="#cb5-35" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span>i <span class="op">==</span> <span class="dv">0</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb5-36"><a href="#cb5-36" aria-hidden="true" tabindex="-1"></a>            inventario<span class="op">[</span>i<span class="op">].</span>stock <span class="op">=</span> <span class="dv">8</span><span class="op">;</span></span>
+<span id="cb5-37"><a href="#cb5-37" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
+<span id="cb5-38"><a href="#cb5-38" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb5-39"><a href="#cb5-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-40"><a href="#cb5-40" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;----------------------------</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb5-41"><a href="#cb5-41" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;Valor total del inventario: </span><span class="sc">%.2f\n</span><span class="st">&quot;</span><span class="op">,</span> valor_total<span class="op">);</span></span>
+<span id="cb5-42"><a href="#cb5-42" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;Nuevo stock del ID 101: </span><span class="sc">%d\n</span><span class="st">&quot;</span><span class="op">,</span> inventario<span class="op">[</span><span class="dv">0</span><span class="op">].</span>stock<span class="op">);</span></span>
+<span id="cb5-43"><a href="#cb5-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-44"><a href="#cb5-44" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb5-45"><a href="#cb5-45" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p>Al utilizar esta tÃ©cnica, se mantiene la <strong>integridad de la
+estructura de datos</strong>, permitiendo operaciones complejas
+(lectura, cÃ¡lculo y modificaciÃ³n) sobre cada entidad de la colecciÃ³n de
+manera iterativa y sencilla.</p>
+<h2 id="aplicaciÃ³n-bases-de-datos-en-memoria">AplicaciÃ³n: Bases de Datos
+en Memoria ðŸ’¾</h2>
+<p>El concepto de <strong>Array de Estructuras</strong> es crucial
+porque proporciona la estructura mÃ¡s bÃ¡sica para implementar una
+<strong>base de datos rudimentaria o una tabla de registros</strong>
+directamente dentro de la memoria del programa.</p>
+<h3 id="modelando-una-tabla">Modelando una Tabla</h3>
+<p>En tÃ©rminos de bases de datos, una tabla se compone de:</p>
+<ol type="1">
+<li><strong>Registros (Filas):</strong> Cada fila representa una entidad
+Ãºnica (un empleado, un producto, un usuario).</li>
+<li><strong>Campos (Columnas):</strong> Cada columna es un atributo
+especÃ­fico (nombre, salario, ID).</li>
+</ol>
+<p>Un Array de Estructuras modela esta tabla perfectamente:</p>
+<ul>
+<li>El <strong>tipo <code>struct</code></strong> define las
+<strong>columnas</strong> (los campos o miembros).</li>
+<li>El <strong>array</strong> define las <strong>filas</strong> (la
+colecciÃ³n de registros).</li>
+</ul>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Concepto de Base de Datos</th>
+<th style="text-align: center;">Equivalente en C</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><strong>Tabla</strong></td>
+<td style="text-align: center;"><strong>Array de Structs</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>Registro (Fila)</strong></td>
+<td style="text-align: center;"><strong>Un elemento <code>[i]</code> del
+array (una <code>struct</code> completa)</strong></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>Campo (Columna)</strong></td>
+<td style="text-align: center;"><strong>Un Miembro de la
+<code>struct</code></strong></td>
+</tr>
+</tbody>
+</table>
+<h3 id="utilidad-de-las-bases-de-datos-en-memoria">Utilidad de las Bases
+de Datos en Memoria</h3>
+<p>Al mantener la colecciÃ³n de estructuras en la memoria, se obtienen
+varias ventajas, especialmente para programas pequeÃ±os o procesos
+internos rÃ¡pidos:</p>
+<ol type="1">
+<li><strong>Acceso RÃ¡pido:</strong> Acceder a los datos es
+extremadamente rÃ¡pido, ya que todo se encuentra en la memoria RAM, sin
+la latencia de acceder a un disco duro o una red (como ocurre con las
+bases de datos externas).</li>
+<li><strong>OrganizaciÃ³n Coherente:</strong> Todos los datos de un
+registro (<code>mi_empleado[3]</code>) estÃ¡n garantizados para estar
+juntos en una ubicaciÃ³n de memoria contigua, lo que facilita las
+operaciones de procesamiento.</li>
+</ol>
+<h3 id="ejemplo-de-uso-prÃ¡ctico">Ejemplo de Uso PrÃ¡ctico</h3>
+<p>Si un programa necesita gestionar una lista de precios temporal o un
+<em>buffer</em> de datos de sensores, un array de estructuras ofrece una
+soluciÃ³n limpia.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">// DefiniciÃ³n de la &quot;Tabla&quot; (los campos)</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="kw">typedef</span> <span class="kw">struct</span> <span class="op">{</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> sensor_id<span class="op">;</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">float</span> temperatura<span class="op">;</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">long</span> tiempo_estampa<span class="op">;</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> LecturaSensor<span class="op">;</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="co">// La Base de Datos en Memoria (las filas)</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="pp">#define MAX_LECTURAS </span><span class="dv">100</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>LecturaSensor historial<span class="op">[</span>MAX_LECTURAS<span class="op">];</span> </span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="co">// Acceder al registro nÃºmero 50</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="co">// float temp_50 = historial[49].temperatura; </span></span></code></pre></div>
+<p>Aunque estos arrays no ofrecen las capacidades de consulta avanzadas
+de un sistema de gestiÃ³n de bases de datos completo (como SQL), son una
+herramienta fundamental en C para la <strong>gestiÃ³n eficiente de
+colecciones estructuradas de datos en el <em>stack</em> o el
+<em>heap</em></strong>.</p>
+
+</div>
+</body>
+</html>
+

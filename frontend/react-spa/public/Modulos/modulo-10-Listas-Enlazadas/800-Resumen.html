@@ -1,0 +1,294 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" crossorigin href="/assets/content-01sust.css">
+</head>
+<body>
+<div class="main-content">
+<h2 id="resumen-mÃ³dulo-listas-enlazadas-y-estructuras-dinÃ¡micas-en-c">ðŸ’¾
+Resumen MÃ³dulo: Listas Enlazadas y Estructuras DinÃ¡micas en C</h2>
+<p>Este mÃ³dulo abordÃ³ la <strong>transiciÃ³n desde los Arrays de tamaÃ±o
+fijo hacia estructuras dinÃ¡micas</strong>, introduciendo el concepto de
+<strong>Listas Enlazadas</strong> como una alternativa flexible y
+eficiente para el manejo de datos en memoria. A travÃ©s del estudio de
+los <strong>nodos, punteros y operaciones de enlace</strong>, el
+estudiante comprendiÃ³ cÃ³mo superar las limitaciones del almacenamiento
+contiguo y acceder a un nuevo nivel de control sobre la memoria y la
+estructura de los programas.</p>
+<hr />
+<h3 id="limitaciones-de-los-arrays-estÃ¡ticos">1. Limitaciones de los
+Arrays EstÃ¡ticos ðŸ§±</h3>
+<table>
+<colgroup>
+<col style="width: 16%" />
+<col style="width: 38%" />
+<col style="width: 45%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Concepto</th>
+<th style="text-align: left;">DescripciÃ³n</th>
+<th style="text-align: left;">Implicancia</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>TamaÃ±o Fijo</strong></td>
+<td style="text-align: left;">Un <em>array</em> tiene una longitud
+inmutable una vez declarado.</td>
+<td style="text-align: left;">Si se necesita mÃ¡s espacio, se debe crear
+un nuevo array y copiar los datos, lo que es ineficiente.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>InserciÃ³n y EliminaciÃ³n
+Costosa</strong></td>
+<td style="text-align: left;">Modificar un array en medio de su
+secuencia requiere mover los elementos siguientes.</td>
+<td style="text-align: left;">Cada operaciÃ³n puede costar <strong><span
+class="math inline"><em>O</em>(<em>N</em>)</span></strong>, afectando el
+rendimiento.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>MotivaciÃ³n del
+Enlazamiento</strong></td>
+<td style="text-align: left;">Las <em>Listas Enlazadas</em> eliminan la
+necesidad de contigÃ¼idad.</td>
+<td style="text-align: left;">Los elementos se enlazan mediante
+punteros, permitiendo una gestiÃ³n dinÃ¡mica y eficiente.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Ejercicio Propuesto:</strong> <em>Simulador de
+Desplazamiento</em> â€” analiza cuÃ¡ntos movimientos requiere insertar un
+valor en un array estÃ¡tico.</p>
+<hr />
+<h3 id="anatomÃ­a-de-una-lista-enlazada">2. AnatomÃ­a de una Lista
+Enlazada ðŸ“¦</h3>
+<table>
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 47%" />
+<col style="width: 31%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Concepto</th>
+<th style="text-align: left;">DescripciÃ³n</th>
+<th style="text-align: left;">Elemento Clave</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>Nodo</strong></td>
+<td style="text-align: left;">Unidad bÃ¡sica de la lista; contiene un
+<strong>dato</strong> y un <strong>puntero de enlace</strong>.</td>
+<td
+style="text-align: left;"><code>struct Nodo { int dato; struct Nodo *siguiente; };</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Campo de Enlace
+(<code>siguiente</code>)</strong></td>
+<td style="text-align: left;">Conecta el nodo actual con el siguiente
+nodo en la lista.</td>
+<td style="text-align: left;">Permite recorrer la estructura
+dinÃ¡micamente.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Puntero
+<code>HEAD</code></strong></td>
+<td style="text-align: left;">Apunta al primer nodo de la lista. Si la
+lista estÃ¡ vacÃ­a, su valor es <code>NULL</code>.</td>
+<td style="text-align: left;">Es el punto de entrada para todas las
+operaciones.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Ejercicio Propuesto:</strong> <em>DefiniciÃ³n de Nodo y
+CreaciÃ³n de HEAD nulo.</em></p>
+<hr />
+<h3 id="creaciÃ³n-dinÃ¡mica-de-nodos">3. CreaciÃ³n DinÃ¡mica de Nodos
+ðŸ§©</h3>
+<table>
+<colgroup>
+<col style="width: 16%" />
+<col style="width: 48%" />
+<col style="width: 35%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Concepto</th>
+<th style="text-align: left;">DescripciÃ³n</th>
+<th style="text-align: left;">RecomendaciÃ³n</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>AsignaciÃ³n con
+<code>malloc()</code></strong></td>
+<td style="text-align: left;">Los nodos deben reservar memoria en el
+<em>Heap</em> para persistir tras la ejecuciÃ³n de una funciÃ³n.</td>
+<td style="text-align: left;">Verificar siempre si <code>malloc()</code>
+retorna <code>NULL</code>.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>InicializaciÃ³n</strong></td>
+<td style="text-align: left;">Cada nodo nuevo debe contener el dato
+asignado y su puntero <code>siguiente</code> igual a
+<code>NULL</code>.</td>
+<td style="text-align: left;">Implementar una funciÃ³n
+<code>crearNodo()</code> para estandarizar este proceso.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>GestiÃ³n de Fallos de
+Memoria</strong></td>
+<td style="text-align: left;">Manejar errores de asignaciÃ³n con mensajes
+claros y liberaciÃ³n preventiva.</td>
+<td style="text-align: left;">Evita fugas de memoria y comportamientos
+indefinidos.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Ejercicio Propuesto:</strong> <em>Implementar
+<code>crearNodo()</code> y enlazar dos nodos entre sÃ­.</em></p>
+<hr />
+<h3 id="inserciÃ³n-en-listas-enlazadas">4. InserciÃ³n en Listas Enlazadas
+ðŸ”—</h3>
+<table>
+<colgroup>
+<col style="width: 12%" />
+<col style="width: 62%" />
+<col style="width: 24%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Tipo de InserciÃ³n</th>
+<th style="text-align: left;">DescripciÃ³n</th>
+<th style="text-align: left;">Complejidad</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>Al Inicio</strong></td>
+<td style="text-align: left;">El nuevo nodo apunta al nodo actual de
+<code>HEAD</code>, y luego <code>HEAD</code> apunta al nuevo nodo.</td>
+<td style="text-align: left;"><strong><span
+class="math inline"><em>O</em>(1)</span></strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Al Final</strong></td>
+<td style="text-align: left;">Se recorre la lista hasta el Ãºltimo nodo
+(puntero <code>NULL</code>) y se enlaza el nuevo nodo.</td>
+<td style="text-align: left;"><strong><span
+class="math inline"><em>O</em>(<em>N</em>)</span></strong></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Intermedia</strong></td>
+<td style="text-align: left;">Se inserta un nodo despuÃ©s de uno
+especÃ­fico, ajustando los punteros.</td>
+<td style="text-align: left;"><strong><span
+class="math inline"><em>O</em>(<em>N</em>)</span></strong> pero sin
+copiar datos.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Ejercicio Propuesto:</strong> <em>Implementar funciones
+<code>insertarInicio()</code> e <code>insertarFin()</code>.</em></p>
+<hr />
+<h3 id="eliminaciÃ³n-y-recorrido-de-la-lista">5. EliminaciÃ³n y Recorrido
+de la Lista ðŸ§®</h3>
+<table>
+<colgroup>
+<col style="width: 16%" />
+<col style="width: 42%" />
+<col style="width: 41%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Concepto</th>
+<th style="text-align: left;">DescripciÃ³n</th>
+<th style="text-align: left;">Detalle TÃ©cnico</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>Recorrido</strong></td>
+<td style="text-align: left;">Uso de un puntero auxiliar
+(<code>actual</code>) que avanza nodo a nodo.</td>
+<td
+style="text-align: left;"><code>while (actual != NULL) { actual = actual-&gt;siguiente; }</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>EliminaciÃ³n al
+Inicio</strong></td>
+<td style="text-align: left;">Mover <code>HEAD</code> al siguiente nodo
+y liberar el anterior con <code>free()</code>.</td>
+<td style="text-align: left;">Evita fugas de memoria.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>EliminaciÃ³n General</strong></td>
+<td style="text-align: left;">Usar dos punteros: uno al nodo actual y
+otro al anterior.</td>
+<td style="text-align: left;">Permite â€œsaltarâ€ el nodo eliminado y
+mantener el enlace correcto.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Ejercicio Propuesto:</strong> <em>Implementar
+<code>imprimirLista()</code> y <code>eliminarInicio()</code>.</em></p>
+<hr />
+<h3 id="aplicaciones-prÃ¡cticas-pilas-y-colas">6. Aplicaciones PrÃ¡cticas:
+Pilas y Colas âš™ï¸</h3>
+<table>
+<colgroup>
+<col style="width: 13%" />
+<col style="width: 35%" />
+<col style="width: 51%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Estructura</th>
+<th style="text-align: left;">Concepto</th>
+<th style="text-align: left;">ImplementaciÃ³n con Listas</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>Pila (LIFO)</strong></td>
+<td style="text-align: left;">Ãšltimo en entrar, primero en salir.</td>
+<td style="text-align: left;">Usar inserciÃ³n y eliminaciÃ³n al inicio
+(<code>push</code> y <code>pop</code>).</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Cola (FIFO)</strong></td>
+<td style="text-align: left;">Primero en entrar, primero en salir.</td>
+<td style="text-align: left;">Usar inserciÃ³n al final y eliminaciÃ³n al
+inicio (<code>enqueue</code>, <code>dequeue</code>).</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Puntero
+<code>TAIL</code></strong></td>
+<td style="text-align: left;">Apunta al Ãºltimo nodo (solo necesario en
+colas).</td>
+<td style="text-align: left;">Permite insertar al final en <strong><span
+class="math inline"><em>O</em>(1)</span></strong>.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Ejercicio Propuesto:</strong> <em>Crear funciones
+<code>push</code>, <code>pop</code>, <code>enqueue</code>,
+<code>dequeue</code> y liberar la lista completa.</em></p>
+<hr />
+<h3 id="conclusiÃ³n-del-mÃ³dulo">ðŸŽ¯ ConclusiÃ³n del MÃ³dulo</h3>
+<p>Este mÃ³dulo consolida el <strong>pensamiento dinÃ¡mico en C</strong>,
+reemplazando la rigidez de los <em>arrays</em> por la flexibilidad del
+manejo de punteros y estructuras enlazadas. Comprender las
+<strong>listas enlazadas</strong> es esencial para dominar estructuras
+mÃ¡s avanzadas (Ã¡rboles, grafos, colas de prioridad) y para entender cÃ³mo
+los sistemas operativos y compiladores gestionan la memoria.</p>
+
+</div>
+</body>
+</html>
+

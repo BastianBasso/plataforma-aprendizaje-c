@@ -50,7 +50,7 @@ export function useModulosIndex() {
       try {
         setLoading(true);
         setError(null);
-        const res = await fetch('/js-spa/data/modulosIndex.json', {
+        const res = await fetch('/data/modulosIndex.json', {
           headers: { 'Accept': 'application/json' },
         });
         if (!res.ok) throw new Error(`HTTP ${res.status}`);

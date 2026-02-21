@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>El proceso de Compilacion y el ciclo de vida del codigo</title>
+    <link rel="stylesheet" crossorigin href="/assets/content-01sust.css">
+    <style>
+        
+    .header-c { background: #fff; border-bottom: 1px solid #e5e7eb; }
+    .logo-c {
+      background: linear-gradient(135deg,#162047 60%, #3b2fa6 100%);
+      color: #fff;
+      font-weight: 900;
+      font-size: 1.7rem;
+      border-radius: 8px;
+      width: 38px; height: 38px;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 2px 8px rgba(59,47,166,0.08);
+      margin-right: 10px;
+    }
+    .user-profile {
+      display: flex; align-items: center; gap: 10px;
+      background: #e0e7ff;
+      border-radius: 999px;
+      padding: 6px 16px;
+      font-size: 1rem;
+      color: #3730a3;
+      font-weight: 600;
+    }
+    .content-title {
+      color: #3730a3;
+      font-size: 2.2rem;
+      font-weight: 800;
+      margin: 36px auto 10px auto;
+      text-align: center;
+      letter-spacing: 1px;
+    }
+    .progress-bar-container {
+      max-width: 700px;
+      margin: 0 auto 32px auto;
+      background: #e0e7ff;
+      border-radius: 999px;
+      padding: 8px 24px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #3730a3;
+      box-shadow: 0 2px 8px rgba(59,47,166,0.08);
+    }
+    .progress-bar {
+      flex: 1;
+      height: 16px;
+      background: #c7d2fe;
+      border-radius: 999px;
+      overflow: hidden;
+      position: relative;
+    }
+    .progress-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg,#2563eb,#3b2fa6);
+      border-radius: 999px;
+      width: 12%;
+      transition: width 0.4s;
+    }
+    .modules-list {
+      max-width: 900px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+    }
+    .module-card {
+      background: linear-gradient(135deg,#2563eb 60%, #3b2fa6 100%);
+      color: #fff;
+      border-radius: 18px;
+      box-shadow: 0 6px 24px rgba(59,47,166,0.10);
+      padding: 0;
+      display: flex;
+      align-items: stretch;
+      position: relative;
+      overflow: hidden;
+      min-height: 140px;
+    }
+    .module-progress-bar {
+      width: 18px;
+      background: #a5b4fc;
+      display: flex;
+      align-items: flex-end;
+      border-radius: 18px 0 0 18px;
+      margin-right: 0;
+      position: relative;
+    }
+    .module-progress-fill {
+      width: 100%;
+      background: #3730a3;
+      border-radius: 18px 0 0 18px;
+      transition: height 0.4s;
+    }
+    .module-content {
+      flex: 1;
+      padding: 24px 32px 24px 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .module-title {
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .module-desc {
+      font-size: 1rem;
+      color: #dbeafe;
+      margin-bottom: 10px;
+    }
+    .module-topics {
+      margin-left: 1.2em;
+      margin-bottom: 10px;
+      color: #e0e7ff;
+      font-size: 0.98rem;
+    }
+    .module-card .start-btn {
+      align-self: flex-end;
+      background: linear-gradient(90deg,#4f46e5,#2563eb);
+      color: #fff;
+      font-weight: 700;
+      border: none;
+      border-radius: 999px;
+      padding: 10px 28px;
+      font-size: 1rem;
+      box-shadow: 0 2px 8px rgba(37,99,235,0.18);
+      transition: background 0.2s;
+      cursor: pointer;
+      margin-top: 8px;
+    }
+    .module-card .start-btn:hover {
+      background: linear-gradient(90deg,#2563eb,#4f46e5);
+    }
+    .footer-c {
+      background: linear-gradient(90deg,#49b3af,#25a6d7 90%);
+      color: #fff;
+      padding: 36px 0 18px 0;
+      margin-top: 48px;
+    }
+    .footer-c .footer-content {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 32px;
+      justify-content: space-between;
+      align-items: flex-start;
+      padding: 0 32px;
+    }
+    .footer-c .footer-logo {
+      display: flex; align-items: center; gap: 10px;
+      font-size: 1.5rem; font-weight: 800;
+      letter-spacing: 1px;
+    }
+    .footer-c .footer-links, .footer-c .footer-newsletter {
+      min-width: 180px;
+    }
+    .footer-c .footer-links a {
+      color: #e0f2fe;
+      display: block;
+      margin-bottom: 8px;
+      text-decoration: none;
+      font-size: 1rem;
+      transition: color 0.2s;
+    }
+    .footer-c .footer-links a:hover {
+      color: #fff;
+    }
+    .footer-c .newsletter-form {
+      display: flex; gap: 8px; margin-top: 8px;
+    }
+    .footer-c .newsletter-form input[type="email"] {
+      border-radius: 999px 0 0 999px;
+      border: none;
+      padding: 8px 16px;
+      font-size: 1rem;
+      outline: none;
+      min-width: 0;
+    }
+    .footer-c .newsletter-form button {
+      border-radius: 0 999px 999px 0;
+      border: none;
+      background: #2563eb;
+      color: #fff;
+      font-weight: 700;
+      padding: 8px 18px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .footer-c .newsletter-form button:hover {
+      background: #1e40af;
+    }
+    .footer-c .copyright {
+      text-align: center;
+      color: #bae6fd;
+      font-size: 0.95rem;
+      margin-top: 24px;
+    }
+    @media (max-width: 900px) {
+      .footer-c .footer-content { flex-direction: column; gap: 18px; align-items: flex-start; }
+      .content-c, .hero-c { padding: 24px 10px; }
+    }
+    @media (max-width: 900px) {
+      .modules-list { padding: 0 8px; }
+      .module-content { padding: 18px 10px 18px 10px; }
+      .content-title { font-size: 1.5rem; }
+    }
+  </style>
+</head>
+
+
+
+<body>    
+<div class="main-content">
+
+
+<h1><strong>3. El Proceso de Compilación y el Ciclo de Vida del
+Código</strong></h1>
+<p>Has escrito tu algoritmo en papel. ¿Cómo conviertes ese plan lógico
+en algo que la computadora pueda ejecutar? Aquí es donde entra en juego
+el <strong>compilador</strong>.</p>
+<p>El lenguaje C pertenece a la familia de los <strong>lenguajes
+compilados</strong>, lo cual es fundamental para su rendimiento. Para
+entender qué significa esto, debemos distinguirlo de su contraparte: el
+lenguaje interpretado.</p>
+<h2><strong>1. Compiladores vs. Intérpretes: La Distinción
+Fundamental</strong></h2>
+<p>Cuando escribes un programa, la CPU de tu computadora no puede
+entender directamente las palabras if, while o printf. La CPU solo
+entiende <strong>código máquina</strong> (secuencias de unos y ceros).
+El proceso de traducción de tu código humano a código máquina puede
+hacerse de dos maneras:</p>
+<p><strong>A. Lenguajes Compilados (Ej: C, C++)</strong></p>
+<p>Un lenguaje compilado utiliza un programa llamado
+<strong>Compilador</strong>.</p>
+<ul>
+<li><p><strong>Proceso:</strong> El compilador toma <em>todo</em> tu
+código fuente y lo traduce <strong>una sola vez</strong> a un archivo de
+código máquina ejecutable (como un .exe en Windows). Esta traducción se
+hace <strong>antes</strong> de que el programa se ejecute.</p></li>
+<li><p><strong>Ejecución:</strong> Una vez compilado, el programa
+resultante es código nativo de la máquina. Se ejecuta directamente sobre
+el <em>hardware</em>, sin necesidad de un traductor
+intermediario.</p></li>
+</ul>
+<p><strong>B. Lenguajes Interpretados (Ej: Python,
+JavaScript)</strong></p>
+<p>Un lenguaje interpretado utiliza un programa llamado
+<strong>Intérprete</strong>.</p>
+<ul>
+<li><p><strong>Proceso:</strong> El intérprete lee tu código fuente
+<strong>línea por línea</strong> y traduce <em>cada línea</em> a código
+máquina <strong>mientras el programa se está
+ejecutando</strong>.</p></li>
+<li><p><strong>Ejecución:</strong> El intérprete actúa como un traductor
+simultáneo en tiempo real. Cada vez que ejecutas el programa, el
+intérprete debe volver a traducir cada línea.</p></li>
+</ul>
+<p><strong>La Ventaja Clave del Código Compilado: La Velocidad
+🚀</strong></p>
+<p>La principal ventaja del modelo de compilación de C es la
+<strong>velocidad de ejecución</strong>.</p>
+<p>Dado que el programa C ya ha sido completamente traducido a código
+máquina antes de que el usuario lo ejecute, la CPU solo tiene que seguir
+esas instrucciones optimizadas. Un programa interpretado, en cambio,
+debe pagar el "costo" de la traducción en tiempo real cada vez que se
+ejecuta, haciéndolo inherentemente más lento.</p>
+<p><strong>Analogía:</strong></p>
+<ul>
+<li><p><strong>Compilador (C):</strong> Es como traducir un libro
+completo del inglés al español (una vez) y luego entregar el libro
+traducido para que cualquiera lo lea a su propio ritmo.</p></li>
+<li><p><strong>Intérprete (Python):</strong> Es como tener un traductor
+al lado, leyendo el libro en inglés y traduciéndolo en voz alta, oración
+por oración, cada vez que alguien quiere leerlo.</p></li>
+</ul>
+<h2><strong>2. El Código Fuente y el Entorno de Desarrollo</strong></h2>
+<p>Antes de que ocurra la magia de la compilación, todo comienza con el
+texto que tú, como programador, escribes.</p>
+<p><strong>El Código Fuente (Archivo .c)</strong></p>
+<p>El <strong>Código Fuente</strong> es el archivo de texto plano que
+contiene el conjunto de <strong>instrucciones lógicas y
+precisas</strong> que definen tu programa, escritas según la sintaxis
+del lenguaje.</p>
+<p>En el caso de nuestro curso:</p>
+<ul>
+<li><p><strong>Definición:</strong> El código fuente es el texto que has
+escrito en Lenguaje C.</p></li>
+<li><p><strong>Extensión:</strong> Típicamente, los archivos de código
+fuente de C terminan con la extensión <strong>.c</strong> (por ejemplo,
+mi_primer_programa.c). Este archivo es la <strong>Entrada</strong> para
+todo el proceso de compilación.</p></li>
+</ul>
+<p>El código fuente es totalmente legible para los humanos, pero la
+computadora no lo puede ejecutar directamente.</p>
+<p><strong>El Entorno de Desarrollo</strong></p>
+<p>Para escribir y gestionar el código fuente, necesitamos un
+<strong>Entorno de Desarrollo</strong>. Este entorno proporciona las
+herramientas necesarias para que el programador pueda crear, compilar y
+probar sus programas eficamente.</p>
+<p>Hay dos configuraciones comunes:</p>
+<ol type="1">
+<li><p><strong>Editor de Texto + Compilador Manual:</strong> Consiste en
+usar un simple editor de texto (como Visual Studio Code, Sublime Text o
+Vim) para escribir el archivo .c. Luego, invocas el
+<strong>Compilador</strong> directamente desde la línea de comandos. Los
+compiladores más utilizados para C son <strong>GCC</strong> (GNU
+Compiler Collection) o <strong>Clang</strong>.</p></li>
+<li><p><strong>IDE (Entorno de Desarrollo Integrado):</strong> Un IDE
+(como Code::Blocks o Visual Studio) es un <em>software</em> que agrupa
+todas las herramientas necesarias en una sola interfaz. Incluye el
+editor de código, el compilador, un depurador (<em>debugger</em>) y
+herramientas de gestión de proyectos. El IDE simplifica el proceso al
+automatizar las complejas fases de compilación y enlazado.</p></li>
+</ol>
+<h2><strong>3. Las Cuatro Fases de la Compilación (El Ciclo de
+Vida)</strong></h2>
+<p>El proceso de transformar tu archivo de <strong>código
+fuente</strong> (.c) en un programa <strong>ejecutable</strong> pasa por
+cuatro fases secuenciales y bien definidas. Este es el ciclo de vida que
+sigue cada programa C:</p>
+<table style="width:97%;">
+<colgroup>
+<col style="width: 28%" />
+<col style="width: 24%" />
+<col style="width: 22%" />
+<col style="width: 22%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>FASE</strong></th>
+<th style="text-align: left;"><strong>HERRAMIENTA</strong></th>
+<th style="text-align: left;"><strong>ENTRADA</strong></th>
+<th style="text-align: left;"><strong>SALIDA</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>I. Preprocesamiento</strong></td>
+<td style="text-align: left;">Preprocesador</td>
+<td style="text-align: left;">Código Fuente (.c)</td>
+<td style="text-align: left;">Código Preprocesado (.i)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>II. Compilación</strong></td>
+<td style="text-align: left;">Compilador</td>
+<td style="text-align: left;">Código Preprocesado (.i)</td>
+<td style="text-align: left;">Código Ensamblador (.s)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>III. Ensamblado</strong></td>
+<td style="text-align: left;">Ensamblador</td>
+<td style="text-align: left;">Código Ensamblador (.s)</td>
+<td style="text-align: left;">Código Objeto (.o o .obj)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>IV. Enlazado
+(<em>Linking</em>)</strong></td>
+<td style="text-align: left;">Enlazador (<em>Linker</em>)</td>
+<td style="text-align: left;">Código Objeto (.o) + Librerías</td>
+<td style="text-align: left;"><strong>Programa Ejecutable</strong> (.exe
+o binario)</td>
+</tr>
+</tbody>
+</table>
+<figure>
+<img src="media/image2.png" style="width:4in;"
+alt="Qué es compilación y cuál es el rol de los compiladores? | Alura Cursos Online" />
+<figcaption aria-hidden="true">Qué es compilación y cuál es el rol de
+los compiladores? | Alura Cursos Online</figcaption>
+</figure>
+<p>Este proceso garantiza que el código sea revisado, optimizado y se le
+añadan todas las piezas externas que necesita antes de ser un programa
+funcional.</p>
+<p><strong>El Ciclo de Vida del Código C: De Texto a
+Ejecutable</strong></p>
+<p>El proceso de compilación es la orquesta que transforma tu plan
+lógico (el código fuente) en un lenguaje que el <em>hardware</em> puede
+entender y ejecutar. Es un proceso secuencial y metódico, dividido en
+cuatro fases principales, cada una con un propósito específico y una
+herramienta dedicada.</p>
+<p><strong>Fase I: El Preprocesamiento (La Preparación)</strong></p>
+<p>El <strong>Preprocesador</strong> es el primer programa en actuar. Su
+función es preparar y expandir el código fuente original antes de que el
+verdadero compilador lo vea. Es, esencialmente, un editor de texto
+inteligente que opera bajo tus órdenes explícitas.</p>
+<ul>
+<li><p><strong>¿Qué hace?</strong> Maneja las directivas que comienzan
+con el símbolo de almohadilla (#).</p>
+<ul>
+<li><p>#include: Su rol más importante. Localiza el archivo de cabecera
+(como stdio.h) y literalmente <strong>copia y pega</strong> todo su
+contenido en tu archivo. ¡Es una operación de <em>copy-paste</em>
+masiva!</p></li>
+<li><p>#define: Realiza sustituciones de texto simples (macros). Si
+defines #define PI 3.14159, el preprocesador reemplaza cada aparición de
+PI con 3.14159.</p></li>
+</ul></li>
+<li><p><strong>Resultado:</strong> El archivo
+<strong>preprocesado</strong> (.i). Es un archivo de texto expandido que
+no contiene directivas #include o #define, sino el código que resulta de
+sus acciones.</p></li>
+</ul>
+<p><strong>Fase II: La Compilación (La Traducción Lógica)</strong></p>
+<p>El <strong>Compilador</strong> toma el archivo preprocesado (.i) y
+realiza la traducción de alto nivel a bajo nivel. Esta es la fase donde
+se pone a prueba tu conocimiento de la sintaxis C.</p>
+<ul>
+<li><p><strong>¿Qué hace?</strong></p>
+<ol type="1">
+<li><p><strong>Revisión Gramatical:</strong> Verifica que el código
+cumpla con las reglas sintácticas y semánticas del estándar C (ANSI C).
+Si olvidas un punto y coma (;), ¡aquí es donde el compilador te grita un
+<strong>Error de Compilación</strong>!</p></li>
+<li><p><strong>Optimización:</strong> Intenta reorganizar el código para
+que se ejecute de la manera más rápida y eficiente posible.</p></li>
+<li><p><strong>Traducción:</strong> Traduce el código C a <strong>código
+ensamblador</strong> (<em>Assembly</em>), un conjunto de instrucciones
+de muy bajo nivel (como MOVE, ADD, JUMP) que son específicas de la
+arquitectura de la CPU (Intel, ARM, etc.).</p></li>
+</ol></li>
+<li><p><strong>Resultado:</strong> El archivo
+<strong>Ensamblador</strong> (.s). Un archivo de texto que contiene
+instrucciones de <em>Assembly</em>.</p></li>
+</ul>
+<p><strong>Fase III: El Ensamblado (El Lenguaje de la
+Máquina)</strong></p>
+<p>El <strong>Ensamblador</strong> es un traductor directo que convierte
+las instrucciones legibles del Ensamblador (.s) en el código nativo que
+la máquina entiende: el <strong>código binario</strong> (unos y
+ceros).</p>
+<ul>
+<li><p><strong>¿Qué hace?</strong> Convierte cada instrucción de
+Ensamblador en su equivalente binario.</p></li>
+<li><p><strong>Resultado:</strong> El archivo <strong>Objeto</strong>
+(.o en Linux/macOS, o .obj en Windows). Este archivo es puro código de
+máquina que la CPU puede ejecutar, pero todavía es una pieza incompleta
+del rompecabezas. ¿Por qué incompleta? Porque aún no está conectada a
+las librerías externas que necesita.</p></li>
+</ul>
+<p><strong>Fase IV: El Enlazado (<em>Linking</em>) (El Ensamblaje
+Final)</strong></p>
+<p>El <strong>Enlazador</strong> (<em>Linker</em>) es el último paso y
+actúa como el pegamento final del programa. Su trabajo es combinar todas
+las piezas de código necesarias.</p>
+<ul>
+<li><p><strong>¿Qué hace?</strong></p>
+<ol type="1">
+<li><p><strong>Unión de Piezas:</strong> Combina todos los archivos
+objeto (.o) que forman parte de tu proyecto (si tu programa usa
+múltiples archivos C).</p></li>
+<li><p><strong>Conexión de Librerías:</strong> Lo más crucial: añade las
+piezas de código que se encuentran en las <strong>librerías
+externas</strong>. Por ejemplo, la función printf() que usas para
+imprimir en pantalla no está incluida en tu archivo .c; el Enlazador la
+busca en la librería estándar de C (como la librería stdio) y conecta su
+código binario a tu programa.</p></li>
+<li><p><strong>Creación del Ejecutable:</strong> Si todas las
+referencias de código se resuelven, el Enlazador crea el archivo
+final.</p></li>
+</ol></li>
+<li><p><strong>Resultado:</strong> El <strong>Programa
+Ejecutable</strong> (Ej. un archivo .exe en Windows o un binario sin
+extensión en Linux/macOS). ¡Este archivo ya es autónomo y puede ser
+ejecutado directamente por la computadora!</p></li>
+</ul>
+<p><img src="media/image3.png"
+style="height:5.5in" /></p>
+<h2><strong>4. Errores Comunes en el Ciclo</strong></h2>
+<p>Aprender a programar es aprender a cometer errores, pero es
+fundamental saber <strong>dónde</strong> y <strong>cuándo</strong>
+ocurren. Durante el ciclo de vida del código C, los errores se dividen
+en dos categorías principales, dependiendo de la fase en que se
+detectan:</p>
+<p><strong>A. Errores de Compilación/Enlazado (Errores de
+Traducción)</strong></p>
+<p>Estos errores ocurren en las primeras tres fases del ciclo
+(Preprocesamiento, Compilación y Ensamblado) o en la fase final del
+Enlazado. Estos errores <strong>impiden</strong> que se genere el
+archivo ejecutable (.exe). El compilador (o el enlazador) te avisará con
+un mensaje de error y el proceso se detendrá.</p>
+<table style="width:97%;">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 19%" />
+<col style="width: 23%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>Tipo de Error</strong></th>
+<th style="text-align: left;"><strong>¿Dónde Ocurre?</strong></th>
+<th style="text-align: left;"><strong>Causa Común</strong></th>
+<th style="text-align: left;"><strong>Ejemplo de Fallo</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>Sintaxis</strong></td>
+<td style="text-align: left;">Compilación</td>
+<td style="text-align: left;">Violación de las reglas del lenguaje.</td>
+<td style="text-align: left;">Olvidar un punto y coma (;) al final de
+una sentencia o usar paréntesis () donde deberían ir llaves {}.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Semántica</strong></td>
+<td style="text-align: left;">Compilación</td>
+<td style="text-align: left;">El código es válido pero no tiene sentido
+lógico.</td>
+<td style="text-align: left;">Intentar sumar dos tipos de datos
+incompatibles sin conversión adecuada.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Enlazado</strong></td>
+<td style="text-align: left;">Enlazado (<em>Linking</em>)</td>
+<td style="text-align: left;">El programa hace referencia a código que
+no encuentra.</td>
+<td style="text-align: left;">Olvidar incluir una librería (#include
+&lt;stdlib.h&gt;) o llamar a una función sin haberla definido en tu
+proyecto.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>La Regla de Oro:</strong> Si tienes un Error de Compilación o
+Enlazado, <strong>NO</strong> tienes un programa ejecutable. Debes
+corregir el código fuente para poder avanzar.</p>
+<p><strong>B. Errores de Ejecución (<em>Runtime
+Errors</em>)</strong></p>
+<p>Estos errores son mucho más sutiles porque el compilador <strong>no
+los detecta</strong>. El archivo ejecutable se genera correctamente,
+pero el programa falla o se comporta de forma inesperada
+<strong>mientras está siendo ejecutado</strong> por el usuario.</p>
+<ul>
+<li><p><strong>¿Dónde Ocurre?</strong> En la fase de uso del programa,
+después de que el enlazador haya terminado su trabajo.</p></li>
+<li><p><strong>Causa Común:</strong> Generalmente se deben a fallos
+lógicos o a escenarios inesperados que el programador no
+anticipó.</p></li>
+</ul>
+<table style="width:97%;">
+<colgroup>
+<col style="width: 27%" />
+<col style="width: 27%" />
+<col style="width: 42%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>Tipo de Error</strong></th>
+<th style="text-align: left;"><strong>Causa Común</strong></th>
+<th style="text-align: left;"><strong>Consecuencia Típica</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>Desbordamiento</strong></td>
+<td style="text-align: left;">Intentar dividir un número por cero.</td>
+<td style="text-align: left;">El programa se detiene abruptamente con un
+error del sistema operativo.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Lógica</strong></td>
+<td style="text-align: left;">Uso incorrecto de una fórmula o
+condición.</td>
+<td style="text-align: left;">El programa se ejecuta hasta el final,
+pero produce un resultado <strong>incorrecto</strong> (ej. una
+calculadora que suma mal).</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Memoria</strong></td>
+<td style="text-align: left;">Acceso a memoria que no fue reservada o
+liberación incorrecta.</td>
+<td style="text-align: left;">Fallos intermitentes, <em>crasheos</em> o
+inestabilidad del sistema.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>La Regla de Oro:</strong> Los <strong>Errores de Ejecución
+Lógica</strong> son los más difíciles de encontrar, ya que requieren que
+el programador haga un seguimiento paso a paso (<em>debugging</em>) para
+descubrir dónde el algoritmo se desvía de su plan original.</p>
+
+
+</div>
+</body>
+
+

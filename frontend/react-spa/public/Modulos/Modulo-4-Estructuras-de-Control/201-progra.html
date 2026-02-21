@@ -1,0 +1,220 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" crossorigin href="/assets/content-01sust.css">
+</head>
+<body>
+<div class="main-content">
+<h1><strong>💻 15 Ejercicios: Estructuras Condicionales (if /
+if-else)</strong></h1>
+<p><strong>Bloque 1: Condicional Simple (if)</strong></p>
+<p><strong>1) Verificación de Cero</strong></p>
+<p>Pide un número entero. Usa un if simple para imprimir "¡El número es
+cero!" solo si el número es igual a $0$.</p>
+<p>Input de Ejemplo: 0</p>
+<p>Output Esperado: ¡El número es cero!</p>
+<p><strong>2) Valor Positivo (Uso de &gt; )</strong></p>
+<p>Pide un número entero (int). Usa un if para imprimir "El valor es
+positivo" solo si es estrictamente mayor que $0$.</p>
+<p>Input de Ejemplo: 50</p>
+<p>Output Esperado: El valor es positivo</p>
+<p><strong>3) Mensaje de Alerta (Uso de != )</strong></p>
+<p>Pide el nivel de batería (int, de 0 a 100). Usa un if simple para
+mostrar "¡Batería NO está al 100%!" solo si el nivel es diferente de
+$100$.</p>
+<p>Input de Ejemplo: 95</p>
+<p>Output Esperado: ¡Batería NO está al 100%!</p>
+<p><strong>4) Descuento Simple</strong></p>
+<p>Pide el total de una compra (float). Usa un if para aplicar un
+descuento del $10\%$ y mostrar el nuevo total solo si la compra supera
+los $200$ (sin incluir $200$).</p>
+<p>Input de Ejemplo: 250.0</p>
+<p>Output Esperado: Total con descuento (10%): 225.00</p>
+<p><strong>5) Verificación de Carácter Específico</strong></p>
+<p>Pide al usuario que ingrese una letra (char). Usa un if para imprimir
+"¡Es la letra 'A'!" solo si la letra ingresada es igual a 'A'.</p>
+<p>Input de Ejemplo: A</p>
+<p>Output Esperado: ¡Es la letra 'A'!</p>
+<p><strong>Bloque 2: Condicional Doble (if-else)</strong></p>
+<p><strong>6) Verificador de Mayoría de Edad</strong></p>
+<p>Pide la edad (int). Usa if-else para determinar si la persona es
+"Mayor de edad" ($\ge 18$) o "Menor de edad".</p>
+<p>Input de Ejemplo: 17</p>
+<p>Output Esperado: Menor de edad.</p>
+<p><strong>7) Par o Impar (Uso de % )</strong></p>
+<p>Pide un número entero. Usa el operador módulo (%) y if-else para
+imprimir si el número es "Par" o "Impar".</p>
+<p>Input de Ejemplo: 13</p>
+<p>Output Esperado: El numero es Impar.</p>
+<p><strong>8) Evaluación de Calificación</strong></p>
+<p>Pide una calificación (float). Usa if-else para imprimir "Aprobado"
+(si $\ge 7.0$) o "Reprobado" (si $&lt; 7.0$).</p>
+<p>Input de Ejemplo: 8.5</p>
+<p>Output Esperado: Aprobado.</p>
+<p><strong>9) Comprobación de Acceso</strong></p>
+<p>Pide un código de acceso (int). Si el código es igual a $1234$,
+imprime "Acceso Concedido". De lo contrario, imprime "Acceso
+Denegado".</p>
+<p>Input de Ejemplo: 5000</p>
+<p>Output Esperado: Acceso Denegado.</p>
+<p><strong>10) Saldo de Cuenta Bancaria</strong></p>
+<p>Pide el saldo actual (float). Usa if-else para informar si la cuenta
+tiene "Fondos Positivos" ($\ge 0$) o "Fondos Negativos".</p>
+<p>Input de Ejemplo: -25.50</p>
+<p>Output Esperado: Fondos Negativos.</p>
+<p><strong>Bloque 3: Condiciones Lógicas y Avanzadas</strong></p>
+<p><strong>11) Rango de Temperatura (Uso de &amp;&amp; )</strong></p>
+<p>Pide una temperatura (int). Usa un if con el operador &amp;&amp; para
+imprimir "Temperatura ideal" solo si la temperatura está entre 20 y 30
+grados (incluyendo ambos extremos).</p>
+<p>Input de Ejemplo: 25</p>
+<p>Output Esperado: Temperatura ideal.</p>
+<p><strong>12) Acceso por Permiso (Uso de || )</strong></p>
+<p>Pide el nivel de usuario (int, donde $1$ es Admin y $0$ es Invitado)
+y si el usuario es "VIP" (char, 'S' o 'N'). Usa if con el operador ||
+para imprimir "Acceso de Alto Nivel" solo si es Admin ($\text{nivel} =
+1$) O es VIP ($\text{VIP} = \text{'S'}$).</p>
+<p>Input de Ejemplo: 0 (Nivel), S (VIP)</p>
+<p>Output Esperado: Acceso de Alto Nivel</p>
+<p><strong>13) Negación Lógica (Uso de ! )</strong></p>
+<p>Pide un valor booleano (int, $0$ o $1$). Usa un if con el operador !
+para imprimir "El valor es Falso" solo si el valor ingresado es $0$.</p>
+<p>Input de Ejemplo: 0</p>
+<p>Output Esperado: El valor es Falso</p>
+<p><strong>14) Condición Compuesta y Aritmética</strong></p>
+<p>Pide dos números enteros, A y B. Usa if-else para determinar si la
+suma de A y B es mayor que 10 O el producto de A y B es igual a 20.
+Imprime el resultado.</p>
+<p>Input de Ejemplo: A=2, B=5</p>
+<p>Output Esperado: La suma es menor que 10 y el producto no es 20.</p>
+<p><strong>15) Validación de Entrada con if Simple (Sintaxis
+Compacta)</strong></p>
+<p>Pide un número. Usa el operador if de una sola línea (sin llaves)
+para imprimir "Número válido." solo si el número es mayor a $100$.</p>
+<p>Input de Ejemplo: 101</p>
+<p>Output Esperado: Número válido.</p>
+<p><strong>Respuestas y Código Fuente</strong></p>
+<p>C</p>
+<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
+<p>int main(void) {</p>
+<p>// Variables para ejercicios</p>
+<p>int num, bateria, edad, codigo, temp, nivel_usuario, valor_bool,
+num_A, num_B;</p>
+<p>char letra, es_vip;</p>
+<p>float compra, calificacion, saldo, total_descuento, nuevo_total;</p>
+<p>printf("--- Soluciones de Ejercicios de Estructuras Condicionales
+---\n");</p>
+<p>// 1) Verificación de Cero (if simple)</p>
+<p>printf("\n1) Ingrese un entero (0 para probar): ");</p>
+<p>scanf("%d", &amp;num);</p>
+<p>if (num == 0) {</p>
+<p>printf("Output Esperado: ¡El número es cero!\n");</p>
+<p>}</p>
+<p>// 2) Valor Positivo (if simple con &gt;)</p>
+<p>printf("\n2) Ingrese un entero: ");</p>
+<p>scanf("%d", &amp;num);</p>
+<p>if (num &gt; 0) {</p>
+<p>printf("Output Esperado: El valor es positivo\n");</p>
+<p>}</p>
+<p>// 3) Mensaje de Alerta (if simple con !=)</p>
+<p>printf("\n3) Nivel de bateria (0-100): ");</p>
+<p>scanf("%d", &amp;bateria);</p>
+<p>if (bateria != 100) {</p>
+<p>printf("Output Esperado: ¡Batería NO está al 100%%!\n");</p>
+<p>}</p>
+<p>// 4) Descuento Simple (if simple y aritmetica)</p>
+<p>printf("\n4) Total de la compra: $");</p>
+<p>scanf("%f", &amp;compra);</p>
+<p>if (compra &gt; 200.0f) {</p>
+<p>total_descuento = compra * 0.10f;</p>
+<p>nuevo_total = compra - total_descuento;</p>
+<p>printf("Output Esperado: Total con descuento (10%%): %.2f\n",
+nuevo_total);</p>
+<p>}</p>
+<p>// 5) Verificación de Carácter Específico (if simple con char)</p>
+<p>printf("\n5) Ingrese una letra: ");</p>
+<p>scanf(" %c", &amp;letra);</p>
+<p>if (letra == 'A') {</p>
+<p>printf("Output Esperado: ¡Es la letra 'A'!\n");</p>
+<p>}</p>
+<p>// 6) Verificador de Mayoría de Edad (if-else)</p>
+<p>printf("\n6) Ingrese edad: ");</p>
+<p>scanf("%d", &amp;edad);</p>
+<p>if (edad &gt;= 18) {</p>
+<p>printf("Output Esperado: Mayor de edad.\n");</p>
+<p>} else {</p>
+<p>printf("Output Esperado: Menor de edad.\n");</p>
+<p>}</p>
+<p>// 7) Par o Impar (if-else con %)</p>
+<p>printf("\n7) Ingrese un numero para par/impar: ");</p>
+<p>scanf("%d", &amp;num);</p>
+<p>if (num % 2 == 0) {</p>
+<p>printf("Output Esperado: El numero es Par.\n");</p>
+<p>} else {</p>
+<p>printf("Output Esperado: El numero es Impar.\n");</p>
+<p>}</p>
+<p>// 8) Evaluación de Calificación (if-else)</p>
+<p>printf("\n8) Ingrese calificacion (float): ");</p>
+<p>scanf("%f", &amp;calificacion);</p>
+<p>if (calificacion &gt;= 7.0f) {</p>
+<p>printf("Output Esperado: Aprobado.\n");</p>
+<p>} else {</p>
+<p>printf("Output Esperado: Reprobado.\n");</p>
+<p>}</p>
+<p>// 9) Comprobación de Acceso (if-else)</p>
+<p>printf("\n9) Ingrese codigo de acceso: ");</p>
+<p>scanf("%d", &amp;codigo);</p>
+<p>if (codigo == 1234) {</p>
+<p>printf("Output Esperado: Acceso Concedido.\n");</p>
+<p>} else {</p>
+<p>printf("Output Esperado: Acceso Denegado.\n");</p>
+<p>}</p>
+<p>// 10) Saldo de Cuenta Bancaria (if-else)</p>
+<p>printf("\n10) Ingrese saldo actual (float): $");</p>
+<p>scanf("%f", &amp;saldo);</p>
+<p>if (saldo &gt;= 0) {</p>
+<p>printf("Output Esperado: Fondos Positivos.\n");</p>
+<p>} else {</p>
+<p>printf("Output Esperado: Fondos Negativos.\n");</p>
+<p>}</p>
+<p>// 11) Rango de Temperatura (if con &amp;&amp;)</p>
+<p>printf("\n11) Temperatura (int): ");</p>
+<p>scanf("%d", &amp;temp);</p>
+<p>if (temp &gt;= 20 &amp;&amp; temp &lt;= 30) {</p>
+<p>printf("Output Esperado: Temperatura ideal.\n");</p>
+<p>}</p>
+<p>// 12) Acceso por Permiso (if con ||)</p>
+<p>printf("\n12) Nivel usuario (1/0) y VIP ('S'/'N'): ");</p>
+<p>scanf("%d %c", &amp;nivel_usuario, &amp;es_vip);</p>
+<p>if (nivel_usuario == 1 || es_vip == 'S') {</p>
+<p>printf("Output Esperado: Acceso de Alto Nivel\n");</p>
+<p>}</p>
+<p>// 13) Negación Lógica (if con !)</p>
+<p>printf("\n13) Valor booleano (0 o 1): ");</p>
+<p>scanf("%d", &amp;valor_bool);</p>
+<p>if (!valor_bool) { // Es True (distinto de 0) si valor_bool es 0.</p>
+<p>printf("Output Esperado: El valor es Falso\n");</p>
+<p>}</p>
+<p>// 14) Condición Compuesta y Aritmética (if-else con ||)</p>
+<p>printf("\n14) Dos numeros A y B: ");</p>
+<p>scanf("%d %d", &amp;num_A, &amp;num_B);</p>
+<p>if ((num_A + num_B &gt; 10) || (num_A * num_B == 20)) {</p>
+<p>printf("Output Esperado: Condicion compuesta Verdadera.\n");</p>
+<p>} else {</p>
+<p>printf("Output Esperado: La suma es menor que 10 y el producto no es
+20.\n");</p>
+<p>}</p>
+<p>// 15) Validación de Entrada con if Simple (Sintaxis Compacta)</p>
+<p>printf("\n15) Ingrese un numero: ");</p>
+<p>scanf("%d", &amp;num);</p>
+<p>if (num &gt; 100)</p>
+<p>printf("Output Esperado: Número válido.\n");</p>
+<p>return 0;</p>
+<p>}</p>
+
+</div>
+</body>
+</html>
+

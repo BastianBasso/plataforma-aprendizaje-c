@@ -1,0 +1,227 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" crossorigin href="/assets/content-01sust.css">
+</head>
+<body>
+<div class="main-content">
+<h2
+id="proyecto-de-laboratorio-implementaciÃ³n-del-vector-dinÃ¡mico-genÃ©rico-dynamic-array">ðŸš€
+Proyecto de Laboratorio: ImplementaciÃ³n del Vector DinÃ¡mico GenÃ©rico
+(<code>Dynamic Array</code>)</h2>
+<h3 id="i.-introducciÃ³n-la-voz-del-experto">I. IntroducciÃ³n (La Voz del
+Experto)</h3>
+<p>El proyecto del <strong>Vector DinÃ¡mico</strong> (similar a
+<code>std::vector</code> en C++ o <code>ArrayList</code> en Java) es el
+pilar de la programaciÃ³n en C a nivel intermedio-avanzado. Requiere que
+tomen el control absoluto del <em>Heap</em> para construir una
+estructura de datos que <strong>crece automÃ¡ticamente</strong>.</p>
+<p><strong>La Regla del Nivel Avanzado:</strong> Este laboratorio es una
+prueba de fuego en la que deberÃ¡n unir el manejo del <strong>tamaÃ±o de
+los tipos (<code>sizeof</code>)</strong>, la <strong>redimensiÃ³n
+eficiente (<code>realloc</code>)</strong> y la <strong>prevenciÃ³n de
+fallos de memoria (<code>free</code> y <code>NULL</code>)</strong>.
+AdemÃ¡s, para maximizar la dificultad y el aprendizaje sobre
+<em>casting</em>, nuestro vector serÃ¡ <strong>genÃ©rico</strong>
+(<code>void *</code>), capaz de almacenar punteros a cualquier tipo de
+dato.</p>
+<h3 id="ii.-objetivo-del-proyecto">II. ðŸŽ¯ Objetivo del Proyecto</h3>
+<p>Implementar una biblioteca modular (archivos <code>.h</code> y
+<code>.c</code>) que defina la estructura y el comportamiento de un
+<em>array</em> de punteros (<code>void *</code>) que crece dinÃ¡micamente
+segÃºn sea necesario, utilizando las cuatro funciones de gestiÃ³n de
+memoria de C.</p>
+<h3 id="iii.-estructura-y-requisitos-tÃ©cnicos">III. ðŸ› ï¸ Estructura y
+Requisitos TÃ©cnicos</h3>
+<h4 id="definiciÃ³n-de-la-estructura">1. DefiniciÃ³n de la Estructura</h4>
+<p>La estructura debe mantener el estado interno del vector. Debe ser un
+contenedor de <strong>punteros genÃ©ricos</strong> a los datos:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdlib.h&gt;</span><span class="pp"> </span><span class="co">// Para las funciones de memoria</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co">// El vector almacenarÃ¡ PUNTEROS a datos, no los datos en sÃ­.</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="kw">typedef</span> <span class="kw">struct</span> <span class="op">{</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">void</span> <span class="op">**</span>datos<span class="op">;</span>    <span class="co">// Puntero doble: Puntero al array de punteros (void*)</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="dt">size_t</span> capacidad<span class="op">;</span> <span class="co">// Memoria total asignada actualmente</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    <span class="dt">size_t</span> tamanio<span class="op">;</span>  <span class="co">// NÃºmero actual de elementos almacenados</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> VectorDinamico<span class="op">;</span></span></code></pre></div>
+<h4 id="funciones-obligatorias-el-corazÃ³n-del-mÃ³dulo">2. Funciones
+Obligatorias (El CorazÃ³n del MÃ³dulo)</h4>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">FunciÃ³n</th>
+<th style="text-align: left;">PropÃ³sito</th>
+<th style="text-align: left;">Requisitos de ImplementaciÃ³n</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td
+style="text-align: left;"><code>int vector_init(VectorDinamico *v, size_t capacidad_inicial);</code></td>
+<td style="text-align: left;">Inicializa el vector.</td>
+<td style="text-align: left;">Debe usar
+<strong><code>malloc()</code></strong> para asignar el <em>array</em>
+inicial de <code>capacidad_inicial</code> elementos de tipo
+<code>void *</code>.</td>
+</tr>
+<tr class="even">
+<td
+style="text-align: left;"><code>int vector_push(VectorDinamico *v, void *elemento);</code></td>
+<td style="text-align: left;">Agrega un nuevo <code>elemento</code> al
+final del vector, si hay espacio.</td>
+<td style="text-align: left;">Debe invocar la funciÃ³n de redimensiÃ³n si
+<code>v-&gt;tamanio == v-&gt;capacidad</code>. El elemento debe ser
+almacenado usando <strong>aritmÃ©tica de punteros</strong>
+(<code>*(v-&gt;datos + v-&gt;tamanio) = elemento;</code>).</td>
+</tr>
+<tr class="odd">
+<td
+style="text-align: left;"><code>void *vector_pop(VectorDinamico *v);</code></td>
+<td style="text-align: left;">Elimina y retorna el Ãºltimo elemento
+agregado, reduciendo el tamaÃ±o (<code>tamanio</code>).</td>
+<td style="text-align: left;">Debe usar desreferencia y aritmÃ©tica de
+punteros para recuperar el elemento.</td>
+</tr>
+<tr class="even">
+<td
+style="text-align: left;"><code>void *vector_get(const VectorDinamico *v, size_t indice);</code></td>
+<td style="text-align: left;">Retorna el puntero al elemento en una
+posiciÃ³n especÃ­fica.</td>
+<td style="text-align: left;">Acceso obligatorio a travÃ©s de
+<strong>aritmÃ©tica de punteros</strong> (ej:
+<code>*(v-&gt;datos + indice)</code>), no notaciÃ³n de corchetes.</td>
+</tr>
+<tr class="odd">
+<td
+style="text-align: left;"><code>void vector_free(VectorDinamico *v);</code></td>
+<td style="text-align: left;"><strong>Destructor CrÃ­tico.</strong>
+Libera toda la memoria dinÃ¡mica.</td>
+<td style="text-align: left;">Debe usar
+<strong><code>free()</code></strong> sobre el puntero
+<code>v-&gt;datos</code> y luego establecer
+<strong><code>v-&gt;datos = NULL;</code></strong> para prevenir punteros
+colgantes/doble liberaciÃ³n.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="iv.-desafÃ­o-i-redimensiÃ³n-de-capacidad-y-manejo-de-realloc">IV.
+ðŸš¨ DesafÃ­o I: RedimensiÃ³n de Capacidad y Manejo de
+<code>realloc()</code></h3>
+<p>La funciÃ³n mÃ¡s importante (y difÃ­cil) es la lÃ³gica de crecimiento.
+Debe implementarse la siguiente funciÃ³n auxiliar obligatoria:</p>
+<h4 id="estrategia-de-crecimiento-amortizado-dificultad-mÃ¡xima">1.
+Estrategia de Crecimiento Amortizado (Dificultad MÃ¡xima)</h4>
+<p><strong>Firma:</strong>
+<code>int vector_redimensionar(VectorDinamico *v, size_t nueva_capacidad);</code></p>
+<ul>
+<li><strong>Regla de Crecimiento (Doble AmortizaciÃ³n):</strong> Cuando
+<code>vector_push</code> detecte que el vector estÃ¡ lleno, debe llamar a
+<code>vector_redimensionar</code>, solicitando que la nueva capacidad
+sea <strong>el doble de la capacidad actual</strong>
+(<code>v-&gt;capacidad * 2</code>).</li>
+<li><strong>Uso de <code>realloc()</code>:</strong> Dentro de esta
+funciÃ³n, debe usarse <strong><code>realloc()</code></strong> para
+solicitar el nuevo bloque de memoria.</li>
+<li><strong>Manejo de Fallos (Memory Safety):</strong>
+<ol type="1">
+<li>El resultado de <code>realloc()</code> debe ser guardado en un
+<strong>puntero temporal (<code>void **temp_ptr</code>)</strong>.</li>
+<li>Debe realizarse la <strong>comprobaciÃ³n esencial
+<code>if (temp_ptr == NULL)</code></strong>.</li>
+<li>Si la asignaciÃ³n falla, el programa <strong>NO DEBE PERDER EL
+PUNTERO ORIGINAL (<code>v-&gt;datos</code>)</strong>. Debe retornar un
+cÃ³digo de error y el puntero <code>v-&gt;datos</code> debe seguir siendo
+vÃ¡lido para evitar una fuga de memoria (Ver archivo
+<code>300</code>).</li>
+</ol></li>
+</ul>
+<hr />
+<h3 id="v.-desafÃ­o-ii-inserciÃ³n-y-memoria-de-inicializaciÃ³n">V. ðŸš¨
+DesafÃ­o II: InserciÃ³n y Memoria de InicializaciÃ³n</h3>
+<p>Para la funciÃ³n <code>vector_push</code>, el elemento a insertar debe
+ser un <strong>nuevo bloque de memoria asignado en el
+<em>Heap</em></strong>, que el alumno debe inicializar a cero,
+reforzando el concepto de la memoria <em>basura</em> de
+<code>malloc</code> vs.Â <code>calloc</code>.</p>
+<ul>
+<li><strong>SimulaciÃ³n de InserciÃ³n (para el <em>main.c</em>):</strong>
+<ol type="1">
+<li>En la funciÃ³n principal de prueba, cuando se use
+<code>vector_push</code>, el alumno debe primero asignar memoria para el
+dato que quiere guardar (ej: un <code>int *</code>, <code>float *</code>
+o una <code>struct *</code>).</li>
+<li>Si el dato es un nuevo <code>struct</code> o un <em>array</em> de
+contadores, el alumno debe usar <strong><code>calloc()</code></strong>
+para inicializarlo a cero antes de pasarlo a
+<code>vector_push</code>.</li>
+</ol></li>
+</ul>
+<h3 id="vi.-puntuaciÃ³n-y-criterios-de-evaluaciÃ³n">VI. ðŸ§ª PuntuaciÃ³n y
+Criterios de EvaluaciÃ³n</h3>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Criterio</th>
+<th style="text-align: left;">Porcentaje</th>
+<th style="text-align: left;">Observaciones Clave</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>Integridad de
+<code>realloc</code></strong></td>
+<td style="text-align: left;">35%</td>
+<td style="text-align: left;">ImplementaciÃ³n correcta de la
+<strong>estrategia de duplicaciÃ³n de capacidad</strong> y la gestiÃ³n
+segura del puntero temporal <code>temp_ptr</code> durante el fallo de
+<code>realloc(NULL)</code>.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>GestiÃ³n de Punteros
+GenÃ©ricos</strong></td>
+<td style="text-align: left;">25%</td>
+<td style="text-align: left;">Uso estricto de <code>void **</code> y la
+<strong>aritmÃ©tica de punteros</strong> (<code>*(v-&gt;datos + i)</code>
+en lugar de <code>v-&gt;datos[i]</code>) para acceso.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Ciclo de Vida de
+Memoria</strong></td>
+<td style="text-align: left;">25%</td>
+<td style="text-align: left;">Uso correcto de
+<strong><code>malloc</code></strong> (inicial),
+<strong><code>calloc</code></strong> (inicializaciÃ³n de nuevos
+elementos), y <strong><code>free</code></strong> (con la anulaciÃ³n a
+<code>NULL</code> post-liberaciÃ³n). PrevenciÃ³n de fugas.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Robustez y Pruebas</strong></td>
+<td style="text-align: left;">15%</td>
+<td style="text-align: left;">El programa de prueba
+(<code>main.c</code>) debe demostrar: a) Crecimiento mÃ¡s allÃ¡ de la
+capacidad inicial, b) LiberaciÃ³n final sin fallos (punteros colgantes o
+doble <code>free</code>), y c) El uso de un <em>debugger</em> o
+<strong>Valgrind</strong> para verificar la ausencia de fugas (Ver
+archivo <code>600</code>).</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</body>
+</html>
+

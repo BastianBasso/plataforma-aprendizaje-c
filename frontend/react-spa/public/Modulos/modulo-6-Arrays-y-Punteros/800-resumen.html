@@ -1,0 +1,210 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" crossorigin href="/assets/content-01sust.css">
+</head>
+<body>
+<div class="main-content">
+<h2 id="resumen-mÃ³dulo-arrays-estÃ¡ticos-y-punteros-fundamentales">ðŸ’¾
+Resumen MÃ³dulo: Arrays EstÃ¡ticos y Punteros Fundamentales</h2>
+<p>Este mÃ³dulo se centrÃ³ en la <strong>GestiÃ³n de la Memoria
+EstÃ¡tica</strong> a travÃ©s de <strong>Arrays</strong> y el salto
+conceptual hacia la <strong>ManipulaciÃ³n Indirecta</strong> mediante
+<strong>Punteros</strong>. Aprendiste que la contigÃ¼idad en memoria,
+aunque eficiente, impone lÃ­mites rÃ­gidos que el programador debe
+respetar para evitar la corrupciÃ³n de datos. La introducciÃ³n a los
+punteros es la puerta de entrada a la manipulaciÃ³n directa de
+direcciones, lo que otorga el verdadero poder de C.</p>
+<hr />
+<h3 id="arrays-y-matrices-estructuras-de-almacenamiento-estÃ¡tico">1.
+Arrays y Matrices: Estructuras de Almacenamiento EstÃ¡tico ðŸ§±</h3>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Concepto</th>
+<th style="text-align: left;">PropÃ³sito en el MÃ³dulo</th>
+<th style="text-align: left;">CaracterÃ­stica Clave</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>Array EstÃ¡tico</strong></td>
+<td style="text-align: left;">Agrupar una colecciÃ³n homogÃ©nea de datos
+(mismo tipo).</td>
+<td style="text-align: left;"><strong>ContigÃ¼idad en Memoria</strong>
+(elementos seguidos) y <strong>TamaÃ±o Fijo</strong> (inalterable en
+tiempo de ejecuciÃ³n).</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Matriz (Array 2D)</strong></td>
+<td style="text-align: left;">Modelar datos tabulares (Filas y
+Columnas).</td>
+<td style="text-align: left;">Es conceptualmente un <strong>Array de
+Arrays</strong>; el primer Ã­ndice es la Fila y el segundo la
+Columna.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Acceso Directo</strong></td>
+<td style="text-align: left;">Acceder a cualquier elemento con la misma
+eficiencia, sin importar su posiciÃ³n.</td>
+<td style="text-align: left;">La direcciÃ³n se calcula mediante la
+<strong>DirecciÃ³n Base</strong> mÃ¡s un desplazamiento (Ã­ndice * tamaÃ±o
+del tipo de dato).</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="indexaciÃ³n-y-el-riesgo-de-la-memoria">2. IndexaciÃ³n y el Riesgo
+de la Memoria ðŸš¨</h3>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Concepto</th>
+<th style="text-align: left;">Rango VÃ¡lido</th>
+<th style="text-align: left;">Consecuencia de Error</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>Ãndice Base Cero</strong></td>
+<td style="text-align: left;">El primer elemento estÃ¡ en el Ã­ndice
+<strong>0</strong>, y el Ãºltimo siempre estÃ¡ en el Ã­ndice <strong><span
+class="math inline"><em>N</em>â€…âˆ’â€…1</span></strong> (si <span
+class="math inline"><em>N</em></span> es el tamaÃ±o total).</td>
+<td style="text-align: left;">La iteraciÃ³n se realiza con la condiciÃ³n
+estricta: <code>i &lt; N</code>.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Desbordamiento de BÃºfer</strong>
+(<em>Buffer Overflow</em>)</td>
+<td style="text-align: left;">Acceder a un Ã­ndice fuera del rango de
+<strong><span class="math inline">0</span> a <span
+class="math inline"><em>N</em>â€…âˆ’â€…1</span></strong>.</td>
+<td style="text-align: left;"><strong>CorrupciÃ³n de memoria</strong>
+(sobrescribe variables adyacentes, potencialmente peligrosa) o
+<strong>Fallos de SegmentaciÃ³n</strong> (<em>Segmentation
+Fault</em>).</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Recorrido de
+Matrices</strong></td>
+<td style="text-align: left;">Se utiliza un bucle
+<strong>exterior</strong> para las Filas (<code>i</code>) y un bucle
+<strong>interior</strong> para las Columnas (<code>j</code>).</td>
+<td style="text-align: left;">El acceso al elemento es siempre
+<code>Matriz[i][j]</code>.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="punteros-el-valor-de-la-direcciÃ³n">3. Punteros: El Valor de la
+DirecciÃ³n ðŸ“Œ</h3>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Concepto</th>
+<th style="text-align: left;">DefiniciÃ³n</th>
+<th style="text-align: left;">Rol del Tipo (<code>int*</code>,
+<code>char*</code>)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>Puntero</strong>
+(<code>tipo*</code>)</td>
+<td style="text-align: left;">Una <strong>variable</strong> cuyo valor
+no es un dato, sino una <strong>DirecciÃ³n de Memoria</strong> (la
+ubicaciÃ³n de otra variable en la RAM).</td>
+<td style="text-align: left;">Le indica al compilador <strong>cuÃ¡ntos
+bytes debe leer o escribir</strong> a partir de esa direcciÃ³n (el tamaÃ±o
+del dato).</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Puntero Nulo
+(<code>NULL</code>)</strong></td>
+<td style="text-align: left;">Un valor especial que indica que el
+puntero <strong>no estÃ¡ asociado a ninguna direcciÃ³n de memoria
+vÃ¡lida</strong>.</td>
+<td style="text-align: left;">Se usa para inicializar punteros y
+realizar chequeos de seguridad (evitando <em>wild pointers</em> y
+<em>segmentation faults</em>).</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="operadores-clave-el-puente-a-la-memoria">4. Operadores Clave: El
+Puente a la Memoria ðŸ”—</h3>
+<p>La interacciÃ³n con la memoria se realiza exclusivamente a travÃ©s de
+dos operadores unarios:</p>
+<table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Operador</th>
+<th style="text-align: left;">Nombre</th>
+<th style="text-align: left;">FunciÃ³n</th>
+<th style="text-align: left;">Resultado en una ExpresiÃ³n</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong><code>&amp;</code></strong></td>
+<td style="text-align: left;"><strong>DirecciÃ³n de</strong>
+(Referencia)</td>
+<td style="text-align: left;">Obtiene la <strong>DirecciÃ³n de
+Memoria</strong> donde reside una variable normal
+(<code>int x;</code>).</td>
+<td style="text-align: left;">Un valor de tipo <strong>Puntero</strong>
+(<code>&amp;x</code> es de tipo <code>int*</code>).</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong><code>*</code></strong></td>
+<td style="text-align: left;"><strong>Desreferencia</strong> (Valor
+en)</td>
+<td style="text-align: left;">Accede al <strong>Valor</strong>
+almacenado en la direcciÃ³n a la que apunta el puntero
+(<code>*p</code>).</td>
+<td style="text-align: left;">ActÃºa como un <strong>Alias</strong> para
+la variable original (permite leer y escribir el dato).</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>RelaciÃ³n
+Array-Puntero</strong></td>
+<td style="text-align: left;">La base de la <strong>AritmÃ©tica de
+Punteros</strong>.</td>
+<td style="text-align: left;">El nombre de un <em>Array</em>
+(<code>mi_array</code>) se degrada (se trata) como un <strong>puntero
+constante</strong> a su primer elemento
+(<code>&amp;mi_array[0]</code>).</td>
+<td style="text-align: left;"><code>mi_array[i]</code> es
+sintÃ¡cticamente equivalente a <code>*(mi_array + i)</code>.</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</body>
+</html>
+

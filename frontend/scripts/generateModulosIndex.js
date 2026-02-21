@@ -2,7 +2,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const baseDir = path.join(__dirname, '../proyecto/dist/protected_html/Modulos');
+const baseDir = path.join(__dirname, '../react-spa/public/Modulos');
 const output = [];
 
 function getModuloNumber(moduloDir) {
@@ -34,12 +34,6 @@ moduloDirs.forEach((moduloDir) => {
 
   const archivos = fs.readdirSync(moduloPath)
     .filter(f => f.endsWith('.html'))
-    .sort((a, b) => {
-      const na = getArchivoNumber(a);
-      const nb = getArchivoNumber(b);
-      if (na != null && nb != null && na !== nb) return na - nb;
-      if (na != null && nb == null) return -1;
-      if (na == null && nb != null) return 1;
       return String(a).localeCompare(String(b), 'es', { numeric: true, sensitivity: 'base' });
     })
     .map(f => ({
@@ -51,7 +45,7 @@ moduloDirs.forEach((moduloDir) => {
     modulo: moduloDir,
     archivos
   });
-});
+
 
 fs.writeFileSync(
   path.join(__dirname, '../js-spa/data/modulosIndex.js'),

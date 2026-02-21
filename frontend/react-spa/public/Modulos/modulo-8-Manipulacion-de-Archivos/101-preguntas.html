@@ -1,0 +1,102 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" crossorigin href="/assets/content-01sust.css">
+</head>
+<body>
+<div class="main-content">
+<h2 id="preguntas-de-alternativa-persistencia-y-streams">10 Preguntas de
+Alternativa: Persistencia y Streams</h2>
+<h3 id="concepto-de-persistencia">1. Concepto de Persistencia</h3>
+<p>Â¿CuÃ¡l es el concepto central de la <strong>Persistencia de
+Datos</strong>?</p>
+<p>A. La capacidad de los datos de permanecer en la memoria volÃ¡til
+(RAM) mientras el programa se ejecuta. B. La manipulaciÃ³n de variables
+utilizando punteros y aritmÃ©tica de memoria. C. La velocidad con la que
+un programa accede a los datos almacenados en el <em>heap</em>. D. La
+capacidad de los datos de <strong>sobrevivir a la ejecuciÃ³n del
+programa</strong> mediante su almacenamiento en medios no volÃ¡tiles.</p>
+<p><strong>Respuesta Correcta: D</strong></p>
+<h3 id="memoria-volÃ¡til-vs.-no-volÃ¡til">2. Memoria VolÃ¡til vs.Â No
+VolÃ¡til</h3>
+<p>Cuando una aplicaciÃ³n en C termina, toda la informaciÃ³n en la
+<strong>memoria volÃ¡til</strong> (RAM, pila, <em>heap</em>) se pierde.
+Â¿QuÃ© tipo de almacenamiento se utiliza para lograr la persistencia de
+datos?</p>
+<p>A. Memoria CachÃ© de la CPU. B. Memoria de la Pila (<em>Stack</em>).
+C. <strong>Almacenamiento no volÃ¡til</strong> (como el disco duro o
+SSD). D. Registros internos del procesador.</p>
+<p><strong>Respuesta Correcta: C</strong></p>
+<h3 id="definiciÃ³n-de-stream">3. DefiniciÃ³n de Stream</h3>
+<p>Â¿QuÃ© tÃ©rmino describe un <strong>canal lÃ³gico o secuencia continua de
+bytes</strong> que fluye desde una fuente a un destino, actuando como
+una <strong>abstracciÃ³n</strong> para la I/O?</p>
+<p>A. Buffer de Memoria. B. Descriptor de Archivo. C.
+<strong>Stream</strong> o Flujo de Datos. D. Array de Caracteres.</p>
+<p><strong>Respuesta Correcta: C</strong></p>
+<h3 id="naturaleza-de-los-datos-en-el-stream">4. Naturaleza de los Datos
+en el Stream</h3>
+<p>Un <em>Stream</em> trata la informaciÃ³n transferida (sin importar si
+es texto, nÃºmeros o binario) como una simple secuencia continua de:</p>
+<p>A. Estructuras de datos. B. Punteros. C. Variables de tipo
+<code>int</code>. D. <strong>Bytes</strong>.</p>
+<p><strong>Respuesta Correcta: D</strong></p>
+<h3 id="stream-de-entrada-estÃ¡ndar">5. Stream de Entrada EstÃ¡ndar</h3>
+<p>Â¿CuÃ¡l de los siguientes <em>Streams</em> EstÃ¡ndar representa el
+<strong>Canal de Entrada EstÃ¡ndar</strong> y por defecto se asocia al
+<strong>teclado</strong>?</p>
+<p>A. <code>stdout</code> B. <strong><code>stdin</code></strong> C.
+<code>stderr</code> D. <code>FILE</code></p>
+<p><strong>Respuesta Correcta: B</strong></p>
+<h3 id="stream-de-salida-estÃ¡ndar">6. Stream de Salida EstÃ¡ndar</h3>
+<p>Â¿CuÃ¡l es el propÃ³sito principal del <em>Stream</em> estÃ¡ndar
+<code>stdout</code> (Salida EstÃ¡ndar)?</p>
+<p>A. Recibir datos del disco duro. B. Imprimir mensajes de error y
+diagnÃ³stico. C. Almacenar variables temporales del programa. D.
+Canalizar datos de <strong>salida normal hacia la pantalla</strong>.</p>
+<p><strong>Respuesta Correcta: D</strong></p>
+<h3 id="flujo-de-errores-estÃ¡ndar">7. Flujo de Errores EstÃ¡ndar</h3>
+<p>Â¿CuÃ¡l es la principal ventaja funcional de que el <em>stream</em>
+<code>stderr</code> sea independiente de <code>stdout</code>?</p>
+<p>A. Permite usar funciones de entrada diferentes a las de la salida.
+B. <strong>Asegura que los mensajes de error crÃ­ticos se muestren
+incluso si la salida normal (<code>stdout</code>) es redirigida a un
+archivo.</strong> C. Acelera la velocidad de impresiÃ³n de la consola. D.
+Permite que el programa acceda al disco duro.</p>
+<p><strong>Respuesta Correcta: B</strong></p>
+<h3 id="gestiÃ³n-de-flujos-de-archivos">8. GestiÃ³n de Flujos de
+Archivos</h3>
+<p>A diferencia de los <em>streams</em> estÃ¡ndar (<code>stdin</code>,
+<code>stdout</code>), para utilizar un <strong>Flujo de Archivo</strong>
+para leer o escribir en un archivo fÃ­sico, el programador debe:</p>
+<p>A. Redirigir <code>stdout</code> al nombre del archivo. B. Declarar
+una <code>struct FILE</code> en la pila. C. <strong>Abrir explÃ­citamente
+la conexiÃ³n lÃ³gica</strong> (el flujo) usando una funciÃ³n como
+<code>fopen()</code>. D. Utilizar <code>scanf()</code> para leer los
+datos directamente del disco.</p>
+<p><strong>Respuesta Correcta: C</strong></p>
+<h3 id="estructura-de-gestiÃ³n-de-archivos">9. Estructura de GestiÃ³n de
+Archivos</h3>
+<p>Â¿QuÃ© estructura de la librerÃ­a <code>stdio.h</code> se utiliza en C
+para gestionar y mantener el estado de un <strong>Flujo de
+Archivo</strong>, y cuyo puntero es devuelto por
+<code>fopen()</code>?</p>
+<p>A. <code>struct Stream</code> B. <code>void *</code> C.
+<strong><code>FILE</code></strong> D. <code>char *</code></p>
+<p><strong>Respuesta Correcta: C</strong></p>
+<h3 id="unificaciÃ³n-de-io">10. UnificaciÃ³n de I/O</h3>
+<p>La unificaciÃ³n de la I/O bajo el modelo de <em>streams</em> (flujos)
+tiene como objetivo principal:</p>
+<p>A. Hacer que todos los dispositivos utilicen la misma velocidad de
+transferencia. B. <strong>Permitir que el mismo cÃ³digo y funciones de
+I/O funcionen con archivos, el teclado y la pantalla.</strong> C.
+Simplificar la gestiÃ³n de la memoria volÃ¡til. D. Asegurar que los datos
+solo se escriban en disco.</p>
+<p><strong>Respuesta Correcta: B</strong></p>
+
+</div>
+</body>
+</html>
+

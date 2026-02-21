@@ -1,0 +1,261 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" crossorigin href="/assets/content-01sust.css">
+</head>
+<body>
+<div class="main-content">
+<h2 id="quÃ©-es-un-puntero-pointer">Â¿QuÃ© es un Puntero? (Pointer) ðŸ“Œ</h2>
+<p>La comprensiÃ³n de los punteros es el paso mÃ¡s importante para dominar
+C. Los <strong>punteros</strong> son el mecanismo central que le otorga
+a C su poder y flexibilidad, permitiendo manipular la memoria
+directamente.</p>
+<hr />
+<h3 id="definiciÃ³n-fundamental">DefiniciÃ³n Fundamental</h3>
+<p>Un <strong>Puntero</strong> es, fundamentalmente, una
+<strong>variable</strong> cuyo valor no es un dato simple (como un
+nÃºmero entero o un carÃ¡cter), sino una <strong>direcciÃ³n de
+memoria</strong>.</p>
+<p>Podemos pensarlo con una analogÃ­a:</p>
+<ul>
+<li><strong>Variable ComÃºn (<code>int x = 10</code>):</strong> La
+variable <code>x</code> es como una casa que contiene el valor
+<strong>10</strong>.</li>
+<li><strong>Puntero (<code>int *p</code>):</strong> El puntero
+<code>p</code> es como un cartel que no contiene un valor, sino la
+<strong>direcciÃ³n exacta</strong> (la calle y el nÃºmero) de esa casa
+(<code>x</code>).</li>
+</ul>
+<h3 id="caracterÃ­sticas-clave">CaracterÃ­sticas Clave</h3>
+<ol type="1">
+<li><strong>Almacena Direcciones:</strong> El valor que almacena un
+puntero es un <strong>nÃºmero entero grande</strong> que el sistema
+operativo utiliza para identificar una ubicaciÃ³n especÃ­fica en la
+memoria RAM.</li>
+<li><strong>Referencia Indirecta:</strong> Los punteros permiten acceder
+al contenido de una variable de forma <strong>indirecta</strong>. En
+lugar de usar el nombre de la variable (<code>x</code>), usamos la
+direcciÃ³n almacenada en el puntero (<code>p</code>) para â€œsaltarâ€ a esa
+ubicaciÃ³n y manipular el dato.</li>
+</ol>
+<p>Esta capacidad de apuntar a ubicaciones de memoria especÃ­ficas es lo
+que permite a C manejar eficientemente <em>arrays</em>, construir listas
+dinÃ¡micas y optimizar el rendimiento.</p>
+<h2 id="tipo-de-puntero">Tipo de Puntero ðŸ·ï¸</h2>
+<p>Aunque un puntero solo almacena un nÃºmero (una direcciÃ³n de memoria),
+es fundamental que se declare con un <strong>tipo de dato</strong>
+especÃ­fico. Un puntero <strong>siempre debe ser del mismo tipo</strong>
+que la variable a la que apunta.</p>
+<h3 id="la-importancia-del-tipo">La Importancia del Tipo</h3>
+<p>Cuando declaramos un puntero, el tipo que especificamos antes del
+asterisco (<code>*</code>) no indica el tipo del puntero en sÃ­ (que
+siempre es una direcciÃ³n de memoria), sino que le dice al compilador
+<strong>quÃ© tipo de dato se encuentra en la direcciÃ³n a la que
+apunta</strong>.</p>
+<p>La razÃ³n principal es determinar el <strong>tamaÃ±o</strong> del dato
+que debe manipularse al usar el puntero.</p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Tipo de Puntero</th>
+<th style="text-align: center;">Apunta a unâ€¦</th>
+<th style="text-align: center;">TamaÃ±o del Dato (Lectura/Escritura)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><code>char*</code></td>
+<td style="text-align: center;"><code>char</code></td>
+<td style="text-align: center;">1 byte</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>int*</code></td>
+<td style="text-align: center;"><code>int</code></td>
+<td style="text-align: center;">4 bytes (TÃ­pico)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>double*</code></td>
+<td style="text-align: center;"><code>double</code></td>
+<td style="text-align: center;">8 bytes (TÃ­pico)</td>
+</tr>
+</tbody>
+</table>
+<h3
+id="funcionamiento-al-sumarrestar-aritmÃ©tica-de-punteros">Funcionamiento
+al Sumar/Restar (AritmÃ©tica de Punteros)</h3>
+<p>El tipo del puntero es crucial para la <strong>aritmÃ©tica de
+punteros</strong>, que se verÃ¡ mÃ¡s adelante.</p>
+<p>Cuando incrementamos un puntero (<code>p++</code>), el compilador no
+le suma 1 a la direcciÃ³n de memoria, sino que le suma el <strong>tamaÃ±o
+en bytes del tipo de dato</strong> al que apunta.</p>
+<ul>
+<li>Si <code>p</code> es un <code>int*</code> (y un <code>int</code>
+mide 4 bytes), al hacer <code>p++</code>, la direcciÃ³n almacenada se
+incrementa en <strong>4 bytes</strong>. Esto asegura que el puntero
+salte a la direcciÃ³n del <strong>siguiente entero contiguo</strong> en
+la memoria.</li>
+</ul>
+<!-- end list -->
+<div class="sourceCode" id="cb1"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Ejemplo conceptual:</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> valor <span class="op">=</span> <span class="dv">10</span><span class="op">;</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> <span class="op">*</span>p <span class="op">=</span> <span class="op">&amp;</span>valor<span class="op">;</span> <span class="co">// p es de tipo int* y apunta a un int.</span></span></code></pre></div>
+<p>Si intentÃ¡ramos que un <code>char*</code> apunte a un
+<code>int</code>, el programa solo leerÃ­a el primer byte de ese entero
+(solo 1 de 4 bytes), lo que resultarÃ­a en una lectura de datos corrupta.
+Por lo tanto, el <strong>tipo garantiza la integridad de la
+operaciÃ³n</strong>.</p>
+<h2 id="el-valor-null">El Valor <code>NULL</code> ðŸš«</h2>
+<p>Al trabajar con punteros, es crucial tener una forma de indicar que
+un puntero aÃºn no ha sido asociado con una variable o que ha dejado de
+apuntar a una direcciÃ³n Ãºtil. Para esto se utiliza el valor
+<strong><code>NULL</code></strong>.</p>
+<hr />
+<h3 id="quÃ©-es-null">Â¿QuÃ© es <code>NULL</code>?</h3>
+<p>El puntero <strong><code>NULL</code></strong> es una
+<strong>constante simbÃ³lica</strong> (definida tÃ­picamente en
+<code>stdio.h</code> o <code>stdlib.h</code> como <code>(void*)0</code>)
+que tiene un significado especial:</p>
+<ul>
+<li>Indica que el puntero <strong>no estÃ¡ apuntando a ninguna direcciÃ³n
+de memoria vÃ¡lida o significativa</strong>.</li>
+<li>Representa un valor que se interpreta como â€œceroâ€ o â€œnuloâ€ para las
+direcciones de memoria.</li>
+</ul>
+<h3 id="inicializaciÃ³n-segura">InicializaciÃ³n Segura</h3>
+<p>Es una <strong>prÃ¡ctica de programaciÃ³n fundamental y segura</strong>
+inicializar todos los punteros a <code>NULL</code> inmediatamente
+despuÃ©s de su declaraciÃ³n. Esto previene el uso de <strong>punteros
+salvajes</strong> (<em>wild pointers</em>), que son punteros que
+contienen basura de memoria y apuntan accidentalmente a una ubicaciÃ³n
+aleatoria e impredecible.</p>
+<p><strong>CÃ³digo de Ejemplo:</strong></p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdlib.h&gt;</span><span class="pp"> </span><span class="co">// Donde NULL suele estar definido</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> <span class="op">*</span>p_seguro <span class="op">=</span> NULL<span class="op">;</span> <span class="co">// Â¡InicializaciÃ³n segura!</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>p_seguro <span class="op">==</span> NULL<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">&quot;El puntero es seguro, no apunta a ninguna parte.</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    <span class="co">// AsignaciÃ³n posterior:</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> x <span class="op">=</span> <span class="dv">50</span><span class="op">;</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    p_seguro <span class="op">=</span> <span class="op">&amp;</span>x<span class="op">;</span> </span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>    <span class="co">// ...uso de *p_seguro...</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>    <span class="co">// DesvinculaciÃ³n segura (prÃ¡ctica comÃºn despuÃ©s de liberar memoria dinÃ¡mica)</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>    p_seguro <span class="op">=</span> NULL<span class="op">;</span> </span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<h3 id="la-importancia-de-la-verificaciÃ³n">La Importancia de la
+VerificaciÃ³n</h3>
+<p>El valor <code>NULL</code> permite a los programadores
+<strong>verificar</strong> si un puntero es seguro de usar antes de
+intentar acceder a la memoria a la que apunta (una operaciÃ³n conocida
+como <strong>desreferenciaciÃ³n</strong>).</p>
+<p>Si intentas <strong>desreferenciar</strong> (acceder al valor) de un
+puntero que es <code>NULL</code>, el sistema operativo generalmente
+detecta que estÃ¡s intentando acceder a una direcciÃ³n prohibida (la
+direcciÃ³n cero) y detiene el programa, generando un error conocido como
+<strong><em>Segmentation Fault</em></strong>.</p>
+<p>Al verificar <code>if (puntero != NULL)</code>, puedes evitar este
+fallo catastrÃ³fico.</p>
+<h2 id="declaraciÃ³n-de-punteros">DeclaraciÃ³n de Punteros âœ¨</h2>
+<p>La declaraciÃ³n de un puntero es el primer paso para utilizarlos en C.
+La sintaxis es muy especÃ­fica e introduce el uso del operador asterisco
+(<code>*</code>).</p>
+<hr />
+<h3 id="sintaxis-de-declaraciÃ³n">Sintaxis de DeclaraciÃ³n</h3>
+<p>Para declarar un puntero, se utiliza la siguiente sintaxis:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>tipo<span class="op">*</span> nombre_puntero<span class="op">;</span></span></code></pre></div>
+<ul>
+<li><strong><code>tipo</code></strong>: Indica el <strong>tipo de
+dato</strong> de la variable a la que el puntero <em>apuntarÃ¡</em> (ej:
+<code>int</code>, <code>char</code>, <code>float</code>).</li>
+<li><strong><code>*</code> (Asterisco)</strong>: Es el <strong>operador
+de declaraciÃ³n de puntero</strong>. Su presencia indica al compilador
+que la variable <code>nombre_puntero</code> no contendrÃ¡ un valor de
+tipo <code>tipo</code>, sino una <strong>direcciÃ³n de memoria</strong>
+que apunta a un dato de ese <code>tipo</code>.</li>
+<li><strong><code>nombre_puntero</code></strong>: El identificador de la
+variable puntero.</li>
+</ul>
+<h3 id="ejemplos-comunes">Ejemplos Comunes</h3>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Tipo de Puntero</th>
+<th style="text-align: left;">DeclaraciÃ³n</th>
+<th style="text-align: left;">Significado</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Puntero a Entero</td>
+<td style="text-align: left;"><code>int* p_edad;</code></td>
+<td style="text-align: left;"><code>p_edad</code> almacena la direcciÃ³n
+de una variable <code>int</code>.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Puntero a CarÃ¡cter</td>
+<td style="text-align: left;"><code>char *p_letra;</code></td>
+<td style="text-align: left;"><code>p_letra</code> almacena la direcciÃ³n
+de una variable <code>char</code>.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Puntero a Flotante</td>
+<td style="text-align: left;"><code>float *p_precio;</code></td>
+<td style="text-align: left;"><code>p_precio</code> almacena la
+direcciÃ³n de una variable <code>float</code>.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="Ã©nfasis-en-el-asterisco">Ã‰nfasis en el Asterisco
+(<code>*</code>)</h3>
+<p>La posiciÃ³n del asterisco (<code>*</code>) en la declaraciÃ³n es
+flexible, pero tiene una implicaciÃ³n conceptual importante:</p>
+<ol type="1">
+<li><p><strong>Adjunto al Tipo (Estilo C):</strong>
+<code>int* p_edad;</code></p>
+<ul>
+<li>Enfatiza que el tipo de la variable es â€œpuntero a enteroâ€
+(<code>int*</code>). Este es el estilo mÃ¡s comÃºn y el que suele
+facilitar la lectura en C moderno.</li>
+</ul></li>
+<li><p><strong>Adjunto al Nombre:</strong> <code>int *p_edad;</code></p>
+<ul>
+<li>Enfatiza que el operador <code>*</code> se aplica a la variable
+<code>p_edad</code> para convertirla en un puntero.</li>
+</ul></li>
+</ol>
+<blockquote>
+<p><strong>Â¡Advertencia Importante!</strong> Al declarar
+<strong>mÃºltiples punteros en la misma lÃ­nea</strong>, debes repetir el
+asterisco para cada variable. Si no lo haces, solo la primera variable
+serÃ¡ un puntero, y las siguientes serÃ¡n variables normales del tipo
+especificado.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span><span class="op">*</span> p1<span class="op">,</span> p2<span class="op">;</span> <span class="co">// p1 es un int*, pero p2 es un int normal.</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> <span class="op">*</span>p3<span class="op">,</span> <span class="op">*</span>p4<span class="op">;</span> <span class="co">// p3 y p4 son ambos int*. (Â¡Uso correcto!)</span></span></code></pre></div>
+</blockquote>
+<p>Es muy recomendable declarar <strong>cada puntero en su propia
+lÃ­nea</strong> para evitar ambigÃ¼edades.</p>
+
+</div>
+</body>
+</html>
+

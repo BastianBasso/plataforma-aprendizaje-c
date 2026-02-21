@@ -1,0 +1,305 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" crossorigin href="/assets/content-01sust.css">
+</head>
+<body>
+<div class="main-content">
+<h2 id="ejercicios-manejo-bÃ¡sico-de-archivos-fopen-y-fclose">10
+Ejercicios: Manejo BÃ¡sico de Archivos (<code>fopen</code> y
+<code>fclose</code>) ðŸ› ï¸</h2>
+<h3 id="bloque-1-apertura-y-cierre-con-diferentes-modos">Bloque 1:
+Apertura y Cierre con Diferentes Modos</h3>
+<p><strong>1) Apertura y Escritura Simple (Modo
+<code>"w"</code>)</strong> Escribe un programa que declare un puntero
+<code>FILE*</code> llamado <code>fichero_salida</code>. Usa
+<code>fopen()</code> para intentar abrir un archivo llamado
+<code>"registro.txt"</code> en modo <strong>escritura
+(<code>"w"</code>)</strong>. Luego, inmediatamente llama a
+<code>fclose()</code> para asegurar el cierre. No es necesario escribir
+contenido, solo abrir y cerrar.</p>
+<p><strong>2) Apertura para AnexiÃ³n (Modo <code>"a"</code>)</strong>
+Modifica el ejercicio anterior para abrir el archivo
+<code>"registro.txt"</code> en modo <strong>anexiÃ³n
+(<code>"a"</code>)</strong>. Si el archivo ya existe, el modo anexiÃ³n no
+debe borrar su contenido. Luego, cierra el flujo.</p>
+<p><strong>3) Apertura Binaria para Escritura
+(<code>"wb"</code>)</strong> Escribe un programa que declare un puntero
+<code>FILE*</code> y use <code>fopen()</code> para abrir un archivo
+llamado <code>"datos.bin"</code> en modo <strong>escritura binaria
+(<code>"wb"</code>)</strong>. Imprime el puntero si la apertura es
+exitosa, y luego cierra el flujo.</p>
+<p><strong>4) DeclaraciÃ³n MÃºltiple de Punteros</strong> Escribe un
+programa que declare <strong>dos</strong> punteros de archivo:
+<code>ptr_lectura</code> y <code>ptr_escritura</code>. Intenta abrir
+<code>"entrada.txt"</code> en modo lectura (<code>"r"</code>) y
+<code>"salida.txt"</code> en modo escritura (<code>"w"</code>). Cierra
+ambos flujos si se abren correctamente.</p>
+<h3 id="bloque-2-comprobaciÃ³n-esencial-de-errores-null">Bloque 2:
+ComprobaciÃ³n Esencial de Errores (<code>NULL</code>)</h3>
+<p><strong>5) ComprobaciÃ³n de Apertura en Modo Lectura</strong> Escribe
+un programa que intente abrir un archivo que sabes que <strong>no
+existe</strong> (ej: <code>"archivo_fantasma.txt"</code>) en modo
+<strong>lectura (<code>"r"</code>)</strong>. Utiliza la comprobaciÃ³n
+<code>if (ptr == NULL)</code> para: * Si falla, imprime un mensaje de
+error y el valor del puntero (<code>NULL</code>). * Si tiene Ã©xito (lo
+cual no deberÃ­a ocurrir), cierra el archivo.</p>
+<p><strong>6) ImplementaciÃ³n de Salida con Error
+(<code>EXIT_FAILURE</code>)</strong> Mejora el ejercicio anterior (con
+el archivo inexistente). Si <code>fopen()</code> devuelve
+<code>NULL</code>, usa la funciÃ³n <strong><code>perror()</code></strong>
+con el argumento <code>"Error al abrir"</code> e inmediatamente despuÃ©s
+usa <strong><code>return EXIT_FAILURE;</code></strong> para terminar el
+programa con un cÃ³digo de error.</p>
+<p><strong>7) Apertura con ComprobaciÃ³n y Cierre Condicional</strong>
+Escribe un programa que intente abrir <code>"log.txt"</code> en modo
+anexiÃ³n (<code>"a"</code>). Implementa la comprobaciÃ³n de
+<code>NULL</code>. Solo si la apertura es exitosa, imprime un mensaje de
+confirmaciÃ³n y llama a <code>fclose()</code>. Si falla, imprime un
+mensaje de error y no llama a <code>fclose()</code>.</p>
+<p><strong>8) SimulaciÃ³n de CorrupciÃ³n de Datos (Falta de
+<code>fclose</code>)</strong> Explica verbalmente (no es necesario
+programar la escritura/lectura) por quÃ© serÃ­a un problema olvidar
+<code>fclose()</code> despuÃ©s de abrir un archivo en modo escritura
+(<code>"w"</code>) e intentar escribir 100 bytes. Â¿QuÃ© riesgo hay y quÃ©
+proceso se omite?</p>
+<h3 id="bloque-3-aplicaciÃ³n-y-concepto">Bloque 3: AplicaciÃ³n y
+Concepto</h3>
+<p><strong>9) ExtracciÃ³n de InformaciÃ³n de Estado</strong> BasÃ¡ndote en
+el contenido del puntero <code>FILE*</code>, enumera tres tipos de
+<strong>informaciÃ³n de estado</strong> que el sistema operativo gestiona
+a travÃ©s de esta estructura una vez que el flujo estÃ¡ abierto.</p>
+<p><strong>10) Uso de la Sintaxis Completa</strong> Escribe la sintaxis
+completa de la funciÃ³n <code>fopen()</code> (incluyendo los tipos de
+retorno y argumentos) y explica brevemente quÃ© representa cada uno de
+sus dos argumentos.</p>
+<p><strong>Sintaxis:</strong> <span class="math inline">â€˜FILE
+*fopen(const char *nombre_archivo, const char *modo);â€˜</span> *
+<strong>Argumento 1 (<code>nombre_archivo</code>):</strong> â€¦ *
+<strong>Argumento 2 (<code>modo</code>):</strong> â€¦</p>
+<h2 id="soluciones-manejo-bÃ¡sico-de-archivos">âœ… Soluciones: Manejo
+BÃ¡sico de Archivos</h2>
+<h3 id="bloque-1-apertura-y-cierre-con-diferentes-modos-1">Bloque 1:
+Apertura y Cierre con Diferentes Modos</h3>
+<p><strong>1) Apertura y Escritura Simple (Modo
+<code>"w"</code>)</strong></p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdlib.h&gt;</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">FILE</span> <span class="op">*</span>fichero_salida<span class="op">;</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="co">// 1. Apertura en modo escritura (&quot;w&quot;)</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    fichero_salida <span class="op">=</span> fopen<span class="op">(</span><span class="st">&quot;registro.txt&quot;</span><span class="op">,</span> <span class="st">&quot;w&quot;</span><span class="op">);</span> </span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>fichero_salida <span class="op">==</span> NULL<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>        perror<span class="op">(</span><span class="st">&quot;Error al abrir en modo &#39;w&#39;&quot;</span><span class="op">);</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> EXIT_FAILURE<span class="op">;</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    <span class="co">// 2. Cierre del flujo</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>fclose<span class="op">(</span>fichero_salida<span class="op">)</span> <span class="op">==</span> <span class="dv">0</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">&quot;Archivo &#39;registro.txt&#39; creado y cerrado correctamente.</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>        perror<span class="op">(</span><span class="st">&quot;Error al cerrar el archivo&quot;</span><span class="op">);</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> EXIT_SUCCESS<span class="op">;</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="co">// Salida Esperada: Archivo &#39;registro.txt&#39; creado y cerrado correctamente. (Y el archivo se crea o trunca).</span></span></code></pre></div>
+<hr />
+<p><strong>2) Apertura para AnexiÃ³n (Modo <code>"a"</code>)</strong></p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">FILE</span> <span class="op">*</span>fichero_salida<span class="op">;</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Apertura en modo anexiÃ³n (&quot;a&quot;)</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    fichero_salida <span class="op">=</span> fopen<span class="op">(</span><span class="st">&quot;registro.txt&quot;</span><span class="op">,</span> <span class="st">&quot;a&quot;</span><span class="op">);</span> </span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>fichero_salida <span class="op">==</span> NULL<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>        perror<span class="op">(</span><span class="st">&quot;Error al abrir en modo &#39;a&#39;&quot;</span><span class="op">);</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Cierre del flujo</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>    fclose<span class="op">(</span>fichero_salida<span class="op">);</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;Archivo &#39;registro.txt&#39; abierto en modo anexiÃ³n y cerrado.</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="co">// Salida Esperada: Archivo &#39;registro.txt&#39; abierto en modo anexiÃ³n y cerrado. (El contenido existente NO se borra).</span></span></code></pre></div>
+<hr />
+<p><strong>3) Apertura Binaria para Escritura
+(<code>"wb"</code>)</strong></p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdlib.h&gt;</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">FILE</span> <span class="op">*</span>ptr_binario<span class="op">;</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Apertura en modo escritura binaria (&quot;wb&quot;)</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    ptr_binario <span class="op">=</span> fopen<span class="op">(</span><span class="st">&quot;datos.bin&quot;</span><span class="op">,</span> <span class="st">&quot;wb&quot;</span><span class="op">);</span> </span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>ptr_binario <span class="op">==</span> NULL<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>        perror<span class="op">(</span><span class="st">&quot;Error al abrir en modo &#39;wb&#39;&quot;</span><span class="op">);</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> EXIT_FAILURE<span class="op">;</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Imprime el puntero (su direcciÃ³n de memoria) y luego cierra</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;El puntero FILE* tiene un valor: </span><span class="sc">%p\n</span><span class="st">&quot;</span><span class="op">,</span> <span class="op">(</span><span class="dt">void</span> <span class="op">*)</span>ptr_binario<span class="op">);</span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>    fclose<span class="op">(</span>ptr_binario<span class="op">);</span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> EXIT_SUCCESS<span class="op">;</span></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a><span class="co">// Salida Esperada: El puntero FILE* tiene un valor: [Una direcciÃ³n de memoria, ej: 0x7fae4c000880]</span></span></code></pre></div>
+<hr />
+<p><strong>4) DeclaraciÃ³n MÃºltiple de Punteros</strong></p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">FILE</span> <span class="op">*</span>ptr_lectura <span class="op">=</span> NULL<span class="op">;</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">FILE</span> <span class="op">*</span>ptr_escritura <span class="op">=</span> NULL<span class="op">;</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Intenta abrir el flujo de lectura (Puede fallar si no existe)</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    ptr_lectura <span class="op">=</span> fopen<span class="op">(</span><span class="st">&quot;entrada.txt&quot;</span><span class="op">,</span> <span class="st">&quot;r&quot;</span><span class="op">);</span> </span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Intenta abrir el flujo de escritura (Crea o trunca)</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    ptr_escritura <span class="op">=</span> fopen<span class="op">(</span><span class="st">&quot;salida.txt&quot;</span><span class="op">,</span> <span class="st">&quot;w&quot;</span><span class="op">);</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;Intentando abrir dos flujos...</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Cierre condicional: solo si el puntero es vÃ¡lido (no NULL)</span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>ptr_lectura <span class="op">!=</span> NULL<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">&quot;Flujo de lectura abierto. Cerrando...</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>        fclose<span class="op">(</span>ptr_lectura<span class="op">);</span></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>ptr_escritura <span class="op">!=</span> NULL<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">&quot;Flujo de escritura abierto. Cerrando...</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>        fclose<span class="op">(</span>ptr_escritura<span class="op">);</span></span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a><span class="co">// Nota: En la prÃ¡ctica real, ambos archivos deben cerrarse usando una estructura de limpieza mÃ¡s robusta.</span></span></code></pre></div>
+<hr />
+<h3 id="bloque-2-comprobaciÃ³n-esencial-de-errores-null-1">Bloque 2:
+ComprobaciÃ³n Esencial de Errores (<code>NULL</code>)</h3>
+<p><strong>5) ComprobaciÃ³n de Apertura en Modo Lectura</strong></p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">FILE</span> <span class="op">*</span>ptr_fantasma<span class="op">;</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    <span class="co">// El archivo &#39;archivo_fantasma.txt&#39; no existe, por lo que fopen() debe retornar NULL</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    ptr_fantasma <span class="op">=</span> fopen<span class="op">(</span><span class="st">&quot;archivo_fantasma.txt&quot;</span><span class="op">,</span> <span class="st">&quot;r&quot;</span><span class="op">);</span> </span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>ptr_fantasma <span class="op">==</span> NULL<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>        <span class="co">// La comprobaciÃ³n funciona</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">&quot;ERROR: La apertura en modo lectura fallÃ³.</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">&quot;El puntero es NULL (valor: </span><span class="sc">%p</span><span class="st">)</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">,</span> <span class="op">(</span><span class="dt">void</span> <span class="op">*)</span>ptr_fantasma<span class="op">);</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">&quot;Ã‰xito inesperado. Cerrando archivo...</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>        fclose<span class="op">(</span>ptr_fantasma<span class="op">);</span></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a><span class="co">// Salida Esperada: ERROR: La apertura en modo lectura fallÃ³. El puntero es NULL (valor: 0x0)</span></span></code></pre></div>
+<hr />
+<p><strong>6) ImplementaciÃ³n de Salida con Error
+(<code>EXIT_FAILURE</code>)</strong></p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdlib.h&gt;</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">FILE</span> <span class="op">*</span>ptr_archivo <span class="op">=</span> fopen<span class="op">(</span><span class="st">&quot;otro_archivo_fantasma.txt&quot;</span><span class="op">,</span> <span class="st">&quot;r&quot;</span><span class="op">);</span> </span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>ptr_archivo <span class="op">==</span> NULL<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>        <span class="co">// 1. Usar perror() para imprimir el error del sistema</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>        perror<span class="op">(</span><span class="st">&quot;Error al abrir&quot;</span><span class="op">);</span> </span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>        <span class="co">// 2. Terminar el programa con cÃ³digo de error</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> EXIT_FAILURE<span class="op">;</span> </span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>    <span class="co">// CÃ³digo solo se ejecuta si hay Ã©xito</span></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>    fclose<span class="op">(</span>ptr_archivo<span class="op">);</span></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> EXIT_SUCCESS<span class="op">;</span></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a><span class="co">// Salida Esperada (ejemplo): Error al abrir: No such file or directory (El mensaje de perror puede variar segÃºn el SO)</span></span></code></pre></div>
+<hr />
+<p><strong>7) Apertura con ComprobaciÃ³n y Cierre
+Condicional</strong></p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">FILE</span> <span class="op">*</span>log_ptr<span class="op">;</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    log_ptr <span class="op">=</span> fopen<span class="op">(</span><span class="st">&quot;log.txt&quot;</span><span class="op">,</span> <span class="st">&quot;a&quot;</span><span class="op">);</span> <span class="co">// Modo anexiÃ³n</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>log_ptr <span class="op">==</span> NULL<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">&quot;FALLO: No se pudo abrir &#39;log.txt&#39;. No se intentarÃ¡ cerrar.</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>        <span class="co">// No se llama a fclose()</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">&quot;Ã‰XITO: &#39;log.txt&#39; abierto y listo para anexar. Procediendo a cerrar...</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>        fclose<span class="op">(</span>log_ptr<span class="op">);</span> <span class="co">// El cierre se ejecuta solo si se abriÃ³</span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a><span class="co">// Salida Esperada: Ã‰XITO: &#39;log.txt&#39; abierto y listo para anexar. Procediendo a cerrar...</span></span></code></pre></div>
+<hr />
+<p><strong>8) SimulaciÃ³n de CorrupciÃ³n de Datos (Falta de
+<code>fclose</code>)</strong></p>
+<p>Si se olvida llamar a <code>fclose()</code> despuÃ©s de abrir un
+archivo en modo escritura (<code>"w"</code>) e intentar escribir 100
+bytes:</p>
+<ul>
+<li><strong>Riesgo:</strong> Los Ãºltimos bytes escritos (o incluso
+todos) pueden <strong>nunca ser escritos en el disco</strong> y
+permanecer en el <strong>buffer de salida</strong> en la memoria
+RAM.</li>
+<li><strong>Proceso Omitido:</strong> Se omite el <strong>volcado
+(<em>flushing</em>)</strong> final. <code>fclose()</code> es la funciÃ³n
+encargada de forzar que el contenido del buffer temporal sea transferido
+permanentemente al almacenamiento no volÃ¡til.</li>
+</ul>
+<hr />
+<h3 id="bloque-3-aplicaciÃ³n-y-concepto-1">Bloque 3: AplicaciÃ³n y
+Concepto</h3>
+<p><strong>9) ExtracciÃ³n de InformaciÃ³n de Estado</strong></p>
+<p>Tres tipos de <strong>informaciÃ³n de estado</strong> que la
+estructura <code>FILE*</code> gestiona son:</p>
+<ol type="1">
+<li><strong>Puntero de PosiciÃ³n Actual:</strong> Indica el
+desplazamiento del flujo dentro del archivo (dÃ³nde se leerÃ¡ o escribirÃ¡
+el prÃ³ximo byte).</li>
+<li><strong>Modo de Apertura:</strong> (ej: lectura, escritura, binario)
+para restringir las operaciones permitidas.</li>
+<li><strong>Buffer Asociado:</strong> Un puntero a la memoria temporal
+(RAM) que almacena datos en trÃ¡nsito.</li>
+</ol>
+<hr />
+<p><strong>10) Uso de la Sintaxis Completa</strong></p>
+<p>La sintaxis completa de la funciÃ³n <code>fopen()</code> es:</p>
+<p><span class="math display">â€˜FILE *fopen(const char *nombre_archivo,
+const char *modo);â€˜</span></p>
+<ul>
+<li><strong>Argumento 1
+(<code>const char *nombre_archivo</code>):</strong> Es una cadena de
+caracteres que especifica la <strong>ruta y el nombre</strong> del
+archivo fÃ­sico en el sistema de archivos (disco).</li>
+<li><strong>Argumento 2 (<code>const char *modo</code>):</strong> Es una
+cadena de caracteres que define la <strong>intenciÃ³n de uso</strong> del
+archivo (por ejemplo, <code>"r"</code> para leer, <code>"w"</code> para
+escribir, o <code>"a"</code> para anexar).</li>
+</ul>
+
+</div>
+</body>
+</html>
+

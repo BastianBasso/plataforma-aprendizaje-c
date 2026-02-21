@@ -1,0 +1,243 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" crossorigin href="/assets/content-01sust.css">
+</head>
+<body>
+<div class="main-content">
+<h2 id="modo-lectura-r">Modo Lectura (<code>"r"</code>) ðŸ“–</h2>
+<p>El modo de operaciÃ³n <strong>lectura (<code>"r"</code>)</strong>
+(<em>read</em>) es el modo mÃ¡s bÃ¡sico para acceder a la informaciÃ³n
+previamente almacenada en un archivo. Se utiliza exclusivamente para
+<strong>extraer datos</strong> del archivo al programa.</p>
+<hr />
+<h3 id="comportamiento-y-restricciones">Comportamiento y
+Restricciones</h3>
+<ol type="1">
+<li><strong>PropÃ³sito:</strong> La Ãºnica operaciÃ³n permitida es la
+lectura de datos del archivo. Intentar escribir o modificar el archivo
+en este modo resultarÃ¡ en un error de I/O.</li>
+<li><strong>VerificaciÃ³n de Existencia:</strong> Este modo tiene una
+restricciÃ³n crÃ­tica: <strong>falla</strong> si el archivo especificado
+<strong>no existe</strong> en el sistema de archivos. Si
+<code>fopen()</code> se llama con el modo <code>"r"</code> y el archivo
+no se encuentra, devolverÃ¡ inmediatamente <code>NULL</code>.</li>
+<li><strong>PosiciÃ³n Inicial del Puntero:</strong> Al abrir un archivo
+exitosamente en modo <code>"r"</code>, el <strong>puntero de posiciÃ³n
+actual</strong> (el Ã­ndice que indica dÃ³nde comenzarÃ¡ la prÃ³xima
+lectura) se establece automÃ¡ticamente al <strong>inicio</strong> del
+archivo (byte cero).</li>
+</ol>
+<h3 id="ejemplo-de-uso">Ejemplo de Uso</h3>
+<div class="sourceCode" id="cb1"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="dt">FILE</span> <span class="op">*</span>archivo_lectura<span class="op">;</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co">// Intenta abrir el archivo &#39;config.txt&#39; para lectura.</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>archivo_lectura <span class="op">=</span> fopen<span class="op">(</span><span class="st">&quot;config.txt&quot;</span><span class="op">,</span> <span class="st">&quot;r&quot;</span><span class="op">);</span> </span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="op">(</span>archivo_lectura <span class="op">==</span> NULL<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Esto ocurre si &#39;config.txt&#39; no existe o si no hay permisos de lectura.</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;Error: El archivo para lectura no existe o no se puede acceder.</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    <span class="co">// El flujo estÃ¡ listo para que la lectura comience desde el primer byte.</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;Archivo abierto exitosamente para lectura.</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    <span class="co">// ... CÃ³digo para leer datos ...</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    fclose<span class="op">(</span>archivo_lectura<span class="op">);</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<h2 id="modo-escritura-w">Modo Escritura (<code>"w"</code>) ðŸ“</h2>
+<p>El modo de operaciÃ³n <strong>escritura (<code>"w"</code>)</strong>
+(<em>write</em>) se utiliza para enviar datos desde el programa al
+archivo en el disco. Es el modo mÃ¡s directo para crear archivos
+nuevos.</p>
+<hr />
+<h3 id="comportamiento-y-efectos-crÃ­ticos">Comportamiento y Efectos
+CrÃ­ticos</h3>
+<p>El modo <code>"w"</code> tiene dos comportamientos cruciales que el
+programador debe entender:</p>
+<ol type="1">
+<li><strong>CreaciÃ³n de Archivo:</strong> Si el archivo especificado en
+<code>fopen()</code> <strong>no existe</strong>, el sistema operativo lo
+<strong>crea</strong> automÃ¡ticamente.</li>
+<li><strong>Truncamiento (Borrado):</strong> Si el archivo <strong>ya
+existe</strong>, <code>fopen()</code> lo abre e inmediatamente
+<strong>trunca (borra) todo su contenido</strong>, restableciendo su
+tamaÃ±o a cero bytes. Esta es la caracterÃ­stica mÃ¡s peligrosa del modo
+<code>"w"</code>, ya que puede resultar en la <strong>pÃ©rdida permanente
+de datos</strong> si se usa accidentalmente en un archivo
+importante.</li>
+</ol>
+<h3 id="posiciÃ³n-inicial-del-puntero">PosiciÃ³n Inicial del Puntero</h3>
+<p>Al abrir un archivo exitosamente en modo <code>"w"</code>, el
+<strong>puntero de posiciÃ³n actual</strong> se establece automÃ¡ticamente
+al <strong>inicio</strong> del archivo (byte cero). Esto, combinado con
+el truncamiento, asegura que la nueva escritura comenzarÃ¡ desde una hoja
+en blanco.</p>
+<h3 id="ejemplo-de-uso-1">Ejemplo de Uso</h3>
+<div class="sourceCode" id="cb2"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="dt">FILE</span> <span class="op">*</span>archivo_escritura<span class="op">;</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co">// Intenta abrir &#39;salida.txt&#39; para escritura.</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co">// Â¡ADVERTENCIA! Si &#39;salida.txt&#39; existe, su contenido serÃ¡ borrado.</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>archivo_escritura <span class="op">=</span> fopen<span class="op">(</span><span class="st">&quot;salida.txt&quot;</span><span class="op">,</span> <span class="st">&quot;w&quot;</span><span class="op">);</span> </span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="op">(</span>archivo_escritura <span class="op">==</span> NULL<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;Error: No se pudo abrir o crear el archivo para escritura.</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    <span class="co">// El flujo estÃ¡ listo para que la escritura comience desde el inicio.</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;Archivo abierto exitosamente en modo escritura (&#39;w&#39;).</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    <span class="co">// ... CÃ³digo para escribir datos ...</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    fclose<span class="op">(</span>archivo_escritura<span class="op">);</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<h2 id="modo-anexar-a">Modo Anexar (<code>"a"</code>) âž•</h2>
+<p>El modo de operaciÃ³n <strong>anexar (<code>"a"</code>)</strong>
+(<em>append</em>) se utiliza para aÃ±adir datos a un archivo existente
+<strong>sin sobrescribir</strong> la informaciÃ³n previa. Es el modo
+ideal para crear archivos de registro (<em>logs</em>) o para aÃ±adir
+nueva informaciÃ³n de forma incremental.</p>
+<hr />
+<h3 id="comportamiento-y-posiciÃ³n-clave">Comportamiento y PosiciÃ³n
+Clave</h3>
+<ol type="1">
+<li><strong>PreservaciÃ³n de Datos:</strong> Si el archivo ya existe, el
+modo <code>"a"</code> <strong>no lo trunca</strong> (no borra su
+contenido), a diferencia del modo <code>"w"</code>.</li>
+<li><strong>CreaciÃ³n:</strong> Si el archivo no existe,
+<code>fopen()</code> lo <strong>crea</strong> automÃ¡ticamente,
+comportÃ¡ndose de manera similar al modo <code>"w"</code> en este
+aspecto.</li>
+<li><strong>PosiciÃ³n del Puntero:</strong> Una vez abierto exitosamente,
+el <strong>puntero de posiciÃ³n actual</strong> se establece
+automÃ¡ticamente al <strong>final</strong> del archivo. Todas las
+operaciones de escritura que se realicen se aÃ±adirÃ¡n a partir de ese
+punto. Incluso si el programador intenta mover el puntero a otra
+posiciÃ³n, la siguiente operaciÃ³n de escritura siempre se ejecutarÃ¡ al
+final del archivo.</li>
+</ol>
+<h3 id="ejemplo-de-uso-2">Ejemplo de Uso</h3>
+<div class="sourceCode" id="cb3"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="dt">FILE</span> <span class="op">*</span>archivo_log<span class="op">;</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co">// Intenta abrir &#39;bitacora.txt&#39; en modo anexiÃ³n.</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co">// Si ya tiene contenido, la nueva escritura irÃ¡ al final.</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>archivo_log <span class="op">=</span> fopen<span class="op">(</span><span class="st">&quot;bitacora.txt&quot;</span><span class="op">,</span> <span class="st">&quot;a&quot;</span><span class="op">);</span> </span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="op">(</span>archivo_log <span class="op">==</span> NULL<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;Error: No se pudo abrir o crear el archivo de bitÃ¡cora.</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    <span class="co">// El flujo estÃ¡ listo para escribir al final del archivo.</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;Archivo abierto exitosamente en modo anexiÃ³n (&#39;a&#39;).</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    <span class="co">// ... CÃ³digo para escribir nuevos registros ...</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>    fclose<span class="op">(</span>archivo_log<span class="op">);</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p>El modo <code>"a"</code> es la opciÃ³n <strong>mÃ¡s segura</strong>
+para la escritura, ya que elimina el riesgo de borrar accidentalmente
+datos importantes.</p>
+<h2 id="modos-de-actualizaciÃ³n">Modos de ActualizaciÃ³n (<code>+</code>)
+ðŸ”„</h2>
+<p>Los <strong>modificadores de actualizaciÃ³n</strong> se indican
+aÃ±adiendo el signo mÃ¡s (<code>+</code>) a los modos base de archivo
+(<code>r</code>, <code>w</code>, o <code>a</code>). Estos modos permiten
+realizar tanto <strong>operaciones de lectura como de escritura</strong>
+en el mismo flujo de archivo, sin necesidad de abrirlo y cerrarlo varias
+veces.</p>
+<p>El comportamiento inicial del archivo (truncamiento, error si no
+existe) sigue siendo el mismo que el del modo base (sin el
+<code>+</code>).</p>
+<hr />
+<h3 id="comportamiento-de-los-modos-de-actualizaciÃ³n">Comportamiento de
+los Modos de ActualizaciÃ³n</h3>
+<table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Modo</th>
+<th style="text-align: center;">Comportamiento Base</th>
+<th style="text-align: center;">Permisos</th>
+<th style="text-align: center;">PosiciÃ³n Inicial</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><strong><code>"r+"</code></strong></td>
+<td style="text-align: center;"><strong>Lectura con
+ActualizaciÃ³n</strong>.</td>
+<td style="text-align: center;">Permite <strong>Leer Y
+Escribir</strong>.</td>
+<td style="text-align: center;"><strong>Inicio</strong> del
+archivo.</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong><code>"w+"</code></strong></td>
+<td style="text-align: center;"><strong>Escritura con
+ActualizaciÃ³n</strong>.</td>
+<td style="text-align: center;">Permite <strong>Leer Y
+Escribir</strong>.</td>
+<td style="text-align: center;"><strong>Inicio</strong> del
+archivo.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong><code>"a+"</code></strong></td>
+<td style="text-align: center;"><strong>AnexiÃ³n con
+ActualizaciÃ³n</strong>.</td>
+<td style="text-align: center;">Permite <strong>Leer Y
+Escribir</strong>.</td>
+<td style="text-align: center;"><strong>Final</strong> del archivo.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="anÃ¡lisis-detallado">AnÃ¡lisis Detallado</h3>
+<h4 id="lectura-y-escritura-r">1. Lectura y Escritura
+(<code>"r+"</code>)</h4>
+<ul>
+<li><strong>Requisito:</strong> El archivo <strong>debe
+existir</strong>. Si no existe, <code>fopen()</code> devuelve
+<code>NULL</code>.</li>
+<li><strong>Truncamiento:</strong> <strong>No trunca</strong> (preserva
+el contenido original).</li>
+<li><strong>Uso ComÃºn:</strong> Se utiliza para <strong>modificar datos
+existentes</strong> en un archivo. Puedes leer una parte del archivo,
+mover el puntero a una posiciÃ³n diferente y luego sobrescribir o
+insertar nuevos datos.</li>
+</ul>
+<h4 id="escritura-y-lectura-w">2. Escritura y Lectura
+(<code>"w+"</code>)</h4>
+<ul>
+<li><strong>Requisito:</strong> Crea el archivo si no existe.</li>
+<li><strong>Truncamiento:</strong> Si el archivo existe, <strong>borra
+inmediatamente todo el contenido</strong> (lo trunca a tamaÃ±o
+cero).</li>
+<li><strong>Uso ComÃºn:</strong> Se utiliza cuando necesitas crear un
+archivo, escribir datos, y luego <strong>leer inmediatamente</strong>
+esos datos sin cerrar y volver a abrir el flujo.</li>
+</ul>
+<h4 id="anexiÃ³n-y-lectura-a">3. AnexiÃ³n y Lectura
+(<code>"a+"</code>)</h4>
+<ul>
+<li><strong>Requisito:</strong> Crea el archivo si no existe.</li>
+<li><strong>Truncamiento:</strong> <strong>No trunca</strong> (preserva
+el contenido original).</li>
+<li><strong>Particularidad:</strong> Puedes leer en cualquier posiciÃ³n
+del archivo, pero <strong>toda operaciÃ³n de escritura siempre se realiza
+al final</strong> del archivo, protegiendo los datos existentes contra
+sobrescritura accidental en el medio.</li>
+</ul>
+<!-- end list -->
+<div class="sourceCode" id="cb4"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Ejemplo: Apertura para modificar un archivo existente (r+)</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="dt">FILE</span> <span class="op">*</span>f <span class="op">=</span> fopen<span class="op">(</span><span class="st">&quot;datos.txt&quot;</span><span class="op">,</span> <span class="st">&quot;r+&quot;</span><span class="op">);</span> </span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="op">(</span>f <span class="op">!=</span> NULL<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="co">// 1. Leer el primer dato.</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="co">// 2. Usar fseek() para moverse.</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="co">// 3. Escribir un nuevo dato para sobrescribir el anterior.</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    <span class="co">// ...</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    fclose<span class="op">(</span>f<span class="op">);</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+
+</div>
+</body>
+</html>
+

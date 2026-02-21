@@ -1,0 +1,244 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" crossorigin href="/assets/content-01sust.css">
+</head>
+<body>
+<div class="main-content">
+<p>6. CreaciÃ³n de LibrerÃ­as Simples (Archivos `.h` y `.c`
+Conceptual)</p>
+<p><strong>El PropÃ³sito de los Archivos MÃºltiples</strong></p>
+<p>Para alcanzar la <strong>modularidad real</strong> y gestionar el
+desarrollo de <strong>proyectos grandes y complejos</strong>, el cÃ³digo
+fuente en C se divide en mÃºltiples archivos. Esta prÃ¡ctica es
+fundamental y va mÃ¡s allÃ¡ de simplemente escribir todas las funciones en
+un solo archivo main.c.</p>
+<p><strong>La Necesidad de DivisiÃ³n</strong></p>
+<p>Cuando un programa contiene docenas o cientos de funciones, mantener
+todo en un Ãºnico archivo se vuelve imprÃ¡ctico:</p>
+<ul>
+<li><p><strong>OrganizaciÃ³n:</strong> Es difÃ­cil localizar funciones
+especÃ­ficas, las dependencias se vuelven confusas y el archivo se vuelve
+tedioso de navegar.</p></li>
+<li><p><strong>ColaboraciÃ³n:</strong> Si varios desarrolladores trabajan
+en el mismo archivo simultÃ¡neamente, se generan conflictos
+constantes.</p></li>
+<li><p><strong>CompilaciÃ³n Lenta:</strong> Cada vez que se realiza un
+cambio, el compilador debe reprocesar la totalidad del cÃ³digo, lo que
+ralentiza el ciclo de desarrollo.</p></li>
+</ul>
+<p><strong>El Principio de la Responsabilidad Ãšnica</strong></p>
+<p>La soluciÃ³n es dividir el cÃ³digo en archivos separados, siguiendo el
+<strong>Principio de la Responsabilidad Ãšnica</strong>. Cada pareja de
+archivos (.h y .c) se convierte en un <strong>mÃ³dulo</strong> que:</p>
+<ol type="1">
+<li><p><strong>Encapsula</strong> un conjunto de funcionalidades
+relacionadas (ej: todas las funciones matemÃ¡ticas, todas las funciones
+de manejo de archivos, etc.).</p></li>
+<li><p><strong>Define una interfaz clara</strong> de cÃ³mo se debe
+interactuar con ese mÃ³dulo.</p></li>
+</ol>
+<p>Esta divisiÃ³n facilita la gestiÃ³n del proyecto, mejora la
+<strong>legibilidad</strong>, permite la <strong>reutilizaciÃ³n</strong>
+de cÃ³digo en otros proyectos y optimiza el proceso de compilaciÃ³n, ya
+que solo los archivos modificados necesitan ser recompilados.</p>
+<p><strong>Archivos de Cabecera (.h)</strong></p>
+<p>El archivo de <strong>Cabecera</strong> o
+<strong><em>Header</em></strong> (identificado con la extensiÃ³n
+<strong>.h</strong>) es la parte del mÃ³dulo que actÃºa como el
+<strong>contrato</strong> o la <strong>interfaz</strong> pÃºblica de su
+cÃ³digo. Su rol principal es decirle al compilador y a otros
+programadores <strong>quÃ©</strong> puede hacer el mÃ³dulo, sin revelar
+<strong>cÃ³mo</strong> lo hace.</p>
+<p><strong>Rol Clave: Contener Prototipos (La Interfaz)</strong></p>
+<p>El archivo .h contiene esencialmente las
+<strong>Declaraciones</strong> o <strong>Prototipos</strong> de las
+funciones que el mÃ³dulo estÃ¡ exponiendo para su uso.</p>
+<ol type="1">
+<li><p><strong>DeclaraciÃ³n:</strong> Un prototipo solo especifica el
+<strong>tipo de retorno</strong>, el <strong>nombre de la
+funciÃ³n</strong> y la <strong>lista de parÃ¡metros</strong> (tipos de
+datos).</p>
+<ul>
+<li><em>Ejemplo:</em> float calcular_impuesto(float monto_base, float
+tasa);</li>
+</ul></li>
+<li><p><strong>Interfaz:</strong> Al incluir este archivo (#include
+"mi_modulo.h"), el compilador conoce la "firma" exacta de todas las
+funciones disponibles. Esto le permite <strong>validar</strong> que las
+llamadas que se hagan desde main() (o cualquier otra funciÃ³n) sean
+correctas en cuanto a tipo y nÃºmero de argumentos.</p></li>
+<li><p><strong>AbstracciÃ³n:</strong> El usuario del mÃ³dulo (la funciÃ³n
+que llama) solo necesita el archivo .h para saber <strong>cÃ³mo
+usar</strong> las funciones; no necesita ver el cÃ³digo de
+implementaciÃ³n.</p></li>
+</ol>
+<p><strong>Contenido TÃ­pico de un Archivo .h</strong></p>
+<table style="width:97%;">
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 63%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>Contenido</strong></th>
+<th style="text-align: left;"><strong>PropÃ³sito</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>Prototipos de
+FunciÃ³n</strong></td>
+<td style="text-align: left;">Especifican las funciones que pueden ser
+llamadas desde el exterior.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Definiciones de
+Constantes</strong></td>
+<td style="text-align: left;">Usando #define o const para valores que el
+mÃ³dulo utiliza (ej: PI).</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Estructuras y Tipos de
+Datos</strong></td>
+<td style="text-align: left;">Definiciones de tipos que el mÃ³dulo
+comparte con el resto del programa.</td>
+</tr>
+</tbody>
+</table>
+<p>Al separar la <strong>declaraciÃ³n (.h)</strong> de la
+<strong>definiciÃ³n (.c)</strong>, se logra un alto nivel de
+<strong>modularidad</strong> y se reduce el tiempo de compilaciÃ³n, ya
+que la mayorÃ­a de los archivos solo necesitan ver las interfaces.</p>
+<p><strong>Archivos de ImplementaciÃ³n (.c)</strong></p>
+<p>El archivo de <strong>ImplementaciÃ³n</strong> o
+<strong><em>Source</em></strong> (identificado con la extensiÃ³n
+<strong>.c</strong>) es el corazÃ³n funcional de un mÃ³dulo. Su rol es
+contener la <strong>DefiniciÃ³n</strong> completa de las funciones cuyos
+prototipos fueron declarados en el archivo de cabecera (.h).</p>
+<p><strong>Rol Clave: Contener la DefiniciÃ³n (La LÃ³gica)</strong></p>
+<p>El archivo .c es donde reside toda la lÃ³gica de negocio y el cÃ³digo
+ejecutable. AquÃ­ se especifica <strong>cÃ³mo</strong> se realizan las
+tareas prometidas por la interfaz (.h):</p>
+<ol type="1">
+<li><p><strong>DefiniciÃ³n de Funciones:</strong> La definiciÃ³n incluye
+el <strong>encabezado completo</strong> de la funciÃ³n (que debe
+coincidir exactamente con el prototipo del .h) seguido por el
+<strong>cuerpo de la funciÃ³n</strong> (las instrucciones envueltas en
+llaves {}).</p></li>
+<li><p><strong>LÃ³gica Interna:</strong> Contiene todas las sentencias,
+variables locales, estructuras de control (if, for, while) y llamadas a
+otras funciones necesarias para cumplir el objetivo del mÃ³dulo.</p></li>
+<li><p><strong>InclusiÃ³n del Header:</strong> Es una prÃ¡ctica
+fundamental que el archivo .c <strong>incluya su propio archivo
+.h</strong> (ej: #include "calculos.h"). Esto permite al compilador
+verificar internamente que la <strong>definiciÃ³n</strong> de la funciÃ³n
+coincida correctamente con su <strong>declaraciÃ³n</strong>.</p></li>
+</ol>
+<p><strong>RelaciÃ³n con el Archivo .h</strong></p>
+<p>La implementaciÃ³n (.c) y la interfaz (.h) trabajan juntas para formar
+un mÃ³dulo:</p>
+<table style="width:97%;">
+<colgroup>
+<col style="width: 28%" />
+<col style="width: 33%" />
+<col style="width: 36%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>Archivo</strong></th>
+<th style="text-align: left;"><strong>Contenido</strong></th>
+<th style="text-align: left;"><strong>Visibilidad</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>.h (Interfaz)</strong></td>
+<td style="text-align: left;">Declaraciones (Prototipos)</td>
+<td style="text-align: left;">Visible para <strong>otros</strong>
+mÃ³dulos y main()</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>.c (ImplementaciÃ³n)</strong></td>
+<td style="text-align: left;">Definiciones (Cuerpo de la FunciÃ³n)</td>
+<td style="text-align: left;"><strong>Oculto</strong> a otros mÃ³dulos
+(solo importa el .h)</td>
+</tr>
+</tbody>
+</table>
+<p>Esta separaciÃ³n es la base del <strong>encapsulamiento</strong>: el
+archivo .c guarda los detalles privados de la implementaciÃ³n, mientras
+que el .h solo expone lo necesario para usar el mÃ³dulo.</p>
+<p>C</p>
+<p>// ===================</p>
+<p>// calc.c (ImplementaciÃ³n)</p>
+<p>// ===================</p>
+<p>#<strong>include</strong> "calc.h" // Incluye su propia declaraciÃ³n
+para verificaciÃ³n</p>
+<p>// DEFINICIÃ“N: Contiene la lÃ³gica</p>
+<p>int sumar(int a, int b) {</p>
+<p>int resultado_interno = a + b;</p>
+<p>return resultado_interno;</p>
+<p>}</p>
+<h2 id="el-enlazado-linking-de-mÃºltiples-archivos">El Enlazado
+(<em>Linking</em>) de MÃºltiples Archivos</h2>
+<p>El <strong>Enlazado</strong> (<em>Linking</em>) es la fase final y
+crucial del proceso de compilaciÃ³n que permite que funciones definidas
+en diferentes mÃ³dulos (.c) puedan ser utilizadas por el programa
+principal (main.c).</p>
+<h3 id="el-proceso-de-construcciÃ³n-del-programa">El Proceso de
+ConstrucciÃ³n del Programa</h3>
+<p>Cuando se trabaja con mÃºltiples archivos, el compilador realiza el
+siguiente proceso en dos etapas principales:</p>
+<h4 id="compilaciÃ³n-generaciÃ³n-de-archivos-objeto-.o">1. CompilaciÃ³n
+(GeneraciÃ³n de Archivos Objeto .o)</h4>
+<p>El compilador de C procesa cada archivo de implementaciÃ³n (.c) de
+forma <strong>independiente</strong>.</p>
+<ul>
+<li><p>Por cada archivo .c (que incluye el prototipo de su respectivo
+.h), el compilador genera un archivo intermedio llamado <strong>Archivo
+Objeto</strong> (con extensiÃ³n <strong>.o</strong> en sistemas
+Unix/Linux o a veces .obj en Windows).</p></li>
+<li><p>Un archivo objeto contiene el cÃ³digo binario (cÃ³digo mÃ¡quina) de
+las funciones. Sin embargo, no contiene las direcciones de memoria
+reales de las funciones que fueron <em>llamadas</em> desde otros
+archivos.</p></li>
+<li><p>En esta etapa, el compilador solo necesita el archivo
+<strong>.h</strong> para confirmar que la llamada a la funciÃ³n es
+sintÃ¡cticamente correcta (coincidencia de tipos y argumentos).</p></li>
+</ul>
+<h4 id="enlazado-linking">2. Enlazado (Linking)</h4>
+<p>Una vez que todos los archivos .c (incluyendo main.c) han sido
+compilados a archivos objeto (.o), el <strong>Enlazador</strong>
+(<em>Linker</em>) entra en acciÃ³n.</p>
+<p>El rol del Enlazador es resolver todas las <strong>referencias
+externas</strong> y unir los bloques de cÃ³digo:</p>
+<ol type="1">
+<li><p><strong>UniÃ³n:</strong> El <strong>Linker</strong> toma todos los
+archivos objeto (.o), incluyendo el que contiene la funciÃ³n
+main().</p></li>
+<li><p><strong>ResoluciÃ³n de Referencias:</strong> Busca la
+<strong>definiciÃ³n</strong> real de cada funciÃ³n que fue solo declarada
+(el prototipo) y conecta las llamadas. Por ejemplo, si main.o llama a la
+funciÃ³n sumar(), el Linker encuentra sumar() en calculos.o y reemplaza
+la referencia con la direcciÃ³n de memoria correcta.</p></li>
+<li><p><strong>GeneraciÃ³n de Ejecutable:</strong> El resultado final de
+este proceso es el programa <strong>Ejecutable</strong> (como a.out o
+mi_programa.exe), que ya contiene todas las piezas de cÃ³digo del
+proyecto unidas y listas para ejecutarse.</p></li>
+</ol>
+<p><strong>En resumen:</strong></p>
+<ul>
+<li><p>El archivo <strong>.h</strong> es un <strong>contrato</strong>
+necesario para la <strong>CompilaciÃ³n</strong>.</p></li>
+<li><p>El archivo <strong>.c</strong> (a travÃ©s del .o) es la
+<strong>implementaciÃ³n</strong> necesaria para el
+<strong>Enlazado</strong>.</p></li>
+</ul>
+
+</div>
+</body>
+</html>
+

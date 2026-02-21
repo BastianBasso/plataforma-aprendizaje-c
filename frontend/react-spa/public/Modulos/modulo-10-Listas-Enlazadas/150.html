@@ -1,0 +1,187 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" crossorigin href="/assets/content-01sust.css">
+</head>
+<body>
+<div class="main-content">
+<h2 id="preguntas-limitaciones-de-arrays-vs.-listas-enlazadas">10
+Preguntas: Limitaciones de <em>Arrays</em> vs.Â Listas Enlazadas</h2>
+<h3 id="pregunta-1-limitaciÃ³n-fundamental-del-array">Pregunta 1:
+LimitaciÃ³n Fundamental del <em>Array</em></h3>
+<p><strong>Pregunta:</strong> Â¿CuÃ¡l es la limitaciÃ³n principal e
+inmutable de los <em>arrays</em> una vez que han sido declarados o
+asignados?</p>
+<ul>
+<li><strong>A.</strong> Solo pueden almacenar tipos de datos primitivos
+(<code>int</code>, <code>char</code>, etc.).</li>
+<li><strong>B.</strong> Son muy lentos para acceder a elementos por
+Ã­ndice.</li>
+<li><strong>C.</strong> <strong>Su tamaÃ±o es estÃ¡tico y fijo, no pueden
+expandirse para almacenar mÃ¡s elementos.</strong></li>
+<li><strong>D.</strong> Sus elementos no son contiguos en memoria.</li>
+</ul>
+<p><strong>Respuesta Correcta:</strong> C</p>
+<hr />
+<h3 id="pregunta-2-consecuencia-de-sobreescritura">Pregunta 2:
+Consecuencia de Sobreescritura</h3>
+<p><strong>Pregunta:</strong> Si un <em>array</em> de 100 elementos
+intenta almacenar un elemento en la posiciÃ³n 101, Â¿cuÃ¡l es el error de
+programaciÃ³n que puede resultar de escribir fuera de los lÃ­mites del
+bloque reservado?</p>
+<ul>
+<li><strong>A.</strong> Fuga de memoria (<em>Memory Leak</em>).</li>
+<li><strong>B.</strong> Error de doble liberaciÃ³n (<em>Double
+Free</em>).</li>
+<li><strong>C.</strong> Ineficiencia <span
+class="math inline"><em>O</em>(<em>N</em><sup>2</sup>)</span>.</li>
+<li><strong>D.</strong> <strong>Desbordamiento de BÃºfer (<em>Buffer
+Overflow</em>).</strong></li>
+</ul>
+<p><strong>Respuesta Correcta:</strong> D</p>
+<hr />
+<h3 id="pregunta-3-ineficiencia-en-la-expansiÃ³n-de-arrays">Pregunta 3:
+Ineficiencia en la ExpansiÃ³n de <em>Arrays</em></h3>
+<p><strong>Pregunta:</strong> Si un <em>array</em> lleno necesita ser
+expandido, Â¿cuÃ¡l es el paso mÃ¡s costoso en tiempo de ejecuciÃ³n?</p>
+<ul>
+<li><strong>A.</strong> Liberar la memoria del <em>array</em> viejo con
+<code>free()</code>.</li>
+<li><strong>B.</strong> <strong>Copiar todos los datos del
+<em>array</em> viejo al <em>array</em> reciÃ©n asignado y mÃ¡s
+grande.</strong></li>
+<li><strong>C.</strong> Solicitar el nuevo bloque de memoria con
+<code>malloc()</code>.</li>
+<li><strong>D.</strong> Inicializar el nuevo espacio a cero.</li>
+</ul>
+<p><strong>Respuesta Correcta:</strong> B</p>
+<hr />
+<h3 id="pregunta-4-complejidad-de-la-copia-de-datos">Pregunta 4:
+Complejidad de la Copia de Datos</h3>
+<p><strong>Pregunta:</strong> Si un <em>array</em> de <span
+class="math inline"><em>N</em></span> elementos debe ser copiado a un
+nuevo bloque de memoria para expandirlo, Â¿cuÃ¡l es la complejidad de
+tiempo de esta operaciÃ³n?</p>
+<ul>
+<li><strong>A.</strong> <span class="math inline"><em>O</em>(1)</span>
+(Tiempo constante).</li>
+<li><strong>B.</strong> <strong><span
+class="math inline"><em>O</em>(<em>N</em>)</span> (Tiempo
+lineal).</strong></li>
+<li><strong>C.</strong> <span
+class="math inline"><em>O</em>(log<em>N</em>)</span> (Tiempo
+logarÃ­tmico).</li>
+<li><strong>D.</strong> <span
+class="math inline"><em>O</em>(<em>N</em><sup>2</sup>)</span> (Tiempo
+cuadrÃ¡tico).</li>
+</ul>
+<p><strong>Respuesta Correcta:</strong> B</p>
+<hr />
+<h3 id="pregunta-5-costo-de-la-inserciÃ³n-intermedia-en-arrays">Pregunta
+5: Costo de la InserciÃ³n Intermedia en <em>Arrays</em></h3>
+<p><strong>Pregunta:</strong> Â¿CuÃ¡l es la razÃ³n principal por la que
+insertar un elemento en una posiciÃ³n intermedia de un <em>array</em> es
+una operaciÃ³n con complejidad <span
+class="math inline"><em>O</em>(<em>N</em>)</span>?</p>
+<ul>
+<li><strong>A.</strong> El sistema operativo necesita buscar espacio
+libre.</li>
+<li><strong>B.</strong> Hay que asignar un nuevo puntero para el nuevo
+elemento.</li>
+<li><strong>C.</strong> <strong>Se requiere desplazar o mover todos los
+elementos subsiguientes una posiciÃ³n hacia adelante para crear el
+espacio.</strong></li>
+<li><strong>D.</strong> La bÃºsqueda por Ã­ndice es muy lenta.</li>
+</ul>
+<p><strong>Respuesta Correcta:</strong> C</p>
+<hr />
+<h3 id="pregunta-6-costo-de-la-eliminaciÃ³n">Pregunta 6: Costo de la
+EliminaciÃ³n</h3>
+<p><strong>Pregunta:</strong> Si se elimina un elemento de la posiciÃ³n
+inicial (Ã­ndice 0) de un <em>array</em> de <span
+class="math inline"><em>N</em></span> elementos, Â¿cuÃ¡l es la complejidad
+de tiempo requerida para llenar el hueco?</p>
+<ul>
+<li><strong>A.</strong> <span
+class="math inline"><em>O</em>(1)</span>.</li>
+<li><strong>B.</strong> <span
+class="math inline"><em>O</em>(log<em>N</em>)</span>.</li>
+<li><strong>C.</strong> <strong><span
+class="math inline"><em>O</em>(<em>N</em>)</span>.</strong></li>
+<li><strong>D.</strong> <span
+class="math inline"><em>O</em>(<em>N</em>log<em>N</em>)</span>.</li>
+</ul>
+<p><strong>Respuesta Correcta:</strong> C</p>
+<hr />
+<h3
+id="pregunta-7-mecanismo-de-flexibilidad-en-listas-enlazadas">Pregunta
+7: Mecanismo de Flexibilidad en Listas Enlazadas</h3>
+<p><strong>Pregunta:</strong> Â¿CuÃ¡l es el mecanismo clave que permite
+que los elementos de una Lista Enlazada no tengan que estar en memoria
+contigua?</p>
+<ul>
+<li><strong>A.</strong> Se utiliza la memoria del <em>Stack</em> en
+lugar del <em>Heap</em>.</li>
+<li><strong>B.</strong> El compilador gestiona automÃ¡ticamente la
+reubicaciÃ³n.</li>
+<li><strong>C.</strong> <strong>Cada elemento estÃ¡ conectado al
+siguiente mediante un puntero (enlace).</strong></li>
+<li><strong>D.</strong> La lista usa un Ã­ndice hash para el acceso.</li>
+</ul>
+<p><strong>Respuesta Correcta:</strong> C</p>
+<hr />
+<h3 id="pregunta-8-componentes-fundamentales-de-un-nodo">Pregunta 8:
+Componentes Fundamentales de un Nodo</h3>
+<p><strong>Pregunta:</strong> Â¿CuÃ¡les son las dos partes fundamentales
+que debe contener cada nodo en una Lista Enlazada Simple?</p>
+<ul>
+<li><strong>A.</strong> Ãndice y TamaÃ±o.</li>
+<li><strong>B.</strong> <strong>Dato (o valor) y Puntero al siguiente
+nodo.</strong></li>
+<li><strong>C.</strong> Puntero al inicio y Puntero al final.</li>
+<li><strong>D.</strong> Puntero al nodo anterior y Puntero al nodo
+siguiente.</li>
+</ul>
+<p><strong>Respuesta Correcta:</strong> B</p>
+<hr />
+<h3 id="pregunta-9-eficiencia-de-inserciÃ³n-en-listas-enlazadas">Pregunta
+9: Eficiencia de InserciÃ³n en Listas Enlazadas</h3>
+<p><strong>Pregunta:</strong> Asumiendo que ya se ha encontrado el nodo
+anterior al punto de inserciÃ³n, Â¿cuÃ¡l es la complejidad de tiempo para
+insertar un nuevo nodo en una Lista Enlazada?</p>
+<ul>
+<li><strong>A.</strong> <span
+class="math inline"><em>O</em>(<em>N</em>)</span>.</li>
+<li><strong>B.</strong> <strong><span
+class="math inline"><em>O</em>(1)</span>.</strong></li>
+<li><strong>C.</strong> <span
+class="math inline"><em>O</em>(log<em>N</em>)</span>.</li>
+<li><strong>D.</strong> <span
+class="math inline"><em>O</em>(<em>N</em><sup>2</sup>)</span>.</li>
+</ul>
+<p><strong>Respuesta Correcta:</strong> B</p>
+<hr />
+<h3 id="pregunta-10-ventaja-principal-de-la-lista-enlazada">Pregunta 10:
+Ventaja Principal de la Lista Enlazada</h3>
+<p><strong>Pregunta:</strong> Â¿QuÃ© operaciÃ³n se beneficia mÃ¡s de la
+arquitectura basada en punteros de las Listas Enlazadas, mejorando su
+complejidad de <span class="math inline"><em>O</em>(<em>N</em>)</span>
+(en <em>arrays</em>) a <span class="math inline"><em>O</em>(1)</span>
+(en listas, una vez ubicado el punto)?</p>
+<ul>
+<li><strong>A.</strong> Acceso a un elemento por su Ã­ndice (Ej:
+<code>lista[5]</code>).</li>
+<li><strong>B.</strong> Recorrido secuencial de todos los
+elementos.</li>
+<li><strong>C.</strong> BÃºsqueda de un valor especÃ­fico.</li>
+<li><strong>D.</strong> <strong>InserciÃ³n y eliminaciÃ³n de elementos
+intermedios.</strong></li>
+</ul>
+<p><strong>Respuesta Correcta:</strong> D</p>
+
+</div>
+</body>
+</html>
+

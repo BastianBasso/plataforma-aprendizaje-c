@@ -1,0 +1,365 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" crossorigin href="/assets/content-01sust.css">
+</head>
+<body>
+<div class="main-content">
+<h1><strong>2. Operadores Relacionales y Lógicos (Bases para la
+Decisión)</strong></h1>
+<p><strong>Concepto de Expresión Booleana (Lógica)</strong></p>
+<p>Una <strong>Expresión Booleana</strong> (o expresión lógica) es
+cualquier sentencia que, al ser evaluada, solo puede tener uno de dos
+resultados posibles: <strong>Verdadero</strong> o
+<strong>Falso</strong>. Estas expresiones son la base de la toma de
+decisiones y el flujo de control en la programación.</p>
+<p><strong>El Modelo Booleano en C</strong></p>
+<p>A diferencia de otros lenguajes que tienen un tipo de dato explícito
+llamado boolean o bool (aunque C99 introdujo el <em>header</em>
+&lt;stdbool.h&gt;), el lenguaje C representa los valores lógicos
+utilizando el tipo de dato <strong>entero (int)</strong>:</p>
+<table style="width:97%;">
+<colgroup>
+<col style="width: 24%" />
+<col style="width: 72%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>Valor Lógico</strong></th>
+<th style="text-align: left;"><strong>Representación en C
+(Entero)</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>Falso</strong> (False)</td>
+<td style="text-align: left;"><strong>Cero (0)</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Verdadero</strong> (True)</td>
+<td style="text-align: left;"><strong>Cualquier valor distinto de
+cero</strong> (Generalmente se utiliza el <strong>Uno (1)</strong>)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Ejemplo:</strong></p>
+<p>Si realizas una comparación simple como 5 &gt; 3, el compilador C no
+devuelve la palabra "Verdadero", sino el valor entero $\mathbf{1}$.</p>
+<p>Si realizas una comparación como 10 == 2, el compilador C devuelve el
+valor entero $\mathbf{0}$.</p>
+<p><strong>La Importancia del Cero (0)</strong></p>
+<p>En C, el concepto de "Falsedad" está ligado de manera fundamental al
+valor $\mathbf{0}$.</p>
+<ul>
+<li><p>Cuando una expresión lógica <strong>devuelve</strong> un
+resultado, lo hace como $\mathbf{0}$ o $\mathbf{1}$.</p></li>
+<li><p>Cuando una estructura de control (como un if)
+<strong>evalúa</strong> una condición, trata el valor $\mathbf{0}$ como
+Falso y <strong>cualquier otro número</strong> (incluyendo números
+negativos o enteros mayores que 1) como Verdadero.</p></li>
+</ul>
+<p><strong>Código de Ejemplo:</strong></p>
+<p>C</p>
+<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
+<p>int main(void) {</p>
+<p>int resultado_comparacion;</p>
+<p>// El resultado es Verdadero, C lo representa con 1</p>
+<p>resultado_comparacion = (10 &gt; 5);</p>
+<p>printf("Resultado de (10 &gt; 5): %d\n", resultado_comparacion);</p>
+<p>// El resultado es Falso, C lo representa con 0</p>
+<p>resultado_comparacion = (10 == 5);</p>
+<p>printf("Resultado de (10 == 5): %d\n", resultado_comparacion);</p>
+<p>return 0;</p>
+<p>}</p>
+<p><strong>Operadores Relacionales (Comparación)</strong></p>
+<p>Los operadores relacionales (o de comparación) se utilizan para
+<strong>establecer una relación</strong> entre dos operandos. Al igual
+que con las expresiones booleanas, el resultado de cualquier comparación
+en C siempre será <strong>Verdadero</strong> (representado como
+$\mathbf{1}$) o <strong>Falso</strong> (representado como
+$\mathbf{0}$).</p>
+<p><strong>Tabla de Operadores de Comparación</strong></p>
+<table style="width:98%;">
+<colgroup>
+<col style="width: 18%" />
+<col style="width: 17%" />
+<col style="width: 25%" />
+<col style="width: 17%" />
+<col style="width: 19%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>Operador</strong></th>
+<th style="text-align: left;"><strong>Lectura</strong></th>
+<th style="text-align: left;"><strong>Significado</strong></th>
+<th style="text-align: left;"><strong>Ejemplo</strong></th>
+<th style="text-align: left;"><strong>Resultado (Valor
+Lógico)</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>==</strong></td>
+<td style="text-align: left;">Igual a</td>
+<td style="text-align: left;">Comprueba si ambos operandos son
+<strong>exactamente iguales</strong>.</td>
+<td style="text-align: left;">5 == 5</td>
+<td style="text-align: left;"><strong>1</strong> (Verdadero)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>!=</strong></td>
+<td style="text-align: left;">Distinto de</td>
+<td style="text-align: left;">Comprueba si ambos operandos <strong>no
+son iguales</strong>.</td>
+<td style="text-align: left;">10 != 5</td>
+<td style="text-align: left;"><strong>1</strong> (Verdadero)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>&gt;</strong></td>
+<td style="text-align: left;">Mayor que</td>
+<td style="text-align: left;">Comprueba si el operando izquierdo es
+<strong>mayor</strong> que el derecho.</td>
+<td style="text-align: left;">12 &gt; 7</td>
+<td style="text-align: left;"><strong>1</strong> (Verdadero)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>&lt;</strong></td>
+<td style="text-align: left;">Menor que</td>
+<td style="text-align: left;">Comprueba si el operando izquierdo es
+<strong>menor</strong> que el derecho.</td>
+<td style="text-align: left;">3 &lt; 8</td>
+<td style="text-align: left;"><strong>1</strong> (Verdadero)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>&gt;=</strong></td>
+<td style="text-align: left;">Mayor o igual que</td>
+<td style="text-align: left;">Comprueba si es mayor <strong>o</strong>
+igual.</td>
+<td style="text-align: left;">4 &gt;= 4</td>
+<td style="text-align: left;"><strong>1</strong> (Verdadero)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>&lt;=</strong></td>
+<td style="text-align: left;">Menor o igual que</td>
+<td style="text-align: left;">Comprueba si es menor <strong>o</strong>
+igual.</td>
+<td style="text-align: left;">9 &lt;= 5</td>
+<td style="text-align: left;"><strong>0</strong> (Falso)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Diferencia Fundamental: Asignación
+vs. Comparación</strong></p>
+<p>Este es el punto de error más común para los principiantes en C. Es
+crucial entender que los signos de igualdad simple y doble tienen
+funciones completamente diferentes:</p>
+<p><strong>1. Asignación (=)</strong></p>
+<ul>
+<li><p><strong>Propósito:</strong> Asignar un valor.</p></li>
+<li><p><strong>Función:</strong> Mueve el valor de la derecha hacia la
+variable de la izquierda.</p></li>
+<li><p><strong>Resultado:</strong> No produce un resultado booleano,
+sino que modifica el valor de una variable.</p></li>
+</ul>
+<p>$$\text{Ejemplo: } \mathbf{\text{edad} \space = \space 30}\text{;}
+\quad \text{("Edad ahora vale 30")}$$</p>
+<p><strong>2. Comparación (==)</strong></p>
+<ul>
+<li><p><strong>Propósito:</strong> Evaluar la igualdad.</p></li>
+<li><p><strong>Función:</strong> Compara si el valor de la izquierda es
+igual al valor de la derecha.</p></li>
+<li><p><strong>Resultado:</strong> Produce un valor booleano (1 o
+0).</p></li>
+</ul>
+<p>$$\text{Ejemplo: } \mathbf{\text{edad} \space == \space 30}\text{?}
+\quad \text{("¿Edad es igual a 30?")}$$</p>
+<p><strong>Advertencia:</strong> Usar accidentalmente = donde se
+esperaba == (por ejemplo, en un bloque if) es un error común que puede
+llevar a <strong>errores de lógica graves</strong> difíciles de depurar,
+ya que la asignación (=) siempre produce un valor (que en la mayoría de
+los casos no será $0$, evaluándose como <strong>Verdadero</strong>).</p>
+<p><strong>Operadores Lógicos (Compuertas) 🔗</strong></p>
+<p>Mientras que los operadores relacionales (&gt;, ==, etc.) comparan
+dos valores, los operadores lógicos se utilizan para <strong>combinar o
+modificar los resultados</strong> de estas expresiones booleanas (los
+$\mathbf{0}$s y $\mathbf{1}$s).</p>
+<p>Permiten crear condiciones complejas, como "si A es verdadero
+<strong>Y</strong> B es verdadero" o "si A es verdadero
+<strong>O</strong> B es verdadero".</p>
+<table style="width:97%;">
+<colgroup>
+<col style="width: 19%" />
+<col style="width: 20%" />
+<col style="width: 32%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>Operador</strong></th>
+<th style="text-align: left;"><strong>Nombre</strong></th>
+<th style="text-align: left;"><strong>Significado</strong></th>
+<th style="text-align: left;"><strong>Ejemplo (Resultado)</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>&amp;&amp;</strong></td>
+<td style="text-align: left;"><strong>AND</strong> Lógico</td>
+<td style="text-align: left;">Devuelve Verdadero (1) solo si
+<strong>ambas</strong> expresiones son verdaderas.</td>
+<td style="text-align: left;">(5 &gt; 1) &amp;&amp; (10 == 10) (1 y 1)
+$\rightarrow$ <strong>1</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">**`</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">`**</td>
+<td style="text-align: left;"><strong>OR</strong> Lógico</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>!</strong></td>
+<td style="text-align: left;"><strong>NOT</strong> Lógico
+(Negación)</td>
+<td style="text-align: left;"><strong>Invierte</strong> el valor lógico.
+Convierte Verdadero (1) en Falso (0) y viceversa.</td>
+<td style="text-align: left;">!(5 &lt; 1) (No Falso) $\rightarrow$
+<strong>1</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Uso para Combinar Condiciones</strong></p>
+<p>Estos operadores son la base de la toma de decisiones complejas.
+Permiten encadenar múltiples verificaciones en una sola sentencia.</p>
+<p><strong>Ejemplo Práctico en C:</strong></p>
+<p>C</p>
+<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
+<p>int main(void) {</p>
+<p>int edad = 25;</p>
+<p>int tiene_licencia = 1; // 1 = Verdadero</p>
+<p>// AND: ¿Es mayor de edad (&gt;=18) Y tiene licencia?</p>
+<p>int puede_conducir = (edad &gt;= 18) &amp;&amp; (tiene_licencia ==
+1);</p>
+<p>// (1) &amp;&amp; (1) = 1 (Verdadero)</p>
+<p>printf("¿Puede conducir?: %d\n", puede_conducir);</p>
+<p>// OR: ¿Tiene un descuento? (Si es menor de 12 O mayor de 65)</p>
+<p>int tiene_descuento = (edad &lt; 12) || (edad &gt; 65);</p>
+<p>// (0) || (0) = 0 (Falso)</p>
+<p>printf("¿Tiene descuento?: %d\n", tiene_descuento);</p>
+<p>// NOT: ¿No es un adolescente?</p>
+<p>int no_adolescente = !( (edad &gt; 12) &amp;&amp; (edad &lt; 20)
+);</p>
+<p>// !( 1 &amp;&amp; 0 ) = !(0) = 1 (Verdadero)</p>
+<p>printf("¿No es adolescente?: %d\n", no_adolescente);</p>
+<p>return 0;</p>
+<p>}</p>
+<p><strong>Tablas de Verdad Simples</strong></p>
+<p>Las Tablas de Verdad son herramientas fundamentales en la lógica que
+demuestran <strong>todas las posibles combinaciones de
+resultados</strong> para un operador lógico dado. Dado que en C solo hay
+dos estados (Verdadero = $\mathbf{1}$, Falso = $\mathbf{0}$), estas
+tablas son sencillas y definitivas.</p>
+<p>Usaremos $\mathbf{A}$ y $\mathbf{B}$ para representar dos condiciones
+booleanas de entrada.</p>
+<p><strong>1. Tablas para &amp;&amp; (AND Lógico)</strong></p>
+<p>El operador <strong>AND</strong> (&amp;&amp;) requiere que
+<strong>todas</strong> las condiciones de entrada sean
+<strong>Verdaderas</strong> para que la expresión completa sea
+Verdadera.</p>
+<table style="width:97%;">
+<colgroup>
+<col style="width: 23%" />
+<col style="width: 23%" />
+<col style="width: 23%" />
+<col style="width: 28%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>A</strong></th>
+<th style="text-align: left;"><strong>B</strong></th>
+<th style="text-align: left;"><strong>A &amp;&amp; B</strong></th>
+<th style="text-align: left;"><strong>Explicación</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">$\mathbf{0}$ (Falso)</td>
+<td style="text-align: left;">$\mathbf{0}$ (Falso)</td>
+<td style="text-align: left;">$\mathbf{0}$ (Falso)</td>
+<td style="text-align: left;">Falso y Falso $\rightarrow$ Falso</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">$\mathbf{0}$ (Falso)</td>
+<td style="text-align: left;">$\mathbf{1}$ (Verdadero)</td>
+<td style="text-align: left;">$\mathbf{0}$ (Falso)</td>
+<td style="text-align: left;">Falso y Verdadero $\rightarrow$ Falso</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">$\mathbf{1}$ (Verdadero)</td>
+<td style="text-align: left;">$\mathbf{0}$ (Falso)</td>
+<td style="text-align: left;">$\mathbf{0}$ (Falso)</td>
+<td style="text-align: left;">Verdadero y Falso $\rightarrow$ Falso</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">$\mathbf{1}$ (Verdadero)</td>
+<td style="text-align: left;">$\mathbf{1}$ (Verdadero)</td>
+<td style="text-align: left;">$\mathbf{1}$ (Verdadero)</td>
+<td style="text-align: left;"><strong>Verdadero y Verdadero
+$\rightarrow$ Verdadero</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Recordatorio:</strong> Si estás verificando que un número
+esté en un rango (ej: $5 &lt; x &lt; 10$), necesitas el &amp;&amp;: (x
+&gt; 5) &amp;&amp; (x &lt; 10).</p>
+<p><strong>2. Tablas para || (OR Lógico)</strong></p>
+<p>El operador <strong>OR</strong> (||) requiere que <strong>al menos
+una</strong> de las condiciones de entrada sea
+<strong>Verdadera</strong> para que la expresión completa sea
+Verdadera.</p>
+<p>| A | B | A $\mathbf{||}$ B | Explicación |</p>
+<p>| :---: | :---: | :---: | :--- |</p>
+<p>| $\mathbf{0}$ (Falso) | $\mathbf{0}$ (Falso) | $\mathbf{0}$ (Falso)
+| Falso o Falso $\rightarrow$ Falso (Único caso) |</p>
+<p>| $\mathbf{0}$ (Falso) | $\mathbf{1}$ (Verdadero) | $\mathbf{1}$
+(Verdadero) | Falso o Verdadero $\rightarrow$ Verdadero |</p>
+<p>| $\mathbf{1}$ (Verdadero) | $\mathbf{0}$ (Falso) | $\mathbf{1}$
+(Verdadero) | Verdadero o Falso $\rightarrow$ Verdadero |</p>
+<p>| $\mathbf{1}$ (Verdadero) | $\mathbf{1}$ (Verdadero) | $\mathbf{1}$
+(Verdadero) | Verdadero o Verdadero $\rightarrow$ Verdadero |</p>
+<p><strong>3. Tabla para ! (NOT Lógico)</strong></p>
+<p>El operador <strong>NOT</strong> (!) solo opera sobre una condición y
+simplemente <strong>invierte</strong> su valor lógico.</p>
+<table style="width:97%;">
+<colgroup>
+<col style="width: 29%" />
+<col style="width: 29%" />
+<col style="width: 37%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>A</strong></th>
+<th style="text-align: left;"><strong>! A</strong></th>
+<th style="text-align: left;"><strong>Explicación</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">$\mathbf{0}$ (Falso)</td>
+<td style="text-align: left;">$\mathbf{1}$ (Verdadero)</td>
+<td style="text-align: left;">La negación de Falso es Verdadero</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">$\mathbf{1}$ (Verdadero)</td>
+<td style="text-align: left;">$\mathbf{0}$ (Falso)</td>
+<td style="text-align: left;">La negación de Verdadero es Falso</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</body>
+</html>
+

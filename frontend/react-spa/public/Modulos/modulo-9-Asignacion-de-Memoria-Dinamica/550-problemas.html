@@ -1,0 +1,201 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" crossorigin href="/assets/content-01sust.css">
+</head>
+<body>
+<div class="main-content">
+<h2 id="ejercicios-liberaciÃ³n-de-memoria-con-free">10 Ejercicios:
+LiberaciÃ³n de Memoria con <code>free()</code> ðŸ§¹</h2>
+<h3 id="pregunta-1-consecuencia-de-no-liberar">Pregunta 1: Consecuencia
+de No Liberar</h3>
+<p><strong>Pregunta:</strong> Si se llama a
+<code>procesar_datos(100)</code> en el cÃ³digo de abajo, Â¿cuÃ¡l es el
+error de gestiÃ³n de memoria mÃ¡s probable en este cÃ³digo?</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> procesar_datos<span class="op">(</span><span class="dt">int</span> n<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> <span class="op">*</span>arr <span class="op">=</span> <span class="op">(</span><span class="dt">int</span> <span class="op">*)</span>malloc<span class="op">(</span>n <span class="op">*</span> <span class="kw">sizeof</span><span class="op">(</span><span class="dt">int</span><span class="op">));</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>arr <span class="op">==</span> NULL<span class="op">)</span> <span class="cf">return</span><span class="op">;</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">// LÃ³gica para usar arr...</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span><span class="op">;</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<ul>
+<li><strong>A.</strong> Un â€˜Double Freeâ€™, ya que <code>malloc</code>
+podrÃ­a llamarse dos veces.</li>
+<li><strong>B.</strong> Un â€˜Puntero Colganteâ€™, ya que el puntero
+<code>arr</code> es local y se destruye.</li>
+<li><strong>C.</strong> <strong>Una â€˜Fuga de Memoriaâ€™ (<em>Memory
+Leak</em>), ya que el bloque de memoria asignado nunca se libera con
+<code>free()</code> antes de que la funciÃ³n termine.</strong></li>
+<li><strong>D.</strong> Un â€˜Fallo de SegmentaciÃ³nâ€™ (<em>Segmentation
+Fault</em>) al intentar acceder a <code>arr</code>.</li>
+</ul>
+<p><strong>Respuesta Correcta:</strong> C</p>
+<hr />
+<h3 id="pregunta-2-argumento-vÃ¡lido-para-free">Pregunta 2: Argumento
+VÃ¡lido para <code>free()</code></h3>
+<p><strong>Pregunta:</strong> SegÃºn la sintaxis y el uso de
+<code>free()</code>, Â¿cuÃ¡l es el <strong>Ãºnico</strong> argumento vÃ¡lido
+que se le debe pasar a la funciÃ³n?</p>
+<ul>
+<li><strong>A.</strong> El nÃºmero total de bytes del bloque de memoria
+que se desea liberar.</li>
+<li><strong>B.</strong> Un puntero que apunte a cualquier posiciÃ³n
+dentro del bloque de memoria asignado.</li>
+<li><strong>C.</strong> <strong>El puntero base devuelto originalmente
+por <code>malloc()</code>, <code>calloc()</code> o
+<code>realloc()</code>, o <code>NULL</code>.</strong></li>
+<li><strong>D.</strong> Cualquier puntero a una variable local declarada
+en el Stack.</li>
+</ul>
+<p><strong>Respuesta Correcta:</strong> C</p>
+<hr />
+<h3 id="pregunta-3-creaciÃ³n-de-puntero-colgante">Pregunta 3: CreaciÃ³n de
+Puntero Colgante</h3>
+<p><strong>Pregunta:</strong> En el siguiente cÃ³digo, Â¿quÃ© tipo de error
+de memoria se crea justo despuÃ©s de <code>free(p)</code> y antes de la
+LÃ­nea X?</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> <span class="op">*</span>p <span class="op">=</span> <span class="op">(</span><span class="dt">int</span> <span class="op">*)</span>malloc<span class="op">(</span><span class="kw">sizeof</span><span class="op">(</span><span class="dt">int</span><span class="op">));</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="op">*</span>p <span class="op">=</span> <span class="dv">50</span><span class="op">;</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>free<span class="op">(</span>p<span class="op">);</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co">// LÃ­nea X: Acceder a *p</span></span></code></pre></div>
+<ul>
+<li><strong>A.</strong> Una fuga de memoria.</li>
+<li><strong>B.</strong> Una doble liberaciÃ³n.</li>
+<li><strong>C.</strong> Un error de tipo (Type Mismatch).</li>
+<li><strong>D.</strong> <strong>Un puntero colgante (<em>Dangling
+Pointer</em>).</strong></li>
+</ul>
+<p><strong>Respuesta Correcta:</strong> D</p>
+<hr />
+<h3 id="pregunta-4-identificaciÃ³n-de-doble-liberaciÃ³n">Pregunta 4:
+IdentificaciÃ³n de Doble LiberaciÃ³n</h3>
+<p><strong>Pregunta:</strong> Â¿CuÃ¡l de las siguientes secuencias de
+llamadas a <code>free()</code> resultarÃ­a en un error de â€˜Doble
+LiberaciÃ³nâ€™ (<em>Double Free</em>) y potencialmente corromperÃ­a el
+<em>Heap</em>?</p>
+<ul>
+<li><strong>A.</strong>
+<code>int *p = (int *)malloc(10); free(p); p = NULL; free(p);</code></li>
+<li><strong>B.</strong>
+<strong><code>int *p1 = (int *)malloc(10); int *p2 = p1; free(p1); free(p2);</code></strong></li>
+<li><strong>C.</strong>
+<code>int *p = (int *)malloc(10); free(p); // ... MÃ¡s cÃ³digo ... free(p);</code></li>
+<li><strong>D.</strong>
+<code>int arr[10]; int *p = arr; free(p);</code></li>
+</ul>
+<p><strong>Respuesta Correcta:</strong> B</p>
+<hr />
+<h3 id="pregunta-5-free-sobre-el-stack">Pregunta 5: <code>free()</code>
+sobre el Stack</h3>
+<p><strong>Pregunta:</strong> Se declara una variable local en el Stack:
+<code>int x = 5;</code>. Â¿QuÃ© sucede si se intenta llamar a
+<code>free(&amp;x)</code>?</p>
+<ul>
+<li><strong>A.</strong> La memoria se libera correctamente y
+<code>x</code> se restablece a 0.</li>
+<li><strong>B.</strong> Se produce una fuga de memoria, ya que el Stack
+no puede liberar variables de esta manera.</li>
+<li><strong>C.</strong> El programa ignora la llamada a
+<code>free()</code> sin ningÃºn efecto.</li>
+<li><strong>D.</strong> <strong>Se produce un error fatal de ejecuciÃ³n,
+ya que <code>free()</code> solo debe usarse en memoria del <em>Heap</em>
+(MontÃ³n) asignada dinÃ¡micamente.</strong></li>
+</ul>
+<p><strong>Respuesta Correcta:</strong> D</p>
+<hr />
+<h3 id="pregunta-6-soluciÃ³n-para-punteros-colgantes">Pregunta 6:
+SoluciÃ³n para Punteros Colgantes</h3>
+<p><strong>Pregunta:</strong> Â¿CuÃ¡l es el propÃ³sito esencial de asignar
+<strong><code>puntero = NULL;</code></strong> inmediatamente despuÃ©s de
+llamar a <code>free(puntero)</code>?</p>
+<ul>
+<li><strong>A.</strong> Devolver el puntero al Stack para que pueda ser
+reutilizado.</li>
+<li><strong>B.</strong> Acelerar el proceso de desasignaciÃ³n de
+memoria.</li>
+<li><strong>C.</strong> Convertir el puntero en un puntero colgante para
+depuraciÃ³n.</li>
+<li><strong>D.</strong> <strong>Prevenir el uso de un puntero colgante y
+evitar errores de â€˜Doble LiberaciÃ³nâ€™ (<em>Double
+Free</em>).</strong></li>
+</ul>
+<p><strong>Respuesta Correcta:</strong> D</p>
+<hr />
+<h3 id="pregunta-7-consecuencia-de-incumplir-la-regla-de-oro">Pregunta
+7: Consecuencia de Incumplir la Regla de Oro</h3>
+<p><strong>Pregunta:</strong> Â¿CuÃ¡l es la <strong>consecuencia
+directa</strong> de no seguir la â€˜Regla de Oro de Câ€™ (es decir, omitir
+<code>free()</code>)?</p>
+<ul>
+<li><strong>A.</strong> Fallo de segmentaciÃ³n inmediato.</li>
+<li><strong>B.</strong> El programa se ralentiza por el tiempo que toma
+la liberaciÃ³n automÃ¡tica de memoria.</li>
+<li><strong>C.</strong> <strong>Una fuga de memoria (<em>Memory
+Leak</em>) que consume recursos del sistema operativo hasta que el
+programa termina.</strong></li>
+<li><strong>D.</strong> Se crea un puntero colgante que siempre apunta a
+datos basura.</li>
+</ul>
+<p><strong>Respuesta Correcta:</strong> C</p>
+<hr />
+<h3 id="pregunta-8-liberar-un-puntero-desplazado">Pregunta 8: Liberar un
+Puntero Desplazado</h3>
+<p><strong>Pregunta:</strong> Se asigna un <em>array</em>:
+<code>int *arr = (int *)malloc(10 * sizeof(int));</code>. Luego se mueve
+el puntero: <code>arr = arr + 5;</code>. Â¿QuÃ© ocurrirÃ­a si se llama a
+<code>free(arr)</code> en este punto?</p>
+<ul>
+<li><strong>A.</strong> La memoria se liberarÃ­a correctamente, ya que el
+sistema puede rastrear el inicio del bloque.</li>
+<li><strong>B.</strong> El programa liberarÃ­a solo la mitad de la
+memoria, causando una fuga parcial.</li>
+<li><strong>C.</strong> Se producirÃ­a una doble liberaciÃ³n del
+bloque.</li>
+<li><strong>D.</strong> <strong>Se producirÃ­a un error fatal o
+corrupciÃ³n del <em>Heap</em>, ya que <code>free()</code> debe recibir el
+puntero que apunta exactamente al inicio del bloque.</strong></li>
+</ul>
+<p><strong>Respuesta Correcta:</strong> D</p>
+<hr />
+<h3 id="pregunta-9-prevenciÃ³n-de-double-free">Pregunta 9: PrevenciÃ³n de
+<em>Double Free</em></h3>
+<p><strong>Pregunta:</strong> Si se omite la prÃ¡ctica de seguridad
+<code>p = NULL;</code> despuÃ©s de <code>free(p);</code>, Â¿cÃ³mo
+contribuye esta omisiÃ³n al riesgo de un error de â€˜Doble LiberaciÃ³nâ€™
+(<em>Double Free</em>)?</p>
+<ul>
+<li><strong>A.</strong> Permite que otro puntero apunte al mismo bloque
+antes de la segunda liberaciÃ³n.</li>
+<li><strong>B.</strong> <strong>Si se llama a <code>free(p)</code>
+accidentalmente por segunda vez, la funciÃ³n intentarÃ¡ liberar la misma
+direcciÃ³n de memoria ya libre.</strong></li>
+<li><strong>C.</strong> Hace que el compilador emita una advertencia que
+el programador puede ignorar.</li>
+<li><strong>D.</strong> Hace que <code>free()</code> libere tambiÃ©n la
+memoria del Stack.</li>
+</ul>
+<p><strong>Respuesta Correcta:</strong> B</p>
+<hr />
+<h3 id="pregunta-10-uso-de-puntero-colgante">Pregunta 10: Uso de Puntero
+Colgante</h3>
+<p><strong>Pregunta:</strong> Â¿QuÃ© tipo de error ocurrirÃ¡ en la LÃ­nea X
+del siguiente cÃ³digo?</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> <span class="op">*</span>p <span class="op">=</span> <span class="op">(</span><span class="dt">int</span> <span class="op">*)</span>malloc<span class="op">(</span><span class="kw">sizeof</span><span class="op">(</span><span class="dt">int</span><span class="op">));</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> <span class="op">*</span>q <span class="op">=</span> p<span class="op">;</span> </span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>free<span class="op">(</span>q<span class="op">);</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="op">*</span>p <span class="op">=</span> <span class="dv">10</span><span class="op">;</span> <span class="co">// Linea X</span></span></code></pre></div>
+<ul>
+<li><strong>A.</strong> Doble LiberaciÃ³n.</li>
+<li><strong>B.</strong> Fuga de Memoria.</li>
+<li><strong>C.</strong> Error de Sintaxis (Compilation Error).</li>
+<li><strong>D.</strong> <strong>Uso de Puntero Colgante, que puede
+llevar a un Fallo de SegmentaciÃ³n o corrupciÃ³n de datos.</strong></li>
+</ul>
+<p><strong>Respuesta Correcta:</strong> D</p>
+
+</div>
+</body>
+</html>
+

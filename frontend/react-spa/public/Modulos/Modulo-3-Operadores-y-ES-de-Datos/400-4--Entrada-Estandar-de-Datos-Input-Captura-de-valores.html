@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" crossorigin href="/assets/content-01sust.css">
+</head>
+<body>
+<div class="main-content">
+<h1>4. Entrada Estándar de Datos (Input): Captura de Valores</h1>
+<p><strong>La Función scanf() (Input Estándar)</strong></p>
+<p>La función <strong>scanf()</strong> (Scan Formatted) es la
+herramienta fundamental en C para manejar la <strong>entrada estándar de
+datos</strong> (<em>Standard Input</em>), que típicamente es lo que el
+usuario escribe en el teclado y ve en la consola. Su propósito es
+capturar y leer información para que el programa pueda procesarla.</p>
+<p><strong>Propósito y Sintaxis</strong></p>
+<p>scanf() toma los datos ingresados por el usuario y los guarda en una
+variable dentro de la memoria del programa. Requiere el <em>header</em>
+&lt;stdio.h&gt;, al igual que printf().</p>
+<p>La sintaxis básica es:</p>
+<p>$$\text{scanf}(\text{"especificador de formato", } \text{dirección de
+la variable})\text{;}$$</p>
+<p><strong>Ejemplo:</strong></p>
+<p>Si queremos leer un número entero (int) y almacenarlo en la variable
+edad:</p>
+<p>C</p>
+<p>int edad;</p>
+<p>scanf("%d", &amp;edad); // Aquí el programa se detiene y espera la
+entrada.</p>
+<p><strong>Diferencias Clave con printf()</strong></p>
+<p>Aunque scanf() y printf() comparten el uso de <strong>especificadores
+de formato</strong> (como %d), sus roles son opuestos:</p>
+<ul>
+<li><p><strong>printf():</strong> <strong>Muestra</strong> datos
+<em>desde</em> el programa <em>hacia</em> la consola (Salida).</p></li>
+<li><p><strong>scanf():</strong> <strong>Captura</strong> datos
+<em>desde</em> la consola <em>hacia</em> el programa (Entrada).</p></li>
+</ul>
+<p>Es una <strong>buena práctica</strong> usar siempre printf()
+inmediatamente antes de scanf() para mostrar un mensaje
+(<em>prompt</em>) al usuario, indicándole qué tipo de dato debe ingresar
+(por ejemplo: "Ingrese su edad: "). Esto mejora la experiencia del
+usuario.</p>
+<p><strong>Especificadores de Formato para scanf()</strong></p>
+<p>Los especificadores de formato son cadenas de texto que comienzan con
+el signo de porcentaje (%) y le indican a la función scanf() qué
+<strong>tipo de dato</strong> debe esperar del usuario y cómo debe
+interpretarlo y almacenarlo en la memoria.</p>
+<p>Aunque se parecen a los usados en printf(), algunos cambian para la
+entrada:</p>
+<table style="width:97%;">
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 23%" />
+<col style="width: 48%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>Especificador</strong></th>
+<th style="text-align: left;"><strong>Tipo de Dato en C</strong></th>
+<th style="text-align: left;"><strong>Descripción</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>%d</strong></td>
+<td style="text-align: left;">int</td>
+<td style="text-align: left;">Lee un valor entero decimal.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>%f</strong></td>
+<td style="text-align: left;">float</td>
+<td style="text-align: left;">Lee un valor de punto flotante de
+precisión simple.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>%lf</strong></td>
+<td style="text-align: left;">double</td>
+<td style="text-align: left;">Lee un valor de punto flotante de doble
+precisión. <strong>(¡Nota importante!)</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>%c</strong></td>
+<td style="text-align: left;">char</td>
+<td style="text-align: left;">Lee un único carácter.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>%s</strong></td>
+<td style="text-align: left;">Cadena de caracteres</td>
+<td style="text-align: left;">Lee una secuencia de caracteres (se verá
+más adelante).</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Diferencia Clave: %f vs. %lf</strong></p>
+<p>En la salida (printf), se usa %f tanto para float como para double.
+Sin embargo, en la entrada (scanf):</p>
+<ul>
+<li><p>Usa <strong>%f</strong> solo para leer variables de tipo
+<strong>float</strong>.</p></li>
+<li><p>Usa <strong>%lf</strong> para leer variables de tipo
+<strong>double</strong>.</p></li>
+</ul>
+<p><strong>Ejemplo de Uso:</strong></p>
+<p>C</p>
+<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
+<p>int main(void) {</p>
+<p>int edad;</p>
+<p>float peso;</p>
+<p>double altura;</p>
+<p>printf("Ingrese su edad (entero): ");</p>
+<p>scanf("%d", &amp;edad); // Usamos %d</p>
+<p>printf("Ingrese su peso (float): ");</p>
+<p>scanf("%f", &amp;peso); // Usamos %f</p>
+<p>printf("Ingrese su altura (double): ");</p>
+<p>scanf("%lf", &amp;altura); // ¡Usamos %lf para double!</p>
+<p>return 0;</p>
+<p>}</p>
+<p><strong>El Operador de Dirección (&amp;)</strong></p>
+<p>El <strong>Operador de Dirección</strong> (&amp;), también conocido
+como el operador de <strong>referencia</strong> o "dirección de", es un
+concepto absolutamente crucial cuando se utiliza la función scanf(). Su
+uso es obligatorio para la mayoría de los tipos de datos básicos y
+representa una introducción práctica al concepto de
+<strong>punteros</strong> en C.</p>
+<p><strong>¿Por qué Necesitamos &amp; en scanf()?</strong></p>
+<p>Cuando se llama a una función en C, normalmente se pasa una
+<strong>copia</strong> del valor de la variable (lo que se llama
+<em>paso por valor</em>). Sin embargo, scanf() necesita hacer lo
+contrario: necesita <strong>modificar</strong> la variable original.</p>
+<ol type="1">
+<li><p><strong>Ubicación, no Valor:</strong> scanf() no necesita el
+valor actual de la variable edad (aún no tiene un valor o tiene basura).
+En cambio, necesita saber la <strong>dirección exacta en la
+memoria</strong> donde está almacenada la variable edad.</p></li>
+<li><p><strong>El Rol de &amp;:</strong> El operador &amp; se coloca
+inmediatamente antes del nombre de la variable y le dice a scanf():
+"<strong>Aquí está la dirección de memoria</strong> donde debes escribir
+el valor que el usuario va a ingresar."</p></li>
+</ol>
+<table style="width:97%;">
+<colgroup>
+<col style="width: 32%" />
+<col style="width: 64%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>Sintaxis Correcta
+(Obligatorio)</strong></th>
+<th style="text-align: left;"><strong>Explicación</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">scanf("%d", **&amp;**edad);</td>
+<td style="text-align: left;">Pasa la <strong>dirección</strong> de
+edad. scanf() usa esa dirección para guardar el nuevo número.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Sintaxis Incorrecta (Error)</td>
+<td style="text-align: left;">Explicación</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">scanf("%d", edad);</td>
+<td style="text-align: left;">Pasa el <strong>valor</strong> de edad
+(una copia). scanf() no puede saber dónde guardar el resultado.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Analagía:</strong> Imagina que quieres enviar una carta a un
+amigo (scanf). No le envías el contenido actual de su buzón (el valor de
+la variable), sino que necesitas saber la <strong>dirección de su
+casa</strong> (&amp;variable) para poder dejar el nuevo contenido
+allí.</p>
+<p>En términos técnicos, al usar &amp;, estamos realizando un
+<strong>paso por referencia</strong>, permitiendo que la función scanf()
+cambie directamente el contenido de la variable definida en la función
+main (o la función llamadora).</p>
+<p><strong>Captura de Cadenas (%s) (Concepto Inicial)</strong></p>
+<p>Para capturar texto, como un nombre o una palabra, C utiliza el
+concepto de <strong>cadenas de caracteres</strong>. Técnicamente, una
+cadena es un arreglo (<em>array</em>) de caracteres. Aunque los
+<em>arrays</em> se cubrirán en un módulo posterior, es necesario
+declarar una variable de cadena para usar %s en scanf().</p>
+<p><strong>1. Declaración de la Cadena</strong></p>
+<p>Para decirle a C que reserve espacio para una palabra o frase, usamos
+la sintaxis:</p>
+<p>$$\text{char }
+\text{nombre\_variable}[\text{tamaño\_máximo}]\text{;}$$</p>
+<p>El tamaño máximo indica cuántos caracteres puede almacenar la cadena
+(debe ser lo suficientemente grande para el texto más el carácter nulo
+\0 que marca el final de toda cadena en C).</p>
+<p><strong>Ejemplo de Declaración:</strong></p>
+<p>C</p>
+<p>char nombre[50]; // Reserva espacio para hasta 49 caracteres más el
+\0</p>
+<p><strong>2. Uso de %s en scanf()</strong></p>
+<p>El especificador de formato <strong>%s</strong> se usa para leer
+cadenas.</p>
+<table style="width:97%;">
+<colgroup>
+<col style="width: 39%" />
+<col style="width: 27%" />
+<col style="width: 31%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>Tipo de Dato</strong></th>
+<th style="text-align: left;"><strong>Especificador</strong></th>
+<th style="text-align: left;"><strong>Operador &amp;</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Cadena (Array de char)</td>
+<td style="text-align: left;"><strong>%s</strong></td>
+<td style="text-align: left;"><strong>NO</strong> es necesario</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Ejemplo de Captura:</strong></p>
+<p>C</p>
+<p>char nombre[50];</p>
+<p>printf("Ingrese su nombre: ");</p>
+<p>scanf("%s", nombre); // ¡Nota: NO se usa el &amp;!</p>
+<p><strong>3. Restricciones y Riesgos de %s</strong></p>
+<p>Aunque %s es la forma más simple de leer texto, tiene
+<strong>limitaciones críticas</strong> en scanf() que el programador
+debe conocer desde ahora:</p>
+<ul>
+<li><p><strong>Problema con Espacios:</strong> %s solo lee caracteres
+hasta que encuentra el <strong>primer espacio en blanco</strong>. Si el
+usuario ingresa "Juan Pérez", scanf() solo capturará
+"<strong>Juan</strong>". La palabra Pérez queda en el <em>buffer</em> de
+entrada.</p></li>
+<li><p><strong>Riesgo de Desbordamiento (<em>Buffer
+Overflow</em>):</strong> %s no respeta el tamaño máximo del arreglo
+([50] en el ejemplo). Si el usuario ingresa una cadena más larga que el
+espacio reservado, se produce un <strong>desbordamiento del
+<em>buffer</em></strong>, sobrescribiendo la memoria adyacente y
+pudiendo causar fallos en el programa.</p></li>
+<li><p><strong>Mitigación del Riesgo:</strong> Para controlar el
+desbordamiento, se debe limitar la cantidad de caracteres a leer
+<strong>directamente en el especificador de formato</strong>. Si el
+arreglo es de 50, se lee un máximo de 49 para dejar espacio para el
+\0.</p></li>
+</ul>
+<p>C</p>
+<p>// Limita la lectura a 49 caracteres para evitar overflow.</p>
+<p>scanf("%49s", nombre);</p>
+<p><strong>Nota:</strong> Para capturar <strong>frases
+completas</strong> con espacios y manejar la seguridad de las cadenas de
+manera robusta, se requerirán funciones más avanzadas (como fgets), que
+se verán en módulos posteriores.</p>
+<p><strong>Manejo de Errores Básicos de scanf</strong></p>
+<p>La función scanf() asume que el usuario ingresará los datos
+exactamente como se especifican (ej: un número entero para %d). Sin
+embargo, en el mundo real, los usuarios pueden cometer errores, como
+ingresar una letra cuando se espera un número. Es fundamental entender
+cómo reacciona scanf() ante estas fallas de validación.</p>
+<p><strong>Cómo Falla scanf()</strong></p>
+<p>scanf() intenta leer la entrada del <em>buffer</em> del teclado y
+convertirla al tipo de dato esperado por el especificador de
+formato.</p>
+<ol type="1">
+<li><p><strong>Fallo de Conversión:</strong> Si la entrada del usuario
+<strong>no coincide</strong> con el tipo de formato esperado (por
+ejemplo, el usuario escribe hola en lugar de 123 para %d), scanf()
+<strong>detiene la lectura inmediatamente</strong>.</p></li>
+<li><p><strong>Devolución de Valor:</strong> scanf() devuelve un valor
+que indica cuántos elementos leyó con éxito.</p>
+<ul>
+<li><p>Si todo sale bien, devuelve el número de variables que
+solicitaste (ej: 1 si pediste un %d).</p></li>
+<li><p>Si hay un error de conversión, devuelve un número menor a lo
+esperado o 0.</p></li>
+</ul></li>
+<li><p><strong>El <em>Buffer</em> Sucio:</strong> Lo más problemático es
+que el dato incorrecto (hola en nuestro ejemplo) <strong>permanece en el
+<em>buffer</em> de entrada</strong>. Si el programa intenta una lectura
+subsiguiente de datos, leerá ese dato erróneo en lugar de esperar una
+nueva entrada del usuario, provocando un ciclo de fallos.</p></li>
+</ol>
+<p><strong>Ejemplo de Falla</strong></p>
+<p>C</p>
+<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
+<p>int main(void) {</p>
+<p>int numero;</p>
+<p>printf("Ingrese un numero entero: ");</p>
+<p>// El valor devuelto por scanf se puede guardar</p>
+<p>int elementos_leidos = scanf("%d", &amp;numero);</p>
+<p>// Si el usuario ingresa una letra, 'elementos_leidos' sera 0.</p>
+<p>printf("scanf leyo %d elementos.\n", elementos_leidos);</p>
+<p>printf("El valor de numero es: %d (Si es incorrecto, es un valor
+'basura').\n", numero);</p>
+<p>return 0;</p>
+<p>}</p>
+<p><strong>Gestión Avanzada:</strong> La detección y corrección de estos
+errores (limpiar el <em>buffer</em> de entrada y solicitar el dato
+nuevamente) es un tema avanzado que requiere el uso de estructuras de
+control (while o if) y funciones específicas (como getchar()), y se
+abordará más adelante. Por ahora, basta con saber que la entrada
+incorrecta del usuario es una fuente común de errores en C.</p>
+
+
+</div>
+</body>
+</html>
+

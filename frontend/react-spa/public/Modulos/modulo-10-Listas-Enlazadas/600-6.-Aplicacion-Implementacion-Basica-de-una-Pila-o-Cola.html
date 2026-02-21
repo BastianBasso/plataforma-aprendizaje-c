@@ -1,0 +1,298 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" crossorigin href="/assets/content-01sust.css">
+</head>
+<body>
+<div class="main-content">
+<h2 id="concepto-de-pila-stack-y-lifo">Concepto de Pila (Stack) y LIFO
+ðŸ§±</h2>
+<p>Una <strong>Pila</strong> (<em>Stack</em>) es una estructura de datos
+abstracta que opera bajo el principio <strong>LIFO</strong> (<em>Last
+In, First Out</em>). Esto significa que el <strong>Ãºltimo</strong>
+elemento que se aÃ±ade a la estructura es el <strong>primero</strong> en
+ser retirado de ella.</p>
+<hr />
+<h3 id="metÃ¡fora-de-la-pila-de-platos">ðŸ´ MetÃ¡fora de la Pila de
+Platos</h3>
+<p>La pila se asemeja a una pila de platos :</p>
+<ul>
+<li>Cuando aÃ±ades un plato, lo colocas en la <strong>cima</strong>
+(Push).</li>
+<li>Cuando quieres tomar un plato, solo puedes tomar el que estÃ¡ en la
+<strong>cima</strong> (Pop).</li>
+<li>El primer plato que pusiste en la parte inferior es el Ãºltimo que
+puedes retirar.</li>
+</ul>
+<h3 id="operaciones-fundamentales">âš™ï¸ Operaciones Fundamentales</h3>
+<p>Las pilas solo permiten operaciones en un extremo, llamado la
+<strong>cima</strong> (<em>Top</em>):</p>
+<ul>
+<li><strong>PUSH</strong> (Empujar): AÃ±adir un elemento a la cima de la
+pila.</li>
+<li><strong>POP</strong> (Sacar): Retirar y devolver el elemento que se
+encuentra en la cima de la pila.</li>
+<li><strong>PEEK</strong> (Mirar): Devolver el elemento de la cima sin
+retirarlo.</li>
+</ul>
+<h3 id="implementaciÃ³n-base-estructura-en-c">ImplementaciÃ³n Base
+(Estructura en C)</h3>
+<p>Aunque la lÃ³gica se implementa con las operaciones <code>PUSH</code>
+y <code>POP</code>, la estructura subyacente sigue siendo el nodo de la
+lista enlazada:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">// La Pila estarÃ¡ representada por el puntero HEAD</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="kw">typedef</span> <span class="kw">struct</span> Nodo <span class="op">{</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> dato<span class="op">;</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">struct</span> Nodo <span class="op">*</span>siguiente<span class="op">;</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> Nodo<span class="op">;</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co">// La operaciÃ³n PUSH corresponderÃ¡ a insertar_al_inicio.</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co">// La operaciÃ³n POP corresponderÃ¡ a eliminar_al_inicio.</span></span></code></pre></div>
+<h2 id="implementaciÃ³n-de-pila-con-lista-enlazada-lifo">ImplementaciÃ³n
+de Pila con Lista Enlazada (LIFO) ðŸ”—</h2>
+<p>La Pila (<em>Stack</em>) se implementa de manera eficiente usando una
+Lista Enlazada Simple, aprovechando que tanto la <strong>inserciÃ³n al
+inicio</strong> como la <strong>eliminaciÃ³n al inicio</strong> son
+operaciones de <strong>tiempo constante</strong> (<span
+class="math inline"><strong>O</strong><strong>(</strong><strong>1</strong><strong>)</strong></span>).</p>
+<p>En este modelo, el puntero <strong><code>HEAD</code></strong> de la
+lista representa la <strong>cima</strong> (<em>Top</em>) de la Pila.</p>
+<hr />
+<h3 id="operaciÃ³n-push-insertar-al-inicio">ðŸ“¥ OperaciÃ³n PUSH (Insertar
+al Inicio)</h3>
+<p>La operaciÃ³n <strong>PUSH</strong> (aÃ±adir un elemento) se mapea
+directamente a la funciÃ³n <code>insertar_al_inicio</code> de la Lista
+Enlazada.</p>
+<ul>
+<li><strong>LÃ³gica:</strong> El nuevo nodo se convierte en el nuevo
+<code>HEAD</code>, garantizando que es el Ãºltimo en entrar.</li>
+<li><strong>Eficiencia:</strong> <span
+class="math inline"><strong>O</strong><strong>(</strong><strong>1</strong><strong>)</strong></span>
+(Tiempo Constante).</li>
+</ul>
+<!-- end list -->
+<div class="sourceCode" id="cb2"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Corresponde a la operaciÃ³n de InserciÃ³n al Inicio</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> push<span class="op">(</span>Nodo <span class="op">**</span>top_ref<span class="op">,</span> <span class="dt">int</span> valor<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">// 1. Crear el nuevo nodo</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    Nodo <span class="op">*</span>nuevo_nodo <span class="op">=</span> crear_nodo<span class="op">(</span>valor<span class="op">);</span> </span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>nuevo_nodo <span class="op">==</span> NULL<span class="op">)</span> <span class="cf">return</span><span class="op">;</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="co">// 2. El nuevo nodo apunta a la cima actual</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    nuevo_nodo<span class="op">-&gt;</span>siguiente <span class="op">=</span> <span class="op">*</span>top_ref<span class="op">;</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    <span class="co">// 3. La cima (HEAD) se actualiza al nuevo nodo</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    <span class="op">*</span>top_ref <span class="op">=</span> nuevo_nodo<span class="op">;</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<hr />
+<h3 id="operaciÃ³n-pop-eliminar-al-inicio">ðŸ“¤ OperaciÃ³n POP (Eliminar al
+Inicio)</h3>
+<p>La operaciÃ³n <strong>POP</strong> (retirar y devolver el elemento) se
+mapea directamente a la funciÃ³n <code>eliminar_al_inicio</code>.</p>
+<ul>
+<li><strong>LÃ³gica:</strong> Se elimina el <code>HEAD</code> actual (el
+Ãºltimo que entrÃ³), y el puntero <code>HEAD</code> se mueve al siguiente
+nodo. Se debe liberar la memoria.</li>
+<li><strong>Eficiencia:</strong> <span
+class="math inline"><strong>O</strong><strong>(</strong><strong>1</strong><strong>)</strong></span>
+(Tiempo Constante).</li>
+</ul>
+<!-- end list -->
+<div class="sourceCode" id="cb3"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Corresponde a la operaciÃ³n de EliminaciÃ³n al Inicio</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> pop<span class="op">(</span>Nodo <span class="op">**</span>top_ref<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Caso LÃ­mite: Pila vacÃ­a</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(*</span>top_ref <span class="op">==</span> NULL<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>        fprintf<span class="op">(</span>stderr<span class="op">,</span> <span class="st">&quot;Error: Pila vacÃ­a.</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="op">-</span><span class="dv">1</span><span class="op">;</span> <span class="co">// Valor de error</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    Nodo <span class="op">*</span>nodo_a_eliminar <span class="op">=</span> <span class="op">*</span>top_ref<span class="op">;</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> dato_retirado <span class="op">=</span> nodo_a_eliminar<span class="op">-&gt;</span>dato<span class="op">;</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    <span class="co">// 1. Mover la cima (HEAD) al siguiente nodo</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>    <span class="op">*</span>top_ref <span class="op">=</span> <span class="op">(*</span>top_ref<span class="op">)-&gt;</span>siguiente<span class="op">;</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>    <span class="co">// 2. Liberar la memoria</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>    free<span class="op">(</span>nodo_a_eliminar<span class="op">);</span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> dato_retirado<span class="op">;</span></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p><strong>Nota:</strong> Utilizar las operaciones de inicio garantiza
+la complejidad <span
+class="math inline"><strong>O</strong><strong>(</strong><strong>1</strong><strong>)</strong></span>,
+esencial para el rendimiento de una Pila.</p>
+<h2 id="concepto-de-cola-queue-y-fifo">Concepto de Cola (Queue) y FIFO
+ðŸš¶â€â™€ï¸</h2>
+<p>Una <strong>Cola</strong> (<em>Queue</em>) es una estructura de datos
+abstracta que opera bajo el principio <strong>FIFO</strong> (<em>First
+In, First Out</em>). Esto significa que el <strong>primer</strong>
+elemento que se aÃ±ade a la estructura es el <strong>primero</strong> en
+ser retirado de ella.</p>
+<hr />
+<h3 id="metÃ¡fora-de-la-fila-del-banco">ðŸ¦ MetÃ¡fora de la Fila del
+Banco</h3>
+<p>La cola se asemeja a la fila de espera en un banco :</p>
+<ul>
+<li>Los elementos entran por el <strong>final</strong> de la fila
+(Enqueue).</li>
+<li>Los elementos salen por el <strong>frente</strong> de la fila
+(Dequeue).</li>
+<li>El cliente que llegÃ³ primero es atendido primero y sale
+primero.</li>
+</ul>
+<h3 id="operaciones-fundamentales-1">âš™ï¸ Operaciones Fundamentales</h3>
+<p>Las Colas permiten operaciones en dos extremos distintos:</p>
+<ul>
+<li><strong>ENQUEUE</strong> (Encolar/AÃ±adir): AÃ±adir un elemento al
+<strong>final</strong> (<em>Rear</em>) de la cola.</li>
+<li><strong>DEQUEUE</strong> (Desencolar/Retirar): Retirar y devolver el
+elemento que se encuentra al <strong>frente</strong> (<em>Front</em>) de
+la cola.</li>
+<li><strong>FRONT/PEEK</strong> (Mirar): Devolver el elemento del frente
+sin retirarlo.</li>
+</ul>
+<h3 id="implementaciÃ³n-base-estructura-en-c-1">ImplementaciÃ³n Base
+(Estructura en C)</h3>
+<p>Para implementar la lÃ³gica de la Cola utilizando una Lista Enlazada
+de forma eficiente, generalmente se requiere un puntero de soporte para
+el final:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Se sigue usando el Nodo base</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="kw">typedef</span> <span class="kw">struct</span> Nodo <span class="op">{</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> dato<span class="op">;</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">struct</span> Nodo <span class="op">*</span>siguiente<span class="op">;</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> Nodo<span class="op">;</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co">// La Cola completa se maneja con dos punteros:</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="co">// - El puntero HEAD (o &#39;Front&#39;)</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="co">// - Un puntero adicional TAIL (o &#39;Rear&#39;)</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="co">// La operaciÃ³n ENQUEUE corresponderÃ¡ a insertar_al_final (usando TAIL).</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="co">// La operaciÃ³n DEQUEUE corresponderÃ¡ a eliminar_al_inicio (usando HEAD).</span></span></code></pre></div>
+<h2 id="implementaciÃ³n-de-cola-con-lista-enlazada-fifo">ImplementaciÃ³n
+de Cola con Lista Enlazada (FIFO) ðŸ”—</h2>
+<p>Para implementar la <strong>Cola</strong> (<em>Queue</em>) de manera
+eficiente (FIFO: <em>First In, First Out</em>) utilizando una Lista
+Enlazada Simple, es crucial que ambas operaciones fundamentales sean de
+<strong>tiempo constante</strong> (<span
+class="math inline"><strong>O</strong><strong>(</strong><strong>1</strong><strong>)</strong></span>).</p>
+<table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">OperaciÃ³n</th>
+<th style="text-align: center;">LÃ³gica FIFO</th>
+<th style="text-align: center;">ImplementaciÃ³n en Lista</th>
+<th style="text-align: center;">Eficiencia</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><strong>ENQUEUE</strong> (AÃ±adir)</td>
+<td style="text-align: center;">Entra por el <strong>Final</strong></td>
+<td style="text-align: center;">InserciÃ³n al <strong>Final</strong></td>
+<td style="text-align: center;"><span
+class="math inline"><strong>O</strong><strong>(</strong><strong>1</strong><strong>)</strong></span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>DEQUEUE</strong> (Retirar)</td>
+<td style="text-align: center;">Sale por el <strong>Frente</strong></td>
+<td style="text-align: center;">EliminaciÃ³n al
+<strong>Inicio</strong></td>
+<td style="text-align: center;"><span
+class="math inline"><strong>O</strong><strong>(</strong><strong>1</strong><strong>)</strong></span></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="la-necesidad-del-puntero-tail-rear">La Necesidad del Puntero
+<code>TAIL</code> (Rear)</h3>
+<p>Si utilizÃ¡ramos la implementaciÃ³n estÃ¡ndar de la lista enlazada solo
+con el puntero <strong><code>HEAD</code></strong> (Frente), la operaciÃ³n
+de <strong>InserciÃ³n al Final</strong> (Enqueue) requerirÃ­a
+<strong>recorrer</strong> toda la lista hasta encontrar el Ãºltimo nodo.
+Esto resultarÃ­a en una ineficiente complejidad de tiempo <span
+class="math inline"><strong>O</strong><strong>(</strong><strong>N</strong><strong>)</strong></span>
+(Orden Lineal), inaceptable para una estructura de cola.</p>
+<p>Para garantizar <span
+class="math inline"><strong>O</strong><strong>(</strong><strong>1</strong><strong>)</strong></span>
+en <strong>Enqueue</strong>, se utiliza una estructura auxiliar que
+mantiene un puntero al <strong>Frente</strong> (<code>Front</code>) y un
+puntero a la <strong>Cola</strong> (<code>Rear</code> o
+<code>TAIL</code>).</p>
+<h3 id="estructura-de-la-cola">âš™ï¸ Estructura de la Cola</h3>
+<p>Primero, definimos una estructura que agrupa los punteros
+necesarios:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">typedef</span> <span class="kw">struct</span> Nodo <span class="op">{</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> dato<span class="op">;</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">struct</span> Nodo <span class="op">*</span>siguiente<span class="op">;</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> Nodo<span class="op">;</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co">// Estructura que mantiene el estado de la Cola</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="kw">typedef</span> <span class="kw">struct</span> Cola <span class="op">{</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    Nodo <span class="op">*</span>front<span class="op">;</span> <span class="co">// Frente de la fila (por donde salen)</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>    Nodo <span class="op">*</span>rear<span class="op">;</span>  <span class="co">// Cola de la fila (por donde entran)</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> Cola<span class="op">;</span></span></code></pre></div>
+<hr />
+<h3 id="operaciÃ³n-enqueue-inserciÃ³n-al-final-o1">ðŸ“¥ OperaciÃ³n ENQUEUE
+(InserciÃ³n al Final O(1))</h3>
+<p>La inserciÃ³n se realiza directamente usando el puntero
+<code>rear</code>, evitando el recorrido.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> enqueue<span class="op">(</span>Cola <span class="op">*</span>q<span class="op">,</span> <span class="dt">int</span> valor<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    Nodo <span class="op">*</span>nuevo_nodo <span class="op">=</span> crear_nodo<span class="op">(</span>valor<span class="op">);</span> </span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>nuevo_nodo <span class="op">==</span> NULL<span class="op">)</span> <span class="cf">return</span><span class="op">;</span> </span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Caso 1: La cola estÃ¡ vacÃ­a (Front y Rear son NULL)</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>q<span class="op">-&gt;</span>rear <span class="op">==</span> NULL<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>        q<span class="op">-&gt;</span>front <span class="op">=</span> nuevo_nodo<span class="op">;</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>        q<span class="op">-&gt;</span>rear <span class="op">=</span> nuevo_nodo<span class="op">;</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span><span class="op">;</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Caso 2: Cola no vacÃ­a</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>    <span class="co">// 1. El nodo actual al final enlaza al nuevo nodo</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>    q<span class="op">-&gt;</span>rear<span class="op">-&gt;</span>siguiente <span class="op">=</span> nuevo_nodo<span class="op">;</span></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>    <span class="co">// 2. El puntero Rear se actualiza al nuevo nodo</span></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>    q<span class="op">-&gt;</span>rear <span class="op">=</span> nuevo_nodo<span class="op">;</span> </span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>    <span class="co">// El nuevo_nodo-&gt;siguiente ya es NULL por defecto.</span></span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<hr />
+<h3 id="operaciÃ³n-dequeue-eliminaciÃ³n-al-inicio-o1">ðŸ“¤ OperaciÃ³n DEQUEUE
+(EliminaciÃ³n al Inicio O(1))</h3>
+<p>La eliminaciÃ³n se realiza sobre el <code>front</code> y es idÃ©ntica a
+la eliminaciÃ³n al inicio de una lista.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> dequeue<span class="op">(</span>Cola <span class="op">*</span>q<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Caso LÃ­mite 1: Cola vacÃ­a</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>q<span class="op">-&gt;</span>front <span class="op">==</span> NULL<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>        fprintf<span class="op">(</span>stderr<span class="op">,</span> <span class="st">&quot;Error: Cola vacÃ­a.</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="op">-</span><span class="dv">1</span><span class="op">;</span> </span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    Nodo <span class="op">*</span>nodo_a_eliminar <span class="op">=</span> q<span class="op">-&gt;</span>front<span class="op">;</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> dato_retirado <span class="op">=</span> nodo_a_eliminar<span class="op">-&gt;</span>dato<span class="op">;</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>    <span class="co">// 1. Mover el frente (front) al siguiente nodo</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>    q<span class="op">-&gt;</span>front <span class="op">=</span> q<span class="op">-&gt;</span>front<span class="op">-&gt;</span>siguiente<span class="op">;</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Caso LÃ­mite 2: Si la cola se vacÃ­a con esta operaciÃ³n</span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>q<span class="op">-&gt;</span>front <span class="op">==</span> NULL<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>        q<span class="op">-&gt;</span>rear <span class="op">=</span> NULL<span class="op">;</span> <span class="co">// Rear tambiÃ©n debe ser NULL</span></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>    <span class="co">// 2. Liberar la memoria del nodo retirado</span></span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>    free<span class="op">(</span>nodo_a_eliminar<span class="op">);</span></span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> dato_retirado<span class="op">;</span></span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+
+</div>
+</body>
+</html>
+

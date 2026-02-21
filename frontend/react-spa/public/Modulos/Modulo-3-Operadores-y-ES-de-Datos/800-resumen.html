@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" crossorigin href="/assets/content-01sust.css">
+</head>
+<body>
+<div class="main-content">
+<h1><strong>Resumen Módulo 3: Operadores y Entrada/Salida de Datos
+(E/S)</strong></h1>
+<p>Este módulo se centró en dotarte de las herramientas esenciales para
+crear programas interactivos y funcionales: los
+<strong>operadores</strong> para el procesamiento lógico y las funciones
+de <strong>Entrada/Salida (E/S)</strong> para la comunicación con el
+usuario.</p>
+<p><strong>1. Tipos de Operadores Clave</strong></p>
+<table style="width:97%;">
+<colgroup>
+<col style="width: 22%" />
+<col style="width: 20%" />
+<col style="width: 54%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>Tipo de Operador</strong></th>
+<th style="text-align: left;"><strong>Símbolos Comunes</strong></th>
+<th style="text-align: left;"><strong>Propósito</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>Aritmético</strong></td>
+<td style="text-align: left;">+, -, *, /, %</td>
+<td style="text-align: left;">Realizan operaciones matemáticas básicas.
+El módulo (%) obtiene el resto de una división entera.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Relacional</strong></td>
+<td style="text-align: left;">==, !=, &gt;, &lt;, &gt;=, &lt;=</td>
+<td style="text-align: left;">Comparan dos valores para producir un
+resultado <strong>booleano</strong> (lógico): 1 (Verdadero) o 0
+(Falso).</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Lógico</strong></td>
+<td style="text-align: left;">&amp;&amp; (AND), `</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Asignación</strong></td>
+<td style="text-align: left;">=, +=, -=, *=</td>
+<td style="text-align: left;">Asignan un valor a una variable. Los
+compuestos (+=) combinan una operación con la asignación (ej: a += 5 es
+igual a a = a + 5).</td>
+</tr>
+</tbody>
+</table>
+<p><strong>2. Prioridad, Precedencia y Asociatividad</strong></p>
+<p>Para resolver expresiones complejas, C utiliza un orden estricto,
+similar a la regla PEMDAS/PAPOMUDAS:</p>
+<ul>
+<li><p><strong>Precedencia (Prioridad):</strong> Define qué operadores
+se resuelven antes. Los paréntesis () tienen la máxima prioridad,
+seguidos por *, /, %, y finalmente +, -.</p></li>
+<li><p><strong>Asociatividad:</strong> Define el orden de evaluación
+cuando hay operadores del mismo nivel (un "empate").</p>
+<ul>
+<li><p><strong>Izquierda a Derecha (L-a-R):</strong> La mayoría de los
+aritméticos (+, -, *, /).</p></li>
+<li><p><strong>Derecha a Izquierda (R-a-L):</strong> Operadores de
+asignación (=, +=).</p></li>
+</ul></li>
+</ul>
+<p><strong>3. Entrada Estándar de Datos (Input)</strong></p>
+<p>La función clave es <strong>scanf()</strong>. Su propósito es leer y
+capturar datos ingresados por el usuario desde la consola y almacenarlos
+en variables.</p>
+<table style="width:97%;">
+<colgroup>
+<col style="width: 29%" />
+<col style="width: 67%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>Concepto</strong></th>
+<th style="text-align: left;"><strong>Detalle</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>Sintaxis</strong></td>
+<td style="text-align: left;">scanf("especificador",
+&amp;variable);</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Operador de Dirección
+(&amp;)</strong></td>
+<td style="text-align: left;"><strong>Obligatorio</strong> para la
+mayoría de variables (ej: int, float, double). Le indica a scanf la
+<strong>dirección de memoria</strong> donde debe guardar el nuevo
+valor.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Especificadores de
+Entrada</strong></td>
+<td style="text-align: left;"><strong>%d</strong> (int),
+<strong>%f</strong> (float), <strong>%lf</strong> (double),
+<strong>%c</strong> (char).</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Cadenas (%s)</strong></td>
+<td style="text-align: left;">Se usa scanf("%s", cadena); sin el &amp;.
+<strong>Advertencia:</strong> Solo lee hasta el primer espacio y no
+protege contra el desbordamiento (<em>overflow</em>).</td>
+</tr>
+</tbody>
+</table>
+<p><strong>4. Salida Estándar de Datos (Output)</strong></p>
+<p>La función <strong>printf()</strong> se utiliza para mostrar
+resultados. En este módulo se enfatizó el <strong>formateo
+profesional</strong>:</p>
+<table style="width:97%;">
+<colgroup>
+<col style="width: 22%" />
+<col style="width: 18%" />
+<col style="width: 56%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>Técnica</strong></th>
+<th style="text-align: left;"><strong>Formato</strong></th>
+<th style="text-align: left;"><strong>Propósito</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>Precisión</strong></td>
+<td style="text-align: left;">%.nf (ej: %.2f)</td>
+<td style="text-align: left;">Limita la salida de flotantes a <em>n</em>
+decimales (ideal para formato de moneda).</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Ancho de Campo</strong></td>
+<td style="text-align: left;">%w.d (ej: %10d)</td>
+<td style="text-align: left;">Fija la cantidad total mínima de
+caracteres para un valor, permitiendo la <strong>alineación a la
+derecha</strong> (<em>padding</em>).</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Alineación Izquierda</strong></td>
+<td style="text-align: left;">%-ws (ej: %-20s)</td>
+<td style="text-align: left;">Utiliza el signo - para alinear texto y
+números a la <strong>izquierda</strong> dentro del ancho de campo.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Tabulación</strong></td>
+<td style="text-align: left;">\t</td>
+<td style="text-align: left;">Secuencia de escape para añadir separación
+de columnas de forma rápida.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>5. El Modelo I-P-O Integrado</strong></p>
+<p>El ciclo <strong>Input-Procesamiento-Output (I-P-O)</strong> es el
+modelo arquitectónico de todo programa, que integra los conocimientos
+del módulo:</p>
+<ol type="1">
+<li><p><strong>Input:</strong> Usar <strong>printf()</strong> para dar
+mensajes guía y <strong>scanf()</strong> para capturar los
+datos.</p></li>
+<li><p><strong>Procesamiento:</strong> Aplicar fórmulas y lógica con los
+<strong>operadores</strong> a los datos capturados.</p></li>
+<li><p><strong>Output:</strong> Usar <strong>printf()</strong>
+formateado para presentar los resultados de manera clara y
+legible.</p></li>
+</ol>
+
+
+</div>
+</body>
+</html>
+

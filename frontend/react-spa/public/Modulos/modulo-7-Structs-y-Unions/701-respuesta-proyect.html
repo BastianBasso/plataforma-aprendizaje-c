@@ -1,0 +1,232 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" crossorigin href="/assets/content-01sust.css">
+</head>
+<body>
+<div class="main-content">
+<h2 id="soluciÃ³n-del-proyecto-simulador-de-telemetrÃ­a">ðŸ’» SoluciÃ³n del
+Proyecto: Simulador de TelemetrÃ­a</h2>
+<p>Este cÃ³digo implementa la <code>union</code>, la estructura con
+<strong>Campos de Bits</strong>, las estructuras anidadas y el
+<strong>Array de Estructuras</strong>, ademÃ¡s de demostrar el uso de
+<code>sizeof()</code> para verificar la optimizaciÃ³n de memoria.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;string.h&gt;</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;time.h&gt;</span><span class="pp"> </span><span class="co">// Para simular un timestamp real</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co">// --- CONSTANTES ---</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="pp">#define MAX_REGISTROS </span><span class="dv">500</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="pp">#define TIPO_FLOTANTE </span><span class="dv">0</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="pp">#define TIPO_ENTERO   </span><span class="dv">1</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="pp">#define TIPO_ESTADO   </span><span class="dv">2</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co">// --- VARIABLES GLOBALES (Array de Structs y Contador) ---</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> contador_registros <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co">// DeclaraciÃ³n global del array de estructuras</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="co">// REQUISITO 4.1: Array de Estructuras</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="kw">typedef</span> <span class="kw">struct</span> Registro Registro<span class="op">;</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>Registro log_telemetria<span class="op">[</span>MAX_REGISTROS<span class="op">];</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="co">// --- REQUISITO 2: Estructura de Estado con Campos de Bits ---</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="co">// Permite guardar 8 estados booleanos en 1 byte (optimizaciÃ³n)</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="kw">typedef</span> <span class="kw">struct</span> <span class="op">{</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>    <span class="co">// DefiniciÃ³n de los Bit Fields</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>    <span class="dt">unsigned</span> <span class="dt">int</span> error_critico <span class="op">:</span> <span class="dv">1</span><span class="op">;</span>      <span class="co">// Bit 0</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>    <span class="dt">unsigned</span> <span class="dt">int</span> warning <span class="op">:</span> <span class="dv">1</span><span class="op">;</span>            <span class="co">// Bit 1</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>    <span class="dt">unsigned</span> <span class="dt">int</span> calibracion_ok <span class="op">:</span> <span class="dv">1</span><span class="op">;</span>     <span class="co">// Bit 2</span></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>    <span class="dt">unsigned</span> <span class="dt">int</span> modo_baja_potencia <span class="op">:</span> <span class="dv">1</span><span class="op">;</span> <span class="co">// Bit 3</span></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>    <span class="dt">unsigned</span> <span class="dt">int</span> reservado <span class="op">:</span> <span class="dv">4</span><span class="op">;</span>          <span class="co">// Bits 4-7 (Relleno para completar 1 byte)</span></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> EstadoSensor<span class="op">;</span></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a><span class="co">// --- REQUISITO 3: Union para Tipos de Datos Variables (Memoria Compartida) ---</span></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a><span class="co">// La union solo reservarÃ¡ el espacio del miembro mÃ¡s grande</span></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a><span class="kw">typedef</span> <span class="kw">union</span> <span class="op">{</span></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>    <span class="dt">float</span> valor_flotante<span class="op">;</span> <span class="co">// 4 bytes (TÃ­pico)</span></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> valor_entero<span class="op">;</span>     <span class="co">// 4 bytes (TÃ­pico)</span></span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>    <span class="dt">char</span> estado_str<span class="op">[</span><span class="dv">8</span><span class="op">];</span>   <span class="co">// 8 bytes (TÃ­pico, serÃ¡ el tamaÃ±o de la union)</span></span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> ValorLectura<span class="op">;</span></span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a><span class="co">// --- REQUISITO 1: Estructura de Registro Principal (Tipo Definido por el Usuario) ---</span></span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a><span class="kw">struct</span> Registro <span class="op">{</span></span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> id_sensor<span class="op">;</span></span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> tipo_dato<span class="op">;</span>      <span class="co">// Etiqueta: para saber quÃ© miembro leer de la union</span></span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>    ValorLectura datos<span class="op">;</span> <span class="co">// Miembro de tipo union</span></span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>    <span class="dt">long</span> timestamp<span class="op">;</span>     <span class="co">// Marca de tiempo simulada</span></span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>    EstadoSensor estado<span class="op">;</span> <span class="co">// Miembro de tipo struct optimizada con Bit Fields</span></span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a><span class="co">// --- REQUISITO 4.2: FunciÃ³n para Agregar Registros ---</span></span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a><span class="co">// Nota: Para simplificar el llamado, se pasan todos los posibles valores de la union y solo se usa el relevante.</span></span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> agregar_registro<span class="op">(</span><span class="dt">int</span> id<span class="op">,</span> <span class="dt">int</span> tipo<span class="op">,</span> <span class="dt">float</span> f_val<span class="op">,</span> <span class="dt">int</span> i_val<span class="op">,</span> <span class="dt">const</span> <span class="dt">char</span> <span class="op">*</span>s_val<span class="op">,</span> <span class="dt">int</span> e_critico<span class="op">,</span> <span class="dt">int</span> warn<span class="op">,</span> <span class="dt">int</span> calib<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>contador_registros <span class="op">&gt;=</span> MAX_REGISTROS<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">&quot;ERROR: Log lleno. No se pudo agregar registro.</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span><span class="op">;</span></span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Acceso usando el operador [] para obtener la struct y . para acceder a los miembros</span></span>
+<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a>    Registro <span class="op">*</span>nuevo_reg <span class="op">=</span> <span class="op">&amp;</span>log_telemetria<span class="op">[</span>contador_registros<span class="op">];</span></span>
+<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Rellenar miembros directos (Usando el operador flecha -&gt; porque &#39;nuevo_reg&#39; es un puntero)</span></span>
+<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a>    nuevo_reg<span class="op">-&gt;</span>id_sensor <span class="op">=</span> id<span class="op">;</span></span>
+<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a>    nuevo_reg<span class="op">-&gt;</span>tipo_dato <span class="op">=</span> tipo<span class="op">;</span></span>
+<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a>    nuevo_reg<span class="op">-&gt;</span>timestamp <span class="op">=</span> <span class="op">(</span><span class="dt">long</span><span class="op">)</span>time<span class="op">(</span>NULL<span class="op">)</span> <span class="op">+</span> contador_registros <span class="op">*</span> <span class="dv">60</span><span class="op">;</span> <span class="co">// SimulaciÃ³n de tiempo</span></span>
+<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a>    <span class="co">// REQUISITO 3: Rellenar la UNION (Solo un miembro es vÃ¡lido)</span></span>
+<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>tipo <span class="op">==</span> TIPO_FLOTANTE<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a>        nuevo_reg<span class="op">-&gt;</span>datos<span class="op">.</span>valor_flotante <span class="op">=</span> f_val<span class="op">;</span></span>
+<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span> <span class="cf">else</span> <span class="cf">if</span> <span class="op">(</span>tipo <span class="op">==</span> TIPO_ENTERO<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb1-67"><a href="#cb1-67" aria-hidden="true" tabindex="-1"></a>        nuevo_reg<span class="op">-&gt;</span>datos<span class="op">.</span>valor_entero <span class="op">=</span> i_val<span class="op">;</span></span>
+<span id="cb1-68"><a href="#cb1-68" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span> <span class="cf">else</span> <span class="cf">if</span> <span class="op">(</span>tipo <span class="op">==</span> TIPO_ESTADO<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb1-69"><a href="#cb1-69" aria-hidden="true" tabindex="-1"></a>        <span class="co">// strncpy y asegurar terminador para evitar desbordamiento</span></span>
+<span id="cb1-70"><a href="#cb1-70" aria-hidden="true" tabindex="-1"></a>        strncpy<span class="op">(</span>nuevo_reg<span class="op">-&gt;</span>datos<span class="op">.</span>estado_str<span class="op">,</span> s_val<span class="op">,</span> <span class="dv">7</span><span class="op">);</span></span>
+<span id="cb1-71"><a href="#cb1-71" aria-hidden="true" tabindex="-1"></a>        nuevo_reg<span class="op">-&gt;</span>datos<span class="op">.</span>estado_str<span class="op">[</span><span class="dv">7</span><span class="op">]</span> <span class="op">=</span> <span class="ch">&#39;</span><span class="sc">\0</span><span class="ch">&#39;</span><span class="op">;</span></span>
+<span id="cb1-72"><a href="#cb1-72" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb1-73"><a href="#cb1-73" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-74"><a href="#cb1-74" aria-hidden="true" tabindex="-1"></a>    <span class="co">// REQUISITO 2: Rellenar los CAMPOS DE BITS</span></span>
+<span id="cb1-75"><a href="#cb1-75" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Acceso a la struct interna &#39;estado&#39; (con .) y a sus miembros bit a bit (con .)</span></span>
+<span id="cb1-76"><a href="#cb1-76" aria-hidden="true" tabindex="-1"></a>    nuevo_reg<span class="op">-&gt;</span>estado<span class="op">.</span>error_critico <span class="op">=</span> e_critico<span class="op">;</span></span>
+<span id="cb1-77"><a href="#cb1-77" aria-hidden="true" tabindex="-1"></a>    nuevo_reg<span class="op">-&gt;</span>estado<span class="op">.</span>warning <span class="op">=</span> warn<span class="op">;</span></span>
+<span id="cb1-78"><a href="#cb1-78" aria-hidden="true" tabindex="-1"></a>    nuevo_reg<span class="op">-&gt;</span>estado<span class="op">.</span>calibracion_ok <span class="op">=</span> calib<span class="op">;</span></span>
+<span id="cb1-79"><a href="#cb1-79" aria-hidden="true" tabindex="-1"></a>    nuevo_reg<span class="op">-&gt;</span>estado<span class="op">.</span>modo_baja_potencia <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> <span class="co">// Por defecto</span></span>
+<span id="cb1-80"><a href="#cb1-80" aria-hidden="true" tabindex="-1"></a>    nuevo_reg<span class="op">-&gt;</span>estado<span class="op">.</span>reservado <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb1-81"><a href="#cb1-81" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-82"><a href="#cb1-82" aria-hidden="true" tabindex="-1"></a>    contador_registros<span class="op">++;</span></span>
+<span id="cb1-83"><a href="#cb1-83" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb1-84"><a href="#cb1-84" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-85"><a href="#cb1-85" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-86"><a href="#cb1-86" aria-hidden="true" tabindex="-1"></a><span class="co">// --- REQUISITO 4.3: FunciÃ³n para Mostrar el Log ---</span></span>
+<span id="cb1-87"><a href="#cb1-87" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> mostrar_log<span class="op">(</span><span class="dt">int</span> max_a_mostrar<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb1-88"><a href="#cb1-88" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;</span><span class="sc">\n</span><span class="st">--- REPORTE DE TELEMETRÃA (</span><span class="sc">%d</span><span class="st"> registros) ---</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">,</span> contador_registros<span class="op">);</span></span>
+<span id="cb1-89"><a href="#cb1-89" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;--------------------------------------------------------------------------------</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb1-90"><a href="#cb1-90" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-91"><a href="#cb1-91" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> limite <span class="op">=</span> <span class="op">(</span>max_a_mostrar <span class="op">&gt;</span> contador_registros<span class="op">)</span> <span class="op">?</span> contador_registros <span class="op">:</span> max_a_mostrar<span class="op">;</span></span>
+<span id="cb1-92"><a href="#cb1-92" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-93"><a href="#cb1-93" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> limite<span class="op">;</span> i<span class="op">++)</span> <span class="op">{</span></span>
+<span id="cb1-94"><a href="#cb1-94" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Utilizamos un puntero para demostrar el uso del operador flecha -&gt;</span></span>
+<span id="cb1-95"><a href="#cb1-95" aria-hidden="true" tabindex="-1"></a>        Registro <span class="op">*</span>reg <span class="op">=</span> <span class="op">&amp;</span>log_telemetria<span class="op">[</span>i<span class="op">];</span></span>
+<span id="cb1-96"><a href="#cb1-96" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-97"><a href="#cb1-97" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">&quot;Log #</span><span class="sc">%d</span><span class="st"> | Sensor ID: </span><span class="sc">%d</span><span class="st"> | Time: </span><span class="sc">%ld\n</span><span class="st">&quot;</span><span class="op">,</span> i <span class="op">+</span> <span class="dv">1</span><span class="op">,</span> reg<span class="op">-&gt;</span>id_sensor<span class="op">,</span> reg<span class="op">-&gt;</span>timestamp<span class="op">);</span></span>
+<span id="cb1-98"><a href="#cb1-98" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-99"><a href="#cb1-99" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Lectura de la UNION (dependiendo de la etiqueta &#39;tipo_dato&#39;)</span></span>
+<span id="cb1-100"><a href="#cb1-100" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">&quot;  &gt; Valor: &quot;</span><span class="op">);</span></span>
+<span id="cb1-101"><a href="#cb1-101" aria-hidden="true" tabindex="-1"></a>        <span class="cf">switch</span> <span class="op">(</span>reg<span class="op">-&gt;</span>tipo_dato<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb1-102"><a href="#cb1-102" aria-hidden="true" tabindex="-1"></a>            <span class="cf">case</span> TIPO_FLOTANTE<span class="op">:</span></span>
+<span id="cb1-103"><a href="#cb1-103" aria-hidden="true" tabindex="-1"></a>                <span class="co">// Acceso a la union: &#39;reg-&gt;datos.valor_flotante&#39;</span></span>
+<span id="cb1-104"><a href="#cb1-104" aria-hidden="true" tabindex="-1"></a>                printf<span class="op">(</span><span class="st">&quot;</span><span class="sc">%.2f</span><span class="st"> (Tipo FLOAT)</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">,</span> reg<span class="op">-&gt;</span>datos<span class="op">.</span>valor_flotante<span class="op">);</span></span>
+<span id="cb1-105"><a href="#cb1-105" aria-hidden="true" tabindex="-1"></a>                <span class="cf">break</span><span class="op">;</span></span>
+<span id="cb1-106"><a href="#cb1-106" aria-hidden="true" tabindex="-1"></a>            <span class="cf">case</span> TIPO_ENTERO<span class="op">:</span></span>
+<span id="cb1-107"><a href="#cb1-107" aria-hidden="true" tabindex="-1"></a>                <span class="co">// Acceso a la union: &#39;reg-&gt;datos.valor_entero&#39;</span></span>
+<span id="cb1-108"><a href="#cb1-108" aria-hidden="true" tabindex="-1"></a>                printf<span class="op">(</span><span class="st">&quot;</span><span class="sc">%d</span><span class="st"> (Tipo INT)</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">,</span> reg<span class="op">-&gt;</span>datos<span class="op">.</span>valor_entero<span class="op">);</span></span>
+<span id="cb1-109"><a href="#cb1-109" aria-hidden="true" tabindex="-1"></a>                <span class="cf">break</span><span class="op">;</span></span>
+<span id="cb1-110"><a href="#cb1-110" aria-hidden="true" tabindex="-1"></a>            <span class="cf">case</span> TIPO_ESTADO<span class="op">:</span></span>
+<span id="cb1-111"><a href="#cb1-111" aria-hidden="true" tabindex="-1"></a>                <span class="co">// Acceso a la union: &#39;reg-&gt;datos.estado_str&#39;</span></span>
+<span id="cb1-112"><a href="#cb1-112" aria-hidden="true" tabindex="-1"></a>                printf<span class="op">(</span><span class="st">&quot;</span><span class="sc">%s</span><span class="st"> (Tipo STRING)</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">,</span> reg<span class="op">-&gt;</span>datos<span class="op">.</span>estado_str<span class="op">);</span></span>
+<span id="cb1-113"><a href="#cb1-113" aria-hidden="true" tabindex="-1"></a>                <span class="cf">break</span><span class="op">;</span></span>
+<span id="cb1-114"><a href="#cb1-114" aria-hidden="true" tabindex="-1"></a>            <span class="cf">default</span><span class="op">:</span></span>
+<span id="cb1-115"><a href="#cb1-115" aria-hidden="true" tabindex="-1"></a>                printf<span class="op">(</span><span class="st">&quot;ERROR DE TIPO DE DATO NO RECONOCIDO</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb1-116"><a href="#cb1-116" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
+<span id="cb1-117"><a href="#cb1-117" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-118"><a href="#cb1-118" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Lectura de los CAMPOS DE BITS</span></span>
+<span id="cb1-119"><a href="#cb1-119" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">&quot;  &gt; Estado BITS: &quot;</span><span class="op">);</span></span>
+<span id="cb1-120"><a href="#cb1-120" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">&quot;Critico: </span><span class="sc">%d</span><span class="st"> | Warning: </span><span class="sc">%d</span><span class="st"> | CalibOK: </span><span class="sc">%d</span><span class="st">&quot;</span><span class="op">,</span></span>
+<span id="cb1-121"><a href="#cb1-121" aria-hidden="true" tabindex="-1"></a>               <span class="co">// Acceso a los campos de bits: &#39;reg-&gt;estado.miembro&#39;</span></span>
+<span id="cb1-122"><a href="#cb1-122" aria-hidden="true" tabindex="-1"></a>               reg<span class="op">-&gt;</span>estado<span class="op">.</span>error_critico<span class="op">,</span></span>
+<span id="cb1-123"><a href="#cb1-123" aria-hidden="true" tabindex="-1"></a>               reg<span class="op">-&gt;</span>estado<span class="op">.</span>warning<span class="op">,</span></span>
+<span id="cb1-124"><a href="#cb1-124" aria-hidden="true" tabindex="-1"></a>               reg<span class="op">-&gt;</span>estado<span class="op">.</span>calibracion_ok<span class="op">);</span></span>
+<span id="cb1-125"><a href="#cb1-125" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-126"><a href="#cb1-126" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span>reg<span class="op">-&gt;</span>estado<span class="op">.</span>error_critico <span class="op">==</span> <span class="dv">1</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb1-127"><a href="#cb1-127" aria-hidden="true" tabindex="-1"></a>            printf<span class="op">(</span><span class="st">&quot;  &lt;&lt; Â¡Â¡ERROR CRÃTICO DETECTADO!! &gt;&gt;&quot;</span><span class="op">);</span> <span class="co">// Mensaje especial</span></span>
+<span id="cb1-128"><a href="#cb1-128" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
+<span id="cb1-129"><a href="#cb1-129" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb1-130"><a href="#cb1-130" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb1-131"><a href="#cb1-131" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;--------------------------------------------------------------------------------</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb1-132"><a href="#cb1-132" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb1-133"><a href="#cb1-133" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-134"><a href="#cb1-134" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-135"><a href="#cb1-135" aria-hidden="true" tabindex="-1"></a><span class="co">// --- REQUISITO 5: FunciÃ³n Principal (main) ---</span></span>
+<span id="cb1-136"><a href="#cb1-136" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb1-137"><a href="#cb1-137" aria-hidden="true" tabindex="-1"></a>    <span class="co">// REQUISITO 5.1: Muestra de sizeof() para verificar la optimizaciÃ³n de memoria</span></span>
+<span id="cb1-138"><a href="#cb1-138" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;--- DEMOSTRACIÃ“N DE MEMORIA Y ALINEACIÃ“N ---</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb1-139"><a href="#cb1-139" aria-hidden="true" tabindex="-1"></a>    <span class="co">// TamaÃ±o de la Union: Debe ser el de &#39;char[8]&#39; (8 bytes, o mÃ¡s por alineaciÃ³n)</span></span>
+<span id="cb1-140"><a href="#cb1-140" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;1. TamaÃ±o de ValorLectura (union): </span><span class="sc">%zu</span><span class="st"> bytes</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">,</span> <span class="kw">sizeof</span><span class="op">(</span>ValorLectura<span class="op">));</span></span>
+<span id="cb1-141"><a href="#cb1-141" aria-hidden="true" tabindex="-1"></a>    <span class="co">// TamaÃ±o de Bit Fields: Debe ser 1 byte</span></span>
+<span id="cb1-142"><a href="#cb1-142" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;2. TamaÃ±o de EstadoSensor (bit fields): </span><span class="sc">%zu</span><span class="st"> bytes</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">,</span> <span class="kw">sizeof</span><span class="op">(</span>EstadoSensor<span class="op">));</span></span>
+<span id="cb1-143"><a href="#cb1-143" aria-hidden="true" tabindex="-1"></a>    <span class="co">// TamaÃ±o total del registro (Suma de los miembros + padding)</span></span>
+<span id="cb1-144"><a href="#cb1-144" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;3. TamaÃ±o de Registro (struct principal): </span><span class="sc">%zu</span><span class="st"> bytes</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">,</span> <span class="kw">sizeof</span><span class="op">(</span>Registro<span class="op">));</span></span>
+<span id="cb1-145"><a href="#cb1-145" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;--------------------------------------------</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb1-146"><a href="#cb1-146" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-147"><a href="#cb1-147" aria-hidden="true" tabindex="-1"></a>    <span class="co">// REQUISITO 5.2: Agregar 5 Registros de Prueba</span></span>
+<span id="cb1-148"><a href="#cb1-148" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-149"><a href="#cb1-149" aria-hidden="true" tabindex="-1"></a>    <span class="co">// 1. Flotante, OK</span></span>
+<span id="cb1-150"><a href="#cb1-150" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;-&gt; Agregando 5 registros de prueba...</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb1-151"><a href="#cb1-151" aria-hidden="true" tabindex="-1"></a>    agregar_registro<span class="op">(</span><span class="dv">1</span><span class="op">,</span> TIPO_FLOTANTE<span class="op">,</span> <span class="fl">23.5</span><span class="bu">f</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> NULL<span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">1</span><span class="op">);</span></span>
+<span id="cb1-152"><a href="#cb1-152" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb1-153"><a href="#cb1-153" aria-hidden="true" tabindex="-1"></a>    <span class="co">// 2. Flotante, con Warning (Temperatura muy alta)</span></span>
+<span id="cb1-154"><a href="#cb1-154" aria-hidden="true" tabindex="-1"></a>    agregar_registro<span class="op">(</span><span class="dv">3</span><span class="op">,</span> TIPO_FLOTANTE<span class="op">,</span> <span class="fl">105.8</span><span class="bu">f</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> NULL<span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">1</span><span class="op">,</span> <span class="dv">1</span><span class="op">);</span></span>
+<span id="cb1-155"><a href="#cb1-155" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-156"><a href="#cb1-156" aria-hidden="true" tabindex="-1"></a>    <span class="co">// 3. Entero, OK (Conteo de partÃ­culas)</span></span>
+<span id="cb1-157"><a href="#cb1-157" aria-hidden="true" tabindex="-1"></a>    agregar_registro<span class="op">(</span><span class="dv">7</span><span class="op">,</span> TIPO_ENTERO<span class="op">,</span> <span class="dv">0</span><span class="er">.0f</span><span class="op">,</span> <span class="dv">550</span><span class="op">,</span> NULL<span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">1</span><span class="op">);</span></span>
+<span id="cb1-158"><a href="#cb1-158" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb1-159"><a href="#cb1-159" aria-hidden="true" tabindex="-1"></a>    <span class="co">// 4. Entero, con Warning (Conteo al lÃ­mite)</span></span>
+<span id="cb1-160"><a href="#cb1-160" aria-hidden="true" tabindex="-1"></a>    agregar_registro<span class="op">(</span><span class="dv">9</span><span class="op">,</span> TIPO_ENTERO<span class="op">,</span> <span class="dv">0</span><span class="er">.0f</span><span class="op">,</span> <span class="dv">99</span><span class="op">,</span> NULL<span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">1</span><span class="op">,</span> <span class="dv">1</span><span class="op">);</span></span>
+<span id="cb1-161"><a href="#cb1-161" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-162"><a href="#cb1-162" aria-hidden="true" tabindex="-1"></a>    <span class="co">// 5. String de Estado, ERROR CRÃTICO (Fallo de energÃ­a)</span></span>
+<span id="cb1-163"><a href="#cb1-163" aria-hidden="true" tabindex="-1"></a>    agregar_registro<span class="op">(</span><span class="dv">10</span><span class="op">,</span> TIPO_ESTADO<span class="op">,</span> <span class="dv">0</span><span class="er">.0f</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="st">&quot;FALLA&quot;</span><span class="op">,</span> <span class="dv">1</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">0</span><span class="op">);</span></span>
+<span id="cb1-164"><a href="#cb1-164" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-165"><a href="#cb1-165" aria-hidden="true" tabindex="-1"></a>    <span class="co">// REQUISITO 5.3: Imprimir el array completo (solo los 5 que agregamos)</span></span>
+<span id="cb1-166"><a href="#cb1-166" aria-hidden="true" tabindex="-1"></a>    mostrar_log<span class="op">(</span><span class="dv">5</span><span class="op">);</span></span>
+<span id="cb1-167"><a href="#cb1-167" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-168"><a href="#cb1-168" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb1-169"><a href="#cb1-169" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<h3 id="anÃ¡lisis-del-cÃ³digo-resuelto">ðŸ§ AnÃ¡lisis del CÃ³digo
+Resuelto</h3>
+<h4 id="optimizaciÃ³n-con-union">1. OptimizaciÃ³n con
+<code>union</code></h4>
+<ul>
+<li>La <code>union ValorLectura</code> define tres posibles formatos
+para el dato.</li>
+<li>Al ejecutar <code>sizeof(ValorLectura)</code>, el resultado serÃ¡ el
+tamaÃ±o de su miembro mÃ¡s grande (<code>char[8]</code>, tÃ­picamente
+<strong>8 bytes</strong>), demostrando que solo se reservan 8 bytes de
+memoria para el valor, sin importar si es un <code>int</code>, un
+<code>float</code> o la cadena.</li>
+</ul>
+<h4 id="optimizaciÃ³n-con-campos-de-bits">2. OptimizaciÃ³n con Campos de
+Bits</h4>
+<ul>
+<li>La estructura <code>EstadoSensor</code> utiliza la sintaxis
+<code>: 1</code> y <code>: 4</code> para forzar a que cada miembro ocupe
+solo la cantidad de bits necesaria.</li>
+<li>El compilador <strong>empaqueta</strong> los 4 bits usados
+(<code>1+1+1+1</code>) mÃ¡s los 4 bits <code>reservado</code> dentro de
+un solo <code>unsigned int</code> (que en este contexto se traduce a
+<strong>1 byte</strong>), demostrando la mÃ¡xima optimizaciÃ³n para la
+lectura de estados binarios.</li>
+</ul>
+<h4 id="integraciÃ³n-y-acceso">3. IntegraciÃ³n y Acceso</h4>
+<ul>
+<li>La estructura principal <code>Registro</code> integra la
+<code>union</code> y la estructura de Campos de Bits como miembros
+anidados.</li>
+<li>La funciÃ³n <code>agregar_registro</code> utiliza la etiqueta
+<code>tipo_dato</code> para decidir a quÃ© miembro de la
+<code>union</code> (<code>datos.valor_flotante</code>,
+<code>datos.valor_entero</code>, o <code>datos.estado_str</code>) se
+debe escribir, y los operadores <strong><code>-&gt;</code></strong>
+(para el puntero <code>nuevo_reg</code>) y
+<strong><code>.</code></strong> (para los miembros internos como
+<code>datos.valor_flotante</code>) se usan correctamente.</li>
+<li>La funciÃ³n <code>mostrar_log</code> usa esa misma etiqueta
+(<code>tipo_dato</code>) para acceder e imprimir el valor
+<strong>vÃ¡lido</strong> de la <code>union</code>, evitando la corrupciÃ³n
+de datos.</li>
+</ul>
+
+</div>
+</body>
+</html>
+

@@ -1,0 +1,146 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" crossorigin href="/assets/content-01sust.css">
+</head>
+<body>
+<div class="main-content">
+<h2 id="cuestionario-alineaciÃ³n-de-datos-y-campos-de-bits">Cuestionario:
+AlineaciÃ³n de Datos y Campos de Bits ðŸ§±</h2>
+<p>A continuaciÃ³n, se presentan las preguntas del cuestionario con la
+opciÃ³n correcta resaltada en la secciÃ³n de respuestas.</p>
+<p><strong>Preguntas de Alternativas</strong></p>
+<ol type="1">
+<li><p>Â¿CuÃ¡l es el requisito fundamental impuesto por el hardware (CPU)
+que obliga al compilador de C a implementar la <strong>AlineaciÃ³n de
+Datos</strong> en las estructuras? A. Asegurar que todas las estructuras
+tengan un tamaÃ±o que sea mÃºltiplo de <span class="math inline">2</span>
+bytes. <strong>B. Permitir que el acceso a datos (lectura/escritura) sea
+mÃ¡s rÃ¡pido y eficiente.</strong> C. Facilitar el uso de la recursividad
+en las estructuras de datos. D. Garantizar que los punteros apunten
+siempre a la direcciÃ³n de memoria <span
+class="math inline">0</span>.</p></li>
+<li><p>Â¿CuÃ¡l es el tÃ©rmino tÃ©cnico que describe los <strong>bytes
+vacÃ­os</strong> que el compilador inserta dentro o al final de una
+estructura (<code>struct</code>) para asegurar que cada miembro comience
+en una direcciÃ³n de memoria que sea un mÃºltiplo de su requisito de
+alineaciÃ³n? A. Bit Field (Campo de Bits) B. Cache Miss (Fallo de CachÃ©)
+<strong>C. Padding o Relleno</strong> D. Data Slot (Ranura de
+Datos)</p></li>
+<li><p>Asumiendo que <code>char</code> requiere alineaciÃ³n de <span
+class="math inline">1</span> byte e <code>int</code> requiere alineaciÃ³n
+de <span class="math inline">4</span> bytes, Â¿cuÃ¡l serÃ¡ el tamaÃ±o final
+en bytes de la siguiente estructura? <span class="math display">typedef
+struct {</span> <span class="math display">â€Šâ€char c1;</span> <span
+class="math display">â€Šâ€int i;</span> <span class="math display">â€Šâ€char
+c2;</span> <span class="math display">}Ejemplo;</span> A. <span
+class="math inline">6</span> bytes B. <span class="math inline">8</span>
+bytes <strong>C. <span class="math inline">12</span> bytes</strong> D.
+<span class="math inline">16</span> bytes</p></li>
+<li><p>Dada la alta presencia de relleno (<span
+class="math inline"><em>padding</em></span>) en una estructura, Â¿quÃ©
+estrategia debe emplear el programador para <strong>mitigar el
+relleno</strong> y reducir el tamaÃ±o total de la estructura? A. Utilizar
+la palabra clave <span class="math inline">union</span> en lugar de
+<span class="math inline">struct</span> para agrupar los miembros. B.
+Aumentar el requisito de alineaciÃ³n a <span class="math inline">8</span>
+bytes para todos los miembros. <strong>C. Reordenar los miembros
+agrupando los tipos de datos mÃ¡s pequeÃ±os (como <span
+class="math inline">char</span>) antes de los mÃ¡s grandes (como <span
+class="math inline">int</span> o <span
+class="math inline">double</span>).</strong> D. Utilizar la directiva
+<span class="math inline">#include &lt;stdlib.h&gt;</span> para liberar
+el espacio de relleno.</p></li>
+<li><p>El principal objetivo de usar <strong>Campos de Bits</strong>
+(<code>bit fields</code>) en las estructuras de C es: A. Controlar el
+orden en que el sistema operativo accede a los miembros de la
+estructura. B. Permitir el uso de variables <span
+class="math inline">booleanas</span> de forma nativa en C. <strong>C.
+Optimizar la memoria al eliminar el relleno (<span
+class="math inline"><em>padding</em></span>) y empaquetar mÃºltiples
+miembros en un solo <span class="math inline">byte</span> o <span
+class="math inline">palabra</span>.</strong> D. Asegurar que la
+estructura ocupe el tamaÃ±o exacto de un puntero (<span
+class="math inline"><em>pointer</em></span>).</p></li>
+<li><p>Â¿CuÃ¡l es la sintaxis correcta en C para declarar un miembro
+llamado <span class="math inline">estado</span> dentro de una
+estructura, que solo debe ocupar <strong><span
+class="math inline">3</span> bits</strong> de memoria? A. <span
+class="math inline">int estadoâ€„=â€„3;</span> B. <span
+class="math inline">unsigned int estado/3;</span> <strong>C. <span
+class="math inline">unsigned int estado : 3;</span></strong> D. <span
+class="math inline">#define estado 3;</span></p></li>
+<li><p>Si declaramos un miembro como <span class="math inline">unsigned
+int flag : 1;</span> en lugar de simplemente <span
+class="math inline">int flag;</span>, Â¿cuÃ¡l es la ventaja directa en la
+asignaciÃ³n de memoria? A. Fuerza al compilador a deshabilitar el <span
+class="math inline"><em>padding</em></span> para toda la estructura. B.
+El miembro <span class="math inline">flag</span> se almacena
+directamente en el registro del CPU, no en la RAM. <strong>C. Permite al
+compilador empaquetar el miembro de <span class="math inline">1</span>
+bit con otros Campos de Bits, potencialmente usando solo una fracciÃ³n de
+un <span class="math inline">byte</span>, en lugar de <span
+class="math inline">4</span> bytes completos.</strong> D. El compilador
+debe asignar siempre <span class="math inline">4</span> bytes (el tamaÃ±o
+de un <span class="math inline">int</span>) al miembro <span
+class="math inline">flag</span>.</p></li>
+<li><p>Â¿En quÃ© escenario la caracterÃ­stica de <strong>Campos de
+Bits</strong> es mÃ¡s crÃ­tica y comÃºnmente utilizada en la programaciÃ³n
+en C? A. En la manipulaciÃ³n de grandes bases de datos para realizar
+bÃºsquedas rÃ¡pidas. B. En el desarrollo de aplicaciones web de alto
+trÃ¡fico. C. En la manipulaciÃ³n de arreglos (<code>arrays</code>) de
+enteros para cÃ¡lculos matemÃ¡ticos complejos. <strong>D. En Sistemas
+Embebidos (firmware), para la optimizaciÃ³n extrema de memoria y el mapeo
+directo de Registros de Control del Hardware.</strong></p></li>
+</ol>
+<hr />
+<h3 id="respuestas-correctas">Respuestas Correctas</h3>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Pregunta</th>
+<th style="text-align: center;">OpciÃ³n Correcta</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><strong>1</strong></td>
+<td style="text-align: center;">B</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>2</strong></td>
+<td style="text-align: center;">C</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>3</strong></td>
+<td style="text-align: center;">C</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>4</strong></td>
+<td style="text-align: center;">C</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>5</strong></td>
+<td style="text-align: center;">C</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>6</strong></td>
+<td style="text-align: center;">C</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>7</strong></td>
+<td style="text-align: center;">C</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>8</strong></td>
+<td style="text-align: center;">D</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</body>
+</html>
+

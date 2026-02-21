@@ -25,7 +25,7 @@ export function Login() {
     setError(null);
 
     try {
-      const res = await fetch('/login', {
+      const res = await fetch('/api/login', {
         method: 'POST',
         credentials: 'include',
         headers: { 'Content-Type': 'application/json', Accept: 'application/json' },

@@ -1,0 +1,258 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" crossorigin href="/assets/content-01sust.css">
+</head>
+<body>
+<div class="main-content">
+<p><strong>ðŸ§  15 Preguntas de Alternativas: Modularidad y
+Funciones</strong></p>
+<p><strong>Bloque 1: DefiniciÃ³n y Conceptos Fundamentales</strong></p>
+<ol type="1">
+<li>Â¿CuÃ¡l es el principio central de la Modularidad en la
+programaciÃ³n?</li>
+</ol>
+<blockquote>
+<p>A. Escribir todo el cÃ³digo en el archivo principal (main.c).</p>
+<p>B. Dividir un programa complejo en componentes pequeÃ±os,
+independientes y lÃ³gicamente organizados.</p>
+<p>C. Usar exclusivamente bucles for para la repeticiÃ³n de cÃ³digo.</p>
+<p>D. Garantizar que todos los datos sean globales para facilitar el
+acceso.</p>
+</blockquote>
+<ol start="2" type="1">
+<li>En el contexto del lenguaje C, Â¿cuÃ¡l es la implementaciÃ³n principal
+de un mÃ³dulo?</li>
+</ol>
+<blockquote>
+<p>A. Variables globales.</p>
+<p>B. Estructuras de control (if/else).</p>
+<p>C. Funciones o archivos separados (.c y .h).</p>
+<p>D. Comentarios extensos dentro del cÃ³digo.</p>
+</blockquote>
+<ol start="3" type="1">
+<li>Â¿QuÃ© concepto define la propiedad de que cada mÃ³dulo (funciÃ³n) se
+encargue de realizar una sola tarea especÃ­fica y bien definida?</li>
+</ol>
+<blockquote>
+<p>A. Baja Acoplamiento.</p>
+<p>B. ReutilizaciÃ³n Externa.</p>
+<p>C. Alta CohesiÃ³n (Responsabilidad Ãšnica).</p>
+<p>D. AbstracciÃ³n MonolÃ­tica.</p>
+</blockquote>
+<ol start="4" type="1">
+<li>Â¿QuÃ© problema busca evitar la modularidad al dividir un cÃ³digo de
+miles de lÃ­neas?</li>
+</ol>
+<blockquote>
+<p>A. El uso excesivo de la memoria RAM.</p>
+<p>B. El problema del cÃ³digo monolÃ­tico, donde un cambio puede afectar a
+todo el sistema.</p>
+<p>C. La necesidad de declarar variables.</p>
+<p>D. El lÃ­mite en el nÃºmero de funciones que puede tener un
+programa.</p>
+</blockquote>
+<ol start="5" type="1">
+<li>Â¿CÃ³mo se realiza la interacciÃ³n o comunicaciÃ³n entre mÃ³dulos
+independientes en la programaciÃ³n modular?</li>
+</ol>
+<blockquote>
+<p>A. Mediante la modificaciÃ³n directa de las variables internas del
+otro mÃ³dulo.</p>
+<p>B. A travÃ©s de comentarios de documentaciÃ³n.</p>
+<p>C. A travÃ©s de interfaces limpias y explÃ­citas (la llamada a
+funciones).</p>
+<p>D. Usando Ãºnicamente la funciÃ³n printf().</p>
+</blockquote>
+<p><strong>Bloque 2: Ventajas de la Modularidad</strong></p>
+<ol start="6" type="1">
+<li>Â¿CuÃ¡l de las siguientes es una ventaja directa de la modularidad
+relacionada con la detecciÃ³n de errores?</li>
+</ol>
+<blockquote>
+<p>A. SimplificaciÃ³n de la sintaxis del lenguaje C.</p>
+<p>B. Facilita la LocalizaciÃ³n de Fallos, rastreando el bug a un mÃ³dulo
+especÃ­fico.</p>
+<p>C. ReducciÃ³n del tiempo de compilaciÃ³n.</p>
+<p>D. EliminaciÃ³n de la necesidad de variables.</p>
+</blockquote>
+<ol start="7" type="1">
+<li>La capacidad de que un cambio en una funciÃ³n tenga un impacto
+limitado en el resto del cÃ³digo, siempre que su interfaz se mantenga, se
+relaciona principalmente con la ventaja de:</li>
+</ol>
+<blockquote>
+<p>A. Estabilidad y Mantenimiento del Sistema.</p>
+<p>B. Flujo LÃ³gico.</p>
+<p>C. AbstracciÃ³n.</p>
+<p>D. ReducciÃ³n Cognitiva.</p>
+</blockquote>
+<ol start="8" type="1">
+<li>Â¿QuÃ© ventaja de la modularidad se asocia con el uso de Nombres
+Descriptivos para las funciones (ej:
+guardar_usuario_en_base_datos)?</li>
+</ol>
+<blockquote>
+<p>A. ReutilizaciÃ³n de CÃ³digo.</p>
+<p>B. Aislamiento.</p>
+<p>C. Legibilidad y ComprensiÃ³n del CÃ³digo.</p>
+<p>D. Alta CohesiÃ³n.</p>
+</blockquote>
+<ol start="9" type="1">
+<li>La Simplicidad como ventaja de la modularidad se logra
+mediante:</li>
+</ol>
+<blockquote>
+<p>A. La escritura de cÃ³digo en minÃºsculas.</p>
+<p>B. La eliminaciÃ³n de todos los comentarios.</p>
+<p>C. La divisiÃ³n de problemas complejos en tareas pequeÃ±as y manejables
+(ReducciÃ³n Cognitiva).</p>
+<p>D. El uso exclusivo de la estructura switch.</p>
+</blockquote>
+<ol start="10" type="1">
+<li>Â¿CuÃ¡l es el beneficio mÃ¡s valioso a largo plazo de la modularidad,
+relacionado con la vida Ãºtil del software?</li>
+</ol>
+<blockquote>
+<p>A. Velocidad de ejecuciÃ³n.</p>
+<p>B. Mantenimiento y DepuraciÃ³n (Debugging).</p>
+<p>C. Bajo consumo de memoria.</p>
+<p>D. Capacidad de usar goto.</p>
+</blockquote>
+<p><strong>Bloque 3: ReutilizaciÃ³n y AbstracciÃ³n</strong></p>
+<ol start="11" type="1">
+<li>El concepto de ReutilizaciÃ³n de CÃ³digo es una consecuencia directa
+de la modularidad y significa:</li>
+</ol>
+<blockquote>
+<p>A. Copiar y pegar bloques de cÃ³digo monolÃ­tico.</p>
+<p>B. Utilizar una funciÃ³n ya desarrollada y probada mÃºltiples veces en
+el mismo o diferentes proyectos.</p>
+<p>C. Escribir el mismo cÃ³digo tres veces para asegurar su
+funcionamiento.</p>
+<p>D. Declarar variables en diferentes alcances.</p>
+</blockquote>
+<ol start="12" type="1">
+<li>Â¿CuÃ¡l es un beneficio clave de la reutilizaciÃ³n de cÃ³digo?</li>
+</ol>
+<blockquote>
+<p>A. GeneraciÃ³n automÃ¡tica de documentaciÃ³n.</p>
+<p>B. Mayor Confiabilidad, al construir sobre cimientos sÃ³lidos y
+probados.</p>
+<p>C. ReducciÃ³n de la dependencia de librerÃ­as externas.</p>
+<p>D. EliminaciÃ³n de la necesidad de la funciÃ³n main.</p>
+</blockquote>
+<ol start="13" type="1">
+<li>Â¿QuÃ© representa una funciÃ³n en el contexto de la AbstracciÃ³n?</li>
+</ol>
+<blockquote>
+<p>A. Un detalle irrelevante del hardware.</p>
+<p>B. El punto de entrada principal del programa.</p>
+<p>C. Un mecanismo que oculta los detalles complejos de la
+implementaciÃ³n de una tarea.</p>
+<p>D. Una estructura que debe ser revisada constantemente.</p>
+</blockquote>
+<ol start="14" type="1">
+<li>La analogÃ­a de la "Caja Negra" en funciones se refiere a que el
+usuario debe enfocarse en:</li>
+</ol>
+<blockquote>
+<p>A. La complejidad interna y el cÃ³digo de bajo nivel.</p>
+<p>B. La optimizaciÃ³n del hardware.</p>
+<p>C. QuÃ© hace la funciÃ³n (entrada y salida), ignorando el cÃ³mo funciona
+internamente.</p>
+<p>D. La cantidad de lÃ­neas de cÃ³digo que tiene la funciÃ³n.</p>
+</blockquote>
+<ol start="15" type="1">
+<li>Al usar una funciÃ³n de biblioteca como printf(), Â¿quÃ© informaciÃ³n
+esencial oculta la abstracciÃ³n al desarrollador?</li>
+</ol>
+<blockquote>
+<p>A. Los parÃ¡metros que debe recibir.</p>
+<p>B. Los cientos de lÃ­neas de cÃ³digo que manipulan buffers y acceden al
+sistema operativo.</p>
+<p>C. El tipo de valor que retorna (que es un entero).</p>
+<p>D. El nombre de la funciÃ³n.</p>
+</blockquote>
+<p><strong>ðŸ”‘ Respuestas Correctas</strong></p>
+<table style="width:97%;">
+<colgroup>
+<col style="width: 35%" />
+<col style="width: 62%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>Pregunta</strong></th>
+<th style="text-align: left;"><strong>Respuesta Correcta</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">B</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2</td>
+<td style="text-align: left;">C</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">3</td>
+<td style="text-align: left;">C</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">4</td>
+<td style="text-align: left;">B</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">5</td>
+<td style="text-align: left;">C</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">6</td>
+<td style="text-align: left;">B</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">7</td>
+<td style="text-align: left;">A</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">8</td>
+<td style="text-align: left;">C</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">9</td>
+<td style="text-align: left;">C</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">10</td>
+<td style="text-align: left;">B</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">11</td>
+<td style="text-align: left;">B</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">12</td>
+<td style="text-align: left;">B</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">13</td>
+<td style="text-align: left;">C</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">14</td>
+<td style="text-align: left;">C</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">15</td>
+<td style="text-align: left;">B</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</body>
+</html>
+

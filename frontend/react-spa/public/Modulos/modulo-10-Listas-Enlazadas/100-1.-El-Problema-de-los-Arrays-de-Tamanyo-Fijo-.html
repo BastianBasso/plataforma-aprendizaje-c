@@ -1,0 +1,213 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" crossorigin href="/assets/content-01sust.css">
+</head>
+<body>
+<div class="main-content">
+<h2 id="limitaciones-del-tamaÃ±o-estÃ¡tico-en-los-arrays">Limitaciones del
+TamaÃ±o EstÃ¡tico en los <em>Arrays</em> ðŸ§±</h2>
+<p>La principal limitaciÃ³n de los <em>arrays</em> tradicionales en C
+(aquellos declarados en el <em>Stack</em> o en la memoria estÃ¡tica, o
+incluso bloques dinÃ¡micos gestionados manualmente) radica en su
+<strong>tamaÃ±o estÃ¡tico e inmutable</strong>.</p>
+<hr />
+<h3 id="la-restricciÃ³n-de-tamaÃ±o">La RestricciÃ³n de TamaÃ±o</h3>
+<p>Una vez que declaras un <em>array</em>, su tamaÃ±o es fijo durante
+toda la ejecuciÃ³n de la funciÃ³n o del programa (dependiendo de dÃ³nde fue
+declarado).</p>
+<ul>
+<li><strong>DefiniciÃ³n Fija:</strong> Cuando defines un <em>array</em>
+como <code>int numeros[100];</code>, el compilador reserva un bloque
+contiguo de <strong>exactamente <span class="math inline">100</span>
+posiciones</strong> para enteros en la memoria.</li>
+<li><strong>Problema de Insuficiencia:</strong> Si, mÃ¡s adelante en la
+ejecuciÃ³n, necesitas almacenar <span class="math inline">101</span>
+elementos, el <em>array</em> <strong>no puede expandirse</strong> para
+acomodar el nuevo dato. Esto lleva a una de dos situaciones
+problemÃ¡ticas:
+<ol type="1">
+<li><strong>Desbordamiento de BÃºfer (<em>Buffer Overflow</em>):</strong>
+Si intentas escribir en la posiciÃ³n <span class="math inline">100</span>
+o superior, el programa escribirÃ¡ en la memoria contigua fuera del
+<em>array</em> reservado, lo que puede corromper datos de otras
+variables y llevar a fallos de segmentaciÃ³n.</li>
+<li><strong>SoluciÃ³n Ineficiente:</strong> La Ãºnica manera de â€œcrecerâ€
+es la siguiente.</li>
+</ol></li>
+</ul>
+<h3 id="el-proceso-ineficiente-de-expansiÃ³n">El Proceso Ineficiente de
+ExpansiÃ³n</h3>
+<p>Cuando un <em>array</em> se queda sin espacio y necesitas aÃ±adir mÃ¡s
+datos, la Ãºnica soluciÃ³n viable es la creaciÃ³n de uno nuevo:</p>
+<ol type="1">
+<li><strong>AsignaciÃ³n de Nuevo Bloque:</strong> Debes solicitar un
+<strong>nuevo bloque de memoria</strong> mÃ¡s grande (por ejemplo, el
+doble del tamaÃ±o original) utilizando una funciÃ³n de asignaciÃ³n dinÃ¡mica
+(<code>malloc</code> o <code>calloc</code>).</li>
+<li><strong>Copia de Datos (<span
+class="math inline"><em>O</em>(<em>N</em>)</span>):</strong> Tienes que
+<strong>copiar todos los datos</strong> del <em>array</em> viejo al
+<em>array</em> nuevo, elemento por elemento. Esta operaciÃ³n es costosa
+en tÃ©rminos de tiempo de ejecuciÃ³n, ya que su complejidad es
+<strong><span
+class="math inline"><em>O</em>(<em>N</em>)</span></strong>, donde <span
+class="math inline"><em>N</em></span> es el nÃºmero de elementos
+copiados.</li>
+<li><strong>LiberaciÃ³n:</strong> Finalmente, debes liberar el bloque de
+memoria del <em>array</em> viejo usando <code>free()</code>.</li>
+</ol>
+<p>Este ciclo de asignaciÃ³n-copia-liberaciÃ³n resulta en un alto consumo
+de recursos y tiempo, lo que demuestra la <strong>ineficiencia</strong>
+de los <em>arrays</em> para estructuras de datos cuyo tamaÃ±o varÃ­a
+frecuentemente.</p>
+<h2 id="ineficiencia-en-inserciÃ³n-y-eliminaciÃ³n">Ineficiencia en
+InserciÃ³n y EliminaciÃ³n ðŸŒ</h2>
+<p>AdemÃ¡s de la limitaciÃ³n del tamaÃ±o fijo, los <em>arrays</em>
+presentan una gran ineficiencia cuando se requiere
+<strong>insertar</strong> o <strong>eliminar</strong> un elemento en una
+posiciÃ³n intermedia.</p>
+<hr />
+<h3 id="la-costosa-operaciÃ³n-de-desplazamiento">La Costosa OperaciÃ³n de
+Desplazamiento</h3>
+<p>Debido a que los <em>arrays</em> deben mantener sus elementos en
+<strong>bloques de memoria contigua</strong>, cualquier cambio que
+altere el orden o el nÃºmero de elementos requiere reubicar datos para
+llenar o crear el espacio.</p>
+<h4 id="inserciÃ³n-de-elementos">1. InserciÃ³n de Elementos</h4>
+<p>Para insertar un nuevo elemento en una posiciÃ³n <strong><span
+class="math inline"><em>i</em></span></strong> de un <em>array</em> de
+<span class="math inline"><em>N</em></span> elementos, se requiere:</p>
+<ol type="1">
+<li><strong>Crear el Espacio:</strong> Todos los elementos desde la
+posiciÃ³n <span class="math inline"><em>i</em></span> hasta la posiciÃ³n
+final <span class="math inline">(<em>N</em>âˆ’1)</span> deben ser
+<strong>desplazados una posiciÃ³n hacia adelante</strong>.</li>
+<li><strong>Complejidad:</strong> Esta operaciÃ³n de mover <span
+class="math inline"><em>N</em>â€…âˆ’â€…<em>i</em></span> elementos es
+linealmente dependiente del nÃºmero de elementos subsiguientes. En el
+peor de los casos (insertar al inicio), tienes que mover casi todos los
+<span class="math inline"><em>N</em></span> elementos.
+<ul>
+<li>Costo de tiempo: <strong><span
+class="math inline"><em>O</em>(<em>N</em>)</span></strong> (Orden
+Lineal).</li>
+</ul></li>
+</ol>
+<h4 id="eliminaciÃ³n-de-elementos">2. EliminaciÃ³n de Elementos</h4>
+<p>Para eliminar un elemento de una posiciÃ³n <strong><span
+class="math inline"><em>i</em></span></strong> de un <em>array</em> de
+<span class="math inline"><em>N</em></span> elementos, se requiere:</p>
+<ol type="1">
+<li><strong>Llenar el Hueco:</strong> Todos los elementos desde la
+posiciÃ³n <span class="math inline"><em>i</em>â€…+â€…1</span> hasta la
+posiciÃ³n final <span class="math inline">(<em>N</em>âˆ’1)</span> deben ser
+<strong>desplazados una posiciÃ³n hacia atrÃ¡s</strong> para llenar el
+espacio vacÃ­o dejado por el elemento eliminado.</li>
+<li><strong>Complejidad:</strong> De manera similar a la inserciÃ³n, esta
+operaciÃ³n tambiÃ©n requiere mover <span
+class="math inline"><em>N</em>â€…âˆ’â€…<em>i</em></span> elementos. En el peor
+de los casos (eliminar al inicio), tienes que mover casi todos los <span
+class="math inline"><em>N</em></span> elementos.
+<ul>
+<li>Costo de tiempo: <strong><span
+class="math inline"><em>O</em>(<em>N</em>)</span></strong> (Orden
+Lineal).</li>
+</ul></li>
+</ol>
+<p>Este costo <strong><span
+class="math inline"><em>O</em>(<em>N</em>)</span></strong> hace que los
+<em>arrays</em> sean extremadamente lentos e ineficientes para
+aplicaciones que requieren constantes modificaciones de datos,
+especialmente si los <em>arrays</em> son grandes.</p>
+<h2 id="la-soluciÃ³n-del-enlazamiento-listas-enlazadas">La SoluciÃ³n del
+Enlazamiento: Listas Enlazadas ðŸ”—</h2>
+<p>Para superar las limitaciones inherentes a los <em>arrays</em>
+(tamaÃ±o fijo e ineficiencia <span
+class="math inline"><em>O</em>(<em>N</em>)</span> en
+inserciÃ³n/eliminaciÃ³n), se introduce la estructura de datos conocida
+como <strong>Lista Enlazada</strong> (<em>Linked List</em>).</p>
+<hr />
+<h3 id="un-enfoque-descentralizado">Un Enfoque Descentralizado</h3>
+<p>A diferencia de los <em>arrays</em>, que almacenan datos en un bloque
+<strong>contiguo y centralizado</strong> de memoria, las listas
+enlazadas adoptan un enfoque <strong>descentralizado</strong>.</p>
+<ul>
+<li><strong>Nodos:</strong> La lista estÃ¡ compuesta por elementos
+individuales llamados <strong>nodos</strong>. Cada nodo es una
+estructura que contiene, al menos, dos partes fundamentales:
+<ol type="1">
+<li><strong>Dato:</strong> El valor o informaciÃ³n que se desea
+almacenar.</li>
+<li><strong>Puntero (Enlace):</strong> Una direcciÃ³n de memoria que
+apunta al <strong>siguiente nodo</strong> de la secuencia.</li>
+</ol></li>
+</ul>
+<h3 id="conexiÃ³n-mediante-punteros">ConexiÃ³n Mediante Punteros</h3>
+<p>El concepto clave es que los nodos de una lista enlazada <strong>no
+tienen que estar fÃ­sicamente adyacentes</strong> en la memoria RAM (el
+<em>Heap</em>).</p>
+<ul>
+<li>La <strong>secuencia lÃ³gica</strong> de los datos no la define la
+posiciÃ³n fÃ­sica, sino la <strong>cadena de punteros</strong> (enlaces)
+que conecta un nodo con el siguiente.</li>
+<li><strong>Flexibilidad:</strong> Dado que la conexiÃ³n se realiza
+mediante punteros, la lista puede crecer o decrecer dinÃ¡micamente sin la
+necesidad de copiar o mover grandes bloques de datos.</li>
+</ul>
+<h3 id="eficiencia-en-operaciones-clave">Eficiencia en Operaciones
+Clave</h3>
+<p>Esta arquitectura de enlazamiento transforma la eficiencia de las
+operaciones que eran costosas en los <em>arrays</em>:</p>
+<table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">OperaciÃ³n</th>
+<th style="text-align: left;">Array (Peor Caso)</th>
+<th style="text-align: left;">Lista Enlazada</th>
+<th style="text-align: left;">RazÃ³n</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>InserciÃ³n</strong></td>
+<td style="text-align: left;"><span
+class="math inline"><em>O</em>(<em>N</em>)</span> (Mover todos los
+elementos)</td>
+<td style="text-align: left;"><strong><span
+class="math inline"><em>O</em>(1)</span></strong> (Solo reasignar
+punteros)</td>
+<td style="text-align: left;">Se rompe el enlace y se crea uno nuevo,
+sin desplazar datos.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>EliminaciÃ³n</strong></td>
+<td style="text-align: left;"><span
+class="math inline"><em>O</em>(<em>N</em>)</span> (Mover todos los
+elementos)</td>
+<td style="text-align: left;"><strong><span
+class="math inline"><em>O</em>(1)</span></strong> (Solo reasignar
+punteros)</td>
+<td style="text-align: left;">Se salta el nodo a eliminar, enlazando el
+anterior con el siguiente.</td>
+</tr>
+</tbody>
+</table>
+<p>El paso a la lista enlazada permite realizar inserciones y
+eliminaciones en tiempo constante (<span
+class="math inline"><em>O</em>(1)</span>) una vez que se ha encontrado
+el nodo anterior, resolviendo asÃ­ la principal ineficiencia de las
+estructuras de tamaÃ±o fijo.</p>
+
+</div>
+</body>
+</html>
+

@@ -1,0 +1,214 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" crossorigin href="/assets/content-01sust.css">
+</head>
+<body>
+<div class="main-content">
+<h2 id="evaluaciÃ³n-acceso-e-indexaciÃ³n-de-arrays">ðŸ“ EvaluaciÃ³n: Acceso
+e IndexaciÃ³n de Arrays</h2>
+<h3 id="pregunta-1-Ã­ndice-base-cero-y-lÃ­mites-de-rango">Pregunta 1:
+Ãndice Base Cero y LÃ­mites de Rango ðŸŽ¯</h3>
+<p>Un programador declara el siguiente <em>array</em>:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#define CAPACIDAD </span><span class="dv">8</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> inventario<span class="op">[</span>CAPACIDAD<span class="op">];</span></span></code></pre></div>
+<p><strong>Responde:</strong></p>
+<ol type="1">
+<li>Â¿CuÃ¡l es el Ã­ndice que corresponde al <strong>primer
+elemento</strong> del <em>array</em> <code>inventario</code>?</li>
+<li>Â¿CuÃ¡l es el Ã­ndice que corresponde al <strong>Ãºltimo
+elemento</strong> del <em>array</em> <code>inventario</code>?</li>
+<li>Si intentas acceder a <code>inventario[8]</code>, Â¿quÃ© sucede?
+(Elige una opciÃ³n)
+<ul>
+<li><ol type="a">
+<li>El compilador genera un error de sintaxis.</li>
+</ol></li>
+<li><ol start="2" type="a">
+<li>El programa se bloquea inmediatamente.</li>
+</ol></li>
+<li><ol start="3" type="a">
+<li>El programa accede a una posiciÃ³n de memoria fuera del array, lo que
+es peligroso.</li>
+</ol></li>
+</ul></li>
+</ol>
+<hr />
+<h3 id="pregunta-2-lectura-y-modificaciÃ³n-por-Ã­ndice">Pregunta 2:
+Lectura y ModificaciÃ³n por Ãndice ðŸ› ï¸</h3>
+<p>Analiza el siguiente cÃ³digo y predice el valor final de la variable
+<code>resultado</code> y el valor final en la posiciÃ³n
+<code>mi_array[1]</code>.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> mi_array<span class="op">[]</span> <span class="op">=</span> <span class="op">{</span><span class="dv">10</span><span class="op">,</span> <span class="dv">20</span><span class="op">,</span> <span class="dv">30</span><span class="op">,</span> <span class="dv">40</span><span class="op">};</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> resultado <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co">// Lectura</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>resultado <span class="op">=</span> mi_array<span class="op">[</span><span class="dv">0</span><span class="op">]</span> <span class="op">+</span> mi_array<span class="op">[</span><span class="dv">3</span><span class="op">];</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co">// ModificaciÃ³n</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>mi_array<span class="op">[</span><span class="dv">1</span><span class="op">]</span> <span class="op">=</span> mi_array<span class="op">[</span><span class="dv">2</span><span class="op">]</span> <span class="op">*</span> <span class="dv">2</span><span class="op">;</span></span></code></pre></div>
+<ol type="1">
+<li>Valor final de <code>resultado</code>:</li>
+<li>Valor final de <code>mi_array[1]</code>:</li>
+</ol>
+<hr />
+<h3
+id="pregunta-3-sintaxis-correcta-de-recorrido-con-bucle-for">Pregunta 3:
+Sintaxis Correcta de Recorrido con Bucle <code>for</code> ðŸ”„</h3>
+<p>Un <em>array</em> llamado <code>datos</code> tiene un tamaÃ±o de
+<strong>12</strong> elementos. Queremos recorrer todos los elementos,
+desde el primero hasta el Ãºltimo.</p>
+<p><strong>Â¿CuÃ¡l de los siguientes bucles <code>for</code> es la
+implementaciÃ³n correcta para el recorrido en C?</strong></p>
+<ul>
+<li><ol type="a">
+<li><code>for (int i = 1; i &lt;= 12; i++) { ... }</code></li>
+</ol></li>
+<li><ol start="2" type="a">
+<li><code>for (int i = 0; i &lt;= 12; i++) { ... }</code></li>
+</ol></li>
+<li><ol start="3" type="a">
+<li><code>for (int i = 0; i &lt; 12; i++) { ... }</code></li>
+</ol></li>
+<li><ol start="4" type="a">
+<li><code>for (int i = 0; i &lt; 11; i++) { ... }</code></li>
+</ol></li>
+</ul>
+<p><strong>Explica brevemente</strong> por quÃ© la opciÃ³n elegida es la
+correcta (enfÃ³cate en el inicio y la condiciÃ³n de parada).</p>
+<hr />
+<h3 id="pregunta-4-identificaciÃ³n-de-desbordamiento-de-Ã­ndice">Pregunta
+4: IdentificaciÃ³n de Desbordamiento de Ãndice ðŸš¨</h3>
+<p>Analiza el siguiente cÃ³digo que intenta sumar el valor de cada
+elemento. El tamaÃ±o del array es <strong>4</strong>.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#define N </span><span class="dv">4</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">(</span><span class="dt">void</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> valores<span class="op">[</span>N<span class="op">]</span> <span class="op">=</span> <span class="op">{</span><span class="dv">5</span><span class="op">,</span> <span class="dv">5</span><span class="op">,</span> <span class="dv">5</span><span class="op">,</span> <span class="dv">5</span><span class="op">};</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> suma <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Bucle con error lÃ³gico</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;=</span> N<span class="op">;</span> i<span class="op">++)</span> <span class="op">{</span> </span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>        suma <span class="op">+=</span> valores<span class="op">[</span>i<span class="op">];</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;Suma: </span><span class="sc">%d\n</span><span class="st">&quot;</span><span class="op">,</span> suma<span class="op">);</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<ol type="1">
+<li>Â¿En quÃ© lÃ­nea de cÃ³digo ocurre un <strong>acceso fuera de
+lÃ­mites</strong> o <strong>desbordamiento de Ã­ndice</strong> (<em>Index
+Out-of-Bounds</em>)?</li>
+<li>Â¿CuÃ¡l es el valor del Ã­ndice (<code>i</code>) que causa este
+problema?</li>
+<li>Â¿QuÃ© <strong>consecuencia</strong> grave puede tener este tipo de
+error de acceso en el programa (ademÃ¡s de un resultado incorrecto)?</li>
+</ol>
+<h2 id="soluciones-acceso-e-indexaciÃ³n-de-arrays">ðŸ”‘ Soluciones: Acceso
+e IndexaciÃ³n de Arrays</h2>
+<hr />
+<h3 id="pregunta-1-Ã­ndice-base-cero-y-lÃ­mites-de-rango-1">Pregunta 1:
+Ãndice Base Cero y LÃ­mites de Rango ðŸŽ¯</h3>
+<p>Para un array de tamaÃ±o 8:</p>
+<ol type="1">
+<li>Â¿CuÃ¡l es el Ã­ndice que corresponde al <strong>primer
+elemento</strong> del <em>array</em> <code>inventario</code>?
+<ul>
+<li><strong>Respuesta:</strong> <strong>0</strong> (C siempre usa
+indexaciÃ³n base cero).</li>
+</ul></li>
+<li>Â¿CuÃ¡l es el Ã­ndice que corresponde al <strong>Ãºltimo
+elemento</strong> del <em>array</em> <code>inventario</code>?
+<ul>
+<li><strong>Respuesta:</strong> <strong>7</strong> (<span
+class="math inline"><em>N</em>â€…âˆ’â€…1</span>, donde <span
+class="math inline"><em>N</em>â€„=â€„8</span>).</li>
+</ul></li>
+<li>Si intentas acceder a <code>inventario[8]</code>, Â¿quÃ© sucede?
+(Elige una opciÃ³n)
+<ul>
+<li><strong>Respuesta:</strong> <strong>c) El programa accede a una
+posiciÃ³n de memoria fuera del array, lo que es peligroso.</strong> (C no
+verifica lÃ­mites, causando un acceso fuera de lÃ­mites o <em>buffer
+overflow</em>).</li>
+</ul></li>
+</ol>
+<hr />
+<h3 id="pregunta-2-lectura-y-modificaciÃ³n-por-Ã­ndice-1">Pregunta 2:
+Lectura y ModificaciÃ³n por Ãndice ðŸ› ï¸</h3>
+<p><strong>CÃ³digo Analizado:</strong>
+<code>int mi_array[] = {10, 20, 30, 40};</code></p>
+<ol type="1">
+<li>Valor final de <code>resultado</code>:
+<ul>
+<li><strong>AnÃ¡lisis:</strong>
+<code>resultado = mi_array[0] + mi_array[3];</code></li>
+<li><code>resultado = 10 + 40;</code></li>
+<li><strong>Respuesta:</strong> <strong>50</strong></li>
+</ul></li>
+<li>Valor final de <code>mi_array[1]</code>:
+<ul>
+<li><strong>AnÃ¡lisis:</strong>
+<code>mi_array[1] = mi_array[2] * 2;</code></li>
+<li><code>mi_array[1] = 30 * 2;</code></li>
+<li><strong>Respuesta:</strong> <strong>60</strong></li>
+</ul></li>
+</ol>
+<hr />
+<h3
+id="pregunta-3-sintaxis-correcta-de-recorrido-con-bucle-for-1">Pregunta
+3: Sintaxis Correcta de Recorrido con Bucle <code>for</code> ðŸ”„</h3>
+<p><strong>Â¿CuÃ¡l de los siguientes bucles <code>for</code> es la
+implementaciÃ³n correcta para el recorrido en C?</strong></p>
+<ul>
+<li><strong>Respuesta:</strong> <strong>c)
+<code>for (int i = 0; i &lt; 12; i++) { ... }</code></strong></li>
+</ul>
+<p><strong>ExplicaciÃ³n:</strong> * <strong>Inicio:</strong> La variable
+de Ã­ndice (<code>i</code>) debe iniciar en <strong>0</strong> (el Ã­ndice
+del primer elemento). * <strong>CondiciÃ³n de Parada:</strong> El bucle
+debe continuar <strong>mientras <code>i</code> sea menor que el tamaÃ±o
+total (12)</strong>. El Ãºltimo Ã­ndice vÃ¡lido es <span
+class="math inline">11</span>, por lo tanto, el bucle debe detenerse
+<em>antes</em> de que <code>i</code> llegue a <span
+class="math inline">12</span>.</p>
+<hr />
+<h3
+id="pregunta-4-identificaciÃ³n-de-desbordamiento-de-Ã­ndice-1">Pregunta 4:
+IdentificaciÃ³n de Desbordamiento de Ãndice ðŸš¨</h3>
+<p><strong>CÃ³digo Analizado:</strong> Array de tamaÃ±o <span
+class="math inline"><em>N</em>â€„=â€„4</span> con el bucle
+<code>for (int i = 0; i &lt;= N; i++)</code>.</p>
+<ol type="1">
+<li>Â¿En quÃ© lÃ­nea de cÃ³digo ocurre un <strong>acceso fuera de
+lÃ­mites</strong> o <strong>desbordamiento de Ã­ndice</strong>?
+<ul>
+<li><strong>Respuesta:</strong> <code>suma += valores[i];</code> (dentro
+del bucle).</li>
+</ul></li>
+<li>Â¿CuÃ¡l es el valor del Ã­ndice (<code>i</code>) que causa este
+problema?
+<ul>
+<li><strong>Respuesta:</strong> <strong>4</strong>. El bucle se ejecuta
+para <span class="math inline"><em>i</em>â€„=â€„0,â€†1,â€†2,â€†3</span> (vÃ¡lidos)
+y <span class="math inline"><em>i</em>â€„=â€„4</span> (invÃ¡lido, ya que el
+Ã­ndice mÃ¡ximo es <span class="math inline">3</span>).</li>
+</ul></li>
+<li>Â¿QuÃ© <strong>consecuencia</strong> grave puede tener este tipo de
+error de acceso en el programa (ademÃ¡s de un resultado incorrecto)?
+<ul>
+<li><strong>Respuesta:</strong> <strong>CorrupciÃ³n de memoria</strong>
+(sobrescribir datos de otras variables en la memoria contigua, conocido
+como <em>Buffer Overflow</em>) o un <strong>bloqueo</strong> inmediato
+del programa (<em>Segmentation Fault</em> o <em>Access
+Violation</em>).</li>
+</ul></li>
+</ol>
+
+</div>
+</body>
+</html>
+

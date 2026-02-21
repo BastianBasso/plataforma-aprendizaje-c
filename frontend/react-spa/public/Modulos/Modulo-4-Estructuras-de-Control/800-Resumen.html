@@ -1,0 +1,186 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" crossorigin href="/assets/content-01sust.css">
+</head>
+<body>
+<div class="main-content">
+<h1><strong>Resumen Módulo: Estructuras de Control de Flujo (Decisión y
+Repetición)</strong></h1>
+<p>Este módulo se centró en la esencia de la programación: el
+<strong>Control de Flujo</strong>. Aprendiste a desviar la ejecución
+lineal del programa para tomar <strong>decisiones</strong> (estructuras
+condicionales) y para ejecutar tareas <strong>repetitivas</strong>
+(estructuras de bucle), permitiendo la creación de lógica compleja e
+interactiva.</p>
+<p><strong>1. El Control de Flujo: Desviando la Ejecución
+Lineal</strong></p>
+<table>
+<colgroup>
+<col style="width: 26%" />
+<col style="width: 42%" />
+<col style="width: 31%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Concepto</strong></th>
+<th><strong>Flujo de Ejecución</strong></th>
+<th><strong>Herramientas en C</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Lineal (Secuencial)</strong></td>
+<td>Las instrucciones se ejecutan <strong>una tras otra</strong> en el
+orden en que fueron escritas.</td>
+<td>Código base sin if ni bucles.</td>
+</tr>
+<tr class="even">
+<td><strong>Estructurado (Controlado)</strong></td>
+<td>El programa puede <strong>saltar</strong>, <strong>decidir</strong>
+qué código ejecutar o <strong>repetir</strong> bloques de código.</td>
+<td>if, else, switch, for, while, do-while, break, continue.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>2. Estructuras de Decisión (Condicionales)</strong></p>
+<p>Estas estructuras permiten que el programa elija qué camino seguir.
+Se basan en la evaluación de expresiones <strong>relacionales</strong>
+(&lt;, &gt;) y <strong>lógicas</strong> (&amp;&amp;, ||, !).</p>
+<table>
+<colgroup>
+<col style="width: 22%" />
+<col style="width: 27%" />
+<col style="width: 18%" />
+<col style="width: 32%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Estructura</strong></th>
+<th><strong>Propósito</strong></th>
+<th><strong>Condición</strong></th>
+<th><strong>Uso Clave</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>if / if-else</strong></td>
+<td>Tomar una decisión binaria (dos caminos: si se cumple o no se
+cumple).</td>
+<td>Simple</td>
+<td>Validar una única lógica o un camino alternativo.</td>
+</tr>
+<tr class="even">
+<td><strong>else if</strong></td>
+<td>Evaluar una <strong>secuencia de condiciones</strong>
+exclusivas.</td>
+<td>Múltiple y secuencial</td>
+<td>Clasificar notas, determinar rangos, crear cadenas de decisión donde
+solo una opción es posible.</td>
+</tr>
+<tr class="odd">
+<td><strong>switch</strong></td>
+<td>Ejecutar un bloque de código basado en la <strong>coincidencia
+exacta</strong> de un valor (típicamente entero o carácter).</td>
+<td>Único Valor</td>
+<td>Implementación de <strong>menús</strong>, selección de días de la
+semana, manejo de códigos de error. Requiere break en cada case para
+evitar el <em>fall-through</em>.</td>
+</tr>
+<tr class="even">
+<td><strong>Anidamiento (if anidado)</strong></td>
+<td>Colocar una estructura condicional <strong>dentro</strong> de
+otra.</td>
+<td>Compleja</td>
+<td>Refinar una condición previa (ej: Si es administrador <em>Y</em> su
+contraseña es correcta).</td>
+</tr>
+</tbody>
+</table>
+<p><strong>3. Estructuras de Repetición (Bucles)</strong></p>
+<p>Estas estructuras permiten ejecutar un bloque de código repetidamente
+hasta que una condición de terminación se cumpla.</p>
+<table>
+<colgroup>
+<col style="width: 18%" />
+<col style="width: 21%" />
+<col style="width: 29%" />
+<col style="width: 29%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Estructura</strong></th>
+<th><strong>Tipo de Repetición</strong></th>
+<th><strong>Evaluación de Condición</strong></th>
+<th><strong>Ejecución Mínima</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>for</strong></td>
+<td><strong>Por Contador Fijo</strong></td>
+<td><strong>Al inicio</strong> (antes de cada iteración).</td>
+<td><strong>Cero</strong> (si la condición inicial es falsa).</td>
+</tr>
+<tr class="even">
+<td><strong>while</strong></td>
+<td><strong>Condicional Previo</strong></td>
+<td><strong>Al inicio</strong>. Ideal para patrones de
+<strong>Centinela</strong> (se repite hasta encontrar un valor
+específico, ej: $0$).</td>
+<td><strong>Cero</strong> (si la condición inicial es falsa).</td>
+</tr>
+<tr class="odd">
+<td><strong>do-while</strong></td>
+<td><strong>Condicional Posterior</strong></td>
+<td><strong>Al final</strong> de la iteración.</td>
+<td><strong>Una vez</strong> (garantizada, incluso si la condición es
+falsa). Ideal para <strong>Menús</strong> interactivos.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>4. Control Fino de Bucles (break y continue)</strong></p>
+<p>Estas sentencias se utilizan dentro de los bucles para modificar el
+flujo de repetición de forma inmediata.</p>
+<table>
+<colgroup>
+<col style="width: 17%" />
+<col style="width: 21%" />
+<col style="width: 31%" />
+<col style="width: 28%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Sentencia</strong></th>
+<th><strong>Propósito</strong></th>
+<th><strong>Mecanismo</strong></th>
+<th><strong>Ejemplo de Uso</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>break</strong></td>
+<td><strong>Terminación Forzada</strong>.</td>
+<td>Sale <strong>inmediatamente</strong> del bucle (for, while,
+do-while) o switch más interno, ignorando la condición principal.</td>
+<td>Límites de intentos, búsqueda de un elemento (detener la búsqueda al
+encontrarlo), salir de un while(1).</td>
+</tr>
+<tr class="even">
+<td><strong>continue</strong></td>
+<td><strong>Salto de Iteración</strong>.</td>
+<td>Omite el resto del código en la iteración <strong>actual</strong> y
+pasa inmediatamente a la siguiente vuelta del bucle.</td>
+<td><strong>Filtrado</strong> de datos (ej: ignorar o saltar el
+procesamiento de números pares o valores inválidos).</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</body>
+</html>
+

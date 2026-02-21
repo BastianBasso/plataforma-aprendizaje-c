@@ -23,7 +23,7 @@ export function SessionProvider({ children }) {
 
   const refresh = useCallback(async () => {
     setStatus(prev => (prev === 'authenticated' ? prev : 'loading'));
-    const { res, json } = await fetchJson('/search-user');
+    const { res, json } = await fetchJson('/api/search-user');
 
     if (res.ok && json?.success) {
       setUser(json.user);
@@ -37,7 +37,7 @@ export function SessionProvider({ children }) {
   }, []);
 
   const logout = useCallback(async () => {
-    await fetchJson('/logout', { method: 'POST' });
+    await fetchJson('/api/logout', { method: 'POST' });
     try {
       sessionStorage.removeItem('userId');
     } catch {

@@ -1,0 +1,285 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" crossorigin href="/assets/content-01sust.css">
+</head>
+<body>
+<div class="main-content">
+<h2 id="sintaxis-de-la-estructura-struct">Sintaxis de la Estructura
+(<code>struct</code>) ðŸ› ï¸</h2>
+<p>La estructura (<code>struct</code>) es la herramienta que C nos da
+para definir nuestros propios tipos de datos compuestos. Definir una
+<code>struct</code> es como crear una <strong>plantilla</strong> o
+<strong>receta</strong> que describe cÃ³mo se organizarÃ¡ la informaciÃ³n
+en la memoria.</p>
+<h3 id="componentes-de-la-sintaxis">Componentes de la Sintaxis</h3>
+<p>La sintaxis para definir una estructura se compone de tres elementos
+clave:</p>
+<ol type="1">
+<li><strong>Palabra Clave <code>struct</code>:</strong> Indica al
+compilador que se estÃ¡ iniciando la definiciÃ³n de un tipo de dato
+compuesto.</li>
+<li><strong>Nombre de Etiqueta (Tag Name):</strong> Es un identificador
+que se le da al nuevo tipo de dato (ej. <code>Persona</code>,
+<code>Fecha</code>, <code>Producto</code>).</li>
+<li><strong>Miembros (Fields):</strong> Son las variables internas que
+componen la estructura, definidas entre llaves (<code>{}</code>) y que
+representan los atributos de la entidad modelada.</li>
+</ol>
+<h3 id="estructura-general">Estructura General</h3>
+<p>La definiciÃ³n completa de la estructura debe ir siempre
+<strong>terminada con un punto y coma (<code>;</code>)</strong> despuÃ©s
+de la llave de cierre.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">struct</span> Nombre_Etiqueta <span class="op">{</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    Tipo1 miembro_1<span class="op">;</span>    <span class="co">// Primer atributo</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    Tipo2 miembro_2<span class="op">;</span>    <span class="co">// Segundo atributo</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    Tipo3 miembro_3<span class="op">[</span>N<span class="op">];</span> <span class="co">// Puede incluir arrays o punteros</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="op">};</span> <span class="co">// Â¡No olvidar el punto y coma final!</span></span></code></pre></div>
+<h3 id="ejemplo-prÃ¡ctico-modelando-un-punto-2d">Ejemplo PrÃ¡ctico:
+Modelando un Punto 2D</h3>
+<p>Para modelar un punto en un plano cartesiano, que necesita dos
+coordenadas (X e Y), ambas enteras:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co">// DefiniciÃ³n del molde &quot;Punto&quot;</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="kw">struct</span> Punto <span class="op">{</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> x<span class="op">;</span> <span class="co">// Miembro para la coordenada X</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> y<span class="op">;</span> <span class="co">// Miembro para la coordenada Y</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="op">};</span> </span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co">// El compilador ahora conoce un nuevo tipo de dato llamado &quot;struct Punto&quot;</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    <span class="co">// AÃºn no estamos creando la variable, solo la definimos.</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<blockquote>
+<p><strong>Nota:</strong> La definiciÃ³n de la <code>struct</code>
+generalmente se coloca <strong>fuera</strong> de la funciÃ³n
+<code>main()</code> (y de cualquier otra funciÃ³n), tÃ­picamente al inicio
+del archivo, para que estÃ© disponible globalmente para el resto del
+cÃ³digo.</p>
+</blockquote>
+<h2 id="declaraciÃ³n-de-variables-struct">DeclaraciÃ³n de Variables
+<code>struct</code> ðŸ‘¤</h2>
+<p>Una vez que hemos definido la plantilla o receta de la estructura
+(<code>struct</code>), el siguiente paso es <strong>declarar
+variables</strong> de ese nuevo tipo. Declarar una variable de tipo
+<code>struct</code> es el momento en que el compilador <strong>reserva
+el espacio de memoria</strong> necesario para almacenar todos sus
+miembros.</p>
+<h3 id="sintaxis-de-declaraciÃ³n">Sintaxis de DeclaraciÃ³n</h3>
+<p>Para declarar una variable, debemos usar la palabra clave
+<code>struct</code>, seguida del <strong>nombre de la etiqueta</strong>
+que definimos, y finalmente, el <strong>nombre que le daremos a la
+variable</strong>.</p>
+<p><span class="math display">â€˜struct Nombre_Etiqueta
+nombre_variable;â€˜</span></p>
+<p><strong>Ejemplo PrÃ¡ctico:</strong></p>
+<p>Si previamente definimos la estructura <code>Punto</code> y la
+estructura <code>Libro</code>:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">// 1. DefiniciÃ³n de las plantillas (hecho previamente)</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="kw">struct</span> Punto <span class="op">{</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> x<span class="op">;</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> y<span class="op">;</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="kw">struct</span> Libro <span class="op">{</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    <span class="dt">char</span> titulo<span class="op">[</span><span class="dv">50</span><span class="op">];</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> paginas<span class="op">;</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>    <span class="co">// 2. DeclaraciÃ³n de variables:</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Declara una variable llamada &#39;origen&#39; del tipo struct Punto.</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>    <span class="kw">struct</span> Punto origen<span class="op">;</span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Declara una variable llamada &#39;mi_libro_favorito&#39; del tipo struct Libro.</span></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>    <span class="kw">struct</span> Libro mi_libro_favorito<span class="op">;</span></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Podemos declarar mÃºltiples variables del mismo tipo en una lÃ­nea:</span></span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>    <span class="kw">struct</span> Punto p1<span class="op">,</span> p2<span class="op">,</span> p3<span class="op">;</span></span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p><strong>Punto Clave:</strong></p>
+<p>Note que, a diferencia de los tipos primitivos (<code>int x;</code>),
+al declarar una variable <code>struct</code>, siempre debemos incluir
+explÃ­citamente la palabra clave <strong><code>struct</code></strong>
+antes del nombre de la etiqueta (<code>struct Punto</code>). Esta es una
+<strong>regla de sintaxis</strong> obligatoria en C.</p>
+<p>La variable <code>origen</code> ahora ocupa un espacio en memoria lo
+suficientemente grande como para contener un <code>int</code> para
+<code>x</code> y un <code>int</code> para <code>y</code>.</p>
+<h2 id="inicializaciÃ³n-de-estructuras-structs">InicializaciÃ³n de
+Estructuras (Structs) âœ¨</h2>
+<p>Al igual que con cualquier variable, es una buena prÃ¡ctica
+inicializar los miembros de una estructura al momento de declararla. C
+ofrece dos mÃ©todos principales para esta inicializaciÃ³n:</p>
+<hr />
+<h3 id="inicializaciÃ³n-por-orden-posicional">1. InicializaciÃ³n por Orden
+(Posicional)</h3>
+<p>Este es el mÃ©todo tradicional y requiere que los valores se
+proporcionen dentro de llaves (<code>{}</code>) en el <strong>mismo
+orden</strong> en que los miembros fueron definidos en la
+estructura.</p>
+<p><strong>Ventajas:</strong> Es conciso. <strong>Desventajas:</strong>
+Es <strong>peligroso</strong> si la definiciÃ³n de la <code>struct</code>
+cambia de orden, ya que los datos se asignarÃ­an incorrectamente sin que
+el compilador avise.</p>
+<p><strong>Ejemplo:</strong> Dada la estructura <code>Producto</code>
+con el orden: <code>ID</code> (entero), <code>precio</code> (flotante),
+<code>cantidad</code> (entero).</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">struct</span> Producto <span class="op">{</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> id<span class="op">;</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">float</span> precio<span class="op">;</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> cantidad<span class="op">;</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Los valores se asignan en el orden: 101, 19.99, 50</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    <span class="kw">struct</span> Producto teclado <span class="op">=</span> <span class="op">{</span><span class="dv">101</span><span class="op">,</span> <span class="fl">19.99</span><span class="bu">f</span><span class="op">,</span> <span class="dv">50</span><span class="op">};</span> </span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Si la struct cambiara, y &#39;cantidad&#39; estuviera antes que &#39;precio&#39;, </span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    <span class="co">// 19.99f se intentarÃ­a asignar a la cantidad (int), causando errores.</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<hr />
+<h3 id="inicializaciÃ³n-por-nombre-de-campo-designada">2. InicializaciÃ³n
+por Nombre de Campo (Designada)</h3>
+<p>Este mÃ©todo, introducido en el estÃ¡ndar C99, es mÃ¡s seguro y legible.
+Permite inicializar los miembros <strong>nombrando explÃ­citamente el
+campo</strong> al que se asigna el valor, usando la sintaxis
+<strong><code>.nombre_campo = valor</code></strong>.</p>
+<p><strong>Ventajas:</strong> Es <strong>seguro</strong> y
+<strong>flexible</strong>. El orden de los inicializadores no importa, y
+se pueden omitir campos (los cuales se inicializarÃ¡n a cero o
+<code>NULL</code>). <strong>Desventajas:</strong> Es ligeramente mÃ¡s
+verboso.</p>
+<p><strong>Ejemplo:</strong> Usando la misma estructura
+<code>Producto</code>:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">struct</span> Producto <span class="op">{</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> id<span class="op">;</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">float</span> precio<span class="op">;</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> cantidad<span class="op">;</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    <span class="co">// InicializaciÃ³n nombrando cada campo</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>    <span class="kw">struct</span> Producto mouse <span class="op">=</span> <span class="op">{</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>        <span class="op">.</span>precio <span class="op">=</span> <span class="fl">12.50</span><span class="bu">f</span><span class="op">,</span> </span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>        <span class="op">.</span>cantidad <span class="op">=</span> <span class="dv">100</span><span class="op">,</span> </span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>        <span class="op">.</span>id <span class="op">=</span> <span class="dv">205</span> <span class="co">// El orden no importa</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>    <span class="op">};</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>    <span class="co">// InicializaciÃ³n parcial: &#39;precio&#39; serÃ¡ 0.0f</span></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>    <span class="kw">struct</span> Producto monitor <span class="op">=</span> <span class="op">{</span></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>        <span class="op">.</span>id <span class="op">=</span> <span class="dv">300</span><span class="op">,</span> </span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>        <span class="op">.</span>cantidad <span class="op">=</span> <span class="dv">20</span></span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>        <span class="co">// .precio se omite</span></span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>    <span class="op">};</span></span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<blockquote>
+<p>ðŸ’¡ <strong>RecomendaciÃ³n:</strong> La inicializaciÃ³n por
+<strong>Nombre de Campo (Designada)</strong> es siempre la mejor
+prÃ¡ctica, ya que mejora la legibilidad del cÃ³digo y lo hace resistente a
+futuros cambios en la definiciÃ³n de la <code>struct</code>.</p>
+</blockquote>
+<h2 id="el-uso-de-typedef-creando-un-alias-para-struct">El Uso de
+<code>typedef</code>: Creando un Alias para <code>struct</code> ðŸ·ï¸</h2>
+<p>La palabra clave <strong><code>typedef</code></strong> (abreviatura
+de <em>type definition</em>) no crea un nuevo tipo de dato, sino que
+crea un <strong>alias</strong> o un <strong>sinÃ³nimo</strong> mÃ¡s corto
+y limpio para un tipo de dato ya existente.</p>
+<p>Aplicada a las estructuras, <code>typedef</code> resuelve la
+necesidad de escribir la palabra clave <code>struct</code> cada vez que
+declaramos una variable.</p>
+<h3 id="sintaxis-y-funciÃ³n">Sintaxis y FunciÃ³n</h3>
+<p>Para usar <code>typedef</code>, se coloca antes de la definiciÃ³n de
+la estructura, y el alias deseado se coloca al final, despuÃ©s de la
+llave de cierre y antes del punto y coma.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">// 1. DefiniciÃ³n sin alias (uso tradicional)</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="kw">struct</span> Persona <span class="op">{</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">char</span> nombre<span class="op">[</span><span class="dv">50</span><span class="op">];</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> edad<span class="op">;</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co">// 2. DefiniciÃ³n usando typedef para crear un alias</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="kw">typedef</span> <span class="kw">struct</span> Fecha_tag <span class="op">{</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> dia<span class="op">;</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> mes<span class="op">;</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> anio<span class="op">;</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> Fecha<span class="op">;</span> <span class="co">// &lt;-- &quot;Fecha&quot; es el alias o sinÃ³nimo del tipo &quot;struct Fecha_tag&quot;</span></span></code></pre></div>
+<h3 id="declaraciÃ³n-de-variables-antes-y-despuÃ©s">DeclaraciÃ³n de
+Variables: Antes y DespuÃ©s</h3>
+<p>El uso de <code>typedef</code> mejora significativamente la
+<strong>legibilidad</strong> y <strong>limpieza</strong> del cÃ³digo,
+haciendo que las estructuras se utilicen de manera similar a los tipos
+primitivos:</p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Forma Tradicional (Sin
+<code>typedef</code>)</th>
+<th style="text-align: center;">Forma Simplificada (Con
+<code>typedef</code>)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td
+style="text-align: center;"><code>struct Persona mi_amigo;</code></td>
+<td style="text-align: center;"><code>Fecha nacimiento;</code></td>
+</tr>
+<tr class="even">
+<td
+style="text-align: center;"><code>struct Persona tu_amigo;</code></td>
+<td style="text-align: center;"><code>Fecha vencimiento;</code></td>
+</tr>
+</tbody>
+</table>
+<h4 id="ejemplo-prÃ¡ctico">Ejemplo PrÃ¡ctico</h4>
+<div class="sourceCode" id="cb7"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co">// Paso 1: Definir la estructura y el alias</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="kw">typedef</span> <span class="kw">struct</span> Empleado_tag <span class="op">{</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> id<span class="op">;</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">float</span> salario<span class="op">;</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> Empleado<span class="op">;</span> <span class="co">// &lt;-- El alias es &#39;Empleado&#39;</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>    <span class="co">// DeclaraciÃ³n sin typedef (mÃ¡s verbosa)</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>    <span class="kw">struct</span> Empleado_tag jefe<span class="op">;</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>    <span class="co">// DeclaraciÃ³n CON typedef (mÃ¡s limpia)</span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>    Empleado tecnico<span class="op">;</span> <span class="co">// Ahora &#39;Empleado&#39; es reconocido como un tipo.</span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>    <span class="co">// InicializaciÃ³n del miembro del alias</span></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>    tecnico<span class="op">.</span>id <span class="op">=</span> <span class="dv">10</span><span class="op">;</span></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;ID del tecnico: </span><span class="sc">%d\n</span><span class="st">&quot;</span><span class="op">,</span> tecnico<span class="op">.</span>id<span class="op">);</span></span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<blockquote>
+<p><strong>ConvenciÃ³n ComÃºn:</strong> Es muy comÃºn en la programaciÃ³n en
+C omitir el <em>Nombre de Etiqueta</em> (<code>Empleado_tag</code>)
+cuando se usa <code>typedef</code>, dejando solo el alias final. Sin
+embargo, incluir el nombre de etiqueta es Ãºtil si la estructura necesita
+referenciarse a sÃ­ misma (lo que se verÃ¡ en temas avanzados como listas
+enlazadas).</p>
+</blockquote>
+
+</div>
+</body>
+</html>
+

@@ -1,0 +1,332 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" crossorigin href="/assets/content-01sust.css">
+</head>
+<body>
+<div class="main-content">
+<h2 id="evaluaciÃ³n-introducciÃ³n-y-sintaxis-de-arrays">ðŸ“ EvaluaciÃ³n:
+IntroducciÃ³n y Sintaxis de Arrays</h2>
+<h3 id="objetivo">Objetivo</h3>
+<p>Verificar la comprensiÃ³n de las reglas de
+<strong>declaraciÃ³n</strong>, <strong>inicializaciÃ³n</strong>,
+<strong>homogeneidad</strong> y la <strong>naturaleza estÃ¡tica</strong>
+de los arrays en C.</p>
+<hr />
+<h3
+id="pregunta-1-validaciÃ³n-de-declaraciÃ³n-y-errores-de-tamaÃ±o">Pregunta
+1: ValidaciÃ³n de DeclaraciÃ³n y Errores de TamaÃ±o âŒ</h3>
+<p>A continuaciÃ³n, se muestran varios intentos de declarar
+<em>arrays</em> en C. Indica si la declaraciÃ³n es <strong>VÃ¡lida
+(V)</strong> o <strong>InvÃ¡lida (I)</strong>. Si es
+<strong>InvÃ¡lida</strong>, explica <strong>brevemente</strong> la razÃ³n
+(regla que rompe).</p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">CÃ³digo</th>
+<th style="text-align: left;">VÃ¡lido/InvÃ¡lido</th>
+<th style="text-align: left;">RazÃ³n (Si es InvÃ¡lido)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>int vector_a[15];</code></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>float precios_b[n];</code>
+<em>(Asumiendo <code>int n = 10;</code>)</em></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td
+style="text-align: left;"><code>int datos_c[5] = {10.5, 20};</code></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td
+style="text-align: left;"><code>const int LIMITE = 7; char letras_d[LIMITE];</code></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="pregunta-2-inicializaciÃ³n-implÃ­cita-y-tamaÃ±o">Pregunta 2:
+InicializaciÃ³n ImplÃ­cita y TamaÃ±o ðŸ“</h3>
+<p>Analiza las siguientes inicializaciones de arrays. Determina el
+<strong>tamaÃ±o total</strong> que tendrÃ¡ el <em>array</em> en memoria y
+el <strong>valor especÃ­fico</strong> de un elemento particular.</p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">CÃ³digo</th>
+<th style="text-align: left;">TamaÃ±o del Array (Elementos)</th>
+<th style="text-align: left;">Valor de la PosiciÃ³n Solicitada</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td
+style="text-align: left;"><code>int a[] = {1, 2, 3, 4, 5};</code></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><code>a[4]</code> = ?</td>
+</tr>
+<tr class="even">
+<td
+style="text-align: left;"><code>float b[10] = {1.0f, 2.0f};</code></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><code>b[5]</code> = ?</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>char c[3] = {'X'};</code></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><code>c[2]</code> = ?</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3
+id="pregunta-3-desbordamiento-de-bÃºfer-buffer-overflow-y-memoria">Pregunta
+3: Desbordamiento de BÃºfer (<em>Buffer Overflow</em>) y Memoria ðŸ›‘</h3>
+<p>El siguiente fragmento de cÃ³digo intenta modificar y acceder a
+elementos fuera del lÃ­mite declarado del <em>array</em>.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> valores<span class="op">[</span><span class="dv">4</span><span class="op">]</span> <span class="op">=</span> <span class="op">{</span><span class="dv">10</span><span class="op">,</span> <span class="dv">20</span><span class="op">,</span> <span class="dv">30</span><span class="op">,</span> <span class="dv">40</span><span class="op">};</span> <span class="co">// indices validos: 0, 1, 2, 3</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> x <span class="op">=</span> <span class="dv">5</span><span class="op">;</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co">// El array estÃ¡ inmediatamente seguido por la variable &#39;x&#39; en memoria (caso hipotÃ©tico)</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>valores<span class="op">[</span><span class="dv">4</span><span class="op">]</span> <span class="op">=</span> <span class="dv">99</span><span class="op">;</span> <span class="co">// Se escribe en el indice 4 (fuera de limites)</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co">// 1. Â¿CuÃ¡l es el Ãºltimo Ã­ndice vÃ¡lido que el programador puede usar en &#39;valores&#39;?</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co">// 2. Si el compilador colocÃ³ la variable &#39;x&#39; inmediatamente despuÃ©s del array &#39;valores&#39;, Â¿quÃ© valor contendrÃ­a ahora la variable &#39;x&#39; despuÃ©s de la ejecuciÃ³n de valores[4] = 99;?</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co">// 3. Â¿CÃ³mo se llama en programaciÃ³n al acto de escribir fuera de los lÃ­mites de un array estÃ¡tico?</span></span></code></pre></div>
+<hr />
+<h3 id="pregunta-4-cÃ¡lculo-de-memoria-y-sizeof">Pregunta 4: CÃ¡lculo de
+Memoria y <code>sizeof()</code> ðŸ§ </h3>
+<p>Sabiendo que un <code>int</code> ocupa <strong>4 bytes</strong> y un
+<code>float</code> ocupa <strong>4 bytes</strong> en el sistema del
+curso, usa el operador <code>sizeof()</code> para predecir las
+siguientes salidas:</p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">CÃ¡lculo de <code>sizeof()</code></th>
+<th style="text-align: left;">Resultado Esperado (en bytes)</th>
+<th style="text-align: left;">Â¿QuÃ© representa el resultado?</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>sizeof(int_array[0])</code></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">El tamaÃ±o de <strong>un solo
+elemento</strong>.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>sizeof(float_array)</code>
+<em>(Declarado como <code>float float_array[8];</code>)</em></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">El tamaÃ±o <strong>total</strong> del
+array.</td>
+</tr>
+<tr class="odd">
+<td
+style="text-align: left;"><code>sizeof(int_array) / sizeof(int_array[0])</code></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">El <strong>nÃºmero de elementos</strong> en
+el array.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="soluciones-introducciÃ³n-y-sintaxis-de-arrays">Soluciones:
+IntroducciÃ³n y Sintaxis de Arrays</h2>
+<p>AquÃ­ estÃ¡n las respuestas correctas para la evaluaciÃ³n de Arrays,
+diseÃ±adas para validar tu comprensiÃ³n de la sintaxis y las reglas de
+inicializaciÃ³n y lÃ­mites en C.</p>
+<hr />
+<h3
+id="pregunta-1-validaciÃ³n-de-declaraciÃ³n-y-errores-de-tamaÃ±o-1">Pregunta
+1: ValidaciÃ³n de DeclaraciÃ³n y Errores de TamaÃ±o</h3>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">CÃ³digo</th>
+<th style="text-align: left;">VÃ¡lido/InvÃ¡lido</th>
+<th style="text-align: left;">RazÃ³n (Si es InvÃ¡lido)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>int vector_a[15];</code></td>
+<td style="text-align: left;"><strong>VÃ¡lida (V)</strong></td>
+<td style="text-align: left;">El tamaÃ±o es un literal constante.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>float precios_b[n];</code>
+<em>(Asumiendo <code>int n = 10;</code>)</em></td>
+<td style="text-align: left;"><strong>InvÃ¡lida (I)</strong></td>
+<td style="text-align: left;">El tamaÃ±o debe ser una <strong>constante
+de tiempo de compilaciÃ³n</strong>, no una variable (<code>n</code>) cuyo
+valor se define en tiempo de ejecuciÃ³n.</td>
+</tr>
+<tr class="odd">
+<td
+style="text-align: left;"><code>int datos_c[5] = {10.5, 20};</code></td>
+<td style="text-align: left;"><strong>InvÃ¡lida (I)</strong></td>
+<td style="text-align: left;">Rompe la regla de
+<strong>homogeneidad</strong>. Se intenta inicializar un array de
+<code>int</code> con un valor <code>float</code>
+(<code>10.5</code>).</td>
+</tr>
+<tr class="even">
+<td
+style="text-align: left;"><code>const int LIMITE = 7; char letras_d[LIMITE];</code></td>
+<td style="text-align: left;"><strong>VÃ¡lida (V)</strong></td>
+<td style="text-align: left;"><code>const int</code> se usa para
+declarar el tamaÃ±o de un array estÃ¡tico, ya que su valor es fijo en
+tiempo de compilaciÃ³n.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="pregunta-2-inicializaciÃ³n-implÃ­cita-y-tamaÃ±o-1">Pregunta 2:
+InicializaciÃ³n ImplÃ­cita y TamaÃ±o</h3>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">CÃ³digo</th>
+<th style="text-align: left;">TamaÃ±o del Array (Elementos)</th>
+<th style="text-align: left;">Valor de la PosiciÃ³n Solicitada</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td
+style="text-align: left;"><code>int a[] = {1, 2, 3, 4, 5};</code></td>
+<td style="text-align: left;"><strong>5</strong></td>
+<td style="text-align: left;"><code>a[4]</code> =
+<strong>5</strong></td>
+</tr>
+<tr class="even">
+<td
+style="text-align: left;"><code>float b[10] = {1.0f, 2.0f};</code></td>
+<td style="text-align: left;"><strong>10</strong></td>
+<td style="text-align: left;"><code>b[5]</code> = <strong>0.0f</strong>
+(InicializaciÃ³n parcial a cero)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>char c[3] = {'X'};</code></td>
+<td style="text-align: left;"><strong>3</strong></td>
+<td style="text-align: left;"><code>c[2]</code> = <strong>0</strong> o
+<strong><code>\0</code></strong> (CarÃ¡cter nulo, inicializaciÃ³n
+parcial)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3
+id="pregunta-3-desbordamiento-de-bÃºfer-buffer-overflow-y-memoria-1">Pregunta
+3: Desbordamiento de BÃºfer (<em>Buffer Overflow</em>) y Memoria</h3>
+<p><strong>CÃ³digo Analizado:</strong></p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> valores<span class="op">[</span><span class="dv">4</span><span class="op">]</span> <span class="op">=</span> <span class="op">{</span><span class="dv">10</span><span class="op">,</span> <span class="dv">20</span><span class="op">,</span> <span class="dv">30</span><span class="op">,</span> <span class="dv">40</span><span class="op">};</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> x <span class="op">=</span> <span class="dv">5</span><span class="op">;</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>valores<span class="op">[</span><span class="dv">4</span><span class="op">]</span> <span class="op">=</span> <span class="dv">99</span><span class="op">;</span></span></code></pre></div>
+<ol type="1">
+<li><p><strong>Â¿CuÃ¡l es el Ãºltimo Ã­ndice vÃ¡lido que el programador puede
+usar en â€˜valoresâ€™?</strong></p>
+<ul>
+<li><strong>Respuesta:</strong> El Ã­ndice
+<strong><code>3</code></strong>. (El array de tamaÃ±o 4 tiene Ã­ndices
+vÃ¡lidos de 0 a 3).</li>
+</ul></li>
+<li><p><strong>Si el compilador colocÃ³ la variable â€˜xâ€™ inmediatamente
+despuÃ©s del array â€˜valoresâ€™, Â¿quÃ© valor contendrÃ­a ahora la variable â€˜xâ€™
+despuÃ©s de la ejecuciÃ³n de <code>valores[4] = 99;</code>?</strong></p>
+<ul>
+<li><strong>Respuesta:</strong> ContendrÃ­a
+<strong><code>99</code></strong>. Al escribir en el Ã­ndice 4 (que no
+existe para el array <code>valores</code>), el programa sobrescribe la
+siguiente porciÃ³n contigua de memoria, que en este escenario es la
+variable <code>x</code>.</li>
+</ul></li>
+<li><p><strong>Â¿CÃ³mo se llama en programaciÃ³n al acto de escribir fuera
+de los lÃ­mites de un array estÃ¡tico?</strong></p>
+<ul>
+<li><strong>Respuesta:</strong> <strong>Desbordamiento de bÃºfer</strong>
+(<em>Buffer Overflow</em>).</li>
+</ul></li>
+</ol>
+<hr />
+<h3 id="pregunta-4-cÃ¡lculo-de-memoria-y-sizeof-1">Pregunta 4: CÃ¡lculo de
+Memoria y <code>sizeof()</code></h3>
+<p><em>(Asumiendo que <code>int</code> y <code>float</code> ocupan 4
+bytes)</em></p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">CÃ¡lculo de <code>sizeof()</code></th>
+<th style="text-align: left;">Resultado Esperado (en bytes)</th>
+<th style="text-align: left;">Â¿QuÃ© representa el resultado?</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>sizeof(int_array[0])</code></td>
+<td style="text-align: left;"><strong>4 bytes</strong></td>
+<td style="text-align: left;">El tamaÃ±o de <strong>un solo
+elemento</strong> (un <code>int</code>).</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>sizeof(float_array)</code>
+<em>(Declarado como <code>float float_array[8];</code>)</em></td>
+<td style="text-align: left;"><strong>32 bytes</strong></td>
+<td style="text-align: left;">El tamaÃ±o <strong>total</strong> del array
+(8 elementos * 4 bytes/elemento).</td>
+</tr>
+<tr class="odd">
+<td
+style="text-align: left;"><code>sizeof(int_array) / sizeof(int_array[0])</code></td>
+<td style="text-align: left;"><strong>5</strong></td>
+<td style="text-align: left;">El <strong>nÃºmero de elementos</strong> en
+el array (se calcula el tamaÃ±o total entre el tamaÃ±o del elemento
+unitario).</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</body>
+</html>
+

@@ -1,0 +1,213 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" crossorigin href="/assets/content-01sust.css">
+</head>
+<body>
+<div class="main-content">
+<h2 id="propÃ³sito-de-calloc-contiguous-allocation">PropÃ³sito de
+<code>calloc()</code> (Contiguous Allocation) âœ¨</h2>
+<p>La funciÃ³n <strong><code>calloc()</code></strong>, disponible en la
+librerÃ­a <code>&lt;stdlib.h&gt;</code>, es una alternativa clave a
+<code>malloc()</code> para la asignaciÃ³n de memoria dinÃ¡mica en el
+<em>Heap</em>.</p>
+<hr />
+<h3 id="funciÃ³n-principal">FunciÃ³n Principal</h3>
+<p>El propÃ³sito de <code>calloc()</code> es doble:</p>
+<ol type="1">
+<li><strong>AsignaciÃ³n Contigua:</strong> Al igual que
+<code>malloc()</code>, solicita y reserva un <strong>bloque
+contiguo</strong> de memoria en tiempo de ejecuciÃ³n.</li>
+<li><strong>InicializaciÃ³n a Cero:</strong> A diferencia de
+<code>malloc()</code>, <code>calloc()</code> garantiza que <strong>todos
+los bits</strong> del bloque de memoria reciÃ©n asignado sean
+<strong>inicializados a cero</strong>.</li>
+</ol>
+<h3 id="ventaja-de-la-inicializaciÃ³n">Ventaja de la InicializaciÃ³n</h3>
+<ul>
+<li>Para tipos enteros o flotantes, inicializar a cero significa que los
+valores numÃ©ricos comienzan siendo <strong>0</strong>.</li>
+<li>Para punteros dentro de estructuras, inicializar a cero significa
+que los punteros comienzan siendo
+<strong><code>NULL</code></strong>.</li>
+</ul>
+<p>Esta caracterÃ­stica elimina el riesgo de trabajar con â€œvalores
+basuraâ€ o contenido aleatorio que podrÃ­a haber estado previamente en esa
+ubicaciÃ³n de memoria, lo que hace a <code>calloc()</code> la opciÃ³n
+preferida para estructuras de datos donde la inicializaciÃ³n a cero es
+crÃ­tica (ej., contadores, <em>arrays</em> de banderas booleanas o
+matrices numÃ©ricas).</p>
+<h2 id="sintaxis-de-calloc">Sintaxis de <code>calloc()</code> ðŸ“</h2>
+<p>La sintaxis de <code>calloc()</code> difiere notablemente de
+<code>malloc()</code> en los argumentos que requiere. En lugar de
+solicitar el tamaÃ±o total del bloque en bytes, <code>calloc()</code>
+pide el nÃºmero de elementos y el tamaÃ±o individual de cada uno por
+separado.</p>
+<hr />
+<h3 id="argumentos-y-fÃ³rmula">Argumentos y FÃ³rmula</h3>
+<p>La definiciÃ³n formal de la funciÃ³n es:</p>
+<p><span class="math display">â€˜void *calloc(size_t num, size_t
+size);â€˜</span></p>
+<p>Donde:</p>
+<ul>
+<li><strong><code>num</code> (NÃºmero de Elementos):</strong> La
+<strong>cantidad</strong> de elementos que deseas almacenar (ej: 10
+enteros, 5 estructuras, etc.).</li>
+<li><strong><code>size</code> (TamaÃ±o del Elemento):</strong> El
+<strong>tamaÃ±o en bytes</strong> de un solo elemento de ese tipo,
+determinado mediante el operador
+<strong><code>sizeof()</code></strong>.</li>
+</ul>
+<p>La funciÃ³n calcula internamente el tamaÃ±o total requerido
+multiplicando estos dos argumentos: <span
+class="math inline"><em>T</em><em>a</em><em>m</em><em>a</em><em>Ã±</em><em>o</em>Â <em>T</em><em>o</em><em>t</em><em>a</em><em>l</em>â€„=â€„numâ€…Ã—â€…size</span>.</p>
+<h3 id="uso-prÃ¡ctico-y-casteo">Uso PrÃ¡ctico y Casteo</h3>
+<p>Al igual que <code>malloc()</code>, <code>calloc()</code> retorna un
+puntero genÃ©rico <strong><code>void*</code></strong> que debe ser
+casteado al tipo de puntero deseado:</p>
+<p><span class="math display">â€˜tipo_puntero *nombre_puntero =
+(tipo_puntero *) calloc(cantidad_elementos,
+sizeof(tipo_elemento));â€˜</span></p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">PropÃ³sito</th>
+<th style="text-align: center;">CÃ³digo de AsignaciÃ³n con
+<code>calloc()</code></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><strong>Array de 10
+enteros</strong></td>
+<td
+style="text-align: center;"><code>int *p_int = (int *) calloc(10, sizeof(int));</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>Array de 5
+estructuras</strong></td>
+<td
+style="text-align: center;"><code>struct Cliente *p_clientes = (struct Cliente *) calloc(5, sizeof(struct Cliente));</code></td>
+</tr>
+</tbody>
+</table>
+<p>Esta sintaxis, aunque un poco mÃ¡s larga que <code>malloc()</code>,
+hace que el cÃ³digo sea mÃ¡s legible al expresar claramente el nÃºmero de
+elementos que se estÃ¡n asignando.</p>
+<h2 id="diferencia-clave-con-malloc">Diferencia Clave con
+<code>malloc()</code> ðŸ†š</h2>
+<p>La principal distinciÃ³n entre <strong><code>calloc()</code></strong>
+y <strong><code>malloc()</code></strong> radica en el <strong>estado
+inicial</strong> del bloque de memoria que asignan en el
+<em>Heap</em>.</p>
+<hr />
+<h3 id="el-estado-de-la-memoria">El Estado de la Memoria</h3>
+<table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">FunciÃ³n</th>
+<th style="text-align: center;">InicializaciÃ³n</th>
+<th style="text-align: center;">Contenido Inicial</th>
+<th style="text-align: center;">Riesgo</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td
+style="text-align: center;"><strong><code>malloc()</code></strong></td>
+<td style="text-align: center;">No inicializa.</td>
+<td style="text-align: center;"><strong>Valores Basura</strong> (Garbage
+Values). Contiene cualquier dato que quedÃ³ de asignaciones previas.</td>
+<td style="text-align: center;">Usar el dato sin inicializar puede
+causar <strong>comportamiento indefinido</strong>.</td>
+</tr>
+<tr class="even">
+<td
+style="text-align: center;"><strong><code>calloc()</code></strong></td>
+<td style="text-align: center;">Inicializa a cero.</td>
+<td style="text-align: center;"><strong>Limpia</strong> (Todos los bits
+se establecen a <strong>0</strong>). Esto implica que los enteros y
+flotantes son <code>0</code> y los punteros son <code>NULL</code>.</td>
+<td style="text-align: center;">No hay riesgo de valores basura, pero
+aÃ±ade un ligero <strong>tiempo de procesamiento</strong> por la
+inicializaciÃ³n.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="implicaciones-prÃ¡cticas">Implicaciones PrÃ¡cticas</h3>
+<p>Si utilizas <code>malloc()</code> para asignar un <em>array</em> de
+10 enteros, tendrÃ¡s 10 enteros con valores impredecibles. Si intentas
+sumarlos, el resultado serÃ¡ errÃ³neo.</p>
+<p>Si utilizas <code>calloc()</code> para asignar el mismo
+<em>array</em>, sabes con certeza que los 10 enteros valen
+<code>0</code>, por lo que puedes empezar a usarlos como contadores o
+variables booleanas inmediatamente, sin la necesidad de un bucle manual
+para ponerlos a cero.</p>
+<p>En resumen, <strong><code>calloc()</code></strong> te ofrece la
+<strong>seguridad</strong> de un estado inicial limpio a expensas de un
+tiempo de ejecuciÃ³n mÃ­nimamente mayor, mientras que
+<strong><code>malloc()</code></strong> es marginalmente <strong>mÃ¡s
+rÃ¡pido</strong> pero requiere que tÃº gestiones la inicializaciÃ³n.</p>
+<h2 id="elecciÃ³n-de-uso-cuÃ¡ndo-usar-calloc">ElecciÃ³n de Uso: Â¿CuÃ¡ndo
+Usar <code>calloc()</code>? ðŸ¤”</h2>
+<p>Dado que <code>calloc()</code> aÃ±ade el paso de inicializar la
+memoria a cero, es ligeramente mÃ¡s lento que <code>malloc()</code>. Por
+lo tanto, la elecciÃ³n de <strong><code>calloc()</code></strong> se debe
+basar en la <strong>necesidad de que la memoria estÃ© limpia</strong>
+desde el inicio.</p>
+<hr />
+<h3 id="recomendaciones-clave">Recomendaciones Clave</h3>
+<p>Se recomienda utilizar <code>calloc()</code> en los siguientes
+escenarios:</p>
+<ol type="1">
+<li><p><strong>Contadores y Sumadores:</strong> Si estÃ¡s asignando un
+<em>array</em> de variables que se usarÃ¡n inmediatamente como
+<strong>contadores</strong> o para acumular sumas, es fundamental que
+todos comiencen en <span class="math inline"><strong>0</strong></span>.
+<code>calloc()</code> elimina la necesidad de escribir un bucle
+<code>for</code> para inicializar el <em>array</em> manualmente.</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode c"><code class="sourceCode c"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">// calloc() limpia el array de contadores</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> <span class="op">*</span>contadores <span class="op">=</span> <span class="op">(</span><span class="dt">int</span> <span class="op">*)</span>calloc<span class="op">(</span><span class="dv">10</span><span class="op">,</span> <span class="kw">sizeof</span><span class="op">(</span><span class="dt">int</span><span class="op">));</span> </span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co">// Ahora contadores[0]...contadores[9] son garantizadamente 0.</span></span></code></pre></div></li>
+<li><p><strong>Banderas Booleanas y Estados:</strong> Cuando se asigna
+memoria para un <em>array</em> de banderas (variables que indican si
+algo es verdadero o falso, <span
+class="math inline"><strong>1</strong></span> o <span
+class="math inline"><strong>0</strong></span>), <code>calloc()</code>
+asegura que todas las banderas comiencen en el estado <span
+class="math inline"><strong>F</strong><strong>a</strong><strong>l</strong><strong>s</strong><strong>o</strong></span>
+(representado por <span
+class="math inline"><strong>0</strong></span>).</p></li>
+<li><p><strong>Arrays NumÃ©ricos Grandes:</strong> En el Ã¡mbito de la
+computaciÃ³n cientÃ­fica o el procesamiento de imÃ¡genes, donde se trabaja
+con matrices grandes que deben comenzar con valores <span
+class="math inline"><strong>0</strong></span> para cÃ¡lculos
+subsiguientes, <code>calloc()</code> es la forma mÃ¡s directa y clara de
+inicializarlas.</p></li>
+</ol>
+<h3 id="resumen-de-la-elecciÃ³n">Resumen de la ElecciÃ³n</h3>
+<p>Si la <strong>velocidad</strong> es la prioridad y sabes que vas a
+<strong>sobrescribir todos los bytes</strong> inmediatamente, usa
+<strong><code>malloc()</code></strong>.</p>
+<p>Si la <strong>seguridad</strong> y la <strong>inicializaciÃ³n a
+cero</strong> son necesarias (especialmente para evitar valores basura
+en estructuras de datos), usa
+<strong><code>calloc()</code></strong>.</p>
+
+</div>
+</body>
+</html>
+

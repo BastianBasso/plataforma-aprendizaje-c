@@ -1,0 +1,238 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" crossorigin href="/assets/content-01sust.css">
+</head>
+<body>
+<div class="main-content">
+<p>4. Valores de Retorno y el Tipo `void`</p>
+<p><strong>La Sentencia return</strong></p>
+<p>La sentencia <strong>return</strong> es fundamental en las funciones
+de C que estÃ¡n diseÃ±adas para devolver un resultado. Su propÃ³sito es
+doble:</p>
+<p><strong>1. Enviar un Valor de Vuelta (ComunicaciÃ³n)</strong></p>
+<p>El uso principal de return es <strong>enviar un valor</strong> de
+regreso a la funciÃ³n que realizÃ³ la llamada (la funciÃ³n llamadora, como
+main()).</p>
+<ul>
+<li><p>El valor que acompaÃ±a a return debe ser del <strong>mismo tipo de
+dato</strong> especificado en el encabezado de la funciÃ³n (el tipo de
+retorno).</p></li>
+<li><p>Este valor devuelto es crucial para que el cÃ³digo principal pueda
+utilizar el resultado del procesamiento modular.</p></li>
+</ul>
+<p><strong>Ejemplo de Valor Retornado:</strong></p>
+<p>C</p>
+<p>// La funciÃ³n promete retornar un entero (int)</p>
+<p>int calcular_doble(int num) {</p>
+<p>int doble = num * 2;</p>
+<p>// AquÃ­ se envÃ­a el valor calculado de vuelta al llamador.</p>
+<p>return doble;</p>
+<p>}</p>
+<p>// Cuando se llama a 'calcular_doble(5)', la expresiÃ³n entera es
+reemplazada por el valor 10.</p>
+<p><strong>2. Terminar la EjecuciÃ³n (Control de Flujo)</strong></p>
+<p>Una vez que la sentencia return es ejecutada, tiene un efecto
+inmediato en el flujo de control del programa:</p>
+<ul>
+<li><p><strong>FinalizaciÃ³n:</strong> La ejecuciÃ³n de la funciÃ³n actual
+<strong>termina inmediatamente</strong>, sin importar si quedan mÃ¡s
+lÃ­neas de cÃ³digo dentro de su cuerpo.</p></li>
+<li><p><strong>Retorno del Control:</strong> El flujo de ejecuciÃ³n
+<strong>salta de vuelta</strong> al punto exacto en la funciÃ³n llamadora
+donde se realizÃ³ la invocaciÃ³n.</p></li>
+</ul>
+<p><strong>Nota:</strong> En una funciÃ³n que no retorna valor (tipo
+void), return; (sin valor) aÃºn puede ser usado para forzar la
+terminaciÃ³n temprana de la funciÃ³n en cualquier punto deseado. Por
+ejemplo, para salir despuÃ©s de validar una condiciÃ³n de error.</p>
+<p><strong>Uso del Valor Retornado ðŸ“¤</strong></p>
+<p>Una vez que una funciÃ³n ejecuta la sentencia return y envÃ­a un valor
+de vuelta a la funciÃ³n llamadora, este valor puede ser utilizado
+inmediatamente de diversas maneras en la lÃ­nea de la llamada.</p>
+<p>El valor retornado se comporta como si fuera una
+<strong>expresiÃ³n</strong> o una <strong>variable</strong> del tipo de
+dato especificado.</p>
+<p><strong>1. AsignaciÃ³n a una Variable</strong></p>
+<p>El uso mÃ¡s comÃºn es asignar el valor retornado a una variable en la
+funciÃ³n llamadora. Esto permite almacenar el resultado para su uso o
+manipulaciÃ³n posterior.</p>
+<p>C</p>
+<p>int calcular_doble(int num) {</p>
+<p>return num * 2;</p>
+<p>}</p>
+<p>int main() {</p>
+<p>int numero_original = 7;</p>
+<p>int resultado_almacenado;</p>
+<p>// El valor 14 retornado se asigna a 'resultado_almacenado'.</p>
+<p>resultado_almacenado = calcular_doble(numero_original);</p>
+<p>printf("El doble es: %d\n", resultado_almacenado); // Imprime 14</p>
+<p>return 0;</p>
+<p>}</p>
+<p><strong>2. Uso Directo en una ExpresiÃ³n</strong></p>
+<p>El valor retornado puede ser utilizado directamente como parte de una
+expresiÃ³n mÃ¡s grande, incluyendo operaciones aritmÃ©ticas o llamadas
+anidadas a otras funciones.</p>
+<p>C</p>
+<p>int calcular_doble(int num) {</p>
+<p>return num * 2;</p>
+<p>}</p>
+<p>int sumar_uno(int num) {</p>
+<p>return num + 1;</p>
+<p>}</p>
+<p>int main() {</p>
+<p>int valor = 5;</p>
+<p>// El 10 retornado por calcular_doble(5) se suma al 3.</p>
+<p>int suma = calcular_doble(valor) + 3; // 10 + 3 = 13</p>
+<p>// Llamadas anidadas: sumar_uno(10) -&gt; 11</p>
+<p>int final = sumar_uno(calcular_doble(valor)); // final = 11</p>
+<p>printf("Suma de doble: %d\n", suma); // Imprime 13</p>
+<p>printf("Resultado anidado: %d\n", final); // Imprime 11</p>
+<p>return 0;</p>
+<p>}</p>
+<p><strong>3. ImpresiÃ³n Directa</strong></p>
+<p>Si el objetivo es simplemente mostrar el resultado al usuario, el
+valor retornado puede pasarse directamente como un
+<strong>argumento</strong> a la funciÃ³n de salida, como printf().</p>
+<p>C</p>
+<p>float calcular_area(float radio) {</p>
+<p>return 3.14159f * radio * radio;</p>
+<p>}</p>
+<p>int main() {</p>
+<p>float r = 5.0f;</p>
+<p>// El valor float retornado se usa como argumento de printf.</p>
+<p>printf("El Ã¡rea del cÃ­rculo es: %.2f\n", calcular_area(r));</p>
+<p>// La expresiÃ³n 'calcular_area(r)' se resuelve a 78.54 antes de que
+printf se ejecute.</p>
+<p>return 0;</p>
+<p>}</p>
+<p>El uso flexible del valor retornado es lo que permite que las
+funciones se integren fluidamente en el flujo lÃ³gico de cualquier
+programa en C.</p>
+<p><strong>El Tipo de Retorno void</strong></p>
+<p>El tipo de retorno <strong>void</strong> es un concepto especial y
+fundamental en C que se utiliza para indicar que una funciÃ³n <strong>no
+devolverÃ¡ ningÃºn valor</strong> a la funciÃ³n que la llamÃ³. En latÃ­n,
+<em>void</em> significa "vacÃ­o" o "nulo".</p>
+<p><strong>DefiniciÃ³n y PropÃ³sito</strong></p>
+<ul>
+<li><p><strong>Significado:</strong> Cuando el tipo de retorno de una
+funciÃ³n es void, el compilador entiende que no se debe esperar un valor
+de salida de esa funciÃ³n.</p></li>
+<li><p><strong>PropÃ³sito:</strong> void se usa en funciones cuyo Ãºnico
+objetivo es realizar una <strong>tarea</strong> o una
+<strong>acciÃ³n</strong> especÃ­fica, en lugar de producir un resultado
+matemÃ¡tico o un dato para ser procesado.</p></li>
+</ul>
+<p><strong>Usos Comunes de void</strong></p>
+<p>Las funciones void son esenciales para implementar la modularidad
+cuando se trata de efectos secundarios o interacciones con el entorno,
+tales como:</p>
+<ul>
+<li><p><strong>ImpresiÃ³n de Datos:</strong> Funciones que formatean y
+muestran informaciÃ³n en la consola.</p>
+<ul>
+<li><em>Ejemplo:</em> void imprimir_menu()</li>
+</ul></li>
+<li><p><strong>ManipulaciÃ³n Directa:</strong> Funciones que modifican
+variables globales o estructuras de datos complejas (que se verÃ¡n en
+mÃ³dulos posteriores) usando <strong>Paso por Referencia</strong>
+(punteros).</p>
+<ul>
+<li><em>Ejemplo:</em> void ordenar_arreglo(int arr[])</li>
+</ul></li>
+<li><p><strong>Interacciones con el Sistema:</strong> Funciones que
+realizan operaciones de entrada/salida (I/O), como guardar datos en un
+archivo o cerrar el programa.</p>
+<ul>
+<li><em>Ejemplo:</em> void guardar_en_archivo(datos)</li>
+</ul></li>
+</ul>
+<p><strong>Sintaxis de void</strong></p>
+<p>Cuando se define una funciÃ³n con tipo de retorno void:</p>
+<ol type="1">
+<li><p><strong>Encabezado:</strong> Se coloca la palabra clave void
+donde normalmente irÃ­a el tipo de retorno.</p></li>
+<li><p><strong>Cuerpo:</strong> La funciÃ³n <strong>no debe</strong>
+incluir la sentencia return con un valor. Puede incluir return; (solo)
+para terminar la ejecuciÃ³n de forma anticipada.</p></li>
+</ol>
+<p><strong>Ejemplo:</strong></p>
+<p>C</p>
+<p>// Prototipo</p>
+<p>void imprimir_encabezado(char simbolo, int longitud);</p>
+<p>// DEFINICIÃ“N: La funciÃ³n realiza la acciÃ³n de imprimir, no produce
+un valor.</p>
+<p>void imprimir_encabezado(char simbolo, int longitud) {</p>
+<p>for (int i = 0; i &lt; longitud; i++) {</p>
+<p>printf("%c", simbolo);</p>
+<p>}</p>
+<p>printf("\n");</p>
+<p>// No se necesita 'return'</p>
+<p>}</p>
+<p>int main() {</p>
+<p>// LLAMADA: Se invoca la acciÃ³n; no se asigna el resultado a una
+variable.</p>
+<p>imprimir_encabezado('=', 40);</p>
+<p>return 0;</p>
+<p>}</p>
+<p><strong>MÃºltiples Sentencias return</strong></p>
+<p>Una funciÃ³n puede contener <strong>mÃºltiples sentencias
+return</strong> distribuidas en su cuerpo, generalmente dentro de
+estructuras de control condicional (if, else if, switch). Sin embargo,
+es crucial entender que, al igual que con una sola sentencia return,
+<strong>solo se ejecutarÃ¡ la primera sentencia return que el flujo de
+control alcance</strong>.</p>
+<p><strong>La Regla de la TerminaciÃ³n</strong></p>
+<p>El principio de que return <strong>termina inmediatamente la
+ejecuciÃ³n</strong> de la funciÃ³n prevalece:</p>
+<ol type="1">
+<li><p><strong>Salida Temprana:</strong> Se utiliza estratÃ©gicamente
+para manejar diferentes escenarios o condiciones, permitiendo a la
+funciÃ³n devolver un resultado y finalizar su procesamiento antes de
+llegar al final del cuerpo.</p></li>
+<li><p><strong>CÃ³digo Inalcanzable:</strong> Cualquier lÃ­nea de cÃ³digo
+que se coloque inmediatamente despuÃ©s de un return <strong>no se
+ejecutarÃ¡</strong> (a menos que ese return estÃ© dentro de un bloque
+condicional que el flujo omita).</p></li>
+</ol>
+<p><strong>Ejemplo de Uso EstratÃ©gico</strong></p>
+<p>El siguiente ejemplo muestra cÃ³mo usar mÃºltiples return para manejar
+la validaciÃ³n de entrada antes de realizar un cÃ¡lculo:</p>
+<p>C</p>
+<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
+<p>// Prototipo: Retorna el cociente de la divisiÃ³n</p>
+<p>float dividir_seguro(float numerador, float divisor);</p>
+<p>// DEFINICIÃ“N con MÃšLTIPLES SENTENCIAS RETURN</p>
+<p>float dividir_seguro(float numerador, float divisor) {</p>
+<p>// 1. Primer 'return' (Salida Temprana por Error)</p>
+<p>if (divisor == 0.0f) {</p>
+<p>printf("Error: DivisiÃ³n por cero no permitida.\n");</p>
+<p>return 0.0f; // Devuelve un valor de error (0.0f) y TERMINA AQUÃ.</p>
+<p>}</p>
+<p>// 2. Si la condiciÃ³n anterior es falsa, el flujo continÃºa...</p>
+<p>float resultado = numerador / divisor;</p>
+<p>// 3. Segundo 'return' (Resultado Exitoso)</p>
+<p>return resultado; // Devuelve el resultado calculado y TERMINA
+AQUÃ.</p>
+<p>// El flujo nunca llega a este punto si se ejecutÃ³ uno de los
+'return' anteriores.</p>
+<p>}</p>
+<p>int main() {</p>
+<p>printf("Resultado 1: %.2f\n", dividir_seguro(10.0f, 2.0f)); //
+Ejecuta el return 2</p>
+<p>printf("Resultado 2: %.2f\n", dividir_seguro(10.0f, 0.0f)); //
+Ejecuta el return 1</p>
+<p>return 0;</p>
+<p>}</p>
+<p>En este caso, si la condiciÃ³n del if es verdadera, se ejecuta el
+primer return 0.0f, y la lÃ­nea que calcula resultado nunca se alcanza.
+Si la condiciÃ³n es falsa, el primer return se omite, y el flujo continÃºa
+hasta el segundo return resultado.</p>
+
+</div>
+</body>
+</html>
+

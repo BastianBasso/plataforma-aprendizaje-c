@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" crossorigin href="/assets/content-01sust.css">
+</head>
+<body>
+<div class="main-content">
+<h1><strong>Ejercicios Propuestos: Declaración y Buenas Prácticas</strong></h1>
+<p><strong><mark>Ejercicio 6.1: Validación de Nombres (Reglas de
+C)</mark></strong></p>
+<p><strong>Objetivo:</strong> Identificar nombres de variables válidos e
+inválidos según las reglas estrictas del compilador C (Reglas de
+Nomenclatura).</p>
+<p><strong>Instrucción:</strong> Clasifica los siguientes nombres como
+<strong>Válido (V)</strong> o <strong>Inválido (I)</strong>. Si es
+inválido, explica la regla que rompe.</p>
+<table style="width:97%;">
+<colgroup>
+<col style="width: 31%" />
+<col style="width: 25%" />
+<col style="width: 40%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>Nombre Propuesto</strong></th>
+<th style="text-align: left;"><strong>Clasificación</strong></th>
+<th style="text-align: left;"><strong>Regla Rota (Si es
+Inválido)</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">limite-maximo</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">int</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">_contador</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2da_oportunidad</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">EdadTotal</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Solución:</strong></p>
+<table style="width:97%;">
+<colgroup>
+<col style="width: 22%" />
+<col style="width: 25%" />
+<col style="width: 49%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>Nombre Propuesto</strong></th>
+<th style="text-align: left;"><strong>Clasificación</strong></th>
+<th style="text-align: left;"><strong>Regla Rota (Si es
+Inválido)</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">limite-maximo</td>
+<td style="text-align: left;"><strong>I</strong></td>
+<td style="text-align: left;">Contiene el caracter especial - (guion
+medio), que es el operador de resta.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">int</td>
+<td style="text-align: left;"><strong>I</strong></td>
+<td style="text-align: left;">Es una <strong>palabra reservada</strong>
+del lenguaje C.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">_contador</td>
+<td style="text-align: left;"><strong>V</strong></td>
+<td style="text-align: left;">Comienza con _ y no rompe reglas
+sintácticas (aunque su uso se desaconseja para variables de
+usuario).</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2da_oportunidad</td>
+<td style="text-align: left;"><strong>I</strong></td>
+<td style="text-align: left;">No puede comenzar con un dígito (2).</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">EdadTotal</td>
+<td style="text-align: left;"><strong>V</strong></td>
+<td style="text-align: left;">Es un nombre válido (letras), aunque no
+sigue la convención Snake Case de C.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Ejercicio 6.2: Refactorización (Claridad y
+Estilo)</strong></p>
+<p><strong>Objetivo:</strong> Aplicar la <strong>Regla de Oro</strong>
+(Claridad) y el <strong>Snake Case</strong> (Estilo) para mejorar la
+legibilidad.</p>
+<p><strong>Instrucción:</strong> Refactoriza el siguiente fragmento de
+código (escrito con nombres pobres) utilizando nombres
+<strong>descriptivos</strong>, la convención <strong>Snake Case</strong>
+para variables y <strong>Mayúsculas con guiones bajos</strong> para
+constantes.</p>
+<p><strong>Código Original:</strong></p>
+<p>C</p>
+<p>#<strong>define</strong> IVA 0.19</p>
+<p>int c = 100;</p>
+<p>float Pfinal = c * (1 + IVA);</p>
+<p><strong>Solución Refactorizada en C:</strong></p>
+<p>C</p>
+<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
+<p>// 1. Constante simbólica: MAYÚSCULAS y nombre descriptivo</p>
+<p>#<strong>define</strong> TASA_IVA 0.19</p>
+<p>int main(void) {</p>
+<p>// 2. Variable: Snake Case y descriptiva (monto_bruto)</p>
+<p>int monto_base = 100;</p>
+<p>// 3. Variable: Snake Case y descriptiva (precio_final)</p>
+<p>float precio_final = monto_base * (1 + TASA_IVA);</p>
+<p>printf("Precio Final: %.2f\n", precio_final);</p>
+<p>return 0;</p>
+<p>}</p>
+<p><strong>Ejercicio 6.3: Declaración Cerca del Uso (C99+)</strong></p>
+<p><strong>Objetivo:</strong> Entender la ventaja de la declaración
+tardía (C99+) para mejorar el <em>scope</em> y la legibilidad.</p>
+<p><strong>Instrucción:</strong> Reescribe el siguiente fragmento de
+código (escrito en el estilo antiguo C89) para que siga la recomendación
+moderna de declarar las variables lo más <strong>cerca posible</strong>
+de su primer uso.</p>
+<p><strong>Código Original (Estilo C89):</strong></p>
+<p>C</p>
+<p>int i;</p>
+<p>int total_acumulado = 0;</p>
+<p>// [100 líneas de código que no usan estas variables]</p>
+<p>for (i = 0; i &lt; 50; i++) {</p>
+<p>total_acumulado += i;</p>
+<p>}</p>
+<p><strong>Solución Refactorizada (Estilo C99/Moderno):</strong></p>
+<p>C</p>
+<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
+<p>void calcular_totales(void) {</p>
+<p>// Declaración tardía: total_acumulado se declara justo antes de su
+uso.</p>
+<p>int total_acumulado = 0;</p>
+<p>// [100 líneas de código que no usan estas variables]</p>
+<p>// ...</p>
+<p>// Declaración tardía: la variable de control 'i' se declara DENTRO
+del bucle 'for'.</p>
+<p>// Esto limita el alcance (scope) de 'i' solo al bucle.</p>
+<p>for (int i = 0; i &lt; 50; i++) {</p>
+<p>total_acumulado += i;</p>
+<p>}</p>
+<p>printf("Total Acumulado: %d\n", total_acumulado);</p>
+<p>}</p>
+<p>int main(void) {</p>
+<p>calcular_totales();</p>
+<p>return 0;</p>
+<p>}</p>
+
+
+</div>
+</body>
+</html>
+

@@ -1,0 +1,255 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" crossorigin href="/assets/content-01sust.css">
+</head>
+<body>
+<div class="main-content">
+<p>Este proyecto exige una precisiÃ³n quirÃºrgica en el manejo de
+<strong>doble puntero</strong> (<code>anterior</code> y
+<code>siguiente</code>) y la lÃ³gica de <strong>circularidad</strong> que
+elimina todos los casos lÃ­mite de inserciÃ³n/eliminaciÃ³n al final, pero
+crea un nuevo conjunto de desafÃ­os.</p>
+<hr />
+<h2
+id="proyecto-de-laboratorio-sistema-de-gestiÃ³n-de-turnos-rotatorios-lista-doblemente-enlazada-circular">ðŸ§ 
+Proyecto de Laboratorio: Sistema de GestiÃ³n de Turnos Rotatorios (Lista
+Doblemente Enlazada Circular)</h2>
+<h3 id="i.-introducciÃ³n-la-voz-del-experto">I. IntroducciÃ³n (La Voz del
+Experto)</h3>
+<p>Hemos dominado la <strong>Lista Enlazada Simple (SLL)</strong>, pero
+su mayor debilidad es el <strong>recorrido unidireccional</strong>
+(<span class="math inline"><em>O</em>(<em>N</em>)</span> para la
+inserciÃ³n al final o la eliminaciÃ³n de un nodo anterior). En sistemas
+reales, como la gestiÃ³n de procesos en un sistema operativo o la
+rotaciÃ³n de un <em>playlist</em>, se requiere un acceso bidireccional y
+un ciclo continuo de trabajo.</p>
+<p>La <strong>Lista Doblemente Enlazada Circular (CDLL)</strong> es la
+soluciÃ³n, combinando la flexibilidad de dos punteros por nodo con la
+eficiencia de un enlace cerrado. Este proyecto les forzarÃ¡ a dominar la
+<strong>manipulaciÃ³n de cuatro punteros simultÃ¡neamente</strong> en las
+operaciones de inserciÃ³n y eliminaciÃ³n, el verdadero pinÃ¡culo de la
+aritmÃ©tica de punteros en C.</p>
+<p><strong>La Regla de Oro:</strong> En la CDLL, si la lista no estÃ¡
+vacÃ­a, el puntero <code>siguiente</code> del Ãºltimo nodo debe apuntar al
+<code>HEAD</code>, y el puntero <code>anterior</code> del
+<code>HEAD</code> debe apuntar al Ãºltimo nodo (el
+<code>TAIL</code>).</p>
+<hr />
+<h3 id="ii.-objetivo-del-proyecto">II. ðŸŽ¯ Objetivo del Proyecto</h3>
+<p>Implementar una estructura de <strong>Lista Doblemente Enlazada
+Circular</strong> para gestionar el turno de un proceso o usuario
+(<code>id_proceso</code>). El sistema debe soportar una rotaciÃ³n
+infinita de turnos y permitir la adiciÃ³n y remociÃ³n de procesos en
+tiempo constante <span class="math inline"><em>O</em>(1)</span> o lineal
+<span class="math inline"><em>O</em>(<em>N</em>)</span> segÃºn el
+requisito.</p>
+<hr />
+<h3 id="iii.-estructura-y-requisitos-tÃ©cnicos">III. ðŸ› ï¸ Estructura y
+Requisitos TÃ©cnicos</h3>
+<h4 id="definiciÃ³n-de-las-estructuras">1. DefiniciÃ³n de las
+Estructuras</h4>
+<p>Se debe definir un <code>struct</code> para el nodo y una estructura
+principal que encapsule el estado de la lista.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Nodo: La unidad fundamental</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="kw">typedef</span> <span class="kw">struct</span> Nodo <span class="op">{</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> id_proceso<span class="op">;</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">struct</span> Nodo <span class="op">*</span>siguiente<span class="op">;</span>  <span class="co">// Puntero al siguiente nodo</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">struct</span> Nodo <span class="op">*</span>anterior<span class="op">;</span>   <span class="co">// Puntero al nodo previo (Doble Enlace)</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> Nodo<span class="op">;</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co">// Estructura de la Lista: El punto de acceso</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="kw">typedef</span> <span class="kw">struct</span> <span class="op">{</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    Nodo <span class="op">*</span>HEAD<span class="op">;</span>  <span class="co">// El punto de inicio de la lista/cÃ­rculo</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> CDLL<span class="op">;</span></span></code></pre></div>
+<h4 id="funciones-obligatorias-exigencia-mÃ¡xima">2. Funciones
+Obligatorias (Exigencia MÃ¡xima)</h4>
+<p>Todas las funciones deben manejar correctamente los <strong>cuatro
+punteros</strong> involucrados en cualquier operaciÃ³n (<span
+class="math inline"><em>N</em><sub><em>n</em><em>u</em><em>e</em><em>v</em><em>o</em></sub>â†’</span>
+<code>anterior</code>/<code>siguiente</code> y <span
+class="math inline"><em>N</em><sub><em>a</em><em>d</em><em>y</em><em>a</em><em>c</em><em>e</em><em>n</em><em>t</em><em>e</em></sub>â†’</span>
+<code>anterior</code>/<code>siguiente</code>).</p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">FunciÃ³n</th>
+<th style="text-align: left;">PropÃ³sito</th>
+<th style="text-align: left;">Complejidad Requerida</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td
+style="text-align: left;"><code>void inicializar_cdll(CDLL *lista);</code></td>
+<td style="text-align: left;">Inicializa la lista a un estado vacÃ­o
+(<code>HEAD = NULL</code>).</td>
+<td style="text-align: left;"><span
+class="math inline"><em>O</em>(1)</span></td>
+</tr>
+<tr class="even">
+<td
+style="text-align: left;"><code>int cdll_esta_vacia(const CDLL *lista);</code></td>
+<td style="text-align: left;">Retorna <code>1</code> si la lista estÃ¡
+vacÃ­a, <code>0</code> en caso contrario.</td>
+<td style="text-align: left;"><span
+class="math inline"><em>O</em>(1)</span></td>
+</tr>
+<tr class="odd">
+<td
+style="text-align: left;"><code>void insertar_al_inicio(CDLL *lista, int id);</code></td>
+<td style="text-align: left;">Inserta un nodo como la nueva cabeza del
+cÃ­rculo.</td>
+<td style="text-align: left;"><span
+class="math inline"><strong>O</strong><strong>(</strong><strong>1</strong><strong>)</strong></span>
+<strong>(CRÃTICO)</strong></td>
+</tr>
+<tr class="even">
+<td
+style="text-align: left;"><code>void insertar_al_final(CDLL *lista, int id);</code></td>
+<td style="text-align: left;">Inserta un nodo justo antes de
+<code>HEAD</code> (es decir, el Ãºltimo nodo).</td>
+<td style="text-align: left;"><span
+class="math inline"><strong>O</strong><strong>(</strong><strong>1</strong><strong>)</strong></span>
+<strong>(CRÃTICO)</strong></td>
+</tr>
+<tr class="odd">
+<td
+style="text-align: left;"><code>int eliminar_por_id(CDLL *lista, int id_eliminar);</code></td>
+<td style="text-align: left;">Busca y elimina el nodo con el
+<code>id_proceso</code> especificado.</td>
+<td style="text-align: left;"><span
+class="math inline"><em>O</em>(<em>N</em>)</span></td>
+</tr>
+<tr class="even">
+<td
+style="text-align: left;"><code>void mostrar_rotacion(CDLL *lista, int N_turnos);</code></td>
+<td style="text-align: left;">Recorre e imprime <span
+class="math inline"><em>N</em></span> turnos de la lista para simular la
+rotaciÃ³n.</td>
+<td style="text-align: left;"><span
+class="math inline"><em>O</em>(<em>N</em>)</span></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3
+id="iv.-desafÃ­o-y-manejo-de-lÃ­mites-doble-puntero-y-circularidad">IV. ðŸš¨
+DesafÃ­o y Manejo de LÃ­mites (Doble Puntero y Circularidad)</h3>
+<p>El alumno debe concentrarse en los siguientes puntos para aprobar la
+lÃ³gica de punteros:</p>
+<ol type="1">
+<li><strong>InserciÃ³n <span class="math inline"><em>O</em>(1)</span>
+(<code>insertar_al_inicio</code> /
+<code>insertar_al_final</code>):</strong>
+<ul>
+<li>No se permite recorrer la lista
+(<code>while (actual != HEAD)</code>) para encontrar el
+<code>TAIL</code>.</li>
+<li>La inserciÃ³n al inicio/final debe obtener el <strong>Ãºltimo
+nodo</strong> a travÃ©s del puntero <strong><code>anterior</code> de la
+cabeza</strong> (<code>lista-&gt;HEAD-&gt;anterior</code>), logrando asÃ­
+el tiempo constante <span
+class="math inline"><strong>O</strong><strong>(</strong><strong>1</strong><strong>)</strong></span>.</li>
+<li>Debe manejar correctamente el <strong>Caso LÃ­mite</strong> de la
+lista <em>VacÃ­a</em> y la lista con <em>Un solo nodo</em>.</li>
+</ul></li>
+<li><strong>EliminaciÃ³n de un Nodo Central:</strong>
+<ul>
+<li>Al eliminar un nodo (ej. <span
+class="math inline"><em>N</em></span>), el puntero
+<code>siguiente</code> de su nodo <strong>anterior</strong> debe ser
+actualizado para saltar a <span class="math inline"><em>N</em></span>â€™s
+nodo <strong>siguiente</strong>.</li>
+<li>SimultÃ¡neamente, el puntero <code>anterior</code> del nodo
+<strong>siguiente</strong> debe ser actualizado para apuntar al nodo
+<strong>anterior</strong> de <span
+class="math inline"><em>N</em></span>.</li>
+</ul></li>
+<li><strong>El Caso LÃ­mite del Ãšltimo Nodo (HEAD):</strong>
+<ul>
+<li>Si se elimina el <code>HEAD</code>, debe reasignarse
+<code>HEAD</code> a su sucesor (el nodo que estaba en
+<code>HEAD-&gt;siguiente</code>) y <strong>mantener la
+circularidad</strong> de los punteros del nuevo <code>HEAD</code>.</li>
+</ul></li>
+<li><strong>LiberaciÃ³n de Memoria:</strong>
+<ul>
+<li>Cada funciÃ³n de eliminaciÃ³n debe usar obligatoriamente
+<strong><code>free()</code></strong> para liberar la memoria del nodo
+eliminado, previniendo fugas de memoria (aplicaciÃ³n directa de los
+archivos <code>300</code> y <code>500</code>).</li>
+</ul></li>
+</ol>
+<hr />
+<h3 id="v.-puntuaciÃ³n-y-criterios-de-evaluaciÃ³n">V. ðŸ§ª PuntuaciÃ³n y
+Criterios de EvaluaciÃ³n</h3>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Criterio</th>
+<th style="text-align: left;">Porcentaje</th>
+<th style="text-align: left;">Observaciones Clave</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>Integridad del Nodo</strong></td>
+<td style="text-align: left;">35%</td>
+<td style="text-align: left;">Correcto manejo de los <strong>cuatro
+punteros</strong> en las operaciones de inserciÃ³n y eliminaciÃ³n. La
+doble conexiÃ³n debe ser siempre correcta.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Manejo de
+Circularidad</strong></td>
+<td style="text-align: left;">25%</td>
+<td style="text-align: left;">El <code>HEAD-&gt;anterior</code> debe ser
+siempre el Ãºltimo nodo (TAIL), y el <code>TAIL-&gt;siguiente</code> debe
+ser siempre el <code>HEAD</code> (excepto cuando la lista estÃ¡
+vacÃ­a).</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Eficiencia <span
+class="math inline"><em>O</em>(1)</span></strong></td>
+<td style="text-align: left;">20%</td>
+<td style="text-align: left;">Las funciones
+<code>insertar_al_inicio</code> y <code>insertar_al_final</code> deben
+ser <span class="math inline"><em>O</em>(1)</span>. <strong>Se penaliza
+fuertemente</strong> el recorrido de la lista para encontrar el Ãºltimo
+nodo.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Casos LÃ­mite y
+Memoria</strong></td>
+<td style="text-align: left;">10%</td>
+<td style="text-align: left;">Correcta gestiÃ³n de los casos: lista
+vacÃ­a, lista con un solo nodo, y uso obligatorio de <code>free()</code>
+tras la eliminaciÃ³n.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Estilo y Modularidad</strong></td>
+<td style="text-align: left;">10%</td>
+<td style="text-align: left;">Uso de archivos <code>.h</code> y
+<code>.c</code> (interfaz y lÃ³gica). CÃ³digo limpio y bien
+comentado.</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</body>
+</html>
+

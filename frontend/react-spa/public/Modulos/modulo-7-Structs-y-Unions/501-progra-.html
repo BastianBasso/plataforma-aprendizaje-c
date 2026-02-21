@@ -1,0 +1,527 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" crossorigin href="/assets/content-01sust.css">
+</head>
+<body>
+<div class="main-content">
+<h2 id="ejercicios-de-programaciÃ³n-la-estructura-union">ðŸ’» 10 Ejercicios
+de ProgramaciÃ³n: La Estructura <code>union</code></h2>
+<p>Los ejercicios estÃ¡n diseÃ±ados para ser resueltos en un entorno de
+desarrollo C, obligando al estudiante a usar <code>printf()</code> y
+<code>sizeof()</code> para verificar sus hipÃ³tesis sobre la memoria
+compartida.</p>
+<h3
+id="bloque-i-conceptos-fundamentales-sizeof-y-memoria-compartida">Bloque
+I: Conceptos Fundamentales (<code>sizeof</code> y Memoria
+Compartida)</h3>
+<h4 id="ejercicio-determinaciÃ³n-de-tamaÃ±o">1. Ejercicio: DeterminaciÃ³n
+de TamaÃ±o</h4>
+<p>Define una <code>union</code> llamada <code>MiDato</code> que
+contenga un miembro <code>int</code> (4 bytes), un miembro
+<code>double</code> (8 bytes) y un miembro <code>char</code> (1 byte).
+<strong>Tarea:</strong> Imprime el tamaÃ±o en bytes de la
+<code>union</code> completa usando <code>sizeof(MiDato)</code>.
+<strong>PropÃ³sito:</strong> Confirmar que el tamaÃ±o de la
+<code>union</code> es igual al de su miembro mÃ¡s grande (8 bytes).</p>
+<h4 id="ejercicio-sobreescritura-de-enteros-y-flotantes">2. Ejercicio:
+Sobreescritura de Enteros y Flotantes</h4>
+<p>Define una <code>union</code> con un <code>int</code> y un
+<code>float</code>.</p>
+<ol type="1">
+<li>Asigna un valor entero simple (ej: <code>42</code>) al miembro
+<code>int</code>. Imprime el valor del <code>int</code>.</li>
+<li>Inmediatamente, asigna un valor flotante (ej: <code>1.0f</code>) al
+miembro <code>float</code>. Imprime el valor del
+<code>float</code>.</li>
+<li><strong>Advertencia:</strong> Intenta leer e imprimir el valor del
+miembro <code>int</code> nuevamente. <strong>PropÃ³sito:</strong>
+Demostrar que el valor del <code>int</code> se corrompe inmediatamente
+despuÃ©s de escribir en el <code>float</code>, ya que comparten los
+mismos 4 bytes.</li>
+</ol>
+<h4 id="ejercicio-inicializaciÃ³n-a-cero">3. Ejercicio: InicializaciÃ³n a
+Cero</h4>
+<p>Declara la misma <code>union</code> del Ejercicio 1.
+<strong>Tarea:</strong> Inicializa la <code>union</code> a cero en el
+momento de la declaraciÃ³n (ej: <code>UnionDatos u = {0};</code>).
+Imprime el valor de <strong>todos</strong> sus miembros
+(<code>int</code>, <code>double</code>, <code>char</code>).
+<strong>PropÃ³sito:</strong> Verificar que, al inicializar la uniÃ³n a
+cero, todos los miembros se inicializan a cero (o su equivalente), pero
+solo el mÃ¡s grande ocupa el espacio reservado.</p>
+<hr />
+<h3 id="bloque-ii-acceso-y-manipulaciÃ³n-lectura-de-basura">Bloque II:
+Acceso y ManipulaciÃ³n (Lectura de Basura)</h3>
+<h4 id="ejercicio-interpretaciÃ³n-cruzada-de-tipos">4. Ejercicio:
+InterpretaciÃ³n Cruzada de Tipos</h4>
+<p>Define una <code>union</code> con un <code>char</code> y un
+<code>short</code> (2 bytes).</p>
+<ol type="1">
+<li>Asigna el valor del carÃ¡cter <code>'A'</code> al miembro
+<code>char</code>.</li>
+<li><strong>Tarea:</strong> Imprime el valor del miembro
+<code>short</code> (como un entero) inmediatamente despuÃ©s.
+<strong>PropÃ³sito:</strong> Observar cÃ³mo el <code>short</code>
+interpreta el <em>byte</em> que contiene el valor ASCII de â€˜Aâ€™ como
+parte de su propio valor de 2 bytes, resultando en un valor numÃ©rico
+diferente al 65.</li>
+</ol>
+<h4 id="ejercicio-el-miembro-char-como-inspector">5. Ejercicio: El
+Miembro <code>char</code> como Inspector</h4>
+<p>Define una <code>union</code> con un <code>int</code> y un
+<code>char[4]</code>.</p>
+<ol type="1">
+<li>Asigna un valor entero (ej: <code>0x11223344</code>) al miembro
+<code>int</code>.</li>
+<li><strong>Tarea:</strong> Usa un bucle <code>for</code> para imprimir
+cada uno de los 4 bytes del miembro <code>char[4]</code> (como si fuera
+un array de bytes). <strong>PropÃ³sito:</strong> Mostrar que ambos
+miembros (<code>int</code> y <code>char[4]</code>) acceden exactamente
+al mismo bloque de 4 bytes, permitiendo examinar la representaciÃ³n
+interna de un <code>int</code> (Endianness).</li>
+</ol>
+<h4 id="ejercicio-flujo-de-modificaciÃ³n-y-lectura">6. Ejercicio: Flujo
+de ModificaciÃ³n y Lectura</h4>
+<p>Define una <code>union</code> con tres miembros: <code>a</code>
+(<code>int</code>), <code>b</code> (<code>float</code>) y <code>c</code>
+(<code>char</code>). <strong>Tarea:</strong> Escribe un programa que
+realice las siguientes acciones en estricto orden y comente cuÃ¡l miembro
+contiene datos vÃ¡lidos despuÃ©s de cada paso:</p>
+<ol type="1">
+<li><code>mi_union.a = 100;</code></li>
+<li><code>mi_union.c = 'Z';</code></li>
+<li><code>mi_union.b = 5.5f;</code></li>
+<li>Imprime el valor de <code>mi_union.a</code>.</li>
+</ol>
+<hr />
+<h3 id="bloque-iii-aplicaciÃ³n-prÃ¡ctica-struct-union">Bloque III:
+AplicaciÃ³n PrÃ¡ctica (<code>struct</code> + <code>union</code>)</h3>
+<h4 id="ejercicio-definiciÃ³n-de-tipo-variado">7. Ejercicio: DefiniciÃ³n
+de Tipo Variado</h4>
+<p>Define la <code>struct Archivo</code> y la
+<code>union Identificador</code> (como se vio en la explicaciÃ³n) para
+modelar datos de un archivo:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">typedef</span> <span class="kw">union</span> <span class="op">{</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> id_numerica<span class="op">;</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">char</span> nombre_archivo<span class="op">[</span><span class="dv">10</span><span class="op">];</span> <span class="co">// Usar 10 para simplificar</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> Identificador<span class="op">;</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="kw">typedef</span> <span class="kw">struct</span> <span class="op">{</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> tipo<span class="op">;</span> <span class="co">// 0=ID, 1=Nombre</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    Identificador datos<span class="op">;</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> Archivo<span class="op">;</span></span></code></pre></div>
+<p><strong>Tarea:</strong> Declara una variable
+<code>Archivo doc1</code>, establece su <code>tipo</code> en 0, y asigna
+un valor a <code>doc1.datos.id_numerica</code>. Imprime ambos
+campos.</p>
+<h4 id="ejercicio-condicionalidad-y-union">8. Ejercicio: Condicionalidad
+y <code>union</code></h4>
+<p>ContinÃºa con la <code>struct Archivo</code> del Ejercicio 7.</p>
+<ol type="1">
+<li>Declara una variable <code>Archivo doc2</code>.</li>
+<li>Establece <code>doc2.tipo</code> en 1.</li>
+<li>Asigna una cadena de 5 caracteres a
+<code>doc2.datos.nombre_archivo</code> usando <code>strcpy()</code>.
+<strong>Tarea:</strong> Usa una estructura de control
+<strong><code>if-else</code></strong> para imprimir el valor de
+<code>doc2</code> de la siguiente manera: si <code>tipo == 1</code>,
+imprime el nombre de archivo; si no, imprime la ID numÃ©rica.
+<strong>PropÃ³sito:</strong> Reforzar el patrÃ³n de uso: la
+<code>struct</code> (la etiqueta) es necesaria para dar contexto a la
+<code>union</code>.</li>
+</ol>
+<h4 id="ejercicio-ahorro-de-memoria-calculado">9. Ejercicio: Ahorro de
+Memoria Calculado</h4>
+<p>Usando las definiciones del Ejercicio 7: <strong>Tarea:</strong></p>
+<ol type="1">
+<li>Imprime <code>sizeof(Identificador)</code> (el tamaÃ±o de la
+<code>union</code>).</li>
+<li>Define una estructura <strong>NO_Union</strong> que contenga
+<code>int id_numerica;</code> y <code>char nombre_archivo[10];</code>
+(sin la <code>union</code>).</li>
+<li>Imprime <code>sizeof(NO_Union)</code>. <strong>PropÃ³sito:</strong>
+Demostrar el ahorro de memoria comparando los resultados numÃ©ricos de
+<code>sizeof()</code>.</li>
+</ol>
+<h4 id="ejercicio-peligro-de-acceso-fuera-de-contexto">10. Ejercicio:
+Peligro de Acceso Fuera de Contexto</h4>
+<p>ContinÃºa con la variable <code>doc2</code> del Ejercicio 8 (que
+contiene el nombre de archivo vÃ¡lido). <strong>Tarea:</strong> Intenta
+leer e imprimir directamente <code>doc2.datos.id_numerica</code> sin
+verificar la etiqueta <code>tipo</code>. <strong>PropÃ³sito:</strong>
+Demostrar, con la salida del programa, que el valor de
+<code>id_numerica</code> es una <strong>basura</strong> numÃ©rica sin
+sentido, ya que estÃ¡ interpretando los bytes del nombre del archivo como
+un entero.</p>
+<h2 id="soluciones-la-estructura-union">ðŸ”‘ Soluciones: La Estructura
+<code>union</code></h2>
+<p><strong><em>Nota:</em></strong> <em>Las salidas numÃ©ricas de los
+ejercicios 4, 5 y 10 dependen de la arquitectura (Endianness) y el
+compilador del sistema. Las respuestas aquÃ­ asumen una arquitectura
+comÃºn (Little Endian, donde el byte menos significativo se almacena
+primero).</em></p>
+<h3
+id="bloque-i-conceptos-fundamentales-sizeof-y-memoria-compartida-1">Bloque
+I: Conceptos Fundamentales (<code>sizeof</code> y Memoria
+Compartida)</h3>
+<h4 id="ejercicio-determinaciÃ³n-de-tamaÃ±o-1">1. Ejercicio: DeterminaciÃ³n
+de TamaÃ±o</h4>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Tipo de Dato</th>
+<th style="text-align: left;">TamaÃ±o asumido (bytes)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>int</code></td>
+<td style="text-align: left;">4</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>double</code></td>
+<td style="text-align: left;">8</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>char</code></td>
+<td style="text-align: left;">1</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Respuesta y CÃ³digo de Prueba:</strong></p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="kw">typedef</span> <span class="kw">union</span> <span class="op">{</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> i<span class="op">;</span> </span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">double</span> d<span class="op">;</span> <span class="co">// Miembro mÃ¡s grande (8 bytes)</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">char</span> c<span class="op">;</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> MiDato<span class="op">;</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;TamaÃ±o de MiDato: </span><span class="sc">%zu</span><span class="st"> bytes</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">,</span> <span class="kw">sizeof</span><span class="op">(</span>MiDato<span class="op">));</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p><strong>Salida Esperada:</strong></p>
+<pre><code>TamaÃ±o de MiDato: 8 bytes</code></pre>
+<p><strong>AnÃ¡lisis:</strong> La <code>union</code> reserva exactamente
+el espacio del miembro mÃ¡s grande, que es el <code>double</code> (8
+bytes).</p>
+<h4 id="ejercicio-sobreescritura-de-enteros-y-flotantes-1">2. Ejercicio:
+Sobreescritura de Enteros y Flotantes</h4>
+<p><strong>Respuesta y CÃ³digo de Prueba:</strong></p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="kw">typedef</span> <span class="kw">union</span> <span class="op">{</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> entero<span class="op">;</span> </span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">float</span> flotante<span class="op">;</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> Superposicion<span class="op">;</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    Superposicion u<span class="op">;</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    <span class="co">// 1. Escribir en entero</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    u<span class="op">.</span>entero <span class="op">=</span> <span class="dv">42</span><span class="op">;</span> </span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;1. Entero escrito: </span><span class="sc">%d\n</span><span class="st">&quot;</span><span class="op">,</span> u<span class="op">.</span>entero<span class="op">);</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>    <span class="co">// 2. Escribir en flotante (sobrescribe los mismos 4 bytes)</span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>    u<span class="op">.</span>flotante <span class="op">=</span> <span class="fl">1.0</span><span class="bu">f</span><span class="op">;</span></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;2. Flotante escrito: </span><span class="sc">%.6f\n</span><span class="st">&quot;</span><span class="op">,</span> u<span class="op">.</span>flotante<span class="op">);</span></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>    <span class="co">// 3. Leer entero (Â¡basura!)</span></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;3. Entero despues de flotante (corrupto): </span><span class="sc">%d\n</span><span class="st">&quot;</span><span class="op">,</span> u<span class="op">.</span>entero<span class="op">);</span></span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p><strong>Salida TÃ­pica Esperada:</strong></p>
+<pre><code>1. Entero escrito: 42
+2. Flotante escrito: 1.000000
+3. Entero despues de flotante (corrupto): 1065353216 </code></pre>
+<p><strong>AnÃ¡lisis:</strong> Escribir <code>1.0f</code>
+(<code>0x3f800000</code>) sobrescribe el valor <code>42</code>. Cuando
+el programa intenta leer el <code>entero</code>, interpreta esos mismos
+bits como un entero, resultando en un valor grande y sin relaciÃ³n.</p>
+<h4 id="ejercicio-inicializaciÃ³n-a-cero-1">3. Ejercicio: InicializaciÃ³n
+a Cero</h4>
+<p><strong>Respuesta y CÃ³digo de Prueba:</strong></p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="kw">typedef</span> <span class="kw">union</span> <span class="op">{</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> i<span class="op">;</span> </span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">double</span> d<span class="op">;</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">char</span> c<span class="op">;</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> UnionDatos<span class="op">;</span> </span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>    <span class="co">// InicializaciÃ³n a cero</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>    UnionDatos u <span class="op">=</span> <span class="op">{</span><span class="dv">0</span><span class="op">};</span> </span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;Entero (i): </span><span class="sc">%d\n</span><span class="st">&quot;</span><span class="op">,</span> u<span class="op">.</span>i<span class="op">);</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;Double (d): </span><span class="sc">%.1f\n</span><span class="st">&quot;</span><span class="op">,</span> u<span class="op">.</span>d<span class="op">);</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;Char (c - ASCII): </span><span class="sc">%d\n</span><span class="st">&quot;</span><span class="op">,</span> u<span class="op">.</span>c<span class="op">);</span></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p><strong>Salida Esperada:</strong></p>
+<pre><code>Entero (i): 0
+Double (d): 0.0
+Char (c - ASCII): 0</code></pre>
+<p><strong>AnÃ¡lisis:</strong> Inicializar el primer miembro a
+<code>{0}</code> garantiza que todo el bloque de memoria compartido se
+llene con ceros, lo que equivale a inicializar todos los miembros al
+valor cero para su respectivo tipo.</p>
+<hr />
+<h3 id="bloque-ii-acceso-y-manipulaciÃ³n-lectura-de-basura-1">Bloque II:
+Acceso y ManipulaciÃ³n (Lectura de Basura)</h3>
+<h4 id="ejercicio-interpretaciÃ³n-cruzada-de-tipos-1">4. Ejercicio:
+InterpretaciÃ³n Cruzada de Tipos</h4>
+<p><strong>Respuesta y CÃ³digo de Prueba:</strong></p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="kw">typedef</span> <span class="kw">union</span> <span class="op">{</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">char</span> c<span class="op">;</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">short</span> s<span class="op">;</span> <span class="co">// 2 bytes</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> ByteInspector<span class="op">;</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>    ByteInspector u <span class="op">=</span> <span class="op">{</span><span class="dv">0</span><span class="op">};</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>    <span class="co">// 1. Escribir en char (&#39;A&#39; es ASCII 65)</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>    u<span class="op">.</span>c <span class="op">=</span> <span class="ch">&#39;A&#39;</span><span class="op">;</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>    <span class="co">// 2. Leer short (interpreta los 2 bytes, donde el primer byte es 65 y el segundo es 0)</span></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;Char escrito: </span><span class="sc">%c\n</span><span class="st">&quot;</span><span class="op">,</span> u<span class="op">.</span>c<span class="op">);</span></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;Short leido (corrupto/interpretado): </span><span class="sc">%d\n</span><span class="st">&quot;</span><span class="op">,</span> u<span class="op">.</span>s<span class="op">);</span></span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p><strong>Salida TÃ­pica Esperada (Little Endian):</strong></p>
+<pre><code>Char escrito: A
+Short leido (corrupto/interpretado): 65</code></pre>
+<p><strong>AnÃ¡lisis:</strong> El valor <code>65</code> escrito en el
+byte <code>c</code> se convierte en el byte menos significativo del
+<code>short</code>. Dado que el segundo byte sigue siendo 0 (por la
+inicializaciÃ³n), el valor final del <code>short</code> es <span
+class="math inline">65â€…+â€…0â€…Ã—â€…256â€„=â€„65</span>. <em>Si el resultado fuera
+16640, el sistema serÃ­a Big Endian.</em></p>
+<h4 id="ejercicio-el-miembro-char-como-inspector-1">5. Ejercicio: El
+Miembro <code>char</code> como Inspector</h4>
+<p><strong>Respuesta y CÃ³digo de Prueba:</strong></p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="kw">typedef</span> <span class="kw">union</span> <span class="op">{</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> i<span class="op">;</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">char</span> bytes<span class="op">[</span><span class="dv">4</span><span class="op">];</span> <span class="co">// Array para acceder a los bytes individuales</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> Inspector<span class="op">;</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>    Inspector u<span class="op">;</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Asignar un valor conocido (hexadecimal para fÃ¡cil seguimiento)</span></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>    u<span class="op">.</span>i <span class="op">=</span> <span class="bn">0x11223344</span><span class="op">;</span> <span class="co">// Donde 11, 22, 33, 44 son los bytes</span></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;Valor del entero: </span><span class="sc">%d\n</span><span class="st">&quot;</span><span class="op">,</span> u<span class="op">.</span>i<span class="op">);</span></span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;Bytes del entero (Little Endian):</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> k <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> k <span class="op">&lt;</span> <span class="dv">4</span><span class="op">;</span> k<span class="op">++)</span> <span class="op">{</span></span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Imprime el valor del byte en hexadecimal</span></span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">&quot;Byte [</span><span class="sc">%d</span><span class="st">]: 0x</span><span class="sc">%x\n</span><span class="st">&quot;</span><span class="op">,</span> k<span class="op">,</span> <span class="op">(</span><span class="dt">unsigned</span> <span class="dt">char</span><span class="op">)</span>u<span class="op">.</span>bytes<span class="op">[</span>k<span class="op">]);</span> </span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p><strong>Salida TÃ­pica Esperada (Little Endian):</strong></p>
+<pre><code>Valor del entero: 287454020
+Bytes del entero (Little Endian):
+Byte [0]: 0x44 
+Byte [1]: 0x33
+Byte [2]: 0x22
+Byte [3]: 0x11</code></pre>
+<p><strong>AnÃ¡lisis:</strong> Esto confirma la <strong>memoria
+compartida</strong>. El array <code>bytes</code> lee los mismos 4 bytes
+del <code>int</code>. El orden invertido (<code>44, 33, 22, 11</code>)
+demuestra que la arquitectura es Little Endian.</p>
+<h4 id="ejercicio-flujo-de-modificaciÃ³n-y-lectura-1">6. Ejercicio: Flujo
+de ModificaciÃ³n y Lectura</h4>
+<p><strong>Respuesta y AnÃ¡lisis:</strong></p>
+<table>
+<colgroup>
+<col style="width: 22%" />
+<col style="width: 18%" />
+<col style="width: 22%" />
+<col style="width: 18%" />
+<col style="width: 18%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Paso</th>
+<th style="text-align: left;">OperaciÃ³n</th>
+<th style="text-align: center;">Miembro VÃ¡lido</th>
+<th style="text-align: left;">Estado de Memoria (<code>a</code>,
+<code>b</code>, <code>c</code>)</th>
+<th
+style="text-align: left;"><code>printf("...: %d", mi_union.a)</code></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">1</td>
+<td style="text-align: left;"><code>u.a = 100;</code></td>
+<td style="text-align: center;"><strong><code>a</code></strong></td>
+<td style="text-align: left;"><code>100</code> escrito en los 4
+bytes.</td>
+<td style="text-align: left;">100</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">2</td>
+<td style="text-align: left;"><code>u.c = 'Z';</code></td>
+<td style="text-align: center;"><strong><code>c</code></strong></td>
+<td style="text-align: left;">Sobreescribe el byte 0 con ASCII 90
+(â€˜Zâ€™).</td>
+<td style="text-align: left;"><strong>Corrupto</strong> (Ligeramente
+cambiado)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">3</td>
+<td style="text-align: left;"><code>u.b = 5.5f;</code></td>
+<td style="text-align: center;"><strong><code>b</code></strong></td>
+<td style="text-align: left;">Los 4 bytes se sobrescriben totalmente con
+<code>5.5f</code>.</td>
+<td style="text-align: left;"><strong>Corrupto</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">4</td>
+<td style="text-align: left;"><code>printf("...u.a");</code></td>
+<td style="text-align: center;"><strong><code>b</code></strong></td>
+<td style="text-align: left;">El <code>int</code> (<code>a</code>) lee
+los bits del <code>float 5.5f</code>.</td>
+<td style="text-align: left;">1085276160 (o similar)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="bloque-iii-aplicaciÃ³n-prÃ¡ctica-struct-union-1">Bloque III:
+AplicaciÃ³n PrÃ¡ctica (<code>struct</code> + <code>union</code>)</h3>
+<h4 id="ejercicio-definiciÃ³n-de-tipo-variado-1">7. Ejercicio: DefiniciÃ³n
+de Tipo Variado</h4>
+<p><strong>Respuesta y CÃ³digo de Prueba:</strong></p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;string.h&gt;</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="kw">typedef</span> <span class="kw">union</span> <span class="op">{</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> id_numerica<span class="op">;</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">char</span> nombre_archivo<span class="op">[</span><span class="dv">10</span><span class="op">];</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> Identificador<span class="op">;</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="kw">typedef</span> <span class="kw">struct</span> <span class="op">{</span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> tipo<span class="op">;</span> <span class="co">// 0=ID, 1=Nombre</span></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>    Identificador datos<span class="op">;</span></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> Archivo<span class="op">;</span></span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>    Archivo doc1<span class="op">;</span></span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Caso 1: ID NumÃ©rica</span></span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>    doc1<span class="op">.</span>tipo <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>    doc1<span class="op">.</span>datos<span class="op">.</span>id_numerica <span class="op">=</span> <span class="dv">5489</span><span class="op">;</span> </span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;Tipo de archivo: </span><span class="sc">%d</span><span class="st"> (ID Numerica)</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">,</span> doc1<span class="op">.</span>tipo<span class="op">);</span></span>
+<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;Valor de ID: </span><span class="sc">%d\n</span><span class="st">&quot;</span><span class="op">,</span> doc1<span class="op">.</span>datos<span class="op">.</span>id_numerica<span class="op">);</span></span>
+<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<h4 id="ejercicio-condicionalidad-y-union-1">8. Ejercicio:
+Condicionalidad y <code>union</code></h4>
+<p><strong>Respuesta y CÃ³digo de Prueba:</strong></p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;string.h&gt;</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="co">// ... (Definiciones de Identificador y Archivo) ...</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>    Archivo doc2<span class="op">;</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Caso 2: Nombre de Archivo</span></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>    doc2<span class="op">.</span>tipo <span class="op">=</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>    strcpy<span class="op">(</span>doc2<span class="op">.</span>datos<span class="op">.</span>nombre_archivo<span class="op">,</span> <span class="st">&quot;Reporte.txt&quot;</span><span class="op">);</span> </span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;--- Lectura Condicional ---</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>doc2<span class="op">.</span>tipo <span class="op">==</span> <span class="dv">1</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">&quot;El tipo es Nombre. Valor: </span><span class="sc">%s\n</span><span class="st">&quot;</span><span class="op">,</span> doc2<span class="op">.</span>datos<span class="op">.</span>nombre_archivo<span class="op">);</span></span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">&quot;El tipo es ID. Valor: </span><span class="sc">%d\n</span><span class="st">&quot;</span><span class="op">,</span> doc2<span class="op">.</span>datos<span class="op">.</span>id_numerica<span class="op">);</span></span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p><strong>AnÃ¡lisis:</strong> La estructura <code>if</code> es el
+<strong>mecanismo de control externo</strong> que permite leer el
+miembro correcto de la <code>union</code> sin corromper datos.</p>
+<h4 id="ejercicio-ahorro-de-memoria-calculado-1">9. Ejercicio: Ahorro de
+Memoria Calculado</h4>
+<p><strong>Respuesta y CÃ³digo de Prueba:</strong></p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;string.h&gt;</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="kw">typedef</span> <span class="kw">union</span> <span class="op">{</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> id_numerica<span class="op">;</span> </span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">char</span> nombre_archivo<span class="op">[</span><span class="dv">10</span><span class="op">];</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> Identificador<span class="op">;</span> </span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="kw">typedef</span> <span class="kw">struct</span> <span class="op">{</span></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> id_numerica<span class="op">;</span> </span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>    <span class="dt">char</span> nombre_archivo<span class="op">[</span><span class="dv">10</span><span class="op">];</span></span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> NO_Union<span class="op">;</span> <span class="co">// Suma los tamaÃ±os</span></span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a><span class="co">// NOTA: Para este ejemplo, asumiremos 4 bytes para int y 10 para char[10]</span></span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Union: TamaÃ±o del miembro mÃ¡s grande (10 bytes o 12 por padding)</span></span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;1. TamaÃ±o de Identificador (union): </span><span class="sc">%zu</span><span class="st"> bytes</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">,</span> <span class="kw">sizeof</span><span class="op">(</span>Identificador<span class="op">));</span> </span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Struct: Suma de los tamaÃ±os (4 + 10 = 14 bytes, o 16 por padding)</span></span>
+<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;2. TamaÃ±o de NO_Union (struct): </span><span class="sc">%zu</span><span class="st"> bytes</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">,</span> <span class="kw">sizeof</span><span class="op">(</span>NO_Union<span class="op">));</span> </span>
+<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb14-23"><a href="#cb14-23" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p><strong>Salida TÃ­pica Esperada (Asumiendo 4 bytes de <code>int</code>
+y 10 bytes de <code>char[10]</code>):</strong></p>
+<pre><code>1. TamaÃ±o de Identificador (union): 12 bytes // TÃ­picamente 12 por alineaciÃ³n de memoria (MÃºltiplo de 4)
+2. TamaÃ±o de NO_Union (struct): 16 bytes // TÃ­picamente 16 por alineaciÃ³n de memoria (4 + 10 + 2 de padding = 16)</code></pre>
+<p><strong>ConclusiÃ³n:</strong> Se demuestra el ahorro (4 bytes en este
+caso), ya que la <code>union</code> solo reserva espacio para el mÃ¡s
+grande.</p>
+<h4 id="ejercicio-peligro-de-acceso-fuera-de-contexto-1">10. Ejercicio:
+Peligro de Acceso Fuera de Contexto</h4>
+<p><strong>Respuesta y CÃ³digo de Prueba:</strong></p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;string.h&gt;</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="co">// ... (Definiciones de Identificador y Archivo) ...</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>    Archivo doc2<span class="op">;</span></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Escribir la cadena</span></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>    doc2<span class="op">.</span>tipo <span class="op">=</span> <span class="dv">1</span><span class="op">;</span> </span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>    strcpy<span class="op">(</span>doc2<span class="op">.</span>datos<span class="op">.</span>nombre_archivo<span class="op">,</span> <span class="st">&quot;DATA&quot;</span><span class="op">);</span> </span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;--- PELIGRO: Lectura sin Contexto ---</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Se lee &#39;id_numerica&#39;, pero la memoria contiene los bytes ASCII de &#39;DATA&#39;</span></span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;Valor de id_numerica corrupto: </span><span class="sc">%d\n</span><span class="st">&quot;</span><span class="op">,</span> doc2<span class="op">.</span>datos<span class="op">.</span>id_numerica<span class="op">);</span> </span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p><strong>Salida TÃ­pica Esperada:</strong></p>
+<pre><code>--- PELIGRO: Lectura sin Contexto ---
+Valor de id_numerica corrupto: 1095048516 </code></pre>
+<p><strong>AnÃ¡lisis:</strong> El valor <code>1095048516</code> es el
+resultado de interpretar los bytes de â€˜DATAâ€™ (valores ASCII 68, 65, 84,
+65) como un Ãºnico entero de 4 bytes. Esto demuestra que sin la etiqueta
+<code>tipo</code>, la <code>union</code> es inÃºtil y peligrosa.</p>
+
+</div>
+</body>
+</html>
+

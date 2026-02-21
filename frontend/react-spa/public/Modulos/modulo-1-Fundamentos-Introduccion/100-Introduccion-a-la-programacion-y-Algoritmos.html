@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Introducción a la programación y Algoritmos</title>
+    <link rel="stylesheet" crossorigin href="/assets/content-01sust.css">
+    <style>
+       
+  </style>
+</head>
+
+
+
+
+<body>
+
+    
+<div class="main-content">
+
+<h1><strong>Introducción a la programación y Algoritmos 🚀</strong></h1>
+<p>¡Bienvenido al Módulo 1! Aquí comenzamos nuestro viaje hacia el
+fascinante mundo de la programación.</p>
+<p>Nuestro primer paso es entender la idea más fundamental: ¿qué
+significa exactamente "programar"?</p>
+<h2><strong>1. ¿Qué es Programar?</strong></h2>
+<p>Imagina que quieres enseñarle a un robot a preparar una taza de café.
+No puedes simplemente decirle: "Hazme un café". El robot no entendería
+esa orden. Necesitas darle una lista de instrucciones increíblemente
+detalladas y en el orden perfecto:</p>
+<ol type="1">
+<li><p>Toma la cafetera.</p></li>
+<li><p>Camina hacia el grifo.</p></li>
+<li><p>Abre el grifo.</p></li>
+<li><p>Llena la cafetera con 500 ml de agua.</p></li>
+<li><p>Cierra el grifo.</p></li>
+<li><p>Añade dos cucharadas de café al filtro.</p></li>
+<li><p>Enciende la cafetera.</p></li>
+<li><p>Espera 5 minutos.</p></li>
+<li><p>Vierte el café en una taza.</p></li>
+</ol>
+<p>Esto, en esencia, es programar.</p>
+<p>La <strong>programación</strong> es el <strong>arte de dar
+instrucciones precisas y lógicas a una computadora para resolver un
+problema</strong> o realizar una tarea. No es magia; es un proceso
+metódico de comunicación. Nosotros, los humanos, pensamos de forma
+abstracta, pero las computadoras son máquinas literales. Solo hacen
+<em>exactamente</em> lo que se les dice.</p>
+<p>El propósito de la programación es tomar un problema complejo (como
+conectar a millones de personas en una red social, analizar datos
+médicos para encontrar una enfermedad o simplemente mostrar esta página
+web) y dividirlo en pequeños pasos que una máquina pueda ejecutar.</p>
+<p><strong>La Computadora: Una Máquina de Procesamiento</strong></p>
+<p>Para programar, necesitamos entender nuestra herramienta principal:
+la <strong>computadora</strong>.</p>
+<p>Lejos de ser una caja mágica, una computadora es fundamentalmente una
+<strong>máquina de procesamiento de información</strong>. Su trabajo se
+puede resumir en un ciclo muy simple de tres pasos (conocido como el
+modelo IPO):</p>
+<ol type="1">
+<li><p><strong>Entrada (Input):</strong> Recibe datos e instrucciones.
+Esto puede ser cualquier cosa: las teclas que presionas, un clic del
+mouse, datos de un sensor de temperatura o la música que
+descargas.</p></li>
+<li><p><strong>Procesamiento (Process):</strong> Aquí ocurre la "magia".
+La Unidad Central de Procesamiento (CPU) toma esos datos de entrada y
+sigue las instrucciones (el <em>programa</em>) que un programador
+escribió. Manipula los datos, realiza cálculos, toma decisiones lógicas
+y transforma esos datos crudos.</p></li>
+<li><p><strong>Salida (Output):</strong> Entrega el resultado del
+procesamiento. Esto es lo que ves en la pantalla, lo que escuchas por
+los altavoces o el archivo que se guarda en el disco duro.</p></li>
+</ol>
+<p>Sin instrucciones (sin un programa), la computadora es solo un
+conjunto inerte de circuitos y metal. La programación es el lenguaje que
+usamos para darle vida a esa máquina, convirtiéndola en la herramienta
+más poderosa que la humanidad haya creado.</p>
+<h2><strong>2. Definición y Características Clave de un Algoritmo
+💡</strong></h2>
+<p>Si la programación es el arte de dar instrucciones a la computadora,
+el <strong>algoritmo</strong> es la <strong>receta</strong> o el
+<strong>plan lógico</strong> que usamos para escribir esas
+instrucciones.</p>
+<p>Un algoritmo es una <strong>secuencia finita y ordenada de pasos
+inequívocos</strong> que, ejecutados correctamente, resuelven un
+problema o cumplen una tarea específica.</p>
+<p>La palabra "algoritmo" tiene su origen en el nombre del matemático
+persa <strong>Muhammad ibn Musa al-Khwarizmi</strong> del siglo IX. Los
+humanos hemos usado algoritmos mucho antes que las computadoras; por
+ejemplo, el proceso para hacer café o el algoritmo de la división que
+aprendemos en la escuela son, en esencia, secuencias lógicas de
+pasos.</p>
+<p>En programación, el algoritmo es el <strong>diseño de la
+solución</strong> que precede al código. Primero se piensa la lógica, y
+luego esa lógica se traduce al lenguaje que la computadora entiende (el
+código C).</p>
+<p><strong>Características Clave de Todo Algoritmo
+Funcional</strong></p>
+<p>Para que un conjunto de pasos sea considerado un algoritmo útil y
+traducible a código C, debe cumplir con estas tres condiciones
+esenciales:</p>
+<table style="width:97%;">
+<colgroup>
+<col style="width: 26%" />
+<col style="width: 37%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>Característica</strong></th>
+<th style="text-align: left;"><strong>Implicación para el
+Programa</strong></th>
+<th style="text-align: left;"><strong>Analogía Cotidiana</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>Finito (Limitado)</strong></td>
+<td style="text-align: left;">El algoritmo <strong>debe
+terminar</strong> después de un número limitado y razonable de pasos. Un
+proceso que se repite infinitamente (bucle infinito) es un fallo
+lógico.</td>
+<td style="text-align: left;">Instrucciones de Montaje: El manual de
+IKEA tiene un paso final; la silla no se sigue armando eternamente.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Ordenado</strong></td>
+<td style="text-align: left;">Los pasos deben seguir una
+<strong>secuencia lógica</strong>. El orden de los pasos es crucial, ya
+que un paso incorrecto puede invalidar toda la solución.</td>
+<td style="text-align: left;">Receta de Cocina: No puedes hornear la
+masa de la tarta de manzana <em>antes</em> de mezclar la harina y el
+azúcar.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Preciso (Inequívoco)</strong></td>
+<td style="text-align: left;">Cada instrucción debe ser <strong>clara,
+concisa</strong> y no dar lugar a ambigüedades. La computadora debe
+saber exactamente qué hacer en cada momento, sin tener que
+adivinar.</td>
+<td style="text-align: left;">Receta de Cocina: Un algoritmo no puede
+decir "añadir una pizca de sal" (ambiguo). Debe especificar: "añadir
+<strong>2 gramos</strong> de sal".</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Definido
+(Consistente)</strong></td>
+<td style="text-align: left;">Si el algoritmo se ejecuta
+<strong>múltiples veces</strong> con los mismos datos de entrada,
+<strong>siempre debe producir el mismo resultado</strong> de
+salida.</td>
+<td style="text-align: left;">Operación de Suma: Si el algoritmo de suma
+recibe los números 5 y 3, el resultado siempre debe ser 8. Cualquier
+otro resultado indica un fallo lógico (<em>bug</em>).</td>
+</tr>
+</tbody>
+</table>
+<h2><strong>3. Fases en la Resolución de Problemas</strong></h2>
+<p>Crear un programa funcional y libre de errores es un proceso
+estructurado que va mucho más allá de simplemente escribir código. La
+<strong>resolución de problemas</strong> mediante la programación sigue
+un ciclo de vida bien definido, garantizando que la solución sea la
+correcta antes de comenzar a codificar:</p>
+<table style="width:97%;">
+<colgroup>
+<col style="width: 22%" />
+<col style="width: 42%" />
+<col style="width: 32%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>Fase</strong></th>
+<th style="text-align: left;"><strong>Descripción</strong></th>
+<th><strong>Rol del Programador</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>1. Análisis del
+Problema</strong></td>
+<td style="text-align: left;">Consiste en comprender exactamente
+<strong>qué se necesita</strong>. Se definen los requisitos, se
+identifican las <strong>Entradas (<em>Inputs</em>)</strong> que recibirá
+el programa y las <strong>Salidas (<em>Outputs</em>)</strong> que debe
+generar. Es la fase de la pregunta: "¿Qué voy a resolver?".</td>
+<td>Definir el problema, identificar datos clave y establecer los
+límites del programa.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>2. Diseño del
+Algoritmo</strong></td>
+<td style="text-align: left;">Se crea el plan lógico de la solución. Se
+estructura la secuencia de pasos que transformará las entradas en
+salidas. Aquí se utilizan herramientas de representación como el
+<strong>Pseudocódigo</strong> o los <strong>Diagramas de
+Flujo</strong>.</td>
+<td>Diseñar el <em>cómo</em> de la solución, asegurando que el algoritmo
+sea preciso, definido y finito.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>3. Codificación</strong></td>
+<td style="text-align: left;">Es la traducción del algoritmo diseñado al
+lenguaje de programación específico, en nuestro caso, <strong>Lenguaje
+C</strong>. Se respeta la sintaxis del lenguaje, se declaran variables y
+se escriben las instrucciones.</td>
+<td>Escribir el código fuente (el programa), siguiendo las normas de C y
+buenas prácticas.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>4. Prueba y
+Depuración</strong></td>
+<td style="text-align: left;">El programa se ejecuta para verificar que
+cumple con los requisitos iniciales. La <strong>prueba</strong> busca
+errores. La <strong>depuración (<em>Debugging</em>)</strong> es el
+proceso de localizar, analizar y corregir los errores o fallos
+(<em>bugs</em>) encontrados.</td>
+<td>Ejecutar pruebas, identificar errores (de lógica o sintaxis) y
+corregirlos hasta que el programa funcione según lo esperado.</td>
+</tr>
+</tbody>
+</table>
+<p>Este ciclo es iterativo: si durante la <strong>Prueba</strong> se
+detecta un error lógico, a menudo es necesario volver a la fase de
+<strong>Diseño del Algoritmo</strong> para corregir el plan
+original.</p>
+<h2><strong>4. Representación de Algoritmos</strong></h2>
+<p>Antes de pasar a la fase de Codificación, donde se utiliza la
+sintaxis estricta del Lenguaje C, es vital tener un
+<strong>plan</strong> claro de la solución. Esta planificación, que
+ocurre en la fase de Diseño del Algoritmo, utiliza métodos de
+representación que son independientes del lenguaje de programación:</p>
+<p><strong>A. Pseudocódigo</strong></p>
+<p>El Pseudocódigo es un lenguaje formal de especificación de algoritmos
+que utiliza una mezcla de <strong>lenguaje natural</strong> (similar al
+español) con <strong>convenciones sintácticas</strong> propias de un
+lenguaje de programación (como LEER, ESCRIBIR, SI... ENTONCES...).</p>
+<ul>
+<li><p><strong>Propósito:</strong> Permite al programador enfocarse
+exclusivamente en la <strong>lógica</strong> del algoritmo (¿qué pasos
+seguir?) sin preocuparse por los detalles de la sintaxis de C, como los
+puntos y comas o los tipos de datos.</p></li>
+<li><p><strong>Ventajas:</strong> Es fácil de leer, comprender y
+modificar. Sirve como un primer borrador que es fácilmente traducible al
+código real.</p></li>
+</ul>
+<p><strong>Ejemplo Básico en Pseudocódigo:</strong></p>
+<p>Fragmento de código</p>
+<p>INICIO</p>
+<p>// 1. ANÁLISIS: Pedir dos números.</p>
+<p>ESCRIBIR "Ingrese el primer número:"</p>
+<p>LEER num1</p>
+<p>// 2. PROCESAMIENTO: Sumar los números.</p>
+<p>ESCRIBIR "Ingrese el segundo número:"</p>
+<p>LEER num2</p>
+<p>resultado = num1 + num2</p>
+<p>// 3. SALIDA: Mostrar el resultado.</p>
+<p>ESCRIBIR "La suma es: ", resultado</p>
+<p>FIN</p>
+<p><strong>B. Diagramas de Flujo (<em>Flowcharts</em>)</strong></p>
+<p>El Diagrama de Flujo es una <strong>representación gráfica</strong>
+del algoritmo. Utiliza un conjunto de símbolos estandarizados unidos por
+flechas para visualizar el flujo de ejecución y las rutas de decisión
+del programa.</p>
+<ul>
+<li><p><strong>Propósito:</strong> Es ideal para visualizar algoritmos
+con estructuras de control complejas (como bucles o múltiples
+decisiones), haciendo que el camino lógico sea muy evidente.</p></li>
+<li><p><strong>Símbolos Comunes:</strong></p>
+<ul>
+<li><p><strong>Óvalo:</strong> Indica el <strong>Inicio</strong> y
+<strong>Fin</strong> del programa.</p></li>
+<li><p><strong>Paralelogramo:</strong> Representa la
+<strong>Entrada</strong> y <strong>Salida</strong> de datos
+(LEER/ESCRIBIR).</p></li>
+<li><p><strong>Rectángulo:</strong> Indica un <strong>Proceso</strong> o
+una operación (ej. una asignación o un cálculo).</p></li>
+<li><p><strong>Rombo:</strong> Representa una <strong>Decisión</strong>
+lógica (generalmente una pregunta Sí/No).</p></li>
+</ul></li>
+</ul>
+<p><img src="/Modulos/modulo-1-Fundamentos-Introduccion/media/image1.png"
+style="width:6.12847in;height:3.64097in" /></p>
+<h2><strong>5. Conceptos Fundamentales</strong></h2>
+<p>Una vez que entendemos qué es un algoritmo y cómo se diseña, es hora
+de introducir los componentes básicos que utilizamos en el Lenguaje C
+para darle vida a ese plan lógico. Estos son los tres pilares de
+cualquier programa:</p>
+<p><strong>A. Instrucción o Sentencia</strong></p>
+<p>La <strong>Instrucción</strong> o <strong>Sentencia</strong> es la
+unidad de trabajo más pequeña y completa que podemos darle a la
+computadora. Es una orden única y específica que se ejecuta.</p>
+<ul>
+<li><p><strong>Analogía:</strong> Piensa en una oración. En un programa,
+una instrucción es como una frase que tiene un sujeto, un verbo y un
+complemento (ej. "Sumar 5 más 3" o "Mostrar el resultado en
+pantalla").</p></li>
+<li><p><strong>En C:</strong> En el Lenguaje C, una instrucción
+generalmente termina con un <strong>punto y coma (;)</strong>, lo que le
+indica al compilador que esa orden ha finalizado.</p></li>
+</ul>
+<p><strong>B. Variables</strong></p>
+<p>Las <strong>Variables</strong> son espacios de memoria temporales que
+reservamos en el sistema para <strong>almacenar y manipular
+datos</strong> mientras el programa se está ejecutando.</p>
+<ul>
+<li><p><strong>Analogía:</strong> Imagina las variables como
+<strong>cajas etiquetadas</strong> en la memoria de la computadora. Cada
+caja tiene un nombre único (la etiqueta de la variable) y puede contener
+un valor (el dato).</p></li>
+<li><p><strong>Propósito:</strong> Nos permiten trabajar con información
+que puede cambiar durante la ejecución del programa (por ejemplo, el
+puntaje de un jugador, el resultado de una suma o el nombre de un
+usuario). Las estudiaremos en detalle en el Módulo 2.</p></li>
+</ul>
+<p><strong>C. Estructuras de Control</strong></p>
+<p>Las <strong>Estructuras de Control</strong> son las herramientas que
+dotan al programa de <strong>inteligencia</strong> y la capacidad de
+tomar decisiones o repetir tareas. Permiten que el flujo de ejecución
+deje de ser lineal.</p>
+<p>Existen dos tipos principales de control:</p>
+<ol type="1">
+<li><p><strong>Estructuras Condicionales (Toma de Decisiones):</strong>
+Permiten ejecutar un bloque de código <strong>solo si se cumple una
+condición</strong>.</p>
+<ul>
+<li><em>Ejemplo Conceptual:</em> <strong>SI</strong> (el usuario ingresó
+la contraseña correcta) <strong>ENTONCES</strong> (permitirle el
+acceso).</li>
+</ul></li>
+<li><p><strong>Estructuras Iterativas (Repetición o Bucles):</strong>
+Permiten ejecutar un bloque de código <strong>múltiples veces</strong>
+hasta que se cumpla una condición de finalización.</p>
+<ul>
+<li><em>Ejemplo Conceptual:</em> <strong>REPETIR</strong> (sumar 1 al
+contador) <strong>MIENTRAS</strong> (el contador sea menor a 100).</li>
+</ul></li>
+</ol>
+<p>Estos conceptos son la columna vertebral de cualquier lenguaje de
+programación y la base sobre la que construiremos programas más
+complejos.</p>
+</div>
+
+
+</body>
+</html>

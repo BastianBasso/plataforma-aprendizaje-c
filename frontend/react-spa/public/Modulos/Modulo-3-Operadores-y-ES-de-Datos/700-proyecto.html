@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" crossorigin href="/assets/content-01sust.css">
+</head>
+<body>
+<div class="main-content">
+<h1><strong>🚀 Proyecto Final del Módulo 3: Simulador de Finanzas
+Personales (I-P-O Extendido)</strong></h1>
+<p>Este proyecto integrará todos los conocimientos adquiridos en el
+<strong>Módulo 3: Operadores y E/S de Datos</strong> (Input,
+Procesamiento, Output formateado, Precedencia y Operadores).</p>
+<p>El objetivo es crear un programa que simule el cálculo del
+<strong>Flujo de Caja Mensual</strong> de una persona, aplicando
+impuestos, descuentos y mostrando el resultado de forma clara y
+profesional.</p>
+<p><strong>Objetivo del Proyecto</strong></p>
+<p>Crear un programa completo que solicite los ingresos brutos y los
+gastos fijos de un usuario, aplique un impuesto y un ahorro obligatorio,
+y determine su <strong>Saldo Neto Disponible</strong>.</p>
+<p><strong>Estructura del Programa (Ciclo I-P-O)</strong></p>
+<p>El proyecto se dividirá estrictamente en las tres fases del modelo
+I-P-O:</p>
+<ol type="1">
+<li><p><strong>Input:</strong> Captura de Ingresos Brutos y Gastos Fijos
+(float).</p></li>
+<li><p><strong>Procesamiento:</strong> Aplicación de fórmulas de cálculo
+(Impuesto, Ahorro) usando operadores aritméticos, relacionales y
+precedencia.</p></li>
+<li><p><strong>Output:</strong> Presentación del resultado como una
+tabla financiera legible, utilizando control de <strong>precisión
+(.2f)</strong> y <strong>ancho de campo (%w.nf)</strong>.</p></li>
+</ol>
+<p><strong>Requisitos de Datos y Constantes</strong></p>
+<table style="width:97%;">
+<colgroup>
+<col style="width: 27%" />
+<col style="width: 17%" />
+<col style="width: 52%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>Nombre</strong></th>
+<th style="text-align: left;"><strong>Tipo de Dato</strong></th>
+<th style="text-align: left;"><strong>Valor / Uso</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>Ingreso Bruto</strong></td>
+<td style="text-align: left;">float</td>
+<td style="text-align: left;">Dato de <strong>Input</strong> del
+usuario.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Gasto Fijo</strong></td>
+<td style="text-align: left;">float</td>
+<td style="text-align: left;">Dato de <strong>Input</strong> del
+usuario.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>TASA_IMPUESTO</strong></td>
+<td style="text-align: left;">const float</td>
+<td style="text-align: left;">Fijo: <strong>$0.15$</strong> (15% de
+impuesto sobre el ingreso).</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>TASA_AHORRO</strong></td>
+<td style="text-align: left;">const float</td>
+<td style="text-align: left;">Fijo: <strong>$0.10$</strong> (10% de
+ahorro obligatorio sobre el ingreso neto).</td>
+</tr>
+</tbody>
+</table>
+<p><strong>CÓDIGO FUENTE DEL PROYECTO</strong></p>
+<p>C</p>
+<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
+<p>// Definición de constantes para el procesamiento</p>
+<p>#<strong>define</strong> TASA_IMPUESTO 0.15f</p>
+<p>#<strong>define</strong> TASA_AHORRO 0.10f</p>
+<p>int main(void) {</p>
+<p>// Variables de Input (Fase 1)</p>
+<p>float ingreso_bruto;</p>
+<p>float gasto_fijo;</p>
+<p>// Variables de Procesamiento (Fase 2)</p>
+<p>float impuesto_calculado;</p>
+<p>float ingreso_neto_inicial;</p>
+<p>float ahorro_obligatorio;</p>
+<p>float saldo_neto_disponible;</p>
+<p>int tiene_superavit; // Resultado lógico (1 o 0)</p>
+<p>// ==========================================================</p>
+<p>// FASE 1: INPUT (Captura de Datos)</p>
+<p>// ==========================================================</p>
+<p>printf("--- 💰 Simulador de Flujo de Caja Mensual ---\n\n");</p>
+<p>// Captura del Ingreso Bruto (Input 1)</p>
+<p>printf("1. Ingrese su ingreso mensual BRUTO (antes de impuestos):
+$");</p>
+<p>scanf("%f", &amp;ingreso_bruto);</p>
+<p>// Captura de Gastos Fijos (Input 2)</p>
+<p>printf("2. Ingrese el total de gastos fijos (alquiler, servicios,
+etc.): $");</p>
+<p>scanf("%f", &amp;gasto_fijo);</p>
+<p>// Verificacion de exito logico (Uso del operador relacional)</p>
+<p>int input_correcto = (ingreso_bruto &gt; 0 &amp;&amp; gasto_fijo
+&gt;= 0);</p>
+<p>// Si el input inicial no es logico, simplemente terminamos</p>
+<p>if (!input_correcto) {</p>
+<p>printf("\n[ERROR] Los ingresos deben ser positivos. Finalizando
+programa.\n");</p>
+<p>return 1;</p>
+<p>}</p>
+<p>// ==========================================================</p>
+<p>// FASE 2: PROCESAMIENTO (Cálculos Financieros)</p>
+<p>// ==========================================================</p>
+<p>// Cálculo 1: Impuesto (Uso de Aritmético y Asignación)</p>
+<p>// NOTA: Se aplica la precedencia natural: * se calcula antes de
+-</p>
+<p>impuesto_calculado = ingreso_bruto * TASA_IMPUESTO;</p>
+<p>ingreso_neto_inicial = ingreso_bruto - impuesto_calculado;</p>
+<p>// Cálculo 2: Ahorro Obligatorio (sobre el ingreso neto)</p>
+<p>ahorro_obligatorio = ingreso_neto_inicial * TASA_AHORRO;</p>
+<p>// Cálculo 3: Saldo Disponible Final</p>
+<p>saldo_neto_disponible = ingreso_neto_inicial - ahorro_obligatorio -
+gasto_fijo;</p>
+<p>// Cálculo 4: Resultado Lógico (Superávit vs. Déficit)</p>
+<p>// Uso del operador relacional para generar 1 (Superávit) o 0
+(Déficit)</p>
+<p>tiene_superavit = (saldo_neto_disponible &gt;= 0);</p>
+<p>// ==========================================================</p>
+<p>// FASE 3: OUTPUT (Presentación Formateada)</p>
+<p>// ==========================================================</p>
+<p>printf("\n\n--- 📊 REPORTE DE FLUJO DE CAJA MENSUAL ---\n");</p>
+<p>printf("===========================================\n");</p>
+<p>// 1. Mostrar Ingresos y Deducciones</p>
+<p>// Uso de %-30s para alinear texto a la izquierda en una columna de
+30</p>
+<p>printf("%-30s | %10.2f\n", "INGRESOS BRUTOS", ingreso_bruto);</p>
+<p>printf("-------------------------------------------\n");</p>
+<p>// Detalle de Deducciones</p>
+<p>printf("%-30s |-%9.2f\n", "(-) Impuesto (15%)",
+impuesto_calculado);</p>
+<p>printf("%-30s | %10.2f\n", "INGRESO NETO DESPUES DE IMPUESTOS",
+ingreso_neto_inicial);</p>
+<p>printf("-------------------------------------------\n");</p>
+<p>// Detalle de Ahorro y Gastos</p>
+<p>printf("%-30s |-%9.2f\n", "(-) Ahorro Obligatorio (10%)",
+ahorro_obligatorio);</p>
+<p>printf("%-30s |-%9.2f\n", "(-) Gastos Fijos Mensuales",
+gasto_fijo);</p>
+<p>printf("===========================================\n");</p>
+<p>// 2. Mostrar el Saldo Final con Formato Condicional</p>
+<p>// El ancho de campo (10.2f) garantiza la alineación perfecta</p>
+<p>printf("%-30s | %10.2f\n", "SALDO NETO DISPONIBLE",
+saldo_neto_disponible);</p>
+<p>printf("===========================================\n");</p>
+<p>// 3. Mostrar el Resultado Lógico con Texto Descriptivo</p>
+<p>printf("ESTADO FINANCIERO: ");</p>
+<p>// Uso de operador relacional (== 1) y condicional (?:) para un
+output legible</p>
+<p>if (tiene_superavit == 1) {</p>
+<p>printf("¡SUPERÁVIT! El saldo es positivo.\n");</p>
+<p>} else {</p>
+<p>printf("DÉFICIT. El saldo es negativo.\n");</p>
+<p>}</p>
+<p>printf("-------------------------------------------\n");</p>
+<p>return 0;</p>
+<p>}</p>
+<p><strong>Ejemplo de Interacción y Output</strong></p>
+<table style="width:97%;">
+<colgroup>
+<col style="width: 22%" />
+<col style="width: 33%" />
+<col style="width: 41%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>Input del Usuario</strong></th>
+<th style="text-align: left;"><strong>Resultado de
+Procesamiento</strong></th>
+<th style="text-align: left;"><strong>Output Formateado</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>Ingreso Bruto:</strong>
+2000.0</td>
+<td style="text-align: left;">Impuesto: $300.00$</td>
+<td style="text-align: left;">INGRESO NETO DESPUES DE IMPUESTOS:
+1700.00</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Gasto Fijo:</strong> 1300.0</td>
+<td style="text-align: left;">Ahorro: $170.00$</td>
+<td style="text-align: left;">SALDO NETO DISPONIBLE: 230.00</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Saldo Neto: $230.00$</td>
+<td style="text-align: left;">ESTADO FINANCIERO: ¡SUPERÁVIT!</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</body>
+</html>
+

@@ -1,0 +1,453 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" crossorigin href="/assets/content-01sust.css">
+</head>
+<body>
+<div class="main-content">
+<h2 id="ejercicios-de-programaciÃ³n-io-de-archivos-de-texto">10
+Ejercicios de ProgramaciÃ³n: I/O de Archivos de Texto ðŸ“ðŸ‘“</h2>
+<h3 id="bloque-1-escritura-formateada-fprintf">Bloque 1: Escritura
+Formateada (<code>fprintf</code>)</h3>
+<p><strong>1. Registro BÃ¡sico con Formato</strong> Escribe un programa
+que declare las variables <code>nombre</code> (cadena),
+<code>edad</code> (entero) y <code>altura</code> (flotante). Abre un
+archivo llamado <strong><code>perfil.txt</code></strong> en modo
+escritura (<code>"w"</code>) y usa
+<strong><code>fprintf()</code></strong> para escribir los datos con el
+siguiente formato, asegurÃ¡ndote de incluir el salto de lÃ­nea
+(<code>\n</code>):</p>
+<blockquote>
+<p><code>Nombre: [nombre], Edad: [edad], Altura: [altura] mts</code></p>
+</blockquote>
+<p><strong>2. Escritura de MÃºltiples Registros (Modo Anexar)</strong>
+Crea una funciÃ³n llamada
+<code>anexar_log(int codigo, const char *mensaje)</code> que abra un
+archivo llamado <strong><code>bitacora.log</code></strong> en modo
+anexar (<code>"a"</code>). Dentro de la funciÃ³n, usa
+<strong><code>fprintf()</code></strong> para escribir un registro en el
+siguiente formato, usando el tiempo actual (<code>time()</code>) o
+simplemente un nÃºmero de secuencia:</p>
+<blockquote>
+<p><code>[Secuencia]: Error [cÃ³digo] - [mensaje]\n</code></p>
+</blockquote>
+<p>Llama a esta funciÃ³n tres veces desde <code>main()</code> con datos
+diferentes.</p>
+<hr />
+<h3 id="bloque-2-lectura-formateada-fscanf">Bloque 2: Lectura Formateada
+(<code>fscanf</code>)</h3>
+<p><strong>3. Lectura de un Ãšnico Registro con VerificaciÃ³n</strong>
+Escribe un programa para leer el archivo
+<strong><code>perfil.txt</code></strong> creado en el Ejercicio 1. a.
+Declara variables para almacenar el nombre, la edad y la altura leÃ­dos.
+b. Usa <strong><code>fscanf()</code></strong> con una cadena de formato
+que <strong>coincida exactamente</strong> con el formato de escritura
+(incluyendo los textos fijos como <code>Nombre:</code> y
+<code>, Edad:</code>). c.Â <strong>Verifica el valor de retorno</strong>
+de <code>fscanf()</code>. Si es 3, imprime los datos leÃ­dos; si no,
+imprime un mensaje de error.</p>
+<p><strong>4. Lectura de Registros MÃºltiples con Bucle
+(<code>EOF</code>)</strong> Crea manualmente un archivo
+<strong><code>coordenadas.txt</code></strong> con el siguiente contenido
+(mÃºltiples lÃ­neas):</p>
+<pre><code>10.5 22
+-5.0 15
+33.1 40</code></pre>
+<p>Escribe un programa que: a. Abra el archivo en modo lectura
+(<code>"r"</code>). b. Use un bucle <code>while</code> que dependa del
+valor de retorno de <strong><code>fscanf()</code></strong> para leer
+pares de flotantes (<code>X</code>, <code>Y</code>) hasta llegar al
+final del archivo (<code>EOF</code>). c.Â Dentro del bucle, imprime cada
+par leÃ­do: <code>Coordenada: (X, Y)</code>.</p>
+<hr />
+<h3 id="bloque-3-lecturaescritura-de-lÃ­neas-fputs-y-fgets">Bloque 3:
+Lectura/Escritura de LÃ­neas (<code>fputs</code> y
+<code>fgets</code>)</h3>
+<p><strong>5. Escritura de Cadenas Sin Nueva LÃ­nea
+(<code>fputs</code>)</strong> Escribe un programa que abra un archivo
+llamado <strong><code>lineas.txt</code></strong> en modo escritura
+(<code>"w"</code>). a. Usa <strong><code>fputs()</code></strong> tres
+veces para escribir tres palabras separadas (ej: â€œUNOâ€, â€œDOSâ€, â€œTRESâ€).
+b. Usa <strong><code>fputs()</code></strong> una cuarta vez para
+escribir una cadena que sea solo un salto de lÃ­nea: <code>"\n"</code>.
+c.Â Cierra el archivo. (Al inspeccionar el archivo, las tres palabras
+deben estar en la misma lÃ­nea).</p>
+<p><strong>6. Lectura Segura de LÃ­neas (<code>fgets</code>)</strong>
+Escribe un programa que lea el archivo
+<strong><code>lineas.txt</code></strong> (creado en el Ej. 5). a. Define
+un <em>buffer</em> de tamaÃ±o 50 (<code>#define MAX 50</code>). b. Usa un
+bucle <code>while</code> con <strong><code>fgets()</code></strong> para
+leer y luego imprimir cada lÃ­nea. c.Â Comenta en el cÃ³digo cÃ³mo
+<code>fgets()</code> ayuda a prevenir el desbordamiento de bÃºfer.</p>
+<hr />
+<h3 id="bloque-4-integraciÃ³n-y-diferenciaciÃ³n">Bloque 4: IntegraciÃ³n y
+DiferenciaciÃ³n</h3>
+<p><strong>7. IntegraciÃ³n <code>fprintf</code> y <code>fgets</code>
+(Escritura y VerificaciÃ³n)</strong> Crea un programa que: a. Use
+<strong><code>fprintf()</code></strong> para escribir un mensaje largo y
+complejo
+(<code>char *mensaje = "Este mensaje incluye: comas, espacios y un nÃºmero 1234."</code>)
+en un archivo <strong><code>mensaje.txt</code></strong>. b. Cierre el
+archivo. c.Â Reabra el archivo en modo lectura y usa
+<strong><code>fgets()</code></strong> para leer el mensaje de vuelta en
+un bÃºfer. d.Â Imprime el mensaje leÃ­do para verificar.</p>
+<p><strong>8. DesafÃ­o de Formato (<code>fscanf</code> vs.Â Datos
+Reales)</strong> Escribe un programa que: a. Use
+<strong><code>fprintf()</code></strong> para escribir la siguiente lÃ­nea
+en <strong><code>datos_mal.txt</code></strong>:
+<code>Nombre=Juan;Edad=30</code>. b. Intente leer el archivo usando
+<strong><code>fscanf()</code></strong> con el siguiente formato
+incorrecto: <code>fscanf(f, "Nombre: %s, Edad: %d", ...)</code>
+c.Â Explica en un comentario la razÃ³n por la que <code>fscanf()</code>
+fallarÃ¡ o solo leerÃ¡ parcialmente los datos.</p>
+<p><strong>9. <code>fputs</code> vs.Â <code>fprintf</code> para
+Cadenas</strong> Compara el uso de <code>fputs</code> y
+<code>fprintf</code> para escribir una cadena simple. a. Abre
+<strong><code>comparacion.txt</code></strong> en modo <code>"w"</code>.
+b. Usa
+<strong><code>fprintf(f, "%s", "Cadena con fprintf.")</code></strong>.
+c.Â Usa <strong><code>fputs("Cadena con fputs.", f)</code></strong>.
+d.Â Cierra el archivo. Â¿CuÃ¡l es el inconveniente de <code>fprintf</code>
+en este caso? (Ocupa mÃ¡s recursos porque procesa el formato, aunque el
+resultado de la cadena sea el mismo).</p>
+<p><strong>10. Bucle de Lectura LÃ­nea por LÃ­nea (<code>fgets</code> para
+CSV)</strong> Escribe un programa que simule la lectura de un archivo
+CSV (valores separados por comas). a. Crea manualmente
+<strong><code>inventario.csv</code></strong> con 3 lÃ­neas:
+<code>Laptop,50,999.99</code>, <code>Teclado,120,45.00</code>, etc. b.
+Usa un bucle <code>while</code> con
+<strong><code>fgets()</code></strong> para leer cada lÃ­nea completa.
+c.Â Dentro del bucle, utiliza <strong><code>sscanf()</code></strong>
+(similar a <code>fscanf</code>, pero lee de una cadena en memoria, el
+bÃºfer de <code>fgets</code>) para parsear la lÃ­nea leÃ­da en un nombre de
+producto (cadena), cantidad (entero) y precio (flotante). d.Â Imprime los
+datos extraÃ­dos de cada lÃ­nea.</p>
+<h2 id="soluciones-io-de-archivos-de-texto">âœ… Soluciones: I/O de
+Archivos de Texto</h2>
+<h3 id="bloque-1-escritura-formateada-fprintf-1">Bloque 1: Escritura
+Formateada (<code>fprintf</code>)</h3>
+<p><strong>1. Registro BÃ¡sico con Formato</strong></p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdlib.h&gt;</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">FILE</span> <span class="op">*</span>archivo <span class="op">=</span> fopen<span class="op">(</span><span class="st">&quot;perfil.txt&quot;</span><span class="op">,</span> <span class="st">&quot;w&quot;</span><span class="op">);</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">char</span> nombre<span class="op">[]</span> <span class="op">=</span> <span class="st">&quot;Elena Rodriguez&quot;</span><span class="op">;</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> edad <span class="op">=</span> <span class="dv">28</span><span class="op">;</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    <span class="dt">float</span> altura <span class="op">=</span> <span class="fl">1.65</span><span class="bu">f</span><span class="op">;</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>archivo <span class="op">==</span> NULL<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>        perror<span class="op">(</span><span class="st">&quot;Error al abrir perfil.txt&quot;</span><span class="op">);</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> EXIT_FAILURE<span class="op">;</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Usando fprintf para dar formato a la salida</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>    fprintf<span class="op">(</span>archivo<span class="op">,</span> <span class="st">&quot;Nombre: </span><span class="sc">%s</span><span class="st">, Edad: </span><span class="sc">%d</span><span class="st">, Altura: </span><span class="sc">%.2f</span><span class="st"> mts</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">,</span> nombre<span class="op">,</span> edad<span class="op">,</span> altura<span class="op">);</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;Ejercicio 1 completado: perfil.txt creado.</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>    fclose<span class="op">(</span>archivo<span class="op">);</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> EXIT_SUCCESS<span class="op">;</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<hr />
+<p><strong>2. Escritura de MÃºltiples Registros (Modo
+Anexar)</strong></p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdlib.h&gt;</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;time.h&gt;</span><span class="pp"> </span><span class="co">// Para simular la secuencia</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> anexar_log<span class="op">(</span><span class="dt">int</span> codigo<span class="op">,</span> <span class="dt">const</span> <span class="dt">char</span> <span class="op">*</span>mensaje<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Abrir en modo anexar (&quot;a&quot;)</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    <span class="dt">FILE</span> <span class="op">*</span>archivo_log <span class="op">=</span> fopen<span class="op">(</span><span class="st">&quot;bitacora.log&quot;</span><span class="op">,</span> <span class="st">&quot;a&quot;</span><span class="op">);</span> </span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>archivo_log <span class="op">==</span> NULL<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>        perror<span class="op">(</span><span class="st">&quot;Error al abrir bitacora.log&quot;</span><span class="op">);</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span><span class="op">;</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Usar fprintf para registrar el evento</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>    fprintf<span class="op">(</span>archivo_log<span class="op">,</span> <span class="st">&quot;[</span><span class="sc">%ld</span><span class="st">]: Error </span><span class="sc">%d</span><span class="st"> - </span><span class="sc">%s\n</span><span class="st">&quot;</span><span class="op">,</span> time<span class="op">(</span>NULL<span class="op">),</span> codigo<span class="op">,</span> mensaje<span class="op">);</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>    fclose<span class="op">(</span>archivo_log<span class="op">);</span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Las tres llamadas generarÃ¡n tres lÃ­neas en bitacora.log</span></span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>    anexar_log<span class="op">(</span><span class="dv">404</span><span class="op">,</span> <span class="st">&quot;Recurso no encontrado&quot;</span><span class="op">);</span></span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>    anexar_log<span class="op">(</span><span class="dv">500</span><span class="op">,</span> <span class="st">&quot;Error interno del servidor&quot;</span><span class="op">);</span></span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>    anexar_log<span class="op">(</span><span class="dv">401</span><span class="op">,</span> <span class="st">&quot;Acceso no autorizado&quot;</span><span class="op">);</span></span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;Ejercicio 2 completado: 3 registros anexados a bitacora.log.</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> EXIT_SUCCESS<span class="op">;</span></span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<hr />
+<h3 id="bloque-2-lectura-formateada-fscanf-1">Bloque 2: Lectura
+Formateada (<code>fscanf</code>)</h3>
+<p><strong>3. Lectura de un Ãšnico Registro con VerificaciÃ³n</strong></p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdlib.h&gt;</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">FILE</span> <span class="op">*</span>archivo <span class="op">=</span> fopen<span class="op">(</span><span class="st">&quot;perfil.txt&quot;</span><span class="op">,</span> <span class="st">&quot;r&quot;</span><span class="op">);</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">char</span> nombre_leido<span class="op">[</span><span class="dv">50</span><span class="op">];</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> edad_leida<span class="op">;</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    <span class="dt">float</span> altura_leida<span class="op">;</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> items_leidos<span class="op">;</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>archivo <span class="op">==</span> NULL<span class="op">)</span> <span class="cf">return</span> EXIT_FAILURE<span class="op">;</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    <span class="co">// El formato debe coincidir EXACTAMENTE con el texto escrito</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>    items_leidos <span class="op">=</span> fscanf<span class="op">(</span>archivo<span class="op">,</span> <span class="st">&quot;Nombre: %[^,], Edad: </span><span class="sc">%d</span><span class="st">, Altura: </span><span class="sc">%f</span><span class="st"> mts&quot;</span><span class="op">,</span> </span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>                          nombre_leido<span class="op">,</span> <span class="op">&amp;</span>edad_leida<span class="op">,</span> <span class="op">&amp;</span>altura_leida<span class="op">);</span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Se esperan 3 elementos leÃ­dos (nombre, edad, altura)</span></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>items_leidos <span class="op">==</span> <span class="dv">3</span><span class="op">)</span> <span class="op">{</span> </span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">&quot;</span><span class="sc">\n</span><span class="st">Ejercicio 3: Lectura exitosa.</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">&quot;Datos leÃ­dos: Nombre: </span><span class="sc">%s</span><span class="st"> | Edad: </span><span class="sc">%d</span><span class="st"> | Altura: </span><span class="sc">%.2f</span><span class="st"> mts</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">,</span> </span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>               nombre_leido<span class="op">,</span> edad_leida<span class="op">,</span> altura_leida<span class="op">);</span></span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">&quot;</span><span class="sc">\n</span><span class="st">Ejercicio 3: Fallo de lectura o formato incorrecto (solo se leyeron </span><span class="sc">%d</span><span class="st"> elementos).</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">,</span> items_leidos<span class="op">);</span></span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>    fclose<span class="op">(</span>archivo<span class="op">);</span></span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> EXIT_SUCCESS<span class="op">;</span></span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<blockquote>
+<p><strong>Nota:</strong> Se utiliza <code>%[^,]</code> en
+<code>fscanf</code> para leer la cadena <code>nombre</code> hasta la
+primera coma, ya que el nombre puede contener espacios.</p>
+</blockquote>
+<hr />
+<p><strong>4. Lectura de Registros MÃºltiples con Bucle
+(<code>EOF</code>)</strong></p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdlib.h&gt;</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    <span class="co">// AsegÃºrese de que &#39;coordenadas.txt&#39; existe con los datos del enunciado</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">FILE</span> <span class="op">*</span>archivo <span class="op">=</span> fopen<span class="op">(</span><span class="st">&quot;coordenadas.txt&quot;</span><span class="op">,</span> <span class="st">&quot;r&quot;</span><span class="op">);</span> </span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    <span class="dt">float</span> x<span class="op">,</span> y<span class="op">;</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> items_leidos<span class="op">;</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> contador <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>archivo <span class="op">==</span> NULL<span class="op">)</span> <span class="cf">return</span> EXIT_FAILURE<span class="op">;</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;</span><span class="sc">\n</span><span class="st">Ejercicio 4: Leyendo coordenadas hasta EOF...</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>    <span class="co">// El bucle continÃºa mientras fscanf lea exactamente 2 elementos (X y Y)</span></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> <span class="op">((</span>items_leidos <span class="op">=</span> fscanf<span class="op">(</span>archivo<span class="op">,</span> <span class="st">&quot;</span><span class="sc">%f</span><span class="st"> </span><span class="sc">%f</span><span class="st">&quot;</span><span class="op">,</span> <span class="op">&amp;</span>x<span class="op">,</span> <span class="op">&amp;</span>y<span class="op">))</span> <span class="op">==</span> <span class="dv">2</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>        contador<span class="op">++;</span></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">&quot;Coordenada </span><span class="sc">%d</span><span class="st">: (</span><span class="sc">%.1f</span><span class="st">, </span><span class="sc">%.1f</span><span class="st">)</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">,</span> contador<span class="op">,</span> x<span class="op">,</span> y<span class="op">);</span></span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Si items_leidos es 0 o 1, algo saliÃ³ mal. Si es EOF, el bucle termina.</span></span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>items_leidos <span class="op">!=</span> EOF<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">&quot;Advertencia: Se detuvo la lectura antes de EOF debido a un error de formato.</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>    fclose<span class="op">(</span>archivo<span class="op">);</span></span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> EXIT_SUCCESS<span class="op">;</span></span>
+<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<hr />
+<h3 id="bloque-3-lecturaescritura-de-lÃ­neas-fputs-y-fgets-1">Bloque 3:
+Lectura/Escritura de LÃ­neas (<code>fputs</code> y
+<code>fgets</code>)</h3>
+<p><strong>5. Escritura de Cadenas Sin Nueva LÃ­nea
+(<code>fputs</code>)</strong></p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdlib.h&gt;</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">FILE</span> <span class="op">*</span>f <span class="op">=</span> fopen<span class="op">(</span><span class="st">&quot;lineas.txt&quot;</span><span class="op">,</span> <span class="st">&quot;w&quot;</span><span class="op">);</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>f <span class="op">==</span> NULL<span class="op">)</span> <span class="cf">return</span> EXIT_FAILURE<span class="op">;</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>    <span class="co">// fputs no aÃ±ade \n automÃ¡ticamente</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>    fputs<span class="op">(</span><span class="st">&quot;UNO&quot;</span><span class="op">,</span> f<span class="op">);</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>    fputs<span class="op">(</span><span class="st">&quot; DOS&quot;</span><span class="op">,</span> f<span class="op">);</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>    fputs<span class="op">(</span><span class="st">&quot; TRES&quot;</span><span class="op">,</span> f<span class="op">);</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Se aÃ±ade el salto de lÃ­nea explÃ­citamente al final</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>    fputs<span class="op">(</span><span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">,</span> f<span class="op">);</span> </span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;</span><span class="sc">\n</span><span class="st">Ejercicio 5 completado: &#39;lineas.txt&#39; contiene &#39;UNO DOS TRES&#39; en una sola lÃ­nea.</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>    fclose<span class="op">(</span>f<span class="op">);</span></span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> EXIT_SUCCESS<span class="op">;</span></span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<hr />
+<p><strong>6. Lectura Segura de LÃ­neas (<code>fgets</code>)</strong></p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdlib.h&gt;</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="pp">#define MAX </span><span class="dv">50</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    <span class="dt">FILE</span> <span class="op">*</span>f <span class="op">=</span> fopen<span class="op">(</span><span class="st">&quot;lineas.txt&quot;</span><span class="op">,</span> <span class="st">&quot;r&quot;</span><span class="op">);</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    <span class="dt">char</span> buffer<span class="op">[</span>MAX<span class="op">];</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>f <span class="op">==</span> NULL<span class="op">)</span> <span class="cf">return</span> EXIT_FAILURE<span class="op">;</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;</span><span class="sc">\n</span><span class="st">Ejercicio 6: Lectura segura de &#39;lineas.txt&#39; con fgets.</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>    <span class="co">// El bucle itera mientras fgets lea una lÃ­nea (no devuelve NULL)</span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> <span class="op">(</span>fgets<span class="op">(</span>buffer<span class="op">,</span> MAX<span class="op">,</span> f<span class="op">)</span> <span class="op">!=</span> NULL<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">&quot;LÃ­nea leÃ­da: </span><span class="sc">%s</span><span class="st">&quot;</span><span class="op">,</span> buffer<span class="op">);</span></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>    fclose<span class="op">(</span>f<span class="op">);</span></span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> EXIT_SUCCESS<span class="op">;</span></span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a><span class="co">/* Comentario: fgets ayuda a prevenir el desbordamiento de bÃºfer </span></span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a><span class="co">   porque el parÃ¡metro &#39;MAX&#39; garantiza que como mÃ¡ximo se leerÃ¡n MAX-1 caracteres, </span></span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a><span class="co">   dejando espacio para el terminador nulo (&#39;\0&#39;) y protegiendo el resto de la memoria. */</span></span></code></pre></div>
+<hr />
+<h3 id="bloque-4-integraciÃ³n-y-diferenciaciÃ³n-1">Bloque 4: IntegraciÃ³n y
+DiferenciaciÃ³n</h3>
+<p><strong>7. IntegraciÃ³n <code>fprintf</code> y <code>fgets</code>
+(Escritura y VerificaciÃ³n)</strong></p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdlib.h&gt;</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;string.h&gt;</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="pp">#define MAX_BUFFER </span><span class="dv">100</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>    <span class="dt">char</span> <span class="op">*</span>mensaje_original <span class="op">=</span> <span class="st">&quot;Este mensaje incluye: comas, espacios y un nÃºmero 1234.</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">;</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>    <span class="dt">char</span> buffer_leido<span class="op">[</span>MAX_BUFFER<span class="op">];</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>    <span class="dt">FILE</span> <span class="op">*</span>f<span class="op">;</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>    <span class="co">// A. Escritura con fprintf</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>    f <span class="op">=</span> fopen<span class="op">(</span><span class="st">&quot;mensaje.txt&quot;</span><span class="op">,</span> <span class="st">&quot;w&quot;</span><span class="op">);</span></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>f <span class="op">==</span> NULL<span class="op">)</span> <span class="cf">return</span> EXIT_FAILURE<span class="op">;</span></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>    fprintf<span class="op">(</span>f<span class="op">,</span> <span class="st">&quot;</span><span class="sc">%s</span><span class="st">&quot;</span><span class="op">,</span> mensaje_original<span class="op">);</span></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>    fclose<span class="op">(</span>f<span class="op">);</span></span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>    <span class="co">// C. Reabrir para lectura</span></span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>    f <span class="op">=</span> fopen<span class="op">(</span><span class="st">&quot;mensaje.txt&quot;</span><span class="op">,</span> <span class="st">&quot;r&quot;</span><span class="op">);</span></span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>f <span class="op">==</span> NULL<span class="op">)</span> <span class="cf">return</span> EXIT_FAILURE<span class="op">;</span></span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>    <span class="co">// D. Lectura con fgets</span></span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>fgets<span class="op">(</span>buffer_leido<span class="op">,</span> MAX_BUFFER<span class="op">,</span> f<span class="op">)</span> <span class="op">!=</span> NULL<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">&quot;</span><span class="sc">\n</span><span class="st">Ejercicio 7: VerificaciÃ³n de mensaje.</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">&quot;Original: </span><span class="sc">%s</span><span class="st">&quot;</span><span class="op">,</span> mensaje_original<span class="op">);</span></span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">&quot;LeÃ­do:    </span><span class="sc">%s</span><span class="st">&quot;</span><span class="op">,</span> buffer_leido<span class="op">);</span></span>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a>        <span class="co">// ComprobaciÃ³n de que la cadena leÃ­da es igual</span></span>
+<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span>strcmp<span class="op">(</span>buffer_leido<span class="op">,</span> mensaje_original<span class="op">)</span> <span class="op">==</span> <span class="dv">0</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a>            printf<span class="op">(</span><span class="st">&quot;VerificaciÃ³n: Ã‰xito (Las cadenas coinciden).</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
+<span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a>             printf<span class="op">(</span><span class="st">&quot;VerificaciÃ³n: Fallo (Las cadenas no coinciden, verifique el </span><span class="sc">\\</span><span class="st">n).</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb8-33"><a href="#cb8-33" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
+<span id="cb8-34"><a href="#cb8-34" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb8-35"><a href="#cb8-35" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb8-36"><a href="#cb8-36" aria-hidden="true" tabindex="-1"></a>    fclose<span class="op">(</span>f<span class="op">);</span></span>
+<span id="cb8-37"><a href="#cb8-37" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> EXIT_SUCCESS<span class="op">;</span></span>
+<span id="cb8-38"><a href="#cb8-38" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<hr />
+<p><strong>8. DesafÃ­o de Formato (<code>fscanf</code> vs.Â Datos
+Reales)</strong></p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdlib.h&gt;</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">FILE</span> <span class="op">*</span>f<span class="op">;</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">char</span> nombre_leido<span class="op">[</span><span class="dv">20</span><span class="op">];</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> edad_leida<span class="op">;</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> items_leidos<span class="op">;</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>    <span class="co">// A. Escribir el formato real</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>    f <span class="op">=</span> fopen<span class="op">(</span><span class="st">&quot;datos_mal.txt&quot;</span><span class="op">,</span> <span class="st">&quot;w&quot;</span><span class="op">);</span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>f <span class="op">==</span> NULL<span class="op">)</span> <span class="cf">return</span> EXIT_FAILURE<span class="op">;</span></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>    fprintf<span class="op">(</span>f<span class="op">,</span> <span class="st">&quot;Nombre=Juan;Edad=30&quot;</span><span class="op">);</span> <span class="co">// Sin espacios, usando &#39;=&#39; y &#39;;&#39;</span></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>    fclose<span class="op">(</span>f<span class="op">);</span></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>    <span class="co">// B. Intentar leer con formato incorrecto</span></span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>    f <span class="op">=</span> fopen<span class="op">(</span><span class="st">&quot;datos_mal.txt&quot;</span><span class="op">,</span> <span class="st">&quot;r&quot;</span><span class="op">);</span></span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>f <span class="op">==</span> NULL<span class="op">)</span> <span class="cf">return</span> EXIT_FAILURE<span class="op">;</span></span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Formato INCORRECTO: Espera &#39;Nombre: &#39; y &#39;, Edad: &#39;</span></span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>    items_leidos <span class="op">=</span> fscanf<span class="op">(</span>f<span class="op">,</span> <span class="st">&quot;Nombre: </span><span class="sc">%s</span><span class="st">, Edad: </span><span class="sc">%d</span><span class="st">&quot;</span><span class="op">,</span> nombre_leido<span class="op">,</span> <span class="op">&amp;</span>edad_leida<span class="op">);</span> </span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;</span><span class="sc">\n</span><span class="st">Ejercicio 8: DesafÃ­o de formato.</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;Elementos leÃ­dos: </span><span class="sc">%d\n</span><span class="st">&quot;</span><span class="op">,</span> items_leidos<span class="op">);</span></span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a>    <span class="co">/* EXPLICACIÃ“N DEL FALLO:</span></span>
+<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a><span class="co">       fscanf falla porque la cadena de formato no coincide con el archivo.</span></span>
+<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a><span class="co">       1. Espera la secuencia &#39;Nombre: &#39;, pero encuentra &#39;Nombre=&#39;. El fallo ocurre aquÃ­.</span></span>
+<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a><span class="co">       2. fscanf se detiene en el primer carÃ¡cter que no coincide (en este caso, &#39;:&#39;).</span></span>
+<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a><span class="co">       3. Como el primer especificador no pudo ser leÃ­do, devuelve 0 o -1 (EOF), </span></span>
+<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a><span class="co">          indicando que no se leyÃ³ ningÃºn dato.</span></span>
+<span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a><span class="co">    */</span></span>
+<span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb9-34"><a href="#cb9-34" aria-hidden="true" tabindex="-1"></a>    fclose<span class="op">(</span>f<span class="op">);</span></span>
+<span id="cb9-35"><a href="#cb9-35" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> EXIT_SUCCESS<span class="op">;</span></span>
+<span id="cb9-36"><a href="#cb9-36" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<hr />
+<p><strong>9. <code>fputs</code> vs.Â <code>fprintf</code> para
+Cadenas</strong></p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdlib.h&gt;</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">FILE</span> <span class="op">*</span>f <span class="op">=</span> fopen<span class="op">(</span><span class="st">&quot;comparacion.txt&quot;</span><span class="op">,</span> <span class="st">&quot;w&quot;</span><span class="op">);</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>f <span class="op">==</span> NULL<span class="op">)</span> <span class="cf">return</span> EXIT_FAILURE<span class="op">;</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>    <span class="co">// fprintf debe procesar el especificador %s</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>    fprintf<span class="op">(</span>f<span class="op">,</span> <span class="st">&quot;</span><span class="sc">%s</span><span class="st">&quot;</span><span class="op">,</span> <span class="st">&quot;Cadena con fprintf.</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span> </span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>    <span class="co">// fputs simplemente escribe la cadena de forma directa</span></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>    fputs<span class="op">(</span><span class="st">&quot;Cadena con fputs.</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">,</span> f<span class="op">);</span></span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>    fclose<span class="op">(</span>f<span class="op">);</span></span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;</span><span class="sc">\n</span><span class="st">Ejercicio 9: ComparaciÃ³n de salida. Ambos escriben cadenas, pero...</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;Inconveniente de fprintf: Es menos eficiente para escribir cadenas literales simples, </span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;                          ya que invoca el motor de procesamiento de formato (</span><span class="sc">%s</span><span class="st">).</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;Ventaja de fputs:         MÃ¡s rÃ¡pido para escribir cadenas simples, sin el overhead del formato.</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> EXIT_SUCCESS<span class="op">;</span></span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<hr />
+<p><strong>10. Bucle de Lectura LÃ­nea por LÃ­nea (<code>fgets</code> para
+CSV)</strong></p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdlib.h&gt;</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="pp">#define MAX_LINEA </span><span class="dv">100</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>    <span class="co">// AsegÃºrese de que &#39;inventario.csv&#39; existe con datos CSV</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>    <span class="dt">FILE</span> <span class="op">*</span>f <span class="op">=</span> fopen<span class="op">(</span><span class="st">&quot;inventario.csv&quot;</span><span class="op">,</span> <span class="st">&quot;r&quot;</span><span class="op">);</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>    <span class="dt">char</span> buffer<span class="op">[</span>MAX_LINEA<span class="op">];</span></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>    <span class="dt">char</span> producto<span class="op">[</span><span class="dv">30</span><span class="op">];</span></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> cantidad<span class="op">;</span></span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>    <span class="dt">float</span> precio<span class="op">;</span></span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> contador <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>f <span class="op">==</span> NULL<span class="op">)</span> <span class="cf">return</span> EXIT_FAILURE<span class="op">;</span></span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;</span><span class="sc">\n</span><span class="st">Ejercicio 10: Leyendo y parseando inventario CSV.</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Bucle: Leer lÃ­nea completa con fgets</span></span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> <span class="op">(</span>fgets<span class="op">(</span>buffer<span class="op">,</span> MAX_LINEA<span class="op">,</span> f<span class="op">)</span> <span class="op">!=</span> NULL<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a>        contador<span class="op">++;</span></span>
+<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a>        <span class="co">// c. Usar sscanf para parsear la lÃ­nea (la coma es el delimitador)</span></span>
+<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a>        <span class="co">// [^,] lee cualquier cosa que NO sea una coma</span></span>
+<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span>sscanf<span class="op">(</span>buffer<span class="op">,</span> <span class="st">&quot;%[^,],</span><span class="sc">%d</span><span class="st">,</span><span class="sc">%f</span><span class="st">&quot;</span><span class="op">,</span> producto<span class="op">,</span> <span class="op">&amp;</span>cantidad<span class="op">,</span> <span class="op">&amp;</span>precio<span class="op">)</span> <span class="op">==</span> <span class="dv">3</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a>            printf<span class="op">(</span><span class="st">&quot;Registro </span><span class="sc">%d</span><span class="st"> | Producto: </span><span class="sc">%-10s</span><span class="st"> | Cantidad: </span><span class="sc">%4d</span><span class="st"> | Precio: </span><span class="sc">%.2f\n</span><span class="st">&quot;</span><span class="op">,</span> </span>
+<span id="cb11-26"><a href="#cb11-26" aria-hidden="true" tabindex="-1"></a>                   contador<span class="op">,</span> producto<span class="op">,</span> cantidad<span class="op">,</span> precio<span class="op">);</span></span>
+<span id="cb11-27"><a href="#cb11-27" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
+<span id="cb11-28"><a href="#cb11-28" aria-hidden="true" tabindex="-1"></a>            printf<span class="op">(</span><span class="st">&quot;Error al parsear lÃ­nea </span><span class="sc">%d</span><span class="st">.</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">,</span> contador<span class="op">);</span></span>
+<span id="cb11-29"><a href="#cb11-29" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
+<span id="cb11-30"><a href="#cb11-30" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb11-31"><a href="#cb11-31" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb11-32"><a href="#cb11-32" aria-hidden="true" tabindex="-1"></a>    fclose<span class="op">(</span>f<span class="op">);</span></span>
+<span id="cb11-33"><a href="#cb11-33" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> EXIT_SUCCESS<span class="op">;</span></span>
+<span id="cb11-34"><a href="#cb11-34" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+
+</div>
+</body>
+</html>
+

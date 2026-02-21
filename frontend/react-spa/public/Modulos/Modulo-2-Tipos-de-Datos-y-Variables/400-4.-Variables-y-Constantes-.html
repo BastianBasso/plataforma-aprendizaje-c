@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" crossorigin href="/assets/content-01sust.css">
+</head>
+<body>
+<div class="main-content">
+<h1>4. Variables y Constantes</h1>
+<p><strong>Variables vs. Constantes: La Diferencia
+Conceptual</strong></p>
+<p>El principio más básico en el manejo de datos en C es distinguir
+entre la información que puede cambiar y aquella que debe permanecer
+fija durante toda la vida del programa.</p>
+<table style="width:97%;">
+<colgroup>
+<col style="width: 26%" />
+<col style="width: 32%" />
+<col style="width: 38%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>Característica</strong></th>
+<th style="text-align: left;"><strong>Variable</strong></th>
+<th style="text-align: left;"><strong>Constante</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>Definición</strong></td>
+<td style="text-align: left;">Una ubicación de memoria cuyo
+<strong>valor puede y debe cambiar</strong> a lo largo de la ejecución
+del programa.</td>
+<td style="text-align: left;">Una ubicación de memoria cuyo
+<strong>valor se fija una única vez</strong> (al inicializarla) y
+<strong>no puede ser modificado</strong> posteriormente.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Propósito</strong></td>
+<td style="text-align: left;">Almacenar datos dinámicos (contadores,
+resultados de cálculos, entradas de usuario).</td>
+<td style="text-align: left;">Almacenar datos fijos y conocidos
+(parámetros matemáticos, límites de sistema, códigos fijos).</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Mutabilidad</strong></td>
+<td style="text-align: left;"><strong>Mutable</strong> (puede
+cambiar).</td>
+<td style="text-align: left;"><strong>Inmutable</strong> (no puede
+cambiar).</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Ejemplo Típico</strong></td>
+<td style="text-align: left;">La edad de un usuario (cambia con el
+tiempo).</td>
+<td style="text-align: left;">El valor de $\pi$ (3.14159...).</td>
+</tr>
+</tbody>
+</table>
+<p><strong>¿Por qué usar Constantes?</strong></p>
+<p>Definir un valor como constante no es solo una regla sintáctica, sino
+una práctica de <strong>seguridad</strong> y
+<strong>legibilidad</strong> en la programación:</p>
+<ol type="1">
+<li><p><strong>Seguridad (Inmutabilidad):</strong> Previene errores
+accidentales. Si intentas modificar una constante más tarde en el
+código, el <strong>compilador generará un error</strong>, protegiendo el
+valor de ser corrompido.</p></li>
+<li><p><strong>Legibilidad (Nombres):</strong> Las constantes suelen
+tener nombres muy descriptivos (ej. PRECIO_IVA o VELOCIDAD_LUZ),
+mejorando la comprensión del código.</p></li>
+<li><p><strong>Mantenibilidad:</strong> Si un valor fijo necesita ser
+actualizado (ej. un tipo de cambio), solo tienes que cambiar la
+definición de la constante en un solo lugar.</p></li>
+</ol>
+<p>En resumen, utiliza <strong>variables</strong> para los valores que
+<strong>manipulas</strong> (sumas, restas, reasignas) y
+<strong>constantes</strong> para los valores que solo
+<strong>consultas</strong> (pero nunca cambias).</p>
+<p><strong>Uso del Calificador const</strong></p>
+<p>En C, la forma <strong>preferida y más moderna</strong> de definir
+una constante con un tipo de dato específico es utilizando el
+calificador de tipo <strong>const</strong>.</p>
+<p><strong>¿Qué es const?</strong></p>
+<p>const (abreviatura de <em>constant</em>) es una palabra clave que
+actúa como un <strong>calificador de tipo</strong>. Se coloca delante (o
+a veces después) de la declaración del tipo de dato y le dice al
+compilador: <strong>"Este valor es de solo lectura y no debe cambiarse
+después de la inicialización."</strong></p>
+<p><strong>Sintaxis y Reglas Clave</strong></p>
+<p>La sintaxis es similar a la de una variable, pero con la palabra
+clave const al inicio:</p>
+<p>$$\text{Sintaxis: } \text{const} \space \space \text{tipo\_de\_dato}
+\space \space \text{NOMBRE} = \text{valor}\text{;}$$</p>
+<ol type="1">
+<li><p><strong>Inicialización Obligatoria:</strong> Una constante
+<strong>debe ser inicializada</strong> al momento de su declaración. Si
+solo la declaras (const int MAXIMO;), el compilador no sabrá qué valor
+"fijar" y generará un error.</p></li>
+<li><p><strong>Inmutabilidad:</strong> Una vez inicializada, cualquier
+intento posterior de <strong>reasignar</strong> un nuevo valor a esa
+constante resultará en un <strong>Error de
+Compilación</strong>.</p></li>
+</ol>
+<p><strong>Ejemplos Prácticos:</strong></p>
+<p>C</p>
+<p>// Constante entera para un límite máximo.</p>
+<p>const int LIMITE_MAXIMO = 100;</p>
+<p>// Constante de punto flotante para un cálculo financiero.</p>
+<p>const float TASA_IVA = 0.19f;</p>
+<p>// Constante de carácter para un código fijo.</p>
+<p>const char CODIGO_ERROR = 'E';</p>
+<p>int main(void) {</p>
+<p>// Esto causará un ERROR DE COMPILACIÓN:</p>
+<p>// LIMITE_MAXIMO = 200;</p>
+<p>return 0;</p>
+<p>}</p>
+<p><strong>Ventajas de const</strong></p>
+<ul>
+<li><p><strong>Seguridad:</strong> Garantiza la inmutabilidad a nivel de
+compilador, evitando modificaciones accidentales.</p></li>
+<li><p><strong>Tipado Fuerte:</strong> A diferencia de otros métodos
+(como #define, que veremos luego), las constantes declaradas con const
+tienen un <strong>tipo de dato</strong> (int, float, etc.), lo que
+permite al compilador realizar comprobaciones de tipo más estrictas y
+correctas.</p></li>
+<li><p><strong>Depuración:</strong> Si intentas modificar una constante,
+el mensaje de error del compilador es más claro y apunta directamente a
+la línea problemática.</p></li>
+</ul>
+<p><strong>Constantes Simbólicas (#define) 🧱</strong></p>
+<p>Antes de que se popularizara el calificador const, el método
+tradicional en C para definir constantes era a través de la directiva
+del <strong>preprocesador</strong> <strong>#define</strong>.</p>
+<p><strong>¿Qué es #define?</strong></p>
+<p>#define le indica al <strong>preprocesador</strong> (la primera fase
+de compilación que vimos en el Módulo 1) que realice una simple tarea de
+<strong>reemplazo de texto</strong> antes de que el compilador vea el
+código.</p>
+<p>$$\text{Sintaxis: } \text{\#define} \space \space
+\text{NOMBRE\_CONSTANTE} \space \space \text{valor}$$</p>
+<p><strong>Ejemplo de #define:</strong></p>
+<p>C</p>
+<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
+<p>// El preprocesador reemplazará cada 'PI' por '3.14159f' antes de la
+compilación.</p>
+<p>#<strong>define</strong> PI 3.14159f</p>
+<p>#<strong>define</strong> MAX_USUARIOS 50</p>
+<p>int main(void) {</p>
+<p>float radio = 10.0f;</p>
+<p>// El compilador ve: float area = 3.14159f * radio * radio;</p>
+<p>float area = PI * radio * radio;</p>
+<p>printf("El área es: %.2f\n", area);</p>
+<p>printf("Límite: %d\n", MAX_USUARIOS);</p>
+<p>return 0;</p>
+<p>}</p>
+<p><strong>#define vs. const (Ventajas y Desventajas)</strong></p>
+<table style="width:97%;">
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 35%" />
+<col style="width: 35%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>Aspecto</strong></th>
+<th style="text-align: left;"><strong>#define (Constante
+Simbólica)</strong></th>
+<th style="text-align: left;"><strong>const (Constante
+Tipada)</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>Fase</strong></td>
+<td style="text-align: left;"><strong>Preprocesador</strong> (Reemplazo
+de texto).</td>
+<td style="text-align: left;"><strong>Compilador</strong> (Tratado como
+una variable de solo lectura).</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Tipo de Dato</strong></td>
+<td style="text-align: left;"><strong>Sin tipo.</strong> Es solo un
+reemplazo de texto literal.</td>
+<td style="text-align: left;"><strong>Tiene un tipo de dato</strong>
+(int, float, etc.).</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Memoria</strong></td>
+<td style="text-align: left;"><strong>No ocupa memoria</strong> en el
+segmento de datos. El valor se incrusta en el código.</td>
+<td style="text-align: left;"><strong>Ocupa memoria</strong> (como una
+variable normal, pero inmutable).</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Seguridad</strong></td>
+<td style="text-align: left;">Baja. Los errores de sintaxis se
+encuentran tarde.</td>
+<td style="text-align: left;"><strong>Alta.</strong> El compilador hace
+estrictas comprobaciones de tipos.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Recomendación</strong></td>
+<td style="text-align: left;">Útil para <em>macros</em> o estructuras
+condicionales complejas (más avanzado).</td>
+<td style="text-align: left;"><strong>Preferido</strong> para definir
+constantes numéricas y de tipo simple.</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>En la programación moderna y orientada a la seguridad, el
+calificador <strong>const es la herramienta recomendada</strong> para
+definir valores fijos, ya que garantiza un control de tipos correcto y
+más seguridad en el código. #define se considera una herramienta de
+preprocesamiento, no una herramienta de tipado.</li>
+</ul>
+<p><strong>Convenciones de Nomenclatura para Constantes ✒️</strong></p>
+<p>Aunque C te permite nombrar constantes como cualquier variable,
+seguir convenciones de nomenclatura es una <strong>buena
+práctica</strong> crucial que mejora la <strong>legibilidad</strong> y
+<strong>mantenibilidad</strong> del código, especialmente en proyectos
+grandes.</p>
+<p>La convención estándar y casi universalmente adoptada en el
+desarrollo C para nombrar constantes (ya sea usando const o #define) es
+el <strong>SNAKE CASE en MAYÚSCULAS</strong>.</p>
+<p><strong>Reglas Clave para Constantes</strong></p>
+<table style="width:98%;">
+<colgroup>
+<col style="width: 22%" />
+<col style="width: 25%" />
+<col style="width: 24%" />
+<col style="width: 24%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>Regla</strong></th>
+<th style="text-align: left;"><strong>Descripción</strong></th>
+<th style="text-align: left;"><strong>Ejemplo de Constante</strong></th>
+<th style="text-align: left;"><strong>Ejemplo de Variable
+(Contraste)</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>Mayúsculas</strong></td>
+<td style="text-align: left;">Todas las letras deben estar en
+<strong>MAYÚSCULAS</strong>.</td>
+<td style="text-align: left;">VELOCIDAD</td>
+<td style="text-align: left;">velocidadActual</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Separación</strong></td>
+<td style="text-align: left;">Usa el <strong>guion bajo</strong> (_)
+para separar palabras (Snake Case).</td>
+<td style="text-align: left;">LIMITE_DATOS_MAX</td>
+<td style="text-align: left;">limiteDeDatos</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Descriptivo</strong></td>
+<td style="text-align: left;">El nombre debe indicar claramente el
+propósito del valor.</td>
+<td style="text-align: left;">PRECIO_IVA_FIJO</td>
+<td style="text-align: left;">precioBruto</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Propósito de la Convención</strong></p>
+<p>El uso de mayúsculas y guiones bajos tiene un propósito
+funcional:</p>
+<ol type="1">
+<li><p><strong>Distinción Visual:</strong> Permite a cualquier
+programador que lea tu código identificar
+<strong>inmediatamente</strong> que un identificador es una constante
+(un valor inmutable) y no una variable común que podría ser
+modificada.</p></li>
+<li><p><strong>Claridad del Propósito:</strong> Al ver const int
+MAX_USUARIOS = 50;, sabes que ese valor de 50 no cambiará durante la
+ejecución del programa, lo que facilita el razonamiento sobre la lógica
+del código.</p></li>
+</ol>
+<p><strong>Ejemplos de Aplicación:</strong></p>
+<p>C</p>
+<p>// Mal Práctica (Parece una variable)</p>
+<p>const float tasa = 0.05f;</p>
+<p>// ✅ Buena Práctica: Snake Case en Mayúsculas</p>
+<p>const float TASA_INTERES_FIJA = 0.05f;</p>
+<p>// ✅ Buena Práctica para una constante entera</p>
+<p>#<strong>define</strong> TAMANIO_BUFFER 1024</p>
+<p>Adherirse a esta convención es esencial para escribir código
+profesional y colaborativo en C.</p>
+<p><strong>Sección Extra: Conversión de Tipos (Casting) en C
+🔄</strong></p>
+<p>En programación C, a menudo necesitamos realizar operaciones que
+involucran diferentes tipos de datos (ej. sumar un int y un float).
+Cuando esto ocurre, el compilador debe convertir un tipo al otro para
+que la operación se pueda realizar correctamente. Este proceso se llama
+<strong>Conversión de Tipos</strong>.</p>
+<p>Existen dos tipos principales de conversión:</p>
+<p><strong>1. Conversión Implícita (Coerción)</strong></p>
+<p>Ocurre <strong>automáticamente</strong> por el compilador sin que el
+programador lo solicite explícitamente. Sucede cuando se pasa de un tipo
+"más pequeño" a un tipo "más grande" (promoción), lo que garantiza que
+no haya pérdida de información.</p>
+<ul>
+<li><strong>Regla:</strong> El tipo de dato "menor" es automáticamente
+promovido al tipo de dato "mayor" antes de la operación.</li>
+</ul>
+<table style="width:97%;">
+<colgroup>
+<col style="width: 28%" />
+<col style="width: 29%" />
+<col style="width: 39%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>Tipo Mayor
+(Recipiente)</strong></th>
+<th style="text-align: left;"><strong>Tipo Menor
+(Convertido)</strong></th>
+<th style="text-align: left;"><strong>Resultado</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">double</td>
+<td style="text-align: left;">float, int</td>
+<td style="text-align: left;">El float o int se convierte a double.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">float</td>
+<td style="text-align: left;">int</td>
+<td style="text-align: left;">El int se convierte a float.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">int</td>
+<td style="text-align: left;">char</td>
+<td style="text-align: left;">El char se convierte a su código ASCII
+(int).</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Ejemplo de Conversión Implícita:</strong></p>
+<p>C</p>
+<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
+<p>int main(void) {</p>
+<p>int entero = 10;</p>
+<p>float decimal = 3.5f;</p>
+<p>// El 'entero' (10) se promueve implícitamente a float (10.0f)</p>
+<p>// antes de la suma.</p>
+<p>float resultado = entero + decimal;</p>
+<p>printf("Resultado implícito (10.0 + 3.5): %.1f\n", resultado);</p>
+<p>return 0;</p>
+<p>}</p>
+<p><strong>Salida Esperada:</strong></p>
+<p>Resultado implícito (10.0 + 3.5): 13.5</p>
+<p><strong>2. Conversión Explícita (Casting)</strong></p>
+<p>Ocurre cuando el programador fuerza la conversión de un tipo a otro,
+incluso si esto implica una posible <strong>pérdida de datos</strong>.
+Esto se realiza mediante el <strong>operador de
+<em>cast</em></strong>.</p>
+<ul>
+<li><strong>Sintaxis:</strong> Se coloca el tipo de destino deseado
+entre paréntesis () inmediatamente antes de la variable o valor a
+convertir.</li>
+</ul>
+<p>$$\text{Sintaxis de Casting: } \text{(tipo\_destino)} \space \space
+\text{expresión\_a\_convertir}$$</p>
+<p><strong>Ejemplo de Conversión Explícita (Casting):</strong></p>
+<p>El casting es vital para operaciones como la división de enteros,
+donde se necesita un resultado decimal.</p>
+<p>C</p>
+<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
+<p>int main(void) {</p>
+<p>int suma_total = 100;</p>
+<p>int contador = 6;</p>
+<p>// División de enteros (100 / 6) resultaría en 16.</p>
+<p>// Para obtener el promedio decimal, forzamos la conversión de
+'suma_total' a float.</p>
+<p>float promedio = (float)suma_total / contador;</p>
+<p>printf("Promedio sin casting (entero): %d / %d = 16\n", suma_total,
+contador);</p>
+<p>printf("Promedio con casting (decimal): %.2f\n", promedio);</p>
+<p>return 0;</p>
+<p>}</p>
+<p><strong>Salida Esperada:</strong></p>
+<p>Promedio sin casting (entero): 100 / 6 = 16</p>
+<p>Promedio con casting (decimal): 16.67</p>
+<p><strong>¡Advertencia! Pérdida de Datos:</strong></p>
+<p>Si haces un <em>cast</em> de un tipo más grande a uno más pequeño
+(ej. float a int), se <strong>trunca</strong> la parte decimal (se
+pierde) o se puede perder el rango, causando resultados inesperados.
+<strong>Usa el <em>casting</em> con precaución.</strong></p>
+
+</div>
+</body>
+</html>
+

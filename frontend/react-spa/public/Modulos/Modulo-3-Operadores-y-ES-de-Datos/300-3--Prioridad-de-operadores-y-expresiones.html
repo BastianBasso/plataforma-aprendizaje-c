@@ -1,0 +1,299 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" crossorigin href="/assets/content-01sust.css">
+</head>
+<body>
+<div class="main-content">
+<p>3. Prioridad de Operadores y Expresiones</p>
+<p><strong>El Orden de las Operaciones (Precedencia)</strong></p>
+<p>En el lenguaje de programación C, al igual que en las matemáticas
+básicas, no todas las operaciones dentro de una expresión se resuelven
+de izquierda a derecha. C sigue un conjunto estricto de reglas llamado
+<strong>Precedencia</strong> u <strong>Orden de las Operaciones</strong>
+para determinar qué operadores se evalúan primero.</p>
+<p><strong>¿Por qué es Necesario un Orden?</strong></p>
+<p>Considera la siguiente expresión:</p>
+<p>$$\text{resultado} = 5 + 2 \times 3\text{;}$$</p>
+<p>Si la operación se resolviera estrictamente de izquierda a
+derecha:</p>
+<ol type="1">
+<li><p>$5 + 2$ es $7$.</p></li>
+<li><p>$7 \times 3$ es $21$.</p></li>
+</ol>
+<p>Sin embargo, si se sigue la convención matemática estándar:</p>
+<ol type="1">
+<li><p>$2 \times 3$ es $6$ (Multiplicación tiene mayor
+prioridad).</p></li>
+<li><p>$5 + 6$ es $11$.</p></li>
+</ol>
+<p>El resultado <strong>correcto en C (y matemática)</strong> es
+<strong>11</strong>. La precedencia garantiza que el compilador siempre
+interprete las expresiones de una manera consistente y predecible,
+produciendo resultados uniformes.</p>
+<p><strong>Conceptos Clave</strong></p>
+<ul>
+<li><p><strong>Precedencia (Prioridad):</strong> Define qué operadores
+se resuelven antes que otros. Por ejemplo, la multiplicación (*) siempre
+tiene mayor precedencia que la suma (+).</p></li>
+<li><p><strong>Expresión Unívoca:</strong> El orden de las operaciones
+asegura que, independientemente de quién escriba el código, una
+expresión compleja como a - b / c siempre se interpretará como a - (b /
+c).</p></li>
+</ul>
+<p>En la siguiente sección se detallará la jerarquía específica que
+utiliza C.</p>
+<p><strong>Importancia:</strong> Entender la precedencia es crucial para
+evitar errores lógicos, especialmente cuando se combinan operadores
+aritméticos (+, *), relacionales (&gt;), y lógicos (&amp;&amp;).</p>
+<p><strong>Jerarquía Básica de Operadores (Precedencia)</strong></p>
+<p>El lenguaje C establece una jerarquía de precedencia para los
+operadores que es vital para predecir el resultado de cualquier
+expresión compleja. Esta jerarquía es similar a la regla
+PEMDAS/PAPOMUDAS utilizada en matemáticas.</p>
+<p>La siguiente tabla presenta la jerarquía básica para los operadores
+que hemos cubierto hasta ahora. Los operadores en los niveles superiores
+se evalúan <strong>antes</strong> que los de los niveles inferiores.</p>
+<table style="width:98%;">
+<colgroup>
+<col style="width: 19%" />
+<col style="width: 20%" />
+<col style="width: 21%" />
+<col style="width: 16%" />
+<col style="width: 20%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>Nivel de Precedencia</strong></th>
+<th style="text-align: left;"><strong>Operadores</strong></th>
+<th style="text-align: left;"><strong>Clase</strong></th>
+<th style="text-align: left;"><strong>Ejemplo</strong></th>
+<th style="text-align: left;"><strong>Se Resuelve...</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>1. Máxima</strong></td>
+<td style="text-align: left;">()</td>
+<td style="text-align: left;">Agrupación</td>
+<td style="text-align: left;">(5 + 3) * 2</td>
+<td style="text-align: left;">Primero el contenido del paréntesis.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>2. Alta</strong></td>
+<td style="text-align: left;">*, /, %</td>
+<td style="text-align: left;">Multiplicativos</td>
+<td style="text-align: left;">10 * 2 / 5</td>
+<td style="text-align: left;">De izquierda a derecha.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>3. Media</strong></td>
+<td style="text-align: left;">+, -</td>
+<td style="text-align: left;">Aditivos</td>
+<td style="text-align: left;">10 + 5 - 2</td>
+<td style="text-align: left;">De izquierda a derecha.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>4. Baja</strong></td>
+<td style="text-align: left;">Relacionales (&gt;, &lt;, ==, !=,
+etc.)</td>
+<td style="text-align: left;">Comparación</td>
+<td style="text-align: left;">a &gt; 10</td>
+<td style="text-align: left;">N/A (Se evalúa después de los
+aritméticos).</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>5. Más Baja</strong></td>
+<td style="text-align: left;">=, +=, -=, etc.</td>
+<td style="text-align: left;">Asignación</td>
+<td style="text-align: left;">x = 10 + 5</td>
+<td style="text-align: left;">De derecha a izquierda.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Análisis de Jerarquía</strong></p>
+<ol type="1">
+<li><p><strong>Paréntesis ():</strong> Siempre tienen la máxima
+prioridad. Fuerzan al compilador a evaluar la expresión dentro de ellos
+primero, independientemente de los operadores que contenga.</p></li>
+<li><p><strong>Multiplicativos (*, /, %):</strong> Estos operadores se
+evalúan antes que la suma y la resta.</p></li>
+<li><p><strong>Aditivos (+, -):</strong> Se resuelven en tercer
+lugar.</p></li>
+</ol>
+<p><strong>Ejemplo de Precedencia:</strong></p>
+<p>Dada la expresión: resultado = 20 - 4 * 2 / 2;</p>
+<ol type="1">
+<li><p><strong>Multiplicación/División:</strong> Se resuelve de
+izquierda a derecha.</p>
+<ul>
+<li><p>4 * 2 $\rightarrow 8$</p></li>
+<li><p>20 - 8 / 2</p></li>
+</ul></li>
+<li><p><strong>División:</strong></p>
+<ul>
+<li><p>8 / 2 $\rightarrow 4$</p></li>
+<li><p>20 - 4</p></li>
+</ul></li>
+<li><p><strong>Resta:</strong></p>
+<ul>
+<li>20 - 4 $\rightarrow 16$</li>
+</ul></li>
+<li><p><strong>Asignación:</strong></p>
+<ul>
+<li>resultado = 16</li>
+</ul></li>
+</ol>
+<p>El resultado final es <strong>16</strong>. Si hubiéramos querido
+restar primero, los <strong>paréntesis</strong> habrían sido necesarios:
+(20 - 4) * 2 / 2, lo que daría $16$.</p>
+<p><strong>Asociatividad (De Empate)</strong></p>
+<p>La <strong>Asociatividad</strong> es la segunda regla que el
+compilador de C utiliza para resolver expresiones, y solo entra en juego
+cuando dos o más operadores de <strong>igual nivel de precedencia
+(prioridad)</strong> aparecen juntos.</p>
+<p>La asociatividad define el <strong>orden de evaluación</strong> entre
+estos operadores que tienen un "empate" en jerarquía.</p>
+<p><strong>1. Asociatividad de Izquierda a Derecha (L-a-R)</strong></p>
+<p>La mayoría de los operadores en C, incluidos los aritméticos básicos
+(*, /, %, +, -) y los relacionales, se asocian de <strong>izquierda a
+derecha</strong>. Esto significa que la operación más a la izquierda se
+ejecuta primero.</p>
+<p><strong>Ejemplo de L-a-R (Multiplicación y División):</strong></p>
+<p>Dada la expresión: resultado = 100 / 10 * 2;</p>
+<ol type="1">
+<li><p><strong>Empate:</strong> La división (/) y la multiplicación (*)
+tienen el mismo nivel de precedencia.</p></li>
+<li><p><strong>Asociatividad (L-a-R):</strong> Se resuelve la operación
+más a la izquierda primero.</p>
+<ul>
+<li>100 / 10 $\rightarrow 10$</li>
+</ul></li>
+<li><p><strong>Siguiente Operación:</strong></p>
+<ul>
+<li>10 * 2 $\rightarrow 20$</li>
+</ul></li>
+</ol>
+<p>El resultado es <strong>20</strong>. (Si se hubiera resuelto de
+derecha a izquierda, el resultado sería $100 / 20 = 5$, lo cual es
+incorrecto).</p>
+<p><strong>2. Asociatividad de Derecha a Izquierda (R-a-L)</strong></p>
+<p>Ciertos operadores, como los <strong>operadores de
+asignación</strong> (=, +=, -=, etc.), los <strong>operadores
+unarios</strong> (!, ++, --) y el <strong>operador condicional</strong>
+(que veremos más adelante), se asocian de <strong>derecha a
+izquierda</strong>.</p>
+<p><strong>Ejemplo de R-a-L (Asignación en Cadena):</strong></p>
+<p>Dada la expresión: a = b = c = 5;</p>
+<ol type="1">
+<li><p><strong>Empate:</strong> Todos los signos de asignación (=)
+tienen el mismo nivel de precedencia.</p></li>
+<li><p><strong>Asociatividad (R-a-L):</strong> Se resuelve la operación
+más a la derecha primero.</p>
+<ul>
+<li><p>c = 5; (Asigna 5 a c)</p></li>
+<li><p>b = c; (Asigna el valor de c, que ahora es 5, a b)</p></li>
+<li><p>a = b; (Asigna el valor de b, que ahora es 5, a a)</p></li>
+</ul></li>
+</ol>
+<p>El resultado final es que <strong>a</strong>, <strong>b</strong> y
+<strong>c</strong> valen <strong>5</strong>.</p>
+<table style="width:97%;">
+<colgroup>
+<col style="width: 23%" />
+<col style="width: 30%" />
+<col style="width: 17%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>Tipo de Operador</strong></th>
+<th style="text-align: left;"><strong>Asociatividad</strong></th>
+<th style="text-align: left;"><strong>Ejemplo</strong></th>
+<th style="text-align: left;"><strong>Orden de Evaluación</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Aritméticos</td>
+<td style="text-align: left;">Izquierda a Derecha (L-a-R)</td>
+<td style="text-align: left;">a * b / c</td>
+<td style="text-align: left;">(a * b) / c</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Asignación</td>
+<td style="text-align: left;">Derecha a Izquierda (R-a-L)</td>
+<td style="text-align: left;">a = b = 10</td>
+<td style="text-align: left;">a = (b = 10)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Uso de Paréntesis para Claridad</strong></p>
+<p>Aunque el compilador C es perfectamente capaz de seguir las reglas de
+precedencia y asociatividad (PEMDAS/PAPOMUDAS), no siempre resulta obvio
+para un lector humano, o para el programador meses después. Por esta
+razón, el uso estratégico de los paréntesis (()) es una de las
+<strong>mejores prácticas</strong> de programación.</p>
+<p><strong>Regla de Oro: Claridad sobre Precedencia Oculta</strong></p>
+<p>Si una expresión es lo suficientemente compleja como para requerir
+una pausa mental para determinar el orden de las operaciones,
+<strong>debes usar paréntesis</strong>.</p>
+<p>Los paréntesis:</p>
+<ol type="1">
+<li><p><strong>Fuerzan el Orden:</strong> Garantizan que las operaciones
+dentro de ellos se realicen primero, anulando la precedencia natural si
+es necesario.</p></li>
+<li><p><strong>Mejoran la Legibilidad:</strong> Hacen que la intención
+del programador sea <strong>inequívoca</strong> al instante, sin
+necesidad de consultar las tablas de precedencia de C.</p></li>
+<li><p><strong>Previenen Errores:</strong> Reducen drásticamente los
+errores lógicos (bugs) que ocurren cuando el programador asume
+incorrectamente el orden de evaluación.</p></li>
+</ol>
+<p><strong>Ejemplo de Mejora de Legibilidad</strong></p>
+<p>Considera la siguiente expresión que calcula el precio final de un
+producto incluyendo un descuento y luego impuestos:</p>
+<table style="width:97%;">
+<colgroup>
+<col style="width: 41%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>Código Original (Confiando en
+Precedencia)</strong></th>
+<th style="text-align: left;"><strong>Código Recomendado (Uso de
+Paréntesis)</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">c float precio_final = precio - precio *
+descuento + impuestos;</td>
+<td style="text-align: left;">c float precio_final = (precio - (precio *
+descuento)) + impuestos;</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Problema:</strong> El lector debe
+recordar que * tiene mayor precedencia que - y +.</td>
+<td style="text-align: left;"><strong>Ventaja:</strong> La prioridad es
+clara: <strong>1)</strong> Calcular el descuento, <strong>2)</strong>
+Restar el descuento al precio, <strong>3)</strong> Sumar los
+impuestos.</td>
+</tr>
+</tbody>
+</table>
+<p>En el código recomendado, los paréntesis indican claramente el flujo
+de cálculo deseado, haciendo el código más robusto y fácil de
+mantener.</p>
+<p>Utiliza paréntesis siempre que la intención del cálculo no sea
+absolutamente obvia. Tu objetivo principal no es escribir el código más
+corto, sino el <strong>más comprensible</strong>.</p>
+
+
+</div>
+</body>
+</html>
+

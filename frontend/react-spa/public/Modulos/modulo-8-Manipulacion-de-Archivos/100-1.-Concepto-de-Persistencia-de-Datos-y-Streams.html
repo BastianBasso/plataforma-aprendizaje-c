@@ -1,0 +1,236 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" crossorigin href="/assets/content-01sust.css">
+</head>
+<body>
+<div class="main-content">
+<h2 id="persistencia-de-datos">Persistencia de Datos ðŸ’¾</h2>
+<p>La <strong>persistencia de datos</strong> es un concepto fundamental
+en la programaciÃ³n que se refiere a la capacidad de los datos de
+<strong>sobrevivir a la ejecuciÃ³n del programa</strong> que los creÃ³ o
+manipulÃ³.</p>
+<h3 id="definiciÃ³n">DefiniciÃ³n</h3>
+<p>En el contexto de la ejecuciÃ³n de un programa en C:</p>
+<ul>
+<li>Cuando una aplicaciÃ³n termina, toda la informaciÃ³n que se encontraba
+en la <strong>memoria volÃ¡til</strong> (como variables en la pila o el
+<em>heap</em>, es decir, la RAM) se <strong>pierde
+irremediablemente</strong>.</li>
+<li>La <strong>persistencia</strong> es la soluciÃ³n a esto: implica
+tomar esos datos de la memoria volÃ¡til y escribirlos en un
+<strong>almacenamiento no volÃ¡til</strong> (permanente).</li>
+</ul>
+<h3 id="medios-de-almacenamiento-persistente">Medios de Almacenamiento
+Persistente</h3>
+<p>El principal medio para lograr la persistencia de datos es el
+<strong>disco duro (HDD o SSD)</strong>, donde los datos se guardan en
+forma de <strong>archivos</strong>.</p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Tipo de Memoria</th>
+<th style="text-align: center;">DuraciÃ³n de los Datos</th>
+<th style="text-align: center;">Ejemplo de Contenido</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><strong>VolÃ¡til (RAM)</strong></td>
+<td style="text-align: center;">Solo mientras el programa se
+ejecuta.</td>
+<td style="text-align: center;">Variables locales, estructuras de datos
+activas.</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>No VolÃ¡til (Disco)</strong></td>
+<td style="text-align: center;">Permanente, hasta que se borran
+manualmente.</td>
+<td style="text-align: center;"><strong>Archivos</strong>, bases de
+datos.</td>
+</tr>
+</tbody>
+</table>
+<p>Por lo tanto, la manipulaciÃ³n de archivos en C es la tÃ©cnica
+principal para lograr la persistencia, permitiendo que la informaciÃ³n
+generada en una sesiÃ³n de un programa pueda ser <strong>recuperada y
+utilizada</strong> en sesiones futuras.</p>
+<h2 id="streams-flujos-de-datos">Streams (Flujos de Datos) ðŸŒŠ</h2>
+<p>El concepto de <strong>Stream</strong> (flujo) en C, y en
+programaciÃ³n en general, es una <strong>abstracciÃ³n</strong> clave para
+manejar la entrada/salida (I/O) de datos de forma uniforme,
+independientemente de si la fuente o el destino es un archivo, el
+teclado o la pantalla.</p>
+<h3 id="definiciÃ³n-1">DefiniciÃ³n</h3>
+<p>Un <strong>Stream</strong> es un <strong>canal lÃ³gico o secuencia
+continua de bytes</strong> que fluye desde una fuente (origen) hasta un
+destino.</p>
+<ul>
+<li><strong>Secuencia de Bytes:</strong> Los datos se tratan como una
+simple secuencia de bytes que se transfieren uno a uno o en bloques, sin
+preocuparse por la estructura interna de los datos.</li>
+<li><strong>AbstracciÃ³n:</strong> El sistema operativo y la biblioteca
+estÃ¡ndar de C (<code>stdio.h</code>) utilizan esta abstracciÃ³n para
+unificar las diferentes formas de I/O. Esto permite que el programador
+use el mismo conjunto de funciones (como <code>printf</code>,
+<code>scanf</code>, <code>fprintf</code>, <code>fscanf</code>) para
+interactuar con dispositivos o archivos distintos.</li>
+</ul>
+<h3 id="unificaciÃ³n-de-io">UnificaciÃ³n de I/O</h3>
+<p>El modelo de <em>streams</em> unifica la interacciÃ³n con:</p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Origen / Destino</th>
+<th style="text-align: center;">Dispositivo FÃ­sico</th>
+<th style="text-align: center;">Tipo de Stream</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><strong>Entrada (Input)</strong></td>
+<td style="text-align: center;">Teclado, Archivo en Disco</td>
+<td style="text-align: center;">Flujo de lectura</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>Salida (Output)</strong></td>
+<td style="text-align: center;">Pantalla, Impresora, Archivo en
+Disco</td>
+<td style="text-align: center;">Flujo de escritura</td>
+</tr>
+</tbody>
+</table>
+<p>Gracias a los <em>streams</em>, el cÃ³digo que lee datos de un archivo
+es estructuralmente idÃ©ntico al cÃ³digo que lee datos del teclado;
+simplemente se apunta el flujo hacia una fuente diferente.</p>
+<h2 id="streams-estÃ¡ndar-standard-streams">Streams EstÃ¡ndar (Standard
+Streams) ðŸŸ¢</h2>
+<p>Para facilitar las operaciones bÃ¡sicas de entrada y salida, el
+entorno de ejecuciÃ³n de C (y muchos otros lenguajes) proporciona
+automÃ¡ticamente tres flujos de datos (<code>streams</code>) predefinidos
+que estÃ¡n disponibles tan pronto como un programa comienza.</p>
+<p>Estos flujos estÃ¡n representados por punteros a la estructura
+<code>FILE</code> (declarados en <code>stdio.h</code>) y actÃºan como
+puentes entre el programa y los dispositivos de entrada/salida mÃ¡s
+comunes del sistema operativo.</p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Nombre del Stream</th>
+<th style="text-align: center;">Dispositivo (Destino/Origen)</th>
+<th style="text-align: center;">PropÃ³sito</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><strong><code>stdin</code></strong>
+(Standard Input)</td>
+<td style="text-align: center;"><strong>Teclado</strong> (o entrada
+redirigida)</td>
+<td style="text-align: center;">Canal de <strong>Entrada
+EstÃ¡ndar</strong>. Es la fuente predeterminada desde donde las funciones
+como <code>scanf()</code> o <code>fgets()</code> leen los datos.</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong><code>stdout</code></strong>
+(Standard Output)</td>
+<td style="text-align: center;"><strong>Pantalla</strong> (o salida
+redirigida)</td>
+<td style="text-align: center;">Canal de <strong>Salida
+EstÃ¡ndar</strong>. Es el destino predeterminado donde las funciones como
+<code>printf()</code> y <code>puts()</code> escriben los resultados del
+programa.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong><code>stderr</code></strong>
+(Standard Error)</td>
+<td style="text-align: center;"><strong>Pantalla</strong> (o salida de
+error)</td>
+<td style="text-align: center;">Canal de <strong>Salida de
+Errores</strong>. Se utiliza para escribir mensajes de diagnÃ³stico y
+errores. Aunque por defecto apunta a la pantalla, su flujo es
+independiente de <code>stdout</code>, lo que permite redirigir la salida
+normal sin perder los mensajes de error crÃ­ticos.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="utilidad">Utilidad</h3>
+<p>El uso de los <em>Streams</em> EstÃ¡ndar es la razÃ³n por la que un
+simple programa en C puede imprimir en la pantalla (<code>stdout</code>)
+o recibir datos del teclado (<code>stdin</code>) sin necesidad de abrir
+archivos o configurar dispositivos explÃ­citamente. Estos flujos ya estÃ¡n
+â€œabiertosâ€ y listos para usar desde el inicio.</p>
+<h2 id="flujos-de-archivos-file-streams">Flujos de Archivos (File
+Streams) ðŸ“‚</h2>
+<p>Para lograr la <strong>persistencia de datos</strong> y manipular
+archivos fÃ­sicos almacenados en el disco, C establece un mecanismo
+especÃ­fico: el <strong>Flujo de Archivo</strong> (<em>File
+Stream</em>).</p>
+<h3 id="la-conexiÃ³n-lÃ³gica-con-el-disco">La ConexiÃ³n LÃ³gica con el
+Disco</h3>
+<p>Un Flujo de Archivo es una <strong>conexiÃ³n lÃ³gica</strong> que el
+programa establece con un archivo en el sistema de almacenamiento no
+volÃ¡til (el disco duro, SSD, etc.).</p>
+<p>A diferencia de los <em>streams</em> estÃ¡ndar (<code>stdin</code>,
+<code>stdout</code>) que estÃ¡n abiertos por defecto, un flujo de archivo
+debe ser <strong>abierto explÃ­citamente</strong> por el programador
+antes de poder leer o escribir datos en Ã©l, y debe ser
+<strong>cerrado</strong> una vez que se termina de usar.</p>
+<h3 id="estructura-file-y-punteros">Estructura <code>FILE</code> y
+Punteros</h3>
+<p>En C, la gestiÃ³n de los flujos de archivos se realiza a travÃ©s de la
+librerÃ­a estÃ¡ndar de I/O (<code>stdio.h</code>) y la estructura
+fundamental es <code>FILE</code>.</p>
+<ol type="1">
+<li><strong>DeclaraciÃ³n:</strong> Para trabajar con un archivo, se
+declara un <strong>puntero</strong> a esta estructura:
+<code>FILE *ptr_archivo;</code>.</li>
+<li><strong>Apertura:</strong> Cuando se llama a una funciÃ³n como
+<code>fopen()</code>, el sistema operativo realiza dos acciones:
+<ul>
+<li>Busca el archivo fÃ­sico en el disco.</li>
+<li>Crea la infraestructura interna para gestionar el flujo (buffers,
+metadatos, etc.).</li>
+<li>Devuelve un puntero (<code>FILE *</code>) que apunta a esta
+infraestructura, que es el <strong>identificador del flujo</strong> que
+utilizaremos para todas las operaciones futuras (lectura, escritura,
+etc.).</li>
+</ul></li>
+</ol>
+<h3 id="el-modelo-de-io-unificado">El Modelo de I/O Unificado</h3>
+<p>El Flujo de Archivo se adhiere al mismo modelo de <em>stream</em> que
+la entrada/salida estÃ¡ndar. Esto significa que, una vez abierto el
+flujo:</p>
+<ul>
+<li>Las funciones de <strong>lectura de archivo</strong> leen bytes de
+la secuencia de datos del archivo.</li>
+<li>Las funciones de <strong>escritura en archivo</strong> aÃ±aden bytes
+al final o en una posiciÃ³n especÃ­fica de la secuencia de datos del
+archivo.</li>
+</ul>
+<p>Este mecanismo permite que las funciones que ya conoces, como
+<code>fprintf()</code> o <code>fscanf()</code>, puedan trabajar tanto
+con la pantalla (<code>stdout</code>) como con un archivo en el disco,
+simplemente cambiando el puntero <code>FILE *</code> al que apuntan.</p>
+
+</div>
+</body>
+</html>
+

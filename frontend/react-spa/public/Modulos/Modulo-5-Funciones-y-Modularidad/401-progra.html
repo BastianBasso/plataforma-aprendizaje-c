@@ -1,0 +1,531 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" crossorigin href="/assets/content-01sust.css">
+</head>
+<body>
+<div class="main-content">
+<p><strong>15 Ejercicios de ProgramaciÃ³n: Valores de Retorno y el Tipo
+void</strong></p>
+<p>Estos ejercicios cubren el uso de la sentencia
+<strong>return</strong> para devolver valores y terminar la ejecuciÃ³n,
+la distinciÃ³n con el tipo <strong>void</strong>, y el uso estratÃ©gico de
+<strong>mÃºltiples return</strong>.</p>
+<p><strong>Bloque 1: return (Valor y Control de Flujo) â†©ï¸Žï¸</strong></p>
+<ol type="1">
+<li><p><strong>AsignaciÃ³n de Valor Retornado</strong></p>
+<ul>
+<li><p><strong>FunciÃ³n:</strong> int sumar_tres_numeros(int a, int b,
+int c)</p></li>
+<li><p><strong>Tarea:</strong> La funciÃ³n debe calcular la suma de los
+tres parÃ¡metros.</p></li>
+<li><p><strong>Requisito:</strong> En main(), llama a la funciÃ³n y
+<strong>asigna el valor retornado</strong> a una variable llamada
+total_suma para su posterior impresiÃ³n.</p></li>
+</ul></li>
+<li><p><strong>Uso Directo en ExpresiÃ³n (Anidamiento)</strong></p>
+<ul>
+<li><p><strong>FunciÃ³n:</strong> int incrementar(int num) (retorna num +
+1).</p></li>
+<li><p><strong>Tarea:</strong> Crea una variable x = 10 en
+main().</p></li>
+<li><p><strong>Requisito:</strong> Usa la funciÃ³n dos veces en una
+<strong>llamada anidada</strong> para calcular
+incrementar(incrementar(x)) y guarda el resultado en una
+variable.</p></li>
+</ul></li>
+<li><p><strong>ImpresiÃ³n Directa</strong></p>
+<ul>
+<li><p><strong>FunciÃ³n:</strong> float
+calcular_perimetro_rectangulo(float largo, float ancho) (retorna $2
+\times (largo + ancho)$).</p></li>
+<li><p><strong>Requisito:</strong> Llama a la funciÃ³n y <strong>pasa
+directamente el valor retornado</strong> como argumento a la funciÃ³n
+printf() en main(). No uses una variable intermedia.</p></li>
+</ul></li>
+<li><p><strong>Flujo de Control y TerminaciÃ³n</strong></p>
+<ul>
+<li><p><strong>FunciÃ³n:</strong> int probar_return_temprano(int
+n)</p></li>
+<li><p><strong>Tarea:</strong> La funciÃ³n debe tener un if que, si n
+&gt; 50, ejecuta <strong>return 100;</strong>. Si n es $\le 50$, el
+cÃ³digo continÃºa e imprime un mensaje antes de ejecutar <strong>return
+50;</strong>.</p></li>
+<li><p><strong>Requisito:</strong> Llama a la funciÃ³n dos veces desde
+main(): una vez para activar el <em>return</em> temprano y otra para
+activar el <em>return</em> final.</p></li>
+</ul></li>
+<li><p><strong>Casting del Retorno</strong></p>
+<ul>
+<li><p><strong>FunciÃ³n:</strong> float obtener_pi_aproximado() (retorna
+3.14).</p></li>
+<li><p><strong>Tarea:</strong> Declara la funciÃ³n con tipo de retorno
+float.</p></li>
+<li><p><strong>Requisito:</strong> En main(), llama a la funciÃ³n y
+asigna el valor retornado a una variable de tipo <strong>int</strong>.
+Comenta el fenÃ³meno del truncamiento resultante.</p></li>
+</ul></li>
+</ol>
+<p><strong>Bloque 2: DistinciÃ³n entre return y void ðŸš«</strong></p>
+<ol start="6" type="1">
+<li><p><strong>FunciÃ³n que Realiza AcciÃ³n (void)</strong></p>
+<ul>
+<li><p><strong>FunciÃ³n:</strong> void imprimir_separador(void)</p></li>
+<li><p><strong>Tarea:</strong> Imprime una lÃ­nea de 25 guiones bajos (_)
+seguida de un salto de lÃ­nea.</p></li>
+<li><p><strong>Requisito:</strong> Define el tipo de retorno como void y
+<strong>no uses la sentencia return</strong> en su cuerpo. Llama a la
+funciÃ³n varias veces.</p></li>
+</ul></li>
+<li><p><strong>FunciÃ³n que Retorna Valor (int)</strong></p>
+<ul>
+<li><p><strong>FunciÃ³n:</strong> int contar_caracteres(void)</p></li>
+<li><p><strong>Tarea:</strong> Simplemente retorna la literal entera
+15.</p></li>
+<li><p><strong>Requisito:</strong> Define el tipo de retorno como int y
+usa return 15;. En main(), verifica que el valor retornado puede ser
+usado en un cÃ¡lculo (contar_caracteres() * 2).</p></li>
+</ul></li>
+<li><p><strong>Uso de return; en void (Salida Temprana)</strong></p>
+<ul>
+<li><p><strong>FunciÃ³n:</strong> void procesar_dato(int valor)</p></li>
+<li><p><strong>Tarea:</strong> Si valor es negativo, la funciÃ³n debe
+imprimir un mensaje de error y usar <strong>return;</strong> para salir
+inmediatamente. Si es positivo, imprime "Procesamiento
+exitoso".</p></li>
+<li><p><strong>Requisito:</strong> Demuestra cÃ³mo return; evita la
+ejecuciÃ³n del resto de la funciÃ³n.</p></li>
+</ul></li>
+<li><p><strong>FunciÃ³n de InteracciÃ³n (Solo void)</strong></p>
+<ul>
+<li><p><strong>FunciÃ³n:</strong> void
+pedir_y_mostrar_nombre(void)</p></li>
+<li><p><strong>Tarea:</strong> La funciÃ³n debe usar scanf() para leer un
+nombre y luego usar printf() para saludar.</p></li>
+<li><p><strong>Requisito:</strong> El flujo completo (entrada y salida)
+debe estar dentro de la funciÃ³n, y el tipo de retorno debe ser
+void.</p></li>
+</ul></li>
+<li><p><strong>Error de CompilaciÃ³n por return y void</strong></p>
+<ul>
+<li><p><strong>FunciÃ³n:</strong> void funcion_erronea(void)</p></li>
+<li><p><strong>Tarea:</strong> Intenta escribir la funciÃ³n con void como
+tipo de retorno, pero incluye la sentencia return 1; en el
+cuerpo.</p></li>
+<li><p><strong>Requisito:</strong> Comenta quÃ© tipo de error de
+compilaciÃ³n se generarÃ­a (error: void function should not return a
+value). <em>No</em> debes generar el error real, solo escribir y
+comentar el cÃ³digo.</p></li>
+</ul></li>
+</ol>
+<p><strong>Bloque 3: MÃºltiples Sentencias return (Estrategia)
+ðŸš¦</strong></p>
+<ol start="11" type="1">
+<li><p><strong>DeterminaciÃ³n de Signo (int)</strong></p>
+<ul>
+<li><p><strong>FunciÃ³n:</strong> int obtener_signo(int numero)</p></li>
+<li><p><strong>Tarea:</strong></p>
+<ul>
+<li><p>Si el nÃºmero es $&gt; 0$, retorna 1.</p></li>
+<li><p>Si el nÃºmero es $&lt; 0$, retorna -1.</p></li>
+<li><p>Si el nÃºmero es igual a $0$, retorna 0.</p></li>
+</ul></li>
+<li><p><strong>Requisito:</strong> Usa una estructura if/else if/else
+con <strong>tres sentencias return distintas</strong> para manejar todos
+los casos.</p></li>
+</ul></li>
+<li><p><strong>FunciÃ³n de ValidaciÃ³n y Resultado</strong></p>
+<ul>
+<li><p><strong>FunciÃ³n:</strong> float calcular_descuento(float total,
+float tasa)</p></li>
+<li><p><strong>Tarea:</strong> Si tasa es $\ge 1.0$ (es decir, $100\%$ o
+mÃ¡s), retorna 0.0f (indicando descuento invÃ¡lido). Si no, retorna el
+descuento calculado (total * tasa).</p></li>
+<li><p><strong>Requisito:</strong> Utiliza el return de salida temprana
+para la validaciÃ³n antes del cÃ¡lculo.</p></li>
+</ul></li>
+<li><p><strong>FunciÃ³n de VotaciÃ³n (Tiempos de EjecuciÃ³n)</strong></p>
+<ul>
+<li><p><strong>FunciÃ³n:</strong> int puede_votar(int edad)</p></li>
+<li><p><strong>Tarea:</strong> Si edad es $\ge 18$, retorna 1. De lo
+contrario, retorna 0.</p></li>
+<li><p><strong>Requisito:</strong> Observa cÃ³mo, si la edad es $20$, el
+return 1; se ejecuta y la lÃ­nea de cÃ³digo return 0; nunca se
+evalÃºa.</p></li>
+</ul></li>
+<li><p><strong>Uso de return en switch</strong></p>
+<ul>
+<li><p><strong>FunciÃ³n:</strong> int dias_por_mes(int mes)</p></li>
+<li><p><strong>Tarea:</strong> Usa una sentencia switch en el parÃ¡metro
+mes. Los casos deben retornar los dÃ­as de ese mes (31 para Enero, 28
+para Febrero, 30 para Abril).</p></li>
+<li><p><strong>Requisito:</strong> Cada case debe terminar con una
+sentencia return (cuatro en total, incluyendo el default).</p></li>
+</ul></li>
+<li><p><strong>CombinaciÃ³n de Usos (return + ImpresiÃ³n
+Directa)</strong></p>
+<ul>
+<li><p><strong>FunciÃ³n:</strong> float calcular_impuesto(float monto)
+(retorna monto * 0.15f).</p></li>
+<li><p><strong>FunciÃ³n void:</strong> void imprimir_informe_fiscal(float
+impuesto) (imprime el impuesto).</p></li>
+<li><p><strong>Requisito:</strong> En main(), llama a
+imprimir_informe_fiscal y usa la llamada a calcular_impuesto(500.0f)
+<strong>directamente como su argumento</strong>.</p></li>
+</ul></li>
+</ol>
+<p><strong>Respuestas de los 15 Ejercicios: Valores de Retorno y el Tipo
+void</strong></p>
+<p>AquÃ­ estÃ¡n las soluciones en cÃ³digo C para los ejercicios,
+enfatizando el uso de return, void, y el control de flujo.</p>
+<p><strong>Bloque 1: return (Valor y Control de Flujo) â†©ï¸Žï¸</strong></p>
+<ol type="1">
+<li><strong>AsignaciÃ³n de Valor Retornado</strong></li>
+</ol>
+<blockquote>
+<p>C</p>
+<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
+<p>int sumar_tres_numeros(int a, int b, int c);</p>
+<p>int main() {</p>
+<p>int num1 = 10, num2 = 20, num3 = 5;</p>
+<p>int total_suma;</p>
+<p>// LLAMADA y ASIGNACIÃ“N: El 35 retornado se guarda en total_suma.</p>
+<p>total_suma = sumar_tres_numeros(num1, num2, num3);</p>
+<p>printf("La suma total es: %d\n", total_suma);</p>
+<p>return 0;</p>
+<p>}</p>
+<p>int sumar_tres_numeros(int a, int b, int c) {</p>
+<p>return a + b + c; // Retorna el valor calculado (35)</p>
+<p>}</p>
+</blockquote>
+<ol start="2" type="1">
+<li><strong>Uso Directo en ExpresiÃ³n (Anidamiento)</strong></li>
+</ol>
+<blockquote>
+<p>C</p>
+<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
+<p>int incrementar(int num);</p>
+<p>int main() {</p>
+<p>int x = 10;</p>
+<p>// LLAMADA ANIDADA:</p>
+<p>// 1. incrementar(x) retorna 11.</p>
+<p>// 2. incrementar(11) retorna 12.</p>
+<p>int final = incrementar(incrementar(x));</p>
+<p>printf("Resultado de la doble incrementaciÃ³n: %d\n", final); //
+Imprime 12</p>
+<p>return 0;</p>
+<p>}</p>
+<p>int incrementar(int num) {</p>
+<p>return num + 1;</p>
+<p>}</p>
+</blockquote>
+<ol start="3" type="1">
+<li><strong>ImpresiÃ³n Directa</strong></li>
+</ol>
+<blockquote>
+<p>C</p>
+<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
+<p>float calcular_perimetro_rectangulo(float largo, float ancho);</p>
+<p>int main() {</p>
+<p>float l = 8.0f;</p>
+<p>float a = 4.0f;</p>
+<p>// IMPRESIÃ“N DIRECTA: El valor (24.0) retornado se pasa directamente
+a printf.</p>
+<p>printf("El perÃ­metro del rectÃ¡ngulo es: %.2f\n",
+calcular_perimetro_rectangulo(l, a));</p>
+<p>return 0;</p>
+<p>}</p>
+<p>float calcular_perimetro_rectangulo(float largo, float ancho) {</p>
+<p>return 2.0f * (largo + ancho);</p>
+<p>}</p>
+</blockquote>
+<ol start="4" type="1">
+<li><strong>Flujo de Control y TerminaciÃ³n</strong></li>
+</ol>
+<blockquote>
+<p>C</p>
+<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
+<p>int probar_return_temprano(int n);</p>
+<p>int main() {</p>
+<p>// Activa el RETURN TEMPRANO (Control de Flujo)</p>
+<p>printf("Caso 1 (n &gt; 50): Resultado -&gt; %d\n",
+probar_return_temprano(60));</p>
+<p>// Activa el RETURN FINAL</p>
+<p>printf("Caso 2 (n &lt;= 50): Resultado -&gt; %d\n",
+probar_return_temprano(45));</p>
+<p>return 0;</p>
+<p>}</p>
+<p>int probar_return_temprano(int n) {</p>
+<p>if (n &gt; 50) {</p>
+<p>printf(" [FUNCIÃ“N] CondiciÃ³n de 'return' temprano activada.
+Terminando ejecuciÃ³n.\n");</p>
+<p>return 100; // La funciÃ³n termina inmediatamente aquÃ­.</p>
+<p>// El flujo NUNCA alcanzarÃ¡ la lÃ­nea de abajo si n &gt; 50.</p>
+<p>}</p>
+<p>printf(" [FUNCIÃ“N] CondiciÃ³n de 'return' temprano omitida. EjecuciÃ³n
+normal.\n");</p>
+<p>return 50;</p>
+<p>}</p>
+</blockquote>
+<ol start="5" type="1">
+<li><strong>Casting del Retorno</strong></li>
+</ol>
+<blockquote>
+<p>C</p>
+<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
+<p>float obtener_pi_aproximado();</p>
+<p>int main() {</p>
+<p>// El float (3.14) retornado se asigna a una variable int.</p>
+<p>int pi_entero = obtener_pi_aproximado();</p>
+<p>printf("Valor float retornado: 3.14\n");</p>
+<p>printf("Valor int asignado: %d\n", pi_entero);</p>
+<p>// Comentario: Se produce el truncamiento de la parte decimal
+(.14)</p>
+<p>// debido a que se asigna un float a un int.</p>
+<p>return 0;</p>
+<p>}</p>
+<p>float obtener_pi_aproximado() {</p>
+<p>return 3.14f;</p>
+<p>}</p>
+</blockquote>
+<p><strong>Bloque 2: DistinciÃ³n entre return y void ðŸš«</strong></p>
+<ol start="6" type="1">
+<li><strong>FunciÃ³n que Realiza AcciÃ³n (void)</strong></li>
+</ol>
+<blockquote>
+<p>C</p>
+<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
+<p>void imprimir_separador(void);</p>
+<p>int main() {</p>
+<p>printf("Inicio del programa\n");</p>
+<p>imprimir_separador(); // LLAMADA 1</p>
+<p>printf("Contenido central\n");</p>
+<p>imprimir_separador(); // LLAMADA 2</p>
+<p>return 0;</p>
+<p>}</p>
+<p>// TIPO VOID: Solo realiza una acciÃ³n (imprimir), no devuelve
+datos.</p>
+<p>void imprimir_separador(void) {</p>
+<p>for (int i = 0; i &lt; 25; i++) {</p>
+<p>printf("_");</p>
+<p>}</p>
+<p>printf("\n");</p>
+<p>// No se usa 'return'</p>
+<p>}</p>
+</blockquote>
+<ol start="7" type="1">
+<li><strong>FunciÃ³n que Retorna Valor (int)</strong></li>
+</ol>
+<blockquote>
+<p>C</p>
+<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
+<p>int contar_caracteres(void);</p>
+<p>int main() {</p>
+<p>// El valor 15 retornado se usa en un cÃ¡lculo</p>
+<p>int doble_conteo = contar_caracteres() * 2;</p>
+<p>printf("El valor retornado es: %d\n", contar_caracteres());</p>
+<p>printf("El doble de ese valor es: %d\n", doble_conteo); // Imprime
+30</p>
+<p>return 0;</p>
+<p>}</p>
+<p>int contar_caracteres(void) {</p>
+<p>return 15; // Devuelve un valor entero</p>
+<p>}</p>
+</blockquote>
+<ol start="8" type="1">
+<li><strong>Uso de return; en void (Salida Temprana)</strong></li>
+</ol>
+<blockquote>
+<p>C</p>
+<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
+<p>void procesar_dato(int valor);</p>
+<p>int main() {</p>
+<p>printf("Procesando -5:\n");</p>
+<p>procesar_dato(-5); // Activa el return; temprano</p>
+<p>printf("\nProcesando 10:\n");</p>
+<p>procesar_dato(10); // EjecuciÃ³n normal</p>
+<p>return 0;</p>
+<p>}</p>
+<p>void procesar_dato(int valor) {</p>
+<p>if (valor &lt; 0) {</p>
+<p>printf(" [ERROR] Valor negativo detectado.\n");</p>
+<p>return; // Salida inmediata de la funciÃ³n VOID</p>
+<p>// La lÃ­nea de abajo es inalcanzable si valor &lt; 0</p>
+<p>}</p>
+<p>printf(" Procesamiento exitoso del valor %d.\n", valor);</p>
+<p>}</p>
+</blockquote>
+<ol start="9" type="1">
+<li><strong>FunciÃ³n de InteracciÃ³n (Solo void)</strong></li>
+</ol>
+<blockquote>
+<p>C</p>
+<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
+<p>void pedir_y_mostrar_nombre(void);</p>
+<p>int main() {</p>
+<p>pedir_y_mostrar_nombre(); // La LLAMADA realiza la acciÃ³n
+completa</p>
+<p>return 0;</p>
+<p>}</p>
+<p>// El flujo de E/S estÃ¡ encapsulado en esta funciÃ³n VOID.</p>
+<p>void pedir_y_mostrar_nombre(void) {</p>
+<p>char nombre[50];</p>
+<p>printf("Introduce tu nombre: ");</p>
+<p>scanf("%s", nombre);</p>
+<p>printf("Â¡Hola, %s! La funciÃ³n void ha completado su tarea.\n",
+nombre);</p>
+<p>}</p>
+</blockquote>
+<ol start="10" type="1">
+<li><strong>Error de CompilaciÃ³n por return y void</strong></li>
+</ol>
+<blockquote>
+<p>C</p>
+<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
+<p>// void funcion_erronea(void) {</p>
+<p>// // Esto causarÃ­a un error de compilaciÃ³n:</p>
+<p>// // error: 'void' function does not return a value</p>
+<p>// // o similar, porque una funciÃ³n declarada como 'void' no puede
+retornar un valor entero (1).</p>
+<p>// return 1;</p>
+<p>// }</p>
+<p>int main() {</p>
+<p>printf("La funciÃ³n con error de return en void ha sido
+comentada.\n");</p>
+<p>return 0;</p>
+<p>}</p>
+</blockquote>
+<p><strong>Bloque 3: MÃºltiples Sentencias return (Estrategia)
+ðŸš¦</strong></p>
+<ol start="11" type="1">
+<li><strong>DeterminaciÃ³n de Signo (int)</strong></li>
+</ol>
+<blockquote>
+<p>C</p>
+<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
+<p>int obtener_signo(int numero);</p>
+<p>int main() {</p>
+<p>printf("Signo de 5: %d\n", obtener_signo(5)); // Retorna 1</p>
+<p>printf("Signo de -12: %d\n", obtener_signo(-12)); // Retorna -1</p>
+<p>printf("Signo de 0: %d\n", obtener_signo(0)); // Retorna 0</p>
+<p>return 0;</p>
+<p>}</p>
+<p>int obtener_signo(int numero) {</p>
+<p>if (numero &gt; 0) {</p>
+<p>return 1;</p>
+<p>} else if (numero &lt; 0) {</p>
+<p>return -1;</p>
+<p>} else {</p>
+<p>return 0; // Si no es &gt; 0 ni &lt; 0, debe ser 0.</p>
+<p>}</p>
+<p>// Solo se ejecuta uno de los tres 'return'.</p>
+<p>}</p>
+</blockquote>
+<ol start="12" type="1">
+<li><strong>FunciÃ³n de ValidaciÃ³n y Resultado</strong></li>
+</ol>
+<blockquote>
+<p>C</p>
+<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
+<p>float calcular_descuento(float total, float tasa);</p>
+<p>int main() {</p>
+<p>printf("Descuento OK (10%%): %.2f\n", calcular_descuento(100.0f,
+0.10f)); // Retorno final</p>
+<p>printf("Descuento InvÃ¡lido (120%%): %.2f\n",
+calcular_descuento(100.0f, 1.20f)); // Return de salida temprana</p>
+<p>return 0;</p>
+<p>}</p>
+<p>float calcular_descuento(float total, float tasa) {</p>
+<p>// RETURN DE VALIDACIÃ“N (Salida Temprana)</p>
+<p>if (tasa &gt;= 1.0f) {</p>
+<p>printf(" [VALIDACIÃ“N] Tasa invÃ¡lida. Descuento forzado a 0.\n");</p>
+<p>return 0.0f;</p>
+<p>}</p>
+<p>// RETURN DE RESULTADO (Solo si la validaciÃ³n pasa)</p>
+<p>return total * tasa;</p>
+<p>}</p>
+</blockquote>
+<ol start="13" type="1">
+<li><strong>FunciÃ³n de VotaciÃ³n (Tiempos de EjecuciÃ³n)</strong></li>
+</ol>
+<blockquote>
+<p>C</p>
+<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
+<p>int puede_votar(int edad);</p>
+<p>int main() {</p>
+<p>printf("Â¿Puede votar con 20 aÃ±os? %d\n", puede_votar(20)); // Return
+1 ejecutado</p>
+<p>printf("Â¿Puede votar con 16 aÃ±os? %d\n", puede_votar(16)); // Return
+0 ejecutado</p>
+<p>return 0;</p>
+<p>}</p>
+<p>int puede_votar(int edad) {</p>
+<p>if (edad &gt;= 18) {</p>
+<p>printf(" [VOTACIÃ“N] Retornando 1.\n");</p>
+<p>return 1; // TERMINA AQUÃ si la edad es &gt;= 18</p>
+<p>}</p>
+<p>printf(" [VOTACIÃ“N] Retornando 0.\n");</p>
+<p>return 0; // Solo se alcanza si la edad es &lt; 18</p>
+<p>}</p>
+</blockquote>
+<ol start="14" type="1">
+<li><strong>Uso de return en switch</strong></li>
+</ol>
+<blockquote>
+<p>C</p>
+<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
+<p>int dias_por_mes(int mes);</p>
+<p>int main() {</p>
+<p>printf("DÃ­as en Enero (1): %d\n", dias_por_mes(1));</p>
+<p>printf("DÃ­as en Febrero (2): %d\n", dias_por_mes(2));</p>
+<p>printf("DÃ­as en un mes invÃ¡lido (15): %d\n", dias_por_mes(15));</p>
+<p>return 0;</p>
+<p>}</p>
+<p>int dias_por_mes(int mes) {</p>
+<p>switch (mes) {</p>
+<p>case 1: // Enero</p>
+<p>case 3: // Marzo</p>
+<p>return 31; // Primer tipo de return</p>
+<p>case 2: // Febrero</p>
+<p>return 28; // Segundo tipo de return</p>
+<p>case 4: // Abril</p>
+<p>case 6: // Junio</p>
+<p>return 30; // Tercer tipo de return</p>
+<p>default:</p>
+<p>return -1; // Cuarto tipo de return (indicando error)</p>
+<p>}</p>
+<p>// El break no es necesario despuÃ©s de 'return'</p>
+<p>}</p>
+</blockquote>
+<ol start="15" type="1">
+<li><strong>CombinaciÃ³n de Usos (return + ImpresiÃ³n
+Directa)</strong></li>
+</ol>
+<blockquote>
+<p>C</p>
+<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
+<p>float calcular_impuesto(float monto);</p>
+<p>void imprimir_informe_fiscal(float impuesto);</p>
+<p>int main() {</p>
+<p>// LLAMADA ANIDADA: El valor float retornado por 'calcular_impuesto'
+(75.0)</p>
+<p>// se usa como ARGUMENTO para la funciÃ³n void
+'imprimir_informe_fiscal'.</p>
+<p>imprimir_informe_fiscal(calcular_impuesto(500.0f));</p>
+<p>return 0;</p>
+<p>}</p>
+<p>float calcular_impuesto(float monto) {</p>
+<p>return monto * 0.15f; // Retorna el 15% del monto</p>
+<p>}</p>
+<p>void imprimir_informe_fiscal(float impuesto) {</p>
+<p>printf("--- INFORME FISCAL ---\n");</p>
+<p>printf("Impuesto calculado (15%%): %.2f\n", impuesto);</p>
+<p>}</p>
+</blockquote>
+
+</div>
+</body>
+</html>
+

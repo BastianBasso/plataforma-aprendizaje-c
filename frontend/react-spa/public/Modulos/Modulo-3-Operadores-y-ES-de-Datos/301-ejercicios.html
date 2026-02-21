@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" crossorigin href="/assets/content-01sust.css">
+</head>
+<body>
+<div class="main-content">
+<p><strong>15 Ejercicios: Prioridad de Operadores y
+Expresiones</strong></p>
+<p><strong>Parte 1: Precedencia (Multiplicación/División antes que
+Suma/Resta)</strong></p>
+<p><strong>Instrucción:</strong> Predice el resultado de las siguientes
+expresiones basándote en la jerarquía de operadores.</p>
+<table style="width:97%;">
+<colgroup>
+<col style="width: 11%" />
+<col style="width: 35%" />
+<col style="width: 28%" />
+<col style="width: 21%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>#</strong></th>
+<th style="text-align: left;"><strong>Descripción</strong></th>
+<th style="text-align: left;"><strong>Código en C</strong></th>
+<th style="text-align: left;"><strong>Output Esperado</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>1</strong></td>
+<td style="text-align: left;">Multiplicación antes que Suma</td>
+<td style="text-align: left;">int r = 5 + 2 * 3; printf("%d", r);</td>
+<td style="text-align: left;">11</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>2</strong></td>
+<td style="text-align: left;">División antes que Resta</td>
+<td style="text-align: left;">int r = 10 - 6 / 2; printf("%d", r);</td>
+<td style="text-align: left;">7</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>3</strong></td>
+<td style="text-align: left;">Módulo antes que Suma</td>
+<td style="text-align: left;">int r = 20 + 7 % 3; printf("%d", r);</td>
+<td style="text-align: left;">21</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>4</strong></td>
+<td style="text-align: left;">Múltiples Operadores (Alta Prioridad)</td>
+<td style="text-align: left;">int r = 8 * 2 + 10 / 5; printf("%d",
+r);</td>
+<td style="text-align: left;">18</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Parte 2: Paréntesis (Forzando el Orden)</strong></p>
+<p><strong>Instrucción:</strong> Predice el resultado de las expresiones
+donde los paréntesis anulan la precedencia natural.</p>
+<table style="width:97%;">
+<colgroup>
+<col style="width: 11%" />
+<col style="width: 29%" />
+<col style="width: 33%" />
+<col style="width: 23%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>#</strong></th>
+<th style="text-align: left;"><strong>Descripción</strong></th>
+<th style="text-align: left;"><strong>Código en C</strong></th>
+<th style="text-align: left;"><strong>Output Esperado</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>5</strong></td>
+<td style="text-align: left;">Paréntesis fuerzan Suma</td>
+<td style="text-align: left;">int r = (5 + 2) * 3; printf("%d", r);</td>
+<td style="text-align: left;">21</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>6</strong></td>
+<td style="text-align: left;">Paréntesis fuerzan Resta</td>
+<td style="text-align: left;">int r = (10 - 6) / 2; printf("%d",
+r);</td>
+<td style="text-align: left;">2</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>7</strong></td>
+<td style="text-align: left;">Paréntesis en el Divisor</td>
+<td style="text-align: left;">int r = 100 / (10 + 10); printf("%d",
+r);</td>
+<td style="text-align: left;">5</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>8</strong></td>
+<td style="text-align: left;">Paréntesis Anidados</td>
+<td style="text-align: left;">int r = (5 * (4 + 1)) / 5; printf("%d",
+r);</td>
+<td style="text-align: left;">5</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Parte 3: Asociatividad (Desempate)</strong></p>
+<p><strong>Instrucción:</strong> Predice el resultado basándote en la
+asociatividad (L-a-R para aritméticos, R-a-L para asignación).</p>
+<table style="width:97%;">
+<colgroup>
+<col style="width: 11%" />
+<col style="width: 32%" />
+<col style="width: 32%" />
+<col style="width: 21%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>#</strong></th>
+<th style="text-align: left;"><strong>Descripción</strong></th>
+<th style="text-align: left;"><strong>Código en C</strong></th>
+<th style="text-align: left;"><strong>Output Esperado</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>9</strong></td>
+<td style="text-align: left;">L-a-R (División y Multiplicación)</td>
+<td style="text-align: left;">int r = 100 / 10 * 2; printf("%d",
+r);</td>
+<td style="text-align: left;">20</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>10</strong></td>
+<td style="text-align: left;">L-a-R (Suma y Resta)</td>
+<td style="text-align: left;">int r = 20 - 5 + 3; printf("%d", r);</td>
+<td style="text-align: left;">18</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>11</strong></td>
+<td style="text-align: left;">L-a-R (Cadena *, /, %)</td>
+<td style="text-align: left;">int r = 10 * 4 / 5 % 3; printf("%d",
+r);</td>
+<td style="text-align: left;">2</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>12</strong></td>
+<td style="text-align: left;">R-a-L (Asignación en Cadena)</td>
+<td style="text-align: left;">int a, b, c; a = b = c = 10; printf("%d",
+a);</td>
+<td style="text-align: left;">10</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Parte 4: Expresiones Complejas y Claridad</strong></p>
+<p><strong>Instrucción:</strong> Calcula el resultado de estas
+expresiones combinadas.</p>
+<table style="width:97%;">
+<colgroup>
+<col style="width: 11%" />
+<col style="width: 28%" />
+<col style="width: 36%" />
+<col style="width: 20%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>#</strong></th>
+<th style="text-align: left;"><strong>Descripción</strong></th>
+<th style="text-align: left;"><strong>Código en C</strong></th>
+<th style="text-align: left;"><strong>Output Esperado</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>13</strong></td>
+<td style="text-align: left;">Expresión Mixta Compleja</td>
+<td style="text-align: left;">int r = 10 + 5 * 2 - 8 / 4; printf("%d",
+r);</td>
+<td style="text-align: left;">18</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>14</strong></td>
+<td style="text-align: left;">Mixta con Paréntesis y Módulo</td>
+<td style="text-align: left;">int r = (10 + 5) * 2 - (9 % 4);
+printf("%d", r);</td>
+<td style="text-align: left;">29</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>15</strong></td>
+<td style="text-align: left;">Paréntesis para Claridad</td>
+<td style="text-align: left;">int a = 12, b = 6, c = 2; int r = (a / b)
++ (a / c); printf("%d", r);</td>
+<td style="text-align: left;">8</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Código Completo de las Respuestas</strong></p>
+<p>C</p>
+<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
+<p>int main(void) {</p>
+<p>int r, a, b, c;</p>
+<p>printf("--- Parte 1: Precedencia ---\n");</p>
+<p>// 1. 5 + (2 * 3) = 11</p>
+<p>r = 5 + 2 * 3;</p>
+<p>printf("1. Resultado: %d\n", r);</p>
+<p>// 2. 10 - (6 / 2) = 7</p>
+<p>r = 10 - 6 / 2;</p>
+<p>printf("2. Resultado: %d\n", r);</p>
+<p>// 3. 20 + (7 % 3) = 20 + 1 = 21</p>
+<p>r = 20 + 7 % 3;</p>
+<p>printf("3. Resultado: %d\n", r);</p>
+<p>// 4. (8 * 2) + (10 / 5) = 16 + 2 = 18</p>
+<p>r = 8 * 2 + 10 / 5;</p>
+<p>printf("4. Resultado: %d\n", r);</p>
+<p>printf("\n--- Parte 2: Paréntesis ---\n");</p>
+<p>// 5. (5 + 2) * 3 = 7 * 3 = 21</p>
+<p>r = (5 + 2) * 3;</p>
+<p>printf("5. Resultado: %d\n", r);</p>
+<p>// 6. (10 - 6) / 2 = 4 / 2 = 2</p>
+<p>r = (10 - 6) / 2;</p>
+<p>printf("6. Resultado: %d\n", r);</p>
+<p>// 7. 100 / (10 + 10) = 100 / 20 = 5</p>
+<p>r = 100 / (10 + 10);</p>
+<p>printf("7. Resultado: %d\n", r);</p>
+<p>// 8. (5 * 5) / 5 = 25 / 5 = 5</p>
+<p>r = (5 * (4 + 1)) / 5;</p>
+<p>printf("8. Resultado: %d\n", r);</p>
+<p>printf("\n--- Parte 3: Asociatividad ---\n");</p>
+<p>// 9. (100 / 10) * 2 = 10 * 2 = 20</p>
+<p>r = 100 / 10 * 2;</p>
+<p>printf("9. Resultado: %d\n", r);</p>
+<p>// 10. (20 - 5) + 3 = 15 + 3 = 18</p>
+<p>r = 20 - 5 + 3;</p>
+<p>printf("10. Resultado: %d\n", r);</p>
+<p>// 11. ((10 * 4) / 5) % 3 = (40 / 5) % 3 = 8 % 3 = 2</p>
+<p>r = 10 * 4 / 5 % 3;</p>
+<p>printf("11. Resultado: %d\n", r);</p>
+<p>// 12. a = (b = (c = 10))</p>
+<p>a = b = c = 10;</p>
+<p>printf("12. Resultado (valor de a): %d\n", a);</p>
+<p>printf("\n--- Parte 4: Complejas ---\n");</p>
+<p>// 13. 10 + (5 * 2) - (8 / 4) = 10 + 10 - 2 = 18</p>
+<p>r = 10 + 5 * 2 - 8 / 4;</p>
+<p>printf("13. Resultado: %d\n", r);</p>
+<p>// 14. (15 * 2) - (9 % 4) = 30 - 1 = 29</p>
+<p>r = (10 + 5) * 2 - (9 % 4);</p>
+<p>printf("14. Resultado: %d\n", r);</p>
+<p>// 15. (12 / 6) + (12 / 2) = 2 + 6 = 8</p>
+<p>a = 12; b = 6; c = 2;</p>
+<p>r = (a / b) + (a / c);</p>
+<p>printf("15. Resultado: %d\n", r);</p>
+<p>return 0;</p>
+<p>}</p>
+<p><strong>Output Consolidado Esperado</strong></p>
+<p>--- Parte 1: Precedencia ---</p>
+<p>1. Resultado: 11</p>
+<p>2. Resultado: 7</p>
+<p>3. Resultado: 21</p>
+<p>4. Resultado: 18</p>
+<p>--- Parte 2: Paréntesis ---</p>
+<p>5. Resultado: 21</p>
+<p>6. Resultado: 2</p>
+<p>7. Resultado: 5</p>
+<p>8. Resultado: 5</p>
+<p>--- Parte 3: Asociatividad ---</p>
+<p>9. Resultado: 20</p>
+<p>10. Resultado: 18</p>
+<p>11. Resultado: 2</p>
+<p>12. Resultado (valor de a): 10</p>
+<p>--- Parte 4: Complejas ---</p>
+<p>13. Resultado: 18</p>
+<p>14. Resultado: 29</p>
+<p>15. Resultado: 8</p>
+
+
+</div>
+</body>
+</html>
+

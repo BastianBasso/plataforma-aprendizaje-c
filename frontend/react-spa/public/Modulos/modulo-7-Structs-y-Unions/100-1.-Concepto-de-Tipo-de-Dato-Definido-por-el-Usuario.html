@@ -1,0 +1,172 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" crossorigin href="/assets/content-01sust.css">
+</head>
+<body>
+<div class="main-content">
+<h2 id="limitaciÃ³n-de-tipos-primitivos">LimitaciÃ³n de Tipos Primitivos
+ðŸ›‘</h2>
+<p>En los mÃ³dulos anteriores, hemos trabajado extensivamente con los
+<strong>tipos de datos primitivos</strong> fundamentales de C:</p>
+<ul>
+<li><strong>Enteros:</strong> <code>int</code>, <code>short</code>,
+<code>long</code>.</li>
+<li><strong>Punto Flotante:</strong> <code>float</code>,
+<code>double</code>.</li>
+<li><strong>CarÃ¡cter:</strong> <code>char</code>.</li>
+</ul>
+<p>La principal limitaciÃ³n que enfrentamos con estos tipos bÃ¡sicos es
+que <strong>cada variable primitiva puede almacenar solo un valor
+individual</strong> a la vez.</p>
+<h3 id="la-restricciÃ³n-univalor">La RestricciÃ³n Univalor</h3>
+<p>Si queremos representar informaciÃ³n simple, esto funciona bien:</p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Tarea</th>
+<th style="text-align: center;">CÃ³digo Primitivo</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">Almacenar la edad</td>
+<td style="text-align: center;"><code>int edad = 30;</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Almacenar un precio</td>
+<td style="text-align: center;"><code>float precio = 45.99f;</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Almacenar una letra</td>
+<td style="text-align: center;"><code>char inicial = 'J';</code></td>
+</tr>
+</tbody>
+</table>
+<p>Sin embargo, en el mundo real, los objetos o entidades casi siempre
+estÃ¡n compuestos por <strong>mÃºltiples atributos</strong> que son de
+<strong>diferentes tipos</strong> de datos.</p>
+<h3 id="problema-datos-aislados">Problema: Datos Aislados</h3>
+<p>Si quisiÃ©ramos modelar un objeto como un <strong>â€œEmpleadoâ€</strong>,
+necesitarÃ­amos:</p>
+<ul>
+<li><code>char nombre[50];</code> (Array de caracteres)</li>
+<li><code>int edad;</code> (Entero)</li>
+<li><code>float salario;</code> (Punto flotante)</li>
+</ul>
+<p>Si estas variables se declaran por separado, no hay una conexiÃ³n
+intrÃ­nseca en el cÃ³digo que le diga al compilador que <code>edad</code>
+y <code>salario</code> pertenecen al mismo <code>Empleado</code>. Los
+datos permanecen aislados, lo que dificulta el manejo de colecciones y
+la organizaciÃ³n del cÃ³digo.</p>
+<p>Esta limitaciÃ³n resalta la necesidad de una herramienta que nos
+permita <strong>agrupar lÃ³gicamente</strong> estos datos heterogÃ©neos
+bajo una Ãºnica identidad.</p>
+<h2 id="necesidad-de-modelado-datos-relacionados">Necesidad de Modelado:
+Datos Relacionados ðŸ§©</h2>
+<p>El objetivo de cualquier lenguaje de programaciÃ³n es modelar y
+manipular informaciÃ³n que representa objetos o entidades del
+<strong>mundo real</strong>. AquÃ­ es donde la limitaciÃ³n de los tipos
+primitivos se hace evidente.</p>
+<hr />
+<h3 id="el-desafÃ­o-del-modelado">El DesafÃ­o del Modelado</h3>
+<p>La mayorÃ­a de las entidades que nos interesa representar en el cÃ³digo
+son <strong>compuestas</strong>, es decir, estÃ¡n formadas por mÃºltiples
+atributos que son de <strong>diferente naturaleza</strong> (distinto
+tipo de dato).</p>
+<p>Imagina que queremos modelar un <strong>â€œLibroâ€</strong>. Para
+describirlo completamente, necesitamos agrupar datos heterogÃ©neos:</p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Atributo</th>
+<th style="text-align: center;">Tipo de Dato</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">TÃ­tulo</td>
+<td style="text-align: center;"><code>char[]</code> (Cadena)</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">PÃ¡ginas</td>
+<td style="text-align: center;"><code>int</code> (Entero)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Precio</td>
+<td style="text-align: center;"><code>float</code> (Flotante)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="la-soluciÃ³n-agrupaciÃ³n-lÃ³gica">La SoluciÃ³n: AgrupaciÃ³n
+LÃ³gica</h3>
+<p>Si intentamos manejar estos atributos de forma separada
+(<code>char titulo_A[50]</code>, <code>int paginas_A</code>,
+<code>float precio_A</code>, y luego <code>char titulo_B[50]</code>,
+etc.), se vuelve <strong>inmanejable</strong> y <strong>propenso a
+errores</strong>. No hay una conexiÃ³n fuerte que garantice que
+<code>paginas_A</code> y <code>precio_A</code> pertenecen al mismo
+libro.</p>
+<p>Para resolver este problema, el lenguaje C introduce la necesidad de
+<strong>agrupar lÃ³gicamente</strong> estos datos bajo una Ãºnica unidad.
+Este proceso se llama <strong>modelado de datos</strong>.</p>
+<p><strong>Modelar</strong> implica definir una estructura que encapsule
+todos los atributos relacionados (como el tÃ­tulo, las pÃ¡ginas y el
+precio) de modo que se les pueda hacer referencia con un <strong>solo
+nombre</strong> (<code>Libro</code>).</p>
+<p>Esta necesidad fundamental de agrupar datos de diferente tipo para
+crear una representaciÃ³n coherente del mundo real es lo que lleva a la
+creaciÃ³n de los <strong>Tipos de Datos Definidos por el
+Usuario</strong>, como las <strong>Estructuras
+(<code>struct</code>)</strong>.</p>
+<h2 id="definiciÃ³n-de-tipo-compuesto">DefiniciÃ³n de Tipo Compuesto
+ðŸ—ï¸</h2>
+<p>Para superar las limitaciones de los tipos primitivos y satisfacer la
+necesidad de modelar entidades complejas, el lenguaje C introduce el
+concepto de <strong>Tipo de Dato Compuesto</strong> o <strong>Definido
+por el Usuario</strong>.</p>
+<h3 id="quÃ©-es-un-tipo-compuesto">Â¿QuÃ© es un Tipo Compuesto?</h3>
+<p>Un tipo de dato compuesto es una <strong>plantilla</strong> o
+<strong>molde</strong> que el programador crea para agrupar variables de
+<strong>diferentes tipos de datos</strong> bajo un solo nombre lÃ³gico.
+Este molde permite manejar informaciÃ³n relacionada como una Ãºnica unidad
+coherente.</p>
+<ul>
+<li><strong>Definido por el Usuario:</strong> A diferencia de
+<code>int</code> o <code>float</code>, que son nativos del lenguaje, el
+programador es quien <strong>establece la estructura de
+almacenamiento</strong> (los miembros que lo componen) y el nombre de
+este nuevo tipo.</li>
+</ul>
+<h3 id="la-estructura-de-almacenamiento">La Estructura de
+Almacenamiento</h3>
+<p>El tipo compuesto mÃ¡s fundamental y utilizado en C para este
+propÃ³sito es la <strong>Estructura</strong> o
+<strong><code>struct</code></strong>.</p>
+<p>Una <code>struct</code> permite definir una colecciÃ³n de variables,
+llamadas <strong>miembros</strong>, que pueden ser de cualquier tipo
+(primitivo, array, o incluso otras <em>structs</em>). Todos los miembros
+se almacenan en la memoria de manera <strong>contigua</strong> (uno
+despuÃ©s del otro).</p>
+<p><strong>Concepto Clave:</strong> Al definir una <code>struct</code>,
+no estÃ¡s creando una variable, sino una <strong>receta</strong> para
+crear variables futuras que contengan todos esos atributos
+agrupados.</p>
+<p><span class="math display">Tipo de Dato Compuestoâ€„â‰¡â€„Estructura
+(â€˜structâ€˜) en C</span></p>
+<p>Por ejemplo, si definimos un tipo <code>Libro</code> que agrupa
+<code>titulo</code> (cadena), <code>paginas</code> (entero) y
+<code>precio</code> (flotante), cada variable que creemos del tipo
+<code>Libro</code> tendrÃ¡ automÃ¡ticamente los tres atributos
+asociados.</p>
+<p>Este nuevo tipo personalizado (<code>struct Libro</code>) puede
+utilizarse luego en el programa de la misma manera que se utiliza un
+tipo primitivo: para declarar variables, pasarlas a funciones, o crear
+arrays de ellas.</p>
+
+</div>
+</body>
+</html>
+

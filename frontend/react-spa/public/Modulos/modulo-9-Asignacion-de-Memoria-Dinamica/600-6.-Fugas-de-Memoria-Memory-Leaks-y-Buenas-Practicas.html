@@ -1,0 +1,200 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" crossorigin href="/assets/content-01sust.css">
+</head>
+<body>
+<div class="main-content">
+<h2 id="definiciÃ³n-de-fuga-de-memoria-memory-leak">DefiniciÃ³n de Fuga de
+Memoria (<em>Memory Leak</em>) ðŸ’§</h2>
+<p>Una <strong>Fuga de Memoria</strong> (<em>Memory Leak</em>) se
+produce cuando el cÃ³digo asigna dinÃ¡micamente un bloque de memoria en el
+<em>Heap</em> (MontÃ³n), pero, debido a un error de programaciÃ³n,
+<strong>pierde la Ãºnica referencia (el puntero) que apunta al inicio de
+ese bloque antes de haber llamado a <code>free()</code></strong>.</p>
+<hr />
+<h3 id="mecanismo-de-la-fuga">Mecanismo de la Fuga</h3>
+<p>La fuga ocurre bajo dos escenarios principales, ambos resultando en
+la pÃ©rdida de control sobre la memoria asignada:</p>
+<ol type="1">
+<li><strong>PÃ©rdida de Puntero (Scope Perdido):</strong> Un puntero
+local (<code>int *ptr;</code>) asignado con <code>malloc()</code> sale
+del Ã¡mbito de su funciÃ³n sin que se haya llamado a <code>free()</code>.
+La variable <code>ptr</code> desaparece del <em>Stack</em>, y la
+direcciÃ³n del bloque en el <em>Heap</em> se pierde
+irremediablemente.</li>
+<li><strong>ReasignaciÃ³n de Puntero:</strong> El puntero de referencia
+se utiliza para apuntar a un nuevo bloque de memoria o a otra direcciÃ³n
+antes de liberar el bloque original.</li>
+</ol>
+<h4 id="ejemplo-de-reasignaciÃ³n-que-causa-fuga">Ejemplo de ReasignaciÃ³n
+que Causa Fuga</h4>
+<div class="sourceCode" id="cb1"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> <span class="op">*</span>datos <span class="op">=</span> <span class="op">(</span><span class="dt">int</span> <span class="op">*)</span>malloc<span class="op">(</span><span class="dv">100</span> <span class="op">*</span> <span class="kw">sizeof</span><span class="op">(</span><span class="dt">int</span><span class="op">));</span> <span class="co">// Bloque A asignado</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co">// ... (Uso de A) ...</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>datos <span class="op">=</span> <span class="op">(</span><span class="dt">int</span> <span class="op">*)</span>malloc<span class="op">(</span><span class="dv">50</span> <span class="op">*</span> <span class="kw">sizeof</span><span class="op">(</span><span class="dt">int</span><span class="op">));</span>      <span class="co">// Bloque B asignado</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co">// En este punto, la direcciÃ³n original del Bloque A </span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co">// se ha sobrescrito con la direcciÃ³n del Bloque B. </span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co">// El Bloque A queda &#39;huÃ©rfano&#39; en el Heap, </span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co">// causando una **Fuga de Memoria**.</span></span></code></pre></div>
+<p>Una vez que la direcciÃ³n del bloque se pierde, el programa ya no
+tiene forma de llamar a <code>free()</code> para devolver esa memoria al
+sistema, y esta queda marcada como â€œen usoâ€ hasta que el programa
+termina.</p>
+<h2 id="impacto-de-las-fugas-de-memoria">Impacto de las Fugas de Memoria
+ðŸ“‰</h2>
+<p>Aunque una sola fuga de memoria de pocos bytes puede ser
+insignificante, el problema real surge cuando las fugas son
+<strong>repetitivas</strong> o ocurren en <strong>procesos de larga
+duraciÃ³n</strong>. Las fugas de memoria tienen un impacto perjudicial y
+progresivo en el rendimiento del software y del sistema operativo.</p>
+<hr />
+<h3 id="consumo-progresivo-de-recursos">Consumo Progresivo de
+Recursos</h3>
+<p>El impacto principal de una fuga de memoria es el <strong>consumo
+lento y progresivo de la memoria RAM disponible</strong>.</p>
+<ul>
+<li>Cada vez que una funciÃ³n con una fuga de memoria se ejecuta, se
+pierde un nuevo bloque en el <em>Heap</em>.</li>
+<li>El sistema operativo (SO) sigue considerando estos bloques como â€œen
+usoâ€ y, con el tiempo, el proceso del programa crece artificialmente en
+tamaÃ±o.</li>
+<li>Si el programa se ejecuta durante horas o dÃ­as (como un servidor o
+un servicio en segundo plano), esta memoria perdida se acumula.</li>
+</ul>
+<h3 id="consecuencias-en-el-sistema">Consecuencias en el Sistema</h3>
+<p>El agotamiento gradual de la memoria disponible lleva a una serie de
+fallos:</p>
+<ol type="1">
+<li><strong>RalentizaciÃ³n del Sistema:</strong> Cuando la memoria RAM
+fÃ­sica se agota, el SO se ve obligado a utilizar el <strong>archivo de
+paginaciÃ³n</strong> o <em>swap</em> (espacio en el disco duro) para
+simular la memoria RAM. El acceso al disco es miles de veces mÃ¡s lento
+que a la RAM, lo que provoca una <strong>degradaciÃ³n drÃ¡stica y
+generalizada</strong> del rendimiento de la aplicaciÃ³n y de todo el
+sistema.</li>
+<li><strong>Fallo del Programa (<em>Crash</em>):</strong> Eventualmente,
+el programa puede intentar asignar mÃ¡s memoria de la que el sistema
+puede proporcionar (incluso utilizando la memoria <em>swap</em>). La
+llamada a <code>malloc()</code> o <code>calloc()</code> falla (retorna
+<code>NULL</code>), y el programa no puede continuar sus operaciones, lo
+que suele resultar en un <strong>cierre forzoso</strong> o un
+comportamiento impredecible.</li>
+<li><strong>Inestabilidad del SO:</strong> En casos extremos y si la
+fuga proviene de un componente central del sistema, puede comprometer la
+estabilidad del sistema operativo completo, requiriendo un
+reinicio.</li>
+</ol>
+<h2 id="buenas-prÃ¡cticas-de-gestiÃ³n-para-evitar-fugas">Buenas PrÃ¡cticas
+de GestiÃ³n para Evitar Fugas âœ¨</h2>
+<p>Evitar fugas de memoria requiere una disciplina constante en la
+gestiÃ³n de los punteros y el uso de las funciones de asignaciÃ³n y
+liberaciÃ³n. Implementar estas reglas clave puede garantizar un cÃ³digo
+robusto y estable.</p>
+<hr />
+<h3 id="la-regla-de-oro-asignaciÃ³n-y-liberaciÃ³n">1. La Regla de Oro:
+AsignaciÃ³n y LiberaciÃ³n</h3>
+<p>La regla mÃ¡s fundamental en C es que debe haber una <strong>llamada a
+<code>free()</code> por cada llamada de asignaciÃ³n</strong> en el
+<em>Heap</em>.</p>
+<ul>
+<li><strong>Balanceo:</strong> AsegÃºrate de que cada
+<code>malloc()</code>, <code>calloc()</code>, o <code>realloc()</code>
+que tenga Ã©xito se corresponda con una <code>free()</code>.</li>
+<li><strong>AnulaciÃ³n:</strong> DespuÃ©s de liberar, anula el puntero
+para prevenir errores de doble liberaciÃ³n y punteros colgantes:
+<code>c     free(ptr);     ptr = NULL; // PrÃ¡ctica esencial de seguridad</code></li>
+</ul>
+<hr />
+<h3 id="principio-de-propiedad-ownership">2. Principio de Propiedad
+(Ownership)</h3>
+<p>Cuando el cÃ³digo se organiza en mÃºltiples funciones, es vital definir
+claramente <strong>quiÃ©n es el responsable de liberar la
+memoria</strong>. Esto evita tanto las fugas (por no liberar) como los
+errores de doble liberaciÃ³n (por liberar dos veces).</p>
+<ul>
+<li><strong>Funciones Creadoras:</strong> Si una funciÃ³n asigna memoria
+(ej., <code>crear_cliente()</code>) y devuelve el puntero al llamador,
+el llamador <strong>adquiere la propiedad</strong> y es responsable de
+llamar a <code>free()</code> al final.</li>
+<li><strong>Funciones Consumidoras:</strong> Si una funciÃ³n recibe un
+puntero como argumento, generalmente <strong>no debe liberar esa
+memoria</strong>, a menos que la documentaciÃ³n lo indique
+explÃ­citamente.</li>
+</ul>
+<hr />
+<h3 id="uso-seguro-de-realloc-puntero-temporal">3. Uso Seguro de
+<code>realloc()</code> (Puntero Temporal)</h3>
+<p>Cuando uses <code>realloc()</code> para cambiar el tamaÃ±o de un
+bloque de memoria, siempre hazlo a travÃ©s de un <strong>puntero
+temporal</strong> para mantener la referencia original segura en caso de
+fallo.</p>
+<ul>
+<li><p><strong>Riesgo:</strong> Si llamas a
+<code>ptr = realloc(ptr, nuevo_tamano)</code> y <code>realloc()</code>
+falla, devuelve <code>NULL</code>, y la direcciÃ³n del bloque original se
+pierde, causando una <strong>fuga de memoria</strong>.</p></li>
+<li><p><strong>PrÃ¡ctica Segura:</strong></p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode c"><code class="sourceCode c"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> <span class="op">*</span>temp_ptr <span class="op">=</span> <span class="op">(</span><span class="dt">int</span> <span class="op">*)</span>realloc<span class="op">(</span>ptr_original<span class="op">,</span> nuevo_tamano<span class="op">);</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="op">(</span>temp_ptr <span class="op">!=</span> NULL<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">// AsignaciÃ³n exitosa: la memoria antigua fue liberada o expandida.</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    ptr_original <span class="op">=</span> temp_ptr<span class="op">;</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Fallo: el puntero original sigue siendo vÃ¡lido,</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Â¡evitando la fuga! La memoria antigua se conserva.</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;Fallo al expandir. Los datos originales se conservan.</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div></li>
+</ul>
+<h2 id="herramientas-de-detecciÃ³n-de-fugas">Herramientas de DetecciÃ³n de
+Fugas ðŸ”</h2>
+<p>Debido a que las fugas de memoria pueden ser difÃ­ciles de identificar
+solo revisando el cÃ³digo (especialmente en programas grandes), existen
+<strong>herramientas externas</strong> especializadas que automatizan la
+detecciÃ³n y el rastreo de estos errores en tiempo de ejecuciÃ³n.</p>
+<hr />
+<h3 id="valgrind-linux-y-macos">Valgrind (Linux y macOS)</h3>
+<p><strong>Valgrind</strong> es la herramienta de detecciÃ³n de fugas de
+memoria mÃ¡s popular y potente para sistemas basados en Unix (Linux y
+macOS).</p>
+<ul>
+<li><strong>Funcionamiento:</strong> Valgrind ejecuta tu programa en un
+entorno de instrumentaciÃ³n. Monitorea cada lectura y escritura de
+memoria, y rastrea todas las llamadas a funciones como
+<code>malloc()</code>, <code>calloc()</code>, y
+<code>free()</code>.</li>
+<li><strong>DetecciÃ³n:</strong> Al finalizar el programa, Valgrind
+genera un informe detallado que identifica:
+<ul>
+<li>Bloques de memoria que fueron asignados pero nunca liberados (la
+<strong>fuga de memoria</strong>).</li>
+<li>La lÃ­nea de cÃ³digo exacta donde se originÃ³ la asignaciÃ³n.</li>
+<li>Errores de punteros colgantes o dobles liberaciones.</li>
+</ul></li>
+</ul>
+<blockquote>
+<p><strong>Uso BÃ¡sico:</strong> Se ejecuta tu programa con Valgrind
+anteponiendo la instrucciÃ³n:</p>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">valgrind</span> <span class="at">--leak-check</span><span class="op">=</span>full ./mi_programa</span></code></pre></div>
+</blockquote>
+<h3 id="otras-herramientas">Otras Herramientas</h3>
+<p>Aunque Valgrind es dominante en entornos de desarrollo de cÃ³digo
+abierto, otras plataformas ofrecen herramientas nativas:</p>
+<ul>
+<li><strong>AddressSanitizer (ASan):</strong> Una herramienta mÃ¡s rÃ¡pida
+y ligera que se integra directamente en los compiladores GCC y Clang.
+Detecta fugas y errores de memoria mÃ¡s complejos directamente durante la
+ejecuciÃ³n.</li>
+<li><strong>Microsoft Application Verifier / Debugger
+(Windows):</strong> Herramientas para detectar problemas de
+<em>Heap</em> y <em>Handle</em> en el entorno de Windows.</li>
+</ul>
+
+</div>
+</body>
+</html>
+

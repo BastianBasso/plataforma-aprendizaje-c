@@ -1,0 +1,287 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" crossorigin href="/assets/content-01sust.css">
+</head>
+<body>
+<div class="main-content">
+<h2 id="propÃ³sito-de-realloc-reallocate-memory">PropÃ³sito de
+<code>realloc()</code> (Reallocate Memory) ðŸ”„</h2>
+<p>La funciÃ³n <strong><code>realloc()</code></strong>, que se encuentra
+en la librerÃ­a estÃ¡ndar <code>&lt;stdlib.h&gt;</code>, tiene el
+propÃ³sito fundamental de <strong>cambiar el tamaÃ±o</strong> de un bloque
+de memoria que fue previamente asignado en el <em>Heap</em> (MontÃ³n)
+mediante <code>malloc()</code> o <code>calloc()</code>.</p>
+<hr />
+<h3 id="por-quÃ©-realloc">Â¿Por quÃ© <code>realloc()</code>?</h3>
+<p>En la programaciÃ³n dinÃ¡mica, a menudo no se sabe de antemano si un
+<em>array</em> o una estructura de datos necesitarÃ¡ crecer o encogerse
+con el tiempo. <code>realloc()</code> ofrece la flexibilidad necesaria
+para ajustar el espacio de memoria reservado <strong>sin perder los
+datos existentes</strong>.</p>
+<ul>
+<li><strong>ExpansiÃ³n:</strong> Permite aumentar el tamaÃ±o del bloque
+para aÃ±adir mÃ¡s elementos (ej., crecer un <em>array</em> dinÃ¡mico cuando
+se aÃ±ade un nuevo elemento).</li>
+<li><strong>ContracciÃ³n:</strong> Permite reducir el tamaÃ±o del bloque,
+liberando el exceso de memoria al sistema.</li>
+<li><strong>Ajuste:</strong> Esencialmente, permite que los programas
+utilicen la memoria de manera mÃ¡s eficiente, solicitando solo la
+cantidad necesaria en cualquier momento.</li>
+</ul>
+<blockquote>
+<p><strong>Importante:</strong> <code>realloc()</code> solo puede operar
+en memoria que ya fue asignada dinÃ¡micamente. Intentar usarla con un
+puntero a memoria estÃ¡tica (<em>Stack</em>) resulta en un error grave o
+comportamiento indefinido.</p>
+</blockquote>
+<h2 id="sintaxis-y-valor-de-retorno-de-realloc">Sintaxis y Valor de
+Retorno de <code>realloc()</code> ðŸ”„</h2>
+<p>La funciÃ³n <code>realloc()</code> requiere dos argumentos y siempre
+devuelve un puntero que debe ser manejado con cuidado, ya que podrÃ­a ser
+diferente al puntero original.</p>
+<hr />
+<h3 id="sintaxis-de-realloc">1. Sintaxis de <code>realloc()</code></h3>
+<p>La funciÃ³n toma el puntero al bloque de memoria existente y el nuevo
+tamaÃ±o deseado, expresado en bytes.</p>
+<p><span class="math display">â€˜void *realloc(void *ptr, size_t
+size);â€˜</span></p>
+<p>En la prÃ¡ctica, la sintaxis usada con el casteo explÃ­cito es:</p>
+<p><span class="math display">â€˜tipo_puntero *nuevo_ptr = (tipo_puntero
+*) realloc(puntero_anterior, nuevo_tamanho_en_bytes);â€˜</span></p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">ParÃ¡metro</th>
+<th style="text-align: center;">DescripciÃ³n</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><strong><code>puntero_anterior</code>
+(<code>ptr</code>)</strong></td>
+<td style="text-align: center;">El puntero al bloque de memoria que se
+desea redimensionar, previamente asignado con <code>malloc</code> o
+<code>calloc</code>.</td>
+</tr>
+<tr class="even">
+<td
+style="text-align: center;"><strong><code>nuevo_tamanho_en_bytes</code>
+(<code>size</code>)</strong></td>
+<td style="text-align: center;">El tamaÃ±o total deseado para el nuevo
+bloque de memoria, calculado usando <code>N * sizeof(Tipo)</code>.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="valor-de-retorno-la-nueva-direcciÃ³n">2. Valor de Retorno (La
+Nueva DirecciÃ³n)</h3>
+<p><code>realloc()</code> puede devolver dos resultados principales:</p>
+<ul>
+<li><strong>Ã‰xito:</strong> Devuelve un puntero
+<strong><code>void*</code></strong> (que debe ser casteado) a la
+direcciÃ³n del bloque de memoria redimensionado.</li>
+<li><strong>Fallo:</strong> Devuelve <strong><code>NULL</code></strong>
+si no se pudo asignar la nueva cantidad de memoria solicitada.</li>
+</ul>
+<h4 id="la-posibilidad-de-una-nueva-direcciÃ³n">La Posibilidad de una
+Nueva DirecciÃ³n</h4>
+<p>Es fundamental entender que el puntero retornado puede ser
+<strong>igual o diferente</strong> al <code>puntero_anterior</code>.</p>
+<ol type="1">
+<li><strong>Misma DirecciÃ³n:</strong> Si el <em>Heap</em> tiene espacio
+contiguo libre <strong>inmediatamente despuÃ©s</strong> del bloque
+original, <code>realloc</code> simplemente expande el bloque en su
+ubicaciÃ³n actual. El puntero devuelto es el mismo que el original.</li>
+<li><strong>Nueva DirecciÃ³n:</strong> Si no hay suficiente espacio
+contiguo para expandir el bloque, <code>realloc</code> realiza
+automÃ¡ticamente la siguiente secuencia:
+<ul>
+<li>Asigna un <strong>nuevo bloque</strong> de memoria en otro lugar del
+<em>Heap</em> con el <code>nuevo_tamanho</code>.</li>
+<li><strong>Copia</strong> el contenido del bloque antiguo al nuevo
+bloque.</li>
+<li><strong>Libera</strong> el bloque de memoria original.</li>
+</ul></li>
+</ol>
+<p>Debido a esta posibilidad, siempre debe asignarse el resultado de
+<code>realloc()</code> a una <strong>variable temporal</strong> o al
+<strong>puntero original</strong> que usarÃ¡ el programa, ya que la
+direcciÃ³n de memoria original podrÃ­a haber quedado invÃ¡lida.</p>
+<h2 id="comportamiento-detallado-de-realloc">Comportamiento Detallado de
+<code>realloc()</code> ðŸ§ </h2>
+<p>El mecanismo interno de <code>realloc()</code> es lo que lo convierte
+en una funciÃ³n flexible y potente para la gestiÃ³n del <em>Heap</em>.
+Opera en base a la disponibilidad de memoria contigua adyacente al
+bloque original.</p>
+<hr />
+<h3 id="el-intento-de-reubicaciÃ³n-fase-1">1. El Intento de ReubicaciÃ³n
+(Fase 1)</h3>
+<p>Cuando se llama a <code>realloc(ptr, nuevo\_tamano)</code>, la
+biblioteca de C primero evalÃºa el entorno del bloque de memoria
+original:</p>
+<ul>
+<li><strong>ExpansiÃ³n o ContracciÃ³n en el Lugar:</strong>
+<ul>
+<li>Si el <code>nuevo_tamano</code> es <strong>menor</strong> que el
+tamaÃ±o actual, <code>realloc</code> simplemente contrae el bloque y
+libera el exceso de memoria al sistema. El puntero original
+<strong>sigue siendo vÃ¡lido</strong>.</li>
+<li>Si el <code>nuevo_tamano</code> es <strong>mayor</strong> que el
+tamaÃ±o actual, <code>realloc</code> verifica si el bloque de memoria
+contigua <strong>inmediatamente despuÃ©s</strong> estÃ¡ libre. Si lo estÃ¡,
+el bloque se expande en el lugar. El puntero original <strong>sigue
+siendo vÃ¡lido</strong>.</li>
+</ul></li>
+</ul>
+<h3 id="la-reubicaciÃ³n-forzosa-fase-2">2. La ReubicaciÃ³n Forzosa (Fase
+2)</h3>
+<p>Si <code>realloc</code> no puede expandir el bloque en su ubicaciÃ³n
+actual (porque otro dato ha sido asignado justo despuÃ©s), realiza una
+secuencia de tres pasos crÃ­ticos:</p>
+<ol type="1">
+<li><strong>Nueva AsignaciÃ³n:</strong> Llama internamente a un mecanismo
+similar a <code>malloc()</code> para encontrar un <strong>nuevo bloque
+de memoria</strong> en una ubicaciÃ³n diferente del <em>Heap</em> que sÃ­
+tenga el <code>nuevo_tamano</code> solicitado.</li>
+<li><strong>Copia de Datos:</strong> Una vez que el nuevo bloque estÃ¡
+asegurado, <code>realloc</code> <strong>copia</strong> el contenido de
+los datos del bloque antiguo al nuevo bloque. Solo se copia la cantidad
+de bytes que existÃ­a en el bloque original o la cantidad del
+<code>nuevo_tamano</code>, el que sea menor.</li>
+<li><strong>LiberaciÃ³n del Original:</strong> El bloque de memoria
+original (<code>ptr</code>) es <strong>liberado automÃ¡ticamente</strong>
+(como si se llamara a <code>free(ptr)</code>). El puntero original queda
+invalidado.</li>
+</ol>
+<h3 id="impacto-en-el-cÃ³digo">3. Impacto en el CÃ³digo</h3>
+<p>Debido a que el puntero original puede quedar invalidado despuÃ©s de
+la Fase 2, la <strong>prÃ¡ctica de cÃ³digo segura</strong> siempre exige
+que el resultado de <code>realloc()</code> se asigne a un
+<strong>puntero temporal</strong> y luego se verifique su Ã©xito
+<strong>antes</strong> de sobrescribir el puntero original.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">// ASIGNACION SEGURA CON REALLOC</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> <span class="op">*</span>temp_ptr <span class="op">=</span> <span class="op">(</span><span class="dt">int</span> <span class="op">*)</span>realloc<span class="op">(</span>ptr_original<span class="op">,</span> nuevo_tamano_bytes<span class="op">);</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="op">(</span>temp_ptr <span class="op">!=</span> NULL<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="co">// La asignaciÃ³n fue exitosa, incluso si es una nueva direcciÃ³n.</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    ptr_original <span class="op">=</span> temp_ptr<span class="op">;</span> <span class="co">// Sobrescribir el puntero original con la nueva direccion (o la misma).</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    <span class="co">// FALLO: el puntero original *ptr_original* sigue apuntando a los datos antiguos.</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Los datos NO se han perdido, pero no se ha redimensionado.</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;ERROR: Reasignacion de memoria fallida. Datos originales conservados.</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Manejar el error...</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<h2 id="casos-especiales-de-realloc-y-null">Casos Especiales de
+<code>realloc()</code> y <code>NULL</code> ðŸ”€</h2>
+<p>Aunque el propÃ³sito principal de <code>realloc()</code> es cambiar el
+tamaÃ±o de un bloque de memoria existente, la funciÃ³n estÃ¡ diseÃ±ada para
+manejar casos especiales de <code>NULL</code> y tamaÃ±o cero, lo que la
+hace Ãºtil para <strong>consolidar la funcionalidad</strong> de
+<code>malloc()</code> y <code>free()</code>.</p>
+<hr />
+<h3 id="reallocnull-size-equivalente-a-malloc">1.
+<code>realloc(NULL, size)</code>: Equivalente a
+<code>malloc()</code></h3>
+<p>Cuando el primer argumento (<code>ptr</code>) de
+<code>realloc()</code> es <strong><code>NULL</code></strong>, la funciÃ³n
+se comporta exactamente como si estuvieras llamando a
+<code>malloc()</code> con el tamaÃ±o especificado.</p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Llamada</th>
+<th style="text-align: center;">PropÃ³sito</th>
+<th style="text-align: center;">Resultado</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><code>realloc(NULL, size)</code></td>
+<td style="text-align: center;"><strong>Asignar</strong> memoria por
+primera vez.</td>
+<td style="text-align: center;">Asigna un nuevo bloque de memoria de
+tamaÃ±o <code>size</code> y devuelve la direcciÃ³n.</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>malloc(size)</code></td>
+<td style="text-align: center;"><strong>Asignar</strong> memoria por
+primera vez.</td>
+<td style="text-align: center;">Asigna un nuevo bloque de memoria de
+tamaÃ±o <code>size</code> y devuelve la direcciÃ³n.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Uso PrÃ¡ctico:</strong> Esto permite a menudo
+<strong>simplificar el cÃ³digo</strong> al inicializar <em>arrays</em>
+dinÃ¡micos que pueden comenzar con tamaÃ±o cero y luego expandirse.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Forma compacta de inicializar un array que puede crecer</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> <span class="op">*</span>datos <span class="op">=</span> NULL<span class="op">;</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>datos <span class="op">=</span> <span class="op">(</span><span class="dt">int</span> <span class="op">*)</span>realloc<span class="op">(</span>datos<span class="op">,</span> <span class="dv">10</span> <span class="op">*</span> <span class="kw">sizeof</span><span class="op">(</span><span class="dt">int</span><span class="op">));</span> <span class="co">// Asigna por primera vez 10 enteros</span></span></code></pre></div>
+<hr />
+<h3 id="reallocptr-0-equivalente-a-free">2.
+<code>realloc(ptr, 0)</code>: Equivalente a <code>free()</code></h3>
+<p>Cuando el segundo argumento (<code>size</code>) de
+<code>realloc()</code> es <strong>cero</strong> (siempre que el puntero
+<code>ptr</code> no sea <code>NULL</code>), la funciÃ³n actÃºa como si
+estuvieras liberando la memoria.</p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Llamada</th>
+<th style="text-align: center;">PropÃ³sito</th>
+<th style="text-align: center;">Resultado</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><code>realloc(ptr, 0)</code></td>
+<td style="text-align: center;"><strong>Liberar</strong> la
+memoria.</td>
+<td style="text-align: center;">Libera el bloque de memoria al que
+apunta <code>ptr</code> y devuelve
+<strong><code>NULL</code></strong>.</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>free(ptr)</code></td>
+<td style="text-align: center;"><strong>Liberar</strong> la
+memoria.</td>
+<td style="text-align: center;">Libera el bloque de memoria al que
+apunta <code>ptr</code>.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Uso PrÃ¡ctico:</strong> Al igual que con
+<code>realloc(NULL, size)</code>, esto puede ayudar a <strong>unificar
+la lÃ³gica de limpieza</strong> de memoria en el cÃ³digo, ya que puedes
+usar una sola funciÃ³n (<code>realloc</code>) para asignar, redimensionar
+y liberar. Sin embargo, en la prÃ¡ctica, <strong><code>free(ptr)</code>
+se prefiere</strong> para la legibilidad y claridad de la intenciÃ³n del
+cÃ³digo.</p>
+<blockquote>
+<p><strong>Advertencia:</strong> Aunque <code>realloc(ptr, 0)</code>
+libera la memoria, la especificaciÃ³n de C establece que el valor de
+retorno es un puntero vÃ¡lido o <code>NULL</code>. La mayorÃ­a de las
+implementaciones devuelven <code>NULL</code>, por lo que es seguro
+tratar el puntero original como invÃ¡lido.</p>
+</blockquote>
+
+</div>
+</body>
+</html>
+

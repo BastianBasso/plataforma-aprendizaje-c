@@ -1,0 +1,570 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" crossorigin href="/assets/content-01sust.css">
+</head>
+<body>
+<div class="main-content">
+<p><strong>15 Ejercicios de ProgramaciÃ³n: DefiniciÃ³n, DeclaraciÃ³n y
+Llamada de Funciones</strong></p>
+<p>Estos ejercicios estÃ¡n diseÃ±ados para practicar la correcta
+<strong>DeclaraciÃ³n (Prototipo)</strong>, <strong>DefiniciÃ³n
+(Cuerpo)</strong> y <strong>Llamada (Uso)</strong> de funciones en C,
+cubriendo los tipos de retorno int, float, y void.</p>
+<p><strong>Bloque 1: Funciones que Retornan un Valor (CÃ¡lculos y
+AsignaciÃ³n) ðŸ”¢</strong></p>
+<ol type="1">
+<li><p><strong>CÃ¡lculo de Ãrea de CÃ­rculo (float)</strong></p>
+<ul>
+<li><p><strong>FunciÃ³n:</strong> float calcular_area_circulo(float
+radio)</p></li>
+<li><p><strong>Tarea:</strong> Recibe el radio de un cÃ­rculo y retorna
+su Ã¡rea ($\pi r^2$). (Usar $3.14159$ para $\pi$).</p></li>
+<li><p><strong>Requisito:</strong> Declarar el prototipo antes de main()
+y llamar a la funciÃ³n en main(), asignando el resultado a una variable
+area_final.</p></li>
+</ul></li>
+<li><p><strong>ConversiÃ³n de Moneda (float)</strong></p>
+<ul>
+<li><p><strong>FunciÃ³n:</strong> float convertir_a_dolares(float pesos,
+float tasa)</p></li>
+<li><p><strong>Tarea:</strong> Recibe una cantidad en pesos y una tasa
+de cambio, y retorna la cantidad equivalente en dÃ³lares.</p></li>
+<li><p><strong>Requisito:</strong> Usar la funciÃ³n para convertir $1000$
+pesos a una tasa de $0.0012$.</p></li>
+</ul></li>
+<li><p><strong>VerificaciÃ³n de Paridad (int/bool)</strong></p>
+<ul>
+<li><p><strong>FunciÃ³n:</strong> int es_par(int numero)</p></li>
+<li><p><strong>Tarea:</strong> Recibe un entero y retorna 1 (verdadero)
+si es par, o 0 (falso) si es impar.</p></li>
+<li><p><strong>Requisito:</strong> Usar un if en main() para imprimir un
+mensaje diferente si la funciÃ³n retorna 1 o 0.</p></li>
+</ul></li>
+<li><p><strong>Encontrar el MÃ¡ximo (int)</strong></p>
+<ul>
+<li><p><strong>FunciÃ³n:</strong> int encontrar_maximo(int a, int
+b)</p></li>
+<li><p><strong>Tarea:</strong> Recibe dos nÃºmeros enteros y retorna el
+mayor de ellos.</p></li>
+<li><p><strong>Requisito:</strong> Llamar a la funciÃ³n dos veces en
+main() y comparar el resultado final.</p></li>
+</ul></li>
+<li><p><strong>CÃ¡lculo de Potencia Simple (int)</strong></p>
+<ul>
+<li><p><strong>FunciÃ³n:</strong> int calcular_cuadrado(int
+base)</p></li>
+<li><p><strong>Tarea:</strong> Recibe un entero base y retorna su
+cuadrado ($base \times base$).</p></li>
+<li><p><strong>Requisito:</strong> Implementar la lÃ³gica de cÃ¡lculo
+dentro del cuerpo de la funciÃ³n usando solo el operador de
+multiplicaciÃ³n.</p></li>
+</ul></li>
+</ol>
+<p><strong>Bloque 2: Funciones sin Retorno (Acciones void)
+ðŸ“£</strong></p>
+<ol start="6" type="1">
+<li><p><strong>ImpresiÃ³n de Saludo Personalizado (void)</strong></p>
+<ul>
+<li><p><strong>FunciÃ³n:</strong> void saludar_usuario(char
+nombre[])</p></li>
+<li><p><strong>Tarea:</strong> Recibe una cadena de caracteres (el
+nombre) e imprime en la consola un saludo formal (ej: "Hola, Bienvenido
+[Nombre]").</p></li>
+<li><p><strong>Requisito:</strong> La funciÃ³n no debe usar return. La
+llamada se hace como una sentencia independiente.</p></li>
+</ul></li>
+<li><p><strong>Dibujo de LÃ­nea (void)</strong></p>
+<ul>
+<li><p><strong>FunciÃ³n:</strong> void dibujar_linea(int longitud, char
+caracter)</p></li>
+<li><p><strong>Tarea:</strong> Recibe un entero para la longitud y un
+carÃ¡cter. Utiliza un bucle for para imprimir el carÃ¡cter esa cantidad de
+veces.</p></li>
+<li><p><strong>Requisito:</strong> Demostrar la
+<strong>reutilizaciÃ³n</strong> llamÃ¡ndola tres veces con diferentes
+parÃ¡metros desde main().</p></li>
+</ul></li>
+<li><p><strong>Formateo de TÃ­tulo (void)</strong></p>
+<ul>
+<li><p><strong>FunciÃ³n:</strong> void imprimir_titulo(char
+titulo[])</p></li>
+<li><p><strong>Tarea:</strong> Recibe una cadena e imprime el tÃ­tulo,
+enmarcado por lÃ­neas de asteriscos.</p></li>
+<li><p><strong>Requisito:</strong> Usar la funciÃ³n dibujar_linea (del
+ejercicio 7) dentro del cuerpo de imprimir_titulo (Modularidad
+Anidada).</p></li>
+</ul></li>
+<li><p><strong>Mensaje de Error (void)</strong></p>
+<ul>
+<li><p><strong>FunciÃ³n:</strong> void mostrar_error(int
+codigo_error)</p></li>
+<li><p><strong>Tarea:</strong> Recibe un cÃ³digo de error entero y usa
+una estructura switch para imprimir una descripciÃ³n del error (101 para
+"Fallo de ConexiÃ³n", 202 para "Archivo no Encontrado").</p></li>
+<li><p><strong>Requisito:</strong> Llamar a la funciÃ³n desde main() para
+simular un error.</p></li>
+</ul></li>
+<li><p><strong>Llamada de FunciÃ³n Anidada (void)</strong></p>
+<ul>
+<li><p><strong>FunciÃ³n A:</strong> void
+ejecutar_proceso_secundario(void) (Imprime "Proceso B
+iniciado").</p></li>
+<li><p><strong>FunciÃ³n B:</strong> void ejecutar_proceso_principal(void)
+(Imprime "Proceso A iniciado" y luego llama a la FunciÃ³n A).</p></li>
+<li><p><strong>Requisito:</strong> Declarar ambas funciones y demostrar
+el flujo de control desde main() a la FunciÃ³n B y de B a la FunciÃ³n
+A.</p></li>
+</ul></li>
+</ol>
+<p><strong>Bloque 3: Flujo de Control y DeclaraciÃ³n EstratÃ©gica
+ðŸŒŠ</strong></p>
+<ol start="11" type="1">
+<li><p><strong>PrÃ¡ctica del Prototipo Obligatorio
+(UbicaciÃ³n)</strong></p>
+<ul>
+<li><p><strong>Tarea:</strong> Crear una funciÃ³n float dividir(float a,
+float b) que retorna el resultado de la divisiÃ³n.</p></li>
+<li><p><strong>Requisito Clave:</strong> Colocar la <strong>DefiniciÃ³n
+(cuerpo)</strong> de la funciÃ³n <em>despuÃ©s</em> de main() para forzar
+la necesidad de declarar el <strong>Prototipo</strong> antes de
+main().</p></li>
+</ul></li>
+<li><p><strong>ComprobaciÃ³n de Edad (int y void combinadas)</strong></p>
+<ul>
+<li><p><strong>FunciÃ³n 1 (int):</strong> int calcular_edad_futura(int
+edad_actual, int anios) (retorna la edad futura).</p></li>
+<li><p><strong>FunciÃ³n 2 (void):</strong> void verificar_mayor_edad(int
+edad) (imprime si la edad es mayor o menor de $18$).</p></li>
+<li><p><strong>Requisito:</strong> main() debe llamar a la FunciÃ³n 1, y
+luego usar el resultado retornado para llamar a la FunciÃ³n 2.</p></li>
+</ul></li>
+<li><p><strong>FunciÃ³n con return Condicional (float)</strong></p>
+<ul>
+<li><p><strong>FunciÃ³n:</strong> float obtener_nota_final(float n1,
+float n2)</p></li>
+<li><p><strong>Tarea:</strong> Calcula el promedio de dos notas. Si el
+promedio es menor a $4.0$, la funciÃ³n retorna 3.9 (simulando una nota
+lÃ­mite). En caso contrario, retorna el promedio real.</p></li>
+<li><p><strong>Requisito:</strong> Usar un if con <strong>dos sentencias
+return distintas</strong> dentro del cuerpo de la funciÃ³n.</p></li>
+</ul></li>
+<li><p><strong>Transferencia de Control en Bucles</strong></p>
+<ul>
+<li><p><strong>FunciÃ³n:</strong> int factorial(int n)</p></li>
+<li><p><strong>Tarea:</strong> Calcula y retorna el factorial del nÃºmero
+n usando un bucle for.</p></li>
+<li><p><strong>Requisito:</strong> Llamar a la funciÃ³n factorial()
+dentro de un bucle for en main() para imprimir los factoriales del $1$
+al $5$. Observar cÃ³mo el control salta dentro del bucle.</p></li>
+</ul></li>
+<li><p><strong>Doble Llamada y AcumulaciÃ³n</strong></p>
+<ul>
+<li><p><strong>FunciÃ³n:</strong> int sumar_tres(int valor)</p></li>
+<li><p><strong>Tarea:</strong> Recibe un valor entero y retorna ese
+valor mÃ¡s $3$.</p></li>
+<li><p>Requisito: En main(), iniciar una variable total en $0$. Llamar a
+la funciÃ³n, luego llamar a la funciÃ³n nuevamente, pero usando el
+resultado de la primera llamada como argumento para la segunda
+llamada.</p></li>
+</ul></li>
+</ol>
+<blockquote>
+<p>Ejemplo: total = sumar_tres(sumar_tres(0));</p>
+</blockquote>
+<ul>
+<li><strong>Salida Esperada:</strong> $6$</li>
+</ul>
+<p><strong>Respuestas de los 15 Ejercicios: DefiniciÃ³n, DeclaraciÃ³n y
+Llamada de Funciones</strong></p>
+<p>AquÃ­ estÃ¡n las soluciones en cÃ³digo C para los ejercicios, incluyendo
+la correcta <strong>DeclaraciÃ³n (Prototipo)</strong>, <strong>DefiniciÃ³n
+(Cuerpo)</strong> y <strong>Llamada (Uso)</strong> de cada funciÃ³n.</p>
+<p><strong>Bloque 1: Funciones que Retornan un Valor ðŸ”¢</strong></p>
+<ol type="1">
+<li><strong>CÃ¡lculo de Ãrea de CÃ­rculo (float)</strong></li>
+</ol>
+<blockquote>
+<p>C</p>
+<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
+<p>// DECLARACIÃ“N (Prototipo)</p>
+<p>float calcular_area_circulo(float radio);</p>
+<p>int main() {</p>
+<p>float radio_ingresado = 4.5f;</p>
+<p>float area_final;</p>
+<p>// LLAMADA y AsignaciÃ³n</p>
+<p>area_final = calcular_area_circulo(radio_ingresado);</p>
+<p>printf("El Ã¡rea del cÃ­rculo con radio %.2f es: %.2f\n",
+radio_ingresado, area_final);</p>
+<p>return 0;</p>
+<p>}</p>
+<p>// DEFINICIÃ“N (Cuerpo)</p>
+<p>float calcular_area_circulo(float radio) {</p>
+<p>const float PI = 3.14159f;</p>
+<p>return PI * radio * radio; // Retorna el cÃ¡lculo</p>
+<p>}</p>
+</blockquote>
+<ol start="2" type="1">
+<li><strong>ConversiÃ³n de Moneda (float)</strong></li>
+</ol>
+<blockquote>
+<p>C</p>
+<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
+<p>float convertir_a_dolares(float pesos, float tasa);</p>
+<p>int main() {</p>
+<p>float pesos_a_convertir = 1000.0f;</p>
+<p>float tasa_cambio = 0.0012f;</p>
+<p>// LLAMADA</p>
+<p>float dolares = convertir_a_dolares(pesos_a_convertir,
+tasa_cambio);</p>
+<p>printf("$%.2f pesos equivalen a $%.4f dÃ³lares (Tasa: %.4f).\n",
+pesos_a_convertir, dolares, tasa_cambio);</p>
+<p>return 0;</p>
+<p>}</p>
+<p>float convertir_a_dolares(float pesos, float tasa) {</p>
+<p>return pesos * tasa;</p>
+<p>}</p>
+</blockquote>
+<ol start="3" type="1">
+<li><strong>VerificaciÃ³n de Paridad (int/bool)</strong></li>
+</ol>
+<blockquote>
+<p>C</p>
+<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
+<p>int es_par(int numero);</p>
+<p>int main() {</p>
+<p>int valor1 = 15;</p>
+<p>int valor2 = 22;</p>
+<p>// LLAMADA 1</p>
+<p>if (es_par(valor1)) {</p>
+<p>printf("%d es un nÃºmero par.\n", valor1);</p>
+<p>} else {</p>
+<p>printf("%d es un nÃºmero impar.\n", valor1);</p>
+<p>}</p>
+<p>// LLAMADA 2</p>
+<p>if (es_par(valor2)) {</p>
+<p>printf("%d es un nÃºmero par.\n", valor2);</p>
+<p>} else {</p>
+<p>printf("%d es un nÃºmero impar.\n", valor2);</p>
+<p>}</p>
+<p>return 0;</p>
+<p>}</p>
+<p>int es_par(int numero) {</p>
+<p>// Retorna 1 (verdadero) si el residuo es 0, y 0 (falso) si es 1.</p>
+<p>return (numero % 2 == 0);</p>
+<p>}</p>
+</blockquote>
+<ol start="4" type="1">
+<li><strong>Encontrar el MÃ¡ximo (int)</strong></li>
+</ol>
+<blockquote>
+<p>C</p>
+<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
+<p>int encontrar_maximo(int a, int b);</p>
+<p>int main() {</p>
+<p>int x = 10, y = 25;</p>
+<p>int z = 100, w = 50;</p>
+<p>// LLAMADA 1</p>
+<p>int max_xy = encontrar_maximo(x, y);</p>
+<p>printf("MÃ¡ximo entre %d y %d es: %d\n", x, y, max_xy);</p>
+<p>// LLAMADA 2</p>
+<p>int max_zw = encontrar_maximo(z, w);</p>
+<p>printf("MÃ¡ximo entre %d y %d es: %d\n", z, w, max_zw);</p>
+<p>return 0;</p>
+<p>}</p>
+<p>int encontrar_maximo(int a, int b) {</p>
+<p>if (a &gt; b) {</p>
+<p>return a;</p>
+<p>} else {</p>
+<p>return b;</p>
+<p>}</p>
+<p>}</p>
+</blockquote>
+<ol start="5" type="1">
+<li><strong>CÃ¡lculo de Potencia Simple (int)</strong></li>
+</ol>
+<blockquote>
+<p>C</p>
+<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
+<p>int calcular_cuadrado(int base);</p>
+<p>int main() {</p>
+<p>int base1 = 7;</p>
+<p>int base2 = 12;</p>
+<p>// LLAMADA y AsignaciÃ³n directa en printf</p>
+<p>printf("El cuadrado de %d es: %d\n", base1,
+calcular_cuadrado(base1));</p>
+<p>printf("El cuadrado de %d es: %d\n", base2,
+calcular_cuadrado(base2));</p>
+<p>return 0;</p>
+<p>}</p>
+<p>int calcular_cuadrado(int base) {</p>
+<p>// ImplementaciÃ³n simple</p>
+<p>return base * base;</p>
+<p>}</p>
+</blockquote>
+<p><strong>Bloque 2: Funciones sin Retorno (Acciones void)
+ðŸ“£</strong></p>
+<ol start="6" type="1">
+<li><strong>ImpresiÃ³n de Saludo Personalizado (void)</strong></li>
+</ol>
+<blockquote>
+<p>C</p>
+<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
+<p>void saludar_usuario(char nombre[]);</p>
+<p>int main() {</p>
+<p>// LLAMADA</p>
+<p>saludar_usuario("Andrea");</p>
+<p>saludar_usuario("Javier");</p>
+<p>return 0;</p>
+<p>}</p>
+<p>// DEFINICIÃ“N: No retorna valor, solo realiza una acciÃ³n
+(imprimir)</p>
+<p>void saludar_usuario(char nombre[]) {</p>
+<p>printf("Hola, Bienvenido %s. Gracias por unirte.\n", nombre);</p>
+<p>// No necesita 'return'</p>
+<p>}</p>
+</blockquote>
+<ol start="7" type="1">
+<li><strong>Dibujo de LÃ­nea (void)</strong></li>
+</ol>
+<blockquote>
+<p>C</p>
+<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
+<p>void dibujar_linea(int longitud, char caracter);</p>
+<p>int main() {</p>
+<p>// LLAMADA (ReutilizaciÃ³n del mÃ³dulo)</p>
+<p>dibujar_linea(20, '=');</p>
+<p>printf(" TÃ­tulo del Reporte \n");</p>
+<p>dibujar_linea(10, '*');</p>
+<p>dibujar_linea(20, '=');</p>
+<p>return 0;</p>
+<p>}</p>
+<p>void dibujar_linea(int longitud, char caracter) {</p>
+<p>for (int i = 0; i &lt; longitud; i++) {</p>
+<p>printf("%c", caracter);</p>
+<p>}</p>
+<p>printf("\n");</p>
+<p>}</p>
+</blockquote>
+<ol start="8" type="1">
+<li><strong>Formateo de TÃ­tulo (void)</strong></li>
+</ol>
+<blockquote>
+<p>C</p>
+<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
+<p>// El prototipo de la funciÃ³n auxiliar tambiÃ©n es necesario</p>
+<p>void dibujar_linea(int longitud, char caracter);</p>
+<p>void imprimir_titulo(char titulo[]);</p>
+<p>int main() {</p>
+<p>// LLAMADA</p>
+<p>imprimir_titulo("MÃ³dulos en C");</p>
+<p>return 0;</p>
+<p>}</p>
+<p>// DEFINICIÃ“N (Modularidad Anidada)</p>
+<p>void imprimir_titulo(char titulo[]) {</p>
+<p>// Llamada a otra funciÃ³n modular dentro del cuerpo</p>
+<p>dibujar_linea(30, '-');</p>
+<p>printf(" %s \n", titulo);</p>
+<p>dibujar_linea(30, '-');</p>
+<p>}</p>
+<p>// DefiniciÃ³n de la funciÃ³n auxiliar (del Ej. 7)</p>
+<p>void dibujar_linea(int longitud, char caracter) {</p>
+<p>for (int i = 0; i &lt; longitud; i++) {</p>
+<p>printf("%c", caracter);</p>
+<p>}</p>
+<p>printf("\n");</p>
+<p>}</p>
+</blockquote>
+<ol start="9" type="1">
+<li><strong>Mensaje de Error (void)</strong></li>
+</ol>
+<blockquote>
+<p>C</p>
+<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
+<p>void mostrar_error(int codigo_error);</p>
+<p>int main() {</p>
+<p>// LLAMADA para simular errores</p>
+<p>mostrar_error(101);</p>
+<p>mostrar_error(500); // CÃ³digo no mapeado</p>
+<p>return 0;</p>
+<p>}</p>
+<p>void mostrar_error(int codigo_error) {</p>
+<p>switch (codigo_error) {</p>
+<p>case 101:</p>
+<p>printf("[ERROR %d] Fallo de ConexiÃ³n a la Base de Datos.\n",
+codigo_error);</p>
+<p>break;</p>
+<p>case 202:</p>
+<p>printf("[ERROR %d] Archivo de ConfiguraciÃ³n no Encontrado.\n",
+codigo_error);</p>
+<p>break;</p>
+<p>default:</p>
+<p>printf("[ERROR %d] Error Desconocido del Sistema.\n",
+codigo_error);</p>
+<p>}</p>
+<p>}</p>
+</blockquote>
+<ol start="10" type="1">
+<li><strong>Llamada de FunciÃ³n Anidada (void)</strong></li>
+</ol>
+<blockquote>
+<p>C</p>
+<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
+<p>void ejecutar_proceso_secundario(void); // Prototipo A</p>
+<p>void ejecutar_proceso_principal(void); // Prototipo B</p>
+<p>int main() {</p>
+<p>printf("--- Main iniciado ---\n");</p>
+<p>ejecutar_proceso_principal(); // LLAMADA del main a B</p>
+<p>printf("--- Main finalizado ---\n");</p>
+<p>return 0;</p>
+<p>}</p>
+<p>// DEFINICIÃ“N A</p>
+<p>void ejecutar_proceso_secundario(void) {</p>
+<p>printf(" -&gt; Proceso B (Secundario) completado.\n");</p>
+<p>}</p>
+<p>// DEFINICIÃ“N B</p>
+<p>void ejecutar_proceso_principal(void) {</p>
+<p>printf(" -&gt; Proceso A (Principal) iniciado.\n");</p>
+<p>// LLAMADA de B a A: Flujo salta de nuevo</p>
+<p>ejecutar_proceso_secundario();</p>
+<p>printf(" -&gt; Proceso A (Principal) completado.\n");</p>
+<p>}</p>
+</blockquote>
+<p><strong>Bloque 3: Flujo de Control y DeclaraciÃ³n EstratÃ©gica
+ðŸŒŠ</strong></p>
+<ol start="11" type="1">
+<li><strong>PrÃ¡ctica del Prototipo Obligatorio (UbicaciÃ³n)</strong></li>
+</ol>
+<blockquote>
+<p>C</p>
+<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
+<p>// PROTOTIPO OBLIGATORIO: Necesario porque la DEFINICIÃ“N estÃ¡ despuÃ©s
+de main()</p>
+<p>float dividir(float a, float b);</p>
+<p>int main() {</p>
+<p>float num1 = 10.0f;</p>
+<p>float num2 = 3.0f;</p>
+<p>float cociente;</p>
+<p>// LLAMADA</p>
+<p>cociente = dividir(num1, num2);</p>
+<p>printf("%.2f dividido por %.2f es: %.2f\n", num1, num2,
+cociente);</p>
+<p>return 0;</p>
+<p>}</p>
+<p>// DEFINICIÃ“N (Cuerpo): Colocado despuÃ©s de main()</p>
+<p>float dividir(float a, float b) {</p>
+<p>if (b == 0.0f) {</p>
+<p>printf("Error: DivisiÃ³n por cero.\n");</p>
+<p>return 0.0f;</p>
+<p>}</p>
+<p>return a / b;</p>
+<p>}</p>
+</blockquote>
+<ol start="12" type="1">
+<li><strong>ComprobaciÃ³n de Edad (int y void combinadas)</strong></li>
+</ol>
+<blockquote>
+<p>C</p>
+<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
+<p>int calcular_edad_futura(int edad_actual, int anios); // Retorna
+int</p>
+<p>void verificar_mayor_edad(int edad); // No retorna (void)</p>
+<p>int main() {</p>
+<p>int edad_actual = 20;</p>
+<p>int anios = 5;</p>
+<p>// LLAMADA 1: Calcula la edad futura</p>
+<p>int edad_futura = calcular_edad_futura(edad_actual, anios);</p>
+<p>printf("En %d aÃ±os, tendrÃ¡s %d aÃ±os.\n", anios, edad_futura);</p>
+<p>// LLAMADA 2: Usa el resultado de la Llamada 1 como argumento</p>
+<p>verificar_mayor_edad(edad_futura);</p>
+<p>return 0;</p>
+<p>}</p>
+<p>int calcular_edad_futura(int edad_actual, int anios) {</p>
+<p>return edad_actual + anios;</p>
+<p>}</p>
+<p>void verificar_mayor_edad(int edad) {</p>
+<p>if (edad &gt;= 18) {</p>
+<p>printf("VerificaciÃ³n: Eres legalmente mayor de edad.\n");</p>
+<p>} else {</p>
+<p>printf("VerificaciÃ³n: Eres menor de edad.\n");</p>
+<p>}</p>
+<p>}</p>
+</blockquote>
+<ol start="13" type="1">
+<li><strong>FunciÃ³n con return Condicional (float)</strong></li>
+</ol>
+<blockquote>
+<p>C</p>
+<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
+<p>float obtener_nota_final(float n1, float n2);</p>
+<p>int main() {</p>
+<p>printf("Nota A: %.1f\n", obtener_nota_final(6.0f, 7.0f)); // Promedio
+6.5</p>
+<p>printf("Nota B: %.1f\n", obtener_nota_final(2.0f, 5.0f)); // Promedio
+3.5 -&gt; Retorna 3.9</p>
+<p>return 0;</p>
+<p>}</p>
+<p>float obtener_nota_final(float n1, float n2) {</p>
+<p>float promedio = (n1 + n2) / 2.0f;</p>
+<p>if (promedio &lt; 4.0f) {</p>
+<p>// Primer return (SimulaciÃ³n de nota lÃ­mite)</p>
+<p>return 3.9f;</p>
+<p>}</p>
+<p>// Segundo return (Retorna el promedio real)</p>
+<p>return promedio;</p>
+<p>}</p>
+</blockquote>
+<ol start="14" type="1">
+<li><strong>Transferencia de Control en Bucles</strong></li>
+</ol>
+<blockquote>
+<p>C</p>
+<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
+<p>long factorial(int n);</p>
+<p>int main() {</p>
+<p>printf("Factoriales del 1 al 5:\n");</p>
+<p>// Bucle en main() que LLAMA a la funciÃ³n</p>
+<p>for (int i = 1; i &lt;= 5; i++) {</p>
+<p>// El flujo de control salta a 'factorial' en cada iteraciÃ³n</p>
+<p>long resultado = factorial(i);</p>
+<p>printf("Factorial de %d es: %ld\n", i, resultado);</p>
+<p>}</p>
+<p>return 0;</p>
+<p>}</p>
+<p>long factorial(int n) {</p>
+<p>long res = 1;</p>
+<p>if (n &lt; 0) return 0;</p>
+<p>for (int i = 1; i &lt;= n; i++) {</p>
+<p>res *= i;</p>
+<p>}</p>
+<p>return res;</p>
+<p>}</p>
+</blockquote>
+<ol start="15" type="1">
+<li><strong>Doble Llamada y AcumulaciÃ³n</strong></li>
+</ol>
+<blockquote>
+<p>C</p>
+<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
+<p>int sumar_tres(int valor);</p>
+<p>int main() {</p>
+<p>int total = 0;</p>
+<p>// Llamada anidada:</p>
+<p>// 1. sumar_tres(0) retorna 3.</p>
+<p>// 2. sumar_tres(3) retorna 6.</p>
+<p>total = sumar_tres(sumar_tres(total));</p>
+<p>printf("El resultado de la doble llamada es: %d\n", total);</p>
+<p>return 0;</p>
+<p>}</p>
+<p>int sumar_tres(int valor) {</p>
+<p>return valor + 3;</p>
+<p>}</p>
+<p>// Salida Esperada: 6</p>
+</blockquote>
+
+</div>
+</body>
+</html>
+

@@ -1,0 +1,620 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" crossorigin href="/assets/content-01sust.css">
+</head>
+<body>
+<div class="main-content">
+<h1><strong>📝 15 Ejercicios: Bucles de Repetición Condicionales (while /
+do-while)</strong></h1>
+<p><strong>Bloque 1: Bucle while (Condición Previa) ⏳</strong></p>
+<ol type="1">
+<li>Contador de Cifras (Iteración Desconocida)</li>
+</ol>
+<blockquote>
+<p>Pide un número entero positivo al usuario. Usa un bucle while para
+contar e imprimir cuántos dígitos tiene ese número.</p>
+</blockquote>
+<ul>
+<li><p><em>Pista: Dentro del bucle, divide el número por $10$ en cada
+iteración.</em></p></li>
+<li><p><strong>Input de Ejemplo:</strong> $3451$</p></li>
+<li><p><strong>Output Esperado:</strong> El número tiene $4$
+dígitos.</p></li>
+</ul>
+<ol start="2" type="1">
+<li>Suma hasta Cero (Centinela)</li>
+</ol>
+<blockquote>
+<p>Inicializa una variable de suma a $0$. Usa un bucle while para pedir
+números al usuario repetidamente y sumarlos, continuando la repetición
+mientras el número introducido no sea $0$. Finalmente, imprime la suma
+total (sin incluir el $0$).</p>
+</blockquote>
+<ul>
+<li><p><strong>Input de Ejemplo:</strong> $10, 5, 2, 0$</p></li>
+<li><p><strong>Output Esperado:</strong> Suma total: $17$</p></li>
+</ul>
+<ol start="3" type="1">
+<li>Detector de Potencia de 2</li>
+</ol>
+<blockquote>
+<p>Pide un número $N$ al usuario. Usa un bucle while para determinar si
+$N$ es una potencia exacta de $2$ (ej: $2, 4, 8, 16$). Puedes hacerlo
+dividiendo repetidamente $N$ entre $2$ mientras el resto sea $0$, y
+verificando si el resultado final es $1$.</p>
+</blockquote>
+<ul>
+<li><p><strong>Input de Ejemplo:</strong> $32$</p></li>
+<li><p><strong>Output Esperado:</strong> $32$ es una potencia de
+$2$.</p></li>
+</ul>
+<ol start="4" type="1">
+<li>Adivinanza Simple</li>
+</ol>
+<blockquote>
+<p>Define un número secreto fijo (ej: $7$). Usa un bucle while para
+pedir al usuario que intente adivinarlo. El bucle debe continuar
+mientras la suposición no sea correcta. Cuando adivine, imprime un
+mensaje de éxito.</p>
+</blockquote>
+<ul>
+<li><p><strong>Output Esperado (tras 3 intentos, ingresando 5, 9,
+7):</strong></p></li>
+<li><p>Intento 1: No es correcto.</p></li>
+<li><p>Intento 2: No es correcto.</p></li>
+<li><p>Intento 3: ¡Correcto! Has adivinado el número.</p></li>
+</ul>
+<ol start="5" type="1">
+<li>División Continua (Estimación)</li>
+</ol>
+<blockquote>
+<p>Inicializa un valor $V = 1000$ (de tipo float). Usa un bucle while
+para dividir $V$ entre $2$ repetidamente. El bucle debe detenerse cuando
+$V$ sea menor que $1$. Cuenta e imprime cuántas divisiones fueron
+necesarias.</p>
+</blockquote>
+<ul>
+<li><strong>Output Esperado:</strong> Se necesitaron $10$
+divisiones.</li>
+</ul>
+<p><strong>Bloque 2: Bucle do-while (Ejecución Garantizada)
+🔄</strong></p>
+<ol start="6" type="1">
+<li>Validación de Número Positivo (Ej. Propuesto A con do-while)</li>
+</ol>
+<blockquote>
+<p>Usa un bucle do-while para pedir al usuario un número. El bucle debe
+continuar mientras el número ingresado sea menor o igual a $0$.
+Garantiza que el programa solo avance con un número positivo.</p>
+</blockquote>
+<ul>
+<li><p><strong>Input de Ejemplo:</strong> $-5, 0, 10$</p></li>
+<li><p><strong>Output Esperado:</strong> El número positivo ingresado es
+$10$.</p></li>
+</ul>
+<ol start="7" type="1">
+<li>Menú de Opciones (Ej. Propuesto B con do-while)</li>
+</ol>
+<blockquote>
+<p>Usa un bucle do-while para mostrar un menú con opciones (ej: 1.
+Sumar, 2. Restar, 3. Salir). El bucle debe garantizar que el menú se
+muestre al menos una vez y debe repetirse mientras la opción
+seleccionada no sea "Salir" (opción 3).</p>
+</blockquote>
+<ul>
+<li><p><strong>Input de Ejemplo:</strong> $1, 4, 3$</p></li>
+<li><p><strong>Output Esperado (Simulado):</strong></p></li>
+<li><p>--- MENU ---</p></li>
+<li><p>1. Sumar</p></li>
+<li><p>2. Restar</p></li>
+<li><p>3. Salir</p></li>
+<li><p>Seleccione una opción: 1</p></li>
+<li><p>(Procesando Sumar...)</p></li>
+<li><p>--- MENU ---</p></li>
+<li><p>...</p></li>
+<li><p>Seleccione una opción: 4</p></li>
+<li><p>Opción inválida. Intente de nuevo.</p></li>
+<li><p>--- MENU ---</p></li>
+<li><p>...</p></li>
+<li><p>Seleccione una opción: 3</p></li>
+<li><p>Saliendo del programa.</p></li>
+</ul>
+<ol start="8" type="1">
+<li>Entrada de Rango Válido</li>
+</ol>
+<blockquote>
+<p>Pide al usuario un número entero entre $1$ y $10$. Usa un bucle
+do-while para forzar la repetición del input mientras el número esté
+fuera de ese rango ($&lt;1$ o $&gt;10$).</p>
+</blockquote>
+<ul>
+<li><p><strong>Input de Ejemplo:</strong> $0, 12, 5$</p></li>
+<li><p><strong>Output Esperado:</strong> Número válido ingresado:
+$5$.</p></li>
+</ul>
+<ol start="9" type="1">
+<li>Simulación de Moneda al Aire</li>
+</ol>
+<blockquote>
+<p>Simula el lanzamiento de una moneda (generando un número aleatorio
+$0$ o $1$). Usa un bucle do-while para repetir el lanzamiento y contar
+cuántos se realizaron hasta que salga el resultado $0$ (Cara). Imprime
+el número total de lanzamientos.</p>
+</blockquote>
+<ul>
+<li><strong>Output Esperado (Ejemplo de 4 lanzamientos):</strong> Número
+de lanzamientos hasta Cara (0): 4</li>
+</ul>
+<ol start="10" type="1">
+<li>Verificación de Contraseña (Mejorada)</li>
+</ol>
+<blockquote>
+<p>Define una contraseña (ej: "cursoC"). Usa un bucle do-while para
+pedir la contraseña al usuario. El bucle debe permitir un máximo de 3
+intentos y solo terminar si la clave es correcta o si se excedió el
+límite de intentos.</p>
+</blockquote>
+<ul>
+<li><p><strong>Input de Ejemplo (3 fallos):</strong> "a", "b",
+"c"</p></li>
+<li><p><strong>Output Esperado:</strong></p></li>
+<li><p>Intento 1 fallido. Quedan 2 intentos.</p></li>
+<li><p>Intento 2 fallido. Queda 1 intento.</p></li>
+<li><p>Intento 3 fallido.</p></li>
+<li><p>Acceso denegado. Se excedió el límite de intentos.</p></li>
+</ul>
+<p><strong>Bloque 3: Diferencias y Bucles Infinitos ⚠️</strong></p>
+<ol start="11" type="1">
+<li>Cálculo de Promedio con Fin Condicional</li>
+</ol>
+<blockquote>
+<p>Pide notas al usuario (números float). Usa un bucle while que se
+repita mientras el usuario ingrese un número mayor que $-1$. Acumula las
+notas y cuenta cuántas se ingresaron. Al salir (ingresar $-1$), calcula
+e imprime el promedio de las notas válidas.</p>
+</blockquote>
+<ul>
+<li><p><strong>Input de Ejemplo:</strong> $7.0, 8.5, 6.0, -1$</p></li>
+<li><p><strong>Output Esperado:</strong> Promedio de $3$ notas:
+$7.17$</p></li>
+</ul>
+<ol start="12" type="1">
+<li>Primer Carácter No Blanco</li>
+</ol>
+<blockquote>
+<p>Usa un bucle while para leer caracteres uno por uno desde la entrada
+estándar. El bucle debe continuar mientras el carácter leído sea un
+espacio en blanco (' ') o un salto de línea ('\n'). Imprime el primer
+carácter que no sea un espacio en blanco.</p>
+</blockquote>
+<ul>
+<li><p><strong>Input de Ejemplo (simulando pulsaciones):</strong>
+[ESPACIO] [TAB] [NUEVA LÍNEA] [a] [NUEVA LÍNEA]</p></li>
+<li><p><strong>Output Esperado:</strong> El primer carácter
+significativo es: 'a'</p></li>
+</ul>
+<ol start="13" type="1">
+<li>Identificación de Bucle Infinito</li>
+</ol>
+<blockquote>
+<p>Crea un fragmento de código simple con while que deliberadamente
+genere un bucle infinito (como el ejemplo visto en el material). Luego,
+explica brevemente qué línea falta o es incorrecta para que el bucle
+termine.</p>
+</blockquote>
+<ul>
+<li><strong>Código a Analizar:</strong></li>
+</ul>
+<blockquote>
+<p>C</p>
+<p>int i = 0;</p>
+<p>while (i &lt; 5) {</p>
+<p>printf("Ciclo\n");</p>
+<p>}</p>
+</blockquote>
+<ul>
+<li><strong>Output Esperado:</strong> El programa se ejecuta
+indefinidamente imprimiendo "Ciclo" sin parar. La línea faltante es
+<strong>i++;</strong> (o equivalente) dentro del cuerpo del bucle.</li>
+</ul>
+<ol start="14" type="1">
+<li>Diferencia de Ejecución Mínima</li>
+</ol>
+<blockquote>
+<p>Escribe dos programas cortos: uno con while y otro con do-while. En
+ambos, inicializa la condición de control como Falsa desde el inicio
+(ej: int i = 10; ... while (i &lt; 5)). Explica y demuestra qué programa
+ejecuta su bloque de código y cuál no.</p>
+</blockquote>
+<ul>
+<li><p><strong>Output Esperado (Comprobación de
+do-while):</strong></p></li>
+<li><p>Bucle WHILE: No se imprimió nada.</p></li>
+<li><p>Bucle DO-WHILE: Se ejecutó al menos una vez.</p></li>
+</ul>
+<ol start="15" type="1">
+<li>Bucle while(1) con Terminación Forzada (break)</li>
+</ol>
+<blockquote>
+<p>Crea un bucle intencionalmente infinito usando while (1). Dentro del
+cuerpo del bucle, pide un número al usuario. Si el número ingresado es
+múltiplo de $10$ (usando el operador módulo %), usa la sentencia break
+para salir forzadamente del bucle.</p>
+</blockquote>
+<ul>
+<li><p><strong>Input de Ejemplo:</strong> $3, 15, 20$</p></li>
+<li><p><strong>Output Esperado:</strong></p></li>
+<li><p>Ingrese un número: 3</p></li>
+<li><p>Ingrese un número: 15</p></li>
+<li><p>Ingrese un número: 20</p></li>
+<li><p>¡Múltiplo de 10 detectado! Saliendo del bucle.</p></li>
+</ul>
+<p><strong>✅ Respuestas de los 15 Ejercicios: Bucles Condicionales
+(while / do-while)</strong></p>
+<p>A continuación, se presenta la solución en código C para cada uno de
+los 15 ejercicios, utilizando las estructuras de repetición
+<strong>while</strong> y <strong>do-while</strong>, enfocándose en la
+repetición controlada por una condición.</p>
+<p><strong>Bloque 1: Bucle while (Condición Previa) ⏳</strong></p>
+<ol type="1">
+<li><strong>Contador de Cifras (Iteración Desconocida)</strong></li>
+</ol>
+<p>C</p>
+<p>// Entrada: numero = 3451</p>
+<p>int numero = 3451;</p>
+<p>int contador_digitos = 0;</p>
+<p>// La condición es que el número sea mayor que 0</p>
+<p>while (numero &gt; 0) {</p>
+<p>numero = numero / 10; // Quitar el último dígito</p>
+<p>contador_digitos++; // Incrementar el contador</p>
+<p>}</p>
+<p>printf("El número tiene %d dígitos.\n", contador_digitos);</p>
+<p>// Output: El número tiene 4 dígitos.</p>
+<ol start="2" type="1">
+<li><strong>Suma hasta Cero (Centinela)</strong></li>
+</ol>
+<p>C</p>
+<p>// Entrada: 10, 5, 2, 0</p>
+<p>int numero_ingresado;</p>
+<p>int suma_total = 0;</p>
+<p>printf("Ingrese números (0 para terminar):\n");</p>
+<p>// Leer el primer número antes de entrar al bucle
+(inicialización)</p>
+<p>scanf("%d", &amp;numero_ingresado);</p>
+<p>// La condición es que el número ingresado NO sea el centinela
+(0)</p>
+<p>while (numero_ingresado != 0) {</p>
+<p>suma_total += numero_ingresado; // Acumular</p>
+<p>// Leer el siguiente número (modifica la condición)</p>
+<p>scanf("%d", &amp;numero_ingresado);</p>
+<p>}</p>
+<p>printf("Suma total: %d\n", suma_total);</p>
+<p>// Output: Suma total: 17</p>
+<ol start="3" type="1">
+<li><strong>Detector de Potencia de 2</strong></li>
+</ol>
+<p>C</p>
+<p>// Entrada: N = 32</p>
+<p>int N = 32;</p>
+<p>if (N &gt; 0) {</p>
+<p>// Si N es una potencia de 2, la división sucesiva por 2</p>
+<p>// siempre dará resto 0, hasta llegar a 1.</p>
+<p>while (N % 2 == 0 &amp;&amp; N &gt; 1) {</p>
+<p>N /= 2;</p>
+<p>}</p>
+<p>if (N == 1) {</p>
+<p>printf("Es una potencia de 2.\n");</p>
+<p>} else {</p>
+<p>printf("No es una potencia de 2.\n");</p>
+<p>}</p>
+<p>} else {</p>
+<p>printf("Ingrese un número positivo.\n");</p>
+<p>}</p>
+<p>// Output (para 32): Es una potencia de 2.</p>
+<ol start="4" type="1">
+<li><strong>Adivinanza Simple</strong></li>
+</ol>
+<p>C</p>
+<p>// Número secreto fijo</p>
+<p>const int SECRETO = 7;</p>
+<p>int suposicion = 0; // Inicializamos con un valor incorrecto para
+entrar</p>
+<p>int intentos = 0;</p>
+<p>printf("Adivina el número secreto (1-10):\n");</p>
+<p>while (suposicion != SECRETO) {</p>
+<p>printf("Intento %d: ", intentos + 1);</p>
+<p>// En un programa real, usaríamos scanf aquí</p>
+<p>// Para el ejemplo, simulamos la entrada:</p>
+<p>if (intentos == 0) suposicion = 5;</p>
+<p>else if (intentos == 1) suposicion = 9;</p>
+<p>else if (intentos == 2) suposicion = 7;</p>
+<p>else break; // Salir si excedemos los intentos simulados</p>
+<p>if (suposicion != SECRETO) {</p>
+<p>printf("No es correcto.\n");</p>
+<p>}</p>
+<p>intentos++;</p>
+<p>}</p>
+<p>if (suposicion == SECRETO) {</p>
+<p>printf("¡Correcto! Has adivinado el número.\n");</p>
+<p>}</p>
+<p>// Output (tras 3 intentos, ingresando 5, 9, 7): ... ¡Correcto!</p>
+<ol start="5" type="1">
+<li><strong>División Continua (Estimación)</strong></li>
+</ol>
+<p>C</p>
+<p>// Valor inicial (float para manejo decimal)</p>
+<p>float V = 1000.0f;</p>
+<p>int divisiones = 0;</p>
+<p>// La condición es que el valor sea mayor o igual a 1</p>
+<p>while (V &gt;= 1.0f) {</p>
+<p>V /= 2.0f; // V = V / 2</p>
+<p>divisiones++;</p>
+<p>}</p>
+<p>printf("Se necesitaron %d divisiones.\n", divisiones);</p>
+<p>// Output: Se necesitaron 10 divisiones. (V = 0.976...)</p>
+<p><strong>Bloque 2: Bucle do-while (Ejecución Garantizada)
+🔄</strong></p>
+<ol start="6" type="1">
+<li><strong>Validación de Número Positivo (Ej. Propuesto A con
+do-while)</strong></li>
+</ol>
+<p>C</p>
+<p>// Entrada: -5, 0, 10</p>
+<p>int num;</p>
+<p>do {</p>
+<p>printf("Ingrese un número positivo: ");</p>
+<p>// scanf("%d", &amp;num); // Uso real</p>
+<p>// Simulación:</p>
+<p>static int intentos = 0;</p>
+<p>if (intentos == 0) num = -5;</p>
+<p>else if (intentos == 1) num = 0;</p>
+<p>else num = 10;</p>
+<p>intentos++;</p>
+<p>if (num &lt;= 0) {</p>
+<p>printf("Error: El número debe ser mayor que cero.\n");</p>
+<p>}</p>
+<p>} while (num &lt;= 0); // La condición se comprueba al final</p>
+<p>printf("El número positivo ingresado es %d.\n", num);</p>
+<p>// Output: El número positivo ingresado es 10.</p>
+<ol start="7" type="1">
+<li><strong>Menú de Opciones (Ej. Propuesto B con
+do-while)</strong></li>
+</ol>
+<p>C</p>
+<p>// Entrada: 1, 4, 3</p>
+<p>int opcion;</p>
+<p>do {</p>
+<p>printf("\n--- MENU ---\n");</p>
+<p>printf("1. Sumar\n");</p>
+<p>printf("2. Restar\n");</p>
+<p>printf("3. Salir\n");</p>
+<p>printf("Seleccione una opción: ");</p>
+<p>// scanf("%d", &amp;opcion); // Uso real</p>
+<p>// Simulación:</p>
+<p>static int intentos = 0;</p>
+<p>if (intentos == 0) opcion = 1;</p>
+<p>else if (intentos == 1) opcion = 4;</p>
+<p>else opcion = 3;</p>
+<p>intentos++;</p>
+<p>switch (opcion) {</p>
+<p>case 1:</p>
+<p>printf("(Procesando Sumar...)\n");</p>
+<p>break;</p>
+<p>case 2:</p>
+<p>printf("(Procesando Restar...)\n");</p>
+<p>break;</p>
+<p>case 3:</p>
+<p>printf("Saliendo del programa.\n");</p>
+<p>break;</p>
+<p>default:</p>
+<p>printf("Opción inválida. Intente de nuevo.\n");</p>
+<p>}</p>
+<p>} while (opcion != 3); // Repetir mientras no sea la opción de
+salida</p>
+<p>// El menú se muestra al menos una vez.</p>
+<ol start="8" type="1">
+<li><strong>Entrada de Rango Válido</strong></li>
+</ol>
+<p>C</p>
+<p>// Entrada: 0, 12, 5</p>
+<p>int numero_rango;</p>
+<p>do {</p>
+<p>printf("Ingrese un número entre 1 y 10: ");</p>
+<p>// scanf("%d", &amp;numero_rango); // Uso real</p>
+<p>// Simulación:</p>
+<p>static int intentos = 0;</p>
+<p>if (intentos == 0) numero_rango = 0;</p>
+<p>else if (intentos == 1) numero_rango = 12;</p>
+<p>else numero_rango = 5;</p>
+<p>intentos++;</p>
+<p>// La condición es V(Falsa) si está en el rango [1, 10]</p>
+<p>} while (numero_rango &lt; 1 || numero_rango &gt; 10);</p>
+<p>printf("Número válido ingresado: %d.\n", numero_rango);</p>
+<p>// Output: Número válido ingresado: 5.</p>
+<ol start="9" type="1">
+<li><strong>Simulación de Moneda al Aire</strong></li>
+</ol>
+<p>C</p>
+<p>// Nota: Para usar srand() y rand() se requiere &lt;stdlib.h&gt; y
+&lt;time.h&gt;</p>
+<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
+<p>// #include &lt;stdlib.h&gt;</p>
+<p>// #include &lt;time.h&gt;</p>
+<p>// srand(time(NULL)); // Inicializar generador al inicio del main</p>
+<p>int resultado_lanzamiento;</p>
+<p>int lanzamientos = 0;</p>
+<p>do {</p>
+<p>// resultado_lanzamiento = rand() % 2; // Uso real (0 o 1)</p>
+<p>// Simulación para fines de ejemplo (ej: 1, 1, 0)</p>
+<p>static int simulacion[] = {1, 1, 0, 0};</p>
+<p>resultado_lanzamiento = simulacion[lanzamientos];</p>
+<p>lanzamientos++;</p>
+<p>printf("Lanzamiento %d: %s\n", lanzamientos,</p>
+<p>(resultado_lanzamiento == 0 ? "Cara" : "Cruz"));</p>
+<p>} while (resultado_lanzamiento != 0); // Repetir hasta que salga 0
+(Cara)</p>
+<p>printf("Número de lanzamientos hasta Cara (0): %d\n",
+lanzamientos);</p>
+<p>// Output (Simulación 1, 1, 0): Número de lanzamientos hasta Cara
+(0): 3</p>
+<ol start="10" type="1">
+<li><strong>Verificación de Contraseña (Mejorada)</strong></li>
+</ol>
+<p>C</p>
+<p>// Entrada: "a", "b", "c" (3 fallos)</p>
+<p>#<strong>include</strong> &lt;string.h&gt; // Necesario para
+strcmp()</p>
+<p>char clave_ingresada[20];</p>
+<p>const char clave_correcta[] = "cursoC";</p>
+<p>int intento_actual = 0;</p>
+<p>const int MAX_INTENTOS = 3;</p>
+<p>int es_correcta;</p>
+<p>do {</p>
+<p>printf("Intento %d. Ingrese clave: ", intento_actual + 1);</p>
+<p>// scanf("%s", clave_ingresada); // Uso real</p>
+<p>// Simulación:</p>
+<p>if (intento_actual == 0) strcpy(clave_ingresada, "a");</p>
+<p>else if (intento_actual == 1) strcpy(clave_ingresada, "b");</p>
+<p>else if (intento_actual == 2) strcpy(clave_ingresada, "c");</p>
+<p>es_correcta = (strcmp(clave_ingresada, clave_correcta) == 0);</p>
+<p>intento_actual++;</p>
+<p>if (!es_correcta &amp;&amp; intento_actual &lt; MAX_INTENTOS) {</p>
+<p>printf("Intento fallido. Quedan %d intentos.\n", MAX_INTENTOS -
+intento_actual);</p>
+<p>}</p>
+<p>} while (!es_correcta &amp;&amp; intento_actual &lt;
+MAX_INTENTOS);</p>
+<p>if (es_correcta) {</p>
+<p>printf("Acceso Concedido.\n");</p>
+<p>} else {</p>
+<p>printf("Acceso denegado. Se excedió el límite de intentos.\n");</p>
+<p>}</p>
+<p><strong>Bloque 3: Diferencias y Bucles Infinitos ⚠️</strong></p>
+<ol start="11" type="1">
+<li><strong>Cálculo de Promedio con Fin Condicional</strong></li>
+</ol>
+<p>C</p>
+<p>// Entrada: 7.0, 8.5, 6.0, -1</p>
+<p>float nota;</p>
+<p>float suma_notas = 0.0f;</p>
+<p>int contador_notas = 0;</p>
+<p>printf("Ingrese notas (ingrese -1 para terminar):\n");</p>
+<p>// Inicializar la condición leyendo el primer valor</p>
+<p>// scanf("%f", &amp;nota); // Uso real</p>
+<p>nota = 7.0f; // Simulación</p>
+<p>while (nota != -1.0f) {</p>
+<p>suma_notas += nota;</p>
+<p>contador_notas++;</p>
+<p>// Modificar la condición leyendo el siguiente valor</p>
+<p>// scanf("%f", &amp;nota); // Uso real</p>
+<p>// Simulación:</p>
+<p>if (contador_notas == 1) nota = 8.5f;</p>
+<p>else if (contador_notas == 2) nota = 6.0f;</p>
+<p>else nota = -1.0f;</p>
+<p>}</p>
+<p>if (contador_notas &gt; 0) {</p>
+<p>float promedio = suma_notas / contador_notas;</p>
+<p>printf("Promedio de %d notas: %.2f\n", contador_notas, promedio);</p>
+<p>} else {</p>
+<p>printf("No se ingresaron notas válidas.\n");</p>
+<p>}</p>
+<p>// Output: Promedio de 3 notas: 7.17</p>
+<ol start="12" type="1">
+<li><strong>Primer Carácter No Blanco</strong></li>
+</ol>
+<p>C</p>
+<p>// Entrada simulada: [ESPACIO], [TAB], [SALTO DE LÍNEA], 'a'</p>
+<p>char c;</p>
+<p>printf("Escriba algunos caracteres:\n");</p>
+<p>// Leer el primer carácter (puede ser un espacio)</p>
+<p>// c = getchar(); // Uso real</p>
+<p>// Simulación</p>
+<p>static int pasos = 0;</p>
+<p>if (pasos == 0) c = ' ';</p>
+<p>else if (pasos == 1) c = '\t';</p>
+<p>else if (pasos == 2) c = '\n';</p>
+<p>else c = 'a';</p>
+<p>pasos++;</p>
+<p>// Repetir mientras el carácter sea un espacio, tabulador o nueva
+línea</p>
+<p>while (c == ' ' || c == '\t' || c == '\n') {</p>
+<p>// c = getchar(); // Modifica la condición leyendo el siguiente</p>
+<p>// Simulación</p>
+<p>if (pasos == 1) c = '\t';</p>
+<p>else if (pasos == 2) c = '\n';</p>
+<p>else c = 'a';</p>
+<p>pasos++;</p>
+<p>}</p>
+<p>printf("El primer carácter significativo es: '%c'\n", c);</p>
+<p>// Output: El primer carácter significativo es: 'a'</p>
+<ol start="13" type="1">
+<li><strong>Identificación de Bucle Infinito</strong></li>
+</ol>
+<p>C</p>
+<p>int i = 0;</p>
+<p>while (i &lt; 5) {</p>
+<p>printf("Ciclo\n");</p>
+<p>// ERROR: Falta la línea de incremento 'i++'</p>
+<p>}</p>
+<p>// El programa se ejecuta indefinidamente imprimiendo "Ciclo" sin
+parar.</p>
+<p>// La línea faltante es i++; (o i += 1) dentro del cuerpo del
+bucle,</p>
+<p>// ya que 'i' nunca cambia, y la condición 'i &lt; 5' siempre es
+Verdadera.</p>
+<ol start="14" type="1">
+<li><strong>Diferencia de Ejecución Mínima</strong></li>
+</ol>
+<p>C</p>
+<p>int i = 10;</p>
+<p>// Bucle WHILE</p>
+<p>printf("Bucle WHILE:\n");</p>
+<p>while (i &lt; 5) {</p>
+<p>printf("Esto NO se imprimirá.\n");</p>
+<p>}</p>
+<p>// Bucle DO-WHILE</p>
+<p>printf("Bucle DO-WHILE:\n");</p>
+<p>do {</p>
+<p>printf("Esto SI se imprimirá al menos una vez.\n");</p>
+<p>} while (i &lt; 5); // Condición (10 &lt; 5) es Falsa, pero se
+verifica al final</p>
+<p>/*</p>
+<p>Output:</p>
+<p>Bucle WHILE:</p>
+<p>Bucle DO-WHILE:</p>
+<p>Esto SI se imprimirá al menos una vez.</p>
+<p>*/</p>
+<ol start="15" type="1">
+<li><strong>Bucle while(1) con Terminación Forzada (break)</strong></li>
+</ol>
+<p>C</p>
+<p>// Entrada: 3, 15, 20</p>
+<p>int num;</p>
+<p>printf("Ingrese números. Ingrese un múltiplo de 10 para
+salir:\n");</p>
+<p>while (1) { // Bucle infinito intencional</p>
+<p>printf("Ingrese un número: ");</p>
+<p>// scanf("%d", &amp;num); // Uso real</p>
+<p>// Simulación:</p>
+<p>static int intentos = 0;</p>
+<p>if (intentos == 0) num = 3;</p>
+<p>else if (intentos == 1) num = 15;</p>
+<p>else num = 20;</p>
+<p>intentos++;</p>
+<p>// Comprobamos la condición de salida</p>
+<p>if (num % 10 == 0) {</p>
+<p>printf("¡Múltiplo de 10 detectado! Saliendo del bucle.\n");</p>
+<p>break; // Fuerza la salida inmediata del while(1)</p>
+<p>}</p>
+<p>}</p>
+<p>// El programa continuaría aquí tras el 'break'</p>
+<p>// Output: Sale al ingresar 20.</p>
+
+
+</div>
+</body>
+</html>
+

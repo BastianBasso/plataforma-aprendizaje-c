@@ -1,0 +1,191 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" crossorigin href="/assets/content-01sust.css">
+</head>
+<body>
+<div class="main-content">
+<h1><strong>Proyecto de Modulo: Sistema de Utilidades Interactivo
+(SUI)</strong></h1>
+<p><strong>Objetivo del Proyecto</strong></p>
+<p>Diseñar e implementar en lenguaje C un programa que funcione a través
+de un <strong>menú interactivo</strong>, permitiendo al usuario
+seleccionar y ejecutar diversas utilidades de cálculo y
+procesamiento.</p>
+<p>El proyecto debe demostrar el uso correcto y anidado de
+<strong>todas</strong> las estructuras de control de flujo estudiadas en
+este módulo.</p>
+<p><strong>Requisitos Técnicos y Conceptos Clave</strong></p>
+<p>El alumno deberá aplicar los siguientes conceptos obligatorios:</p>
+<table style="width:97%;">
+<colgroup>
+<col style="width: 27%" />
+<col style="width: 28%" />
+<col style="width: 41%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>Concepto de Control de
+Flujo</strong></th>
+<th style="text-align: left;"><strong>Estructura o Uso
+Requerido</strong></th>
+<th style="text-align: left;"><strong>Contexto del
+Proyecto</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>Bucle Principal</strong></td>
+<td style="text-align: left;">while(1) o do-while con sentencia
+<strong>break</strong></td>
+<td style="text-align: left;">Mantener el menú activo hasta que se
+seleccione la opción "Salir".</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Selección de Opción</strong></td>
+<td style="text-align: left;">Estructura <strong>switch</strong> (con
+default)</td>
+<td style="text-align: left;">Manejar las diferentes opciones del menú
+de forma eficiente.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Condicional Múltiple</strong></td>
+<td style="text-align: left;">Cadena <strong>if-else
+if-else</strong></td>
+<td style="text-align: left;">Implementar la lógica de la Opción 1
+(Clasificación).</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Bucle por Contador</strong></td>
+<td style="text-align: left;">Estructura <strong>for</strong></td>
+<td style="text-align: left;">Implementar la lógica de la Opción 2
+(Tabla de Multiplicar).</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Bucle Condicional</strong></td>
+<td style="text-align: left;">Estructura <strong>while</strong>
+(estándar)</td>
+<td style="text-align: left;">Implementar la lógica de la Opción 3
+(Validación de Entrada).</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Control de Bucle</strong></td>
+<td style="text-align: left;">Sentencia <strong>continue</strong></td>
+<td style="text-align: left;">Dentro de la lógica de la Opción 4 (Filtro
+de Impares).</td>
+</tr>
+</tbody>
+</table>
+<p><strong>💻 Descripción Detallada del SUI</strong></p>
+<p>El programa debe presentar el siguiente menú principal al inicio de
+su ejecución, y después de completar cada tarea, volver a mostrar el
+menú:</p>
+<p>=========================================</p>
+<p>SISTEMA DE UTILIDADES INTERACTIVO</p>
+<p>=========================================</p>
+<p>1. Clasificar Número (if-else if)</p>
+<p>2. Generar Tabla de Multiplicar (for)</p>
+<p>3. Sumar hasta el Cero (while y centinela)</p>
+<p>4. Contador de Divisores Impares (continue)</p>
+<p>5. Salir del Programa</p>
+<p>-----------------------------------------</p>
+<p>Ingrese su opción (1-5):</p>
+<p><strong>1. Opción 1: Clasificar Número (Uso de if-else
+if-else)</strong></p>
+<ul>
+<li><p><strong>Entrada:</strong> Solicitar un número entero (int) al
+usuario.</p></li>
+<li><p><strong>Lógica:</strong> Usar la estructura <strong>if-else
+if-else</strong> para clasificar el número e imprimir el resultado:</p>
+<ul>
+<li><p>Si el número es <strong>mayor que 100</strong>, imprimir:
+"Categoría Alta".</p></li>
+<li><p>Si el número está entre <strong>50 y 100</strong> (inclusive),
+imprimir: "Categoría Media".</p></li>
+<li><p>Si el número está entre <strong>1 y 49</strong> (inclusive),
+imprimir: "Categoría Baja".</p></li>
+<li><p>Si el número es <strong>0 o negativo</strong>, imprimir:
+"Categoría Neutra/Negativa".</p></li>
+</ul></li>
+</ul>
+<p><strong>2. Opción 2: Generar Tabla de Multiplicar (Uso de
+for)</strong></p>
+<ul>
+<li><p><strong>Entrada:</strong> Solicitar un número entero (int) N (ej.
+7).</p></li>
+<li><p><strong>Lógica:</strong> Usar un bucle <strong>for</strong> que
+itere de 1 a 10. Dentro del bucle, calcular e imprimir cada línea de la
+tabla de multiplicar de</p>
+<ol start="14" type="A">
+<li></li>
+</ol></li>
+<li><p><strong>Output Esperado (Ej. N=7):</strong></p></li>
+<li><p>7 x 1 = 7</p></li>
+<li><p>...</p></li>
+<li><p>7 x 10 = 70</p></li>
+</ul>
+<p><strong>3. Opción 3: Sumar hasta el Cero (Uso de while como
+Centinela)</strong></p>
+<ul>
+<li><p><strong>Entrada:</strong> Solicitar números enteros
+repetidamente.</p></li>
+<li><p><strong>Lógica:</strong></p>
+<ul>
+<li><p>Inicializar una variable de suma a 0.</p></li>
+<li><p>Usar un bucle <strong>while</strong> cuya condición dependa de un
+"valor centinela". El bucle debe continuar pidiendo y sumando números
+<strong>mientras el número ingresado no sea 0</strong>.</p></li>
+<li><p>Una vez que el usuario ingresa <strong>0</strong>, el bucle
+termina.</p></li>
+<li><p><strong>Salida:</strong> Imprimir el valor final de la suma
+total.</p></li>
+</ul></li>
+</ul>
+<p><strong>4. Opción 4: Contador de Divisores Impares (Uso de
+continue)</strong></p>
+<ul>
+<li><p><strong>Entrada:</strong> Solicitar un número entero positivo
+(int) N (ej. 12).</p></li>
+<li><p><strong>Lógica:</strong></p>
+<ul>
+<li><p>Usar un bucle <strong>for</strong> que itere desde <strong>1
+hasta N</strong>.</p></li>
+<li><p>Dentro del bucle, usar la sentencia <strong>continue</strong>
+para <strong>filtrar</strong> y <strong>saltar</strong> cualquier número
+que sea un <strong>divisor par</strong> de N.</p></li>
+<li><p>Solo si el número i es un divisor impar de N, se debe incrementar
+un <strong>contador</strong> de divisores impares.</p></li>
+</ul></li>
+<li><p><strong>Salida Esperada (Ej. N=12):</strong> Divisores de 12 son
+(1, 2, 3, 4, 6, 12). Los divisores impares son (1, 3). Imprimir: "El
+número 12 tiene 2 divisores impares."</p></li>
+</ul>
+<p><strong>5. Opción 5: Salir del Programa (Uso de break)</strong></p>
+<ul>
+<li><strong>Lógica:</strong> Dentro del bloque case 5 del switch, usar
+la sentencia <strong>break</strong> para salir del bucle principal
+(while(1) o do-while) y terminar la ejecución del programa, imprimiendo:
+"Saliendo del Sistema. ¡Adiós!".</li>
+</ul>
+<p><strong>Criterios de Autoevaluación</strong></p>
+<ol type="1">
+<li><p><strong>Funcionalidad (50%):</strong> El programa ejecuta
+correctamente las 5 opciones descritas y regresa al menú principal
+(excepto con la opción 5).</p></li>
+<li><p><strong>Uso de Estructuras (30%):</strong> Se verifica el uso
+obligatorio y apropiado de switch, if-else if, for, while, break y
+continue según lo especificado.</p></li>
+<li><p><strong>Manejo de Errores (10%):</strong> La opción default del
+switch maneja la entrada inválida en el menú principal.</p></li>
+<li><p><strong>Estilo y Documentación (10%):</strong> El código está
+bien indentado, utiliza nombres de variables significativos y contiene
+comentarios breves que explican la lógica clave.</p></li>
+</ol>
+
+
+</div>
+</body>
+</html>
+

@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" crossorigin href="/assets/content-01sust.css">
+</head>
+<body>
+<div class="main-content">
+<h1><strong>15 Ejercicios: Captura de Datos (scanf) y
+Operadores</strong></h1>
+<p><strong>Bloque 1: Captura de Tipos de Datos Básicos y Uso de
+&amp;</strong></p>
+<p><strong>1) Captura Entera Básica</strong></p>
+<p>Escribe un programa que pida al usuario que ingrese un número entero
+(int) y luego lo imprima.</p>
+<p>Input de Ejemplo: 42</p>
+<p>Output Esperado: Ingresaste: 42</p>
+<p><strong>2) Captura de Punto Flotante (float)</strong></p>
+<p>Escribe un programa que pida un peso (float). Captúralo e imprímelo
+con un solo decimal.</p>
+<p>Input de Ejemplo: 65.75</p>
+<p>Output Esperado: Tu peso es: 65.8</p>
+<p><strong>3) Captura de Doble Precisión (double)</strong></p>
+<p>Escribe un programa que pida una distancia (double). Recuerda usar el
+especificador de formato correcto para la entrada (%lf). Imprime la
+distancia.</p>
+<p>Input de Ejemplo: 3000.123456</p>
+<p>Output Esperado: Distancia registrada: 3000.123456</p>
+<p><strong>4) Captura de Carácter (char)</strong></p>
+<p>Escribe un programa que pida al usuario ingresar la primera letra de
+su nombre (char). Captúrala e imprímela.</p>
+<p>Input de Ejemplo: L</p>
+<p>Output Esperado: La inicial es: L</p>
+<p><strong>5) Doble Captura con Error Intencional (Omisión de
+&amp;)</strong></p>
+<p>Declara una variable edad (int). Pide la edad al usuario y omite
+intencionalmente el operador &amp; en scanf. Imprime la edad.</p>
+<p>Input de Ejemplo: 25</p>
+<p>Output Esperado: (El programa fallará o mostrará un valor de
+basura/0, ya que el valor no se pudo almacenar correctamente debido a la
+falta de &amp;). El comportamiento exacto varía según el compilador.</p>
+<p><strong>Bloque 2: Combinando Captura, Operadores y
+Lógica</strong></p>
+<p><strong>6) Conversor Dólar a Euro</strong></p>
+<p>Pide al usuario una cantidad en dólares (float). Calcula y muestra el
+valor en euros (Tasa fija: $1\text{ dólar} = 0.93\text{ euros}$).</p>
+<p>Input de Ejemplo: 100.0</p>
+<p>Output Esperado: 100.00 dolares son 93.00 euros</p>
+<p><strong>7) Calculadora de Área de Rectángulo</strong></p>
+<p>Pide la longitud de la base y la altura (int) de un rectángulo.
+Calcula y muestra el área.</p>
+<p>Input de Ejemplo: 15 (Base), 4 (Altura)</p>
+<p>Output Esperado: El area del rectangulo es: 60</p>
+<p><strong>8) Comprobador de Mayoría de Edad</strong></p>
+<p>Pide la edad (int) al usuario. Usa un operador relacional (&gt;=)
+para imprimir 1 si es mayor o igual a 18, o 0 si es menor.</p>
+<p>Input de Ejemplo: 19</p>
+<p>Output Esperado: Mayor de edad (1=Si, 0=No): 1</p>
+<p><strong>9) Verificación de Rango con &amp;&amp;</strong></p>
+<p>Pide un número entero. Usa el operador &amp;&amp; para imprimir 1 si
+el número está estrictamente entre 1 y 10 (sin incluir 1 ni 10), o 0 si
+no lo está.</p>
+<p>Input de Ejemplo: 7</p>
+<p>Output Esperado: Entre (1, 10): 1</p>
+<p><strong>10) Verificación de Paridad con % y !</strong></p>
+<p>Pide un número entero. Imprime 1 si el número es par (usando el
+operador módulo \% y el operador lógico !), o 0 si es impar.</p>
+<p>Input de Ejemplo: 14</p>
+<p>Output Esperado: Es par (1=Si, 0=No): 1</p>
+<p><strong>Bloque 3: Múltiples Capturas y Cadenas</strong></p>
+<p><strong>11) Captura Múltiple de Tipos Mixtos</strong></p>
+<p>Pide al usuario su edad (int) y su sueldo mensual (float) en una sola
+línea de entrada. Imprime ambos datos.</p>
+<p>Input de Ejemplo: 35 1500.50</p>
+<p>Output Esperado: Edad: 35, Sueldo: 1500.50</p>
+<p><strong>12) Asignación y Operador !</strong></p>
+<p>Pide al usuario un número booleano (0 o 1). Almacena la negación (!)
+de ese valor en otra variable e imprime el resultado.</p>
+<p>Input de Ejemplo: 0</p>
+<p>Output Esperado: El valor negado es: 1</p>
+<p><strong>13) Operador Lógico || con Input</strong></p>
+<p>Pide al usuario que ingrese dos números enteros, A y B. Imprime 1 si
+A es igual a 0 O B es menor que 5, o 0 en caso contrario.</p>
+<p>Input de Ejemplo: 5 2 (A, B)</p>
+<p>Output Esperado: A=0 o B&lt;5: 1</p>
+<p><strong>14) Captura de una Palabra (%s)</strong></p>
+<p>Pide al usuario su primer nombre y guárdalo en una cadena de 25
+caracteres. Imprime un saludo.</p>
+<p>Input de Ejemplo: Susana</p>
+<p>Output Esperado: Hola, Susana! Bienvenida.</p>
+<p><strong>15) Captura Segura de Cadena (Mitigación de
+<em>Overflow</em>)</strong></p>
+<p>Declara una cadena de 15 caracteres. Pide al usuario que ingrese un
+código, pero usa el limitador (%14s) en scanf para garantizar la
+seguridad.</p>
+<p>Input de Ejemplo: abcdefghijklmnopqrs (Más de 15 caracteres)</p>
+<p>Output Esperado: Codigo capturado: abcdefghijklmn (Solo se capturan
+14 caracteres).</p>
+<p><strong>Respuestas y Código Fuente</strong></p>
+<p>C</p>
+<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
+<p>int main(void) {</p>
+<p>// Variables para ejercicios</p>
+<p>int num, edad, base, altura, es_mayor, num_A, num_B, booleano,
+negado, logico;</p>
+<p>float peso, dolares, sueldo;</p>
+<p>double longitud;</p>
+<p>char inicial;</p>
+<p>char nombre[25];</p>
+<p>char codigo[15];</p>
+<p>float tasa = 0.93;</p>
+<p>printf("--- Soluciones de Ejercicios ---\n");</p>
+<p>// 1) Captura Entera Básica</p>
+<p>printf("1) Ingrese un entero: ");</p>
+<p>scanf("%d", &amp;num);</p>
+<p>printf("Output Esperado: Ingresaste: %d\n\n", num);</p>
+<p>// 2) Captura de Punto Flotante (float)</p>
+<p>printf("2) Ingrese un peso (float): ");</p>
+<p>scanf("%f", &amp;peso);</p>
+<p>printf("Output Esperado: Tu peso es: %.1f\n\n", peso);</p>
+<p>// 3) Captura de Doble Precisión (double)</p>
+<p>printf("3) Ingrese una distancia (double): ");</p>
+<p>scanf("%lf", &amp;longitud);</p>
+<p>printf("Output Esperado: Distancia registrada: %f\n\n",
+longitud);</p>
+<p>// 4) Captura de Carácter (char)</p>
+<p>printf("4) Ingrese una inicial (char): ");</p>
+<p>scanf(" %c", &amp;inicial); // El espacio antes de %c ignora el salto
+de línea anterior</p>
+<p>printf("Output Esperado: La inicial es: %c\n\n", inicial);</p>
+<p>// 5) Doble Captura con Error Intencional (Omisión de &amp;) -
+Comentar o quitar para evitar el error real en la compilación</p>
+<p>/*</p>
+<p>printf("5) Error Intencional: Ingrese la edad sin usar &amp; (Output
+fallido): \n");</p>
+<p>scanf("%d", edad); // Incorrecto: Falla al no pasar la dirección</p>
+<p>printf("Output Esperado: Falla o valor basura: %d\n\n", edad);</p>
+<p>*/</p>
+<p>printf("5) Error Intencional: (Observar el warning del compilador por
+omitir &amp;)\n\n");</p>
+<p>// 6) Conversor Dólar a Euro</p>
+<p>printf("6) Dolares a convertir: ");</p>
+<p>scanf("%f", &amp;dolares);</p>
+<p>printf("Output Esperado: %.2f dolares son %.2f euros\n\n", dolares,
+dolares * tasa);</p>
+<p>// 7) Calculadora de Área de Rectángulo</p>
+<p>printf("7) Base y Altura: ");</p>
+<p>scanf("%d %d", &amp;base, &amp;altura);</p>
+<p>printf("Output Esperado: El area del rectangulo es: %d\n\n", base *
+altura);</p>
+<p>// 8) Comprobador de Mayoría de Edad</p>
+<p>printf("8) Ingrese edad: ");</p>
+<p>scanf("%d", &amp;edad);</p>
+<p>es_mayor = (edad &gt;= 18);</p>
+<p>printf("Output Esperado: Mayor de edad (1=Si, 0=No): %d\n\n",
+es_mayor);</p>
+<p>// 9) Verificación de Rango con &amp;&amp;</p>
+<p>printf("9) Ingrese un numero (para rango &gt;1 y &lt;10): ");</p>
+<p>scanf("%d", &amp;num);</p>
+<p>logico = (num &gt; 1) &amp;&amp; (num &lt; 10);</p>
+<p>printf("Output Esperado: Entre (1, 10): %d\n\n", logico);</p>
+<p>// 10) Verificación de Paridad con % y !</p>
+<p>printf("10) Ingrese un numero (paridad): ");</p>
+<p>scanf("%d", &amp;num);</p>
+<p>logico = !(num % 2); // (num % 2 == 0) que es lo mismo que !(num %
+2)</p>
+<p>printf("Output Esperado: Es par (1=Si, 0=No): %d\n\n", logico);</p>
+<p>// 11) Captura Múltiple de Tipos Mixtos</p>
+<p>printf("11) Edad y Sueldo (int float): ");</p>
+<p>scanf("%d %f", &amp;edad, &amp;sueldo);</p>
+<p>printf("Output Esperado: Edad: %d, Sueldo: %.2f\n\n", edad,
+sueldo);</p>
+<p>// 12) Asignación y Operador !</p>
+<p>printf("12) Ingrese 0 o 1 (booleano): ");</p>
+<p>scanf("%d", &amp;booleano);</p>
+<p>negado = !booleano;</p>
+<p>printf("Output Esperado: El valor negado es: %d\n\n", negado);</p>
+<p>// 13) Operador Lógico || con Input</p>
+<p>printf("13) Ingrese dos numeros A y B: ");</p>
+<p>scanf("%d %d", &amp;num_A, &amp;num_B);</p>
+<p>logico = (num_A == 0) || (num_B &lt; 5);</p>
+<p>printf("Output Esperado: A=0 o B&lt;5: %d\n\n", logico);</p>
+<p>// 14) Captura de una Palabra (%s)</p>
+<p>printf("14) Primer nombre (una palabra): ");</p>
+<p>scanf("%s", nombre);</p>
+<p>printf("Output Esperado: Hola, %s! Bienvenida.\n\n", nombre);</p>
+<p>// 15) Captura Segura de Cadena (Mitigación de Overflow)</p>
+<p>printf("15) Codigo (max 14 chars, array de 15): ");</p>
+<p>scanf("%14s", codigo);</p>
+<p>printf("Output Esperado: Codigo capturado: %s\n\n", codigo);</p>
+<p>return 0;</p>
+<p>}</p>
+
+
+</div>
+</body>
+</html>
+

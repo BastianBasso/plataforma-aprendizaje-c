@@ -1,0 +1,482 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" crossorigin href="/assets/content-01sust.css">
+</head>
+<body>
+<div class="main-content">
+<h2 id="ejercicios-operadores-punto-.-y-flecha--">10 Ejercicios:
+Operadores Punto (<code>.</code>) y Flecha (<code>-&gt;</code>)</h2>
+<h3 id="bloque-1-acceso-directo-operador-punto-.">Bloque 1: Acceso
+Directo (Operador Punto <code>.</code>)</h3>
+<p><strong>1) AsignaciÃ³n y Lectura con Punto</strong> Define una
+estructura <code>Pelicula</code> con dos miembros:
+<code>int anio_estreno</code> y <code>float rating</code>. Declara una
+variable <code>film</code> y usa el <strong>operador punto</strong>
+(<code>.</code>) para asignarle el aÃ±o <code>2024</code> y el rating
+<code>8.5</code>. Luego, imprime ambos valores.</p>
+<p>Input de Ejemplo: (Ninguna)</p>
+<p>Output Esperado: Pelicula: 2024, Rating: 8.50</p>
+<p><strong>2) InicializaciÃ³n y ModificaciÃ³n con Punto</strong> Define
+una <code>struct Moneda</code> con un <code>char nombre[10]</code> y un
+<code>float valor</code>. Inicializa directamente una variable
+<code>dolar</code> con el nombre <code>"USD"</code> y valor
+<code>1.0</code>. Luego, usa el <strong>operador punto</strong> para
+modificar el <code>valor</code> a <code>0.93</code> (simulando una
+conversiÃ³n a Euro) e imprime el nuevo valor.</p>
+<p>Input de Ejemplo: (Ninguna)</p>
+<p>Output Esperado: Nuevo valor de USD: 0.93</p>
+<p><strong>3) Copia de Structs y Acceso por Punto</strong> Define una
+<code>struct Caja</code> con <code>int ancho</code> y
+<code>int alto</code>. Inicializa <code>caja1</code> con
+<code>ancho=10</code> y <code>alto=5</code>. Luego, crea una segunda
+variable <code>caja2</code> y asÃ­gnale directamente
+<code>caja2 = caja1;</code>. Imprime el <code>alto</code> de
+<code>caja2</code> usando el <strong>operador punto</strong>.</p>
+<p>Input de Ejemplo: (Ninguna)</p>
+<p>Output Esperado: Alto de caja2: 5</p>
+<hr />
+<h3 id="bloque-2-punteros-a-structs-y-operador-flecha--">Bloque 2:
+Punteros a Structs y Operador Flecha (<code>-&gt;</code>)</h3>
+<p><strong>4) DeclaraciÃ³n de Puntero y AsignaciÃ³n de DirecciÃ³n</strong>
+Utiliza la <code>struct Pelicula</code> del Ejercicio 1. Declara una
+variable <code>film_original</code> inicializada. Declara un puntero a
+estructura llamado <code>ptr_film</code> y asÃ­gnale la
+<strong>direcciÃ³n</strong> de <code>film_original</code> usando el
+operador de direcciÃ³n (<code>&amp;</code>). Imprime la direcciÃ³n
+almacenada en el puntero (<code>%p</code>).</p>
+<p>Input de Ejemplo: (Ninguna)</p>
+<p>Output Esperado: (La direcciÃ³n variarÃ¡) Direccion: 0x7ffeeâ€¦abc</p>
+<p><strong>5) Acceso Indirecto con Operador Flecha
+(<code>-&gt;</code>)</strong> ContinÃºa con la
+<code>struct Pelicula</code> y el puntero <code>ptr_film</code>. Utiliza
+el <strong>operador flecha (<code>-&gt;</code>)</strong> para asignar el
+valor <code>1999</code> al miembro <code>anio_estreno</code> a travÃ©s
+del puntero. Luego, imprime el <code>anio_estreno</code> usando el
+operador flecha.</p>
+<p>Input de Ejemplo: (Ninguna)</p>
+<p>Output Esperado: AÃ±o accedido por flecha: 1999</p>
+<p><strong>6) Acceso Cruzado (Punto vs.Â Flecha)</strong> Define una
+<code>struct Persona</code> con <code>int edad</code>. Declara la
+variable <code>yo</code> con <code>edad=25</code> y un puntero
+<code>ptr_yo</code> que apunte a <code>yo</code>. 1. Modifica la
+<code>edad</code> a <code>26</code> usando la variable
+<strong>directa</strong> y el <strong>operador punto</strong>
+(<code>.</code>). 2. Imprime la edad usando el <strong>puntero</strong>
+y el <strong>operador flecha</strong> (<code>-&gt;</code>).</p>
+<p>Input de Ejemplo: (Ninguna)</p>
+<p>Output Esperado: Edad modificada (via flecha): 26</p>
+<p><strong>7) AsignaciÃ³n de String a travÃ©s del Puntero</strong> Define
+una <code>struct Libro</code> con <code>char titulo[50]</code>. Declara
+un <code>Libro</code> llamado <code>mi_libro</code> y un puntero
+<code>ptr_libro</code> apuntando a Ã©l. Usa la funciÃ³n
+<code>strcpy()</code> (recuerda <code>#include &lt;string.h&gt;</code>)
+junto con el <strong>operador flecha</strong> para asignar el tÃ­tulo
+<code>"El Gran C"</code> a <code>mi_libro</code> a travÃ©s de
+<code>ptr_libro</code>. Imprime el tÃ­tulo usando el operador flecha.</p>
+<p>Input de Ejemplo: (Ninguna)</p>
+<p>Output Esperado: Titulo asignado: El Gran C</p>
+<hr />
+<h3 id="bloque-3-equivalencia-de-notaciÃ³n">Bloque 3: Equivalencia de
+NotaciÃ³n</h3>
+<p><strong>8) DemostraciÃ³n de Equivalencia de Lectura</strong> Define
+una <code>struct Datos</code> con <code>float pi = 3.14159f</code>.
+Declara una variable <code>constante</code> y un puntero
+<code>ptr_constante</code> que la apunte. Imprime el valor de
+<code>pi</code> de dos maneras: 1. Usando la forma
+<strong>larga</strong> <code>(*ptr_constante).pi</code>. 2. Usando la
+forma <strong>simplificada</strong>
+<code>ptr_constante-&gt;pi</code>.</p>
+<p>Input de Ejemplo: (Ninguna)</p>
+<p>Output Esperado: Valor (Larga): 3.141590 Valor (Flecha): 3.141590</p>
+<p><strong>9) DemostraciÃ³n de Equivalencia de Escritura</strong> Define
+una <code>struct Contador</code> con <code>int valor</code>. Declara una
+variable <code>c</code> inicializada a <code>0</code> y un puntero
+<code>ptr_c</code>. Asigna un nuevo valor (<code>10</code>) al miembro
+<code>valor</code> <strong>solo</strong> usando la sintaxis larga
+<code>(*ptr_c).valor</code>. Luego, imprime el valor usando el operador
+punto en la variable <strong>directa</strong> <code>c.valor</code>.</p>
+<p>Input de Ejemplo: (Ninguna)</p>
+<p>Output Esperado: Valor despues de (*p).valor: 10</p>
+<p><strong>10) Error de Precedencia (DetecciÃ³n de Fallo)</strong> Define
+una <code>struct Par</code> con <code>int num</code>. Declara una
+variable <code>p</code> y un puntero <code>ptr_p</code> apuntando a
+ella. Intenta acceder al miembro <code>num</code> usando la notaciÃ³n
+<strong>incorrecta</strong> <code>*ptr_p.num = 5;</code>. Explica el
+error que producirÃ¡ el compilador (o el valor de basura/comportamiento
+inesperado si es un <em>warning</em>).</p>
+<p>Input de Ejemplo: (Ninguna)</p>
+<p>Output Esperado: (El compilador arrojarÃ¡ un error porque . tiene
+mayor precedencia que <em>). Error Esperado: error: request for member
+â€˜numâ€™ in something not a structure or union </em>(Nota: Si el compilador
+permite la ejecuciÃ³n, el valor de â€˜numâ€™ serÃ¡ una basura, ya que la
+operaciÃ³n fallÃ³. Este ejercicio busca ilustrar la necesidad de los
+parÃ©ntesis en la notaciÃ³n larga).*</p>
+<h2 id="soluciones-operadores-punto-.-y-flecha--">âœ… Soluciones:
+Operadores Punto (<code>.</code>) y Flecha (<code>-&gt;</code>)</h2>
+<h3 id="bloque-1-acceso-directo-operador-punto-.-1">Bloque 1: Acceso
+Directo (Operador Punto <code>.</code>)</h3>
+<h4 id="asignaciÃ³n-y-lectura-con-punto">1) AsignaciÃ³n y Lectura con
+Punto</h4>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Input de Ejemplo</th>
+<th style="text-align: center;">Output Esperado</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">(Ninguna)</td>
+<td style="text-align: center;">Pelicula: 2024, Rating: 8.50</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb1"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="kw">typedef</span> <span class="kw">struct</span> <span class="op">{</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> anio_estreno<span class="op">;</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">float</span> rating<span class="op">;</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> Pelicula<span class="op">;</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    Pelicula film<span class="op">;</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Acceso y asignaciÃ³n directa con el operador punto (.)</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    film<span class="op">.</span>anio_estreno <span class="op">=</span> <span class="dv">2024</span><span class="op">;</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    film<span class="op">.</span>rating <span class="op">=</span> <span class="fl">8.5</span><span class="bu">f</span><span class="op">;</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;Pelicula: </span><span class="sc">%d</span><span class="st">, Rating: </span><span class="sc">%.2f\n</span><span class="st">&quot;</span><span class="op">,</span> film<span class="op">.</span>anio_estreno<span class="op">,</span> film<span class="op">.</span>rating<span class="op">);</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<h4 id="inicializaciÃ³n-y-modificaciÃ³n-con-punto">2) InicializaciÃ³n y
+ModificaciÃ³n con Punto</h4>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Input de Ejemplo</th>
+<th style="text-align: center;">Output Esperado</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">(Ninguna)</td>
+<td style="text-align: center;">Nuevo valor de USD: 0.93</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb2"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="kw">typedef</span> <span class="kw">struct</span> <span class="op">{</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">char</span> nombre<span class="op">[</span><span class="dv">10</span><span class="op">];</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">float</span> valor<span class="op">;</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> Moneda<span class="op">;</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    <span class="co">// InicializaciÃ³n de la cadena usando inicializaciÃ³n designada para la struct</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    Moneda dolar <span class="op">=</span> <span class="op">{.</span>nombre <span class="op">=</span> <span class="st">&quot;USD&quot;</span><span class="op">,</span> <span class="op">.</span>valor <span class="op">=</span> <span class="fl">1.0</span><span class="bu">f</span><span class="op">};</span> </span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    <span class="co">// ModificaciÃ³n directa con el operador punto</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    dolar<span class="op">.</span>valor <span class="op">=</span> <span class="dv">0</span><span class="er">.93f</span><span class="op">;</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;Nuevo valor de USD: </span><span class="sc">%.2f\n</span><span class="st">&quot;</span><span class="op">,</span> dolar<span class="op">.</span>valor<span class="op">);</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<h4 id="copia-de-structs-y-acceso-por-punto">3) Copia de Structs y
+Acceso por Punto</h4>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Input de Ejemplo</th>
+<th style="text-align: center;">Output Esperado</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">(Ninguna)</td>
+<td style="text-align: center;">Alto de caja2: 5</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb3"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="kw">typedef</span> <span class="kw">struct</span> <span class="op">{</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> ancho<span class="op">;</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> alto<span class="op">;</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> Caja<span class="op">;</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    Caja caja1 <span class="op">=</span> <span class="op">{</span><span class="dv">10</span><span class="op">,</span> <span class="dv">5</span><span class="op">};</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    Caja caja2<span class="op">;</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    <span class="co">// La asignaciÃ³n de structs copia todos los miembros</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>    caja2 <span class="op">=</span> caja1<span class="op">;</span> </span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Acceso directo a la copia con el operador punto</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;Alto de caja2: </span><span class="sc">%d\n</span><span class="st">&quot;</span><span class="op">,</span> caja2<span class="op">.</span>alto<span class="op">);</span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<hr />
+<h3 id="bloque-2-punteros-a-structs-y-operador-flecha---1">Bloque 2:
+Punteros a Structs y Operador Flecha (<code>-&gt;</code>)</h3>
+<h4 id="declaraciÃ³n-de-puntero-y-asignaciÃ³n-de-direcciÃ³n">4) DeclaraciÃ³n
+de Puntero y AsignaciÃ³n de DirecciÃ³n</h4>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Input de Ejemplo</th>
+<th style="text-align: center;">Output Esperado</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">(Ninguna)</td>
+<td style="text-align: center;">Direccion: 0x7ffeeâ€¦abc (La direcciÃ³n
+variarÃ¡)</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb4"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="kw">typedef</span> <span class="kw">struct</span> <span class="op">{</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> anio_estreno<span class="op">;</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">float</span> rating<span class="op">;</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> Pelicula<span class="op">;</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    Pelicula film_original <span class="op">=</span> <span class="op">{</span><span class="dv">2000</span><span class="op">,</span> <span class="fl">7.0</span><span class="bu">f</span><span class="op">};</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    Pelicula <span class="op">*</span>ptr_film<span class="op">;</span> <span class="co">// DeclaraciÃ³n del puntero a la estructura</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    <span class="co">// AsignaciÃ³n de la direcciÃ³n de memoria de la variable struct</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    ptr_film <span class="op">=</span> <span class="op">&amp;</span>film_original<span class="op">;</span> </span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;Direccion: </span><span class="sc">%p\n</span><span class="st">&quot;</span><span class="op">,</span> <span class="op">(</span><span class="dt">void</span><span class="op">*)</span>ptr_film<span class="op">);</span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<h4 id="acceso-indirecto-con-operador-flecha--">5) Acceso Indirecto con
+Operador Flecha (<code>-&gt;</code>)</h4>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Input de Ejemplo</th>
+<th style="text-align: center;">Output Esperado</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">(Ninguna)</td>
+<td style="text-align: center;">AÃ±o accedido por flecha: 1999</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb5"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="kw">typedef</span> <span class="kw">struct</span> <span class="op">{</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> anio_estreno<span class="op">;</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">float</span> rating<span class="op">;</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> Pelicula<span class="op">;</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>    Pelicula film_original <span class="op">=</span> <span class="op">{</span><span class="dv">2000</span><span class="op">,</span> <span class="fl">7.0</span><span class="bu">f</span><span class="op">};</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>    Pelicula <span class="op">*</span>ptr_film <span class="op">=</span> <span class="op">&amp;</span>film_original<span class="op">;</span> </span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>    <span class="co">// AsignaciÃ³n INDIRECTA con el operador FLECHA (-&gt;)</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>    ptr_film<span class="op">-&gt;</span>anio_estreno <span class="op">=</span> <span class="dv">1999</span><span class="op">;</span> </span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;AÃ±o accedido por flecha: </span><span class="sc">%d\n</span><span class="st">&quot;</span><span class="op">,</span> ptr_film<span class="op">-&gt;</span>anio_estreno<span class="op">);</span></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<h4 id="acceso-cruzado-punto-vs.-flecha">6) Acceso Cruzado (Punto
+vs.Â Flecha)</h4>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Input de Ejemplo</th>
+<th style="text-align: center;">Output Esperado</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">(Ninguna)</td>
+<td style="text-align: center;">Edad modificada (via flecha): 26</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb6"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="kw">typedef</span> <span class="kw">struct</span> <span class="op">{</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> edad<span class="op">;</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> Persona<span class="op">;</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    Persona yo <span class="op">=</span> <span class="op">{.</span>edad <span class="op">=</span> <span class="dv">25</span><span class="op">};</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>    Persona <span class="op">*</span>ptr_yo <span class="op">=</span> <span class="op">&amp;</span>yo<span class="op">;</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>    <span class="co">// 1. ModificaciÃ³n con operador punto (acceso directo)</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>    yo<span class="op">.</span>edad <span class="op">=</span> <span class="dv">26</span><span class="op">;</span> </span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>    <span class="co">// 2. Lectura con operador flecha (acceso indirecto)</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;Edad modificada (via flecha): </span><span class="sc">%d\n</span><span class="st">&quot;</span><span class="op">,</span> ptr_yo<span class="op">-&gt;</span>edad<span class="op">);</span></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<h4 id="asignaciÃ³n-de-string-a-travÃ©s-del-puntero">7) AsignaciÃ³n de
+String a travÃ©s del Puntero</h4>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Input de Ejemplo</th>
+<th style="text-align: center;">Output Esperado</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">(Ninguna)</td>
+<td style="text-align: center;">Titulo asignado: El Gran C</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb7"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;string.h&gt;</span><span class="pp"> </span><span class="co">// Necesario para strcpy</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="kw">typedef</span> <span class="kw">struct</span> <span class="op">{</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">char</span> titulo<span class="op">[</span><span class="dv">50</span><span class="op">];</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> Libro<span class="op">;</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>    Libro mi_libro<span class="op">;</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>    Libro <span class="op">*</span>ptr_libro <span class="op">=</span> <span class="op">&amp;</span>mi_libro<span class="op">;</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Acceso al miembro titulo a travÃ©s de la flecha</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>    strcpy<span class="op">(</span>ptr_libro<span class="op">-&gt;</span>titulo<span class="op">,</span> <span class="st">&quot;El Gran C&quot;</span><span class="op">);</span> </span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;Titulo asignado: </span><span class="sc">%s\n</span><span class="st">&quot;</span><span class="op">,</span> ptr_libro<span class="op">-&gt;</span>titulo<span class="op">);</span></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<hr />
+<h3 id="bloque-3-equivalencia-de-notaciÃ³n-1">Bloque 3: Equivalencia de
+NotaciÃ³n</h3>
+<h4 id="demostraciÃ³n-de-equivalencia-de-lectura">8) DemostraciÃ³n de
+Equivalencia de Lectura</h4>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Input de Ejemplo</th>
+<th style="text-align: center;">Output Esperado</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">(Ninguna)</td>
+<td style="text-align: center;">Valor (Larga): 3.141590<br>Valor
+(Flecha): 3.141590</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb8"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="kw">typedef</span> <span class="kw">struct</span> <span class="op">{</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">float</span> pi<span class="op">;</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> Datos<span class="op">;</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>    Datos constante <span class="op">=</span> <span class="op">{.</span>pi <span class="op">=</span> <span class="fl">3.14159</span><span class="bu">f</span><span class="op">};</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>    Datos <span class="op">*</span>ptr_constante <span class="op">=</span> <span class="op">&amp;</span>constante<span class="op">;</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>    <span class="co">// 1. Forma Larga: Desreferencia (*ptr) y luego acceso (.miembro).</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>    <span class="dt">float</span> valor_larga <span class="op">=</span> <span class="op">(*</span>ptr_constante<span class="op">).</span>pi<span class="op">;</span> </span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>    <span class="co">// 2. Forma Simplificada: Operador Flecha (-&gt;).</span></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>    <span class="dt">float</span> valor_flecha <span class="op">=</span> ptr_constante<span class="op">-&gt;</span>pi<span class="op">;</span></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;Valor (Larga): </span><span class="sc">%f\n</span><span class="st">&quot;</span><span class="op">,</span> valor_larga<span class="op">);</span></span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;Valor (Flecha): </span><span class="sc">%f\n</span><span class="st">&quot;</span><span class="op">,</span> valor_flecha<span class="op">);</span></span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<h4 id="demostraciÃ³n-de-equivalencia-de-escritura">9) DemostraciÃ³n de
+Equivalencia de Escritura</h4>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Input de Ejemplo</th>
+<th style="text-align: center;">Output Esperado</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">(Ninguna)</td>
+<td style="text-align: center;">Valor despues de (*p).valor: 10</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb9"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="kw">typedef</span> <span class="kw">struct</span> <span class="op">{</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> valor<span class="op">;</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> Contador<span class="op">;</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>    Contador c <span class="op">=</span> <span class="op">{</span><span class="dv">0</span><span class="op">};</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>    Contador <span class="op">*</span>ptr_c <span class="op">=</span> <span class="op">&amp;</span>c<span class="op">;</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>    <span class="co">// AsignaciÃ³n usando la sintaxis larga (*puntero).miembro</span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>    <span class="op">(*</span>ptr_c<span class="op">).</span>valor <span class="op">=</span> <span class="dv">10</span><span class="op">;</span> </span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Lectura con acceso directo (c.valor)</span></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;Valor despues de (*p).valor: </span><span class="sc">%d\n</span><span class="st">&quot;</span><span class="op">,</span> c<span class="op">.</span>valor<span class="op">);</span></span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<h4 id="error-de-precedencia-detecciÃ³n-de-fallo">10) Error de
+Precedencia (DetecciÃ³n de Fallo)</h4>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Input de Ejemplo</th>
+<th style="text-align: center;">Output Esperado</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">(Ninguna)</td>
+<td style="text-align: center;">(El compilador arrojarÃ¡ un error porque
+. tiene mayor precedencia que *).<br>Error Esperado: error: request for
+member â€˜numâ€™ in something not a structure or union</td>
+</tr>
+</tbody>
+</table>
+<p><strong>ExplicaciÃ³n del Error:</strong> El cÃ³digo incorrecto
+<code>*ptr_p.num = 5;</code> falla porque el operador punto
+(<code>.</code>) se evalÃºa primero que el asterisco
+(<code>*</code>).</p>
+<ol type="1">
+<li>El compilador intenta ejecutar <code>ptr_p.num</code>. Esto es
+incorrecto porque <code>ptr_p</code> es un puntero, no una estructura
+directa.</li>
+<li>DeberÃ­a haber sido <strong><code>(*ptr_p).num</code></strong>
+(desreferenciar primero para obtener la estructura, luego acceder).</li>
+</ol>
+<p><strong>CÃ³digo Correcto para Corroborar el Comportamiento (No
+Ejecutable, solo para ilustraciÃ³n del error):</strong></p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co">/*</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co">// Este cÃ³digo NO COMPILA</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="co">typedef struct { int num; } Par;</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="co">int main() {</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="co">    Par p = {0};</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="co">    Par *ptr_p = &amp;p;</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="co">    </span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="co">    // El compilador intentarÃ¡: *(ptr_p.num), lo cual es invÃ¡lido</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="co">    *ptr_p.num = 5; // ERROR: Â¡AquÃ­ faltan los parÃ©ntesis!</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="co">    </span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a><span class="co">    return 0;</span></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a><span class="co">}</span></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a><span class="co">*/</span></span></code></pre></div>
+
+</div>
+</body>
+</html>
+

@@ -1,0 +1,284 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" crossorigin href="/assets/content-01sust.css">
+</head>
+<body>
+<div class="main-content">
+<h2 id="nota">Nota:</h2>
+<p>Este proyecto requiere compilar tres archivos juntos:</p>
+<ol type="1">
+<li><strong><code>vector_dinamico.h</code></strong>: El archivo de
+cabecera con la estructura y las firmas de las funciones.</li>
+<li><strong><code>vector_dinamico.c</code></strong>: La implementaciÃ³n
+de todas las funciones de memoria y lÃ³gica.</li>
+<li><strong><code>main.c</code></strong>: El programa de prueba que
+demuestra el crecimiento, la inserciÃ³n genÃ©rica (con
+<code>calloc</code>) y la liberaciÃ³n segura.</li>
+</ol>
+<hr />
+<h2 id="archivo-de-cabecera-vector_dinamico.h">1. Archivo de Cabecera:
+<code>vector_dinamico.h</code></h2>
+<p>Este archivo define la interfaz pÃºblica de la biblioteca.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#ifndef VECTOR_DINAMICO_H</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#define VECTOR_DINAMICO_H</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdlib.h&gt;</span><span class="pp"> </span><span class="co">// Para size_t, NULL</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co">// Estructura del Vector DinÃ¡mico</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co">// Almacena PUNTEROS GENÃ‰RICOS (void *)</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="kw">typedef</span> <span class="kw">struct</span> <span class="op">{</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    <span class="dt">void</span> <span class="op">**</span>datos<span class="op">;</span>       <span class="co">// Puntero doble: Puntero al array de punteros genÃ©ricos</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    <span class="dt">size_t</span> capacidad<span class="op">;</span>   <span class="co">// Memoria total asignada actualmente</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    <span class="dt">size_t</span> tamanio<span class="op">;</span>     <span class="co">// NÃºmero actual de elementos almacenados</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> VectorDinamico<span class="op">;</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="co">// Funciones Obligatorias</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> vector_init<span class="op">(</span>VectorDinamico <span class="op">*</span>v<span class="op">,</span> <span class="dt">size_t</span> capacidad_inicial<span class="op">);</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> vector_push<span class="op">(</span>VectorDinamico <span class="op">*</span>v<span class="op">,</span> <span class="dt">void</span> <span class="op">*</span>elemento<span class="op">);</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> <span class="op">*</span>vector_pop<span class="op">(</span>VectorDinamico <span class="op">*</span>v<span class="op">);</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> <span class="op">*</span>vector_get<span class="op">(</span><span class="dt">const</span> VectorDinamico <span class="op">*</span>v<span class="op">,</span> <span class="dt">size_t</span> indice<span class="op">);</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> vector_free<span class="op">(</span>VectorDinamico <span class="op">*</span>v<span class="op">);</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="co">// FunciÃ³n Auxiliar CrÃ­tica de RedimensiÃ³n</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> vector_redimensionar<span class="op">(</span>VectorDinamico <span class="op">*</span>v<span class="op">,</span> <span class="dt">size_t</span> nueva_capacidad<span class="op">);</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="pp">#endif </span><span class="co">// VECTOR_DINAMICO_H</span></span></code></pre></div>
+<hr />
+<h2 id="archivo-de-implementaciÃ³n-vector_dinamico.c">2. Archivo de
+ImplementaciÃ³n: <code>vector_dinamico.c</code></h2>
+<p>AquÃ­ se implementan la lÃ³gica de crecimiento amortizado (DesafÃ­o I),
+la aritmÃ©tica de punteros y la gestiÃ³n segura de
+<code>realloc()</code>.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;vector_dinamico.h&quot;</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co">/**</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co"> * </span><span class="an">@brief</span><span class="co"> FunciÃ³n Auxiliar CrÃ­tica: Redimensiona la capacidad del vector.</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co"> * </span><span class="an">@param</span><span class="co"> </span><span class="cv">v</span><span class="co"> Puntero al VectorDinamico.</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co"> * </span><span class="an">@param</span><span class="co"> </span><span class="cv">nueva_capacidad</span><span class="co"> La nueva capacidad deseada.</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co"> * </span><span class="an">@return</span><span class="co"> 1 si tiene Ã©xito, 0 si falla (realloc devuelve NULL).</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="co"> */</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> vector_redimensionar<span class="op">(</span>VectorDinamico <span class="op">*</span>v<span class="op">,</span> <span class="dt">size_t</span> nueva_capacidad<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    <span class="co">// --- DESAFÃO I: GESTIÃ“N SEGURA DE realloc() ---</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    <span class="co">// 1. Intentar la redimensiÃ³n y guardar el resultado en un puntero temporal.</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    <span class="dt">void</span> <span class="op">**</span>temp_ptr <span class="op">=</span> <span class="op">(</span><span class="dt">void</span> <span class="op">**)</span>realloc<span class="op">(</span>v<span class="op">-&gt;</span>datos<span class="op">,</span> nueva_capacidad <span class="op">*</span> <span class="kw">sizeof</span><span class="op">(</span><span class="dt">void</span> <span class="op">*));</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>    <span class="co">// 2. ComprobaciÃ³n esencial de NULL. Â¡CRÃTICO! (Ver archivo 300)</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>temp_ptr <span class="op">==</span> NULL<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Fallo: NO PERDER EL PUNTERO ORIGINAL. </span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>        <span class="co">// El vector sigue siendo funcional con su capacidad antigua.</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>        fprintf<span class="op">(</span>stderr<span class="op">,</span> <span class="st">&quot;ADVERTENCIA: realloc fallÃ³. Capacidad no modificada.</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span> <span class="co">// Falla la redimensiÃ³n</span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>    <span class="co">// 3. Ã‰xito: Actualizamos el puntero y la capacidad</span></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>    v<span class="op">-&gt;</span>datos <span class="op">=</span> temp_ptr<span class="op">;</span></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>    v<span class="op">-&gt;</span>capacidad <span class="op">=</span> nueva_capacidad<span class="op">;</span></span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;DEBUG: Redimension OK. Nueva Capacidad: </span><span class="sc">%zu</span><span class="st">.</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">,</span> v<span class="op">-&gt;</span>capacidad<span class="op">);</span></span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">1</span><span class="op">;</span> <span class="co">// Ã‰xito</span></span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a><span class="co">// ImplementaciÃ³n de vector_init</span></span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> vector_init<span class="op">(</span>VectorDinamico <span class="op">*</span>v<span class="op">,</span> <span class="dt">size_t</span> capacidad_inicial<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>capacidad_inicial <span class="op">==</span> <span class="dv">0</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>        capacidad_inicial <span class="op">=</span> <span class="dv">1</span><span class="op">;</span> </span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Usamos malloc para el array inicial de punteros (void *)</span></span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>    v<span class="op">-&gt;</span>datos <span class="op">=</span> <span class="op">(</span><span class="dt">void</span> <span class="op">**)</span>malloc<span class="op">(</span>capacidad_inicial <span class="op">*</span> <span class="kw">sizeof</span><span class="op">(</span><span class="dt">void</span> <span class="op">*));</span></span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a>    <span class="co">// ComprobaciÃ³n de NULL (Ver archivo 200)</span></span>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>v<span class="op">-&gt;</span>datos <span class="op">==</span> NULL<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a>        v<span class="op">-&gt;</span>capacidad <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a>        v<span class="op">-&gt;</span>tamanio <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span> <span class="co">// Fallo al asignar</span></span>
+<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a>    v<span class="op">-&gt;</span>capacidad <span class="op">=</span> capacidad_inicial<span class="op">;</span></span>
+<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a>    v<span class="op">-&gt;</span>tamanio <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">1</span><span class="op">;</span> <span class="co">// Ã‰xito</span></span>
+<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a><span class="co">// ImplementaciÃ³n de vector_push</span></span>
+<span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> vector_push<span class="op">(</span>VectorDinamico <span class="op">*</span>v<span class="op">,</span> <span class="dt">void</span> <span class="op">*</span>elemento<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a>    <span class="co">// 1. CHEQUEAR LA NECESIDAD DE CRECIMIENTO</span></span>
+<span id="cb2-58"><a href="#cb2-58" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>v<span class="op">-&gt;</span>tamanio <span class="op">==</span> v<span class="op">-&gt;</span>capacidad<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb2-59"><a href="#cb2-59" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Regla de Crecimiento Amortizado: Duplicar capacidad</span></span>
+<span id="cb2-60"><a href="#cb2-60" aria-hidden="true" tabindex="-1"></a>        <span class="dt">size_t</span> nueva_capacidad <span class="op">=</span> v<span class="op">-&gt;</span>capacidad <span class="op">*</span> <span class="dv">2</span><span class="op">;</span></span>
+<span id="cb2-61"><a href="#cb2-61" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb2-62"><a href="#cb2-62" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(!</span>vector_redimensionar<span class="op">(</span>v<span class="op">,</span> nueva_capacidad<span class="op">))</span> <span class="op">{</span></span>
+<span id="cb2-63"><a href="#cb2-63" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span> <span class="co">// Fallo en la redimensiÃ³n</span></span>
+<span id="cb2-64"><a href="#cb2-64" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
+<span id="cb2-65"><a href="#cb2-65" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb2-66"><a href="#cb2-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-67"><a href="#cb2-67" aria-hidden="true" tabindex="-1"></a>    <span class="co">// 2. INSERTAR EL ELEMENTO con ARITMÃ‰TICA DE PUNTEROS</span></span>
+<span id="cb2-68"><a href="#cb2-68" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Acceso estricto: *(v-&gt;datos + offset)</span></span>
+<span id="cb2-69"><a href="#cb2-69" aria-hidden="true" tabindex="-1"></a>    <span class="op">*(</span>v<span class="op">-&gt;</span>datos <span class="op">+</span> v<span class="op">-&gt;</span>tamanio<span class="op">)</span> <span class="op">=</span> elemento<span class="op">;</span> </span>
+<span id="cb2-70"><a href="#cb2-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-71"><a href="#cb2-71" aria-hidden="true" tabindex="-1"></a>    <span class="co">// 3. ACTUALIZAR EL TAMAÃ‘O</span></span>
+<span id="cb2-72"><a href="#cb2-72" aria-hidden="true" tabindex="-1"></a>    v<span class="op">-&gt;</span>tamanio<span class="op">++;</span></span>
+<span id="cb2-73"><a href="#cb2-73" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-74"><a href="#cb2-74" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb2-75"><a href="#cb2-75" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb2-76"><a href="#cb2-76" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-77"><a href="#cb2-77" aria-hidden="true" tabindex="-1"></a><span class="co">// ImplementaciÃ³n de vector_get</span></span>
+<span id="cb2-78"><a href="#cb2-78" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> <span class="op">*</span>vector_get<span class="op">(</span><span class="dt">const</span> VectorDinamico <span class="op">*</span>v<span class="op">,</span> <span class="dt">size_t</span> indice<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb2-79"><a href="#cb2-79" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>indice <span class="op">&gt;=</span> v<span class="op">-&gt;</span>tamanio<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb2-80"><a href="#cb2-80" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> NULL<span class="op">;</span> <span class="co">// Ãndice fuera de los lÃ­mites</span></span>
+<span id="cb2-81"><a href="#cb2-81" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb2-82"><a href="#cb2-82" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-83"><a href="#cb2-83" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Acceso con ARITMÃ‰TICA DE PUNTEROS</span></span>
+<span id="cb2-84"><a href="#cb2-84" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="op">*(</span>v<span class="op">-&gt;</span>datos <span class="op">+</span> indice<span class="op">);</span></span>
+<span id="cb2-85"><a href="#cb2-85" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb2-86"><a href="#cb2-86" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-87"><a href="#cb2-87" aria-hidden="true" tabindex="-1"></a><span class="co">// ImplementaciÃ³n de vector_pop</span></span>
+<span id="cb2-88"><a href="#cb2-88" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> <span class="op">*</span>vector_pop<span class="op">(</span>VectorDinamico <span class="op">*</span>v<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb2-89"><a href="#cb2-89" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>v<span class="op">-&gt;</span>tamanio <span class="op">==</span> <span class="dv">0</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb2-90"><a href="#cb2-90" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> NULL<span class="op">;</span> <span class="co">// El vector estÃ¡ vacÃ­o</span></span>
+<span id="cb2-91"><a href="#cb2-91" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb2-92"><a href="#cb2-92" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-93"><a href="#cb2-93" aria-hidden="true" tabindex="-1"></a>    <span class="co">// 1. Reducir el tamaÃ±o (apunta al anterior Ãºltimo elemento)</span></span>
+<span id="cb2-94"><a href="#cb2-94" aria-hidden="true" tabindex="-1"></a>    v<span class="op">-&gt;</span>tamanio<span class="op">--;</span></span>
+<span id="cb2-95"><a href="#cb2-95" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-96"><a href="#cb2-96" aria-hidden="true" tabindex="-1"></a>    <span class="co">// 2. Obtener el elemento removido</span></span>
+<span id="cb2-97"><a href="#cb2-97" aria-hidden="true" tabindex="-1"></a>    <span class="dt">void</span> <span class="op">*</span>elemento <span class="op">=</span> <span class="op">*(</span>v<span class="op">-&gt;</span>datos <span class="op">+</span> v<span class="op">-&gt;</span>tamanio<span class="op">);</span></span>
+<span id="cb2-98"><a href="#cb2-98" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-99"><a href="#cb2-99" aria-hidden="true" tabindex="-1"></a>    <span class="co">// 3. Buena PrÃ¡ctica: Establecer el puntero en la posiciÃ³n liberada a NULL</span></span>
+<span id="cb2-100"><a href="#cb2-100" aria-hidden="true" tabindex="-1"></a>    <span class="op">*(</span>v<span class="op">-&gt;</span>datos <span class="op">+</span> v<span class="op">-&gt;</span>tamanio<span class="op">)</span> <span class="op">=</span> NULL<span class="op">;</span></span>
+<span id="cb2-101"><a href="#cb2-101" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-102"><a href="#cb2-102" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> elemento<span class="op">;</span></span>
+<span id="cb2-103"><a href="#cb2-103" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb2-104"><a href="#cb2-104" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-105"><a href="#cb2-105" aria-hidden="true" tabindex="-1"></a><span class="co">// ImplementaciÃ³n de vector_free</span></span>
+<span id="cb2-106"><a href="#cb2-106" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> vector_free<span class="op">(</span>VectorDinamico <span class="op">*</span>v<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb2-107"><a href="#cb2-107" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>v<span class="op">-&gt;</span>datos <span class="op">!=</span> NULL<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb2-108"><a href="#cb2-108" aria-hidden="true" tabindex="-1"></a>        <span class="co">// 1. Liberar la memoria del array de punteros (void **)</span></span>
+<span id="cb2-109"><a href="#cb2-109" aria-hidden="true" tabindex="-1"></a>        free<span class="op">(</span>v<span class="op">-&gt;</span>datos<span class="op">);</span></span>
+<span id="cb2-110"><a href="#cb2-110" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb2-111"><a href="#cb2-111" aria-hidden="true" tabindex="-1"></a>        <span class="co">// 2. Prevenir Punteros Colgantes y Double Free (Ver archivo 500)</span></span>
+<span id="cb2-112"><a href="#cb2-112" aria-hidden="true" tabindex="-1"></a>        v<span class="op">-&gt;</span>datos <span class="op">=</span> NULL<span class="op">;</span> </span>
+<span id="cb2-113"><a href="#cb2-113" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb2-114"><a href="#cb2-114" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Opcional: Resetear el estado de la estructura</span></span>
+<span id="cb2-115"><a href="#cb2-115" aria-hidden="true" tabindex="-1"></a>    v<span class="op">-&gt;</span>capacidad <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb2-116"><a href="#cb2-116" aria-hidden="true" tabindex="-1"></a>    v<span class="op">-&gt;</span>tamanio <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb2-117"><a href="#cb2-117" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<hr />
+<h2 id="archivo-de-prueba-main.c">3. Archivo de Prueba:
+<code>main.c</code></h2>
+<p>Este programa demuestra el uso genÃ©rico (<code>Tarea</code>), fuerza
+el crecimiento (<code>realloc</code>) y realiza la liberaciÃ³n en dos
+pasos para evitar fugas (<code>free</code> de los datos internos y luego
+<code>vector_free</code>).</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;vector_dinamico.h&quot;</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdlib.h&gt;</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;string.h&gt;</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co">// DefiniciÃ³n de una estructura de prueba (simulando datos reales)</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="kw">typedef</span> <span class="kw">struct</span> <span class="op">{</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> id<span class="op">;</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    <span class="dt">char</span> nombre<span class="op">[</span><span class="dv">30</span><span class="op">];</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> Tarea<span class="op">;</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="co">// FunciÃ³n para liberar los DATOS individuales apuntados por el vector</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> liberar_datos_internos<span class="op">(</span>VectorDinamico <span class="op">*</span>v<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;</span><span class="sc">\n</span><span class="st">--- PASO CRÃTICO: LIBERANDO LOS BLOQUES DE DATOS INDIVIDUALES EN EL HEAP ---</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Recorrer y liberar CADA bloque de memoria al que apuntan los void *</span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">size_t</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> v<span class="op">-&gt;</span>tamanio<span class="op">;</span> i<span class="op">++)</span> <span class="op">{</span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>        <span class="dt">void</span> <span class="op">*</span>dato_ptr <span class="op">=</span> vector_get<span class="op">(</span>v<span class="op">,</span> i<span class="op">);</span></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span>dato_ptr <span class="op">!=</span> NULL<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>            printf<span class="op">(</span><span class="st">&quot;Liberando: [ID </span><span class="sc">%d</span><span class="st">] en </span><span class="sc">%p\n</span><span class="st">&quot;</span><span class="op">,</span> <span class="op">((</span>Tarea <span class="op">*)</span>dato_ptr<span class="op">)-&gt;</span>id<span class="op">,</span> dato_ptr<span class="op">);</span></span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>            free<span class="op">(</span>dato_ptr<span class="op">);</span></span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>    <span class="co">// El vector ahora solo contiene punteros basura (colgantes), </span></span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>    <span class="co">// pero el siguiente paso (vector_free) lo soluciona al liberar el array.</span></span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Inicializar con capacidad 2 para FORZAR 2 REDIMENSIONES (2 -&gt; 4 -&gt; 8)</span></span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>    <span class="dt">const</span> <span class="dt">size_t</span> CAPACIDAD_INICIAL <span class="op">=</span> <span class="dv">2</span><span class="op">;</span> </span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a>    VectorDinamico vec<span class="op">;</span></span>
+<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;### INICIO DEL PROYECTO: VECTOR DINÃMICO GENÃ‰RICO ###</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a>    <span class="co">// 1. InicializaciÃ³n</span></span>
+<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(!</span>vector_init<span class="op">(&amp;</span>vec<span class="op">,</span> CAPACIDAD_INICIAL<span class="op">))</span> <span class="op">{</span></span>
+<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a>        fprintf<span class="op">(</span>stderr<span class="op">,</span> <span class="st">&quot;ERROR: Fallo en la inicializaciÃ³n (memoria insuficiente).</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> EXIT_FAILURE<span class="op">;</span></span>
+<span id="cb3-40"><a href="#cb3-40" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb3-41"><a href="#cb3-41" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;Vector inicializado. Capacidad: </span><span class="sc">%zu</span><span class="st"> | TamaÃ±o: </span><span class="sc">%zu\n</span><span class="st">&quot;</span><span class="op">,</span> vec<span class="op">.</span>capacidad<span class="op">,</span> vec<span class="op">.</span>tamanio<span class="op">);</span></span>
+<span id="cb3-42"><a href="#cb3-42" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-43"><a href="#cb3-43" aria-hidden="true" tabindex="-1"></a>    <span class="co">// --- Bucle de InserciÃ³n ---</span></span>
+<span id="cb3-44"><a href="#cb3-44" aria-hidden="true" tabindex="-1"></a>    <span class="dt">const</span> <span class="dt">int</span> NUM_ELEMENTOS <span class="op">=</span> <span class="dv">5</span><span class="op">;</span> </span>
+<span id="cb3-45"><a href="#cb3-45" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> NUM_ELEMENTOS<span class="op">;</span> i<span class="op">++)</span> <span class="op">{</span></span>
+<span id="cb3-46"><a href="#cb3-46" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb3-47"><a href="#cb3-47" aria-hidden="true" tabindex="-1"></a>        <span class="co">// **DesafÃ­o II: Usar calloc para asignar el elemento individual (InicializaciÃ³n a 0)**</span></span>
+<span id="cb3-48"><a href="#cb3-48" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Esto garantiza que los bytes se inicialicen a cero (Ver archivo 400)</span></span>
+<span id="cb3-49"><a href="#cb3-49" aria-hidden="true" tabindex="-1"></a>        Tarea <span class="op">*</span>nueva_tarea <span class="op">=</span> <span class="op">(</span>Tarea <span class="op">*)</span>calloc<span class="op">(</span><span class="dv">1</span><span class="op">,</span> <span class="kw">sizeof</span><span class="op">(</span>Tarea<span class="op">));</span> </span>
+<span id="cb3-50"><a href="#cb3-50" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb3-51"><a href="#cb3-51" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span>nueva_tarea <span class="op">==</span> NULL<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb3-52"><a href="#cb3-52" aria-hidden="true" tabindex="-1"></a>            fprintf<span class="op">(</span>stderr<span class="op">,</span> <span class="st">&quot;ERROR: calloc fallÃ³. Terminando.</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb3-53"><a href="#cb3-53" aria-hidden="true" tabindex="-1"></a>            <span class="cf">goto</span> cleanup<span class="op">;</span> <span class="co">// Saltar a la limpieza de memoria</span></span>
+<span id="cb3-54"><a href="#cb3-54" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
+<span id="cb3-55"><a href="#cb3-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-56"><a href="#cb3-56" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Asignar datos reales</span></span>
+<span id="cb3-57"><a href="#cb3-57" aria-hidden="true" tabindex="-1"></a>        nueva_tarea<span class="op">-&gt;</span>id <span class="op">=</span> <span class="dv">100</span> <span class="op">+</span> i<span class="op">;</span></span>
+<span id="cb3-58"><a href="#cb3-58" aria-hidden="true" tabindex="-1"></a>        sprintf<span class="op">(</span>nueva_tarea<span class="op">-&gt;</span>nombre<span class="op">,</span> <span class="st">&quot;Tarea_</span><span class="sc">%d</span><span class="st">&quot;</span><span class="op">,</span> i<span class="op">);</span></span>
+<span id="cb3-59"><a href="#cb3-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-60"><a href="#cb3-60" aria-hidden="true" tabindex="-1"></a>        <span class="co">// 2. Push (ForzarÃ¡ redimensiÃ³n en i=2 y i=4)</span></span>
+<span id="cb3-61"><a href="#cb3-61" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(!</span>vector_push<span class="op">(&amp;</span>vec<span class="op">,</span> nueva_tarea<span class="op">))</span> <span class="op">{</span></span>
+<span id="cb3-62"><a href="#cb3-62" aria-hidden="true" tabindex="-1"></a>            fprintf<span class="op">(</span>stderr<span class="op">,</span> <span class="st">&quot;ERROR CRÃTICO: Fallo en vector_push (Redimension fallida).</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb3-63"><a href="#cb3-63" aria-hidden="true" tabindex="-1"></a>            free<span class="op">(</span>nueva_tarea<span class="op">);</span> <span class="co">// Liberar el elemento que no se pudo insertar</span></span>
+<span id="cb3-64"><a href="#cb3-64" aria-hidden="true" tabindex="-1"></a>            <span class="cf">goto</span> cleanup<span class="op">;</span> <span class="co">// Saltar a la limpieza de memoria</span></span>
+<span id="cb3-65"><a href="#cb3-65" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
+<span id="cb3-66"><a href="#cb3-66" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">&quot;  &gt;&gt; Push OK: [ID </span><span class="sc">%d</span><span class="st">]. TamaÃ±o: </span><span class="sc">%zu</span><span class="st">/</span><span class="sc">%zu\n</span><span class="st">&quot;</span><span class="op">,</span> nueva_tarea<span class="op">-&gt;</span>id<span class="op">,</span> vec<span class="op">.</span>tamanio<span class="op">,</span> vec<span class="op">.</span>capacidad<span class="op">);</span></span>
+<span id="cb3-67"><a href="#cb3-67" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb3-68"><a href="#cb3-68" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-69"><a href="#cb3-69" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;</span><span class="sc">\n</span><span class="st">--- VERIFICACIÃ“N DE LECTURA Y CASTING ---</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb3-70"><a href="#cb3-70" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">size_t</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> vec<span class="op">.</span>tamanio<span class="op">;</span> i<span class="op">++)</span> <span class="op">{</span></span>
+<span id="cb3-71"><a href="#cb3-71" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Se requiere el casting de void * a Tarea *</span></span>
+<span id="cb3-72"><a href="#cb3-72" aria-hidden="true" tabindex="-1"></a>        Tarea <span class="op">*</span>t <span class="op">=</span> <span class="op">(</span>Tarea <span class="op">*)</span>vector_get<span class="op">(&amp;</span>vec<span class="op">,</span> i<span class="op">);</span></span>
+<span id="cb3-73"><a href="#cb3-73" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span>t <span class="op">!=</span> NULL<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb3-74"><a href="#cb3-74" aria-hidden="true" tabindex="-1"></a>            printf<span class="op">(</span><span class="st">&quot;GET [</span><span class="sc">%zu</span><span class="st">]: ID: </span><span class="sc">%d</span><span class="st">, Nombre: </span><span class="sc">%s\n</span><span class="st">&quot;</span><span class="op">,</span> i<span class="op">,</span> t<span class="op">-&gt;</span>id<span class="op">,</span> t<span class="op">-&gt;</span>nombre<span class="op">);</span></span>
+<span id="cb3-75"><a href="#cb3-75" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
+<span id="cb3-76"><a href="#cb3-76" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb3-77"><a href="#cb3-77" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-78"><a href="#cb3-78" aria-hidden="true" tabindex="-1"></a>    <span class="co">// --- Prueba de POP ---</span></span>
+<span id="cb3-79"><a href="#cb3-79" aria-hidden="true" tabindex="-1"></a>    Tarea <span class="op">*</span>ultima_tarea <span class="op">=</span> <span class="op">(</span>Tarea <span class="op">*)</span>vector_pop<span class="op">(&amp;</span>vec<span class="op">);</span> </span>
+<span id="cb3-80"><a href="#cb3-80" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>ultima_tarea <span class="op">!=</span> NULL<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb3-81"><a href="#cb3-81" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">&quot;</span><span class="sc">\n</span><span class="st">POP OK. Elemento removido: ID </span><span class="sc">%d</span><span class="st">. TamaÃ±o Final: </span><span class="sc">%zu\n</span><span class="st">&quot;</span><span class="op">,</span> ultima_tarea<span class="op">-&gt;</span>id<span class="op">,</span> vec<span class="op">.</span>tamanio<span class="op">);</span></span>
+<span id="cb3-82"><a href="#cb3-82" aria-hidden="true" tabindex="-1"></a>        free<span class="op">(</span>ultima_tarea<span class="op">);</span> <span class="co">// Liberar el dato del Heap</span></span>
+<span id="cb3-83"><a href="#cb3-83" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb3-84"><a href="#cb3-84" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-85"><a href="#cb3-85" aria-hidden="true" tabindex="-1"></a>    <span class="co">// 3. Limpieza CrÃ­tica de Memoria</span></span>
+<span id="cb3-86"><a href="#cb3-86" aria-hidden="true" tabindex="-1"></a>    cleanup<span class="op">:</span></span>
+<span id="cb3-87"><a href="#cb3-87" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;</span><span class="sc">\n</span><span class="st">### LIBERACIÃ“N TOTAL DE MEMORIA ###</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb3-88"><a href="#cb3-88" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-89"><a href="#cb3-89" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Primer paso: Liberar los datos internos (los bloques que calloc asignÃ³)</span></span>
+<span id="cb3-90"><a href="#cb3-90" aria-hidden="true" tabindex="-1"></a>    liberar_datos_internos<span class="op">(&amp;</span>vec<span class="op">);</span></span>
+<span id="cb3-91"><a href="#cb3-91" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-92"><a href="#cb3-92" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Segundo paso: Liberar el array de punteros (lo que malloc/realloc asignÃ³)</span></span>
+<span id="cb3-93"><a href="#cb3-93" aria-hidden="true" tabindex="-1"></a>    vector_free<span class="op">(&amp;</span>vec<span class="op">);</span></span>
+<span id="cb3-94"><a href="#cb3-94" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-95"><a href="#cb3-95" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;vector_free() OK. Puntero v.datos ahora es: </span><span class="sc">%p\n</span><span class="st">&quot;</span><span class="op">,</span> <span class="op">(</span><span class="dt">void</span> <span class="op">*)</span>vec<span class="op">.</span>datos<span class="op">);</span></span>
+<span id="cb3-96"><a href="#cb3-96" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-97"><a href="#cb3-97" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;</span><span class="sc">\n</span><span class="st">**INSTRUCCIÃ“N:** Ejecute con Valgrind para verificar la ausencia de fugas (Ver archivo 600):</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb3-98"><a href="#cb3-98" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;valgrind --leak-check=full --show-leak-kinds=all ./main</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb3-99"><a href="#cb3-99" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-100"><a href="#cb3-100" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> EXIT_SUCCESS<span class="op">;</span></span>
+<span id="cb3-101"><a href="#cb3-101" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+
+</div>
+</body>
+</html>
+

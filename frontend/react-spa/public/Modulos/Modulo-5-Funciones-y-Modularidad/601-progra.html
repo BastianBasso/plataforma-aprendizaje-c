@@ -1,0 +1,440 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" crossorigin href="/assets/content-01sust.css">
+</head>
+<body>
+<div class="main-content">
+<p><strong>15 Ejercicios de ProgramaciÃ³n: LibrerÃ­as Simples (.h y .c
+Conceptual) ðŸ› ï¸</strong></p>
+<p><strong>RecomendaciÃ³n:</strong> Se recomienda altamente el uso de un
+ambiente de desarrollo (IDE, como VS Code o Code::Blocks, o un
+compilador en lÃ­nea con soporte para mÃºltiples archivos) para realizar
+estos ejercicios y probar la modularidad y el enlazado.</p>
+<p><strong>Bloque 1: SeparaciÃ³n de Responsabilidades (.h vs.Â .c)
+ðŸ“</strong></p>
+<ol type="1">
+<li><p><strong>IdentificaciÃ³n de Contenido del .h
+(Interfaz)</strong></p>
+<ul>
+<li><p><strong>Tarea:</strong> Crea un archivo geometria.h
+conceptualmente.</p></li>
+<li><p><strong>Requisito:</strong> Debe contener el
+<strong>prototipo</strong> para dos funciones: float
+calcular_area_circulo(float radio) y float calcular_volumen_cubo(float
+lado). <strong>Comenta</strong> por quÃ© estas lÃ­neas (solo la firma de
+la funciÃ³n) van en el .h.</p></li>
+</ul></li>
+<li><p><strong>IdentificaciÃ³n de Contenido del .c
+(ImplementaciÃ³n)</strong></p>
+<ul>
+<li><p><strong>Tarea:</strong> Crea un archivo geometria.c
+conceptualmente.</p></li>
+<li><p><strong>Requisito:</strong> Debe contener la
+<strong>definiciÃ³n</strong> (el cuerpo con la lÃ³gica de cÃ¡lculo) para
+las funciones anteriores. <strong>Comenta</strong> la importancia de
+incluir #include "geometria.h" al inicio del archivo .c.</p></li>
+</ul></li>
+<li><p><strong>El Principio de la Responsabilidad Ãšnica</strong></p>
+<ul>
+<li><p><strong>Tarea:</strong> Describe quÃ© tipo de funciones deben
+agruparse en un mÃ³dulo llamado gestion_clientes.h y
+gestion_clientes.c.</p></li>
+<li><p><strong>Requisito:</strong> Nombra al menos tres funciones
+relacionadas con ese tema (ej: agregar_cliente()).
+<strong>Explica</strong> brevemente por quÃ© agruparlas respeta el
+<strong>Principio de la Responsabilidad Ãšnica</strong>.</p></li>
+</ul></li>
+<li><p><strong>AbstracciÃ³n y OcultaciÃ³n de LÃ³gica</strong></p>
+<ul>
+<li><p><strong>Tarea:</strong> Una funciÃ³n void registrar_log(char*
+mensaje) requiere lÃ³gica interna compleja (manejo de archivos, marca de
+tiempo, etc.).</p></li>
+<li><p><strong>Requisito:</strong> <strong>Explica</strong> quÃ© archivo
+contendrÃ­a solo el prototipo (la interfaz) y quÃ© archivo contendrÃ­a toda
+la lÃ³gica interna (la implementaciÃ³n). <strong>Comenta</strong> por quÃ©
+esta separaciÃ³n es la base de la <strong>abstracciÃ³n</strong>.</p></li>
+</ul></li>
+<li><p><strong>DeclaraciÃ³n de Constante Compartida</strong></p>
+<ul>
+<li><p><strong>Tarea:</strong> El valor PI debe ser accesible en el
+mÃ³dulo de cÃ¡lculos y en main.c.</p></li>
+<li><p><strong>Requisito:</strong> Muestra cÃ³mo se declararÃ­a la
+constante PI (usando #define PI 3.14159f) y <strong>en quÃ©
+archivo</strong> (.h o .c) deberÃ­a ir para que pueda ser compartida
+eficientemente con cualquier mÃ³dulo que la necesite.</p></li>
+</ul></li>
+</ol>
+<p><strong>Bloque 2: CompilaciÃ³n y Enlazado Conceptual ðŸ”—</strong></p>
+<ol start="6" type="1">
+<li><p><strong>El PropÃ³sito del Archivo Objeto (.o)</strong></p>
+<ul>
+<li><p><strong>Contexto:</strong> Tienes main.c, modulo_1.c y modulo_2.c
+en tu ambiente de desarrollo.</p></li>
+<li><p><strong>Requisito:</strong> <strong>Explica</strong> cuÃ¡ntos
+archivos objeto (.o) se generarÃ¡n en la fase de
+<strong>CompilaciÃ³n</strong> y quÃ© contiene ese archivo (.o) en tÃ©rminos
+de cÃ³digo (cÃ³digo binario/mÃ¡quina).</p></li>
+</ul></li>
+<li><p><strong>Fallo de CompilaciÃ³n (Falta de .h)</strong></p>
+<ul>
+<li><p><strong>Escenario:</strong> Tu main.c llama a multiplicar(5, 3);
+pero <strong>NO incluye</strong> el archivo calculos.h. El archivo
+calculos.c sÃ­ existe.</p></li>
+<li><p><strong>Requisito:</strong> <strong>Explica</strong> por quÃ©
+fallarÃ­a la <strong>CompilaciÃ³n</strong>. Â¿QuÃ© informaciÃ³n le falta al
+compilador en ese momento para validar la "firma" de la funciÃ³n
+multiplicar()?</p></li>
+</ul></li>
+<li><p><strong>Fallo de Enlazado (Falta de .c)</strong></p>
+<ul>
+<li><p><strong>Escenario:</strong> Tu main.c incluye calculos.h y llama
+a multiplicar(5, 3);. Pero el archivo <strong>calculos.c no
+existe</strong> (o no se incluyÃ³ en la lista de archivos a
+compilar).</p></li>
+<li><p><strong>Requisito:</strong> <strong>Explica</strong> si este
+error ocurre en la fase de <strong>CompilaciÃ³n</strong> o
+<strong>Enlazado</strong>. Â¿Por quÃ© el <strong>Linker</strong> no puede
+crear el ejecutable?</p></li>
+</ul></li>
+<li><p><strong>ResoluciÃ³n de Referencias</strong></p>
+<ul>
+<li><p><strong>Contexto:</strong> El archivo main.o necesita usar una
+funciÃ³n llamada saludar() que estÃ¡ definida en utilidades.o.</p></li>
+<li><p><strong>Requisito:</strong> <strong>Identifica</strong> quÃ©
+componente del proceso (Compilador o Enlazador) es el responsable de
+encontrar la ubicaciÃ³n real de saludar() en utilidades.o y
+<strong>conectar</strong> la llamada.</p></li>
+</ul></li>
+<li><p><strong>Impacto en la Velocidad de CompilaciÃ³n</strong></p>
+<ul>
+<li><p><strong>Escenario:</strong> En tu proyecto modular, solo se
+modifica una lÃ­nea de cÃ³digo en calculos.c.</p></li>
+<li><p><strong>Requisito:</strong> <strong>Explica</strong> cÃ³mo la
+modularidad (.h y .c separados) <strong>optimiza el tiempo de
+construcciÃ³n</strong>. Â¿QuÃ© archivos deben ser recompilados y cuÃ¡les
+pueden saltarse esta fase?</p></li>
+</ul></li>
+</ol>
+<p><strong>Bloque 3: Estructura y Mejores PrÃ¡cticas ðŸ—ï¸</strong></p>
+<ol start="11" type="1">
+<li><p><strong>Encapsulamiento de Funciones Privadas</strong></p>
+<ul>
+<li><p><strong>Tarea:</strong> Tienes una funciÃ³n int
+obtener_datos_internos() que solo es utilizada dentro de la lÃ³gica de
+gestion_interna.c.</p></li>
+<li><p><strong>Requisito:</strong> Â¿DeberÃ­a el prototipo de esta funciÃ³n
+incluirse en gestion_interna.h? <strong>Justifica</strong> tu respuesta
+en tÃ©rminos de <strong>abstracciÃ³n</strong> y
+<strong>encapsulamiento</strong>.</p></li>
+</ul></li>
+<li><p><strong>Diferencia Clave: #include &lt;...&gt; vs.Â #include
+"..."</strong></p>
+<ul>
+<li><p><strong>Tarea:</strong> Escribe las dos formas de incluir
+archivos de cabecera.</p></li>
+<li><p><strong>Requisito:</strong> <strong>Explica</strong> brevemente
+la diferencia conceptual entre usar la sintaxis con Ã¡ngulos
+(&lt;stdio.h&gt;) y la sintaxis con comillas ("mis_funciones.h") en
+tÃ©rminos de dÃ³nde busca el compilador el archivo.</p></li>
+</ul></li>
+<li><p><strong>MÃ³dulo de ConfiguraciÃ³n</strong></p>
+<ul>
+<li><p><strong>Tarea:</strong> Define un mÃ³dulo llamado config.h y
+config.c.</p></li>
+<li><p><strong>Requisito:</strong> El .h debe exponer una funciÃ³n char*
+get_nombre_app(). El .c debe contener la variable con el nombre real.
+<strong>Explica</strong> por quÃ© es mejor obtener el nombre del app a
+travÃ©s de una <strong>funciÃ³n</strong> (el enfoque modular) en lugar de
+exponerlo como una variable global en el .h.</p></li>
+</ul></li>
+<li><p><strong>ValidaciÃ³n del Compilador (Coincidencia de
+Tipos)</strong></p>
+<ul>
+<li><p><strong>Escenario:</strong> En matematica.h declaras int
+sumar(int a, int b);. En main.c, llamas a sumar(10, 5.5);.</p></li>
+<li><p><strong>Requisito:</strong> <strong>Explica</strong> cÃ³mo el
+archivo <strong>.h</strong> ayuda al compilador a generar una
+<strong>advertencia o error</strong> sobre la coincidencia de tipos (5.5
+pasado a int) <strong>antes</strong> de que el Linker entre en
+acciÃ³n.</p></li>
+</ul></li>
+<li><p><strong>Objetivo del CÃ³digo Reutilizable</strong></p>
+<ul>
+<li><p><strong>Tarea:</strong> Piensa en un mÃ³dulo llamado
+utilidades_cadenas.h y utilidades_cadenas.c.</p></li>
+<li><p><strong>Requisito:</strong> <strong>Explica</strong> cÃ³mo la
+separaciÃ³n en este mÃ³dulo facilita la <strong>reutilizaciÃ³n de
+cÃ³digo</strong>. Si empiezas un nuevo proyecto, Â¿quÃ© archivos necesitas
+copiar y quÃ© paso de la compilaciÃ³n/enlazado te lo permite
+usar?</p></li>
+</ul></li>
+</ol>
+<p><strong>Respuestas de los 15 Ejercicios: LibrerÃ­as Simples (.h y .c
+Conceptual)</strong></p>
+<p>Respuestas conceptuales para los ejercicios, enfatizando la divisiÃ³n
+de responsabilidades entre los archivos de cabecera (.h) y de
+implementaciÃ³n (.c), y el proceso de enlazado (<em>linking</em>).</p>
+<p><strong>Bloque 1: SeparaciÃ³n de Responsabilidades (.h vs.Â .c)
+ðŸ“</strong></p>
+<ol type="1">
+<li><p><strong>IdentificaciÃ³n de Contenido del .h
+(Interfaz)</strong></p>
+<ul>
+<li><strong>Contenido Conceptual de geometria.h:</strong></li>
+</ul></li>
+</ol>
+<blockquote>
+<p>C</p>
+<p>// Prototipos de las funciones: La interfaz</p>
+<p>float calcular_area_circulo(float radio);</p>
+<p>float calcular_volumen_cubo(float lado);</p>
+</blockquote>
+<ul>
+<li><strong>Comentario:</strong> Van en el <strong>.h</strong> porque
+solo definen la <strong>"firma"</strong> o el
+<strong>"contrato"</strong> de las funciones. Esto es lo Ãºnico que otros
+mÃ³dulos (main.c) necesitan saber para llamar a las funciones
+correctamente, sin tener que ver la lÃ³gica interna.</li>
+</ul>
+<ol start="2" type="1">
+<li><p><strong>IdentificaciÃ³n de Contenido del .c
+(ImplementaciÃ³n)</strong></p>
+<ul>
+<li><strong>Contenido Conceptual de geometria.c:</strong></li>
+</ul></li>
+</ol>
+<blockquote>
+<p>C</p>
+<p>#include "geometria.h" // Incluye su propia declaraciÃ³n para
+validaciÃ³n</p>
+<p>#define PI 3.14159f // Si PI es solo para uso interno, puede ir
+aquÃ­</p>
+<p>// DefiniciÃ³n: Contiene la lÃ³gica y el cuerpo de la funciÃ³n</p>
+<p>float calcular_area_circulo(float radio) {</p>
+<p>return PI * radio * radio;</p>
+<p>}</p>
+<p>// DefiniciÃ³n: Contiene la lÃ³gica y el cuerpo de la funciÃ³n</p>
+<p>float calcular_volumen_cubo(float lado) {</p>
+<p>return lado * lado * lado;</p>
+<p>}</p>
+</blockquote>
+<ul>
+<li><strong>Comentario:</strong> La inclusiÃ³n de #include "geometria.h"
+asegura que las <strong>definiciones</strong> de las funciones en
+geometria.c coincidan con los <strong>prototipos</strong>
+declarados.</li>
+</ul>
+<ol start="3" type="1">
+<li><p><strong>El Principio de la Responsabilidad Ãšnica</strong></p>
+<ul>
+<li><p><strong>MÃ³dulo:</strong> gestion_clientes.h y
+gestion_clientes.c</p></li>
+<li><p><strong>Funciones Relacionadas:</strong> agregar_cliente(datos),
+eliminar_cliente(id), buscar_cliente(nombre).</p></li>
+<li><p><strong>ExplicaciÃ³n:</strong> Agrupar estas funciones respeta la
+Responsabilidad Ãšnica porque el mÃ³dulo entero solo se encarga de una
+cosa: <strong>manejar los datos y operaciones de la entidad
+"Cliente"</strong>. Si se necesita modificar la forma en que se guarda o
+se busca un cliente, solo hay que tocar este par de archivos.</p></li>
+</ul></li>
+<li><p><strong>AbstracciÃ³n y OcultaciÃ³n de LÃ³gica</strong></p>
+<ul>
+<li><p>El <strong>prototipo</strong> (void registrar_log(char*
+mensaje);) irÃ­a en <strong>log.h</strong> (la interfaz).</p></li>
+<li><p>Toda la <strong>lÃ³gica interna</strong> (abrir/cerrar archivo,
+obtener hora actual, formatear el texto, etc.) irÃ­a en
+<strong>log.c</strong> (la implementaciÃ³n).</p></li>
+<li><p><strong>Comentario:</strong> Esto es <strong>abstracciÃ³n</strong>
+porque el programador que llama a registrar_log("Error"); solo necesita
+saber que la funciÃ³n existe y quÃ© argumentos necesita. No necesita
+conocer (ni ver) los complejos pasos internos.</p></li>
+</ul></li>
+<li><p><strong>DeclaraciÃ³n de Constante Compartida</strong></p>
+<ul>
+<li><p>La constante #define PI 3.14159f deberÃ­a ir en el archivo de
+<strong>cabecera (.h)</strong> del mÃ³dulo matemÃ¡tico (ej:
+math_util.h).</p></li>
+<li><p><strong>RazÃ³n:</strong> Cualquier mÃ³dulo o main.c que necesite
+usar esta constante simplemente incluirÃ¡ math_util.h (junto con los
+prototipos de funciÃ³n) y tendrÃ¡ acceso inmediato al valor de
+PI.</p></li>
+</ul></li>
+</ol>
+<p><strong>Bloque 2: CompilaciÃ³n y Enlazado Conceptual ðŸ”—</strong></p>
+<ol start="6" type="1">
+<li><p><strong>El PropÃ³sito del Archivo Objeto (.o)</strong></p>
+<ul>
+<li><p>Se generarÃ¡n <strong>tres</strong> archivos objeto (main.o,
+modulo_1.o, modulo_2.o).</p></li>
+<li><p>Cada archivo .o contiene el <strong>cÃ³digo
+binario/mÃ¡quina</strong> de las funciones de su respectivo archivo .c.
+Es cÃ³digo ejecutable, pero incompleto, ya que las llamadas a funciones
+externas aÃºn son referencias sin resolver.</p></li>
+</ul></li>
+<li><p><strong>Fallo de CompilaciÃ³n (Falta de .h)</strong></p>
+<ul>
+<li><p>El error ocurrirÃ­a en la fase de <strong>CompilaciÃ³n</strong> del
+archivo main.c.</p></li>
+<li><p><strong>Falla:</strong> Cuando el compilador encuentra la lÃ­nea
+multiplicar(5, 3); en main.c, no tiene el prototipo de multiplicar(). El
+compilador no sabe:</p>
+<ol type="1">
+<li><p>Si la funciÃ³n existe.</p></li>
+<li><p>QuÃ© tipo de valor retorna.</p></li>
+<li><p>QuÃ© tipos de argumentos espera.</p></li>
+</ol></li>
+<li><p>Esto genera una advertencia (o error, dependiendo de la
+configuraciÃ³n) de funciÃ³n implÃ­cita, porque el compilador no puede
+<strong>validar la llamada</strong>.</p></li>
+</ul></li>
+<li><p><strong>Fallo de Enlazado (Falta de .c)</strong></p>
+<ul>
+<li><p>El error ocurrirÃ­a en la fase de <strong>Enlazado</strong>
+(<em>Linking</em>).</p></li>
+<li><p><strong>Falla:</strong> La compilaciÃ³n pasa porque main.c vio el
+prototipo en calculos.h y validÃ³ la llamada. Sin embargo, cuando el
+<strong>Linker</strong> intenta unir main.o con todos los demÃ¡s archivos
+objeto, busca la <strong>definiciÃ³n real</strong> (el cuerpo del cÃ³digo
+binario) de multiplicar(). Como calculos.c no se compilÃ³, el archivo
+calculos.o no existe, y el Linker reporta un error de <strong>referencia
+indefinida</strong>.</p></li>
+</ul></li>
+<li><p><strong>ResoluciÃ³n de Referencias</strong></p>
+<ul>
+<li><p>El <strong>Enlazador (<em>Linker</em>)</strong> es el
+responsable.</p></li>
+<li><p>El compilador solo verifica que la llamada a saludar() sea
+sintÃ¡cticamente correcta (gracias al prototipo en el .h). El Linker es
+quien, durante la fase de uniÃ³n, encuentra la ubicaciÃ³n final de la
+funciÃ³n saludar() dentro del archivo utilidades.o y conecta el salto de
+cÃ³digo correctamente.</p></li>
+</ul></li>
+<li><p><strong>Impacto en la Velocidad de CompilaciÃ³n</strong></p>
+<ul>
+<li><p>Solo el archivo <strong>calculos.c</strong> necesita ser
+<strong>recompilado</strong> a su nuevo archivo objeto
+(calculos.o).</p></li>
+<li><p>Todos los demÃ¡s archivos objeto (incluido main.o) se mantienen
+sin cambios.</p></li>
+<li><p>Solo se ejecuta la fase de <strong>Enlazado</strong> al final,
+que es mucho mÃ¡s rÃ¡pida que la recompilaciÃ³n completa de todo el cÃ³digo
+fuente. Esto acelera drÃ¡sticamente el ciclo de desarrollo en proyectos
+grandes.</p></li>
+</ul></li>
+</ol>
+<p><strong>Bloque 3: Estructura y Mejores PrÃ¡cticas ðŸ—ï¸</strong></p>
+<ol start="11" type="1">
+<li><p><strong>Encapsulamiento de Funciones Privadas</strong></p>
+<ul>
+<li><p><strong>No</strong> deberÃ­a incluirse en
+gestion_interna.h.</p></li>
+<li><p><strong>JustificaciÃ³n:</strong> El archivo .h es la
+<strong>interfaz pÃºblica</strong>. Si obtener_datos_internos() es una
+funciÃ³n auxiliar que solo sirve para la lÃ³gica de gestion_interna.c,
+incluir su prototipo en el .h <strong>rompe la abstracciÃ³n</strong> y el
+<strong>encapsulamiento</strong>, ya que expone al usuario detalles
+internos que no necesita conocer. El prototipo de esta funciÃ³n debe ir
+directamente en la parte superior de gestion_interna.c o declararse como
+static (lo que limita su visibilidad al archivo actual).</p></li>
+</ul></li>
+<li><p><strong>Diferencia Clave: #include &lt;...&gt; vs.Â #include
+"..."</strong></p></li>
+</ol>
+<table style="width:98%;">
+<colgroup>
+<col style="width: 22%" />
+<col style="width: 27%" />
+<col style="width: 47%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>Sintaxis</strong></th>
+<th style="text-align: left;"><strong>Uso TÃ­pico</strong></th>
+<th style="text-align: left;"><strong>BÃºsqueda del
+Compilador</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>#include
+&lt;archivo.h&gt;</strong></td>
+<td style="text-align: left;">Bibliotecas estÃ¡ndar de C (stdio.h,
+stdlib.h, etc.)</td>
+<td style="text-align: left;">Inicia la bÃºsqueda en los directorios
+preestablecidos del <strong>sistema</strong> y del compilador.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>#include "archivo.h"</strong></td>
+<td style="text-align: left;">MÃ³dulos propios del proyecto
+(mis_funciones.h)</td>
+<td style="text-align: left;">Inicia la bÃºsqueda en el
+<strong>directorio actual</strong> del archivo fuente (.c) y luego, si
+no lo encuentra, en los directorios del sistema.</td>
+</tr>
+</tbody>
+</table>
+<ol start="13" type="1">
+<li><p><strong>MÃ³dulo de ConfiguraciÃ³n</strong></p>
+<ul>
+<li><strong>Enfoque Modular:</strong> El .h expone char*
+get_nombre_app(), y el .c implementa:</li>
+</ul></li>
+</ol>
+<blockquote>
+<p>C</p>
+<p>// En config.c</p>
+<p>static const char* NOMBRE_APP = "MiApp v1.0";</p>
+<p>char* get_nombre_app() {</p>
+<p>return (char*)NOMBRE_APP;</p>
+<p>}</p>
+</blockquote>
+<ul>
+<li><p><strong>ExplicaciÃ³n:</strong> Es mejor usar una <strong>funciÃ³n
+de acceso</strong> porque:</p>
+<ol type="1">
+<li><p><strong>ProtecciÃ³n:</strong> Evita que el usuario final modifique
+accidentalmente la variable de configuraciÃ³n, ya que la variable real
+(NOMBRE_APP) estÃ¡ <strong>oculta</strong> dentro del .c.</p></li>
+<li><p><strong>AbstracciÃ³n:</strong> Si el nombre del app se calcula o
+se lee de un archivo en el futuro, la funciÃ³n get_nombre_app() no
+cambiarÃ¡ su firma.</p></li>
+</ol></li>
+</ul>
+<ol start="14" type="1">
+<li><p><strong>ValidaciÃ³n del Compilador (Coincidencia de
+Tipos)</strong></p>
+<ul>
+<li><p>El archivo <strong>matematica.h</strong> (que contiene int
+sumar(int a, int b);) proporciona al compilador el <strong>patrÃ³n de la
+funciÃ³n</strong>.</p></li>
+<li><p>Cuando el compilador lee sumar(10, 5.5); en main.c, compara los
+argumentos con el patrÃ³n. Detecta que se le estÃ¡ pasando un float (5.5)
+donde espera un int.</p></li>
+<li><p>Esta informaciÃ³n es suficiente para que el compilador emita una
+<strong>advertencia</strong> de posible pÃ©rdida de datos (conversiÃ³n
+implÃ­cita de float a int) durante la fase de
+<strong>CompilaciÃ³n</strong>, antes de que se intente el
+enlazado.</p></li>
+</ul></li>
+<li><p><strong>Objetivo del CÃ³digo Reutilizable</strong></p>
+<ul>
+<li><p>La separaciÃ³n en utilidades_cadenas.h y utilidades_cadenas.c
+facilita la reutilizaciÃ³n porque el mÃ³dulo tiene una
+<strong>responsabilidad clara</strong>.</p></li>
+<li><p><strong>Archivos a Copiar:</strong> Para usarlo en un nuevo
+proyecto, solo necesitas copiar <strong>utilidades_cadenas.h y
+utilidades_cadenas.c</strong> al nuevo directorio.</p></li>
+<li><p><strong>Paso Clave:</strong> El <strong>Enlazador</strong> se
+encargarÃ¡ de unir el archivo objeto compilado (utilidades_cadenas.o) con
+el nuevo main.o del proyecto. No es necesario reescribir la lÃ³gica de
+las funciones; solo se reutiliza su cÃ³digo binario.</p></li>
+</ul></li>
+</ol>
+
+</div>
+</body>
+</html>
+

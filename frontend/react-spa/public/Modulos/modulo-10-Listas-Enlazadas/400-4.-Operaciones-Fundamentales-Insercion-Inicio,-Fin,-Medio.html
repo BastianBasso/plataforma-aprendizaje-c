@@ -1,0 +1,364 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" crossorigin href="/assets/content-01sust.css">
+</head>
+<body>
+<div class="main-content">
+<h2 id="nota-importante-aplicaciÃ³n-prÃ¡ctica">Nota Importante: AplicaciÃ³n
+PrÃ¡ctica</h2>
+<p>A lo largo del desarrollo teÃ³rico de este mÃ³dulo, encontrarÃ¡
+referencias a conceptos clave. Para facilitar la consolidaciÃ³n de su
+aprendizaje, hemos incluido los <strong>cÃ³digos de demostraciÃ³n y
+ejemplos prÃ¡cticos</strong> que ilustran estos conceptos, los cuales
+estÃ¡n disponibles <strong>al final de esta secciÃ³n teÃ³rica</strong>.</p>
+<p>Se recomienda encarecidamente revisar y ejecutar cada ejemplo para
+una mejor comprensiÃ³n.</p>
+<h2 id="inserciÃ³n-al-inicio-la-operaciÃ³n-mÃ¡s-sencilla">InserciÃ³n al
+Inicio (La OperaciÃ³n MÃ¡s Sencilla) ðŸš€</h2>
+<p>La <strong>inserciÃ³n al inicio</strong> de una Lista Enlazada Simple
+es la operaciÃ³n de modificaciÃ³n mÃ¡s rÃ¡pida y directa, ya que no requiere
+recorrer la lista. Su complejidad de tiempo es <strong><span
+class="math inline"><em>O</em>(1)</span></strong> (tiempo
+constante).</p>
+<hr />
+<h3 id="mecanismo-de-inserciÃ³n">Mecanismo de InserciÃ³n</h3>
+<p>El proceso consiste en dos simples pasos que redirigen los punteros
+para que el nuevo nodo se convierta en la nueva cabeza de la lista:</p>
+<ol type="1">
+<li><strong>Enlace del Nuevo Nodo:</strong> El puntero
+<code>siguiente</code> del <strong>nuevo nodo</strong> debe apuntar al
+nodo que actualmente estÃ¡ siendo apuntado por <code>HEAD</code>. De esta
+manera, el resto de la lista se â€œcuelgaâ€ del nuevo nodo.</li>
+<li><strong>ActualizaciÃ³n de <code>HEAD</code>:</strong> El puntero
+<strong><code>HEAD</code></strong> se actualiza para apuntar a la
+direcciÃ³n del <strong>nuevo nodo</strong>.</li>
+</ol>
+<h4 id="lÃ³gica-en-cÃ³digo">LÃ³gica en CÃ³digo</h4>
+<p>La lÃ³gica sigue el siguiente orden:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">// 1. Crear el nuevo nodo (nuevo_nodo)</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co">// 2. Establecer el enlace: el nuevo nodo apunta a la cabeza actual</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>nuevo_nodo<span class="op">-&gt;</span>siguiente <span class="op">=</span> <span class="op">*</span>head_ref<span class="op">;</span> </span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co">// 3. Actualizar HEAD: la cabeza ahora apunta al nuevo nodo</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="op">*</span>head_ref <span class="op">=</span> nuevo_nodo<span class="op">;</span> </span></code></pre></div>
+<p>Este procedimiento funciona tanto si la lista estaba vacÃ­a (donde el
+<code>HEAD</code> original es <code>NULL</code>) como si contenÃ­a muchos
+elementos. Si el <code>HEAD</code> original era <code>NULL</code>, el
+nuevo nodo apunta a <code>NULL</code>, cumpliendo con la regla de
+terminaciÃ³n de lista.</p>
+<h2 id="inserciÃ³n-al-final-requiere-recorrido">InserciÃ³n al Final
+(Requiere Recorrido) ðŸ”š</h2>
+<p>Insertar un nodo al final de una Lista Enlazada Simple es mÃ¡s
+complejo que la inserciÃ³n al inicio porque <strong>no se puede acceder
+al Ãºltimo nodo directamente</strong>; su direcciÃ³n no estÃ¡ almacenada en
+una variable principal como <code>HEAD</code>.</p>
+<hr />
+<h3 id="necesidad-de-recorrido-on">Necesidad de Recorrido (<span
+class="math inline"><em>O</em>(<em>N</em>)</span>)</h3>
+<p>Para conectar el nuevo nodo al final de la lista, debemos encontrar
+el nodo que actualmente ocupa la Ãºltima posiciÃ³n.</p>
+<ol type="1">
+<li><strong>Puntero Auxiliar:</strong> Se utiliza un <strong>puntero
+auxiliar</strong> (ej., <code>actual</code> o <code>temp</code>)
+inicializado en <code>HEAD</code> para comenzar la bÃºsqueda.</li>
+<li><strong>IteraciÃ³n:</strong> El puntero auxiliar avanza
+secuencialmente a travÃ©s de la lista utilizando el campo
+<code>siguiente</code> de cada nodo.</li>
+<li><strong>CondiciÃ³n de Parada:</strong> El recorrido se detiene cuando
+el puntero auxiliar apunta a un nodo cuyo campo de enlace,
+<strong><code>siguiente</code></strong>, es igual a
+<strong><code>NULL</code></strong>. Ese nodo es el Ãºltimo de la
+lista.</li>
+</ol>
+<p>Este proceso de bÃºsqueda requiere visitar potencialmente todos los
+<span class="math inline"><em>N</em></span> nodos de la lista, lo que
+resulta en una complejidad de tiempo de <strong><span
+class="math inline"><em>O</em>(<em>N</em>)</span></strong> (Orden
+Lineal).</p>
+<h3 id="mecanismo-de-inserciÃ³n-1">Mecanismo de InserciÃ³n</h3>
+<p>Una vez que se encuentra el Ãºltimo nodo, se realiza el enlace:</p>
+<ol type="1">
+<li>El campo <code>siguiente</code> del <strong>Ãºltimo nodo</strong>
+encontrado se reasigna para apuntar al <strong>nuevo nodo</strong>.</li>
+<li>Dado que el nuevo nodo es el nuevo final, su campo
+<code>siguiente</code> ya debe estar configurado como
+<strong><code>NULL</code></strong>.</li>
+</ol>
+<h4 id="lÃ³gica-en-cÃ³digo-recorrido">LÃ³gica en CÃ³digo (Recorrido)</h4>
+<div class="sourceCode" id="cb2"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Asumimos &#39;nuevo_nodo&#39; ya estÃ¡ creado y head_ref es el puntero doble a HEAD</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>Nodo <span class="op">*</span>actual <span class="op">=</span> <span class="op">*</span>head_ref<span class="op">;</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co">// Si la lista estÃ¡ vacÃ­a, el nuevo nodo se convierte en HEAD y salimos.</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="op">(*</span>head_ref <span class="op">==</span> NULL<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="op">*</span>head_ref <span class="op">=</span> nuevo_nodo<span class="op">;</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span><span class="op">;</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="co">// Recorrer la lista hasta el Ãºltimo nodo</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> <span class="op">(</span>actual<span class="op">-&gt;</span>siguiente <span class="op">!=</span> NULL<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    actual <span class="op">=</span> actual<span class="op">-&gt;</span>siguiente<span class="op">;</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="co">// &#39;actual&#39; ahora apunta al Ãºltimo nodo</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>actual<span class="op">-&gt;</span>siguiente <span class="op">=</span> nuevo_nodo<span class="op">;</span> <span class="co">// Enlaza el Ãºltimo nodo al nuevo nodo</span></span></code></pre></div>
+<h2 id="inserciÃ³n-intermedia-lÃ³gica-de-enlace">InserciÃ³n Intermedia
+(LÃ³gica de Enlace) ðŸ”„</h2>
+<p>La <strong>inserciÃ³n intermedia</strong> consiste en aÃ±adir un nuevo
+nodo en una posiciÃ³n especÃ­fica de la lista, generalmente
+<strong>despuÃ©s de un nodo de referencia</strong> previamente
+encontrado.</p>
+<hr />
+<h3 id="proceso-lÃ³gico">Proceso LÃ³gico</h3>
+<p>Para lograr la inserciÃ³n en medio de la lista, se requiere
+reconfigurar los enlaces de dos nodos: el <strong>nodo anterior</strong>
+y el <strong>nuevo nodo</strong>.</p>
+<p>Supongamos que queremos insertar <code>Nuevo Nodo</code> despuÃ©s de
+<code>Nodo Actual</code>.</p>
+<ol type="1">
+<li><strong>Preservar el Resto de la Lista:</strong> El puntero
+<code>siguiente</code> del <strong>Nuevo Nodo</strong> debe apuntar a la
+misma direcciÃ³n a la que actualmente apunta el <code>Nodo Actual</code>.
+Esto â€œcuelgaâ€ el resto de la lista (el sucesor de
+<code>Nodo Actual</code>) al Nuevo Nodo. <span
+class="math display">â€˜Nuevo Nodo-&gt;siguiente = Nodo
+Actual-&gt;siguiente;â€˜</span></li>
+<li><strong>Insertar el Nuevo Nodo:</strong> El puntero
+<code>siguiente</code> del <strong>Nodo Actual</strong> debe
+actualizarse para apuntar al <code>Nuevo Nodo</code>, formalizando la
+inserciÃ³n. <span class="math display">â€˜Nodo Actual-&gt;siguiente = Nuevo
+Nodo;â€˜</span></li>
+</ol>
+<h3 id="requisito-encontrar-el-nodo-anterior-on">Requisito: Encontrar el
+Nodo Anterior (<span
+class="math inline"><em>O</em>(<em>N</em>)</span>)</h3>
+<p>Al igual que en la inserciÃ³n al final, la parte mÃ¡s costosa de la
+inserciÃ³n intermedia es la <strong>bÃºsqueda</strong> del
+<code>Nodo Actual</code> (o nodo de referencia).</p>
+<ul>
+<li>La bÃºsqueda requiere <strong>recorrer</strong> la lista desde
+<code>HEAD</code> hasta encontrar el nodo deseado (por valor o por
+Ã­ndice).</li>
+<li>Esto implica una complejidad de tiempo de <strong><span
+class="math inline"><em>O</em>(<em>N</em>)</span></strong>. Una vez
+encontrado el nodo, la reconfiguraciÃ³n de los punteros es <strong><span
+class="math inline"><em>O</em>(1)</span></strong> (constante).</li>
+</ul>
+<h2 id="eficiencia-de-la-inserciÃ³n-en-listas-enlazadas">Eficiencia de la
+InserciÃ³n en Listas Enlazadas â±ï¸</h2>
+<p>La eficiencia es la principal ventaja de las Listas Enlazadas sobre
+los <em>arrays</em> de tamaÃ±o fijo, aunque la velocidad varÃ­a
+dependiendo del punto de inserciÃ³n.</p>
+<hr />
+<h3 id="inserciÃ³n-en-tiempo-constante-o1">InserciÃ³n en Tiempo Constante
+(<span class="math inline"><em>O</em>(1)</span>)</h3>
+<p>La operaciÃ³n de <strong>inserciÃ³n al inicio</strong> tiene la mejor
+eficiencia posible, ya que su tiempo de ejecuciÃ³n es constante, o
+<strong><span class="math inline"><em>O</em>(1)</span></strong>.</p>
+<ul>
+<li><strong>RazÃ³n:</strong> Para insertar al inicio, solo se necesitan
+dos operaciones de reasignaciÃ³n de punteros, independientemente del
+tamaÃ±o de la lista (10 nodos o 1 millÃ³n de nodos). No se requiere ningÃºn
+recorrido ni mover datos.</li>
+</ul>
+<h3 id="inserciÃ³n-en-tiempo-lineal-on">InserciÃ³n en Tiempo Lineal (<span
+class="math inline"><em>O</em>(<em>N</em>)</span>)</h3>
+<p>Las operaciones de <strong>inserciÃ³n al final</strong> y <strong>al
+medio</strong> tienen una eficiencia lineal, o <strong><span
+class="math inline"><em>O</em>(<em>N</em>)</span></strong>, debido al
+proceso de bÃºsqueda o recorrido.</p>
+<ul>
+<li><strong>RazÃ³n:</strong> Antes de reconfigurar los punteros, el
+programa debe <strong>recorrer la lista</strong> desde <code>HEAD</code>
+hasta encontrar el Ãºltimo nodo (para insertar al final) o el nodo de
+referencia (para insertar al medio). El tiempo requerido aumenta en
+proporciÃ³n directa al nÃºmero <span class="math inline"><em>N</em></span>
+de elementos de la lista.</li>
+</ul>
+<h3 id="la-gran-ventaja-manipulaciÃ³n-de-punteros">La Gran Ventaja:
+ManipulaciÃ³n de Punteros</h3>
+<p>A pesar de que las inserciones al final y al medio son <span
+class="math inline"><em>O</em>(<em>N</em>)</span>, siguen siendo
+fundamentalmente diferentes a la ineficiencia de los <em>arrays</em>
+(<span class="math inline"><em>O</em>(<em>N</em>)</span>):</p>
+<ul>
+<li><strong>Listas Enlazadas:</strong> La fase <span
+class="math inline"><em>O</em>(<em>N</em>)</span> es <strong>solo para
+la bÃºsqueda</strong>. Una vez que se encuentra la posiciÃ³n, la inserciÃ³n
+real es <strong><span class="math inline"><em>O</em>(1)</span></strong>
+porque solo implica modificar <strong>dos punteros</strong>.</li>
+<li><strong><em>Arrays</em>:</strong> La fase <span
+class="math inline"><em>O</em>(<em>N</em>)</span> implica <strong>mover
+fÃ­sicamente todos los elementos subsiguientes</strong> en la memoria, lo
+cual es significativamente mÃ¡s costoso en tÃ©rminos de rendimiento real
+del sistema que solo manipular punteros.</li>
+</ul>
+<p>En resumen, las listas enlazadas son ideales para estructuras de
+datos que requieren <strong>inserciones y eliminaciones
+frecuentes</strong>, priorizando la flexibilidad sobre el acceso directo
+por Ã­ndice.</p>
+<h2 id="ejemplo-de-implementacion">Ejemplo de implementacion</h2>
+<p>Asumiremos que la siguiente estructura y funciÃ³n base ya existen:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdlib.h&gt;</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co">// DefiniciÃ³n de la estructura del Nodo</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="kw">typedef</span> <span class="kw">struct</span> Nodo <span class="op">{</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> dato<span class="op">;</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">struct</span> Nodo <span class="op">*</span>siguiente<span class="op">;</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> Nodo<span class="op">;</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="co">// FunciÃ³n FÃ¡brica para crear un nuevo nodo (Segura contra fallo de malloc)</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>Nodo <span class="op">*</span>crear_nodo<span class="op">(</span><span class="dt">int</span> valor<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    Nodo <span class="op">*</span>nuevo_nodo <span class="op">=</span> <span class="op">(</span>Nodo <span class="op">*)</span>malloc<span class="op">(</span><span class="kw">sizeof</span><span class="op">(</span>Nodo<span class="op">));</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>nuevo_nodo <span class="op">==</span> NULL<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>        fprintf<span class="op">(</span>stderr<span class="op">,</span> <span class="st">&quot;Error: Memoria insuficiente.</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> NULL<span class="op">;</span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>    nuevo_nodo<span class="op">-&gt;</span>dato <span class="op">=</span> valor<span class="op">;</span></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>    nuevo_nodo<span class="op">-&gt;</span>siguiente <span class="op">=</span> NULL<span class="op">;</span></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> nuevo_nodo<span class="op">;</span></span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a><span class="co">// FunciÃ³n auxiliar para imprimir la lista</span></span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> imprimir_lista<span class="op">(</span>Nodo <span class="op">*</span>head<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>    Nodo <span class="op">*</span>actual <span class="op">=</span> head<span class="op">;</span></span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> <span class="op">(</span>actual <span class="op">!=</span> NULL<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">&quot;</span><span class="sc">%d</span><span class="st"> -&gt; &quot;</span><span class="op">,</span> actual<span class="op">-&gt;</span>dato<span class="op">);</span></span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>        actual <span class="op">=</span> actual<span class="op">-&gt;</span>siguiente<span class="op">;</span></span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;NULL</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a><span class="co">// FunciÃ³n auxiliar para liberar toda la memoria (Buena PrÃ¡ctica)</span></span>
+<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> liberar_lista<span class="op">(</span>Nodo <span class="op">*</span>head<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a>    Nodo <span class="op">*</span>actual <span class="op">=</span> head<span class="op">;</span></span>
+<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a>    Nodo <span class="op">*</span>siguiente<span class="op">;</span></span>
+<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> <span class="op">(</span>actual <span class="op">!=</span> NULL<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a>        siguiente <span class="op">=</span> actual<span class="op">-&gt;</span>siguiente<span class="op">;</span></span>
+<span id="cb3-40"><a href="#cb3-40" aria-hidden="true" tabindex="-1"></a>        free<span class="op">(</span>actual<span class="op">);</span></span>
+<span id="cb3-41"><a href="#cb3-41" aria-hidden="true" tabindex="-1"></a>        actual <span class="op">=</span> siguiente<span class="op">;</span></span>
+<span id="cb3-42"><a href="#cb3-42" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb3-43"><a href="#cb3-43" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<hr />
+<h2 id="inserciÃ³n-al-inicio-o1">1. InserciÃ³n al Inicio (O(1)) ðŸš€</h2>
+<p>Esta operaciÃ³n es la mÃ¡s simple; solo requiere reasignar dos
+punteros.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> insertar_al_inicio<span class="op">(</span>Nodo <span class="op">**</span>head_ref<span class="op">,</span> <span class="dt">int</span> valor<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    Nodo <span class="op">*</span>nuevo_nodo <span class="op">=</span> crear_nodo<span class="op">(</span>valor<span class="op">);</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">// VerificaciÃ³n de error de creaciÃ³n</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>nuevo_nodo <span class="op">==</span> NULL<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span><span class="op">;</span> </span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    <span class="co">// 1. El nuevo nodo apunta al nodo al que HEAD apuntaba</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    nuevo_nodo<span class="op">-&gt;</span>siguiente <span class="op">=</span> <span class="op">*</span>head_ref<span class="op">;</span> </span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    <span class="co">// 2. HEAD se actualiza para apuntar al nuevo nodo</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    <span class="op">*</span>head_ref <span class="op">=</span> nuevo_nodo<span class="op">;</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;Insertado al inicio: </span><span class="sc">%d\n</span><span class="st">&quot;</span><span class="op">,</span> valor<span class="op">);</span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<hr />
+<h2 id="inserciÃ³n-al-final-on">2. InserciÃ³n al Final (O(N)) ðŸ”š</h2>
+<p>Requiere el <strong>recorrido completo</strong> de la lista para
+encontrar el Ãºltimo nodo.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> insertar_al_final<span class="op">(</span>Nodo <span class="op">**</span>head_ref<span class="op">,</span> <span class="dt">int</span> valor<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    Nodo <span class="op">*</span>nuevo_nodo <span class="op">=</span> crear_nodo<span class="op">(</span>valor<span class="op">);</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>nuevo_nodo <span class="op">==</span> NULL<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span><span class="op">;</span> </span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Caso 1: Lista vacÃ­a. El nuevo nodo se convierte en HEAD.</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(*</span>head_ref <span class="op">==</span> NULL<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>        <span class="op">*</span>head_ref <span class="op">=</span> nuevo_nodo<span class="op">;</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">&quot;Lista vacÃ­a: Insertado </span><span class="sc">%d</span><span class="st"> como HEAD</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">,</span> valor<span class="op">);</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span><span class="op">;</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Caso 2: Lista no vacÃ­a. Recorrido O(N).</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>    Nodo <span class="op">*</span>actual <span class="op">=</span> <span class="op">*</span>head_ref<span class="op">;</span></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Iterar hasta que actual-&gt;siguiente sea NULL (encontrando el Ãºltimo nodo)</span></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> <span class="op">(</span>actual<span class="op">-&gt;</span>siguiente <span class="op">!=</span> NULL<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>        actual <span class="op">=</span> actual<span class="op">-&gt;</span>siguiente<span class="op">;</span></span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>    <span class="co">// El Ãºltimo nodo (actual) enlaza al nuevo nodo</span></span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>    actual<span class="op">-&gt;</span>siguiente <span class="op">=</span> nuevo_nodo<span class="op">;</span></span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;Insertado al final: </span><span class="sc">%d\n</span><span class="st">&quot;</span><span class="op">,</span> valor<span class="op">);</span></span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<hr />
+<h2 id="inserciÃ³n-intermedia-on">3. InserciÃ³n Intermedia (O(N)) ðŸ”„</h2>
+<p>Insertar un nodo <strong>despuÃ©s de</strong> un nodo especÃ­fico.
+Requiere <span class="math inline"><em>O</em>(<em>N</em>)</span> para
+encontrar el nodo de referencia.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Inserta un nodo con &#39;nuevo_valor&#39; DESPUÃ‰S del nodo que contiene &#39;valor_referencia&#39;.</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> insertar_despues_de<span class="op">(</span>Nodo <span class="op">*</span>head<span class="op">,</span> <span class="dt">int</span> valor_referencia<span class="op">,</span> <span class="dt">int</span> nuevo_valor<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">// 1. Crear el nuevo nodo</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    Nodo <span class="op">*</span>nuevo_nodo <span class="op">=</span> crear_nodo<span class="op">(</span>nuevo_valor<span class="op">);</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>nuevo_nodo <span class="op">==</span> NULL<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span><span class="op">;</span> </span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>    <span class="co">// 2. Recorrido O(N): Buscar el nodo de referencia</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>    Nodo <span class="op">*</span>actual <span class="op">=</span> head<span class="op">;</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> <span class="op">(</span>actual <span class="op">!=</span> NULL <span class="op">&amp;&amp;</span> actual<span class="op">-&gt;</span>dato <span class="op">!=</span> valor_referencia<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>        actual <span class="op">=</span> actual<span class="op">-&gt;</span>siguiente<span class="op">;</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>    <span class="co">// 3. VerificaciÃ³n de referencia</span></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>actual <span class="op">==</span> NULL<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">&quot;Error: Nodo con valor </span><span class="sc">%d</span><span class="st"> no encontrado para inserciÃ³n.</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">,</span> valor_referencia<span class="op">);</span></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>        free<span class="op">(</span>nuevo_nodo<span class="op">);</span> <span class="co">// Liberar el nodo si no se pudo insertar (Buena PrÃ¡ctica)</span></span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span><span class="op">;</span></span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>    <span class="co">// 4. LÃ³gica de Enlace O(1): InserciÃ³n</span></span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>    <span class="co">// a) El nuevo nodo apunta al sucesor del nodo actual</span></span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>    nuevo_nodo<span class="op">-&gt;</span>siguiente <span class="op">=</span> actual<span class="op">-&gt;</span>siguiente<span class="op">;</span> </span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>    <span class="co">// b) El nodo actual apunta al nuevo nodo</span></span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a>    actual<span class="op">-&gt;</span>siguiente <span class="op">=</span> nuevo_nodo<span class="op">;</span> </span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;Insertado </span><span class="sc">%d</span><span class="st"> despues de </span><span class="sc">%d\n</span><span class="st">&quot;</span><span class="op">,</span> nuevo_valor<span class="op">,</span> valor_referencia<span class="op">);</span></span>
+<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<hr />
+<h2 id="ejemplo-de-uso-main">Ejemplo de Uso (Main)</h2>
+<div class="sourceCode" id="cb7"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    Nodo <span class="op">*</span>HEAD <span class="op">=</span> NULL<span class="op">;</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;--- 1. InserciÃ³n al Inicio ---</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    insertar_al_inicio<span class="op">(&amp;</span>HEAD<span class="op">,</span> <span class="dv">10</span><span class="op">);</span> <span class="co">// Lista: 10 -&gt; NULL</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    insertar_al_inicio<span class="op">(&amp;</span>HEAD<span class="op">,</span> <span class="dv">5</span><span class="op">);</span>  <span class="co">// Lista: 5 -&gt; 10 -&gt; NULL</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    imprimir_lista<span class="op">(</span>HEAD<span class="op">);</span> <span class="co">// Resultado: 5 -&gt; 10 -&gt; NULL</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;</span><span class="sc">\n</span><span class="st">--- 2. InserciÃ³n al Final ---</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>    insertar_al_final<span class="op">(&amp;</span>HEAD<span class="op">,</span> <span class="dv">20</span><span class="op">);</span> <span class="co">// Lista: 5 -&gt; 10 -&gt; 20 -&gt; NULL</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>    insertar_al_final<span class="op">(&amp;</span>HEAD<span class="op">,</span> <span class="dv">30</span><span class="op">);</span> <span class="co">// Lista: 5 -&gt; 10 -&gt; 20 -&gt; 30 -&gt; NULL</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>    imprimir_lista<span class="op">(</span>HEAD<span class="op">);</span> <span class="co">// Resultado: 5 -&gt; 10 -&gt; 20 -&gt; 30 -&gt; NULL</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;</span><span class="sc">\n</span><span class="st">--- 3. InserciÃ³n Intermedia ---</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Insertar 15 despuÃ©s de 10</span></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>    insertar_despues_de<span class="op">(</span>HEAD<span class="op">,</span> <span class="dv">10</span><span class="op">,</span> <span class="dv">15</span><span class="op">);</span> <span class="co">// Lista: 5 -&gt; 10 -&gt; 15 -&gt; 20 -&gt; 30 -&gt; NULL</span></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>    imprimir_lista<span class="op">(</span>HEAD<span class="op">);</span> <span class="co">// Resultado: 5 -&gt; 10 -&gt; 15 -&gt; 20 -&gt; 30 -&gt; NULL</span></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Intentar insertar despuÃ©s de un valor que no existe</span></span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>    insertar_despues_de<span class="op">(</span>HEAD<span class="op">,</span> <span class="dv">99</span><span class="op">,</span> <span class="dv">50</span><span class="op">);</span> </span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>    <span class="co">// LiberaciÃ³n de memoria al finalizar</span></span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>    liberar_lista<span class="op">(</span>HEAD<span class="op">);</span></span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+
+</div>
+</body>
+</html>
+

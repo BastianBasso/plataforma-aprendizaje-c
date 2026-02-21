@@ -1,0 +1,249 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" crossorigin href="/assets/content-01sust.css">
+</head>
+<body>
+<div class="main-content">
+<h2 id="propÃ³sito-de-malloc-memory-allocation">PropÃ³sito de
+<code>malloc()</code> (Memory Allocation) ðŸ’¾</h2>
+<p>La funciÃ³n <strong><code>malloc()</code></strong> es la herramienta
+fundamental en la librerÃ­a estÃ¡ndar de C (<code>&lt;stdlib.h&gt;</code>)
+para realizar la <strong>asignaciÃ³n de memoria dinÃ¡mica</strong>.</p>
+<hr />
+<h3 id="funciÃ³n-principal">FunciÃ³n Principal</h3>
+<p>El propÃ³sito de <code>malloc()</code> es solicitar y reservar un
+<strong>Ãºnico bloque contiguo de bytes</strong> de la memoria del
+<em>Heap</em> (MontÃ³n) en <strong>tiempo de ejecuciÃ³n</strong>.</p>
+<ul>
+<li><strong>AsignaciÃ³n DinÃ¡mica:</strong> Permite que el programa
+solicite memoria cuyo tamaÃ±o se determina mientras el cÃ³digo se estÃ¡
+ejecutando (por ejemplo, el usuario especifica el tamaÃ±o de un
+<em>array</em>).</li>
+<li><strong>Bloque de Bytes:</strong> <code>malloc()</code> simplemente
+encuentra y reserva un espacio que tiene el tamaÃ±o exacto solicitado,
+sin inicializar el contenido de ese bloque. Los bytes asignados
+contendrÃ¡n cualquier valor que estuviera previamente en esa ubicaciÃ³n de
+memoria (lo que se conoce como <strong>valores basura</strong>).</li>
+</ul>
+<h3 id="el-flujo">El Flujo</h3>
+<ol type="1">
+<li>El programa llama a <code>malloc()</code> solicitando
+<strong>N</strong> cantidad de bytes.</li>
+<li>El sistema operativo busca un bloque contiguo de tamaÃ±o
+<strong>N</strong> en el <em>Heap</em>.</li>
+<li>Si lo encuentra, <code>malloc()</code> devuelve la <strong>direcciÃ³n
+de inicio</strong> de ese bloque.</li>
+<li>Si falla (generalmente por falta de memoria), <code>malloc()</code>
+devuelve <strong><code>NULL</code></strong>.</li>
+</ol>
+<p><strong><code>malloc()</code></strong> es la base de la programaciÃ³n
+de memoria dinÃ¡mica, ya que permite crear estructuras de datos flexibles
+que persisten fuera del Ã¡mbito de una funciÃ³n.</p>
+<h2 id="sintaxis-de-malloc-y-uso-de-sizeof">Sintaxis de
+<code>malloc()</code> y Uso de <code>sizeof()</code> ðŸ“</h2>
+<p>La funciÃ³n <code>malloc()</code> requiere un Ãºnico argumento: la
+cantidad exacta de bytes que desea reservar en el <em>Heap</em>.</p>
+<hr />
+<h3 id="sintaxis-de-malloc">1. Sintaxis de <code>malloc()</code></h3>
+<p>La sintaxis general para llamar a <code>malloc()</code> y asignar la
+memoria es la siguiente:</p>
+<p><span class="math display">â€˜tipo_puntero *nombre_puntero =
+(tipo_puntero *) malloc(cantidad_de_bytes);â€˜</span></p>
+<p>Donde: * <strong><code>cantidad_de_bytes</code></strong>: Es el
+argumento crucial que especifica cuÃ¡ntos bytes de memoria contigua se
+deben reservar. * <strong><code>(tipo_puntero *)</code></strong>: Es el
+<strong>casteo explÃ­cito</strong> del puntero genÃ©rico que devuelve
+<code>malloc()</code> al tipo de puntero deseado (<code>int*</code>,
+<code>float*</code>, <code>struct Cliente*</code>, etc.).</p>
+<h3 id="el-uso-fundamental-de-sizeof">2. El Uso Fundamental de
+<code>sizeof()</code></h3>
+<p>Para garantizar que se solicita la cantidad precisa de bytes, siempre
+debe utilizar el operador <strong><code>sizeof()</code></strong>. Esto
+es fundamental por dos razones:</p>
+<ol type="1">
+<li><strong>Portabilidad:</strong> El tamaÃ±o de los tipos de datos
+primitivos (<code>int</code>, <code>long</code>, <code>float</code>)
+varÃ­a entre diferentes arquitecturas y compiladores. Usar
+<code>sizeof()</code> asegura que su cÃ³digo funcione correctamente en
+cualquier sistema.</li>
+<li><strong>PrecisiÃ³n:</strong> Calcula automÃ¡ticamente el tamaÃ±o exacto
+de <em>arrays</em> y <code>structs</code>.</li>
+</ol>
+<p>Para asignar memoria para <strong>mÃºltiples elementos</strong> del
+mismo tipo (como un <em>array</em> dinÃ¡mico), se utiliza la fÃ³rmula:</p>
+<p><span class="math display">â€˜Cantidad de bytesâ€˜ â€„=â€„â€˜NÃºmero de
+elementosâ€˜ â€…Ã—â€…â€˜sizeof(Tipo de elemento)â€˜</span></p>
+<h4 id="ejemplos-prÃ¡cticos">Ejemplos PrÃ¡cticos</h4>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">PropÃ³sito</th>
+<th style="text-align: center;">CÃ³digo de AsignaciÃ³n</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><strong>Un solo entero</strong></td>
+<td
+style="text-align: center;"><code>int *p_int = (int *) malloc(sizeof(int));</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>Array de 10
+flotantes</strong></td>
+<td
+style="text-align: center;"><code>float *p_array = (float *) malloc(10 * sizeof(float));</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>Array de N
+estructuras</strong></td>
+<td
+style="text-align: center;"><code>struct Cliente *clientes = (struct Cliente *) malloc(N * sizeof(struct Cliente));</code></td>
+</tr>
+</tbody>
+</table>
+<p>El uso correcto de <code>sizeof()</code> con <code>malloc()</code> es
+la base para una gestiÃ³n de memoria dinÃ¡mica precisa y robusta.</p>
+<h2 id="retorno-de-malloc-y-el-casteo-casting">Retorno de
+<code>malloc()</code> y el Casteo (Casting) ðŸ§™</h2>
+<p>La funciÃ³n <code>malloc()</code> es un servicio genÃ©rico de
+asignaciÃ³n de memoria; por lo tanto, no puede saber de antemano quÃ© tipo
+de datos deseas almacenar. Esto se refleja en el tipo de valor que
+devuelve.</p>
+<hr />
+<h3 id="el-retorno-void-puntero-genÃ©rico">1. El Retorno
+<code>void*</code> (Puntero GenÃ©rico)</h3>
+<ul>
+<li><strong>Tipo de Retorno:</strong> <code>malloc()</code> retorna un
+puntero de tipo <strong><code>void*</code></strong> (puntero a
+<code>void</code>).</li>
+<li><strong>Significado:</strong> Un <code>void*</code> es un
+<strong>puntero genÃ©rico</strong> capaz de apuntar a cualquier tipo de
+dato en la memoria. Indica la direcciÃ³n de inicio del bloque de memoria
+que acaba de ser asignado, pero no especifica quÃ© tipo de estructura o
+variable contiene.</li>
+</ul>
+<h3 id="necesidad-del-casteo-explÃ­cito">2. Necesidad del Casteo
+ExplÃ­cito</h3>
+<p>Para que puedas interactuar correctamente con la memoria asignada
+(por ejemplo, usar aritmÃ©tica de punteros o acceder a miembros de una
+estructura), el puntero <code>void*</code> debe ser convertido al tipo
+especÃ­fico que necesitas. Esta conversiÃ³n se conoce como
+<strong>casteo</strong> o <strong>conversiÃ³n de tipo</strong>
+(<em>casting</em>).</p>
+<h4 id="por-quÃ©-castear">Â¿Por quÃ© Castear?</h4>
+<p>El compilador necesita saber el tipo de dato al que apunta el puntero
+para determinar:</p>
+<ol type="1">
+<li><strong>AritmÃ©tica de Punteros:</strong> CuÃ¡ntos bytes moverse
+cuando se incrementa o decrementa el puntero (<code>ptr++</code>). Si el
+puntero es <code>int*</code>, <code>ptr++</code> moverÃ¡ la direcciÃ³n
+<span class="math inline">4</span> bytes (o el <code>sizeof(int)</code>
+del sistema). Si es <code>void*</code>, el compilador no sabe cuÃ¡nto
+avanzar.</li>
+<li><strong>Acceso a la Memoria:</strong> CuÃ¡ntos bytes leer o escribir
+al desreferenciar el puntero (<code>*ptr</code>).</li>
+</ol>
+<h4 id="ejemplo-de-casteo">Ejemplo de Casteo</h4>
+<p>Para almacenar un entero (<code>int</code>) o un <em>array</em> de
+enteros, el puntero <code>void*</code> debe ser casteado a
+<code>(int*)</code>:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Casteo del puntero void* (retorno de malloc) a int*</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> <span class="op">*</span>p_entero <span class="op">=</span> <span class="op">(</span><span class="dt">int</span> <span class="op">*)</span> malloc<span class="op">(</span><span class="kw">sizeof</span><span class="op">(</span><span class="dt">int</span><span class="op">));</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co">// Casteo a un puntero de estructura</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="kw">struct</span> Cliente <span class="op">*</span>p_cliente <span class="op">=</span> <span class="op">(</span><span class="kw">struct</span> Cliente <span class="op">*)</span> malloc<span class="op">(</span><span class="kw">sizeof</span><span class="op">(</span><span class="kw">struct</span> Cliente<span class="op">));</span></span></code></pre></div>
+<blockquote>
+<p><strong>Nota sobre C vs.Â C++:</strong> En el lenguaje
+<strong>C</strong> (estÃ¡ndar), el casteo de <code>void*</code> a
+cualquier otro puntero es <strong>implÃ­cito</strong> y opcional. Sin
+embargo, en <strong>C++</strong> es <strong>obligatorio</strong>, y la
+prÃ¡ctica general de C (especialmente para claridad y compatibilidad)
+recomienda mantener el casteo explÃ­cito.</p>
+</blockquote>
+<h2 id="comprobaciÃ³n-de-fallo-con-null-prÃ¡ctica-esencial">ComprobaciÃ³n
+de Fallo con <code>NULL</code> (PrÃ¡ctica Esencial) âš ï¸</h2>
+<p>La comprobaciÃ³n del valor de retorno de <code>malloc()</code> es la
+<strong>prÃ¡ctica de programaciÃ³n mÃ¡s crucial</strong> al trabajar con
+memoria dinÃ¡mica. <strong>Nunca se debe omitir</strong> esta
+verificaciÃ³n.</p>
+<hr />
+<h3 id="el-fallo-de-asignaciÃ³n">1. El Fallo de AsignaciÃ³n</h3>
+<p>Si la funciÃ³n <code>malloc()</code> no logra encontrar un bloque de
+memoria contigua en el <em>Heap</em> del tamaÃ±o solicitado (generalmente
+porque la memoria disponible es insuficiente o estÃ¡ muy fragmentada),
+<strong>retorna un puntero nulo (<code>NULL</code>)</strong>.</p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">CondiciÃ³n</th>
+<th style="text-align: center;">Resultado</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><strong>Ã‰xito</strong></td>
+<td style="text-align: center;">Devuelve la direcciÃ³n de inicio del
+bloque de memoria asignado.</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>Fallo</strong></td>
+<td style="text-align: center;">Devuelve
+<strong><code>NULL</code></strong>.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="consecuencias-de-omitir-la-comprobaciÃ³n">2. Consecuencias de
+Omitir la ComprobaciÃ³n</h3>
+<p>Si el programa ignora que <code>malloc()</code> devolviÃ³
+<code>NULL</code> e intenta acceder a la memoria a travÃ©s de ese
+puntero, ocurrirÃ¡ un <strong>comportamiento indefinido</strong> que, en
+la mayorÃ­a de los sistemas operativos, resulta en un <strong>fallo de
+segmentaciÃ³n</strong> (<em>Segmentation Fault</em>). Este es un error
+grave que termina la ejecuciÃ³n del programa abruptamente.</p>
+<h3 id="implementaciÃ³n-de-la-comprobaciÃ³n">3. ImplementaciÃ³n de la
+ComprobaciÃ³n</h3>
+<p>Siempre se debe verificar si el puntero devuelto es <code>NULL</code>
+inmediatamente despuÃ©s de la llamada a <code>malloc()</code>. Si falla,
+el programa debe manejar la situaciÃ³n de manera segura, que a menudo
+implica imprimir un mensaje de error y terminar la ejecuciÃ³n de forma
+controlada.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdlib.h&gt;</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> N <span class="op">=</span> <span class="dv">1000000000</span><span class="op">;</span> <span class="co">// Intento de asignar una cantidad muy grande</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> <span class="op">*</span>array_dinamico <span class="op">=</span> <span class="op">(</span><span class="dt">int</span> <span class="op">*)</span>malloc<span class="op">(</span>N <span class="op">*</span> <span class="kw">sizeof</span><span class="op">(</span><span class="dt">int</span><span class="op">));</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    <span class="co">// VERIFICACIÃ“N ESENCIAL</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>array_dinamico <span class="op">==</span> NULL<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">&quot;ERROR: Fallo al asignar la memoria dinamica.</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">&quot;El programa terminara para evitar un Segmentation Fault.</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Finalizar el programa o intentar un mecanismo de recuperacion</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>        exit<span class="op">(</span>EXIT_FAILURE<span class="op">);</span> </span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>    <span class="co">// --- Solo se ejecuta si la asignacion fue exitosa ---</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Uso de la memoria...</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;Memoria asignada con exito.</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>    free<span class="op">(</span>array_dinamico<span class="op">);</span></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> EXIT_SUCCESS<span class="op">;</span></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+
+</div>
+</body>
+</html>
+

@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" crossorigin href="/assets/content-01sust.css">
+</head>
+<body>
+<div class="main-content">
+
+
+
+
+<h1>1. Operadores Aritméticos y Asignación</h1>
+<p><strong>Operadores Aritméticos Fundamentales</strong></p>
+<p>Los operadores aritméticos son el corazón de cualquier lenguaje de
+programación, ya que permiten realizar cálculos matemáticos básicos
+sobre variables y valores. C utiliza los símbolos convencionales para
+estas operaciones.</p>
+<table style="width:97%;">
+<colgroup>
+<col style="width: 18%" />
+<col style="width: 21%" />
+<col style="width: 18%" />
+<col style="width: 17%" />
+<col style="width: 20%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>Operador</strong></th>
+<th style="text-align: left;"><strong>Nombre</strong></th>
+<th style="text-align: left;"><strong>Función</strong></th>
+<th style="text-align: left;"><strong>Ejemplo</strong></th>
+<th style="text-align: left;"><strong>Resultado</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>+</strong></td>
+<td style="text-align: left;">Suma</td>
+<td style="text-align: left;">Adición</td>
+<td style="text-align: left;">5 + 3</td>
+<td style="text-align: left;">8</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>-</strong></td>
+<td style="text-align: left;">Resta</td>
+<td style="text-align: left;">Sustracción</td>
+<td style="text-align: left;">10 - 4</td>
+<td style="text-align: left;">6</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>*</strong></td>
+<td style="text-align: left;">Multiplicación</td>
+<td style="text-align: left;">Producto</td>
+<td style="text-align: left;">2 * 7</td>
+<td style="text-align: left;">14</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>/</strong></td>
+<td style="text-align: left;">División</td>
+<td style="text-align: left;">Cociente</td>
+<td style="text-align: left;">20.0 / 4.0</td>
+<td style="text-align: left;">5.0</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Punto Clave: La División de Enteros
+(Truncamiento)</strong></p>
+<p>En C, el comportamiento del operador de división (/) depende
+completamente de los <strong>tipos de datos</strong> de los operandos
+(los números que se están dividiendo).</p>
+<p><strong>1. División de Punto Flotante (Resultado
+Decimal)</strong></p>
+<p>Si <strong>al menos uno</strong> de los operandos es de tipo flotante
+(float, double), C realiza una <strong>división decimal</strong> para
+conservar la precisión:</p>
+<p>C</p>
+<p>// Al menos un operando es flotante, resultado es decimal</p>
+<p>float resultado_flotante = 10.0 / 3;</p>
+<p>// resultado_flotante es 3.333333</p>
+<p><strong>2. División de Enteros (Truncamiento)</strong></p>
+<p>Si <strong>ambos</strong> operandos son de tipo entero (int, char,
+etc.), C realiza una <strong>división entera</strong> y simplemente
+<strong>trunca</strong> (corta o elimina) la parte decimal del
+cociente.</p>
+<ul>
+<li><strong>No es redondeo; es eliminación.</strong></li>
+</ul>
+<p>C</p>
+<p>// Ambos operandos son enteros, resultado es entero</p>
+<p>int resultado_entero = 10 / 3;</p>
+<p>// resultado_entero es 3 (el 0.3333 se elimina)</p>
+<p>int otro_resultado = 7 / 2;</p>
+<p>// otro_resultado es 3 (el 0.5 se elimina)</p>
+<p><strong>Consejo:</strong> Para realizar una división decimal precisa
+entre dos enteros, debes utilizar el <strong>Casting Explícito</strong>
+para convertir uno de ellos a float o double antes de la operación (ej:
+(float)10 / 3).</p>
+<p><strong>El Operador Módulo (%) remainder</strong></p>
+<p>El operador módulo, representado por el símbolo de porcentaje (%), es
+un operador aritmético que calcula el <strong>resto o residuo</strong>
+de una división entera.</p>
+<p><strong>Funcionamiento Básico</strong></p>
+<p>A diferencia del operador de división (/) que calcula el cociente, el
+operador % solo se enfoca en la cantidad que "sobra" después de que la
+división se ha realizado por completo en números enteros.</p>
+<table style="width:98%;">
+<colgroup>
+<col style="width: 19%" />
+<col style="width: 16%" />
+<col style="width: 19%" />
+<col style="width: 42%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>Operación</strong></th>
+<th style="text-align: left;"><strong>Lectura</strong></th>
+<th style="text-align: left;"><strong>Resultado</strong></th>
+<th style="text-align: left;"><strong>Explicación</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">10 / 3</td>
+<td style="text-align: left;">División</td>
+<td style="text-align: left;">3</td>
+<td style="text-align: left;">Cabe 3 veces.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">10 % 3</td>
+<td style="text-align: left;">Módulo</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">El resto es $1$ ($\text{ya que } 3 \times
+3 + \mathbf{1} = 10$).</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">15 % 4</td>
+<td style="text-align: left;">Módulo</td>
+<td style="text-align: left;">3</td>
+<td style="text-align: left;">El resto es $3$ ($\text{ya que } 3 \times
+4 + \mathbf{3} = 15$).</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Nota:</strong> El operador módulo <strong>solo funciona con
+tipos de datos enteros</strong> (int, char, etc.). No puede ser
+utilizado directamente con tipos de punto flotante (float o double).</p>
+<p><strong>Utilidades Clave del Módulo</strong></p>
+<p>El operador módulo es fundamental para la lógica de programación y se
+utiliza en diversas situaciones:</p>
+<ol type="1">
+<li><p><strong>Determinar Números Pares o Impares:</strong></p>
+<ul>
+<li><p>Si el resto de dividir un número entre $2$ es $0$, el número es
+<strong>par</strong> (numero % 2 == 0).</p></li>
+<li><p>Si el resto de dividir un número entre $2$ es $1$, el número es
+<strong>impar</strong> (numero % 2 == 1).</p></li>
+</ul></li>
+<li><p><strong>Ciclos y Repeticiones:</strong></p>
+<ul>
+<li>Es útil para realizar una acción cada cierto número de veces, por
+ejemplo, imprimir un salto de línea cada 5 elementos en un bucle (if
+(contador % 5 == 0)).</li>
+</ul></li>
+<li><p><strong>Restricción de Rangos:</strong></p>
+<ul>
+<li>Permite que un número se mantenga dentro de un rango específico. Por
+ejemplo, (dias_transcurridos % 7) siempre dará un valor entre $0$ y $6$,
+ideal para calcular el día de la semana.</li>
+</ul></li>
+</ol>
+<p><strong>Ejemplo de Par/Impar:</strong></p>
+<p>C</p>
+<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
+<p>int main(void) {</p>
+<p>int numero = 7;</p>
+<p>int resultado = numero % 2; // 7 / 2 = 3, resto 1</p>
+<p>printf("El resto de 7 / 2 es: %d\n", resultado);</p>
+<p>// Si resultado es 1, es impar.</p>
+<p>return 0;</p>
+<p>}</p>
+<p><strong>Operador de Asignación Simple (=)</strong></p>
+<p>El signo de igual (=) es uno de los operadores más fundamentales y a
+menudo malentendidos por los principiantes. En C y en la mayoría de los
+lenguajes de programación, el = no representa una <strong>igualdad
+matemática</strong> o una comparación, sino una <strong>acción</strong>
+o instrucción.</p>
+<p><strong>Propósito: Asignación de Valor</strong></p>
+<p>El operador de asignación (=) toma el <strong>valor</strong> de la
+expresión que se encuentra a su <strong>derecha</strong> y lo almacena o
+<strong>asigna</strong> en la variable que se encuentra a su
+<strong>izquierda</strong>.</p>
+<p>$$\text{Sintaxis: } \text{variable} \space \space \mathbf{=} \space
+\space \text{valor\_o\_expresión}\text{;}$$</p>
+<p><strong>Ejemplo Práctico:</strong></p>
+<p>C</p>
+<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
+<p>int main(void) {</p>
+<p>int edad; // Declaración</p>
+<p>edad = 25; // Asignación simple: El valor 25 se almacena en
+'edad'.</p>
+<p>int siguiente_edad = edad + 1; // La expresión de la derecha (25 + 1)
+se evalúa</p>
+<p>// y el resultado (26) se asigna a 'siguiente_edad'.</p>
+<p>printf("Edad asignada: %d\n", edad);</p>
+<p>printf("Siguiente edad: %d\n", siguiente_edad);</p>
+<p>return 0;</p>
+<p>}</p>
+<p><strong>Diferencia Crucial con la Matemática</strong></p>
+<p>Es vital entender que la asignación es un proceso
+<strong>unidireccional</strong> que va de derecha a izquierda:</p>
+<ol type="1">
+<li><p>La <strong>variable</strong> (destino) siempre debe estar a la
+<strong>izquierda</strong> del =.</p></li>
+<li><p>El <strong>valor</strong> o la <strong>expresión</strong>
+(origen) siempre debe estar a la <strong>derecha</strong> del
+=.</p></li>
+</ol>
+<p>Si intentas invertir el orden, el compilador generará un error:</p>
+<p>C</p>
+<p>// int 10 = resultado; // ¡ERROR DE COMPILACIÓN! El '10' es un valor,
+no una variable.</p>
+<p>Este concepto se refuerza cuando se utilizan <strong>operadores de
+comparación</strong> (que se verán más adelante, como ==), que son los
+que realmente evalúan la igualdad.</p>
+<p><strong>Operadores de Asignación Compuesta (Abreviados)</strong></p>
+<p>Los operadores de asignación compuesta combinan una <strong>operación
+aritmética</strong> con la <strong>asignación</strong> en un solo paso.
+Su propósito es simplificar y hacer más conciso el código cuando una
+variable se modifica utilizando su propio valor actual.</p>
+<p><strong>Sintaxis y Equivalencia</strong></p>
+<p>La forma general de estos operadores es:</p>
+<p>$$\text{variable } \mathbf{\text{op=}} \space
+\text{valor}\text{;}$$</p>
+<p>Esto es totalmente equivalente a:</p>
+<p>$$\text{variable } \mathbf{\text{=}} \space \text{variable }
+\mathbf{\text{op}} \space \text{valor}\text{;}$$</p>
+<p>Donde "op" es cualquiera de los operadores aritméticos (+, -, *, /,
+%).</p>
+<p><strong>Tabla de Operadores Compuestos</strong></p>
+<table style="width:97%;">
+<colgroup>
+<col style="width: 19%" />
+<col style="width: 23%" />
+<col style="width: 20%" />
+<col style="width: 34%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>Operador</strong></th>
+<th style="text-align: left;"><strong>Nombre</strong></th>
+<th style="text-align: left;"><strong>Equivalente a</strong></th>
+<th style="text-align: left;"><strong>Significado</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>+=</strong></td>
+<td style="text-align: left;">Asignación de Suma</td>
+<td style="text-align: left;">x = x + y;</td>
+<td style="text-align: left;">Suma el valor de la derecha al valor
+actual de x y asigna el resultado a x.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>-=</strong></td>
+<td style="text-align: left;">Asignación de Resta</td>
+<td style="text-align: left;">x = x - y;</td>
+<td style="text-align: left;">Resta el valor de la derecha al valor
+actual de x y asigna el resultado a x.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>*=</strong></td>
+<td style="text-align: left;">Asignación de Multiplicación</td>
+<td style="text-align: left;">x = x * y;</td>
+<td style="text-align: left;">Multiplica x por el valor de la derecha y
+asigna el resultado a x.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>/=</strong></td>
+<td style="text-align: left;">Asignación de División</td>
+<td style="text-align: left;">x = x / y;</td>
+<td style="text-align: left;">Divide x por el valor de la derecha y
+asigna el resultado a x.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>%=</strong></td>
+<td style="text-align: left;">Asignación de Módulo</td>
+<td style="text-align: left;">x = x % y;</td>
+<td style="text-align: left;">Asigna a x el <strong>resto</strong> de la
+división de x por el valor de la derecha.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Ejemplos Prácticos</strong></p>
+<p>Imagina que la variable contador tiene un valor inicial de 10.</p>
+<table style="width:97%;">
+<colgroup>
+<col style="width: 29%" />
+<col style="width: 28%" />
+<col style="width: 39%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>Operación Abreviada</strong></th>
+<th style="text-align: left;"><strong>Versión Larga</strong></th>
+<th style="text-align: left;"><strong>Nuevo Valor de
+contador</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">contador += 5;</td>
+<td style="text-align: left;">contador = contador + 5;</td>
+<td style="text-align: left;">15</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">contador *= 2;</td>
+<td style="text-align: left;">contador = contador * 2;</td>
+<td style="text-align: left;">30</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">contador %= 4;</td>
+<td style="text-align: left;">contador = contador % 4;</td>
+<td style="text-align: left;">2 (ya que $30 / 4$ da resto $2$)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Ventajas:</strong></p>
+<p>El uso de la asignación compuesta es una <strong>buena
+práctica</strong> ya que reduce la redundancia, hace el código más
+limpio y, en algunos casos, permite al compilador generar código máquina
+ligeramente más eficiente.</p>
+<p><strong>Operadores de Incremento/Decremento (Unarios)</strong></p>
+<p>Los operadores unarios <strong>++ (incremento)</strong> y <strong>--
+(decremento)</strong> son una forma extremadamente concisa de sumar o
+restar $\mathbf{1}$ a una variable, respectivamente. Son esenciales en
+C, especialmente para el control de bucles y contadores.</p>
+<table style="width:97%;">
+<colgroup>
+<col style="width: 19%" />
+<col style="width: 21%" />
+<col style="width: 32%" />
+<col style="width: 23%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>Operador</strong></th>
+<th style="text-align: left;"><strong>Nombre</strong></th>
+<th style="text-align: left;"><strong>Función</strong></th>
+<th><strong>Equivalente a</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>++</strong></td>
+<td style="text-align: left;">Incremento</td>
+<td style="text-align: left;">Suma 1 a la variable.</td>
+<td>x = x + 1;</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>--</strong></td>
+<td style="text-align: left;">Decremento</td>
+<td style="text-align: left;">Resta 1 a la variable.</td>
+<td>x = x - 1;</td>
+</tr>
+</tbody>
+</table>
+<p>La <strong>crucialidad</strong> de estos operadores radica en
+<strong>dónde</strong> se colocan con respecto a la variable: la forma
+<strong>prefijo</strong> y la forma <strong>postfijo</strong>. Ambas
+modifican el valor de la variable, pero difieren en el
+<strong>momento</strong> en que devuelven el valor modificado a la
+expresión.</p>
+<p><strong>Diferencia entre Prefijo y Postfijo</strong></p>
+<p><strong>1. Forma Prefijo (++i o --i)</strong></p>
+<p>El operador se coloca <strong>antes</strong> de la variable.</p>
+<ul>
+<li><strong>Acción:</strong> <strong>Primero</strong> se modifica
+(incrementa o decrementa) el valor de la variable, y
+<strong>luego</strong> se usa el <strong>nuevo valor</strong> en la
+expresión circundante.</li>
+</ul>
+<p><strong>Ejemplo Prefijo:</strong></p>
+<p>C</p>
+<p>int x = 5;</p>
+<p>int y = ++x; // 1. x se incrementa a 6. 2. y toma el nuevo valor de x
+(6).</p>
+<p>// Resultado: x es 6, y es 6</p>
+<p><strong>2. Forma Postfijo (i++ o i--)</strong></p>
+<p>El operador se coloca <strong>después</strong> de la variable.</p>
+<ul>
+<li><strong>Acción:</strong> <strong>Primero</strong> se usa el
+<strong>valor original</strong> de la variable en la expresión, y
+<strong>luego</strong> se modifica (incrementa o decrementa) el valor de
+la variable.</li>
+</ul>
+<p><strong>Ejemplo Postfijo:</strong></p>
+<p>C</p>
+<p>int a = 5;</p>
+<p>int b = a++; // 1. b toma el valor original de a (5). 2. a se
+incrementa a 6.</p>
+<p>// Resultado: a es 6, b es 5</p>
+<table style="width:98%;">
+<colgroup>
+<col style="width: 18%" />
+<col style="width: 18%" />
+<col style="width: 28%" />
+<col style="width: 32%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>Forma</strong></th>
+<th style="text-align: left;"><strong>Sintaxis</strong></th>
+<th style="text-align: left;"><strong>Devuelve a la
+Expresión</strong></th>
+<th style="text-align: left;"><strong>Momento de la
+Modificación</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>Prefijo</strong></td>
+<td style="text-align: left;">++i</td>
+<td style="text-align: left;"><strong>Nuevo</strong> valor</td>
+<td style="text-align: left;">Antes de la asignación</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Postfijo</strong></td>
+<td style="text-align: left;">i++</td>
+<td style="text-align: left;"><strong>Original</strong> valor</td>
+<td style="text-align: left;">Después de la asignación</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Recomendación de Buena Práctica:</strong> Si simplemente
+necesitas incrementar una variable en su propia línea (ej., dentro de un
+bucle for donde la variable no se usa inmediatamente en otra
+asignación), la mayoría de los desarrolladores prefieren usar la
+<strong>forma prefijo</strong> (++i), ya que a menudo puede ser
+ligeramente más eficiente para el compilador en términos de no tener que
+almacenar el valor original temporalmente.</p>
+
+
+</div>
+</body>
+</html>
+

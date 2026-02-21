@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" crossorigin href="/assets/content-01sust.css">
+</head>
+<body>
+<div class="main-content">
+<h1><strong>📊 15 Ejercicios: Salida Estándar Formateada
+(printf)</strong></h1>
+<p>Aquí tienes 15 ejercicios para repasar el <strong>Formateo Avanzado
+de la Salida con printf()</strong>, incluyendo el control de precisión,
+el ancho de campo, el uso de %c, %s y la tabulación.</p>
+<p><strong>Bloque 1: Múltiples Argumentos y Precisión
+Numérica</strong></p>
+<p><strong>1) Múltiples Argumentos y Tipos</strong></p>
+<p>Imprime la edad (int) y la calificación promedio (float) de un
+estudiante en una sola línea.</p>
+<p>Datos: edad = 21, promedio = 8.75</p>
+<p>Output Esperado: El estudiante tiene 21 años y su promedio es
+8.750000.</p>
+<p><strong>2) Formato de Moneda (%.2f)</strong></p>
+<p>Imprime un precio (float) asegurándote de que siempre muestre
+exactamente dos decimales para el formato de moneda.</p>
+<p>Datos: costo = 12.9</p>
+<p>Output Esperado: El costo es: $12.90</p>
+<p><strong>3) Redondeo por Precisión (%.0f)</strong></p>
+<p>Imprime un valor flotante limitando la precisión a cero decimales
+(%.0f). Observa que printf realiza un redondeo.</p>
+<p>Datos: temperatura = 36.65</p>
+<p>Output Esperado: Temperatura redondeada: 37</p>
+<p><strong>4) Especificadores Repetidos</strong></p>
+<p>Imprime el mismo número entero (int) dos veces en la misma línea,
+separándolos con una coma.</p>
+<p>Datos: numero_base = 50</p>
+<p>Output Esperado: El numero es 50, y otra vez 50.</p>
+<p><strong>5) Impresión de double con Precisión Alta</strong></p>
+<p>Imprime una constante de doble precisión (double) mostrando 6
+decimales.</p>
+<p>Datos: PI = 3.1415926535</p>
+<p>Output Esperado: Valor de PI: 3.141593</p>
+<p><strong>Bloque 2: Ancho de Campo (<em>Padding</em>) y
+Alineación</strong></p>
+<p><strong>6) Ancho de Campo para Enteros (%w.d)</strong></p>
+<p>Imprime un número entero en una columna que tenga un ancho total de 8
+caracteres.</p>
+<p>Datos: codigo = 123</p>
+<p>Output Esperado: 123 (El 123 está precedido por 5 espacios).</p>
+<p><strong>7) Combinación de Ancho y Precisión (%w.nf)</strong></p>
+<p>Imprime un porcentaje (float) en una columna de 6 caracteres de ancho
+con un solo decimal.</p>
+<p>Datos: porcentaje = 10.5</p>
+<p>Output Esperado: 10.5 (El 10.5 está precedido por 2 espacios).</p>
+<p><strong>8) Alineación a la Izquierda para Texto (%-w.s)</strong></p>
+<p>Imprime una palabra (%s) en una columna de 12 caracteres, alineada a
+la izquierda (usando -).</p>
+<p>Datos: producto = "Leche"</p>
+<p>Output Esperado: Leche (La palabra Leche está seguida por 7
+espacios).</p>
+<p><strong>9) Alineación a la Derecha de Texto (Impresión de
+ID)</strong></p>
+<p>Imprime un ID de usuario que debe ocupar un mínimo de 10 caracteres y
+alinearse a la derecha.</p>
+<p>Datos: id_usuario = "USER45"</p>
+<p>Output Esperado: USER45 (El ID está precedido por 4 espacios).</p>
+<p><strong>10) Formato de Tabla Simple (Encabezados)</strong></p>
+<p>Imprime un encabezado de tabla sencillo usando la secuencia de escape
+de tabulación (\t) para separar las columnas.</p>
+<p>Output Esperado: ID\tNombre\tEstado (El compilador generará los
+espacios de tabulación)</p>
+<p><strong>Bloque 3: Caracteres, Cadenas y Estructuración</strong></p>
+<p><strong>11) Impresión Secuencial de Caracteres (%c)</strong></p>
+<p>Imprime tres caracteres individuales, seguidos por un salto de línea
+(\n).</p>
+<p>Datos: c1 = 'A', c2 = 'C', c3 = 'E'</p>
+<p>Output Esperado: A C E</p>
+<p><strong>12) Uso de Código ASCII</strong></p>
+<p>Imprime un carácter utilizando su código ASCII entero (int). Usa el
+código 35 (que corresponde a #).</p>
+<p>Datos: codigo_hash = 35</p>
+<p>Output Esperado: El simbolo es: #</p>
+<p><strong>13) Impresión de Cadena con Limitación (%.ns)</strong></p>
+<p>Imprime una cadena de texto, limitando la salida a solo los primeros
+7 caracteres (precisión de cadena).</p>
+<p>Datos: frase = "Programacion"</p>
+<p>Output Esperado: Program</p>
+<p><strong>14) Creación de una Fila de Tabla (Alineación
+Combinada)</strong></p>
+<p>Imprime una fila de datos que contenga un nombre (%-10s) y una edad
+(%5d), asegurando la alineación.</p>
+<p>Datos: nombre = "Ana", edad = 22</p>
+<p>Output Esperado: Ana | 22 (El nombre tiene 7 espacios de relleno y la
+edad 3).</p>
+<p><strong>15) Formateo de Recibo (Mixto)</strong></p>
+<p>Imprime el costo total de una compra (float) con 2 decimales y el
+nombre del cajero (%s) en una salida estructurada.</p>
+<p>Datos: total = 245.89, cajero = "Luis"</p>
+<p>Output Esperado: TOTAL: $245.89. Atendido por Luis</p>
+<p><strong>Respuestas y Código Fuente</strong></p>
+<p>C</p>
+<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
+<p>int main(void) {</p>
+<p>// Variables para ejercicios</p>
+<p>int edad = 21, numero_base = 50, codigo = 123, codigo_hash = 35,
+num_A = 10, num_B = 20;</p>
+<p>float promedio = 8.75f, costo = 12.9f, temperatura = 36.65f,
+porcentaje = 10.5f, total = 245.89f;</p>
+<p>double PI = 3.1415926535;</p>
+<p>char c1 = 'A', c2 = 'C', c3 = 'E';</p>
+<p>char producto[] = "Leche";</p>
+<p>char id_usuario[] = "USER45";</p>
+<p>char frase[] = "Programacion";</p>
+<p>char nombre[] = "Ana";</p>
+<p>char cajero[] = "Luis";</p>
+<p>printf("--- Soluciones de Ejercicios ---\n");</p>
+<p>// 1) Múltiples Argumentos y Tipos</p>
+<p>printf("1) Output Esperado: El estudiante tiene %d años y su promedio
+es %f.\n", edad, promedio);</p>
+<p>// 2) Formato de Moneda (%.2f)</p>
+<p>printf("2) Output Esperado: El costo es: $%.2f\n", costo);</p>
+<p>// 3) Redondeo por Precisión (%.0f)</p>
+<p>printf("3) Output Esperado: Temperatura redondeada: %.0f\n",
+temperatura);</p>
+<p>// 4) Especificadores Repetidos</p>
+<p>printf("4) Output Esperado: El numero es %d, y otra vez %d.\n",
+numero_base, numero_base);</p>
+<p>// 5) Impresión de double con Precisión Alta</p>
+<p>printf("5) Output Esperado: Valor de PI: %.6f\n", PI);</p>
+<p>// 6) Ancho de Campo para Enteros (%w.d)</p>
+<p>printf("6) Output Esperado: |%8d|\n", codigo);</p>
+<p>// 7) Combinación de Ancho y Precisión (%w.nf)</p>
+<p>printf("7) Output Esperado: |%6.1f|\n", porcentaje);</p>
+<p>// 8) Alineación a la Izquierda para Texto (%-w.s)</p>
+<p>printf("8) Output Esperado: |%-12s|\n", producto);</p>
+<p>// 9) Alineación a la Derecha de Texto (Impresión de ID)</p>
+<p>printf("9) Output Esperado: |%10s|\n", id_usuario);</p>
+<p>// 10) Formato de Tabla Simple (Encabezados)</p>
+<p>printf("10) Output Esperado: ID\tNombre\tEstado\n");</p>
+<p>// 11) Impresión Secuencial de Caracteres (%c)</p>
+<p>printf("11) Output Esperado: %c %c %c\n", c1, c2, c3);</p>
+<p>// 12) Uso de Código ASCII</p>
+<p>printf("12) Output Esperado: El simbolo es: %c\n", codigo_hash);</p>
+<p>// 13) Impresión de Cadena con Limitación (%.ns)</p>
+<p>printf("13) Output Esperado: %.7s\n", frase);</p>
+<p>// 14) Creación de una Fila de Tabla (Alineación Combinada)</p>
+<p>printf("14) Output Esperado: %-10s | %5d\n", nombre, edad);</p>
+<p>// 15) Formateo de Recibo (Mixto)</p>
+<p>printf("15) Output Esperado: TOTAL: $%.2f. Atendido por %s\n", total,
+cajero);</p>
+<p>return 0;</p>
+<p>}</p>
+
+
+</div>
+</body>
+</html>
+

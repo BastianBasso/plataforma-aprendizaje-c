@@ -1,0 +1,461 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" crossorigin href="/assets/content-01sust.css">
+</head>
+<body>
+<div class="main-content">
+<h2 id="nota">Nota:</h2>
+<p>Para estos ejercicios, utilizaremos la siguiente estructura de datos
+en C:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">typedef</span> <span class="kw">struct</span> <span class="op">{</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> id<span class="op">;</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">float</span> temperatura<span class="op">;</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">char</span> sensor<span class="op">[</span><span class="dv">10</span><span class="op">];</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> LecturaSensor<span class="op">;</span></span></code></pre></div>
+<hr />
+<h2 id="ejercicios-de-programaciÃ³n-archivos-binarios-fwrite-y-fread">10
+Ejercicios de ProgramaciÃ³n: Archivos Binarios (<code>fwrite</code> y
+<code>fread</code>) ðŸ§±</h2>
+<h3 id="bloque-1-diferencia-y-modos-binarios">Bloque 1: Diferencia y
+Modos Binarios</h3>
+<p><strong>1. ComparaciÃ³n de TamaÃ±o de Archivo (Texto
+vs.Â Binario)</strong> Escribe un programa que: a. Escriba el nÃºmero
+entero <code>123456</code> en un archivo llamado
+<strong><code>texto.txt</code></strong> usando
+<strong><code>fprintf()</code></strong> y el modo <code>"w"</code>. b.
+Escriba el mismo entero <code>123456</code> a un archivo llamado
+<strong><code>binario.dat</code></strong> usando
+<strong><code>fwrite()</code></strong> y el modo <code>"wb"</code>.
+c.Â <strong>Pregunta a Responder:</strong> Compara (mentalmente o con la
+salida del programa) la cantidad de bytes que ocupa el nÃºmero en cada
+archivo. Â¿Por quÃ© el archivo binario es mÃ¡s pequeÃ±o (asumiendo
+<code>sizeof(int)</code> es 4 bytes)?</p>
+<p><strong>2. Uso del Modo Binario de AnexiÃ³n
+(<code>"ab"</code>)</strong> Escribe un programa que: a. Abra un archivo
+llamado <strong><code>log_binario.dat</code></strong> en modo de
+escritura binaria (<code>"wb"</code>) y escriba un registro de tipo
+<code>LecturaSensor</code>. b. Cierre el archivo. c.Â Vuelva a abrir el
+archivo en modo de <strong>anexiÃ³n binaria (<code>"ab"</code>)</strong>
+y escriba un segundo registro <code>LecturaSensor</code>.
+d.Â <strong>Objetivo:</strong> Confirmar que el primer registro no se
+borrÃ³ y que el segundo registro se aÃ±adiÃ³ al final.</p>
+<p><strong>3. Modos de ActualizaciÃ³n Binaria
+(<code>"rb+"</code>)</strong> Explica en un comentario en tu cÃ³digo de
+quÃ© manera difieren los modos <code>"wb+"</code> y <code>"rb+"</code> en
+la manipulaciÃ³n de un archivo existente. Luego, intenta abrir un archivo
+que <strong>no existe</strong> en modo
+<strong><code>"rb+"</code></strong> y verifica que <code>fopen()</code>
+devuelve <code>NULL</code>.</p>
+<hr />
+<h3 id="bloque-2-escritura-binaria-fwrite">Bloque 2: Escritura Binaria
+(<code>fwrite</code>)</h3>
+<p><strong>4. Escritura de una Sola Estructura</strong> Escribe un
+programa que: a. Defina una variable <code>LecturaSensor</code> y
+asÃ­gnale valores. b. Abra un archivo llamado
+<strong><code>datos.bin</code></strong> en modo <code>"wb"</code>.
+c.Â Utiliza <strong><code>fwrite()</code></strong> para escribir la
+estructura completa, asegurando que los argumentos <code>size</code> y
+<code>count</code> sean correctos (utilizando
+<code>sizeof(LecturaSensor)</code> y <code>1</code>). d.Â Cierra el
+archivo.</p>
+<p><strong>5. Escritura de un Array de Estructuras</strong> Modifica el
+programa anterior para que: a. Declare un array de tres estructuras
+<code>LecturaSensor</code> (ej.
+<code>LecturaSensor registros[3];</code>). b. Inicializa los tres
+elementos con datos diferentes. c.Â Utiliza <strong>una sola
+llamada</strong> a <strong><code>fwrite()</code></strong> para escribir
+todo el array en el archivo
+<strong><code>datos_array.bin</code></strong>.</p>
+<p><strong>6. Escritura de Datos Primitivos sin Estructura</strong>
+Escribe un programa que declare un array de 10 nÃºmeros flotantes
+(<code>float numeros[10];</code>). a. Inicializa el array. b. Usa
+<strong><code>fwrite()</code></strong> para escribir el array completo
+en un archivo binario llamado
+<strong><code>flotantes.bin</code></strong>. c.Â <strong>Argumentos
+Clave:</strong> Â¿QuÃ© valores usaste para <code>size</code> y
+<code>count</code> en este caso? (Debes usar <code>sizeof(float)</code>
+y <code>10</code>).</p>
+<hr />
+<h3 id="bloque-3-lectura-binaria-fread">Bloque 3: Lectura Binaria
+(<code>fread</code>)</h3>
+<p><strong>7. Lectura de una Sola Estructura</strong> Escribe un
+programa para leer el archivo <strong><code>datos.bin</code></strong>
+creado en el Ejercicio 4. a. Declara una variable
+<code>LecturaSensor</code> vacÃ­a llamada <code>destino</code>. b. Abre
+el archivo en modo <strong><code>"rb"</code></strong>. c.Â Utiliza
+<strong><code>fread()</code></strong> con los mismos parÃ¡metros de
+tamaÃ±o y cantidad que <code>fwrite()</code> para leer el registro
+directamente en <code>destino</code>. d.Â Verifica el valor de retorno de
+<code>fread()</code> y, si fue exitoso, imprime los datos de la
+estructura <code>destino</code>.</p>
+<p><strong>8. Lectura de un Array en Bucle</strong> Escribe un programa
+para leer el archivo <strong><code>datos_array.bin</code></strong>
+creado en el Ejercicio 5. a. Declara una variable
+<code>LecturaSensor</code> vacÃ­a. b. Usa un bucle
+<strong><code>while</code></strong> que se ejecute mientras
+<strong><code>fread()</code></strong> devuelva <code>1</code> (indicando
+que leyÃ³ un registro completo). c.Â Dentro del bucle, imprime los datos
+de cada registro leÃ­do.</p>
+<p><strong>9. ComprobaciÃ³n de Integridad de Archivo</strong> Escribe un
+programa que: a. Escriba exactamente 5 estructuras
+<code>LecturaSensor</code> en
+<strong><code>registros.bin</code></strong> usando <code>fwrite</code>.
+b. Cierre y reabra el archivo en modo <code>"rb"</code>. c.Â Use una
+<strong>sola llamada</strong> a <strong><code>fread()</code></strong>
+intentando leer las 5 estructuras en un array de 5 estructuras en
+memoria. d.Â Comprueba si el valor de retorno de <code>fread()</code> es
+igual a <code>5</code>. Si lo es, imprime un mensaje de Ã©xito.</p>
+<p><strong>10. Diferencia de Punteros en <code>fwrite</code>
+vs.Â <code>fprintf</code></strong> Imagina que quieres escribir la
+variable entera <code>int valor = 5;</code>. a. <strong>Escritura
+Binaria:</strong> Â¿CuÃ¡l es el primer argumento (<code>ptr</code>) que
+pasarÃ­as a <strong><code>fwrite()</code></strong>? b. <strong>Escritura
+de Texto:</strong> Â¿CuÃ¡l es el primer argumento (<code>stream</code>) y
+el Ãºltimo argumento (<code>...</code>) que pasarÃ­as a
+<strong><code>fprintf()</code></strong>?</p>
+<p>Explica en un comentario la razÃ³n por la que <code>fwrite</code>
+requiere la <strong>direcciÃ³n de memoria</strong>
+(<code>&amp;valor</code>), mientras que <code>fprintf</code> requiere
+solo el <strong>valor</strong> (<code>valor</code>).</p>
+<p><em>(Respuesta esperada: <code>fwrite</code> necesita la direcciÃ³n
+para copiar el bloque de bytes; <code>fprintf</code> necesita el valor
+para convertirlo a caracteres).</em></p>
+<h2 id="soluciones-archivos-binarios-fwrite-y-fread">âœ… Soluciones:
+Archivos Binarios (<code>fwrite</code> y <code>fread</code>)</h2>
+<p>Utilizaremos esta estructura en todas las soluciones:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">typedef</span> <span class="kw">struct</span> <span class="op">{</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> id<span class="op">;</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">float</span> temperatura<span class="op">;</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">char</span> sensor<span class="op">[</span><span class="dv">10</span><span class="op">];</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> LecturaSensor<span class="op">;</span></span></code></pre></div>
+<hr />
+<h3 id="bloque-1-diferencia-y-modos-binarios-1">Bloque 1: Diferencia y
+Modos Binarios</h3>
+<p><strong>1. ComparaciÃ³n de TamaÃ±o de Archivo (Texto
+vs.Â Binario)</strong></p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdlib.h&gt;</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">FILE</span> <span class="op">*</span>ft<span class="op">,</span> <span class="op">*</span>fb<span class="op">;</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> numero <span class="op">=</span> <span class="dv">123456</span><span class="op">;</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    <span class="co">// A. Escritura en modo texto (&quot;w&quot;)</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    ft <span class="op">=</span> fopen<span class="op">(</span><span class="st">&quot;texto.txt&quot;</span><span class="op">,</span> <span class="st">&quot;w&quot;</span><span class="op">);</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>ft<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>        fprintf<span class="op">(</span>ft<span class="op">,</span> <span class="st">&quot;</span><span class="sc">%d</span><span class="st">&quot;</span><span class="op">,</span> numero<span class="op">);</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>        fclose<span class="op">(</span>ft<span class="op">);</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>    <span class="co">// B. Escritura en modo binario (&quot;wb&quot;)</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>    fb <span class="op">=</span> fopen<span class="op">(</span><span class="st">&quot;binario.dat&quot;</span><span class="op">,</span> <span class="st">&quot;wb&quot;</span><span class="op">);</span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>fb<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>        fwrite<span class="op">(&amp;</span>numero<span class="op">,</span> <span class="kw">sizeof</span><span class="op">(</span><span class="dt">int</span><span class="op">),</span> <span class="dv">1</span><span class="op">,</span> fb<span class="op">);</span></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>        fclose<span class="op">(</span>fb<span class="op">);</span></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;Ejercicio 1:</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;- &#39;texto.txt&#39; (Texto): Ocupa 6 bytes (por los caracteres &#39;1&#39;,&#39;2&#39;,&#39;3&#39;,&#39;4&#39;,&#39;5&#39;,&#39;6&#39;).</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;- &#39;binario.dat&#39; (Binario): Ocupa </span><span class="sc">%zu</span><span class="st"> bytes (el tamano exacto del int en memoria).</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">,</span> <span class="kw">sizeof</span><span class="op">(</span><span class="dt">int</span><span class="op">));</span></span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>    <span class="co">// R: El archivo binario es mÃ¡s pequeÃ±o porque no hay conversiÃ³n a ASCII.</span></span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> EXIT_SUCCESS<span class="op">;</span></span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p><strong>2. Uso del Modo Binario de AnexiÃ³n
+(<code>"ab"</code>)</strong></p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdlib.h&gt;</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">FILE</span> <span class="op">*</span>archivo<span class="op">;</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    LecturaSensor r1 <span class="op">=</span> <span class="op">{</span><span class="dv">1</span><span class="op">,</span> <span class="fl">25.5</span><span class="bu">f</span><span class="op">,</span> <span class="st">&quot;Sala&quot;</span><span class="op">};</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    LecturaSensor r2 <span class="op">=</span> <span class="op">{</span><span class="dv">2</span><span class="op">,</span> <span class="fl">28.1</span><span class="bu">f</span><span class="op">,</span> <span class="st">&quot;Cocina&quot;</span><span class="op">};</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    <span class="co">// a. Escribir primer registro en modo &quot;wb&quot; (truncar/crear)</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    archivo <span class="op">=</span> fopen<span class="op">(</span><span class="st">&quot;log_binario.dat&quot;</span><span class="op">,</span> <span class="st">&quot;wb&quot;</span><span class="op">);</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>archivo<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>        fwrite<span class="op">(&amp;</span>r1<span class="op">,</span> <span class="kw">sizeof</span><span class="op">(</span>LecturaSensor<span class="op">),</span> <span class="dv">1</span><span class="op">,</span> archivo<span class="op">);</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>        fclose<span class="op">(</span>archivo<span class="op">);</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>    <span class="co">// c. Volver a abrir en modo &quot;ab&quot; (anexar binario) y escribir el segundo</span></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>    archivo <span class="op">=</span> fopen<span class="op">(</span><span class="st">&quot;log_binario.dat&quot;</span><span class="op">,</span> <span class="st">&quot;ab&quot;</span><span class="op">);</span></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>archivo<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>        fwrite<span class="op">(&amp;</span>r2<span class="op">,</span> <span class="kw">sizeof</span><span class="op">(</span>LecturaSensor<span class="op">),</span> <span class="dv">1</span><span class="op">,</span> archivo<span class="op">);</span></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>        fclose<span class="op">(</span>archivo<span class="op">);</span></span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">&quot;Ejercicio 2: Se escribieron 2 registros. &#39;ab&#39; anexo el segundo al final.</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>    <span class="co">// El archivo log_binario.dat ahora tiene 2 * sizeof(LecturaSensor) bytes.</span></span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> EXIT_SUCCESS<span class="op">;</span></span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p><strong>3. Modos de ActualizaciÃ³n Binaria
+(<code>"rb+"</code>)</strong></p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdlib.h&gt;</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">FILE</span> <span class="op">*</span>f_no_existe<span class="op">;</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    <span class="co">// ExplicaciÃ³n de la diferencia de modos</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    <span class="co">/* Diferencia:</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="co">    - &quot;wb+&quot;: Lo crea o lo TRUNCA (borra contenido) si existe. Permite leer y escribir.</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="co">    - &quot;rb+&quot;: Requiere que el archivo YA EXISTA. Si no existe, devuelve NULL. Permite leer y escribir sin borrar.</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="co">    */</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>   </span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Intentar abrir un archivo que no existe en modo &quot;rb+&quot;</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>    f_no_existe <span class="op">=</span> fopen<span class="op">(</span><span class="st">&quot;archivo_fantasma.bin&quot;</span><span class="op">,</span> <span class="st">&quot;rb+&quot;</span><span class="op">);</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;Ejercicio 3:</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>f_no_existe <span class="op">==</span> NULL<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">&quot;Intento de abrir en &#39;rb+&#39; fallo (NULL devuelto), ya que el archivo no existe.</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">&quot;Error: Â¡El archivo existia! Cerrando...</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>        fclose<span class="op">(</span>f_no_existe<span class="op">);</span></span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> EXIT_SUCCESS<span class="op">;</span></span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<hr />
+<h3 id="bloque-2-escritura-binaria-fwrite-1">Bloque 2: Escritura Binaria
+(<code>fwrite</code>)</h3>
+<p><strong>4. Escritura de una Sola Estructura</strong></p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdlib.h&gt;</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="kw">typedef</span> <span class="kw">struct</span> <span class="op">{</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> id<span class="op">;</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">float</span> temperatura<span class="op">;</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    <span class="dt">char</span> sensor<span class="op">[</span><span class="dv">10</span><span class="op">];</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> LecturaSensor<span class="op">;</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>    <span class="dt">FILE</span> <span class="op">*</span>archivo<span class="op">;</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>    LecturaSensor dato <span class="op">=</span> <span class="op">{</span><span class="dv">10</span><span class="op">,</span> <span class="fl">36.8</span><span class="bu">f</span><span class="op">,</span> <span class="st">&quot;CPU_Temp&quot;</span><span class="op">};</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>    archivo <span class="op">=</span> fopen<span class="op">(</span><span class="st">&quot;datos.bin&quot;</span><span class="op">,</span> <span class="st">&quot;wb&quot;</span><span class="op">);</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>archivo <span class="op">==</span> NULL<span class="op">)</span> <span class="cf">return</span> EXIT_FAILURE<span class="op">;</span></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Escribir 1 elemento con el tamaÃ±o de LecturaSensor</span></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>    <span class="dt">size_t</span> escritos <span class="op">=</span> fwrite<span class="op">(&amp;</span>dato<span class="op">,</span> </span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>                             <span class="kw">sizeof</span><span class="op">(</span>LecturaSensor<span class="op">),</span> </span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>                             <span class="dv">1</span><span class="op">,</span> </span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>                             archivo<span class="op">);</span></span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>                                </span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>escritos <span class="op">==</span> <span class="dv">1</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">&quot;Ejercicio 4: Estructura escrita exitosamente en datos.bin.</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">&quot;Error: Escritura incompleta.</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>    fclose<span class="op">(</span>archivo<span class="op">);</span></span>
+<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> EXIT_SUCCESS<span class="op">;</span></span>
+<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p><strong>5. Escritura de un Array de Estructuras</strong></p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdlib.h&gt;</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="kw">typedef</span> <span class="kw">struct</span> <span class="op">{</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> id<span class="op">;</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">float</span> temperatura<span class="op">;</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    <span class="dt">char</span> sensor<span class="op">[</span><span class="dv">10</span><span class="op">];</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> LecturaSensor<span class="op">;</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>    <span class="dt">FILE</span> <span class="op">*</span>archivo<span class="op">;</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>    LecturaSensor registros<span class="op">[</span><span class="dv">3</span><span class="op">]</span> <span class="op">=</span> <span class="op">{</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>        <span class="op">{</span><span class="dv">101</span><span class="op">,</span> <span class="fl">20.0</span><span class="bu">f</span><span class="op">,</span> <span class="st">&quot;A1&quot;</span><span class="op">},</span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>        <span class="op">{</span><span class="dv">102</span><span class="op">,</span> <span class="fl">21.5</span><span class="bu">f</span><span class="op">,</span> <span class="st">&quot;A2&quot;</span><span class="op">},</span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>        <span class="op">{</span><span class="dv">103</span><span class="op">,</span> <span class="fl">19.8</span><span class="bu">f</span><span class="op">,</span> <span class="st">&quot;A3&quot;</span><span class="op">}</span></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>    <span class="op">};</span></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>    archivo <span class="op">=</span> fopen<span class="op">(</span><span class="st">&quot;datos_array.bin&quot;</span><span class="op">,</span> <span class="st">&quot;wb&quot;</span><span class="op">);</span></span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>archivo <span class="op">==</span> NULL<span class="op">)</span> <span class="cf">return</span> EXIT_FAILURE<span class="op">;</span></span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Escribir 3 elementos con el tamaÃ±o de LecturaSensor, en una sola llamada</span></span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>    <span class="dt">size_t</span> escritos <span class="op">=</span> fwrite<span class="op">(</span>registros<span class="op">,</span> </span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>                             <span class="kw">sizeof</span><span class="op">(</span>LecturaSensor<span class="op">),</span> </span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>                             <span class="dv">3</span><span class="op">,</span> </span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a>                             archivo<span class="op">);</span></span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a>                                </span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>escritos <span class="op">==</span> <span class="dv">3</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">&quot;Ejercicio 5: Array de 3 estructuras escrito exitosamente en datos_array.bin.</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
+<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">&quot;Error: Solo se escribieron </span><span class="sc">%zu</span><span class="st"> elementos.</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">,</span> escritos<span class="op">);</span></span>
+<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a>    fclose<span class="op">(</span>archivo<span class="op">);</span></span>
+<span id="cb7-34"><a href="#cb7-34" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> EXIT_SUCCESS<span class="op">;</span></span>
+<span id="cb7-35"><a href="#cb7-35" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p><strong>6. Escritura de Datos Primitivos sin Estructura</strong></p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdlib.h&gt;</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">FILE</span> <span class="op">*</span>archivo<span class="op">;</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">float</span> numeros<span class="op">[</span><span class="dv">10</span><span class="op">]</span> <span class="op">=</span> <span class="op">{</span><span class="fl">1.1</span><span class="bu">f</span><span class="op">,</span> <span class="fl">2.2</span><span class="bu">f</span><span class="op">,</span> <span class="fl">3.3</span><span class="bu">f</span><span class="op">,</span> <span class="fl">4.4</span><span class="bu">f</span><span class="op">,</span> <span class="fl">5.5</span><span class="bu">f</span><span class="op">,</span> <span class="fl">6.6</span><span class="bu">f</span><span class="op">,</span> <span class="fl">7.7</span><span class="bu">f</span><span class="op">,</span> <span class="fl">8.8</span><span class="bu">f</span><span class="op">,</span> <span class="fl">9.9</span><span class="bu">f</span><span class="op">,</span> <span class="fl">10.0</span><span class="bu">f</span><span class="op">};</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>    archivo <span class="op">=</span> fopen<span class="op">(</span><span class="st">&quot;flotantes.bin&quot;</span><span class="op">,</span> <span class="st">&quot;wb&quot;</span><span class="op">);</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>archivo <span class="op">==</span> NULL<span class="op">)</span> <span class="cf">return</span> EXIT_FAILURE<span class="op">;</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Escribir el array completo. size=sizeof(float), count=10</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>    <span class="dt">size_t</span> escritos <span class="op">=</span> fwrite<span class="op">(</span>numeros<span class="op">,</span> </span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>                             <span class="kw">sizeof</span><span class="op">(</span><span class="dt">float</span><span class="op">),</span> <span class="co">// TamaÃ±o de cada elemento</span></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>                             <span class="dv">10</span><span class="op">,</span>            <span class="co">// Cantidad de elementos</span></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>                             archivo<span class="op">);</span></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>                                </span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>escritos <span class="op">==</span> <span class="dv">10</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">&quot;Ejercicio 6: 10 flotantes escritos en flotantes.bin.</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">&quot;Error: Solo se escribieron </span><span class="sc">%zu</span><span class="st"> flotantes.</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">,</span> escritos<span class="op">);</span></span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>    fclose<span class="op">(</span>archivo<span class="op">);</span></span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Argumentos Clave: size = sizeof(float), count = 10</span></span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> EXIT_SUCCESS<span class="op">;</span></span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<hr />
+<h3 id="bloque-3-lectura-binaria-fread-1">Bloque 3: Lectura Binaria
+(<code>fread</code>)</h3>
+<p><strong>7. Lectura de una Sola Estructura</strong></p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdlib.h&gt;</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="kw">typedef</span> <span class="kw">struct</span> <span class="op">{</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> id<span class="op">;</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">float</span> temperatura<span class="op">;</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    <span class="dt">char</span> sensor<span class="op">[</span><span class="dv">10</span><span class="op">];</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> LecturaSensor<span class="op">;</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>    <span class="co">// AsegÃºrese de ejecutar el Ejercicio 4 primero.</span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>    <span class="dt">FILE</span> <span class="op">*</span>archivo <span class="op">=</span> fopen<span class="op">(</span><span class="st">&quot;datos.bin&quot;</span><span class="op">,</span> <span class="st">&quot;rb&quot;</span><span class="op">);</span></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>    LecturaSensor destino<span class="op">;</span></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>    <span class="dt">size_t</span> leidos<span class="op">;</span></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>archivo <span class="op">==</span> NULL<span class="op">)</span> <span class="cf">return</span> EXIT_FAILURE<span class="op">;</span></span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Leer 1 elemento con el tamaÃ±o de LecturaSensor</span></span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>    leidos <span class="op">=</span> fread<span class="op">(&amp;</span>destino<span class="op">,</span> </span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>                   <span class="kw">sizeof</span><span class="op">(</span>LecturaSensor<span class="op">),</span> </span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>                   <span class="dv">1</span><span class="op">,</span> </span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>                   archivo<span class="op">);</span></span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>                                </span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>leidos <span class="op">==</span> <span class="dv">1</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">&quot;</span><span class="sc">\n</span><span class="st">Ejercicio 7: Lectura exitosa de 1 registro:</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">&quot;ID: </span><span class="sc">%d</span><span class="st">, Temp: </span><span class="sc">%.1f</span><span class="st">, Sensor: </span><span class="sc">%s\n</span><span class="st">&quot;</span><span class="op">,</span> </span>
+<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a>               destino<span class="op">.</span>id<span class="op">,</span> destino<span class="op">.</span>temperatura<span class="op">,</span> destino<span class="op">.</span>sensor<span class="op">);</span></span>
+<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
+<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">&quot;</span><span class="sc">\n</span><span class="st">Error o EOF alcanzado (leidos: </span><span class="sc">%zu</span><span class="st">).</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">,</span> leidos<span class="op">);</span></span>
+<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a>    fclose<span class="op">(</span>archivo<span class="op">);</span></span>
+<span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> EXIT_SUCCESS<span class="op">;</span></span>
+<span id="cb9-34"><a href="#cb9-34" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p><strong>8. Lectura de un Array en Bucle</strong></p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdlib.h&gt;</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="kw">typedef</span> <span class="kw">struct</span> <span class="op">{</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> id<span class="op">;</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">float</span> temperatura<span class="op">;</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>    <span class="dt">char</span> sensor<span class="op">[</span><span class="dv">10</span><span class="op">];</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> LecturaSensor<span class="op">;</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>    <span class="co">// AsegÃºrese de ejecutar el Ejercicio 5 primero.</span></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>    <span class="dt">FILE</span> <span class="op">*</span>archivo <span class="op">=</span> fopen<span class="op">(</span><span class="st">&quot;datos_array.bin&quot;</span><span class="op">,</span> <span class="st">&quot;rb&quot;</span><span class="op">);</span></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>    LecturaSensor registro_actual<span class="op">;</span></span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> contador <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>archivo <span class="op">==</span> NULL<span class="op">)</span> <span class="cf">return</span> EXIT_FAILURE<span class="op">;</span></span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;</span><span class="sc">\n</span><span class="st">Ejercicio 8: Leyendo registros uno por uno en un bucle:</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>    <span class="co">// El bucle se mantiene mientras fread lee exitosamente 1 elemento</span></span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> <span class="op">(</span>fread<span class="op">(&amp;</span>registro_actual<span class="op">,</span> <span class="kw">sizeof</span><span class="op">(</span>LecturaSensor<span class="op">),</span> <span class="dv">1</span><span class="op">,</span> archivo<span class="op">)</span> <span class="op">==</span> <span class="dv">1</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>        contador<span class="op">++;</span></span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">&quot;Registro </span><span class="sc">%d</span><span class="st"> -&gt; ID: </span><span class="sc">%d</span><span class="st">, Temp: </span><span class="sc">%.1f\n</span><span class="st">&quot;</span><span class="op">,</span> </span>
+<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a>               contador<span class="op">,</span> registro_actual<span class="op">.</span>id<span class="op">,</span> registro_actual<span class="op">.</span>temperatura<span class="op">);</span></span>
+<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;Fin de la lectura. Total de registros leÃ­dos: </span><span class="sc">%d</span><span class="st">.</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">,</span> contador<span class="op">);</span></span>
+<span id="cb10-28"><a href="#cb10-28" aria-hidden="true" tabindex="-1"></a>    fclose<span class="op">(</span>archivo<span class="op">);</span></span>
+<span id="cb10-29"><a href="#cb10-29" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> EXIT_SUCCESS<span class="op">;</span></span>
+<span id="cb10-30"><a href="#cb10-30" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p><strong>9. ComprobaciÃ³n de Integridad de Archivo</strong></p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdlib.h&gt;</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="kw">typedef</span> <span class="kw">struct</span> <span class="op">{</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> id<span class="op">;</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">float</span> temperatura<span class="op">;</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>    <span class="dt">char</span> sensor<span class="op">[</span><span class="dv">10</span><span class="op">];</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> LecturaSensor<span class="op">;</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a><span class="pp">#define NUM_REGISTROS </span><span class="dv">5</span></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>    <span class="dt">FILE</span> <span class="op">*</span>f<span class="op">;</span></span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>    LecturaSensor buffer_escritura<span class="op">[</span>NUM_REGISTROS<span class="op">]</span> <span class="op">=</span> <span class="op">{{</span><span class="dv">1</span><span class="op">,</span> <span class="dv">0</span><span class="er">.0f</span><span class="op">,</span> <span class="st">&quot;A&quot;</span><span class="op">},</span> <span class="op">{</span><span class="dv">2</span><span class="op">,</span> <span class="dv">0</span><span class="er">.0f</span><span class="op">,</span> <span class="st">&quot;B&quot;</span><span class="op">},</span> <span class="op">{</span><span class="dv">3</span><span class="op">,</span> <span class="dv">0</span><span class="er">.0f</span><span class="op">,</span> <span class="st">&quot;C&quot;</span><span class="op">},</span> <span class="op">{</span><span class="dv">4</span><span class="op">,</span> <span class="dv">0</span><span class="er">.0f</span><span class="op">,</span> <span class="st">&quot;D&quot;</span><span class="op">},</span> <span class="op">{</span><span class="dv">5</span><span class="op">,</span> <span class="dv">0</span><span class="er">.0f</span><span class="op">,</span> <span class="st">&quot;E&quot;</span><span class="op">}};</span></span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>    LecturaSensor buffer_lectura<span class="op">[</span>NUM_REGISTROS<span class="op">];</span></span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>    <span class="dt">size_t</span> leidos<span class="op">;</span></span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a>    <span class="co">// A. Escribir 5 registros</span></span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a>    f <span class="op">=</span> fopen<span class="op">(</span><span class="st">&quot;registros.bin&quot;</span><span class="op">,</span> <span class="st">&quot;wb&quot;</span><span class="op">);</span></span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>f<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a>        fwrite<span class="op">(</span>buffer_escritura<span class="op">,</span> <span class="kw">sizeof</span><span class="op">(</span>LecturaSensor<span class="op">),</span> NUM_REGISTROS<span class="op">,</span> f<span class="op">);</span></span>
+<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a>        fclose<span class="op">(</span>f<span class="op">);</span></span>
+<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a>    <span class="co">// C. Reabrir y leer 5 registros en una sola llamada</span></span>
+<span id="cb11-26"><a href="#cb11-26" aria-hidden="true" tabindex="-1"></a>    f <span class="op">=</span> fopen<span class="op">(</span><span class="st">&quot;registros.bin&quot;</span><span class="op">,</span> <span class="st">&quot;rb&quot;</span><span class="op">);</span></span>
+<span id="cb11-27"><a href="#cb11-27" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>f <span class="op">==</span> NULL<span class="op">)</span> <span class="cf">return</span> EXIT_FAILURE<span class="op">;</span></span>
+<span id="cb11-28"><a href="#cb11-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-29"><a href="#cb11-29" aria-hidden="true" tabindex="-1"></a>    leidos <span class="op">=</span> fread<span class="op">(</span>buffer_lectura<span class="op">,</span> <span class="kw">sizeof</span><span class="op">(</span>LecturaSensor<span class="op">),</span> NUM_REGISTROS<span class="op">,</span> f<span class="op">);</span></span>
+<span id="cb11-30"><a href="#cb11-30" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb11-31"><a href="#cb11-31" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;</span><span class="sc">\n</span><span class="st">Ejercicio 9: ComprobaciÃ³n de integridad.</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb11-32"><a href="#cb11-32" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;Registros solicitados: </span><span class="sc">%d\n</span><span class="st">&quot;</span><span class="op">,</span> NUM_REGISTROS<span class="op">);</span></span>
+<span id="cb11-33"><a href="#cb11-33" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;Registros leÃ­dos: </span><span class="sc">%zu\n</span><span class="st">&quot;</span><span class="op">,</span> leidos<span class="op">);</span></span>
+<span id="cb11-34"><a href="#cb11-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-35"><a href="#cb11-35" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>leidos <span class="op">==</span> NUM_REGISTROS<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb11-36"><a href="#cb11-36" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">&quot;Integridad: Ã‰XITO. Se leyeron exactamente 5 registros.</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb11-37"><a href="#cb11-37" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
+<span id="cb11-38"><a href="#cb11-38" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">&quot;Integridad: FALLO. Los datos del archivo no estÃ¡n completos.</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb11-39"><a href="#cb11-39" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb11-40"><a href="#cb11-40" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb11-41"><a href="#cb11-41" aria-hidden="true" tabindex="-1"></a>    fclose<span class="op">(</span>f<span class="op">);</span></span>
+<span id="cb11-42"><a href="#cb11-42" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> EXIT_SUCCESS<span class="op">;</span></span>
+<span id="cb11-43"><a href="#cb11-43" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p><strong>10. Diferencia de Punteros en <code>fwrite</code>
+vs.Â <code>fprintf</code></strong></p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdlib.h&gt;</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> valor <span class="op">=</span> <span class="dv">5</span><span class="op">;</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;</span><span class="sc">\n</span><span class="st">Ejercicio 10: Diferencia de Punteros</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>    <span class="co">// a. Escritura Binaria (fwrite):</span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>    <span class="co">// El primer argumento (ptr) debe ser la DIRECCIÃ“N de memoria de la variable: &amp;valor</span></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>    <span class="co">// fwrite(&amp;valor, sizeof(int), 1, flujo);</span></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>    <span class="co">// b. Escritura de Texto (fprintf):</span></span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>    <span class="co">// El primer argumento (stream) es el puntero FILE*.</span></span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>    <span class="co">// El Ãºltimo argumento (...) es el VALOR de la variable: valor</span></span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>    <span class="co">// fprintf(flujo, &quot;Valor: %d&quot;, valor);</span></span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;ExplicaciÃ³n:</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;- &#39;fwrite&#39; requiere &amp;valor porque copia el bloque de BYTES directamente desde esa direcciÃ³n.</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;- &#39;fprintf&#39; requiere solo &#39;valor&#39; porque primero CONVIERTE el valor numerico a una cadena de caracteres (ej: &#39;5&#39;) y luego escribe esa cadena.</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> EXIT_SUCCESS<span class="op">;</span></span>
+<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+
+</div>
+</body>
+</html>
+
