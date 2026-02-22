@@ -313,16 +313,21 @@ export function Admin() {
             gap: 18px;
             align-items: start;
           }
-
+          
           /* Card base (alineado a Configuracion.jsx) */
           .hub-admin .generic-card {
+            width: 85%;
             background: #fff;
             border: 2px solid #c4c5c5;
             border-radius: 18px;
             padding: 18px 20px;
             box-shadow: 0 2px 12px rgba(60, 120, 200, 0.08);
           }
-
+          
+          .hub-admin [aria-label="Encabezado"]{
+            width: 88.8%;
+          }
+          
           .hub-admin .title {
             margin: 0 0 6px;
             color: #1a4e8a;
