@@ -18,7 +18,7 @@ export function Registro() {
     setSuccess(null);
 
     try {
-      const res = await fetch('/register', {
+      const res = await fetch('/api/register', {
         method: 'POST',
         credentials: 'include',
         headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
