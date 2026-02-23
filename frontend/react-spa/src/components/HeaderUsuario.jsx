@@ -6,7 +6,7 @@ export function HeaderUsuario() {
   const navigate = useNavigate();
 
   const isAuthenticated = status === 'authenticated';
-  const username = isAuthenticated ? user?.username : null;
+  const username = isAuthenticated ? user?.usuario : null;
 
   async function onLogout() {
     await logout();
