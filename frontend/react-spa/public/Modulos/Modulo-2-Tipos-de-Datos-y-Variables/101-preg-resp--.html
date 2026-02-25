@@ -8,83 +8,139 @@
 <body>
 <div class="main-content">
 <p><strong>Cuestionario: Datos, Memoria y Variables en C</strong></p>
-<p>1. ¿Cuál es la unidad fundamental de información en un sistema
-digital que solo puede tener el valor de 0 o 1?</p>
-<p>A. El Byte.</p>
-<p>B. El Bit.</p>
-<p>C. La Dirección de Memoria.</p>
-<p>D. La Variable.</p>
-<p>2. ¿Cuántos bits componen un Byte, la unidad más pequeña de memoria
-que puede ser direccional en la RAM?</p>
-<p>A. 1 bit.</p>
-<p>B. 4 bits.</p>
-<p>C. 8 bits.</p>
-<p>D. 16 bits.</p>
-<p>3. ¿Cuál de los siguientes tipos de datos representa la verdad o
-falsedad y se utiliza para tomar decisiones en el código (conocido como
-Booleano)?</p>
-<p>A. Numéricos.</p>
-<p>B. Lógicos.</p>
-<p>C. Textuales.</p>
-<p>D. Alfanuméricos.</p>
-<p>4. ¿Qué nombre recibe la memoria volátil donde un programa C guarda y
-recupera activamente todos sus datos durante la ejecución?</p>
-<p>A. Memoria ROM.</p>
-<p>B. Disco Duro (HDD/SSD).</p>
-<p>C. Memoria Caché.</p>
-<p>D. Memoria RAM.</p>
-<p>5. En la analogía de la RAM como un gran armario, ¿qué representa
-cada uno de los "cajones" individuales con su propia dirección?</p>
-<p>A. Un Bit.</p>
-<p>B. Un Byte.</p>
-<p>C. El Tipo de Dato.</p>
-<p>D. El Valor de la Variable.</p>
-<p>6. Cuando declaras una variable de un tipo específico (ej. int), ¿qué
-le indica ese tipo de dato al compilador?</p>
-<p>A. El nombre que debe tener la variable.</p>
-<p>B. La función que debe realizar la variable.</p>
-<p>C. Cuántos bytes contiguos debe reservar en la memoria para el
-dato.</p>
-<p>D. Si el programa debe ejecutarse al inicio o al final.</p>
-<p>7. ¿Qué se asigna a una variable en C para que el programador pueda
-acceder a su valor sin tener que recordar su ubicación numérica?</p>
-<p>A. Un puntero.</p>
-<p>B. La dirección de memoria.</p>
-<p>C. Una etiqueta simple (el nombre de la variable).</p>
-<p>D. Un valor binario.</p>
-<p>8. Si un entero (int) ocupa 4 bytes de espacio en la memoria RAM,
-¿cuántos bits está reservando la computadora para ese dato?</p>
-<p>A. 4 bits.</p>
-<p>B. 8 bits.</p>
-<p>C. 16 bits.</p>
-<p>D. 32 bits 4 * 8.</p>
-<p>9. ¿Qué concepto representa la ubicación física y única del primer
-byte de un dato en la RAM, siendo un número largo (generalmente
-hexadecimal)?</p>
-<p>A. El Valor (Value).</p>
-<p>B. El Byte.</p>
-<p>C. La Dirección de Memoria.</p>
-<p>D. El Nombre de la Variable.</p>
-<p>10. Al declarar una variable, el compilador debe reservar bytes que
-son contiguos. ¿Qué significa esto?</p>
-<p>A. Que los bytes deben ser leídos de forma aleatoria.</p>
-<p>B. Que los bytes se encuentran dispersos por toda la RAM.</p>
-<p>C. Que los bytes están ubicados uno al lado del otro en el espacio de
-la memoria.</p>
-<p>D. Que el valor de la variable nunca puede cambiar.</p>
-<p><strong>Respuestas Correctas</strong></p>
-<ol type="1">
-<li><p>B</p></li>
-<li><p>C</p></li>
-<li><p>B</p></li>
-<li><p>D</p></li>
-<li><p>B</p></li>
-<li><p>C</p></li>
-<li><p>C</p></li>
-<li><p>D</p></li>
-<li><p>C</p></li>
-<li><p>C</p></li>
-</ol>
+
+<div data-quiz="alternative">
+    <script type="application/json" data-quiz-config>
+        {
+            "version": 1,
+            "quizId": "mod2-101-datos-memoria-variables",
+            "lessonId": 101,
+            "title": "Cuestionario: Datos, Memoria y Variables en C",
+            "questions": [
+                {
+                    "id": "m2-101-1",
+                    "label": "Bits y Bytes",
+                    "text": "¿Cuál es la unidad fundamental de información en un sistema digital que solo puede tener el valor de 0 o 1?",
+                    "options": [
+                        { "id": "A", "text": "A. El Byte." },
+                        { "id": "B", "text": "B. El Bit." },
+                        { "id": "C", "text": "C. La Dirección de Memoria." },
+                        { "id": "D", "text": "D. La Variable." }
+                    ],
+                    "correctOptionId": "B"
+                },
+                {
+                    "id": "m2-101-2",
+                    "label": "Bits y Bytes",
+                    "text": "¿Cuántos bits componen un Byte, la unidad más pequeña de memoria que puede ser direccional en la RAM?",
+                    "options": [
+                        { "id": "A", "text": "A. 1 bit." },
+                        { "id": "B", "text": "B. 4 bits." },
+                        { "id": "C", "text": "C. 8 bits." },
+                        { "id": "D", "text": "D. 16 bits." }
+                    ],
+                    "correctOptionId": "C"
+                },
+                {
+                    "id": "m2-101-3",
+                    "label": "Tipos de Datos",
+                    "text": "¿Cuál de los siguientes tipos de datos representa la verdad o falsedad y se utiliza para tomar decisiones en el código (conocido como Booleano)?",
+                    "options": [
+                        { "id": "A", "text": "A. Numéricos." },
+                        { "id": "B", "text": "B. Lógicos." },
+                        { "id": "C", "text": "C. Textuales." },
+                        { "id": "D", "text": "D. Alfanuméricos." }
+                    ],
+                    "correctOptionId": "B"
+                },
+                {
+                    "id": "m2-101-4",
+                    "label": "RAM",
+                    "text": "¿Qué nombre recibe la memoria volátil donde un programa C guarda y recupera activamente todos sus datos durante la ejecución?",
+                    "options": [
+                        { "id": "A", "text": "A. Memoria ROM." },
+                        { "id": "B", "text": "B. Disco Duro (HDD/SSD)." },
+                        { "id": "C", "text": "C. Memoria Caché." },
+                        { "id": "D", "text": "D. Memoria RAM." }
+                    ],
+                    "correctOptionId": "D"
+                },
+                {
+                    "id": "m2-101-5",
+                    "label": "RAM",
+                    "text": "En la analogía de la RAM como un gran armario, ¿qué representa cada uno de los \"cajones\" individuales con su propia dirección?",
+                    "options": [
+                        { "id": "A", "text": "A. Un Bit." },
+                        { "id": "B", "text": "B. Un Byte." },
+                        { "id": "C", "text": "C. El Tipo de Dato." },
+                        { "id": "D", "text": "D. El Valor de la Variable." }
+                    ],
+                    "correctOptionId": "B"
+                },
+                {
+                    "id": "m2-101-6",
+                    "label": "Tipos de Datos",
+                    "text": "Cuando declaras una variable de un tipo específico (ej. int), ¿qué le indica ese tipo de dato al compilador?",
+                    "options": [
+                        { "id": "A", "text": "A. El nombre que debe tener la variable." },
+                        { "id": "B", "text": "B. La función que debe realizar la variable." },
+                        { "id": "C", "text": "C. Cuántos bytes contiguos debe reservar en la memoria para el dato." },
+                        { "id": "D", "text": "D. Si el programa debe ejecutarse al inicio o al final." }
+                    ],
+                    "correctOptionId": "C"
+                },
+                {
+                    "id": "m2-101-7",
+                    "label": "Variables",
+                    "text": "¿Qué se asigna a una variable en C para que el programador pueda acceder a su valor sin tener que recordar su ubicación numérica?",
+                    "options": [
+                        { "id": "A", "text": "A. Un puntero." },
+                        { "id": "B", "text": "B. La dirección de memoria." },
+                        { "id": "C", "text": "C. Una etiqueta simple (el nombre de la variable)." },
+                        { "id": "D", "text": "D. Un valor binario." }
+                    ],
+                    "correctOptionId": "C"
+                },
+                {
+                    "id": "m2-101-8",
+                    "label": "Bits y Bytes",
+                    "text": "Si un entero (int) ocupa 4 bytes de espacio en la memoria RAM, ¿cuántos bits está reservando la computadora para ese dato?",
+                    "options": [
+                        { "id": "A", "text": "A. 4 bits." },
+                        { "id": "B", "text": "B. 8 bits." },
+                        { "id": "C", "text": "C. 16 bits." },
+                        { "id": "D", "text": "D. 32 bits 4 * 8." }
+                    ],
+                    "correctOptionId": "D"
+                },
+                {
+                    "id": "m2-101-9",
+                    "label": "Direcciones",
+                    "text": "¿Qué concepto representa la ubicación física y única del primer byte de un dato en la RAM, siendo un número largo (generalmente hexadecimal)?",
+                    "options": [
+                        { "id": "A", "text": "A. El Valor (Value)." },
+                        { "id": "B", "text": "B. El Byte." },
+                        { "id": "C", "text": "C. La Dirección de Memoria." },
+                        { "id": "D", "text": "D. El Nombre de la Variable." }
+                    ],
+                    "correctOptionId": "C"
+                },
+                {
+                    "id": "m2-101-10",
+                    "label": "Memoria",
+                    "text": "Al declarar una variable, el compilador debe reservar bytes que son contiguos. ¿Qué significa esto?",
+                    "options": [
+                        { "id": "A", "text": "A. Que los bytes deben ser leídos de forma aleatoria." },
+                        { "id": "B", "text": "B. Que los bytes se encuentran dispersos por toda la RAM." },
+                        { "id": "C", "text": "C. Que los bytes están ubicados uno al lado del otro en el espacio de la memoria." },
+                        { "id": "D", "text": "D. Que el valor de la variable nunca puede cambiar." }
+                    ],
+                    "correctOptionId": "C"
+                }
+            ]
+        }
+    </script>
+</div>
 
 </div>
 </body>
