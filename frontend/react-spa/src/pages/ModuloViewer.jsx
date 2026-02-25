@@ -1,5 +1,6 @@
-import { useCallback, useMemo, useRef } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
+import { mountAlternativeQuizzesInDocument } from '../features/quizzes/alternativeQuiz/mountAlternativeQuizzesInDocument.js';
 
 function getStoredUserId() {
   const raw = sessionStorage.getItem('userId');
@@ -42,11 +43,15 @@ export function ModuloViewer({ modulosIndex }) {
   const fi = Number(fileIndex);
 
   const iframeRef = useRef(null);
+  const quizCleanupRef = useRef(null);
+  const [quizRequiredToProceed, setQuizRequiredToProceed] = useState(false);
+  const [quizSubmitted, setQuizSubmitted] = useState(false);
 
   // CSS adicional para el contenido HTML cargado en el iframe.
   // Nota: esto solo funciona si el iframe es same-origin.
   const injectedCssHrefs = useMemo(() => [
     '/c-code-style.css',
+    '/assets/alternative-quiz.css',
   ], []);
 
   const flat = useMemo(() => {
@@ -106,10 +111,39 @@ export function ModuloViewer({ modulosIndex }) {
           link.href = href;
         }
       }
+
+      // Monta quizzes de alternativas declarados en el HTML.
+      if (typeof quizCleanupRef.current === 'function') {
+        try {
+          quizCleanupRef.current();
+        } catch {
+          // ignore
+        }
+      }
+      setQuizSubmitted(false);
+      const { mountedCount, cleanup } = mountAlternativeQuizzesInDocument(doc, {
+        onAnySubmitted: () => {
+          setQuizSubmitted(true);
+        },
+      });
+      quizCleanupRef.current = cleanup;
+      setQuizRequiredToProceed(mountedCount > 0);
     } catch {
       // Cross-origin o políticas del iframe: no se puede inyectar.
     }
   }, [injectedCssHrefs]);
+
+  useEffect(() => {
+    return () => {
+      if (typeof quizCleanupRef.current === 'function') {
+        try {
+          quizCleanupRef.current();
+        } catch {
+          // ignore
+        }
+      }
+    };
+  }, []);
 
   return (
     <div className="viewer">
@@ -139,9 +173,15 @@ export function ModuloViewer({ modulosIndex }) {
           <Link className="viewer-hub" to="/cursos">Volver a cursos</Link>
 
           {next ? (
-            <Link className="viewer-btn" to={`/m/${next.modIndex}/${next.fileIndex}`} onClick={handleNextClick}>
-              Siguiente →
-            </Link>
+            quizRequiredToProceed && !quizSubmitted ? (
+              <span className="viewer-btn viewer-btn-disabled" aria-disabled="true">
+                Siguiente →
+              </span>
+            ) : (
+              <Link className="viewer-btn" to={`/m/${next.modIndex}/${next.fileIndex}`} onClick={handleNextClick}>
+                Siguiente →
+              </Link>
+            )
           ) : (
             <span className="viewer-btn viewer-btn-disabled">Siguiente →</span>
           )}

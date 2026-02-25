@@ -1,0 +1,124 @@
+/*
+  Estilos del quiz de alternativas.
+  Objetivo: acercarse al look de 201-preguntas-respuesta.html,
+  pero aplicado al componente montado dentro del iframe.
+*/
+
+.alt-quiz .alt-quiz-container {
+  max-width: 900px;
+  margin: 24px auto;
+}
+
+.alt-quiz .alt-quiz-title {
+  text-align: center;
+  color: #2563eb;
+  margin: 0 0 18px 0;
+  font-size: 1.6rem;
+  font-weight: 800;
+}
+
+.alt-quiz .question-item {
+  margin-bottom: 20px;
+  padding: 15px;
+  border: 1px solid #eee;
+  border-radius: 8px;
+}
+
+.alt-quiz .alt-quiz-label {
+  font-weight: 600;
+}
+
+.alt-quiz .option-label {
+  display: block;
+  margin-bottom: 8px;
+  padding: 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  position: relative;
+}
+
+.alt-quiz .option-label:hover:not(.correct):not(.incorrect) {
+  background-color: #f0f0f0;
+}
+
+.alt-quiz .correct {
+  background-color: #d1e7dd;
+  border: 1px solid #0f5132;
+  color: #0f5132;
+  font-weight: bold;
+}
+
+.alt-quiz .correct::after {
+  content: ' ✓ Correcta';
+  color: #0f5132;
+  font-size: 1.05em;
+  margin-left: 10px;
+  font-weight: bold;
+}
+
+.alt-quiz .incorrect {
+  background-color: #f8d7da;
+  border: 1px solid #842029;
+  color: #842029;
+}
+
+.alt-quiz .incorrect::after {
+  content: ' ❌ Incorrecta';
+  color: #842029;
+  font-size: 1.05em;
+  margin-left: 10px;
+  font-weight: bold;
+}
+
+.alt-quiz .btn-submit {
+  display: inline-block;
+  background: linear-gradient(90deg, #2563eb 60%, #3b2fa6 100%);
+  color: #fff;
+  font-weight: 700;
+  font-size: 1.08rem;
+  padding: 12px 38px;
+  border-radius: 999px;
+  border: none;
+  box-shadow: 0 2px 12px rgba(37, 99, 235, 0.14);
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+  margin: 24px auto 0 auto;
+  display: block;
+}
+
+.alt-quiz .btn-submit:hover:enabled {
+  background: linear-gradient(90deg, #3b2fa6 60%, #2563eb 100%);
+  transform: translateY(-2px) scale(1.04);
+  box-shadow: 0 6px 24px rgba(37, 99, 235, 0.22);
+}
+
+.alt-quiz .btn-submit:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.alt-quiz .quiz-message {
+  margin-top: 16px;
+  padding: 15px;
+  border-radius: 8px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.alt-quiz .quiz-message.success {
+  background-color: #0f5132;
+  color: #fff;
+}
+
+.alt-quiz .quiz-message.warning {
+  background-color: #fff3cd;
+  color: #664d03;
+}
+
+.alt-quiz .quiz-message.info {
+  background-color: #cff4fc;
+  color: #055160;
+}
