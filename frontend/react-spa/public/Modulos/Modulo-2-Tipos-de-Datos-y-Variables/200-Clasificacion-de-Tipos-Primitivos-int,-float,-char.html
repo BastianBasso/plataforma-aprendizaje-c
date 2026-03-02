@@ -293,9 +293,15 @@ códigos de estado, índices de arreglos.</p></li>
 int.</p></li>
 </ul>
 <p>C</p>
-<p>int edad_usuario = 30;</p>
-<p>int numero_de_intentos = 5;</p>
-<p>int temperatura_ambiente = -12;</p>
+<div class="c2h-code">
+  <div class="c2h-code-inner">
+    <table>
+      <tr><td>1</td><td><span class="c2h-kword c2h-kword-int">int</span> <span class="c2h-identifier">edad_usuario</span> <span class="c2h-operator">=</span> <span class="c2h-val-int">30</span>;</td></tr>
+      <tr><td>2</td><td><span class="c2h-kword c2h-kword-int">int</span> <span class="c2h-identifier">numero_de_intentos</span> <span class="c2h-operator">=</span> <span class="c2h-val-int">5</span>;</td></tr>
+      <tr><td>3</td><td><span class="c2h-kword c2h-kword-int">int</span> <span class="c2h-identifier">temperatura_ambiente</span> <span class="c2h-operator">=</span> <span class="c2h-operator">-</span><span class="c2h-val-int">12</span>;</td></tr>
+    </table>
+  </div>
+</div>
 <h2><strong>El Rango de Valores y el Tamaño en Bytes</strong></h2>
 <p>La cantidad de números que un int puede almacenar está determinada
 directamente por la <strong>cantidad de <em>bytes</em> que el compilador
@@ -309,8 +315,7 @@ valores únicos. Dado que los int por defecto pueden ser positivos o
 negativos (signed), ese rango de valores se divide:</p></li>
 </ol>
 <blockquote>
-<p>$$\text{Rango Aproximado} \approx \text{de } -2.14 \text{ billones a
-} +2.14 \text{ billones}$$</p>
+<p>x ∈ [ −2.14 billones,+2.14 billones ] </p>
 </blockquote>
 <ol start="3" type="1">
 <li><strong>Dependencia de la Máquina:</strong> Es importante recordar
@@ -375,12 +380,19 @@ crucial.</td>
 se trata como un double. Si deseas asignar explícitamente un valor a un
 float, debes añadir el sufijo <strong>f</strong> al número:</p>
 <p>C</p>
-<p>// float: Simple precisión (4 bytes).</p>
-<p>float velocidad = 9.8f; // Se usa la 'f' para indicar que es un
-float.</p>
-<p>// double: Doble precisión (8 bytes).</p>
-<p>double pi = 3.1415926535; // Valor por defecto en C.</p>
-<p>double saldo_cuenta = 1250.75;</p>
+<div class="c2h-code">
+  <div class="c2h-code-inner">
+    <table>
+      <tr><td>1</td><td><span class="c2h-comment">// float: Simple precisión (4 bytes).</span></td></tr>
+      <tr><td>2</td><td><span class="c2h-kword c2h-kword-float">float</span> <span class="c2h-identifier">velocidad</span> <span class="c2h-operator">=</span> <span class="c2h-val-flt">9.8</span><span class="c2h-identifier">f</span>; <span class="c2h-comment">// Se usa la 'f' para indicar que es un</span></td></tr>
+      <tr><td>3</td><td><span class="c2h-kword c2h-kword-float">float</span>.</td></tr>
+      <tr><td>4</td><td><span class="c2h-comment">// double: Doble precisión (8 bytes).</span></td></tr>
+      <tr><td>5</td><td><span class="c2h-kword c2h-kword-double">double</span> <span class="c2h-identifier">pi</span> <span class="c2h-operator">=</span> <span class="c2h-val-flt">3.1415926535</span>; <span class="c2h-comment">// Valor por defecto en C.</span></td></tr>
+      <tr><td>6</td><td><span class="c2h-kword c2h-kword-double">double</span> <span class="c2h-identifier">saldo_cuenta</span> <span class="c2h-operator">=</span> <span class="c2h-val-flt">1250.75</span>;</td></tr>    
+     
+    </table>
+  </div>
+</div>
 <p><strong>Nota:</strong> Es una buena práctica usar
 <strong>double</strong> a menos que tengas una razón específica (como
 optimización de memoria en sistemas muy limitados) para usar float, ya
@@ -427,13 +439,20 @@ caracteres (aunque con cuidado).</p>
 dobles, los valores de tipo char deben ir encerrados entre
 <strong>comillas simples</strong> (' ').</p>
 <p>C</p>
-<p>// Se almacena la letra 'L', que internamente es el número 76
-(ASCII).</p>
-<p>char inicial = 'L';</p>
-<p>// Se almacena el carácter de signo de dólar.</p>
-<p>char simbolo = '$';</p>
-<p>// Esto es totalmente válido en C (suma de códigos ASCII):</p>
-<p>char siguiente_letra = 'A' + 1; // 'A' (65) + 1 = 66, que es 'B'</p>
+<div class="c2h-code">
+  <div class="c2h-code-inner">
+    <table>
+      <tr><td>1</td><td><span class="c2h-comment">// Se almacena la letra 'L', que internamente es el número 76</span></td></tr>
+      <tr><td>2</td><td>(<span class="c2h-identifier">ASCII</span>).</td></tr>
+      <tr><td>3</td><td><span class="c2h-kword c2h-kword-char">char</span> <span class="c2h-identifier">inicial</span> <span class="c2h-operator">=</span> <span class="c2h-val-char">'L'</span>;</td></tr>
+      <tr><td>4</td><td><span class="c2h-comment">// Se almacena el carácter de signo de dólar.</span></td></tr>
+      <tr><td>5</td><td><span class="c2h-kword c2h-kword-char">char</span> <span class="c2h-identifier">simbolo</span> <span class="c2h-operator">=</span> <span class="c2h-val-char">'$'</span>;</td></tr>
+      <tr><td>6</td><td><span class="c2h-comment">// Esto es totalmente válido en C (suma de códigos ASCII):</span></td></tr>
+      <tr><td>7</td><td><span class="c2h-kword c2h-kword-char">char</span> <span class="c2h-identifier">siguiente_letra</span> <span class="c2h-operator">=</span> <span class="c2h-val-char">'A'</span> <span class="c2h-operator">+</span> <span class="c2h-val-int">1</span>; <span class="c2h-comment">// 'A' (65) + 1 = 66, que es 'B'</span></td></tr>
+      
+    </table>
+  </div>
+</div>
 <p>El tipo char es la base para construir tipos derivados más complejos,
 como las <strong>cadenas de caracteres</strong> (<em>strings</em> o
 texto), que son simplemente arreglos de muchos char.</p>
@@ -480,23 +499,30 @@ paréntesis.</li>
 <p>Podemos usar sizeof junto con printf() para mostrar el tamaño de los
 tipos primitivos en la consola:</p>
 <p>C</p>
-<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
-<p>int main(void) {</p>
-<p>// El operador sizeof retorna un valor de tipo size_t (entero sin
-signo)</p>
-<p>// Usamos el especificador de formato %zu para imprimir el
-resultado.</p>
-<p>printf("Tamaño de char: %zu bytes\n", sizeof(char));</p>
-<p>printf("Tamaño de int: %zu bytes\n", sizeof(int));</p>
-<p>printf("Tamaño de float: %zu bytes\n", sizeof(float));</p>
-<p>printf("Tamaño de double: %zu bytes\n", sizeof(double));</p>
-<p>return 0;</p>
-<p>}</p>
+<div class="c2h-code">
+  <div class="c2h-code-inner">
+    <table>
+      <tr><td>1</td><td><span class="c2h-directive">#include</span> <span class="c2h-val-str">&lt;stdio.h&gt;</span></td></tr>
+      <tr><td>2</td><td><span class="c2h-kword c2h-kword-int">int</span> <span class="c2h-identifier c2h-fdeclname">main</span>(<span class="c2h-kword c2h-kword-void">void</span>) {</td></tr>
+      <tr><td>3</td><td>    <span class="c2h-comment">// El operador sizeof retorna un valor de tipo size_t (entero sin signo)</span></td></tr>
+      <tr><td>4</td><td>    <span class="c2h-comment">// Usamos el especificador de formato %zu para imprimir el resultado.</span></td></tr>
+      <tr><td>5</td><td>    <span class="c2h-identifier c2h-fcallname">printf</span>(<span class="c2h-val-str">"Tamaño de char: %zu bytes\n"</span>, <span class="c2h-kword c2h-kword-sizeof">sizeof</span>(<span class="c2h-kword c2h-kword-char">char</span>));</td></tr>
+      <tr><td>6</td><td>    <span class="c2h-identifier c2h-fcallname">printf</span>(<span class="c2h-val-str">"Tamaño de int: %zu bytes\n"</span>, <span class="c2h-kword c2h-kword-sizeof">sizeof</span>(<span class="c2h-kword c2h-kword-int">int</span>));</td></tr>
+      <tr><td>7</td><td>    <span class="c2h-identifier c2h-fcallname">printf</span>(<span class="c2h-val-str">"Tamaño de float: %zu bytes\n"</span>, <span class="c2h-kword c2h-kword-sizeof">sizeof</span>(<span class="c2h-kword c2h-kword-float">float</span>));</td></tr>
+      <tr><td>8</td><td>    <span class="c2h-identifier c2h-fcallname">printf</span>(<span class="c2h-val-str">"Tamaño de double: %zu bytes\n"</span>, <span class="c2h-kword c2h-kword-sizeof">sizeof</span>(<span class="c2h-kword c2h-kword-double">double</span>));</td></tr>
+      <tr><td>9</td><td>    <span class="c2h-kword c2h-kword-return">return</span> <span class="c2h-val-int">0</span>;</td></tr>
+      <tr><td>10</td><td>}</td></tr>
+      
+    </table>
+  </div>
+</div>
 <p><strong>Salida Típica (Sistema de 64 bits):</strong></p>
+<blockquote>
 <p>Tamaño de char: 1 bytes</p>
 <p>Tamaño de int: 4 bytes</p>
 <p>Tamaño de float: 4 bytes</p>
 <p>Tamaño de double: 8 bytes</p>
+</blockquote>
 <p>Con sizeof, no tienes que confiar en la documentación externa; puedes
 preguntarle directamente a tu compilador.</p>
 

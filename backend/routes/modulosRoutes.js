@@ -33,6 +33,9 @@ router.get('/Modulos/modulo-1-Fundamentos-Introduccion/media/image2.png',isAuthe
 router.get('/Modulos/modulo-1-Fundamentos-Introduccion/media/image3.png',isAuthenticated ,(req, res) => {
     res.sendFile(path.join(__dirname, "../../frontend/dist/protected_html/Modulos/modulo-1-Fundamentos-Introduccion/media/image3.png"));
 });
+router.get('/Modulos/modulo-1-Fundamentos-Introduccion/media/image4.png',isAuthenticated ,(req, res) => {
+    res.sendFile(path.join(__dirname, "../../frontend/dist/protected_html/Modulos/modulo-1-Fundamentos-Introduccion/media/image4.png"));
+});
 // contenido 1
 router.get('/Modulos/modulo-1-Fundamentos-Introduccion/100-Introduccion-a-la-programacion-y-Algoritmos.html',isAuthenticated ,(req, res) => {
    // res.sendFile(path.join(__dirname, "../../frontend/react-spa/dist/Modulos/modulo-1-Fundamentos-Introduccion/100-Introduccion-a-la-programacion-y-Algoritmos.html"));

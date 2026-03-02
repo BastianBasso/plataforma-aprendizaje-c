@@ -235,15 +235,26 @@ minúsculas) de las <strong>constantes simbólicas</strong> (que están en
 </ol>
 <p><strong>Ejemplo de Aplicación:</strong></p>
 <p>C</p>
-<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
-<p>int main(void) {</p>
-<p>// ✅ Snake Case para la variable</p>
-<p>int edad_usuario_registrado = 30;</p>
-<p>// ❌ Evitar Camel Case en la mayoría de proyectos C</p>
-<p>// int edadUsuarioRegistrado = 30;</p>
-<p>printf("Edad: %d\n", edad_usuario_registrado);</p>
-<p>return 0;</p>
-<p>}</p>
+<div class="c2h-code">
+  <div class="c2h-code-inner">
+    <table>
+      <tr><td>1</td><td><span class="c2h-directive">#include</span> <span class="c2h-val-str">&lt;stdio.h&gt;</span></td></tr>
+      <tr><td>2</td><td></td></tr>
+      <tr><td>3</td><td><span class="c2h-kword c2h-kword-int">int</span> <span class="c2h-identifier c2h-fdeclname">main</span>(<span class="c2h-kword c2h-kword-void">void</span>) {</td></tr>
+      <tr><td>4</td><td>    <span class="c2h-comment">// ✅ Snake Case para la variable</span></td></tr>
+      <tr><td>5</td><td>    <span class="c2h-kword c2h-kword-int">int</span> <span class="c2h-identifier">edad_usuario_registrado</span> <span class="c2h-operator">=</span> <span class="c2h-val-int">30</span>;</td></tr>
+      <tr><td>6</td><td>    </td></tr>
+      <tr><td>7</td><td>    <span class="c2h-comment">// ❌ Evitar Camel Case en la mayoría de proyectos C</span></td></tr>
+      <tr><td>8</td><td>    <span class="c2h-comment">// int edadUsuarioRegistrado = 30;</span></td></tr>
+      <tr><td>9</td><td>    </td></tr>
+      <tr><td>10</td><td>    <span class="c2h-identifier c2h-fcallname">printf</span>(<span class="c2h-val-str">"Edad: %d\n"</span>, <span class="c2h-identifier">edad_usuario_registrado</span>);</td></tr>
+      <tr><td>11</td><td>    </td></tr>
+      <tr><td>12</td><td>    <span class="c2h-kword c2h-kword-return">return</span> <span class="c2h-val-int">0</span>;</td></tr>
+      <tr><td>13</td><td>}</td></tr>
+      <tr><td>14</td><td></td></tr>
+    </table>
+  </div>
+</div>
 <p><strong>Declaración Cerca del Uso (Ámbito Local)</strong></p>
 <p>En las versiones más antiguas de C (C89/ANSI C), era obligatorio
 declarar todas las variables al <strong>inicio de un bloque de
