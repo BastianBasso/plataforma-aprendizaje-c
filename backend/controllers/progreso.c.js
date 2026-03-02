@@ -79,7 +79,7 @@ exports.registrarRespuesta = async (req, res) => {
     try {
         const consultaValidacion = await db.query(
             `SELECT a.Es_Correcta, p.Categoria_ID 
-             FROM Alternativa_Quiz a
+             FROM Alternativa a
              JOIN Pregunta_Quiz p ON a.Pregunta_ID = p.ID
              WHERE a.ID = $1 AND p.ID = $2`,
             [alternativaIdSeleccionada, preguntaId]
@@ -249,7 +249,7 @@ exports.obtenerPreguntaQuiz = async (req, res) => {
                     ) ORDER BY a.Orden
                 ) AS alternativas
             FROM Pregunta p
-            JOIN Alternativa_Quiz a ON p.ID = a.Pregunta_ID
+            JOIN Alternativa a ON p.ID = a.Pregunta_ID
             WHERE p.Leccion_ID = $1
             GROUP BY p.ID
             ORDER BY p.ID;
