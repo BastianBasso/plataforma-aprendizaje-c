@@ -53,9 +53,15 @@ legible</strong> que usarás en tu código.</td>
 </table>
 <p><strong>Ejemplos de Declaración:</strong></p>
 <p>C</p>
-<p>int contador; // Declara una variable entera llamada contador.</p>
-<p>float precio; // Declara una variable de punto flotante.</p>
-<p>char inicial; // Declara una variable para un solo carácter.</p>
+<div class="c2h-code">
+  <div class="c2h-code-inner">
+    <table>
+      <tr><td>1</td><td><span class="c2h-kword c2h-kword-int">int</span> <span class="c2h-identifier">contador</span>; <span class="c2h-comment">// Declara una variable entera llamada contador.</span></td></tr>
+      <tr><td>2</td><td><span class="c2h-kword c2h-kword-float">float</span> <span class="c2h-identifier">precio</span>; <span class="c2h-comment">// Declara una variable de punto flotante.</span></td></tr>
+      <tr><td>3</td><td><span class="c2h-kword c2h-kword-char">char</span> <span class="c2h-identifier">inicial</span>; <span class="c2h-comment">// Declara una variable para un solo carácter.</span></td></tr>
+    </table>
+  </div>
+</div>
 <p><strong>El Rol de la Declaración</strong></p>
 <p>Es crucial entender lo que hace y lo que <strong>no hace</strong> una
 declaración:</p>
@@ -162,21 +168,28 @@ impredecible.</p></li>
 la variable valor_basura se declara, pero <strong>nunca se le asigna un
 valor</strong> antes de ser impresa.</p>
 <p>C</p>
-<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
-<p>int main(void) {</p>
-<p>// 1. Declaración: El espacio para esta variable se reserva en la
-RAM.</p>
-<p>int valor_basura;</p>
-<p>// 2. USO PELIGROSO: Intentamos leer la variable sin inicializar.</p>
-<p>printf("El valor basura es (impredecible): %d\n", valor_basura);</p>
-<p>// 3. Demostración de un comportamiento seguro</p>
-<p>int valor_seguro = 10;</p>
-<p>printf("El valor seguro es: %d\n", valor_seguro);</p>
-<p>return 0;</p>
-<p>}</p>
+<div class="c2h-code">
+  <div class="c2h-code-inner">
+    <table>
+      <tr><td>1</td><td><span class="c2h-directive">#include</span> <span class="c2h-val-str">&lt;stdio.h&gt;</span></td></tr>
+      <tr><td>2</td><td><span class="c2h-kword c2h-kword-int">int</span> <span class="c2h-identifier c2h-fdeclname">main</span>(<span class="c2h-kword c2h-kword-void">void</span>) {</td></tr>
+      <tr><td>3</td><td>    <span class="c2h-comment">// 1. Declaración: El espacio para esta variable se reserva en la RAM.</span></td></tr>
+      <tr><td>4</td><td>    <span class="c2h-kword c2h-kword-int">int</span> <span class="c2h-identifier">valor_basura</span>;</td></tr>
+      <tr><td>5</td><td>    <span class="c2h-comment">// 2. USO PELIGROSO: Intentamos leer la variable sin inicializar.</span></td></tr>
+      <tr><td>6</td><td>    <span class="c2h-identifier c2h-fcallname">printf</span>(<span class="c2h-val-str">"El valor basura es (impredecible): %d\n"</span>, <span class="c2h-identifier">valor_basura</span>);</td></tr>
+      <tr><td>7</td><td>    <span class="c2h-comment">// 3. Demostración de un comportamiento seguro</span></td></tr>
+      <tr><td>8</td><td>    <span class="c2h-kword c2h-kword-int">int</span> <span class="c2h-identifier">valor_seguro</span> <span class="c2h-operator">=</span> <span class="c2h-val-int">10</span>;</td></tr>
+      <tr><td>9</td><td>    <span class="c2h-identifier c2h-fcallname">printf</span>(<span class="c2h-val-str">"El valor seguro es: %d\n"</span>, <span class="c2h-identifier">valor_seguro</span>);</td></tr>
+      <tr><td>10</td><td>   <span class="c2h-kword c2h-kword-return">return</span> <span class="c2h-val-int">0</span>;</td></tr>
+      <tr><td>11</td><td>}</td></tr>
+    </table>
+  </div>
+</div>
 <p><strong>Salida Típica (Resultado Impredecible):</strong></p>
+<blockquote>
 <p>El valor basura es (impredecible): -1073741824</p>
 <p>El valor seguro es: 10</p>
+</blockquote>
 <p><strong>Nota:</strong> La salida del valor basura (-1073741824 en
 este ejemplo) <strong>cambiará</strong> cada vez que se ejecute el
 programa en diferentes máquinas o incluso en diferentes momentos en la
@@ -201,19 +214,27 @@ mostrar el valor al usuario.</p></li>
 cálculos con ese valor.</p></li>
 </ul>
 <p>C</p>
-<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
-<p>int main(void) {</p>
-<p>int saldo = 100; // Inicialización</p>
-<p>int descuento = 20;</p>
-<p>// Uso del valor: el nombre 'saldo' se reemplaza por el valor 100 en
-la impresión.</p>
-<p>printf("Saldo inicial: %d\n", saldo);</p>
-<p>// Uso del valor: el nombre 'saldo' y 'descuento' se usan en una
-operación.</p>
-<p>int nuevo_saldo = saldo - descuento;</p>
-<p>printf("Nuevo saldo: %d\n", nuevo_saldo);</p>
-<p>return 0;</p>
-<p>}</p>
+<div class="c2h-code">
+  <div class="c2h-code-inner">
+    <table>
+      <tr><td>1</td><td><span class="c2h-directive">#include</span> <span class="c2h-val-str">&lt;stdio.h&gt;</span></td></tr>
+      <tr><td>2</td><td></td></tr>
+      <tr><td>3</td><td><span class="c2h-kword c2h-kword-int">int</span> <span class="c2h-identifier c2h-fdeclname">main</span>(<span class="c2h-kword c2h-kword-void">void</span>) {</td></tr>
+      <tr><td>4</td><td>    <span class="c2h-kword c2h-kword-int">int</span> <span class="c2h-identifier">saldo</span> <span class="c2h-operator">=</span> <span class="c2h-val-int">100</span>; <span class="c2h-comment">// Inicialización</span></td></tr>
+      <tr><td>5</td><td>    <span class="c2h-kword c2h-kword-int">int</span> <span class="c2h-identifier">descuento</span> <span class="c2h-operator">=</span> <span class="c2h-val-int">20</span>;</td></tr>
+      <tr><td>6</td><td>    </td></tr>
+      <tr><td>7</td><td>    <span class="c2h-comment">// Uso del valor: el nombre 'saldo' se reemplaza por el valor 100 en la impresión.</span></td></tr>
+      <tr><td>8</td><td>    <span class="c2h-identifier c2h-fcallname">printf</span>(<span class="c2h-val-str">"Saldo inicial: %d\n"</span>, <span class="c2h-identifier">saldo</span>);</td></tr>
+      <tr><td>9</td><td>    </td></tr>
+      <tr><td>10</td><td>    <span class="c2h-comment">// Uso del valor: el nombre 'saldo' y 'descuento' se usan en una operación.</span></td></tr>
+      <tr><td>11</td><td>    <span class="c2h-kword c2h-kword-int">int</span> <span class="c2h-identifier">nuevo_saldo</span> <span class="c2h-operator">=</span> <span class="c2h-identifier">saldo</span> <span class="c2h-operator">-</span> <span class="c2h-identifier">descuento</span>;</td></tr>
+      <tr><td>12</td><td>    <span class="c2h-identifier c2h-fcallname">printf</span>(<span class="c2h-val-str">"Nuevo saldo: %d\n"</span>, <span class="c2h-identifier">nuevo_saldo</span>);</td></tr>
+      <tr><td>13</td><td>    </td></tr>
+      <tr><td>14</td><td>    <span class="c2h-kword c2h-kword-return">return</span> <span class="c2h-val-int">0</span>;</td></tr>
+      <tr><td>15</td><td>}</td></tr>
+    </table>
+  </div>
+</div>
 <p><strong>2. Reasignación del Valor</strong></p>
 <p>La clave del término <strong>variable</strong> es que su valor
 <em>puede variar</em> durante la ejecución del programa. La
@@ -231,24 +252,33 @@ y se pierde.</p></li>
 </ol>
 <p><strong>Ejemplo de Reasignación:</strong></p>
 <p>C</p>
-<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
-<p>int main(void) {</p>
-<p>int contador = 1; // Inicialización</p>
-<p>printf("Contador (Inicio): %d\n", contador);</p>
-<p>// Reasignación 1: Cambia el valor a 5.</p>
-<p>contador = 5;</p>
-<p>printf("Contador (Primer cambio): %d\n", contador);</p>
-<p>// Reasignación 2: El nuevo valor se basa en el valor actual (5 +
-1).</p>
-<p>contador = contador + 1; // Ahora 'contador' vale 6</p>
-<p>printf("Contador (Segundo cambio): %d\n", contador);</p>
-<p>return 0;</p>
-<p>}</p>
+<div class="c2h-code">
+  <div class="c2h-code-inner">
+    <table>
+      <tr><td>1</td><td><span class="c2h-directive">#include</span> <span class="c2h-val-str">&lt;stdio.h&gt;</span></td></tr>
+      <tr><td>2</td><td><span class="c2h-kword c2h-kword-int">int</span> <span class="c2h-identifier c2h-fdeclname">main</span>(<span class="c2h-kword c2h-kword-void">void</span>) {</td></tr>
+      <tr><td>3</td><td>    <span class="c2h-kword c2h-kword-int">int</span> <span class="c2h-identifier">contador</span> <span class="c2h-operator">=</span> <span class="c2h-val-int">1</span>; <span class="c2h-comment">// Inicialización</span></td></tr>
+      <tr><td>4</td><td>    <span class="c2h-identifier c2h-fcallname">printf</span>(<span class="c2h-val-str">"Contador (Inicio): %d\n"</span>, <span class="c2h-identifier">contador</span>);</td></tr>
+      <tr><td>5</td><td>    <span class="c2h-comment">// Reasignación 1: Cambia el valor a 5.</span></td></tr>
+      <tr><td>6</td><td>    </td></tr>
+      <tr><td>7</td><td>    <span class="c2h-identifier">contador</span> <span class="c2h-operator">=</span> <span class="c2h-val-int">5</span>;</td></tr>
+      <tr><td>8</td><td>    <span class="c2h-identifier c2h-fcallname">printf</span>(<span class="c2h-val-str">"Contador (Primer cambio): %d\n"</span>, <span class="c2h-identifier">contador</span>);</td></tr>
+      <tr><td>9</td><td>    <span class="c2h-comment">// Reasignación 2: El nuevo valor se basa en el valor actual (5 + 1).</span></td></tr>
+      <tr><td>10</td><td>    </td></tr>
+      <tr><td>11</td><td>    <span class="c2h-identifier">contador</span> <span class="c2h-operator">=</span> <span class="c2h-identifier">contador</span> <span class="c2h-operator">+</span> <span class="c2h-val-int">1</span>; <span class="c2h-comment">// Ahora 'contador' vale 6</span></td></tr>
+      <tr><td>12</td><td>    <span class="c2h-identifier c2h-fcallname">printf</span>(<span class="c2h-val-str">"Contador (Segundo cambio): %d\n"</span>, <span class="c2h-identifier">contador</span>);</td></tr>
+      <tr><td>13</td><td>    </td></tr>
+      <tr><td>14</td><td>    <span class="c2h-kword c2h-kword-return">return</span> <span class="c2h-val-int">0</span>;</td></tr>
+      <tr><td>15</td><td>}</td></tr>
+    </table>
+  </div>
+</div>
 <p><strong>Salida Esperada:</strong></p>
+<blockquote>
 <p>Contador (Inicio): 1</p>
 <p>Contador (Primer cambio): 5</p>
 <p>Contador (Segundo cambio): 6</p>
-
+</blockquote>
 </div>
 </body>
 </html>

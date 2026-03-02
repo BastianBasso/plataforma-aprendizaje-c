@@ -11,36 +11,79 @@
 <p><strong>1. Cuestionario de Alternativas</strong></p>
 <p>Pon a prueba tus conocimientos sobre la sintaxis esencial y las
 herramientas de salida.</p>
-<p>1. ¿Qué extensión debe tener un archivo de código fuente de C antes
-de ser compilado?</p>
-<p>A. .exe</p>
-<p>B. .c</p>
-<p>C. .h</p>
-<p>D. .bin</p>
-<p>2. ¿Qué comando se utiliza típicamente en la terminal para compilar
-el archivo programa.c y crear un ejecutable llamado app?</p>
-<p>A. compile programa.c to app</p>
-<p>B. gcc programa.c -o app</p>
-<p>C. run programa.c</p>
-<p>D. main programa.c</p>
-<p>3. ¿Qué biblioteca estándar es obligatorio incluir para poder
-utilizar la función printf()?</p>
-<p>A. &lt;stdlib.h&gt;</p>
-<p>B. &lt;math.h&gt;</p>
-<p>C. &lt;stdio.h&gt;</p>
-<p>D. &lt;string.h&gt;</p>
-<p>4. ¿Cuál es el propósito de la secuencia de escape \n dentro de una
-cadena de control de printf()?</p>
-<p>A. Imprimir una tabulación.</p>
-<p>B. Insertar un salto de línea.</p>
-<p>C. Imprimir el carácter de barra invertida.</p>
-<p>D. Marcar el final de la cadena de control.</p>
-<p>5. Si olvidas el punto y coma (;) después de una llamada a printf(),
-¿qué tipo de error ocurrirá?</p>
-<p>A. Error de Ejecución (Runtime Error).</p>
-<p>B. Error de Compilación (Sintaxis).</p>
-<p>C. Error de Enlazado.</p>
-<p>D. El programa ignorará la línea.</p>
+
+<div data-quiz="alternative">
+  <script type="application/json" data-quiz-config>
+    {
+      "version": 1,
+      "quizId": "mod1-601-q-a",
+      "lessonId": 601,
+      "title": "Cuestionario de Alternativas (601)",
+      "questions": [
+        {
+          "id": "601-1",
+          "label": "Archivos",
+          "text": "¿Qué extensión debe tener un archivo de código fuente de C antes de ser compilado?",
+          "options": [
+            { "id": "A", "text": "A. .exe" },
+            { "id": "B", "text": "B. .c" },
+            { "id": "C", "text": "C. .h" },
+            { "id": "D", "text": "D. .bin" }
+          ],
+          "correctOptionId": "B"
+        },
+        {
+          "id": "601-2",
+          "label": "Compilación",
+          "text": "¿Qué comando se utiliza típicamente en la terminal para compilar el archivo programa.c y crear un ejecutable llamado app?",
+          "options": [
+            { "id": "A", "text": "A. compile programa.c to app" },
+            { "id": "B", "text": "B. gcc programa.c -o app" },
+            { "id": "C", "text": "C. run programa.c" },
+            { "id": "D", "text": "D. main programa.c" }
+          ],
+          "correctOptionId": "B"
+        },
+        {
+          "id": "601-3",
+          "label": "Bibliotecas",
+          "text": "¿Qué biblioteca estándar es obligatorio incluir para poder utilizar la función printf()?",
+          "options": [
+            { "id": "A", "text": "A. <stdlib.h>" },
+            { "id": "B", "text": "B. <math.h>" },
+            { "id": "C", "text": "C. <stdio.h>" },
+            { "id": "D", "text": "D. <string.h>" }
+          ],
+          "correctOptionId": "C"
+        },
+        {
+          "id": "601-4",
+          "label": "Printf",
+          "text": "¿Cuál es el propósito de la secuencia de escape \\n dentro de una cadena de control de printf()?",
+          "options": [
+            { "id": "A", "text": "A. Imprimir una tabulación." },
+            { "id": "B", "text": "B. Insertar un salto de línea." },
+            { "id": "C", "text": "C. Imprimir el carácter de barra invertida." },
+            { "id": "D", "text": "D. Marcar el final de la cadena de control." }
+          ],
+          "correctOptionId": "B"
+        },
+        {
+          "id": "601-5",
+          "label": "Errores",
+          "text": "Si olvidas el punto y coma (;) después de una llamada a printf(), ¿qué tipo de error ocurrirá?",
+          "options": [
+            { "id": "A", "text": "A. Error de Ejecución (Runtime Error)." },
+            { "id": "B", "text": "B. Error de Compilación (Sintaxis)." },
+            { "id": "C", "text": "C. Error de Enlazado." },
+            { "id": "D", "text": "D. El programa ignorará la línea." }
+          ],
+          "correctOptionId": "B"
+        }
+      ]
+    }
+  </script>
+</div>
 <p><strong>2. Ejercicio de Código Práctico: Perfil de
 Usuario</strong></p>
 <p>Escribe un programa C completo que utilice todos los elementos clave
@@ -56,33 +99,35 @@ separada</strong> y con una <strong>tabulación</strong> entre la
 etiqueta y el valor.</p></li>
 </ol>
 <p><strong>Salida Deseada:</strong></p>
+<blockquote>
 <p>--- PERFIL DE USUARIO ---</p>
 <p>Nombre: Juan Pérez</p>
 <p>Edad: 30 años</p>
 <p>Lenguaje: C</p>
 <p>-------------------------</p>
+</blockquote>
 <p><strong>Solución del Ejercicio:</strong></p>
 <p>C</p>
-<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
-<p>int main(void) {</p>
-<p>// Encabezado del perfil con saltos de línea</p>
-<p>printf("--- PERFIL DE USUARIO ---\n");</p>
-<p>// Información con tabulación (\t) para alinear</p>
-<p>printf("Nombre:\t\tJuan Pérez\n");</p>
-<p>printf("Edad:\t\t30 años\n");</p>
-<p>printf("Lenguaje:\tC\n");</p>
-<p>// Cierre del perfil</p>
-<p>printf("-------------------------\n");</p>
-<p>return 0;</p>
-<p>}</p>
-<p><strong>Respuestas al Cuestionario</strong></p>
-<ol type="1">
-<li><p>B</p></li>
-<li><p>B</p></li>
-<li><p>C</p></li>
-<li><p>B</p></li>
-<li><p>B</p></li>
-</ol>
+<div class="c2h-code">
+  <div class="c2h-code-inner">
+    <table>
+      <tr><td>1</td><td><span class="c2h-directive">#include</span> <span class="c2h-val-str">&lt;stdio.h&gt;</span></td></tr>
+      <tr><td>2</td><td><span class="c2h-kword c2h-kword-int">int</span> <span class="c2h-identifier c2h-fdeclname">main</span>(<span class="c2h-kword c2h-kword-void">void</span>) {</td></tr>
+      <tr><td>3</td><td>    <span class="c2h-comment">// Encabezado del perfil con saltos de línea</span></td></tr>
+      <tr><td>4</td><td>    <span class="c2h-identifier c2h-fcallname">printf</span>(<span class="c2h-val-str">"--- PERFIL DE USUARIO ---\n"</span>);</td></tr>
+      <tr><td>5</td><td>    <span class="c2h-comment">// Información con tabulación (\t) para alinear</span></td></tr>
+      <tr><td>6</td><td>    <span class="c2h-identifier c2h-fcallname">printf</span>(<span class="c2h-val-str">"Nombre:\t\tJuan Pérez\n"</span>);</td></tr>
+      <tr><td>7</td><td>    <span class="c2h-identifier c2h-fcallname">printf</span>(<span class="c2h-val-str">"Edad:\t\t30 años\n"</span>);</td></tr>
+      <tr><td>8</td><td>    <span class="c2h-identifier c2h-fcallname">printf</span>(<span class="c2h-val-str">"Lenguaje:\tC\n"</span>);</td></tr>
+      <tr><td>9</td><td>    <span class="c2h-comment">// Cierre del perfil</span></td></tr>
+      <tr><td>10</td><td>    <span class="c2h-identifier c2h-fcallname">printf</span>(<span class="c2h-val-str">"-------------------------\n"</span>);</td></tr>
+      <tr><td>11</td><td>    <span class="c2h-kword c2h-kword-return">return</span> <span class="c2h-val-int">0</span>;</td></tr>
+      <tr><td>12</td><td>}</td></tr>
+      <tr><td>13</td><td></td></tr>
+    </table>
+  </div>
+</div>
+
 
 
 </body>

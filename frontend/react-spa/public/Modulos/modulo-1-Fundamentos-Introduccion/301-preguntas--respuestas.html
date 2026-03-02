@@ -10,94 +10,139 @@
 <p><strong>Cuestionario: El Proceso de Compilación y el Ciclo de Vida
 del Código C</strong></p>
 <p><strong>Preguntas de Alternativas</strong></p>
-<p>1. ¿Cuál es la principal ventaja de un lenguaje compilado (como C)
-frente a un lenguaje interpretado (como Python)?</p>
-<p>A. El código fuente es más fácil de leer.</p>
-<p>B. El programa puede ejecutarse en cualquier hardware sin
-modificaciones.</p>
-<p>C. La velocidad de ejecución es superior, ya que la traducción a
-código máquina se realiza una sola vez antes de la ejecución.</p>
-<p>D. Permite la gestión automática de memoria, evitando errores.</p>
-<p>2. ¿Cuál es el propósito del Preprocesador en la Fase I de la
-compilación de C?</p>
-<p>A. Traducir el código a Ensamblador y optimizarlo.</p>
-<p>B. Manejar directivas como #include y #define, copiando y pegando
-contenido o realizando sustituciones de texto.</p>
-<p>C. Combinar el código objeto de múltiples archivos y librerías.</p>
-<p>D. Verificar la sintaxis y la semántica del código.</p>
-<p>3. ¿Qué herramienta o programa es el responsable de traducir el
-Código Ensamblador (.s) en Código Objeto binario (.o)?</p>
-<p>A. El Compilador</p>
-<p>B. El Enlazador (Linker)</p>
-<p>C. El Preprocesador</p>
-<p>D. El Ensamblador</p>
-<p>4. ¿Qué ocurre en la Fase II: Compilación que lleva a que el
-compilador detenga el proceso y muestre un "Error de Compilación"?</p>
-<p>A. El programa intenta dividir por cero.</p>
-<p>B. Se olvida añadir el código de la función printf() de la librería
-estándar.</p>
-<p>C. El código incumple las reglas sintácticas de C (ej. falta un punto
-y coma ;).</p>
-<p>D. Se realiza una operación lógica que produce un resultado
-incorrecto.</p>
-<p>5. Si un programador olvida la directiva #include &lt;stdio.h&gt; y
-usa la función printf(), ¿en qué fase del ciclo de compilación es más
-probable que ocurra un error?</p>
-<p>A. Preprocesamiento (Fase I)</p>
-<p>B. Compilación (Fase II)</p>
-<p>C. Enlazado (Linking) (Fase IV)</p>
-<p>D. Ejecución (Runtime)</p>
-<p>6. ¿Qué es un IDE (Entorno de Desarrollo Integrado) en el contexto de
-C?</p>
-<p>A. Un software que solo se usa para escribir el código fuente
-(.c).</p>
-<p>B. Un software que agrupa el editor de código, el compilador, el
-enlazador y el depurador en una sola interfaz.</p>
-<p>C. Un programa que traduce el código línea por línea durante la
-ejecución.</p>
-<p>D. La extensión de archivo final del programa ejecutable.</p>
-<p>7. ¿Cuál es el resultado directo de la Fase IV: Enlazado
-(Linking)?</p>
-<p>A. El archivo Ensamblador (.s).</p>
-<p>B. El archivo Preprocesado (.i).</p>
-<p>C. El Código Objeto (.o).</p>
-<p>D. El Programa Ejecutable (Ej. .exe o binario final).</p>
-<p>8. ¿Qué representa el archivo con extensión .s en el ciclo de
-compilación de C?</p>
-<p>A. El código fuente original listo para ser ejecutado.</p>
-<p>B. El código Ensamblador, resultado de la traducción del
-Compilador.</p>
-<p>C. El código objeto binario listo para el enlazado.</p>
-<p>D. El archivo de librerías externas que se deben incluir.</p>
-<p>9. Un Error de Ejecución (Runtime Error) se diferencia de un Error de
-Compilación en que:</p>
-<p>A. Es más fácil de detectar, ya que el compilador lo señala
-inmediatamente.</p>
-<p>B. Ocurre siempre por un fallo de sintaxis.</p>
-<p>C. El programa genera el archivo ejecutable, pero falla o produce
-resultados incorrectos mientras está siendo usado por el usuario.</p>
-<p>D. Se corrige añadiendo la directiva #define al inicio del
-código.</p>
-<p>10. La herramienta Enlazador (Linker) tiene como función
-esencial:</p>
-<p>A. Realizar la sustitución de macros definidas con #define.</p>
-<p>B. Verificar la optimización del código Ensamblador.</p>
-<p>C. Combinar el código objeto de nuestro programa con las funciones
-binarias de las librerías externas (como las de stdio.h).</p>
-<p>D. Convertir las instrucciones del Ensamblador a código binario.</p>
-<p><strong>Respuestas Correctas</strong></p>
-<ol type="1">
-<li><p>C</p></li>
-<li><p>B</p></li>
-<li><p>D</p></li>
-<li><p>C</p></li>
-<li><p>C</p></li>
-<li><p>B</p></li>
-<li><p>D</p></li>
-<li><p>B</p></li>
-<li><p>C</p></li>
-<li><p>C</p></li>
-</ol>
+
+<div data-quiz="alternative">
+    <script type="application/json" data-quiz-config>
+        {
+            "version": 1,
+            "quizId": "mod1-301-compilacion-ciclo-vida",
+            "lessonId": 301,
+            "title": "Cuestionario: El Proceso de Compilación y el Ciclo de Vida del Código C",
+            "questions": [
+                {
+                    "id": "301-1",
+                    "label": "Compilación",
+                    "text": "¿Cuál es la principal ventaja de un lenguaje compilado (como C) frente a un lenguaje interpretado (como Python)?",
+                    "options": [
+                        { "id": "A", "text": "A. El código fuente es más fácil de leer." },
+                        { "id": "B", "text": "B. El programa puede ejecutarse en cualquier hardware sin modificaciones." },
+                        { "id": "C", "text": "C. La velocidad de ejecución es superior, ya que la traducción a código máquina se realiza una sola vez antes de la ejecución." },
+                        { "id": "D", "text": "D. Permite la gestión automática de memoria, evitando errores." }
+                    ],
+                    "correctOptionId": "C"
+                },
+                {
+                    "id": "301-2",
+                    "label": "Preprocesador",
+                    "text": "¿Cuál es el propósito del Preprocesador en la Fase I de la compilación de C?",
+                    "options": [
+                        { "id": "A", "text": "A. Traducir el código a Ensamblador y optimizarlo." },
+                        { "id": "B", "text": "B. Manejar directivas como #include y #define, copiando y pegando contenido o realizando sustituciones de texto." },
+                        { "id": "C", "text": "C. Combinar el código objeto de múltiples archivos y librerías." },
+                        { "id": "D", "text": "D. Verificar la sintaxis y la semántica del código." }
+                    ],
+                    "correctOptionId": "B"
+                },
+                {
+                    "id": "301-3",
+                    "label": "Herramientas",
+                    "text": "¿Qué herramienta o programa es el responsable de traducir el Código Ensamblador (.s) en Código Objeto binario (.o)?",
+                    "options": [
+                        { "id": "A", "text": "A. El Compilador" },
+                        { "id": "B", "text": "B. El Enlazador (Linker)" },
+                        { "id": "C", "text": "C. El Preprocesador" },
+                        { "id": "D", "text": "D. El Ensamblador" }
+                    ],
+                    "correctOptionId": "D"
+                },
+                {
+                    "id": "301-4",
+                    "label": "Errores",
+                    "text": "¿Qué ocurre en la Fase II: Compilación que lleva a que el compilador detenga el proceso y muestre un \"Error de Compilación\"?",
+                    "options": [
+                        { "id": "A", "text": "A. El programa intenta dividir por cero." },
+                        { "id": "B", "text": "B. Se olvida añadir el código de la función printf() de la librería estándar." },
+                        { "id": "C", "text": "C. El código incumple las reglas sintácticas de C (ej. falta un punto y coma ;)." },
+                        { "id": "D", "text": "D. Se realiza una operación lógica que produce un resultado incorrecto." }
+                    ],
+                    "correctOptionId": "C"
+                },
+                {
+                    "id": "301-5",
+                    "label": "Enlazado",
+                    "text": "Si un programador olvida la directiva #include <stdio.h> y usa la función printf(), ¿en qué fase del ciclo de compilación es más probable que ocurra un error?",
+                    "options": [
+                        { "id": "A", "text": "A. Preprocesamiento (Fase I)" },
+                        { "id": "B", "text": "B. Compilación (Fase II)" },
+                        { "id": "C", "text": "C. Enlazado (Linking) (Fase IV)" },
+                        { "id": "D", "text": "D. Ejecución (Runtime)" }
+                    ],
+                    "correctOptionId": "C"
+                },
+                {
+                    "id": "301-6",
+                    "label": "Herramientas",
+                    "text": "¿Qué es un IDE (Entorno de Desarrollo Integrado) en el contexto de C?",
+                    "options": [
+                        { "id": "A", "text": "A. Un software que solo se usa para escribir el código fuente (.c)." },
+                        { "id": "B", "text": "B. Un software que agrupa el editor de código, el compilador, el enlazador y el depurador en una sola interfaz." },
+                        { "id": "C", "text": "C. Un programa que traduce el código línea por línea durante la ejecución." },
+                        { "id": "D", "text": "D. La extensión de archivo final del programa ejecutable." }
+                    ],
+                    "correctOptionId": "B"
+                },
+                {
+                    "id": "301-7",
+                    "label": "Enlazado",
+                    "text": "¿Cuál es el resultado directo de la Fase IV: Enlazado (Linking)?",
+                    "options": [
+                        { "id": "A", "text": "A. El archivo Ensamblador (.s)." },
+                        { "id": "B", "text": "B. El archivo Preprocesado (.i)." },
+                        { "id": "C", "text": "C. El Código Objeto (.o)." },
+                        { "id": "D", "text": "D. El Programa Ejecutable (Ej. .exe o binario final)." }
+                    ],
+                    "correctOptionId": "D"
+                },
+                {
+                    "id": "301-8",
+                    "label": "Artefactos",
+                    "text": "¿Qué representa el archivo con extensión .s en el ciclo de compilación de C?",
+                    "options": [
+                        { "id": "A", "text": "A. El código fuente original listo para ser ejecutado." },
+                        { "id": "B", "text": "B. El código Ensamblador, resultado de la traducción del Compilador." },
+                        { "id": "C", "text": "C. El código objeto binario listo para el enlazado." },
+                        { "id": "D", "text": "D. El archivo de librerías externas que se deben incluir." }
+                    ],
+                    "correctOptionId": "B"
+                },
+                {
+                    "id": "301-9",
+                    "label": "Errores",
+                    "text": "Un Error de Ejecución (Runtime Error) se diferencia de un Error de Compilación en que:",
+                    "options": [
+                        { "id": "A", "text": "A. Es más fácil de detectar, ya que el compilador lo señala inmediatamente." },
+                        { "id": "B", "text": "B. Ocurre siempre por un fallo de sintaxis." },
+                        { "id": "C", "text": "C. El programa genera el archivo ejecutable, pero falla o produce resultados incorrectos mientras está siendo usado por el usuario." },
+                        { "id": "D", "text": "D. Se corrige añadiendo la directiva #define al inicio del código." }
+                    ],
+                    "correctOptionId": "C"
+                },
+                {
+                    "id": "301-10",
+                    "label": "Enlazado",
+                    "text": "La herramienta Enlazador (Linker) tiene como función esencial:",
+                    "options": [
+                        { "id": "A", "text": "A. Realizar la sustitución de macros definidas con #define." },
+                        { "id": "B", "text": "B. Verificar la optimización del código Ensamblador." },
+                        { "id": "C", "text": "C. Combinar el código objeto de nuestro programa con las funciones binarias de las librerías externas (como las de stdio.h)." },
+                        { "id": "D", "text": "D. Convertir las instrucciones del Ensamblador a código binario." }
+                    ],
+                    "correctOptionId": "C"
+                }
+            ]
+        }
+    </script>
+</div>
 
 
 

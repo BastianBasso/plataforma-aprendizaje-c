@@ -1,5 +1,5 @@
 // js/components/navbar.js
-import { modulosIndex } from "../../react-spa/public/data/modulosIndex.js";
+import { modulosIndex } from "../data/modulosIndex.js";
 
 // Puedes pasar el índice del módulo a mostrar (por defecto muestra todos)
 export function Navbar({ moduloIndex = null } = {}) {

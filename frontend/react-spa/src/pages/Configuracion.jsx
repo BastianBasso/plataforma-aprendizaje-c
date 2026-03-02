@@ -46,10 +46,16 @@ export function Configuracion() {
           .hub.hub-config {
             max-width: 1100px;
             margin: 40px auto;
-            padding: 40px 32px;
-            background: #fff;
+            padding: 40px 100px;
+            background: #d1e3f7;
             border-radius: 18px;
             box-shadow: 0 4px 24px rgba(60, 120, 200, 0.10);
+          }
+          
+          .hub.hub-config .config-grid {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 32px;
           }
 
           .hub-config .generic-card {
@@ -62,12 +68,14 @@ export function Configuracion() {
           }
 
           .hub-config .hub-title {
+            
             color: #1a4e8a;
             font-weight: 700;
             font-size: 2.0rem;
             letter-spacing: 0.5px;
             margin: 0 0 6px;
             text-align: left;
+            
           }
 
           .hub-config .hub-subtitle {
@@ -80,7 +88,8 @@ export function Configuracion() {
           .hub-config .config-grid {
             display: grid;
             grid-template-columns: 1.15fr 0.85fr;
-            gap: 50px;
+            gap: 25px;
+            column-gap: 75px;
           }
 
           .hub-config .config-card-title {
