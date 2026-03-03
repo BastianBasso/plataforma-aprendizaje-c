@@ -50,7 +50,7 @@ export function ModuloViewer({ modulosIndex }) {
   // CSS adicional para el contenido HTML cargado en el iframe.
   // Nota: esto solo funciona si el iframe es same-origin.
   const injectedCssHrefs = useMemo(() => [
-    '/c-code-style.css',
+    '/css-dinamico/c-code-style.css',
     '/assets/alternative-quiz.css',
   ], []);
 
