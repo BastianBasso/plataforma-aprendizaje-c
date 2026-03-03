@@ -77,11 +77,12 @@ exports.registrarRespuesta = async (req, res) => {
     const { usuarioId, preguntaId, alternativaIdSeleccionada } = req.body; 
     
     try {
+        // 1. Validamos la respuesta del usuario
         const consultaValidacion = await db.query(
-            `SELECT a.Es_Correcta, p.Categoria_ID 
-             FROM Alternativa_Quiz a
-             JOIN Pregunta_Quiz p ON a.Pregunta_ID = p.ID
-             WHERE a.ID = $1 AND p.ID = $2`,
+            `SELECT a.es_correcta, a.categoria_id 
+             FROM alternativa a
+             JOIN pregunta p ON a.pregunta_id = p.id
+             WHERE a.id = $1 AND p.id = $2`,
             [alternativaIdSeleccionada, preguntaId]
         );
 
@@ -91,18 +92,27 @@ exports.registrarRespuesta = async (req, res) => {
         
         const { es_correcta, categoria_id } = consultaValidacion.rows[0];
 
+        // 2. NUEVO: Buscamos cuál era la alternativa correcta real para el feedback visual
+        const consultaCorrecta = await db.query(
+            `SELECT id FROM alternativa WHERE pregunta_id = $1 AND es_correcta = true`,
+            [preguntaId]
+        );
+        const idCorrecta = consultaCorrecta.rows[0]?.id;
+
+        // 3. Guardamos el intento
         await db.query(
-            `INSERT INTO Respuesta_Quiz_Usuario (Usuario_ID, Pregunta_ID, Alternativa_ID, Es_Correcta, Intento) 
+            `INSERT INTO respuesta_quiz_usuario (usuario_id, pregunta_id, alternativa_id, es_correcta, intento) 
              VALUES ($1, $2, $3, $4, 1) 
-             ON CONFLICT (Usuario_ID, Pregunta_ID, Intento) 
-             DO UPDATE SET Alternativa_ID = $3, Es_Correcta = $4, Fecha_Respuesta = CURRENT_TIMESTAMP`,
+             ON CONFLICT (usuario_id, pregunta_id, intento) 
+             DO UPDATE SET alternativa_id = $3, es_correcta = $4, fecha_respuesta = CURRENT_TIMESTAMP`,
             [usuarioId, preguntaId, alternativaIdSeleccionada, es_correcta]
         );
 
         res.status(200).json({ 
             mensaje: 'Respuesta registrada.',
             esCorrecta: es_correcta,
-            categoriaId: categoria_id 
+            categoriaId: categoria_id,
+            idCorrecta: idCorrecta // <-- Enviamos el ID al Frontend
         });
 
     } catch (error) {
@@ -110,6 +120,7 @@ exports.registrarRespuesta = async (req, res) => {
         res.status(500).json({ error: 'Error del servidor.' });
     }
 };
+
 /*
   3. GET /api/progreso/curso/:usuarioId/:cursoId
   Calcula el porcentaje de avance general del curso (barra total).
@@ -249,7 +260,7 @@ exports.obtenerPreguntaQuiz = async (req, res) => {
                     ) ORDER BY a.Orden
                 ) AS alternativas
             FROM Pregunta p
-            JOIN Alternativa_Quiz a ON p.ID = a.Pregunta_ID
+            JOIN Alternativa a ON p.ID = a.Pregunta_ID
             WHERE p.Leccion_ID = $1
             GROUP BY p.ID
             ORDER BY p.ID;
