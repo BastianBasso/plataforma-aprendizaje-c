@@ -6,7 +6,7 @@ const session = require('express-session');
 // 1. Importar rutas modularizadas (Esto queda igual)
 const authRoutes = require('./routes/registro'); 
 const loginRoutes = require('./routes/login.r.js');
-const userRoutes = require('./routes/userRoutes');  
+const userRoutes = require('./routes/users.r.js');  
 const staticRoutes = require('./routes/staticRoutes'); 
 const progresoRoutes = require('./routes/progreso.r.js');
 

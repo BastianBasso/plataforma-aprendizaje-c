@@ -4,10 +4,13 @@ const userController = require('../controllers/user.C');
 const subidaImagen = require('../middlewares/subidaImagen');
 const { requireAuth } = require('../middlewares/auth');
 
-// Ruta para obtener información del usuario autenticado
 router.get('/search-user', requireAuth, userController.getPerfil);
-router.get('/me', requireAuth, userController.getPerfil);
-router.put('/me', requireAuth, userController.updatePerfil);
-router.post('/me/imagen', requireAuth, subidaImagen.single('imagen'), userController.uploadImagen);
+
+router.get('/perfil', requireAuth, userController.getPerfil);
+router.put('/perfil', requireAuth, userController.updatePerfil);
+router.post('/perfil/imagen', requireAuth, subidaImagen.single('imagen'), userController.uploadImagen);
+
+router.put('/perfil/password', requireAuth, userController.updatePassword);
+router.get('/perfil/stats', requireAuth, userController.getGlobalStats);
 
 module.exports = router;
