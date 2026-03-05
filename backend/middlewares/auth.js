@@ -1,9 +1,5 @@
-
-// Middleware de autenticación
-// Verifica si el usuario tiene una sesión válida
- 
 function isAuthenticated(req, res, next) {
-    if (req.session && req.session.loggedIn) {
+    if (req.session && req.session.loggedIn && req.session.userId) {
         next();
     } else {
         console.log('Acceso denegado: Usuario no autenticado. Redirigiendo a /');
@@ -11,12 +7,8 @@ function isAuthenticated(req, res, next) {
     }
 }
 
-
- //Middleware para APIs que requieren autenticación
- // Devuelve JSON en lugar de redireccionar
- 
 function requireAuth(req, res, next) {
-    if (req.session && req.session.loggedIn) {
+    if (req.session && req.session.loggedIn && req.session.userId) {
         next();
     } else {
         return res.status(401).json({ 
