@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { mountAlternativeQuizzesInDocument } from '../features/quizzes/alternativeQuiz/mountAlternativeQuizzesInDocument.js';
+import { mountProgrammingExercisesInDocument } from '../features/programmingExercises/mountProgrammingExercisesInDocument.js';
 
 function getStoredUserId() {
   const raw = sessionStorage.getItem('userId');
@@ -43,7 +44,7 @@ export function ModuloViewer({ modulosIndex }) {
   const fi = Number(fileIndex);
 
   const iframeRef = useRef(null);
-  const quizCleanupRef = useRef(null);
+  const cleanupRef = useRef([]);
   const [quizRequiredToProceed, setQuizRequiredToProceed] = useState(false);
   const [quizSubmitted, setQuizSubmitted] = useState(false);
 
@@ -113,21 +114,31 @@ export function ModuloViewer({ modulosIndex }) {
       }
 
       // Monta quizzes de alternativas declarados en el HTML.
-      if (typeof quizCleanupRef.current === 'function') {
+      for (const fn of cleanupRef.current || []) {
+        if (typeof fn !== 'function') continue;
         try {
-          quizCleanupRef.current();
+          fn();
         } catch {
           // ignore
         }
       }
+      cleanupRef.current = [];
+
       setQuizSubmitted(false);
-      const { mountedCount, cleanup } = mountAlternativeQuizzesInDocument(doc, {
+      const alt = mountAlternativeQuizzesInDocument(doc, {
         onAnySubmitted: () => {
           setQuizSubmitted(true);
         },
       });
-      quizCleanupRef.current = cleanup;
-      setQuizRequiredToProceed(mountedCount > 0);
+
+      const prog = mountProgrammingExercisesInDocument(doc, {
+        onAnyPassed: () => {
+          setQuizSubmitted(true);
+        },
+      });
+
+      cleanupRef.current = [alt.cleanup, prog.cleanup].filter(Boolean);
+      setQuizRequiredToProceed((alt.mountedCount + prog.mountedCount) > 0);
     } catch {
       // Cross-origin o políticas del iframe: no se puede inyectar.
     }
@@ -135,13 +146,15 @@ export function ModuloViewer({ modulosIndex }) {
 
   useEffect(() => {
     return () => {
-      if (typeof quizCleanupRef.current === 'function') {
+      for (const fn of cleanupRef.current || []) {
+        if (typeof fn !== 'function') continue;
         try {
-          quizCleanupRef.current();
+          fn();
         } catch {
           // ignore
         }
       }
+      cleanupRef.current = [];
     };
   }, []);
 
