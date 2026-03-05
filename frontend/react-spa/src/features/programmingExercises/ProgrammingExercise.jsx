@@ -11,7 +11,7 @@ function getStoredUserId() {
 
 /**
  * @param {{
- *  config: { version: 1, exerciseId: string, lessonId?: number, title?: string },
+ *  config: { version: 1, exerciseId: string, lessonId?: number, title?: string, showTitle?: boolean },
  *  onPassed?: (info: { exerciseId: string }) => void
  * }} props
  */
@@ -90,6 +90,8 @@ export function ProgrammingExercise({ config, onPassed }) {
     return spec?.title || config?.title || 'Ejercicio de programación';
   }, [spec?.title, config?.title]);
 
+  const showTitle = config?.showTitle !== false;
+
   async function handleValidate() {
     if (!spec) return;
 
@@ -140,7 +142,7 @@ export function ProgrammingExercise({ config, onPassed }) {
 
   return (
     <section data-feature="programming-exercise" aria-label={title}>
-      <h2>{title}</h2>
+      {showTitle ? <h2>{title}</h2> : null}
 
       {loading ? <p>Cargando ejercicio…</p> : null}
 
