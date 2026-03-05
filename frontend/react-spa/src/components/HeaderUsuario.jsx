@@ -21,7 +21,6 @@ export function HeaderUsuario() {
         {isAuthenticated ? (
           <nav className="app-header-nav" aria-label="Navegación">
             <Link to="/cursos">Cursos</Link>
-            <Link to="/configuracion">Configuración</Link>
           </nav>
         ) : null}
 
@@ -30,6 +29,14 @@ export function HeaderUsuario() {
             <>
               <span className="app-header-username">{username}</span>
               <button type="button" className="app-header-btn" onClick={onLogout}>Cerrar sesión</button>
+              <Link
+                to="/configuracion"
+                aria-label="Configuración"
+                title="Configuración"
+                style={{ display: 'inline-flex', alignItems: 'center', fontSize: '1.8rem', lineHeight: 1 }}
+              >
+                ⚙
+              </Link>
             </>
           ) : (
             <>

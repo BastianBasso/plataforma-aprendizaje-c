@@ -344,10 +344,13 @@ body {
 .app-header-nav {
   display: flex;
   gap: 12px;
+  flex: 1;
+  justify-content: center;
 }
 
 .app-header-nav a {
   color: #b8c1ec;
+  font-size: calc(1rem + 5px);
 }
 
 .app-header-user {
