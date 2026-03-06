@@ -26,11 +26,9 @@ export function ProgrammingExercise({ config, onPassed }) {
   const [submitting, setSubmitting] = useState(false);
   const [passed, setPassed] = useState(false);
 
-  const textareaStyle = useMemo(() => {
-    const base = { width: '100%', fontFamily: 'monospace' };
-    if (!lastResult) return base;
-    if (lastResult.passed) return { ...base, borderColor: '#198754', outlineColor: '#198754' };
-    return { ...base, borderColor: '#dc3545', outlineColor: '#dc3545' };
+  const textareaValidationState = useMemo(() => {
+    if (!lastResult) return 'none';
+    return lastResult.passed ? 'pass' : 'fail';
   }, [lastResult]);
 
   useEffect(() => {
@@ -172,9 +170,13 @@ export function ProgrammingExercise({ config, onPassed }) {
               value={code}
               onChange={e => setCode(e.target.value)}
               rows={12}
-              style={textareaStyle}
+              className="programming-exercise-textarea"
+              data-validation-state={textareaValidationState}
               disabled={passed}
               placeholder="Escribe aquí tu solución en C..."
+              spellCheck={false}
+              autoCorrect="off"
+              autoCapitalize="none"
             />
           </label>
 

@@ -45,8 +45,15 @@ export function ModuloViewer({ modulosIndex }) {
 
   const iframeRef = useRef(null);
   const cleanupRef = useRef([]);
-  const [quizRequiredToProceed, setQuizRequiredToProceed] = useState(false);
-  const [quizSubmitted, setQuizSubmitted] = useState(false);
+  const [altRequiredToProceed, setAltRequiredToProceed] = useState(false);
+  const [progRequiredToProceed, setProgRequiredToProceed] = useState(false);
+  const [altDone, setAltDone] = useState(true);
+  const [progDone, setProgDone] = useState(true);
+
+  const altTargetCountRef = useRef(0);
+  const progTargetCountRef = useRef(0);
+  const altSubmittedIdsRef = useRef(new Set());
+  const progPassedIdsRef = useRef(new Set());
 
   // CSS adicional para el contenido HTML cargado en el iframe.
   // Nota: esto solo funciona si el iframe es same-origin.
@@ -124,21 +131,48 @@ export function ModuloViewer({ modulosIndex }) {
       }
       cleanupRef.current = [];
 
-      setQuizSubmitted(false);
+      // Reinicia agregadores para este documento.
+      altSubmittedIdsRef.current = new Set();
+      progPassedIdsRef.current = new Set();
+      altTargetCountRef.current = 0;
+      progTargetCountRef.current = 0;
+      setAltDone(true);
+      setProgDone(true);
+
       const alt = mountAlternativeQuizzesInDocument(doc, {
-        onAnySubmitted: () => {
-          setQuizSubmitted(true);
+        onAnySubmitted: (info) => {
+          const quizId = info?.quizId;
+          if (typeof quizId !== 'string' || !quizId) return;
+          altSubmittedIdsRef.current.add(quizId);
+          if (altTargetCountRef.current > 0 && altSubmittedIdsRef.current.size >= altTargetCountRef.current) {
+            setAltDone(true);
+          }
         },
       });
 
       const prog = mountProgrammingExercisesInDocument(doc, {
-        onAnyPassed: () => {
-          setQuizSubmitted(true);
+        onAnyPassed: (info) => {
+          const exerciseId = info?.exerciseId;
+          if (typeof exerciseId !== 'string' || !exerciseId) return;
+          progPassedIdsRef.current.add(exerciseId);
+          if (progTargetCountRef.current > 0 && progPassedIdsRef.current.size >= progTargetCountRef.current) {
+            setProgDone(true);
+          }
         },
       });
 
+      altTargetCountRef.current = alt.mountedCount;
+      progTargetCountRef.current = prog.mountedCount;
+
+      const altRequired = alt.mountedCount > 0;
+      const progRequired = prog.mountedCount > 0;
+
+      setAltRequiredToProceed(altRequired);
+      setProgRequiredToProceed(progRequired);
+      setAltDone(!altRequired);
+      setProgDone(!progRequired);
+
       cleanupRef.current = [alt.cleanup, prog.cleanup].filter(Boolean);
-      setQuizRequiredToProceed((alt.mountedCount + prog.mountedCount) > 0);
     } catch {
       // Cross-origin o políticas del iframe: no se puede inyectar.
     }
@@ -186,7 +220,7 @@ export function ModuloViewer({ modulosIndex }) {
           <Link className="viewer-hub" to="/cursos">Volver a cursos</Link>
 
           {next ? (
-            quizRequiredToProceed && !quizSubmitted ? (
+            (altRequiredToProceed || progRequiredToProceed) && !((!altRequiredToProceed || altDone) && (!progRequiredToProceed || progDone)) ? (
               <span className="viewer-btn viewer-btn-disabled" aria-disabled="true">
                 Siguiente →
               </span>
