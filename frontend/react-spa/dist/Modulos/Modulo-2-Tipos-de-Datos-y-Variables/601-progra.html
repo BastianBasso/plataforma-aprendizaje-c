@@ -3,24 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modulo 2 ejercicios 6</title>
     <link rel="stylesheet" crossorigin href="/assets/content-01sust.css">
 </head>
 <body>
 <div class="main-content">
 
-<div data-exercise="programming">
-    <script type="application/json" data-exercise-config>
-        {
-            "version": 1,
-            "exerciseId": "m2-601-e62-refactor",
-            "lessonId": 2601,
-            "title": "Ejercicio 6.2 (Práctica): refactorización"
-        }
-    </script>
-</div>
 <h1><strong>Ejercicios Propuestos: Declaración y Buenas Prácticas</strong></h1>
-<p><strong>Ejercicio 6.1: Validación de Nombres (Reglas de
-C)</strong></p>
+<h3>Ejercicio 6.1: Validación de Nombres (Reglas de C)</h3>
 <p><strong>Objetivo:</strong> Identificar nombres de variables válidos e
 inválidos según las reglas estrictas del compilador C (Reglas de
 Nomenclatura).</p>
@@ -117,8 +107,10 @@ sigue la convención Snake Case de C.</td>
 </tr>
 </tbody>
 </table>
-<p><strong>Ejercicio 6.2: Refactorización (Claridad y
-Estilo)</strong></p>
+
+<br>
+
+<h3>Ejercicio 6.2: Refactorización (Claridad y Estilo)</h3>
 <p><strong>Objetivo:</strong> Aplicar la <strong>Regla de Oro</strong>
 (Claridad) y el <strong>Snake Case</strong> (Estilo) para mejorar la
 legibilidad.</p>
@@ -127,60 +119,116 @@ código (escrito con nombres pobres) utilizando nombres
 <strong>descriptivos</strong>, la convención <strong>Snake Case</strong>
 para variables y <strong>Mayúsculas con guiones bajos</strong> para
 constantes.</p>
-<p><strong>Código Original:</strong></p>
-<p>C</p>
-<p>#<strong>define</strong> IVA 0.19</p>
-<p>int c = 100;</p>
-<p>float Pfinal = c * (1 + IVA);</p>
-<p><strong>Solución Refactorizada en C:</strong></p>
-<p>C</p>
-<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
-<p>// 1. Constante simbólica: MAYÚSCULAS y nombre descriptivo</p>
-<p>#<strong>define</strong> TASA_IVA 0.19</p>
-<p>int main(void) {</p>
-<p>// 2. Variable: Snake Case y descriptiva (monto_bruto)</p>
-<p>int monto_base = 100;</p>
-<p>// 3. Variable: Snake Case y descriptiva (precio_final)</p>
-<p>float precio_final = monto_base * (1 + TASA_IVA);</p>
-<p>printf("Precio Final: %.2f\n", precio_final);</p>
-<p>return 0;</p>
-<p>}</p>
-<p><strong>Ejercicio 6.3: Declaración Cerca del Uso (C99+)</strong></p>
+
+<details>
+    <summary><strong>Código original</strong></summary>
+    <div class="c2h-code">
+        <div class="c2h-code-inner">
+            <table>
+                <tr><td>1</td><td><span class="c2h-directive">#define</span> <span class="c2h-identifier">IVA</span> <span class="c2h-val-flt">0.19</span></td></tr>
+                <tr><td>2</td><td><span class="c2h-kword c2h-kword-int">int</span> <span class="c2h-identifier">c</span> = <span class="c2h-val-int">100</span>;</td></tr>
+                <tr><td>3</td><td><span class="c2h-kword c2h-kword-float">float</span> <span class="c2h-identifier">Pfinal</span> = <span class="c2h-identifier">c</span> * (<span class="c2h-val-int">1</span> + <span class="c2h-identifier">IVA</span>);</td></tr>
+            </table>
+        </div>
+    </div>
+</details>
+
+<div data-exercise="programming">
+    <script type="application/json" data-exercise-config>
+        {
+            "version": 1,
+            "exerciseId": "m2-601-e62-refactor",
+            "lessonId": 2601,
+            "showTitle": false
+        }
+    </script>
+</div>
+
+<details>
+    <summary><strong>Solución refactorizada en C</strong></summary>
+    <div class="c2h-code">
+        <div class="c2h-code-inner">
+            <table>
+                <tr><td>1</td><td><span class="c2h-directive">#include</span> <span class="c2h-val-str">&lt;stdio.h&gt;</span></td></tr>
+                <tr><td>2</td><td><span class="c2h-directive">#define</span> <span class="c2h-identifier">TASA_IVA</span> <span class="c2h-val-flt">0.19</span></td></tr>
+                <tr><td>3</td><td><span class="c2h-kword c2h-kword-int">int</span> <span class="c2h-identifier c2h-fdeclname">main</span>(<span class="c2h-kword c2h-kword-void">void</span>) {</td></tr>
+                <tr><td>4</td><td>&nbsp;&nbsp;&nbsp;&nbsp;<span class="c2h-kword c2h-kword-int">int</span> <span class="c2h-identifier">monto_base</span> = <span class="c2h-val-int">100</span>;</td></tr>
+                <tr><td>5</td><td>&nbsp;&nbsp;&nbsp;&nbsp;<span class="c2h-kword c2h-kword-float">float</span> <span class="c2h-identifier">precio_final</span> = <span class="c2h-identifier">monto_base</span> * (<span class="c2h-val-int">1</span> + <span class="c2h-identifier">TASA_IVA</span>);</td></tr>
+                <tr><td>6</td><td>&nbsp;&nbsp;&nbsp;&nbsp;<span class="c2h-identifier c2h-fcallname">printf</span>(<span class="c2h-val-str">"Precio Final: %.2f\n"</span>, <span class="c2h-identifier">precio_final</span>);</td></tr>
+                <tr><td>7</td><td>&nbsp;&nbsp;&nbsp;&nbsp;<span class="c2h-kword c2h-kword-return">return</span> <span class="c2h-val-int">0</span>;</td></tr>
+                <tr><td>8</td><td>}</td></tr>
+            </table>
+        </div>
+    </div>
+</details>
+
+<br>
+
+<h3>Ejercicio 6.3: Declaración Cerca del Uso (C99+)</h3>
 <p><strong>Objetivo:</strong> Entender la ventaja de la declaración
 tardía (C99+) para mejorar el <em>scope</em> y la legibilidad.</p>
 <p><strong>Instrucción:</strong> Reescribe el siguiente fragmento de
 código (escrito en el estilo antiguo C89) para que siga la recomendación
 moderna de declarar las variables lo más <strong>cerca posible</strong>
 de su primer uso.</p>
-<p><strong>Código Original (Estilo C89):</strong></p>
-<p>C</p>
-<p>int i;</p>
-<p>int total_acumulado = 0;</p>
-<p>// [100 líneas de código que no usan estas variables]</p>
-<p>for (i = 0; i &lt; 50; i++) {</p>
-<p>total_acumulado += i;</p>
-<p>}</p>
-<p><strong>Solución Refactorizada (Estilo C99/Moderno):</strong></p>
-<p>C</p>
-<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
-<p>void calcular_totales(void) {</p>
-<p>// Declaración tardía: total_acumulado se declara justo antes de su
-uso.</p>
-<p>int total_acumulado = 0;</p>
-<p>// [100 líneas de código que no usan estas variables]</p>
-<p>// ...</p>
-<p>// Declaración tardía: la variable de control 'i' se declara DENTRO
-del bucle 'for'.</p>
-<p>// Esto limita el alcance (scope) de 'i' solo al bucle.</p>
-<p>for (int i = 0; i &lt; 50; i++) {</p>
-<p>total_acumulado += i;</p>
-<p>}</p>
-<p>printf("Total Acumulado: %d\n", total_acumulado);</p>
-<p>}</p>
-<p>int main(void) {</p>
-<p>calcular_totales();</p>
-<p>return 0;</p>
-<p>}</p>
+
+<details>
+    <summary><strong>Código original (estilo C89)</strong></summary>
+    <div class="c2h-code">
+        <div class="c2h-code-inner">
+            <table>
+                <tr><td>1</td><td><span class="c2h-kword c2h-kword-int">int</span> <span class="c2h-identifier">i</span>;</td></tr>
+                <tr><td>2</td><td><span class="c2h-kword c2h-kword-int">int</span> <span class="c2h-identifier">total_acumulado</span> = <span class="c2h-val-int">0</span>;</td></tr>
+                <tr><td>3</td><td><span class="c2h-comment">// [100 líneas de código que no usan estas variables]</span></td></tr>
+                <tr><td>4</td><td><span class="c2h-kword c2h-kword-for">for</span> (<span class="c2h-identifier">i</span> = <span class="c2h-val-int">0</span>; <span class="c2h-identifier">i</span> &lt; <span class="c2h-val-int">50</span>; <span class="c2h-identifier">i</span>++) {</td></tr>
+                <tr><td>5</td><td>&nbsp;&nbsp;&nbsp;&nbsp;<span class="c2h-identifier">total_acumulado</span> += <span class="c2h-identifier">i</span>;</td></tr>
+                <tr><td>6</td><td>}</td></tr>
+            </table>
+        </div>
+    </div>
+</details>
+
+<div data-exercise="programming">
+    <script type="application/json" data-exercise-config>
+        {
+            "version": 1,
+            "exerciseId": "m2-601-e63-decl-cerca-uso",
+            "lessonId": 2601,
+            "showTitle": false
+        }
+    </script>
+</div>
+
+<details>
+    <summary><strong>Solución refactorizada (estilo C99/Moderno)</strong></summary>
+    <div class="c2h-code">
+        <div class="c2h-code-inner">
+            <table>
+                <tr><td>1</td><td><span class="c2h-directive">#include</span> <span class="c2h-val-str">&lt;stdio.h&gt;</span></td></tr>
+                <tr><td>2</td><td></td></tr>
+                <tr><td>3</td><td><span class="c2h-kword c2h-kword-void">void</span> <span class="c2h-identifier">calcular_totales</span>(<span class="c2h-kword c2h-kword-void">void</span>) {</td></tr>
+                <tr><td>4</td><td>&nbsp;&nbsp;&nbsp;&nbsp;<span class="c2h-comment">// Declaración tardía: total_acumulado se declara justo antes de su uso.</span></td></tr>
+                <tr><td>5</td><td>&nbsp;&nbsp;&nbsp;&nbsp;<span class="c2h-kword c2h-kword-int">int</span> <span class="c2h-identifier">total_acumulado</span> = <span class="c2h-val-int">0</span>;</td></tr>
+                <tr><td>6</td><td></td></tr>
+                <tr><td>7</td><td>&nbsp;&nbsp;&nbsp;&nbsp;<span class="c2h-comment">// [100 líneas de código que no usan estas variables]</span></td></tr>
+                <tr><td>8</td><td>&nbsp;&nbsp;&nbsp;&nbsp;<span class="c2h-comment">// ...</span></td></tr>
+                <tr><td>9</td><td></td></tr>
+                <tr><td>10</td><td>&nbsp;&nbsp;&nbsp;&nbsp;<span class="c2h-comment">// Declaración tardía: i se declara dentro del for.</span></td></tr>
+                <tr><td>11</td><td>&nbsp;&nbsp;&nbsp;&nbsp;<span class="c2h-kword c2h-kword-for">for</span> (<span class="c2h-kword c2h-kword-int">int</span> <span class="c2h-identifier">i</span> = <span class="c2h-val-int">0</span>; <span class="c2h-identifier">i</span> &lt; <span class="c2h-val-int">50</span>; <span class="c2h-identifier">i</span>++) {</td></tr>
+                <tr><td>12</td><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="c2h-identifier">total_acumulado</span> += <span class="c2h-identifier">i</span>;</td></tr>
+                <tr><td>13</td><td>&nbsp;&nbsp;&nbsp;&nbsp;}</td></tr>
+                <tr><td>14</td><td></td></tr>
+                <tr><td>15</td><td>&nbsp;&nbsp;&nbsp;&nbsp;<span class="c2h-identifier c2h-fcallname">printf</span>(<span class="c2h-val-str">"Total Acumulado: %d\n"</span>, <span class="c2h-identifier">total_acumulado</span>);</td></tr>
+                <tr><td>16</td><td>}</td></tr>
+                <tr><td>17</td><td></td></tr>
+                <tr><td>18</td><td><span class="c2h-kword c2h-kword-int">int</span> <span class="c2h-identifier c2h-fdeclname">main</span>(<span class="c2h-kword c2h-kword-void">void</span>) {</td></tr>
+                <tr><td>19</td><td>&nbsp;&nbsp;&nbsp;&nbsp;<span class="c2h-identifier">calcular_totales</span>();</td></tr>
+                <tr><td>20</td><td>&nbsp;&nbsp;&nbsp;&nbsp;<span class="c2h-kword c2h-kword-return">return</span> <span class="c2h-val-int">0</span>;</td></tr>
+                <tr><td>21</td><td>}</td></tr>
+            </table>
+        </div>
+    </div>
+</details>
 
 
 </div>

@@ -1,0 +1,241 @@
+/**
+ * Specs locales (Módulo 2 - Lección 301)
+ *
+ * Nota: Estos specs son un fallback para correr SIN backend.
+ */
+
+export const M2_301_SPECS = {
+  'm2-301-e1-decl-separado': {
+    version: 1,
+    exerciseId: 'm2-301-e1-decl-separado',
+    title: 'Ejercicio 1: declaración en dos pasos',
+    language: 'c',
+    expectedOutput: 'Horas trabajadas: 40',
+    hints: ['Declara: int horas_trabajadas;', 'Luego asigna: horas_trabajadas = 40;', 'Imprime con %d.'],
+    normalize: { stripComments: true, collapseWhitespace: true },
+    maxCodeLength: 12000,
+    rules: [
+      { id: 'include-stdio', type: 'regex', pattern: '#\\s*include\\s*<stdio\\.h>', flags: 'm', message: 'Incluye <stdio.h>.' },
+      { id: 'decl', type: 'regex', pattern: '\\bint\\s+horas_trabajadas\\s*;', flags: 'm', message: 'Declara: int horas_trabajadas;' },
+      { id: 'assign', type: 'regex', pattern: '\\bhoras_trabajadas\\s*=\\s*40\\s*;', flags: 'm', message: 'Asigna: horas_trabajadas = 40;' },
+      {
+        id: 'printf',
+        type: 'regex',
+        pattern: 'printf\\s*\\(\\s*"[^"]*%d[^"]*"\\s*,\\s*horas_trabajadas\\s*\\)',
+        flags: 'm',
+        message: 'Imprime horas_trabajadas con printf y %d.',
+      },
+    ],
+  },
+
+  'm2-301-e2-init-directa': {
+    version: 1,
+    exerciseId: 'm2-301-e2-init-directa',
+    title: 'Ejercicio 2: inicialización directa',
+    language: 'c',
+    expectedOutput: 'Distancia: 150.5 km\nCalificación: A\nPrecio: 19.99',
+    hints: [
+      'Usa: float distancia = 150.5f;',
+      "Usa: char calificacion = 'A';",
+      'Usa: double precio_unitario = 19.99;',
+      'Imprime con %.1f, %c y %.2f/%.2lf.',
+    ],
+    normalize: { stripComments: true, collapseWhitespace: true },
+    maxCodeLength: 12000,
+    rules: [
+      { id: 'include-stdio', type: 'regex', pattern: '#\\s*include\\s*<stdio\\.h>', flags: 'm', message: 'Incluye <stdio.h>.' },
+      { id: 'dist', type: 'regex', pattern: '\\bfloat\\s+distancia\\s*=\\s*150\\.5f\\s*;', flags: 'm', message: 'Declara: float distancia = 150.5f;' },
+      { id: 'calif', type: 'regex', pattern: "\\bchar\\s+calificacion\\s*=\\s*'A'\\s*;", flags: 'm', message: "Declara: char calificacion = 'A';" },
+      { id: 'precio', type: 'regex', pattern: '\\bdouble\\s+precio_unitario\\s*=\\s*19\\.99\\s*;', flags: 'm', message: 'Declara: double precio_unitario = 19.99;' },
+      {
+        id: 'printf-float',
+        type: 'regex',
+        pattern: 'printf\\s*\\(\\s*"[^"]*%\\.1f[^"]*"\\s*,\\s*distancia\\s*\\)',
+        flags: 'm',
+        message: 'Imprime distancia con %.1f.',
+      },
+      {
+        id: 'printf-char',
+        type: 'regex',
+        pattern: 'printf\\s*\\(\\s*"[^"]*%c[^"]*"\\s*,\\s*calificacion\\s*\\)',
+        flags: 'm',
+        message: 'Imprime calificacion con %c.',
+      },
+      {
+        id: 'printf-double',
+        type: 'regex',
+        pattern: 'printf\\s*\\(\\s*"[^"]*%\\.2l?f[^"]*"\\s*,\\s*precio_unitario\\s*\\)',
+        flags: 'm',
+        message: 'Imprime precio_unitario con dos decimales (%.2f o %.2lf).',
+      },
+    ],
+  },
+
+  'm2-301-e3-valor-basura': {
+    version: 1,
+    exerciseId: 'm2-301-e3-valor-basura',
+    title: 'Ejercicio 3: valor sin inicializar (advertencia)',
+    language: 'c',
+    expectedOutput:
+      'El valor de la variable sin inicializar es: [impredecible]\n--- ADVERTENCIA: Este valor es basura e impredecible ---',
+    hints: ['Declara: int valor_sin_init; (sin asignación)', 'Imprime su valor con %d.', 'Imprime una advertencia.'],
+    normalize: { stripComments: true, collapseWhitespace: true },
+    maxCodeLength: 12000,
+    rules: [
+      { id: 'include-stdio', type: 'regex', pattern: '#\\s*include\\s*<stdio\\.h>', flags: 'm', message: 'Incluye <stdio.h>.' },
+      { id: 'decl', type: 'regex', pattern: '\\bint\\s+valor_sin_init\\s*;', flags: 'm', message: 'Declara: int valor_sin_init;' },
+      { id: 'no-assign', type: 'notRegex', pattern: '\\bvalor_sin_init\\s*=', flags: 'm', message: 'No inicialices valor_sin_init (no debe haber asignación).' },
+      {
+        id: 'printf-value',
+        type: 'regex',
+        pattern: 'printf\\s*\\(\\s*"[^"]*%d[^"]*"\\s*,\\s*valor_sin_init\\s*\\)',
+        flags: 'm',
+        message: 'Imprime valor_sin_init con %d.',
+      },
+      {
+        id: 'printf-warning',
+        type: 'regex',
+        pattern: 'printf\\s*\\(\\s*"[^"]*ADVERTENCIA[^"]*"\\s*\\)',
+        flags: 'm',
+        message: 'Imprime un mensaje de ADVERTENCIA.',
+      },
+    ],
+  },
+
+  'm2-301-e4-contador': {
+    version: 1,
+    exerciseId: 'm2-301-e4-contador',
+    title: 'Ejercicio 4: reasignación de contador',
+    language: 'c',
+    expectedOutput: 'Valor final del contador: 11',
+    hints: ['Inicializa contador en 0.', 'Reasigna a 10.', 'Incrementa con: contador = contador + 1;'],
+    normalize: { stripComments: true, collapseWhitespace: true },
+    maxCodeLength: 12000,
+    rules: [
+      { id: 'include-stdio', type: 'regex', pattern: '#\\s*include\\s*<stdio\\.h>', flags: 'm', message: 'Incluye <stdio.h>.' },
+      { id: 'init-0', type: 'regex', pattern: '\\bint\\s+contador\\s*=\\s*0\\s*;', flags: 'm', message: 'Inicializa: int contador = 0;' },
+      { id: 'set-10', type: 'regex', pattern: '\\bcontador\\s*=\\s*10\\s*;', flags: 'm', message: 'Reasigna: contador = 10;' },
+      { id: 'inc', type: 'regex', pattern: '\\bcontador\\s*=\\s*contador\\s*\\+\\s*1\\s*;', flags: 'm', message: 'Incrementa con: contador = contador + 1;' },
+      {
+        id: 'printf',
+        type: 'regex',
+        pattern: 'printf\\s*\\(\\s*"[^"]*%d[^"]*"\\s*,\\s*contador\\s*\\)',
+        flags: 'm',
+        message: 'Imprime contador con %d.',
+      },
+    ],
+  },
+
+  'm2-301-e5-area': {
+    version: 1,
+    exerciseId: 'm2-301-e5-area',
+    title: 'Ejercicio 5: área del círculo',
+    language: 'c',
+    expectedOutput: 'El área del círculo es: 78.54',
+    hints: [
+      'Declara float radio = 5.0f;',
+      'Declara float area;',
+      'Calcula: area = 3.14159f * radio * radio;',
+      'Imprime con %.2f.',
+    ],
+    normalize: { stripComments: true, collapseWhitespace: true },
+    rules: [
+      { id: 'include-stdio', type: 'regex', pattern: '#\\s*include\\s*<stdio\\.h>', flags: 'm', message: 'Incluye <stdio.h>.' },
+      { id: 'decl-radio', type: 'regex', pattern: '\\bfloat\\s+radio\\s*=\\s*5\\.0f\\s*;', flags: 'm', message: 'Declara radio como 5.0f.' },
+      { id: 'decl-area', type: 'regex', pattern: '\\bfloat\\s+area\\s*;', flags: 'm', message: 'Declara area.' },
+      { id: 'formula', type: 'regex', pattern: '\\barea\\s*=\\s*3\\.14159f\\s*\\*\\s*radio\\s*\\*\\s*radio\\s*;', flags: 'm', message: 'Calcula area = 3.14159f * radio * radio.' },
+      { id: 'printf-area', type: 'regex', pattern: 'printf\\s*\\(\\s*"[^"]*%\\.2f[^"]*"\\s*,\\s*area\\s*\\)\\s*;', flags: 'm', message: 'Imprime area con %.2f.' },
+    ],
+  },
+
+  'm2-301-e6-estado': {
+    version: 1,
+    exerciseId: 'm2-301-e6-estado',
+    title: 'Ejercicio 6: cambio de estado (char)',
+    language: 'c',
+    expectedOutput: 'Estado inicial: P (Pendiente)\nNuevo estado: C (Completado)',
+    hints: ["Inicia: char estado = 'P';", "Reasigna: estado = 'C';", 'Imprime usando %c.'],
+    normalize: { stripComments: true, collapseWhitespace: true },
+    maxCodeLength: 12000,
+    rules: [
+      { id: 'include-stdio', type: 'regex', pattern: '#\\s*include\\s*<stdio\\.h>', flags: 'm', message: 'Incluye <stdio.h>.' },
+      { id: 'init-p', type: 'regex', pattern: "\\bchar\\s+estado\\s*=\\s*'P'\\s*;", flags: 'm', message: "Declara: char estado = 'P';" },
+      { id: 'set-c', type: 'regex', pattern: "\\bestado\\s*=\\s*'C'\\s*;", flags: 'm', message: "Reasigna: estado = 'C';" },
+      {
+        id: 'printf-initial',
+        type: 'regex',
+        pattern: 'printf\\s*\\(\\s*"[^"]*%c[^"]*"\\s*,\\s*estado\\s*\\)',
+        flags: 'm',
+        message: 'Imprime estado usando %c.',
+      },
+      {
+        id: 'printf-new',
+        type: 'regex',
+        pattern: 'printf\\s*\\(\\s*"[^"]*Nuevo\\s+estado[^"]*%c[^"]*"\\s*,\\s*estado\\s*\\)',
+        flags: 'm',
+        message: 'Imprime el nuevo estado después de reasignar.',
+      },
+    ],
+  },
+
+  'm2-301-e7-trunc-double-int': {
+    version: 1,
+    exerciseId: 'm2-301-e7-trunc-double-int',
+    title: 'Ejercicio 7: truncamiento (double → int)',
+    language: 'c',
+    expectedOutput: 'El valor entero final es: 15',
+    hints: ['Usa: double valor_bruto = 15.75;', 'Declara: int valor_entero;', 'Asigna: valor_entero = valor_bruto;'],
+    normalize: { stripComments: true, collapseWhitespace: true },
+    maxCodeLength: 12000,
+    rules: [
+      { id: 'include-stdio', type: 'regex', pattern: '#\\s*include\\s*<stdio\\.h>', flags: 'm', message: 'Incluye <stdio.h>.' },
+      { id: 'decl-bruto', type: 'regex', pattern: '\\bdouble\\s+valor_bruto\\s*=\\s*15\\.75\\s*;', flags: 'm', message: 'Declara: double valor_bruto = 15.75;' },
+      { id: 'decl-entero', type: 'regex', pattern: '\\bint\\s+valor_entero\\s*;', flags: 'm', message: 'Declara: int valor_entero;' },
+      { id: 'assign', type: 'regex', pattern: '\\bvalor_entero\\s*=\\s*valor_bruto\\s*;', flags: 'm', message: 'Asigna: valor_entero = valor_bruto; (sin cast)' },
+      {
+        id: 'printf',
+        type: 'regex',
+        pattern: 'printf\\s*\\(\\s*"[^"]*%d[^"]*"\\s*,\\s*valor_entero\\s*\\)',
+        flags: 'm',
+        message: 'Imprime valor_entero con %d.',
+      },
+    ],
+  },
+
+  'm2-301-e8-init-multiple-suma': {
+    version: 1,
+    exerciseId: 'm2-301-e8-init-multiple-suma',
+    title: 'Ejercicio 8: inicialización múltiple y suma',
+    language: 'c',
+    expectedOutput: 'La suma final (5 + 10 + 0) es: 15',
+    hints: ['En una sola línea: int x = 0, y = 0, z = 0;', 'Luego: x = 5; y = 10;', 'Calcula e imprime la suma.'],
+    normalize: { stripComments: true, collapseWhitespace: true },
+    maxCodeLength: 12000,
+    rules: [
+      { id: 'include-stdio', type: 'regex', pattern: '#\\s*include\\s*<stdio\\.h>', flags: 'm', message: 'Incluye <stdio.h>.' },
+      {
+        id: 'decl-multiple',
+        type: 'regex',
+        pattern: '\\bint\\s+x\\s*=\\s*0\\s*,\\s*y\\s*=\\s*0\\s*,\\s*z\\s*=\\s*0\\s*;',
+        flags: 'm',
+        message: 'Inicializa x, y, z en una sola línea con comas.',
+      },
+      { id: 'set-x', type: 'regex', pattern: '\\bx\\s*=\\s*5\\s*;', flags: 'm', message: 'Reasigna: x = 5;' },
+      { id: 'set-y', type: 'regex', pattern: '\\by\\s*=\\s*10\\s*;', flags: 'm', message: 'Reasigna: y = 10;' },
+      {
+        id: 'suma',
+        type: 'regex',
+        pattern: '\\b(?:int\\s+)?suma\\s*=\\s*x\\s*\\+\\s*y\\s*\\+\\s*z\\s*;',
+        flags: 'm',
+        message: 'Calcula: suma = x + y + z;',
+      },
+      {
+        id: 'printf',
+        type: 'regex',
+        pattern: 'printf\\s*\\(\\s*"[^"]*%d[^"]*"\\s*,\\s*suma\\s*\\)',
+        flags: 'm',
+        message: 'Imprime suma con %d.',
+      },
+    ],
+  },
+};

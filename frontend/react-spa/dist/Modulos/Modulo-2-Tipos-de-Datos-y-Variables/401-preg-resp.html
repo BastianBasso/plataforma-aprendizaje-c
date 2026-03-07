@@ -8,325 +8,462 @@
 <body>
 <div class="main-content">
 
+<p><strong>⚙️ Ejercicios de Programación: Constantes y Conversión de Tipos</strong></p>
+
+<h3>Ejercicio 1: Constantes Tipadas (const)</h3>
+<p><strong>Instrucción:</strong> Define una constante entera <strong>const int LIMITE_MAXIMO = 50;</strong> y una variable <strong>int</strong> llamada <strong>puntuacion</strong>. Inicializa la variable con la constante. Imprime ambos valores.</p>
+
+<div data-exercise="programming">
+    <script type="application/json" data-exercise-config>
+        {
+            "version": 1,
+            "exerciseId": "m2-401-e1-const-tipadas",
+            "lessonId": 2401,
+            "showTitle": false
+        }
+    </script>
+</div>
+
+<details>
+    <summary><strong>Solución en C</strong></summary>
+    <div class="c2h-code"><div class="c2h-code-inner"><table>
+        <tr><td>1</td><td><span class="c2h-directive">#include</span> <span class="c2h-val-str">&lt;stdio.h&gt;</span></td></tr>
+        <tr><td>2</td><td><span class="c2h-kword c2h-kword-int">int</span> <span class="c2h-identifier c2h-fdeclname">main</span>(<span class="c2h-kword c2h-kword-void">void</span>) {</td></tr>
+        <tr><td>3</td><td>    <span class="c2h-kword c2h-kword-const">const</span> <span class="c2h-kword c2h-kword-int">int</span> <span class="c2h-identifier">LIMITE_MAXIMO</span> = <span class="c2h-val-int">50</span>;</td></tr>
+        <tr><td>4</td><td>    <span class="c2h-kword c2h-kword-int">int</span> <span class="c2h-identifier">puntuacion</span> = <span class="c2h-identifier">LIMITE_MAXIMO</span>;</td></tr>
+        <tr><td>5</td><td>    <span class="c2h-identifier c2h-fcallname">printf</span>(<span class="c2h-val-str">"Límite máximo definido: %d\n"</span>, <span class="c2h-identifier">LIMITE_MAXIMO</span>);</td></tr>
+        <tr><td>6</td><td>    <span class="c2h-identifier c2h-fcallname">printf</span>(<span class="c2h-val-str">"Puntuación inicial: %d\n"</span>, <span class="c2h-identifier">puntuacion</span>);</td></tr>
+        <tr><td>7</td><td>    <span class="c2h-kword c2h-kword-return">return</span> <span class="c2h-val-int">0</span>;</td></tr>
+        <tr><td>8</td><td>}</td></tr>
+    </table></div></div>
+</details>
+
+<br>
+
+<h3>Ejercicio 2: Uso de Constantes Simbólicas (#define)</h3>
+<p><strong>Instrucción:</strong> Usa la directiva <strong>#define</strong> para crear una constante simbólica llamada <strong>DIAS_SEMANA</strong> con el valor <strong>7</strong>. Usa esta constante para calcular el total de horas en tres semanas y guarda el resultado en una variable <strong>int</strong>.</p>
+
 <div data-exercise="programming">
     <script type="application/json" data-exercise-config>
         {
             "version": 1,
             "exerciseId": "m2-401-e2-define",
             "lessonId": 2401,
-            "title": "Ejercicio 2 (Práctica): #define DIAS_SEMANA"
+            "showTitle": false
         }
     </script>
 </div>
-<p><strong>Ejercicios: Variables, Constantes y Conversión de
-Tipos</strong></p>
-<p><strong>Ejercicio 1: Constantes Tipadas (const)</strong></p>
-<p><strong>Instrucción:</strong> Define una constante entera const int
-LIMITE_MAXIMO = 50; y una variable int llamada puntuacion. Inicializa la
-variable con la constante. Imprime ambos valores.</p>
-<p><strong>Solución en C:</strong></p>
-<p>C</p>
-<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
-<p>int main(void) {</p>
-<p>// Definición de una constante tipada</p>
-<p>const int LIMITE_MAXIMO = 50;</p>
-<p>// Uso de la constante para inicializar una variable</p>
-<p>int puntuacion = LIMITE_MAXIMO;</p>
-<p>printf("Límite máximo definido: %d\n", LIMITE_MAXIMO);</p>
-<p>printf("Puntuación inicial: %d\n", puntuacion);</p>
-<p>return 0;</p>
-<p>}</p>
-<p><strong>Output Esperado:</strong></p>
-<p>Límite máximo definido: 50</p>
-<p>Puntuación inicial: 50</p>
-<p><strong>Ejercicio 2: Uso de Constantes Simbólicas
-(#define)</strong></p>
-<p><strong>Instrucción:</strong> Usa la directiva #define para crear una
-constante simbólica llamada DIAS_SEMANA con el valor 7. Usa esta
-constante para calcular el total de horas en tres semanas y guarda el
-resultado en una variable int.</p>
-<p><strong>Solución en C:</strong></p>
-<p>C</p>
-<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
-<p>#<strong>define</strong> DIAS_SEMANA 7</p>
-<p>int main(void) {</p>
-<p>const int HORAS_DIA = 24; // Constante usando 'const'</p>
-<p>// El preprocesador reemplaza DIAS_SEMANA por 7</p>
-<p>int horas_tres_semanas = DIAS_SEMANA * 3 * HORAS_DIA;</p>
-<p>printf("Horas en 3 semanas: %d\n", horas_tres_semanas);</p>
-<p>return 0;</p>
-<p>}</p>
-<p><strong>Output Esperado:</strong></p>
-<p>Horas en 3 semanas: 504</p>
-<p><strong>Ejercicio 3: Falla de Inmutabilidad (const)</strong></p>
-<p><strong>Instrucción:</strong> Define una constante const float PI =
-3.14159f;. Intenta, y observa el error, reasignar un nuevo valor a PI
-después de su inicialización. (Describe el error en lugar de ejecutar el
-código fallido).</p>
-<p>Explicación y Solución:</p>
-<p>El código siguiente causaría un error de compilación porque const
-previene cualquier reasignación, reforzando la inmutabilidad.</p>
-<p>C</p>
-<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
-<p>int main(void) {</p>
-<p>const float PI = 3.14159f;</p>
-<p>// PI = 3.14; // ¡ERROR DE COMPILACIÓN!</p>
-<p>printf("La constante PI fue definida de forma segura.\n");</p>
-<p>return 0;</p>
-<p>}</p>
-<p><strong>Output Esperado:</strong></p>
-<p>La constante PI fue definida de forma segura.</p>
-<p>// NOTA: Si descomentas 'PI = 3.14;', el compilador mostrará un error
-como:</p>
-<p>// error: assignment of read-only variable 'PI'</p>
-<p><strong>Ejercicio 4: Convención de Nomenclatura</strong></p>
-<p><strong>Instrucción:</strong> Define una constante de tasa de interés
-usando la convención de nomenclatura MAYUSCULAS_CON_GUION_BAJO (const
-float TASA_ANUAL = 0.05f;). Define una variable capitalInicial usando
-<em>camelCase</em>. Usa ambas para calcular el interés simple por un
-año.</p>
-<p><strong>Solución en C:</strong></p>
-<p>C</p>
-<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
-<p>int main(void) {</p>
-<p>const float TASA_ANUAL = 0.05f; // Constante (MAYÚSCULAS)</p>
-<p>float capitalInicial = 1000.0f; // Variable (camelCase)</p>
-<p>float interesGanado = capitalInicial * TASA_ANUAL;</p>
-<p>printf("Capital: %.2f\n", capitalInicial);</p>
-<p>printf("Interés ganado: %.2f\n", interesGanado);</p>
-<p>return 0;</p>
-<p>}</p>
-<p><strong>Output Esperado:</strong></p>
-<p>Capital: 1000.00</p>
-<p>Interés ganado: 50.00</p>
-<p><strong>Ejercicio 5: Conversión Implícita (int a float)</strong></p>
-<p><strong>Instrucción:</strong> Realiza una suma entre una variable int
-y una variable float. Asigna el resultado a un float. Explica por qué el
-int se convirtió automáticamente.</p>
-<p><strong>Solución en C:</strong></p>
-<p>C</p>
-<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
-<p>int main(void) {</p>
-<p>int numero_entero = 15;</p>
-<p>float numero_decimal = 2.5f;</p>
-<p>// Conversión Implícita: El 'numero_entero' (15) se promociona a
-float (15.0f)</p>
-<p>float resultado = numero_entero + numero_decimal;</p>
-<p>printf("Resultado (15 + 2.5): %.1f\n", resultado);</p>
-<p>return 0;</p>
-<p>}</p>
-<p><strong>Output Esperado:</strong></p>
-<p>Resultado (15 + 2.5): 17.5</p>
-<p><strong>Ejercicio 6: Conversión Implícita (char a int)</strong></p>
-<p><strong>Instrucción:</strong> Declara un char con el valor '1'.
-Súmale un int con el valor 5 y guarda el resultado en otro int. Imprime
-el resultado numérico.</p>
-<p><strong>Solución en C:</strong></p>
-<p>C</p>
-<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
-<p>int main(void) {</p>
-<p>char caracter_uno = '1'; // ASCII de '1' es 49</p>
-<p>int incremento = 5;</p>
-<p>// El 'caracter_uno' se convierte a su valor ASCII (49) antes de la
-suma</p>
-<p>int valor_final = caracter_uno + incremento;</p>
-<p>printf("Código ASCII de '1' + 5 es: %d\n", valor_final);</p>
-<p>return 0;</p>
-<p>}</p>
-<p><strong>Output Esperado:</strong></p>
-<p>Código ASCII de '1' + 5 es: 54</p>
-<p><strong>Ejercicio 7: División Entera (Sin Casting)</strong></p>
-<p><strong>Instrucción:</strong> Divide dos números enteros, num1 = 10 y
-num2 = 4, y guarda el resultado en un float. Imprime el resultado para
-mostrar cómo la división de enteros trunca el resultado antes de la
-asignación.</p>
-<p><strong>Solución en C:</strong></p>
-<p>C</p>
-<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
-<p>int main(void) {</p>
-<p>int num1 = 10;</p>
-<p>int num2 = 4;</p>
-<p>// C realiza la división de enteros (10 / 4 = 2) antes de asignarlo
-al float.</p>
-<p>float resultado_entero = num1 / num2;</p>
-<p>printf("Resultado de división entera (10 / 4): %.2f\n",
-resultado_entero);</p>
-<p>return 0;</p>
-<p>}</p>
-<p><strong>Output Esperado:</strong></p>
-<p>Resultado de división entera (10 / 4): 2.00</p>
-<p><strong>Ejercicio 8: Conversión Explícita (Casting para
-División)</strong></p>
-<p><strong>Instrucción:</strong> Usa las mismas variables del ejercicio
-anterior (num1 = 10, num2 = 4), pero aplica <strong>casting</strong> a
-uno de los operandos antes de la división para asegurar un resultado de
-punto flotante.</p>
-<p><strong>Solución en C:</strong></p>
-<p>C</p>
-<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
-<p>int main(void) {</p>
-<p>int num1 = 10;</p>
-<p>int num2 = 4;</p>
-<p>// Casting: (float) fuerza a num1 a ser 10.0f, lo que obliga a toda
-la</p>
-<p>// operación a realizarse en punto flotante.</p>
-<p>float resultado_decimal = (float)num1 / num2;</p>
-<p>printf("Resultado de división decimal (10 / 4): %.2f\n",
-resultado_decimal);</p>
-<p>return 0;</p>
-<p>}</p>
-<p><strong>Output Esperado:</strong></p>
-<p>Resultado de división decimal (10 / 4): 2.50</p>
-<p><strong>Ejercicio 9: Casting para Pérdida de Datos
-(Truncamiento)</strong></p>
-<p><strong>Instrucción:</strong> Inicializa un double con el valor
-99.98. Usa <strong>casting</strong> para asignarlo a una variable int.
-Imprime el valor resultante de la variable int para demostrar la pérdida
-de la parte decimal.</p>
-<p><strong>Solución en C:</strong></p>
-<p>C</p>
-<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
-<p>int main(void) {</p>
-<p>double valor_decimal = 99.98;</p>
-<p>// Casting: (int) fuerza la conversión, cortando la parte
-decimal.</p>
-<p>int valor_entero = (int)valor_decimal;</p>
-<p>printf("Valor double original: %.2lf\n", valor_decimal);</p>
-<p>printf("Valor entero resultante (truncado): %d\n", valor_entero);</p>
-<p>return 0;</p>
-<p>}</p>
-<p><strong>Output Esperado:</strong></p>
-<p>Valor double original: 99.98</p>
-<p>Valor entero resultante (truncado): 99</p>
-<p><strong>Ejercicio 10: Reasignación de Variable vs. Uso de
-Constante</strong></p>
-<p><strong>Instrucción:</strong> Declara una variable int llamada stock
-e inicialízala a 100. Define una constante const int CANTIDAD_VENDIDA =
-10;. Realiza una resta y reasigna el nuevo valor a stock. Imprime ambos
-valores al final.</p>
-<p><strong>Solución en C:</strong></p>
-<p>C</p>
-<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
-<p>int main(void) {</p>
-<p>int stock = 100;</p>
-<p>const int CANTIDAD_VENDIDA = 10; // Fijo</p>
-<p>// Uso de constante en la operación y reasignación en la variable</p>
-<p>stock = stock - CANTIDAD_VENDIDA;</p>
-<p>printf("Cantidad vendida (constante): %d\n", CANTIDAD_VENDIDA);</p>
-<p>printf("Stock restante (variable reasignada): %d\n", stock);</p>
-<p>return 0;</p>
-<p>}</p>
-<p><strong>Output Esperado:</strong></p>
-<p>Cantidad vendida (constante): 10</p>
-<p>Stock restante (variable reasignada): 90</p>
-<p><strong>Ejercicio 11: Múltiple Conversión Implícita</strong></p>
-<p><strong>Instrucción:</strong> Declara un char ('Z'), un int (100), y
-un double (0.5). Súmalos y guarda el resultado en una variable double.
-Explica por qué el double es el tipo final.</p>
-<p><strong>Solución en C:</strong></p>
-<p>C</p>
-<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
-<p>int main(void) {</p>
-<p>char letra_z = 'Z';</p>
-<p>int numero_grande = 100;</p>
-<p>double factor = 0.5;</p>
-<p>// Conversión implícita: char y int se promocionan a double porque es
-el tipo "más grande".</p>
-<p>double resultado = letra_z + numero_grande + factor;</p>
-<p>// ASCII de 'Z' es 90. Operación: 90 + 100 + 0.5 = 190.5</p>
-<p>printf("Resultado final (double): %.1lf\n", resultado);</p>
-<p>return 0;</p>
-<p>}</p>
-<p><strong>Output Esperado:</strong></p>
-<p>Resultado final (double): 190.5</p>
-<p><strong>Ejercicio 12: Casting para Forzar int</strong></p>
-<p><strong>Instrucción:</strong> Calcula el promedio de dos números
-float: 95.5f y 80.0f. Usa <strong>casting</strong> para forzar que el
-resultado final del promedio se guarde como un int (truncando el
-decimal).</p>
-<p><strong>Solución en C:</strong></p>
-<p>C</p>
-<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
-<p>int main(void) {</p>
-<p>float nota1 = 95.5f;</p>
-<p>float nota2 = 80.0f;</p>
-<p>float promedio_real = (nota1 + nota2) / 2.0f;</p>
-<p>// Casting: Fuerza el truncamiento del promedio real para obtener
-solo la parte entera.</p>
-<p>int promedio_entero = (int)promedio_real;</p>
-<p>printf("Promedio real: %.2f\n", promedio_real);</p>
-<p>printf("Promedio entero forzado: %d\n", promedio_entero);</p>
-<p>return 0;</p>
-<p>}</p>
-<p><strong>Output Esperado:</strong></p>
-<p>Promedio real: 87.75</p>
-<p>Promedio entero forzado: 87</p>
-<p><strong>Ejercicio 13: Definición Mixta de Constantes</strong></p>
-<p><strong>Instrucción:</strong> Define una constante de color (ej.
-"Rojo") usando #define y una constante de estado (ej. 301) usando const
-int. Imprime ambas para demostrar que cumplen la convención de
-mayúsculas.</p>
-<p><strong>Solución en C:</strong></p>
-<p>C</p>
-<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
-<p>#<strong>define</strong> COLOR_DEFAULT "ROJO" // Constante
-Simbólica</p>
-<p>int main(void) {</p>
-<p>const int CODIGO_ESTADO = 301; // Constante Tipada</p>
-<p>printf("Mensaje de estado: %d\n", CODIGO_ESTADO);</p>
-<p>printf("Color seleccionado: %s\n", COLOR_DEFAULT);</p>
-<p>return 0;</p>
-<p>}</p>
-<p><strong>Output Esperado:</strong></p>
-<p>Mensaje de estado: 301</p>
-<p>Color seleccionado: ROJO</p>
-<p><strong>Ejercicio 14: Casting para Uso de Memoria</strong></p>
-<p><strong>Instrucción:</strong> Inicializa un double con un valor
-grande (1234567.89). Usa casting para asignarlo a una variable float.
-Imprime ambos valores para observar una posible pérdida de precisión en
-el float debido a su menor tamaño de memoria (4 bytes vs 8 bytes).</p>
-<p><strong>Solución en C:</strong></p>
-<p>C</p>
-<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
-<p>int main(void) {</p>
-<p>double valor_alta_precision = 1234567.89; // 8 bytes</p>
-<p>// Casting: Pérdida de precisión al forzar 8 bytes a 4 bytes.</p>
-<p>float valor_baja_precision = (float)valor_alta_precision;</p>
-<p>printf("Double (8 bytes): %.10lf\n", valor_alta_precision);</p>
-<p>// El float puede no retener todos los decimales de forma
-precisa.</p>
-<p>printf("Float (4 bytes): %.10f\n", valor_baja_precision);</p>
-<p>return 0;</p>
-<p>}</p>
-<p><strong>Output Esperado (Observar la diferencia en los últimos
-dígitos):</strong></p>
-<p>Double (8 bytes): 1234567.8900000000</p>
-<p>Float (4 bytes): 1234567.8750000000 // El valor puede variar
-ligeramente según el sistema</p>
-<p><strong>Ejercicio 15: Evaluación de Expresión con
-Casting</strong></p>
-<p><strong>Instrucción:</strong> Dadas tres variables int (a=5, b=2,
-c=3), calcula el resultado de la expresión: $\text{Resultado} = a +
-(\text{casting a float de } b / c)$. Guarda el resultado en un
-float.</p>
-<p><strong>Solución en C:</strong></p>
-<p>C</p>
-<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
-<p>int main(void) {</p>
-<p>int a = 5;</p>
-<p>int b = 2;</p>
-<p>int c = 3;</p>
-<p>// Paso 1: b/c es división entera (2/3 = 0).</p>
-<p>// Paso 2: El casting (float) convierte ese '0' a 0.0f.</p>
-<p>// float resultado = a + (float)(b / c); // Esto daría 5.0</p>
-<p>// CORRECCIÓN: Para dividir 2.0 / 3.0, el casting debe aplicarse al
-numerador o denominador:</p>
-<p>float resultado = a + ((float)b / c);</p>
-<p>printf("Resultado (5 + 2.0/3.0): %.4f\n", resultado);</p>
-<p>return 0;</p>
-<p>}</p>
-<p><strong>Output Esperado:</strong></p>
-<p>Resultado (5 + 2.0/3.0): 5.6667</p>
+
+<details>
+    <summary><strong>Solución en C</strong></summary>
+    <div class="c2h-code"><div class="c2h-code-inner"><table>
+        <tr><td>1</td><td><span class="c2h-directive">#include</span> <span class="c2h-val-str">&lt;stdio.h&gt;</span></td></tr>
+        <tr><td>2</td><td><span class="c2h-directive">#define</span> <span class="c2h-identifier">DIAS_SEMANA</span> <span class="c2h-val-int">7</span></td></tr>
+        <tr><td>3</td><td><span class="c2h-kword c2h-kword-int">int</span> <span class="c2h-identifier c2h-fdeclname">main</span>(<span class="c2h-kword c2h-kword-void">void</span>) {</td></tr>
+        <tr><td>4</td><td>    <span class="c2h-kword c2h-kword-const">const</span> <span class="c2h-kword c2h-kword-int">int</span> <span class="c2h-identifier">HORAS_DIA</span> = <span class="c2h-val-int">24</span>;</td></tr>
+        <tr><td>5</td><td>    <span class="c2h-kword c2h-kword-int">int</span> <span class="c2h-identifier">horas_tres_semanas</span> = <span class="c2h-identifier">DIAS_SEMANA</span> * <span class="c2h-val-int">3</span> * <span class="c2h-identifier">HORAS_DIA</span>;</td></tr>
+        <tr><td>6</td><td>    <span class="c2h-identifier c2h-fcallname">printf</span>(<span class="c2h-val-str">"Horas en 3 semanas: %d\n"</span>, <span class="c2h-identifier">horas_tres_semanas</span>);</td></tr>
+        <tr><td>7</td><td>    <span class="c2h-kword c2h-kword-return">return</span> <span class="c2h-val-int">0</span>;</td></tr>
+        <tr><td>8</td><td>}</td></tr>
+    </table></div></div>
+</details>
+
+<br>
+
+<h3>Ejercicio 3: Falla de Inmutabilidad (const)</h3>
+<p><strong>Instrucción:</strong> Define una constante <strong>const float PI = 3.14159f;</strong>. Intenta (y comenta) la línea donde reasignarías <strong>PI</strong> y agrega un comentario indicando el error de compilación esperado. Imprime un mensaje final.</p>
+
+<div data-exercise="programming">
+    <script type="application/json" data-exercise-config>
+        {
+            "version": 1,
+            "exerciseId": "m2-401-e3-const-inmutable",
+            "lessonId": 2401,
+            "showTitle": false
+        }
+    </script>
+</div>
+
+<details>
+    <summary><strong>Solución en C</strong></summary>
+    <div class="c2h-code"><div class="c2h-code-inner"><table>
+        <tr><td>1</td><td><span class="c2h-directive">#include</span> <span class="c2h-val-str">&lt;stdio.h&gt;</span></td></tr>
+        <tr><td>2</td><td><span class="c2h-kword c2h-kword-int">int</span> <span class="c2h-identifier c2h-fdeclname">main</span>(<span class="c2h-kword c2h-kword-void">void</span>) {</td></tr>
+        <tr><td>3</td><td>    <span class="c2h-kword c2h-kword-const">const</span> <span class="c2h-kword c2h-kword-float">float</span> <span class="c2h-identifier">PI</span> = <span class="c2h-val-flt">3.14159f</span>;</td></tr>
+        <tr><td>4</td><td>    <span class="c2h-comment">// PI = 3.14f; // ERROR: assignment of read-only variable 'PI'</span></td></tr>
+        <tr><td>5</td><td>    <span class="c2h-identifier c2h-fcallname">printf</span>(<span class="c2h-val-str">"La constante PI fue definida de forma segura.\n"</span>);</td></tr>
+        <tr><td>6</td><td>    <span class="c2h-kword c2h-kword-return">return</span> <span class="c2h-val-int">0</span>;</td></tr>
+        <tr><td>7</td><td>}</td></tr>
+    </table></div></div>
+</details>
+
+<br>
+
+<h3>Ejercicio 4: Convención de Nomenclatura</h3>
+<p><strong>Instrucción:</strong> Define una constante <strong>const float TASA_ANUAL = 0.05f;</strong> (MAYUSCULAS_CON_GUION_BAJO). Define una variable <strong>capitalInicial</strong> (camelCase). Calcula el interés simple por un año e imprime capital e interés.</p>
+
+<div data-exercise="programming">
+    <script type="application/json" data-exercise-config>
+        {
+            "version": 1,
+            "exerciseId": "m2-401-e4-nomenclatura",
+            "lessonId": 2401,
+            "showTitle": false
+        }
+    </script>
+</div>
+
+<details>
+    <summary><strong>Solución en C</strong></summary>
+    <div class="c2h-code"><div class="c2h-code-inner"><table>
+        <tr><td>1</td><td><span class="c2h-directive">#include</span> <span class="c2h-val-str">&lt;stdio.h&gt;</span></td></tr>
+        <tr><td>2</td><td><span class="c2h-kword c2h-kword-int">int</span> <span class="c2h-identifier c2h-fdeclname">main</span>(<span class="c2h-kword c2h-kword-void">void</span>) {</td></tr>
+        <tr><td>3</td><td>    <span class="c2h-kword c2h-kword-const">const</span> <span class="c2h-kword c2h-kword-float">float</span> <span class="c2h-identifier">TASA_ANUAL</span> = <span class="c2h-val-flt">0.05f</span>;</td></tr>
+        <tr><td>4</td><td>    <span class="c2h-kword c2h-kword-float">float</span> <span class="c2h-identifier">capitalInicial</span> = <span class="c2h-val-flt">1000.0f</span>;</td></tr>
+        <tr><td>5</td><td>    <span class="c2h-kword c2h-kword-float">float</span> <span class="c2h-identifier">interesGanado</span> = <span class="c2h-identifier">capitalInicial</span> * <span class="c2h-identifier">TASA_ANUAL</span>;</td></tr>
+        <tr><td>6</td><td>    <span class="c2h-identifier c2h-fcallname">printf</span>(<span class="c2h-val-str">"Capital: %.2f\n"</span>, <span class="c2h-identifier">capitalInicial</span>);</td></tr>
+        <tr><td>7</td><td>    <span class="c2h-identifier c2h-fcallname">printf</span>(<span class="c2h-val-str">"Interés ganado: %.2f\n"</span>, <span class="c2h-identifier">interesGanado</span>);</td></tr>
+        <tr><td>8</td><td>    <span class="c2h-kword c2h-kword-return">return</span> <span class="c2h-val-int">0</span>;</td></tr>
+        <tr><td>9</td><td>}</td></tr>
+    </table></div></div>
+</details>
+
+<br>
+
+<h3>Ejercicio 5: Conversión Implícita (int a float)</h3>
+<p><strong>Instrucción:</strong> Realiza una suma entre una variable <strong>int</strong> y una variable <strong>float</strong>. Asigna el resultado a un <strong>float</strong> y comenta por qué se convierte automáticamente.</p>
+
+<div data-exercise="programming">
+    <script type="application/json" data-exercise-config>
+        {
+            "version": 1,
+            "exerciseId": "m2-401-e5-impl-int-float",
+            "lessonId": 2401,
+            "showTitle": false
+        }
+    </script>
+</div>
+
+<details>
+    <summary><strong>Solución en C</strong></summary>
+    <div class="c2h-code"><div class="c2h-code-inner"><table>
+        <tr><td>1</td><td><span class="c2h-directive">#include</span> <span class="c2h-val-str">&lt;stdio.h&gt;</span></td></tr>
+        <tr><td>2</td><td><span class="c2h-kword c2h-kword-int">int</span> <span class="c2h-identifier c2h-fdeclname">main</span>(<span class="c2h-kword c2h-kword-void">void</span>) {</td></tr>
+        <tr><td>3</td><td>    <span class="c2h-kword c2h-kword-int">int</span> <span class="c2h-identifier">numero_entero</span> = <span class="c2h-val-int">15</span>;</td></tr>
+        <tr><td>4</td><td>    <span class="c2h-kword c2h-kword-float">float</span> <span class="c2h-identifier">numero_decimal</span> = <span class="c2h-val-flt">2.5f</span>;</td></tr>
+        <tr><td>5</td><td>    <span class="c2h-comment">// Conversión implícita: el int se promociona a float en la suma.</span></td></tr>
+        <tr><td>6</td><td>    <span class="c2h-kword c2h-kword-float">float</span> <span class="c2h-identifier">resultado</span> = <span class="c2h-identifier">numero_entero</span> + <span class="c2h-identifier">numero_decimal</span>;</td></tr>
+        <tr><td>7</td><td>    <span class="c2h-identifier c2h-fcallname">printf</span>(<span class="c2h-val-str">"Resultado (15 + 2.5): %.1f\n"</span>, <span class="c2h-identifier">resultado</span>);</td></tr>
+        <tr><td>8</td><td>    <span class="c2h-kword c2h-kword-return">return</span> <span class="c2h-val-int">0</span>;</td></tr>
+        <tr><td>9</td><td>}</td></tr>
+    </table></div></div>
+</details>
+
+<br>
+
+<h3>Ejercicio 6: Conversión Implícita (char a int)</h3>
+<p><strong>Instrucción:</strong> Declara un <strong>char</strong> con el valor <strong>'1'</strong>. Súmale un <strong>int</strong> con el valor <strong>5</strong> y guarda el resultado en otro <strong>int</strong>. Imprime el resultado numérico (ASCII).</p>
+
+<div data-exercise="programming">
+    <script type="application/json" data-exercise-config>
+        {
+            "version": 1,
+            "exerciseId": "m2-401-e6-impl-char-int",
+            "lessonId": 2401,
+            "showTitle": false
+        }
+    </script>
+</div>
+
+<details>
+    <summary><strong>Solución en C</strong></summary>
+    <div class="c2h-code"><div class="c2h-code-inner"><table>
+        <tr><td>1</td><td><span class="c2h-directive">#include</span> <span class="c2h-val-str">&lt;stdio.h&gt;</span></td></tr>
+        <tr><td>2</td><td><span class="c2h-kword c2h-kword-int">int</span> <span class="c2h-identifier c2h-fdeclname">main</span>(<span class="c2h-kword c2h-kword-void">void</span>) {</td></tr>
+        <tr><td>3</td><td>    <span class="c2h-kword c2h-kword-char">char</span> <span class="c2h-identifier">caracter_uno</span> = <span class="c2h-val-char">'1'</span>; <span class="c2h-comment">// ASCII de '1' es 49</span></td></tr>
+        <tr><td>4</td><td>    <span class="c2h-kword c2h-kword-int">int</span> <span class="c2h-identifier">incremento</span> = <span class="c2h-val-int">5</span>;</td></tr>
+        <tr><td>5</td><td>    <span class="c2h-kword c2h-kword-int">int</span> <span class="c2h-identifier">valor_final</span> = <span class="c2h-identifier">caracter_uno</span> + <span class="c2h-identifier">incremento</span>;</td></tr>
+        <tr><td>6</td><td>    <span class="c2h-identifier c2h-fcallname">printf</span>(<span class="c2h-val-str">"Código ASCII de '1' + 5 es: %d\n"</span>, <span class="c2h-identifier">valor_final</span>);</td></tr>
+        <tr><td>7</td><td>    <span class="c2h-kword c2h-kword-return">return</span> <span class="c2h-val-int">0</span>;</td></tr>
+        <tr><td>8</td><td>}</td></tr>
+    </table></div></div>
+</details>
+
+<br>
+
+<h3>Ejercicio 7: División Entera (sin casting)</h3>
+<p><strong>Instrucción:</strong> Divide dos enteros (<strong>num1 = 10</strong>, <strong>num2 = 4</strong>) y guarda el resultado en un <strong>float</strong> para mostrar el truncamiento previo.</p>
+
+<div data-exercise="programming">
+    <script type="application/json" data-exercise-config>
+        {
+            "version": 1,
+            "exerciseId": "m2-401-e7-div-entera",
+            "lessonId": 2401,
+            "showTitle": false
+        }
+    </script>
+</div>
+
+<details>
+    <summary><strong>Solución en C</strong></summary>
+    <div class="c2h-code"><div class="c2h-code-inner"><table>
+        <tr><td>1</td><td><span class="c2h-directive">#include</span> <span class="c2h-val-str">&lt;stdio.h&gt;</span></td></tr>
+        <tr><td>2</td><td><span class="c2h-kword c2h-kword-int">int</span> <span class="c2h-identifier c2h-fdeclname">main</span>(<span class="c2h-kword c2h-kword-void">void</span>) {</td></tr>
+        <tr><td>3</td><td>    <span class="c2h-kword c2h-kword-int">int</span> <span class="c2h-identifier">num1</span> = <span class="c2h-val-int">10</span>;</td></tr>
+        <tr><td>4</td><td>    <span class="c2h-kword c2h-kword-int">int</span> <span class="c2h-identifier">num2</span> = <span class="c2h-val-int">4</span>;</td></tr>
+        <tr><td>5</td><td>    <span class="c2h-kword c2h-kword-float">float</span> <span class="c2h-identifier">resultado_entero</span> = <span class="c2h-identifier">num1</span> / <span class="c2h-identifier">num2</span>; <span class="c2h-comment">// 10/4 = 2 (entero) -> 2.00</span></td></tr>
+        <tr><td>6</td><td>    <span class="c2h-identifier c2h-fcallname">printf</span>(<span class="c2h-val-str">"Resultado de división entera (10 / 4): %.2f\n"</span>, <span class="c2h-identifier">resultado_entero</span>);</td></tr>
+        <tr><td>7</td><td>    <span class="c2h-kword c2h-kword-return">return</span> <span class="c2h-val-int">0</span>;</td></tr>
+        <tr><td>8</td><td>}</td></tr>
+    </table></div></div>
+</details>
+
+<br>
+
+<h3>Ejercicio 8: Casting para División (resultado decimal)</h3>
+<p><strong>Instrucción:</strong> Repite el ejercicio anterior, pero aplica <strong>casting</strong> a uno de los operandos para obtener un resultado decimal.</p>
+
+<div data-exercise="programming">
+    <script type="application/json" data-exercise-config>
+        {
+            "version": 1,
+            "exerciseId": "m2-401-e8-div-casting",
+            "lessonId": 2401,
+            "showTitle": false
+        }
+    </script>
+</div>
+
+<details>
+    <summary><strong>Solución en C</strong></summary>
+    <div class="c2h-code"><div class="c2h-code-inner"><table>
+        <tr><td>1</td><td><span class="c2h-directive">#include</span> <span class="c2h-val-str">&lt;stdio.h&gt;</span></td></tr>
+        <tr><td>2</td><td><span class="c2h-kword c2h-kword-int">int</span> <span class="c2h-identifier c2h-fdeclname">main</span>(<span class="c2h-kword c2h-kword-void">void</span>) {</td></tr>
+        <tr><td>3</td><td>    <span class="c2h-kword c2h-kword-int">int</span> <span class="c2h-identifier">num1</span> = <span class="c2h-val-int">10</span>;</td></tr>
+        <tr><td>4</td><td>    <span class="c2h-kword c2h-kword-int">int</span> <span class="c2h-identifier">num2</span> = <span class="c2h-val-int">4</span>;</td></tr>
+        <tr><td>5</td><td>    <span class="c2h-kword c2h-kword-float">float</span> <span class="c2h-identifier">resultado_decimal</span> = (<span class="c2h-kword c2h-kword-float">float</span>)<span class="c2h-identifier">num1</span> / <span class="c2h-identifier">num2</span>;</td></tr>
+        <tr><td>6</td><td>    <span class="c2h-identifier c2h-fcallname">printf</span>(<span class="c2h-val-str">"Resultado de división decimal (10 / 4): %.2f\n"</span>, <span class="c2h-identifier">resultado_decimal</span>);</td></tr>
+        <tr><td>7</td><td>    <span class="c2h-kword c2h-kword-return">return</span> <span class="c2h-val-int">0</span>;</td></tr>
+        <tr><td>8</td><td>}</td></tr>
+    </table></div></div>
+</details>
+
+<br>
+
+<h3>Ejercicio 9: Casting para pérdida de datos (truncamiento)</h3>
+<p><strong>Instrucción:</strong> Inicializa un <strong>double</strong> con <strong>99.98</strong>. Usa <strong>casting</strong> para asignarlo a una variable <strong>int</strong> y muestra la pérdida de la parte decimal.</p>
+
+<div data-exercise="programming">
+    <script type="application/json" data-exercise-config>
+        {
+            "version": 1,
+            "exerciseId": "m2-401-e9-cast-trunc",
+            "lessonId": 2401,
+            "showTitle": false
+        }
+    </script>
+</div>
+
+<details>
+    <summary><strong>Solución en C</strong></summary>
+    <div class="c2h-code"><div class="c2h-code-inner"><table>
+        <tr><td>1</td><td><span class="c2h-directive">#include</span> <span class="c2h-val-str">&lt;stdio.h&gt;</span></td></tr>
+        <tr><td>2</td><td><span class="c2h-kword c2h-kword-int">int</span> <span class="c2h-identifier c2h-fdeclname">main</span>(<span class="c2h-kword c2h-kword-void">void</span>) {</td></tr>
+        <tr><td>3</td><td>    <span class="c2h-kword c2h-kword-double">double</span> <span class="c2h-identifier">valor_decimal</span> = <span class="c2h-val-flt">99.98</span>;</td></tr>
+        <tr><td>4</td><td>    <span class="c2h-kword c2h-kword-int">int</span> <span class="c2h-identifier">valor_entero</span> = (<span class="c2h-kword c2h-kword-int">int</span>)<span class="c2h-identifier">valor_decimal</span>;</td></tr>
+        <tr><td>5</td><td>    <span class="c2h-identifier c2h-fcallname">printf</span>(<span class="c2h-val-str">"Valor double original: %.2lf\n"</span>, <span class="c2h-identifier">valor_decimal</span>);</td></tr>
+        <tr><td>6</td><td>    <span class="c2h-identifier c2h-fcallname">printf</span>(<span class="c2h-val-str">"Valor entero resultante (truncado): %d\n"</span>, <span class="c2h-identifier">valor_entero</span>);</td></tr>
+        <tr><td>7</td><td>    <span class="c2h-kword c2h-kword-return">return</span> <span class="c2h-val-int">0</span>;</td></tr>
+        <tr><td>8</td><td>}</td></tr>
+    </table></div></div>
+</details>
+
+<br>
+
+<h3>Ejercicio 10: Reasignación de variable vs uso de constante</h3>
+<p><strong>Instrucción:</strong> Declara una variable <strong>int stock</strong> inicializada a <strong>100</strong>. Define <strong>const int CANTIDAD_VENDIDA = 10;</strong>. Resta y reasigna el nuevo valor a stock. Imprime ambos valores.</p>
+
+<div data-exercise="programming">
+    <script type="application/json" data-exercise-config>
+        {
+            "version": 1,
+            "exerciseId": "m2-401-e10-stock-const",
+            "lessonId": 2401,
+            "showTitle": false
+        }
+    </script>
+</div>
+
+<details>
+    <summary><strong>Solución en C</strong></summary>
+    <div class="c2h-code"><div class="c2h-code-inner"><table>
+        <tr><td>1</td><td><span class="c2h-directive">#include</span> <span class="c2h-val-str">&lt;stdio.h&gt;</span></td></tr>
+        <tr><td>2</td><td><span class="c2h-kword c2h-kword-int">int</span> <span class="c2h-identifier c2h-fdeclname">main</span>(<span class="c2h-kword c2h-kword-void">void</span>) {</td></tr>
+        <tr><td>3</td><td>    <span class="c2h-kword c2h-kword-int">int</span> <span class="c2h-identifier">stock</span> = <span class="c2h-val-int">100</span>;</td></tr>
+        <tr><td>4</td><td>    <span class="c2h-kword c2h-kword-const">const</span> <span class="c2h-kword c2h-kword-int">int</span> <span class="c2h-identifier">CANTIDAD_VENDIDA</span> = <span class="c2h-val-int">10</span>;</td></tr>
+        <tr><td>5</td><td>    <span class="c2h-identifier">stock</span> = <span class="c2h-identifier">stock</span> - <span class="c2h-identifier">CANTIDAD_VENDIDA</span>;</td></tr>
+        <tr><td>6</td><td>    <span class="c2h-identifier c2h-fcallname">printf</span>(<span class="c2h-val-str">"Cantidad vendida (constante): %d\n"</span>, <span class="c2h-identifier">CANTIDAD_VENDIDA</span>);</td></tr>
+        <tr><td>7</td><td>    <span class="c2h-identifier c2h-fcallname">printf</span>(<span class="c2h-val-str">"Stock restante (variable reasignada): %d\n"</span>, <span class="c2h-identifier">stock</span>);</td></tr>
+        <tr><td>8</td><td>    <span class="c2h-kword c2h-kword-return">return</span> <span class="c2h-val-int">0</span>;</td></tr>
+        <tr><td>9</td><td>}</td></tr>
+    </table></div></div>
+</details>
+
+<br>
+
+<h3>Ejercicio 11: Múltiple conversión implícita</h3>
+<p><strong>Instrucción:</strong> Declara un <strong>char</strong> (<strong>'Z'</strong>), un <strong>int</strong> (100) y un <strong>double</strong> (0.5). Súmalos y guarda el resultado en un <strong>double</strong>. Explica en un comentario por qué el tipo final es double.</p>
+
+<div data-exercise="programming">
+    <script type="application/json" data-exercise-config>
+        {
+            "version": 1,
+            "exerciseId": "m2-401-e11-promociones",
+            "lessonId": 2401,
+            "showTitle": false
+        }
+    </script>
+</div>
+
+<details>
+    <summary><strong>Solución en C</strong></summary>
+    <div class="c2h-code"><div class="c2h-code-inner"><table>
+        <tr><td>1</td><td><span class="c2h-directive">#include</span> <span class="c2h-val-str">&lt;stdio.h&gt;</span></td></tr>
+        <tr><td>2</td><td><span class="c2h-kword c2h-kword-int">int</span> <span class="c2h-identifier c2h-fdeclname">main</span>(<span class="c2h-kword c2h-kword-void">void</span>) {</td></tr>
+        <tr><td>3</td><td>    <span class="c2h-kword c2h-kword-char">char</span> <span class="c2h-identifier">letra_z</span> = <span class="c2h-val-char">'Z'</span>;</td></tr>
+        <tr><td>4</td><td>    <span class="c2h-kword c2h-kword-int">int</span> <span class="c2h-identifier">numero_grande</span> = <span class="c2h-val-int">100</span>;</td></tr>
+        <tr><td>5</td><td>    <span class="c2h-kword c2h-kword-double">double</span> <span class="c2h-identifier">factor</span> = <span class="c2h-val-flt">0.5</span>;</td></tr>
+        <tr><td>6</td><td>    <span class="c2h-comment">// Promoción: char e int se convierten a double porque es el tipo más grande.</span></td></tr>
+        <tr><td>7</td><td>    <span class="c2h-kword c2h-kword-double">double</span> <span class="c2h-identifier">resultado</span> = <span class="c2h-identifier">letra_z</span> + <span class="c2h-identifier">numero_grande</span> + <span class="c2h-identifier">factor</span>;</td></tr>
+        <tr><td>8</td><td>    <span class="c2h-identifier c2h-fcallname">printf</span>(<span class="c2h-val-str">"Resultado final (double): %.1lf\n"</span>, <span class="c2h-identifier">resultado</span>);</td></tr>
+        <tr><td>9</td><td>    <span class="c2h-kword c2h-kword-return">return</span> <span class="c2h-val-int">0</span>;</td></tr>
+        <tr><td>10</td><td>}</td></tr>
+    </table></div></div>
+</details>
+
+<br>
+
+<h3>Ejercicio 12: Casting para forzar int</h3>
+<p><strong>Instrucción:</strong> Calcula el promedio de <strong>95.5f</strong> y <strong>80.0f</strong>. Usa <strong>casting</strong> para forzar que el resultado final se guarde como <strong>int</strong> (truncando decimales).</p>
+
+<div data-exercise="programming">
+    <script type="application/json" data-exercise-config>
+        {
+            "version": 1,
+            "exerciseId": "m2-401-e12-promedio-cast",
+            "lessonId": 2401,
+            "showTitle": false
+        }
+    </script>
+</div>
+
+<details>
+    <summary><strong>Solución en C</strong></summary>
+    <div class="c2h-code"><div class="c2h-code-inner"><table>
+        <tr><td>1</td><td><span class="c2h-directive">#include</span> <span class="c2h-val-str">&lt;stdio.h&gt;</span></td></tr>
+        <tr><td>2</td><td><span class="c2h-kword c2h-kword-int">int</span> <span class="c2h-identifier c2h-fdeclname">main</span>(<span class="c2h-kword c2h-kword-void">void</span>) {</td></tr>
+        <tr><td>3</td><td>    <span class="c2h-kword c2h-kword-float">float</span> <span class="c2h-identifier">nota1</span> = <span class="c2h-val-flt">95.5f</span>;</td></tr>
+        <tr><td>4</td><td>    <span class="c2h-kword c2h-kword-float">float</span> <span class="c2h-identifier">nota2</span> = <span class="c2h-val-flt">80.0f</span>;</td></tr>
+        <tr><td>5</td><td>    <span class="c2h-kword c2h-kword-float">float</span> <span class="c2h-identifier">promedio_real</span> = (<span class="c2h-identifier">nota1</span> + <span class="c2h-identifier">nota2</span>) / <span class="c2h-val-flt">2.0f</span>;</td></tr>
+        <tr><td>6</td><td>    <span class="c2h-kword c2h-kword-int">int</span> <span class="c2h-identifier">promedio_entero</span> = (<span class="c2h-kword c2h-kword-int">int</span>)<span class="c2h-identifier">promedio_real</span>;</td></tr>
+        <tr><td>7</td><td>    <span class="c2h-identifier c2h-fcallname">printf</span>(<span class="c2h-val-str">"Promedio real: %.2f\n"</span>, <span class="c2h-identifier">promedio_real</span>);</td></tr>
+        <tr><td>8</td><td>    <span class="c2h-identifier c2h-fcallname">printf</span>(<span class="c2h-val-str">"Promedio entero forzado: %d\n"</span>, <span class="c2h-identifier">promedio_entero</span>);</td></tr>
+        <tr><td>9</td><td>    <span class="c2h-kword c2h-kword-return">return</span> <span class="c2h-val-int">0</span>;</td></tr>
+        <tr><td>10</td><td>}</td></tr>
+    </table></div></div>
+</details>
+
+<br>
+
+<h3>Ejercicio 13: Definición mixta de constantes</h3>
+<p><strong>Instrucción:</strong> Define una constante de color usando <strong>#define</strong> y una constante de estado usando <strong>const int</strong>. Imprime ambas.</p>
+
+<div data-exercise="programming">
+    <script type="application/json" data-exercise-config>
+        {
+            "version": 1,
+            "exerciseId": "m2-401-e13-mixta-const",
+            "lessonId": 2401,
+            "showTitle": false
+        }
+    </script>
+</div>
+
+<details>
+    <summary><strong>Solución en C</strong></summary>
+    <div class="c2h-code"><div class="c2h-code-inner"><table>
+        <tr><td>1</td><td><span class="c2h-directive">#include</span> <span class="c2h-val-str">&lt;stdio.h&gt;</span></td></tr>
+        <tr><td>2</td><td><span class="c2h-directive">#define</span> <span class="c2h-identifier">COLOR_DEFAULT</span> <span class="c2h-val-str">"ROJO"</span></td></tr>
+        <tr><td>3</td><td><span class="c2h-kword c2h-kword-int">int</span> <span class="c2h-identifier c2h-fdeclname">main</span>(<span class="c2h-kword c2h-kword-void">void</span>) {</td></tr>
+        <tr><td>4</td><td>    <span class="c2h-kword c2h-kword-const">const</span> <span class="c2h-kword c2h-kword-int">int</span> <span class="c2h-identifier">CODIGO_ESTADO</span> = <span class="c2h-val-int">301</span>;</td></tr>
+        <tr><td>5</td><td>    <span class="c2h-identifier c2h-fcallname">printf</span>(<span class="c2h-val-str">"Mensaje de estado: %d\n"</span>, <span class="c2h-identifier">CODIGO_ESTADO</span>);</td></tr>
+        <tr><td>6</td><td>    <span class="c2h-identifier c2h-fcallname">printf</span>(<span class="c2h-val-str">"Color seleccionado: %s\n"</span>, <span class="c2h-identifier">COLOR_DEFAULT</span>);</td></tr>
+        <tr><td>7</td><td>    <span class="c2h-kword c2h-kword-return">return</span> <span class="c2h-val-int">0</span>;</td></tr>
+        <tr><td>8</td><td>}</td></tr>
+    </table></div></div>
+</details>
+
+<br>
+
+<h3>Ejercicio 14: Casting por uso de memoria (double a float)</h3>
+<p><strong>Instrucción:</strong> Inicializa un <strong>double</strong> grande (1234567.89). Haz <strong>casting</strong> a <strong>float</strong> y compara ambos valores para notar la posible pérdida de precisión.</p>
+
+<div data-exercise="programming">
+    <script type="application/json" data-exercise-config>
+        {
+            "version": 1,
+            "exerciseId": "m2-401-e14-double-float",
+            "lessonId": 2401,
+            "showTitle": false
+        }
+    </script>
+</div>
+
+<details>
+    <summary><strong>Solución en C</strong></summary>
+    <div class="c2h-code"><div class="c2h-code-inner"><table>
+        <tr><td>1</td><td><span class="c2h-directive">#include</span> <span class="c2h-val-str">&lt;stdio.h&gt;</span></td></tr>
+        <tr><td>2</td><td><span class="c2h-kword c2h-kword-int">int</span> <span class="c2h-identifier c2h-fdeclname">main</span>(<span class="c2h-kword c2h-kword-void">void</span>) {</td></tr>
+        <tr><td>3</td><td>    <span class="c2h-kword c2h-kword-double">double</span> <span class="c2h-identifier">valor_alta_precision</span> = <span class="c2h-val-flt">1234567.89</span>;</td></tr>
+        <tr><td>4</td><td>    <span class="c2h-kword c2h-kword-float">float</span> <span class="c2h-identifier">valor_baja_precision</span> = (<span class="c2h-kword c2h-kword-float">float</span>)<span class="c2h-identifier">valor_alta_precision</span>;</td></tr>
+        <tr><td>5</td><td>    <span class="c2h-identifier c2h-fcallname">printf</span>(<span class="c2h-val-str">"Double (8 bytes): %.10lf\n"</span>, <span class="c2h-identifier">valor_alta_precision</span>);</td></tr>
+        <tr><td>6</td><td>    <span class="c2h-identifier c2h-fcallname">printf</span>(<span class="c2h-val-str">"Float (4 bytes): %.10f\n"</span>, <span class="c2h-identifier">valor_baja_precision</span>);</td></tr>
+        <tr><td>7</td><td>    <span class="c2h-kword c2h-kword-return">return</span> <span class="c2h-val-int">0</span>;</td></tr>
+        <tr><td>8</td><td>}</td></tr>
+    </table></div></div>
+</details>
+
+<br>
+
+<h3>Ejercicio 15: Evaluación de expresión con casting</h3>
+<p><strong>Instrucción:</strong> Dadas <strong>a=5</strong>, <strong>b=2</strong>, <strong>c=3</strong>, calcula: $\text{resultado} = a + ((float)b / c)$ y guárdalo en un <strong>float</strong>. Imprime el resultado.</p>
+
+<div data-exercise="programming">
+    <script type="application/json" data-exercise-config>
+        {
+            "version": 1,
+            "exerciseId": "m2-401-e15-expresion-cast",
+            "lessonId": 2401,
+            "showTitle": false
+        }
+    </script>
+</div>
+
+<details>
+    <summary><strong>Solución en C</strong></summary>
+    <div class="c2h-code"><div class="c2h-code-inner"><table>
+        <tr><td>1</td><td><span class="c2h-directive">#include</span> <span class="c2h-val-str">&lt;stdio.h&gt;</span></td></tr>
+        <tr><td>2</td><td><span class="c2h-kword c2h-kword-int">int</span> <span class="c2h-identifier c2h-fdeclname">main</span>(<span class="c2h-kword c2h-kword-void">void</span>) {</td></tr>
+        <tr><td>3</td><td>    <span class="c2h-kword c2h-kword-int">int</span> <span class="c2h-identifier">a</span> = <span class="c2h-val-int">5</span>;</td></tr>
+        <tr><td>4</td><td>    <span class="c2h-kword c2h-kword-int">int</span> <span class="c2h-identifier">b</span> = <span class="c2h-val-int">2</span>;</td></tr>
+        <tr><td>5</td><td>    <span class="c2h-kword c2h-kword-int">int</span> <span class="c2h-identifier">c</span> = <span class="c2h-val-int">3</span>;</td></tr>
+        <tr><td>6</td><td>    <span class="c2h-kword c2h-kword-float">float</span> <span class="c2h-identifier">resultado</span> = <span class="c2h-identifier">a</span> + ((<span class="c2h-kword c2h-kword-float">float</span>)<span class="c2h-identifier">b</span> / <span class="c2h-identifier">c</span>);</td></tr>
+        <tr><td>7</td><td>    <span class="c2h-identifier c2h-fcallname">printf</span>(<span class="c2h-val-str">"Resultado (5 + 2.0/3.0): %.4f\n"</span>, <span class="c2h-identifier">resultado</span>);</td></tr>
+        <tr><td>8</td><td>    <span class="c2h-kword c2h-kword-return">return</span> <span class="c2h-val-int">0</span>;</td></tr>
+        <tr><td>9</td><td>}</td></tr>
+    </table></div></div>
+</details>
 
 
 </div>
