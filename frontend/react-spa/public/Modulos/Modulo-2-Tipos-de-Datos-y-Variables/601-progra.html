@@ -5,6 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Modulo 2 ejercicios 6</title>
     <link rel="stylesheet" crossorigin href="/assets/content-01sust.css">
+    <style>
+        .quiz-feedback {
+            font-weight: 700;
+        }
+
+        .quiz-summary {
+            font-weight: 700;
+        }
+    </style>
 </head>
 <body>
 <div class="main-content">
@@ -34,32 +43,131 @@ Inválido)</strong></th>
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">limite-maximo</td>
-<td style="text-align: left;"></td>
-<td style="text-align: left;"></td>
+<td style="text-align: left;">
+    <select data-quiz61="limite-maximo" aria-label="Clasificación para limite-maximo">
+        <option value="">—</option>
+        <option value="V">V</option>
+        <option value="I">I</option>
+    </select>
+</td>
+<td style="text-align: left;"><span class="quiz-feedback" data-quiz61-feedback="limite-maximo"></span></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">int</td>
-<td style="text-align: left;"></td>
-<td style="text-align: left;"></td>
+<td style="text-align: left;">
+    <select data-quiz61="int" aria-label="Clasificación para int">
+        <option value="">—</option>
+        <option value="V">V</option>
+        <option value="I">I</option>
+    </select>
+</td>
+<td style="text-align: left;"><span class="quiz-feedback" data-quiz61-feedback="int"></span></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">_contador</td>
-<td style="text-align: left;"></td>
-<td style="text-align: left;"></td>
+<td style="text-align: left;">
+    <select data-quiz61="_contador" aria-label="Clasificación para _contador">
+        <option value="">—</option>
+        <option value="V">V</option>
+        <option value="I">I</option>
+    </select>
+</td>
+<td style="text-align: left;"><span class="quiz-feedback" data-quiz61-feedback="_contador"></span></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">2da_oportunidad</td>
-<td style="text-align: left;"></td>
-<td style="text-align: left;"></td>
+<td style="text-align: left;">
+    <select data-quiz61="2da_oportunidad" aria-label="Clasificación para 2da_oportunidad">
+        <option value="">—</option>
+        <option value="V">V</option>
+        <option value="I">I</option>
+    </select>
+</td>
+<td style="text-align: left;"><span class="quiz-feedback" data-quiz61-feedback="2da_oportunidad"></span></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">EdadTotal</td>
-<td style="text-align: left;"></td>
-<td style="text-align: left;"></td>
+<td style="text-align: left;">
+    <select data-quiz61="EdadTotal" aria-label="Clasificación para EdadTotal">
+        <option value="">—</option>
+        <option value="V">V</option>
+        <option value="I">I</option>
+    </select>
+</td>
+<td style="text-align: left;"><span class="quiz-feedback" data-quiz61-feedback="EdadTotal"></span></td>
 </tr>
 </tbody>
 </table>
+
+<p>
+    <button type="button" id="btn-comprobar-61">Comprobar</button>
+    <span class="quiz-summary" id="quiz-61-resumen" aria-live="polite"></span>
+</p>
+
+<script>
+    (function () {
+        const KEY = {
+            'limite-maximo': {
+                classification: 'I',
+                rule: "Contiene el caracter especial - (guion medio), que es el operador de resta.",
+            },
+            'int': {
+                classification: 'I',
+                rule: 'Es una palabra reservada del lenguaje C.',
+            },
+            '_contador': {
+                classification: 'V',
+                rule: 'Comienza con _ y no rompe reglas sintácticas (aunque su uso se desaconseja para variables de usuario).',
+            },
+            '2da_oportunidad': {
+                classification: 'I',
+                rule: 'No puede comenzar con un dígito (2).',
+            },
+            'EdadTotal': {
+                classification: 'V',
+                rule: 'Es un nombre válido (letras), aunque no sigue la convención Snake Case de C.',
+            },
+        };
+
+        const button = document.getElementById('btn-comprobar-61');
+        if (!button) return;
+
+        button.addEventListener('click', function () {
+            let total = 0;
+            let correctas = 0;
+
+            Object.keys(KEY).forEach(function (name) {
+                const select = document.querySelector('select[data-quiz61="' + name + '"]');
+                const feedback = document.querySelector('span[data-quiz61-feedback="' + name + '"]');
+                if (!select || !feedback) return;
+
+                total += 1;
+
+                const chosen = select.value;
+                if (!chosen) {
+                    feedback.textContent = '— Sin responder';
+                    return;
+                }
+
+                const expected = KEY[name].classification;
+                if (chosen === expected) {
+                    correctas += 1;
+                    feedback.textContent = '✓ Correcto';
+                    return;
+                }
+
+                const regla = KEY[name].rule ? ' Regla: ' + KEY[name].rule : '';
+                feedback.textContent = '✗ Incorrecto. Correcta: ' + expected + '.' + regla;
+            });
+
+            const resumen = document.getElementById('quiz-61-resumen');
+            if (resumen) resumen.textContent = 'Resultado: ' + correctas + '/' + total + ' correctas.';
+        });
+    })();
+</script>
+
 <p><strong>Solución:</strong></p>
+<details>
 <table style="width:97%;">
 <colgroup>
 <col style="width: 22%" />
@@ -107,7 +215,7 @@ sigue la convención Snake Case de C.</td>
 </tr>
 </tbody>
 </table>
-
+</details>
 <br>
 
 <h3>Ejercicio 6.2: Refactorización (Claridad y Estilo)</h3>
