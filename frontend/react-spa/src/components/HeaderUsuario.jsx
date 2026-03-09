@@ -20,6 +20,13 @@ export function HeaderUsuario() {
 
         {isAuthenticated ? (
           <nav className="app-header-nav" aria-label="Navegación">
+            
+            {user?.rol === 'Administrador' || user?.rol === 'Super Administrador' && (
+              <Link to="/admin" style={{ fontWeight: 800, color: '#1a4e8a' }}>
+                Panel Admin
+              </Link>
+            )}
+
             <Link to="/cursos">Cursos</Link>
             <Link to="/configuracion">Configuración</Link>
           </nav>
@@ -33,8 +40,6 @@ export function HeaderUsuario() {
             </>
           ) : (
             <>
-              {// <span className="app-header-username">Invitado</span>
-              }
               <Link className="app-header-btn" to="/login">Login</Link>
             </>
           )}

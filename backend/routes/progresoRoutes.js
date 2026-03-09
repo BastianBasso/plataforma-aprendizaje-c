@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const progresoController = require('../controllers/progreso.c'); 
+const progresoController = require('../controllers/progresoController');            
+const { requireAuth } = require('../middlewares/auth');
 
 // Rutas para el progreso de Contenido (Barra de 'Next')
 // --------------------------------------------------------
@@ -14,7 +15,6 @@ router.get('/curso/:usuarioId/:cursoId', progresoController.obtenerProgresoCurso
 // Calcula y devuelve el porcentaje de un MÓDULO.
 router.get('/modulo/:usuarioId/:moduloId', progresoController.obtenerProgresoModulo);
 
-
 // Rutas para el Progreso de Evaluaciones (Quizzes y Respuestas)
 // --------------------------------------------------------
 
@@ -26,5 +26,7 @@ router.get('/acierto/:usuarioId/:leccionId', progresoController.obtenerPorcentaj
 
 // Obtiene todas las preguntas y alternativas de un quiz para mostrarlas en pantalla
 router.get('/quiz/alternativas/:leccionId', progresoController.obtenerPreguntaQuiz);
+
+router.get('/perfil/stats', requireAuth, progresoController.getGlobalStats);
 
 module.exports = router;
