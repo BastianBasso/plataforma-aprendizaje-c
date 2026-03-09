@@ -3,14 +3,16 @@ const app = express();
 const path = require("path");
 const session = require('express-session');
 
-// 1. Importar rutas modularizadas (Esto queda igual)
-const authRoutes = require('./routes/registro'); 
-const loginRoutes = require('./routes/login.r.js');
-const userRoutes = require('./routes/users.r.js');  
+// 1. Importar rutas modularizadas 
+const authRoutes = require('./routes/registroRoutes'); 
+const loginRoutes = require('./routes/loginRoutes');
+const userRoutes = require('./routes/usersRoutes');  
 const staticRoutes = require('./routes/staticRoutes'); 
-const progresoRoutes = require('./routes/progreso.r.js');
+const progresoRoutes = require('./routes/progresoRoutes'); 
 
-// 2. Configuración de sesión (Queda igual)
+const adminRoutes = require('./routes/adminRoutes'); 
+
+// 2. Configuración de sesión 
 app.use(session({
     secret: 'tu_secreto_muy_seguro_y_largo',
     resave: false, 
@@ -25,26 +27,24 @@ app.use(session({
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-// 3. Archivos estáticos (Queda igual)
+// 3. Archivos estáticos 
 const reactDist = path.join(__dirname, '../frontend/react-spa/dist');
 app.use(express.static(reactDist));
 app.use('/react', express.static(reactDist));
 
 // =========================================================
-// 4. MONTAR RUTAS (
+// 4. MONTAR RUTAS 
 // =========================================================
-
 
 app.use('/api', authRoutes);     // endpoints de registro
 app.use('/api', loginRoutes);    // endpoints de login/logout
 app.use('/api', userRoutes);     // endpoints de usuarios
-app.use('/api', progresoRoutes); // endpoints de progreso (este ya lo tenías bien)
+app.use('/api', progresoRoutes); // endpoints de progreso 
 
-// Nota sobre staticRoutes: Si estas son rutas que devuelven HTML antiguo
-// quizás quieras dejarlas como app.use('/', staticRoutes); 
-// Pero si devuelven datos JSON, déjalas con '/api' también.
+app.use('/api', adminRoutes); 
+
+
 app.use('/', staticRoutes); 
-// =========================================================
 
 app.get(/^\/react(\/.*)?$/, (req, res) => {
     res.sendFile(path.join(reactDist, 'index.html'));
