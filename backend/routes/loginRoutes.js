@@ -1,8 +1,9 @@
-const { requireAuth } = require('../middlewares/auth'); 
-
 const express = require('express');
 const router = express.Router();
-const authController = require('../controllers/login.c');
+const authController = require('../controllers/loginController');
+
+const { requireAuth } = require('../middlewares/auth'); 
+
 
 // Rutas de autenticación
 
@@ -21,6 +22,9 @@ router.get('/status', requireAuth, (req, res) => {
         }
     });
 });
+
+router.put('/perfil/password', requireAuth, authController.updatePassword);
+
 
 
 module.exports = router;

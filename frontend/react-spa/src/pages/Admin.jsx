@@ -1,181 +1,21 @@
 import { Shell } from '../components/Shell.jsx';
-import { useMemo, useState } from 'react';
+import { useMemo, useState, useEffect } from 'react';
 import { useSession } from '../context/SessionContext.jsx';
 
-
 function Icon({ name }) {
-  const common = {
-    width: 18,
-    height: 18,
-    viewBox: '0 0 24 24',
-    fill: 'none',
-    xmlns: 'http://www.w3.org/2000/svg',
-    'aria-hidden': true,
-    focusable: false,
-  };
+  const common = { width: 18, height: 18, viewBox: '0 0 24 24', fill: 'none', xmlns: 'http://www.w3.org/2000/svg', 'aria-hidden': true, focusable: false };
 
   switch (name) {
-    case 'users':
-      return (
-        <svg {...common}>
-          <path
-            d="M16 20v-1a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v1"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-          <path
-            d="M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-          <path
-            d="M22 20v-1a4 4 0 0 0-3-3.87"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-          <path
-            d="M19 3.13a4 4 0 0 1 0 7.75"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-        </svg>
-      );
-    case 'courses':
-      return (
-        <svg {...common}>
-          <path
-            d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-          <path
-            d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2Z"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-        </svg>
-      );
-    case 'message':
-      return (
-        <svg {...common}>
-          <path
-            d="M21 15a4 4 0 0 1-4 4H7l-4 3V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4v8Z"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-        </svg>
-      );
-    case 'settings':
-      return (
-        <svg {...common}>
-          <path
-            d="M12 15.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Z"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-          <path
-            d="M19.4 15a7.9 7.9 0 0 0 .1-2l2-1.5-2-3.5-2.4 1a8 8 0 0 0-1.7-1L15 3h-6L8.6 7.5a8 8 0 0 0-1.7 1l-2.4-1-2 3.5 2 1.5a7.9 7.9 0 0 0 .1 2l-2 1.5 2 3.5 2.4-1a8 8 0 0 0 1.7 1L9 21h6l.4-2.5a8 8 0 0 0 1.7-1l2.4 1 2-3.5-2-1.5Z"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-        </svg>
-      );
-    case 'faq':
-      return (
-        <svg {...common}>
-          <path
-            d="M12 18h.01"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-          <path
-            d="M9.09 9a3 3 0 1 1 4.91 2.36c-.9.63-1.5 1.28-1.5 2.64"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-          <path
-            d="M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-        </svg>
-      );
-    case 'filter':
-      return (
-        <svg {...common}>
-          <path
-            d="M3 4h18l-7 8v6l-4 2v-8L3 4Z"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-        </svg>
-      );
-    case 'search':
-      return (
-        <svg {...common}>
-          <path
-            d="M11 19a8 8 0 1 1 0-16 8 8 0 0 1 0 16Z"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-          <path
-            d="M21 21l-4.35-4.35"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-        </svg>
-      );
-    case 'plus':
-      return (
-        <svg {...common}>
-          <path
-            d="M12 5v14"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-          <path
-            d="M5 12h14"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-        </svg>
-      );
-    default:
-      return null;
+    case 'users': return <svg {...common}><path d="M16 20v-1a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v1" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /><path d="M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /><path d="M22 20v-1a4 4 0 0 0-3-3.87" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /><path d="M19 3.13a4 4 0 0 1 0 7.75" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>;
+    case 'courses': return <svg {...common}><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>;
+    case 'message': return <svg {...common}><path d="M21 15a4 4 0 0 1-4 4H7l-4 3V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4v8Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>;
+    case 'settings': return <svg {...common}><path d="M12 15.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /><path d="M19.4 15a7.9 7.9 0 0 0 .1-2l2-1.5-2-3.5-2.4 1a8 8 0 0 0-1.7-1L15 3h-6L8.6 7.5a8 8 0 0 0-1.7 1l-2.4-1-2 3.5 2 1.5a7.9 7.9 0 0 0 .1 2l-2 1.5 2 3.5 2.4-1a8 8 0 0 0 1.7 1L9 21h6l.4-2.5a8 8 0 0 0 1.7-1l2.4 1 2-3.5-2-1.5Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>;
+    case 'faq': return <svg {...common}><path d="M12 18h.01" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /><path d="M9.09 9a3 3 0 1 1 4.91 2.36c-.9.63-1.5 1.28-1.5 2.64" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /><path d="M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>;
+    case 'filter': return <svg {...common}><path d="M3 4h18l-7 8v6l-4 2v-8L3 4Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>;
+    case 'search': return <svg {...common}><path d="M11 19a8 8 0 1 1 0-16 8 8 0 0 1 0 16Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /><path d="M21 21l-4.35-4.35" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>;
+    case 'edit': return <svg {...common}><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>;
+    case 'trash': return <svg {...common}><path d="M3 6h18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>;
+    default: return null;
   }
 }
 
@@ -183,111 +23,55 @@ export function Admin() {
   const { user, status } = useSession();
   const [query, setQuery] = useState('');
   const [activeSection, setActiveSection] = useState('usuarios');
+  
+  const [users, setUsers] = useState([]);
+  const [loadingUsers, setLoadingUsers] = useState(true);
 
-  const users = useMemo(
-    () => [
-      {
-        id: 1,
-        name: 'Ann Culhane',
-        role: 'Estudiante',
-        email: 'annculhane@gmail.com',
-        progress: 60,
-        lastConnection: '2 semanas',
-      },
-      {
-        id: 2,
-        name: 'Ahmad Rosser',
-        role: 'Estudiante',
-        email: 'ahmadrosser@gmail.com',
-        progress: 60,
-        lastConnection: '1 semana',
-      },
-      {
-        id: 3,
-        name: 'Zain Calzoni',
-        role: 'Estudiante',
-        email: 'zaincalzoni@gmail.com',
-        progress: 50,
-        lastConnection: '3 días',
-      },
-      {
-        id: 4,
-        name: 'Leo Stanton',
-        role: 'Estudiante',
-        email: 'leostanton@gmail.com',
-        progress: 30,
-        lastConnection: '4 horas',
-      },
-      {
-        id: 5,
-        name: 'Kaiya Vetrov',
-        role: 'Estudiante',
-        email: 'kaiyavetrov@gmail.com',
-        progress: 20,
-        lastConnection: '1 mes',
-      },
-      {
-        id: 6,
-        name: 'Ryan Westervelt',
-        role: 'Estudiante',
-        email: 'ryanwestervelt@gmail.com',
-        progress: 30,
-        lastConnection: '1 año',
-      },
-      {
-        id: 7,
-        name: 'Corey Stanton',
-        role: 'Estudiante',
-        email: 'coreystanton@gmail.com',
-        progress: 15,
-        lastConnection: '2 días',
-      },
-      {
-        id: 8,
-        name: 'Adison Aminoff',
-        role: 'Estudiante',
-        email: 'adisonaminoff@gmail.com',
-        progress: 90,
-        lastConnection: '1 día',
-      },
-      {
-        id: 9,
-        name: 'Alfredo Aminoff',
-        role: 'Estudiante',
-        email: 'alfredoaminoff@gmail.com',
-        progress: 100,
-        lastConnection: '2 horas',
-      },
-    ],
-    [],
-  );
+  const [editingUser, setEditingUser] = useState(null);
+  const [newRole, setNewRole] = useState('');
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 7;
+
+  useEffect(() => {
+    if ((user?.rol === 'Administrador' || user?.rol === 'Super Administrador') && activeSection === 'usuarios') {
+      setLoadingUsers(true);
+      fetch('/api/admin/usuarios')
+        .then(res => res.json())
+        .then(data => {
+          if (data.success) {
+            setUsers(data.users);
+          }
+        })
+        .catch(err => console.error("Error cargando usuarios:", err))
+        .finally(() => setLoadingUsers(false));
+    }
+  }, [user?.rol, activeSection]);
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [query]);
 
   const filteredUsers = useMemo(() => {
     const q = String(query || '').trim().toLowerCase();
     if (!q) return users;
     return users.filter((u) => {
-      return (
-        u.name.toLowerCase().includes(q) ||
-        u.email.toLowerCase().includes(q) ||
-        u.role.toLowerCase().includes(q)
-      );
+      return (u.name || '').toLowerCase().includes(q);
     });
   }, [query, users]);
 
+  const totalPages = Math.ceil(filteredUsers.length / itemsPerPage) || 1;
+  const paginatedUsers = filteredUsers.slice(
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage
+  );
+
   const pageTitle = useMemo(() => {
     switch (activeSection) {
-      case 'usuarios':
-        return 'Usuarios';
-      case 'cursos':
-        return 'Cursos edición';
-      case 'mensajes':
-        return 'Mensajes';
-      case 'configuracion':
-        return 'Configuración';
-      case 'faq':
-        return 'FAQ';
-      default:
-        return 'Administración';
+      case 'usuarios': return 'Usuarios';
+      case 'cursos': return 'Cursos edición';
+      case 'configuracion': return 'Configuración';
+      default: return 'Administración';
     }
   }, [activeSection]);
 
@@ -297,442 +81,374 @@ export function Admin() {
     return 'low';
   }
 
+  function formatDate(dateString) {
+    if (!dateString) return 'Nunca';
+    const date = new Date(dateString);
+    return date.toLocaleDateString('es-ES', { day: '2-digit', month: 'short', year: 'numeric' });
+  }
+
+  const openEditModal = (u) => {
+    setEditingUser(u);
+    setNewRole(u.role);
+  };
+
+  const closeEditModal = () => {
+    setEditingUser(null);
+    setNewRole('');
+  };
+
+// Reemplaza handleSaveRole por esta:
+  const handleSaveRole = async () => {
+    try {
+      const response = await fetch(`/api/admin/usuarios/${editingUser.id}/rol`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ newRole })
+      });
+      
+      const data = await response.json();
+      
+      if (response.ok && data.success) {
+        // Actualizamos la tabla local sin recargar la página
+        setUsers(users.map(u => u.id === editingUser.id ? { ...u, role: newRole } : u));
+        closeEditModal();
+      } else {
+        alert(data.message || 'Error al cambiar el rol');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      alert('Error de conexión con el servidor');
+    }
+  };
+
+  const handleDeleteUser = async (u) => {
+    const confirmDelete = window.confirm(`¿Estás seguro que deseas eliminar permanentemente a ${u.name}? Esta acción no se puede deshacer.`);
+    
+    if (confirmDelete) {
+      try {
+        const response = await fetch(`/api/admin/usuarios/${u.id}`, {
+          method: 'DELETE'
+        });
+        
+        const data = await response.json();
+        
+        if (response.ok && data.success) {
+          setUsers(users.filter(user => user.id !== u.id));
+        } else {
+          alert(data.message || 'Error al eliminar usuario');
+        }
+      } catch (error) {
+        console.error('Error:', error);
+        alert('Error de conexión con el servidor');
+      }
+    }
+  };
+
+  if (status === 'loading') return null; 
+  
+  if (user?.rol !== 'Administrador' && user?.rol !== 'Super Administrador') {
+    return (
+      <Shell>
+        <main className="hub" style={{ textAlign: 'center', padding: '100px 20px' }}>
+          <h1 style={{ color: '#8a1a1a' }}>Acceso Denegado</h1>
+          <p>No tienes los permisos necesarios para ver esta página.</p>
+        </main>
+      </Shell>
+    );
+  }
+
   return (
     <Shell>
       <main className="hub hub-admin" aria-label="Administración">
         <style>{`
-          /* Estilos locales para /admin (scoped a .hub-admin) */
-          .hub.hub-admin {
-            max-width: 1180px;
-            margin: 40px auto;
-            padding: 28px;
+          /* REGLA DE ORO PARA EVITAR DESBORDES */
+          .hub-admin *, .hub-admin *::before, .hub-admin *::after {
+            box-sizing: border-box !important;
           }
 
-          .hub-admin .panel {
-            display: grid;
-            grid-template-columns: 280px 1fr;
-            gap: 18px;
-            align-items: start;
+          .hub.hub-admin { 
+            max-width: 1180px; 
+            margin: 40px auto; 
+            padding: 32px; 
+            background: #d1e3f7; 
+            border-radius: 24px; 
+            box-shadow: 0 8px 32px rgba(26, 78, 138, 0.12); 
+            width: 100%;
           }
           
-          /* Card base (alineado a Configuracion.jsx) */
-          .hub-admin .generic-card {
-            width: 85%;
-            background: #fff;
-            border: 2px solid #c4c5c5;
-            border-radius: 18px;
-            padding: 18px 20px;
-            box-shadow: 0 2px 12px rgba(60, 120, 200, 0.08);
+          /* LAYOUT GRID BLINDADO (No más solapamientos) */
+          .hub-admin .admin-layout-grid { 
+            display: grid !important; 
+            grid-template-columns: 280px minmax(0, 1fr) !important; 
+            gap: 24px !important; 
+            align-items: start !important; 
+            width: 100% !important; 
           }
           
-          .hub-admin [aria-label="Encabezado"]{
-            width: 88.8%;
+          .hub-admin .admin-sidebar-col { 
+            position: sticky !important; 
+            top: 20px !important; 
+            display: flex !important; 
+            flex-direction: column !important; 
+            gap: 16px !important; 
+            z-index: 10 !important; 
           }
           
-          .hub-admin .title {
-            margin: 0 0 6px;
-            color: #1a4e8a;
-            font-weight: 800;
-            font-size: 2rem;
-            letter-spacing: 0.3px;
-            text-align: left;
+          .hub-admin .admin-main-col { 
+            display: flex !important; 
+            flex-direction: column !important; 
+            gap: 16px !important; 
+            min-width: 0 !important; /* Vital para que la tabla no rompa el grid */
           }
+          
+          .hub-admin .generic-card { width: 100%; background: #ffffff; border: 2px solid #c9def5; border-radius: 18px; padding: 22px 24px; box-shadow: 0 4px 16px rgba(60, 120, 200, 0.08); position: relative; overflow: hidden; }
+          .hub-admin [aria-label="Encabezado"] { margin-bottom: 24px; z-index: 1; }
+          
+          .hub-admin .title { margin: 0 0 6px; color: #1a4e8a; font-weight: 900; font-size: 2.2rem; letter-spacing: 0.3px; text-align: left; }
+          .hub-admin .subtitle { margin: 0; color: #405268; font-weight: 600; text-align: left; }
 
-          .hub-admin .subtitle {
-            margin: 0;
-            color: #222e3a;
-            opacity: 0.85;
-            text-align: left;
+          .hub-admin .profile { display: grid; grid-template-columns: 64px 1fr; gap: 14px; align-items: center; }
+          .hub-admin .avatar { width: 64px; height: 64px; border-radius: 999px; background: radial-gradient(circle at 30% 30%, #4f9aff 0%, #1a4e8a 100%); box-shadow: 0 6px 16px rgba(26, 78, 138, 0.25); border: 2px solid #ffffff; flex-shrink: 0;}
+          .hub-admin .profile-name { margin: 0; color: #111; font-weight: 900; text-align: left; line-height: 1.1; font-size: 1.1rem; }
+          .hub-admin .profile-role { margin: 4px 0 0; color: #1e7035; font-weight: 800; text-align: left; font-size: 0.9rem; }
+
+          .hub-admin .nav { display: grid; gap: 10px; }
+          .hub-admin .navbtn { width: 100%; display: flex; align-items: center; justify-content: flex-start; gap: 12px; padding: 12px 14px; border-radius: 12px; border: 1px solid transparent; background: transparent; color: #405268; font-weight: 800; cursor: pointer; text-align: left; transition: all 0.2s ease;}
+          .hub-admin .navbtn:hover { background: #f0f7ff; color: #1a4e8a; }
+          .hub-admin .navbtn.active { background: #1a4e8a; color: #ffffff; box-shadow: 0 4px 12px rgba(26, 78, 138, 0.3); }
+
+          .hub-admin .toolbar { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; width: 100%;}
+          .hub-admin .toolbar-left { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; width: 100%; }
+          .hub-admin .iconbtn { width: 44px; height: 44px; border-radius: 12px; border: 2px solid #e3eaf2; background: #f7fbff; display: inline-flex; align-items: center; justify-content: center; cursor: pointer; color: #1a4e8a; flex-shrink: 0; transition: background 0.2s;}
+          .hub-admin .iconbtn:hover { background: #eaf4ff; border-color: #c9def5;}
+          
+          /* BUSCADOR BLINDADO PARA EVITAR QUE EL ICONO MONTE AL TEXTO */
+          .hub-admin .admin-search-box { 
+            display: flex; 
+            align-items: center; 
+            gap: 10px; 
+            border: 2px solid #e3eaf2; 
+            background: #f7fbff; 
+            border-radius: 12px; 
+            padding: 0 14px; 
+            height: 44px; 
+            flex: 1 1 100%; 
+            min-width: 200px;
+            transition: border-color 0.2s;
           }
+          .hub-admin .admin-search-box svg { flex-shrink: 0; width: 18px; height: 18px; }
+          .hub-admin .admin-search-box:focus-within { border-color: #1a4e8a; background: #ffffff; }
+          .hub-admin .admin-search-box input { border: none !important; outline: none !important; font-size: 1rem; width: 100%; background: transparent !important; color: #111111 !important; font-weight: 600;}
+          .hub-admin .admin-search-box input::placeholder { color: #8a9ba8 !important; font-weight: 500;}
 
-          /* Sidebar */
-          .hub-admin .sidebar {
-            position: sticky;
-            top: 18px;
-            display: grid;
-            gap: 12px;
-          }
+          .hub-admin .tablewrap { overflow-x: auto; border-radius: 16px; border: 2px solid #e3f0ff; background: #ffffff; width: 100%;}
+          .hub-admin table { width: 100%; border-collapse: collapse; background: transparent; min-width: 700px; }
+          .hub-admin thead th { text-align: left; padding: 16px 14px; font-size: 0.82rem; letter-spacing: 0.08em; text-transform: uppercase; color: #1a4e8a; background: #eaf4ff; border-bottom: 2px solid #d1e3f7; font-weight: 900;}
+          .hub-admin tbody td { padding: 14px 14px; border-bottom: 1px solid #eef2f7; color: #222e3a; font-weight: 700; vertical-align: middle; }
+          .hub-admin tbody tr:nth-child(even) td { background: #fafcff; }
+          .hub-admin tbody tr:hover td { background: #f0f7ff; }
+          
+          .hub-admin .muted { font-weight: 800; color: #405268; opacity: 0.85; }
+          .hub-admin .pill { display: inline-flex; align-items: center; padding: 6px 12px; border-radius: 999px; background: #eaf4ff; color: #1a4e8a; font-weight: 800; font-size: 0.85rem; border: 1px solid #c9def5;}
+          .hub-admin .pct { font-variant-numeric: tabular-nums; font-weight: 900; font-size: 1.05rem;}
+          .hub-admin .pct.good { color: #1e7035; } 
+          .hub-admin .pct.mid { color: #f59e0b; } 
+          .hub-admin .pct.low { color: #b42318; } 
+          
+          .hub-admin .footerRow { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; padding: 12px 4px 0; }
+          .hub-admin .mini { color: #1a4e8a; font-weight: 800; margin: 0; font-size: 0.95rem;}
 
-          .hub-admin .profile {
-            display: grid;
-            grid-template-columns: 64px 1fr;
-            gap: 12px;
-            align-items: center;
-          }
+          .hub-admin .pagination { display: flex; justify-content: flex-end; align-items: center; gap: 15px; padding-top: 20px; margin-top: 10px; border-top: 2px solid #eaf4ff;}
+          .hub-admin .pagination button { background: #ffffff; border: 2px solid #c9def5; padding: 8px 16px; border-radius: 10px; font-weight: 800; color: #1a4e8a; cursor: pointer; transition: all 0.2s;}
+          .hub-admin .pagination button:hover:not(:disabled) { background: #1a4e8a; color: #ffffff; border-color: #1a4e8a;}
+          .hub-admin .pagination button:disabled { opacity: 0.5; cursor: not-allowed; color: #8a9ba8; border-color: #e3eaf2; background: #f7fbff;}
+          .hub-admin .page-info { font-size: 0.95rem; font-weight: 800; color: #1a4e8a; }
 
-          .hub-admin .avatar {
-            width: 64px;
-            height: 64px;
-            border-radius: 999px;
-            background: radial-gradient(circle at 30% 30%, #b3d8ff 0%, #1a4e8a 100%);
-            box-shadow: 0 10px 22px rgba(26, 78, 138, 0.18);
-            border: 2px solid rgba(26, 78, 138, 0.25);
-          }
+          .hub-admin .action-btn { background: #f7fbff; border: 1px solid #e3eaf2; cursor: pointer; padding: 8px; border-radius: 8px; transition: all 0.2s; display: inline-flex; align-items: center; justify-content: center; }
+          .hub-admin .action-btn svg { width: 18px; height: 18px; flex-shrink: 0;}
+          .hub-admin .action-btn.edit { color: #1a4e8a; }
+          .hub-admin .action-btn.edit:hover { background: #1a4e8a; color: #ffffff; border-color: #1a4e8a;}
+          .hub-admin .action-btn.delete { color: #b42318; }
+          .hub-admin .action-btn.delete:hover { background: #b42318; color: #ffffff; border-color: #b42318;}
 
-          .hub-admin .profile-name {
-            margin: 0;
-            color: #111;
-            font-weight: 900;
-            text-align: left;
-            line-height: 1.1;
-          }
+          .hub-admin .modal-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(4px); display: flex; align-items: center; justify-content: center; z-index: 1000; }
+          .hub-admin .modal-box { background: #ffffff; width: 420px; border-radius: 20px; box-shadow: 0 20px 40px rgba(0,0,0,0.25); padding: 30px; animation: slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1); border: 2px solid #eaf4ff;}
+          @keyframes slideUp { from { opacity: 0; transform: translateY(30px) scale(0.95); } to { opacity: 1; transform: translateY(0) scale(1); } }
+          .hub-admin .modal-header { font-size: 1.6rem; color: #1a4e8a; font-weight: 900; margin-top: 0; margin-bottom: 20px; border-bottom: 2px solid #eaf4ff; padding-bottom: 12px; }
+          .hub-admin .modal-label { display: block; font-size: 0.95rem; color: #1a4e8a; font-weight: 800; margin-bottom: 8px; }
+          .hub-admin .modal-select { width: 100%; padding: 12px; border-radius: 10px; border: 2px solid #c9def5; outline: none; font-size: 1rem; font-weight: 700; color: #111; margin-bottom: 24px; background-color: #f7fbff; transition: border-color 0.2s;}
+          .hub-admin .modal-select:focus { border-color: #1a4e8a; }
+          .hub-admin .modal-actions { display: flex; justify-content: flex-end; gap: 12px; }
+          .hub-admin .btn-modal { padding: 10px 20px; border-radius: 10px; font-weight: 800; cursor: pointer; border: none; transition: transform 0.1s, opacity 0.2s; }
+          .hub-admin .btn-modal.cancel { background: #eef2f7; color: #405268; }
+          .hub-admin .btn-modal.save { background: #1e7035; color: #fff; box-shadow: 0 4px 12px rgba(30, 112, 53, 0.25);} 
+          .hub-admin .btn-modal:hover { opacity: 0.9; transform: translateY(-1px);}
 
-          .hub-admin .profile-role {
-            margin: 2px 0 0;
-            color: #1a4e8a;
-            font-weight: 800;
-            opacity: 0.95;
-            text-align: left;
-          }
-
-          .hub-admin .nav {
-            display: grid;
-            gap: 8px;
-          }
-
-          .hub-admin .navbtn {
-            width: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: flex-start;
-            gap: 10px;
-            padding: 10px 12px;
-            border-radius: 12px;
-            border: 1px solid #e3eaf2;
-            background: #f7fbff;
-            color: #14385f;
-            font-weight: 900;
-            cursor: pointer;
-            text-align: left;
-          }
-
-          .hub-admin .navbtn:hover {
-            border-color: rgba(26, 78, 138, 0.35);
-            box-shadow: 0 0 0 3px rgba(26, 78, 138, 0.10);
-          }
-
-          .hub-admin .navbtn.active {
-            background: #eaf6ff;
-            border-color: rgba(26, 78, 138, 0.45);
-            color: #1a4e8a;
-          }
-
-          /* Content */
-          .hub-admin .content {
-            display: grid;
-            gap: 12px;
-          }
-
-          .hub-admin .toolbar {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 12px;
-            flex-wrap: wrap;
-          }
-
-          .hub-admin .toolbar-left {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            flex-wrap: wrap;
-          }
-
-          .hub-admin .iconbtn {
-            width: 40px;
-            height: 40px;
-            border-radius: 12px;
-            border: 1px solid #e3eaf2;
-            background: #fff;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            color: #1a4e8a;
-          }
-
-          .hub-admin .search {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            border: 1px solid #d7dee9;
-            background: #fff;
-            border-radius: 12px;
-            padding: 0 10px;
-            height: 40px;
-            min-width: min(420px, 72vw);
-          }
-
-          .hub-admin .search input {
-            border: 0;
-            outline: none;
-            font-size: 0.98rem;
-            width: 100%;
-            background: transparent;
-          }
-
-          .hub-admin .primary {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            border-radius: 12px;
-            border: 0;
-            padding: 10px 14px;
-            background: #1a4e8a;
-            color: #fff;
-            font-weight: 900;
-            cursor: pointer;
-            height: 40px;
-          }
-
-          .hub-admin .primary:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-          }
-
-          /* Table */
-          .hub-admin .tablewrap {
-            overflow: auto;
-            border-radius: 16px;
-            border: 1px solid #e3eaf2;
-          }
-
-          .hub-admin table {
-            width: 100%;
-            border-collapse: collapse;
-            background: #fff;
-            min-width: 760px;
-          }
-
-          .hub-admin thead th {
-            text-align: left;
-            padding: 12px 12px;
-            font-size: 0.78rem;
-            letter-spacing: 0.06em;
-            text-transform: uppercase;
-            color: #405268;
-            background: #f7fbff;
-            border-bottom: 1px solid #e3eaf2;
-            white-space: nowrap;
-          }
-
-          .hub-admin tbody td {
-            padding: 12px 12px;
-            border-bottom: 1px solid #eef2f7;
-            color: #111;
-            font-weight: 700;
-            vertical-align: middle;
-          }
-
-          .hub-admin tbody tr:hover td {
-            background: rgba(234, 246, 255, 0.55);
-          }
-
-          .hub-admin .muted {
-            font-weight: 800;
-            color: #223;
-            opacity: 0.78;
-          }
-
-          .hub-admin .pill {
-            display: inline-flex;
-            align-items: center;
-            padding: 4px 10px;
-            border-radius: 999px;
-            background: rgba(26, 78, 138, 0.08);
-            color: #1a4e8a;
-            font-weight: 900;
-            font-size: 0.88rem;
-            white-space: nowrap;
-          }
-
-          .hub-admin .pct {
-            font-variant-numeric: tabular-nums;
-            font-weight: 1000;
-          }
-
-          .hub-admin .pct.good { color: #0f7a3d; }
-          .hub-admin .pct.mid { color: #1a4e8a; }
-          .hub-admin .pct.low { color: #b42318; }
-
-          .hub-admin .footerRow {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 12px;
-            flex-wrap: wrap;
-            padding: 10px 2px 0;
-          }
-
-          .hub-admin .mini {
-            color: #222e3a;
-            opacity: 0.8;
-            font-weight: 800;
-            margin: 0;
-          }
-
-          /* Responsive */
-          @media (max-width: 980px) {
-            .hub.hub-admin {
-              padding: 18px 14px;
-              margin: 18px auto;
-            }
-
-            .hub-admin .panel {
-              grid-template-columns: 1fr;
-            }
-
-            .hub-admin .sidebar {
-              position: static;
-            }
-
-            .hub-admin .search {
-              min-width: 100%;
-            }
+          @media (max-width: 980px) { 
+            .hub.hub-admin { padding: 20px; margin: 20px; border-radius: 16px;} 
+            .hub-admin .admin-layout-grid { grid-template-columns: 1fr !important; } 
+            .hub-admin .admin-sidebar-col { position: relative !important; top: 0 !important; } 
           }
         `}</style>
 
+        {editingUser && (
+          <div className="modal-overlay" onClick={closeEditModal}>
+            <div className="modal-box" onClick={(e) => e.stopPropagation()}>
+              <h2 className="modal-header">Editar Perfil</h2>
+              <div style={{ marginBottom: '20px', padding: '12px', background: '#f8fbff', borderRadius: '12px', border: '1px solid #eaf4ff' }}>
+                <span className="modal-label" style={{marginBottom: '4px'}}>Usuario seleccionado</span>
+                <div style={{ fontWeight: '900', color: '#111', fontSize: '1.1rem' }}>{editingUser.name}</div>
+                <div style={{ fontSize: '0.9rem', color: '#405268', fontWeight: '600' }}>{editingUser.email}</div>
+              </div>
+              <label className="modal-label">Asignar Rol</label>
+              <select 
+                className="modal-select" 
+                value={newRole} 
+                onChange={(e) => setNewRole(e.target.value)}
+                disabled={user?.rol !== 'Super Administrador' && editingUser.role === 'Super Administrador'}
+              >
+                <option value="Usuario">Usuario (Estudiante)</option>
+                {user?.rol === 'Super Administrador' && (
+                  <>
+                    <option value="Administrador">Administrador</option>
+                    <option value="Super Administrador">Super Administrador</option>
+                  </>
+                )}
+              </select>
+              <div className="modal-actions">
+                <button className="btn-modal cancel" onClick={closeEditModal}>Cancelar</button>
+                <button className="btn-modal save" onClick={handleSaveRole}>Guardar Cambios</button>
+              </div>
+            </div>
+          </div>
+        )}
+
         <section className="generic-card" aria-label="Encabezado">
-          <h1 className="title">Administración de la página</h1>
-          <p className="subtitle">
-            Gestiona usuarios y contenido. Esta vista es UI lista para conectar APIs.
-          </p>
+          <h1 className="title">Administración de la plataforma</h1>
+          <p className="subtitle">Supervisa el rendimiento y gestiona los roles de acceso del sistema.</p>
         </section>
 
-        <div className="panel">
-          <aside className="sidebar" aria-label="Menú admin">
+        <div className="admin-layout-grid">
+          <aside className="admin-sidebar-col" aria-label="Menú admin">
             <section className="generic-card" aria-label="Perfil">
               <div className="profile">
                 <div className="avatar" />
                 <div>
                   <p className="profile-name">{user?.username ?? 'Admin'}</p>
                   <p className="profile-role">
-                    {status === 'authenticated' ? (user?.role ?? 'Administrador') : 'Invitado'}
+                    {status === 'authenticated' ? (user?.rol ?? 'Administrador') : 'Invitado'}
                   </p>
                 </div>
               </div>
             </section>
-
             <section className="generic-card" aria-label="Navegación">
               <div className="nav">
-                <button
-                  type="button"
-                  className={`navbtn ${activeSection === 'usuarios' ? 'active' : ''}`}
-                  onClick={() => setActiveSection('usuarios')}
-                >
-                  <Icon name="users" /> Usuarios
-                </button>
-                <button
-                  type="button"
-                  className={`navbtn ${activeSection === 'cursos' ? 'active' : ''}`}
-                  onClick={() => setActiveSection('cursos')}
-                >
-                  <Icon name="courses" /> Cursos edición
-                </button>
-                <button
-                  type="button"
-                  className={`navbtn ${activeSection === 'mensajes' ? 'active' : ''}`}
-                  onClick={() => setActiveSection('mensajes')}
-                >
-                  <Icon name="message" /> Mensajes
-                </button>
-                <button
-                  type="button"
-                  className={`navbtn ${activeSection === 'configuracion' ? 'active' : ''}`}
-                  onClick={() => setActiveSection('configuracion')}
-                >
-                  <Icon name="settings" /> Configuración
-                </button>
-                <button
-                  type="button"
-                  className={`navbtn ${activeSection === 'faq' ? 'active' : ''}`}
-                  onClick={() => setActiveSection('faq')}
-                >
-                  <Icon name="faq" /> FAQ
-                </button>
+                <button type="button" className={`navbtn ${activeSection === 'usuarios' ? 'active' : ''}`} onClick={() => setActiveSection('usuarios')}><Icon name="users" /> Usuarios</button>
+                <button type="button" className={`navbtn ${activeSection === 'cursos' ? 'active' : ''}`} onClick={() => setActiveSection('cursos')}><Icon name="courses" /> Cursos edición</button>
+                <button type="button" className={`navbtn ${activeSection === 'configuracion' ? 'active' : ''}`} onClick={() => setActiveSection('configuracion')}><Icon name="settings" /> Configuración</button>
               </div>
             </section>
           </aside>
 
-          <section className="content" aria-label="Contenido admin">
+          <section className="admin-main-col" aria-label="Contenido admin">
             <section className="generic-card" aria-label="Barra de herramientas">
               <div className="toolbar">
                 <div className="toolbar-left">
-                  <button type="button" className="iconbtn" aria-label="Filtros (UI)">
-                    <Icon name="filter" />
-                  </button>
-                  <div className="search" role="search">
+                  <div className="admin-search-box" role="search">
                     <Icon name="search" />
                     <input
+                      type="text"
                       value={query}
                       onChange={(e) => setQuery(e.target.value)}
-                      placeholder="Search… (nombre, correo, rol)"
+                      placeholder="Buscar solo por nombre o usuario..."
                       aria-label="Buscar usuarios"
                       autoComplete="off"
                     />
                   </div>
                 </div>
-
-                <button
-                  type="button"
-                  className="primary"
-                  onClick={() => {
-                    // Placeholder: aquí conectarías modal/route para crear usuario
-                    // eslint-disable-next-line no-alert
-                    alert('UI lista. Conecta tu endpoint para crear usuarios.');
-                  }}
-                >
-                  <Icon name="plus" /> añadir usuario
-                </button>
               </div>
               <div className="footerRow" aria-label="Resumen">
-                <p className="mini">
-                  <span className="muted">Sección:</span> {pageTitle}
-                </p>
-                <p className="mini">
-                  <span className="muted">Mostrando:</span> {filteredUsers.length} de {users.length}
-                </p>
+                <p className="mini">Sección: {pageTitle}</p>
+                <p className="mini">Total usuarios: {filteredUsers.length}</p>
               </div>
             </section>
 
             <section className="generic-card" aria-label="Tabla">
               <div className="tablewrap" role="region" aria-label="Listado de usuarios" tabIndex={0}>
-                <table>
-                  <thead>
-                    <tr>
-                      <th style={{ width: 56 }}>#</th>
-                      <th>NAME</th>
-                      <th>ROL</th>
-                      <th>CORREO</th>
-                      <th style={{ width: 130 }}>% DE AVANCE</th>
-                      <th style={{ width: 150 }}>LAST CONNECTION</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {filteredUsers.length ? (
-                      filteredUsers.map((u) => (
-                        <tr key={u.id}>
-                          <td className="muted">{u.id}</td>
-                          <td>{u.name}</td>
-                          <td className="muted">{u.role}</td>
-                          <td>
-                            <span className="pill">{u.email}</span>
-                          </td>
-                          <td>
-                            <span className={`pct ${progressTone(u.progress)}`}>{u.progress}</span>
-                          </td>
-                          <td className="muted">{u.lastConnection}</td>
+                {loadingUsers ? (
+                  <div style={{ padding: '40px', textAlign: 'center', fontWeight: '900', color: '#1a4e8a', fontSize: '1.2rem' }}>Cargando usuarios desde la base de datos...</div>
+                ) : (
+                  <>
+                    <table>
+                      <thead>
+                        <tr>
+                          <th style={{ width: 40 }}>#</th>
+                          <th>NOMBRE</th>
+                          <th>ROL</th>
+                          <th>CORREO</th>
+                          <th style={{ width: 100 }}>% AVANCE</th>
+                          <th style={{ width: 140 }}>ÚLTIMA CONEXIÓN</th>
+                          <th style={{ width: 110, textAlign: 'center' }}>ACCIONES</th>
                         </tr>
-                      ))
-                    ) : (
-                      <tr>
-                        <td colSpan={6} style={{ padding: 18 }}>
-                          <span className="muted">Sin resultados para “{String(query || '').trim()}”.</span>
-                        </td>
-                      </tr>
+                      </thead>
+                      <tbody>
+                        {paginatedUsers.length ? (
+                          paginatedUsers.map((u, index) => {
+                            const realIndex = (currentPage - 1) * itemsPerPage + index + 1;
+                            return (
+                              <tr key={u.id}>
+                                <td className="muted">{realIndex}</td>
+                                <td>{u.name}</td>
+                                <td className="muted">{u.role}</td>
+                                <td><span className="pill">{u.email}</span></td>
+                                <td><span className={`pct ${progressTone(u.progress)}`}>{u.progress}%</span></td>
+                                <td className="muted">{formatDate(u.lastconnection)}</td>
+                                <td style={{ textAlign: 'center' }}>
+                                  <div style={{ display: 'flex', gap: '8px', justifyContent: 'center' }}>
+                                    <button className="action-btn edit" onClick={() => openEditModal(u)} title="Editar Rol">
+                                      <Icon name="edit" />
+                                    </button>
+                                    {user?.id !== u.id && (
+                                      <button className="action-btn delete" onClick={() => handleDeleteUser(u)} title="Eliminar Usuario">
+                                        <Icon name="trash" />
+                                      </button>
+                                    )}
+                                  </div>
+                                </td>
+                              </tr>
+                            );
+                          })
+                        ) : (
+                          <tr>
+                            <td colSpan={7} style={{ padding: 24, textAlign: 'center' }}>
+                              <span className="muted">Sin resultados para “{String(query || '').trim()}”.</span>
+                            </td>
+                          </tr>
+                        )}
+                      </tbody>
+                    </table>
+
+                    {totalPages > 1 && (
+                      <div className="pagination">
+                        <button 
+                          onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
+                          disabled={currentPage === 1}
+                        >
+                          Anterior
+                        </button>
+                        <span className="page-info">
+                          Página {currentPage} de {totalPages}
+                        </span>
+                        <button 
+                          onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
+                          disabled={currentPage === totalPages}
+                        >
+                          Siguiente
+                        </button>
+                      </div>
                     )}
-                  </tbody>
-                </table>
+                  </>
+                )}
               </div>
             </section>
           </section>

@@ -1,17 +1,13 @@
-// server/controllers/progreso.controller.js
 const db = require('../db'); 
 
 /*
  1. POST /api/progreso/paso/completar
  Registra la finalización de un paso/lección (para el botón 'Next').
  */
-
-
-exports.progreso = async (req, res) => {
+const progreso = async (req, res) => {
     const { usuarioId, leccionId, moduloId } = req.body; 
 
     try {
-        
         const resultadoLeccion = await db.query(
             'SELECT ID, Tipo_Contenido FROM Leccion WHERE ID = $1 AND Modulo_ID = $2',
             [leccionId, moduloId]
@@ -52,7 +48,6 @@ exports.progreso = async (req, res) => {
         `;
         
         const result = await db.query(queryCalculo, [usuarioId, moduloId]);
-
         const nuevoPorcentaje = result.rows.length > 0 ? result.rows[0].nuevo_porcentaje : 0;
 
         res.status(200).json({ 
@@ -68,16 +63,14 @@ exports.progreso = async (req, res) => {
     }
 };
     
-
 /*
   2. POST /api/progreso/respuesta
   Registra la respuesta de una pregunta seleccionando la Alternativa_ID.
 */
-exports.registrarRespuesta = async (req, res) => {
+const registrarRespuesta = async (req, res) => {
     const { usuarioId, preguntaId, alternativaIdSeleccionada } = req.body; 
     
     try {
-        // 1. Validamos la respuesta del usuario
         const consultaValidacion = await db.query(
             `SELECT a.es_correcta, a.categoria_id 
              FROM alternativa a
@@ -92,14 +85,12 @@ exports.registrarRespuesta = async (req, res) => {
         
         const { es_correcta, categoria_id } = consultaValidacion.rows[0];
 
-        // 2. NUEVO: Buscamos cuál era la alternativa correcta real para el feedback visual
         const consultaCorrecta = await db.query(
             `SELECT id FROM alternativa WHERE pregunta_id = $1 AND es_correcta = true`,
             [preguntaId]
         );
         const idCorrecta = consultaCorrecta.rows[0]?.id;
 
-        // 3. Guardamos el intento
         await db.query(
             `INSERT INTO respuesta_quiz_usuario (usuario_id, pregunta_id, alternativa_id, es_correcta, intento) 
              VALUES ($1, $2, $3, $4, 1) 
@@ -112,7 +103,7 @@ exports.registrarRespuesta = async (req, res) => {
             mensaje: 'Respuesta registrada.',
             esCorrecta: es_correcta,
             categoriaId: categoria_id,
-            idCorrecta: idCorrecta // <-- Enviamos el ID al Frontend
+            idCorrecta: idCorrecta 
         });
 
     } catch (error) {
@@ -125,7 +116,7 @@ exports.registrarRespuesta = async (req, res) => {
   3. GET /api/progreso/curso/:usuarioId/:cursoId
   Calcula el porcentaje de avance general del curso (barra total).
  */
-exports.obtenerProgresoCurso = async (req, res) => {
+const obtenerProgresoCurso = async (req, res) => {
     const { usuarioId, cursoId } = req.params;
     
     const query = `
@@ -151,12 +142,11 @@ exports.obtenerProgresoCurso = async (req, res) => {
     }
 };
 
-
- // 4. GET /api/progreso/modulo/:usuarioId/:moduloId
- // Calcula el porcentaje de avance dentro de un módulo.
- // (La lógica es idéntica a la anterior, solo cambia la cláusula WHERE)
- 
-exports.obtenerProgresoModulo = async (req, res) => {
+/*
+  4. GET /api/progreso/modulo/:usuarioId/:moduloId
+  Calcula el porcentaje de avance dentro de un módulo.
+ */
+const obtenerProgresoModulo = async (req, res) => {
     const { usuarioId, moduloId } = req.params;
     
     const query = `
@@ -181,10 +171,11 @@ exports.obtenerProgresoModulo = async (req, res) => {
     }
 };
 
-// 5. GET /api/progreso/acierto/:usuarioId/:leccionId
- // Calcula el porcentaje de acierto del quiz asociado a una lección.
- 
-exports.obtenerPorcentajeAcierto = async (req, res) => {
+/*
+  5. GET /api/progreso/acierto/:usuarioId/:leccionId
+  Calcula el porcentaje de acierto del quiz asociado a una lección.
+ */
+const obtenerPorcentajeAcierto = async (req, res) => {
     const { usuarioId, leccionId } = req.params;
 
    const query = `
@@ -199,7 +190,6 @@ exports.obtenerPorcentajeAcierto = async (req, res) => {
 
     try {
         const result = await db.query(query, [usuarioId, leccionId]);
-        // Si no hay respuestas, devuelve 0%
         const acierto = result.rows[0];
         if (!acierto.total_respuestas) {
             acierto.porcentaje_acierto = '0.00';
@@ -211,21 +201,20 @@ exports.obtenerPorcentajeAcierto = async (req, res) => {
     }
 };
 
-
- // 6. POST /api/progreso/codigo/enviar
- // Registra el envío de código y marca la lección como completada si el score es perfecto.
-
-exports.registrarEnvioCodigo = async (req, res) => {
+/*
+  6. POST /api/progreso/codigo/enviar
+  Registra el envío de código y marca la lección como completada si el score es perfecto.
+*/
+const registrarEnvioCodigo = async (req, res) => {
     // ... Lógica para ejecutar el Juez en Línea y obtener el score ...
     
+    // Asumiendo que ejercicioId y scoreObtenido se declaran más arriba en tu código completo
     // Obtener Puntos Máximos y Leccion_ID del Ejercicio
-    const ejercicioResult = await db.query(
+    /* const ejercicioResult = await db.query(
         `SELECT Puntos_Maximos, Leccion_ID FROM Ejercicio WHERE ID = $1`,
         [ejercicioId]
     );
     const { puntos_maximos, leccion_id } = ejercicioResult.rows[0];
-
-    // ... INSERT en Envio_Codigo ...
 
     // Lógica de Progresión CRÍTICA
     if (scoreObtenido >= puntos_maximos) {
@@ -237,14 +226,14 @@ exports.registrarEnvioCodigo = async (req, res) => {
         );
         res.status(200).json({ mensaje: 'Ejercicio resuelto con éxito. Progreso actualizado.', completado: true });
     }
-    // ...
+    */
 };
 
 /*
   GET /api/quiz/alternativas/:leccionId
   Obtiene todas las preguntas y alternativas de una lección para renderizar en la UI.
 */
-exports.obtenerPreguntaQuiz = async (req, res) => {
+const obtenerPreguntaQuiz = async (req, res) => {
     const { leccionId } = req.params;
     try {
         const query = `
@@ -271,4 +260,99 @@ exports.obtenerPreguntaQuiz = async (req, res) => {
         console.error('Error al obtener preguntas del quiz:', error);
         res.status(500).json({ error: 'Error del servidor.' });
     }
+};
+
+
+const getUserProgress = async (req, res) => {
+    const { usuarioId, moduloId } = req.params;
+
+    try {
+        const query = `
+            SELECT 
+                (SELECT COUNT(*) FROM Leccion WHERE Modulo_ID = $2) as total_pasos,
+                COUNT(pp.ID) as pasos_completados
+            FROM Progreso pp
+            JOIN Leccion l ON pp.Leccion_ID = l.ID
+            WHERE pp.Usuario_ID = $1 AND l.Modulo_ID = $2
+        `;
+        
+        const result = await db.query(query, [usuarioId, moduloId]);
+        const { total_pasos, pasos_completados } = result.rows[0];
+        
+        const porcentaje = total_pasos > 0 ? ((pasos_completados / total_pasos) * 100).toFixed(2) : 0;
+
+        res.status(200).json({
+            total_pasos: parseInt(total_pasos),
+            pasos_completados: parseInt(pasos_completados),
+            porcentaje_progreso: porcentaje
+        });
+    } catch (error) {
+        res.status(500).json({ error: 'Error al obtener progreso' });
+    }
+};
+
+const getQuizStats = async (req, res) => {
+    const { usuarioId, leccionId } = req.params;
+
+    try {
+        const query = `
+            SELECT 
+                COUNT(*) as total_respondidas,
+                SUM(CASE WHEN Es_Correcta THEN 1 ELSE 0 END) as aciertos,
+                SUM(CASE WHEN NOT Es_Correcta THEN 1 ELSE 0 END) as fallos
+            FROM Respuesta_Quiz_Usuario r
+            JOIN Pregunta_Quiz p ON r.Pregunta_ID = p.ID
+            WHERE r.Usuario_ID = $1 AND p.Leccion_ID = $2
+        `;
+
+        const result = await db.query(query, [usuarioId, leccionId]);
+        const stats = result.rows[0];
+        const porcentajeAcierto = stats.total_respondidas > 0 ? ((stats.aciertos / stats.total_respondidas) * 100).toFixed(2) : 0;
+
+        res.status(200).json({ ...stats, porcentaje_acierto: porcentajeAcierto });
+    } catch (error) {
+        res.status(500).json({ error: 'Error al generar estadísticas de quiz' });
+    }
+};
+
+const getGlobalStats = async (req, res) => {
+    try {
+        const quizzesRes = await db.query(
+            `SELECT COUNT(DISTINCT p.leccion_id) as aprobados 
+             FROM respuesta_quiz_usuario r
+             JOIN pregunta p ON r.pregunta_id = p.id
+             WHERE r.usuario_id = $1 AND r.es_correcta = true`,
+            [req.session.userId]
+        );
+        
+        const modulosRes = await db.query(
+            `SELECT COUNT(DISTINCT l.modulo_id) as completados 
+             FROM progreso pp 
+             JOIN leccion l ON pp.leccion_id = l.id 
+             WHERE pp.usuario_id = $1`,
+            [req.session.userId]
+        );
+
+        res.json({
+            success: true,
+            quizzes: parseInt(quizzesRes.rows[0]?.aprobados || 0),
+            modulos: parseInt(modulosRes.rows[0]?.completados || 0)
+        });
+    } catch (error) {
+        console.error('Error obteniendo stats:', error);
+        res.json({ success: true, quizzes: 0, modulos: 0 }); 
+    }
+};
+
+module.exports = {
+    progreso,
+    registrarRespuesta,
+    obtenerProgresoCurso,
+    obtenerProgresoModulo,
+    obtenerPorcentajeAcierto,
+    registrarEnvioCodigo,
+    obtenerPreguntaQuiz,
+    getUserProgress,
+    getQuizStats,
+    getGlobalStats
 };
