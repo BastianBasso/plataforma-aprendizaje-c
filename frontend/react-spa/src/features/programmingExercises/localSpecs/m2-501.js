@@ -1,0 +1,242 @@
+export const M2_501_SPECS = {
+  'm2-501-e1-int-max': {
+    version: 1,
+    exerciseId: 'm2-501-e1-int-max',
+    title: 'Ejercicio 1: INT_MAX',
+    language: 'c',
+    hints: ['Incluye <limits.h>.', 'Usa INT_MAX.', 'Imprime con printf y %d.'],
+    normalize: { stripComments: true, collapseWhitespace: true },
+    maxCodeLength: 12000,
+    rules: [
+      { id: 'include-stdio', type: 'regex', pattern: '#\\s*include\\s*<stdio\\.h>', flags: 'm', message: 'Incluye <stdio.h>.' },
+      { id: 'include-limits', type: 'regex', pattern: '#\\s*include\\s*<limits\\.h>', flags: 'm', message: 'Incluye <limits.h>.' },
+      { id: 'uses-int-max', type: 'regex', pattern: '\\bINT_MAX\\b', flags: 'm', message: 'Usa la constante INT_MAX.' },
+      { id: 'printf', type: 'regex', pattern: 'printf\\s*\\(.*%d', flags: 'm', message: 'Imprime con printf usando %d.' },
+    ],
+  },
+
+  'm2-501-e2-overflow': {
+    version: 1,
+    exerciseId: 'm2-501-e2-overflow',
+    title: 'Ejercicio 2: overflow',
+    language: 'c',
+    expectedOutput: 'Valor inicial (INT_MAX): 2147483647\nValor después de +1: -2147483648',
+    hints: ['Incluye <limits.h>', 'Inicializa contador = INT_MAX', 'Suma 1 y vuelve a imprimir'],
+    normalize: { stripComments: true, collapseWhitespace: true },
+    rules: [
+      { id: 'include-stdio', type: 'regex', pattern: '#\\s*include\\s*<stdio\\.h>', flags: 'm', message: 'Incluye <stdio.h>.' },
+      { id: 'include-limits', type: 'regex', pattern: '#\\s*include\\s*<limits\\.h>', flags: 'm', message: 'Incluye <limits.h>.' },
+      { id: 'init', type: 'regex', pattern: '\\bint\\s+contador\\s*=\\s*INT_MAX\\s*;', flags: 'm', message: 'Inicializa contador con INT_MAX.' },
+      { id: 'sum', type: 'regex', pattern: 'contador\\s*=\\s*contador\\s*\\+\\s*1\\s*;', flags: 'm', message: 'Suma 1 al contador (contador = contador + 1).' },
+      { id: 'printf', type: 'regex', pattern: 'printf\\s*\\(.*INT_MAX', flags: 'm', message: 'Imprime el valor inicial.' },
+    ],
+  },
+
+  'm2-501-e3-underflow': {
+    version: 1,
+    exerciseId: 'm2-501-e3-underflow',
+    title: 'Ejercicio 3: INT_MIN underflow',
+    language: 'c',
+    hints: ['Incluye <limits.h>.', 'Inicializa contador con INT_MIN.', 'Resta 1 y vuelve a imprimir.'],
+    normalize: { stripComments: true, collapseWhitespace: true },
+    maxCodeLength: 12000,
+    rules: [
+      { id: 'include-stdio', type: 'regex', pattern: '#\\s*include\\s*<stdio\\.h>', flags: 'm', message: 'Incluye <stdio.h>.' },
+      { id: 'include-limits', type: 'regex', pattern: '#\\s*include\\s*<limits\\.h>', flags: 'm', message: 'Incluye <limits.h>.' },
+      { id: 'uses-int-min', type: 'regex', pattern: '\\bINT_MIN\\b', flags: 'm', message: 'Usa INT_MIN.' },
+      {
+        id: 'minus-one',
+        type: 'regex',
+        pattern: '(contador\\s*=\\s*contador\\s*-\\s*1\\s*;|contador\\s*--\\s*;|--\\s*contador\\s*;)',
+        flags: 'm',
+        message: 'Resta 1 al contador (por ejemplo: contador = contador - 1;).',
+      },
+      { id: 'printf', type: 'regex', pattern: 'printf\\s*\\(', flags: 'm', message: 'Imprime resultados con printf.' },
+    ],
+  },
+
+  'm2-501-e4-unsigned-capacidad': {
+    version: 1,
+    exerciseId: 'm2-501-e4-unsigned-capacidad',
+    title: 'Ejercicio 4: unsigned int grande',
+    language: 'c',
+    hints: ['Declara unsigned int capacidad.', 'Inicializa con 4000000000U.', 'Imprime con %u.'],
+    normalize: { stripComments: true, collapseWhitespace: true },
+    rules: [
+      { id: 'include-stdio', type: 'regex', pattern: '#\\s*include\\s*<stdio\\.h>', flags: 'm', message: 'Incluye <stdio.h>.' },
+      { id: 'unsigned-int', type: 'regex', pattern: '\\bunsigned\\s+int\\b', flags: 'm', message: 'Usa el tipo unsigned int.' },
+      { id: 'value', type: 'regex', pattern: '4000000000U', flags: 'm', message: 'Inicializa con 4000000000U.' },
+      { id: 'printf-u', type: 'regex', pattern: 'printf\\s*\\(\\s*"[^"]*%u', flags: 'm', message: 'Imprime con printf usando %u.' },
+    ],
+  },
+
+  'm2-501-e5-unsigned-negativo': {
+    version: 1,
+    exerciseId: 'm2-501-e5-unsigned-negativo',
+    title: 'Ejercicio 5: unsigned = -1',
+    language: 'c',
+    hints: ['Declara unsigned int.', 'Asigna -1.', 'Imprime con %u.'],
+    normalize: { stripComments: true, collapseWhitespace: true },
+    rules: [
+      { id: 'include-stdio', type: 'regex', pattern: '#\\s*include\\s*<stdio\\.h>', flags: 'm', message: 'Incluye <stdio.h>.' },
+      { id: 'unsigned-int', type: 'regex', pattern: '\\bunsigned\\s+int\\b', flags: 'm', message: 'Usa el tipo unsigned int.' },
+      { id: 'assign', type: 'regex', pattern: '=\\s*-\\s*1\\s*;', flags: 'm', message: 'Asigna -1 a la variable unsigned.' },
+      { id: 'printf-u', type: 'regex', pattern: 'printf\\s*\\(\\s*"[^"]*%u', flags: 'm', message: 'Imprime con printf usando %u.' },
+    ],
+  },
+
+  'm2-501-e6-char-rango': {
+    version: 1,
+    exerciseId: 'm2-501-e6-char-rango',
+    title: 'Ejercicio 6: CHAR_MIN y CHAR_MAX',
+    language: 'c',
+    hints: ['Incluye <limits.h>.', 'Usa CHAR_MIN y CHAR_MAX.', 'Imprime ambos.'],
+    normalize: { stripComments: true, collapseWhitespace: true },
+    rules: [
+      { id: 'include-stdio', type: 'regex', pattern: '#\\s*include\\s*<stdio\\.h>', flags: 'm', message: 'Incluye <stdio.h>.' },
+      { id: 'include-limits', type: 'regex', pattern: '#\\s*include\\s*<limits\\.h>', flags: 'm', message: 'Incluye <limits.h>.' },
+      { id: 'char-min', type: 'regex', pattern: '\\bCHAR_MIN\\b', flags: 'm', message: 'Usa CHAR_MIN.' },
+      { id: 'char-max', type: 'regex', pattern: '\\bCHAR_MAX\\b', flags: 'm', message: 'Usa CHAR_MAX.' },
+      { id: 'printf', type: 'regex', pattern: 'printf\\s*\\(', flags: 'm', message: 'Imprime el rango con printf.' },
+    ],
+  },
+
+  'm2-501-e7-uint-wrap-up': {
+    version: 1,
+    exerciseId: 'm2-501-e7-uint-wrap-up',
+    title: 'Ejercicio 7: UINT_MAX + 1',
+    language: 'c',
+    hints: ['Incluye <limits.h>.', 'Inicializa con UINT_MAX.', 'Suma 1 y muestra el resultado.'],
+    normalize: { stripComments: true, collapseWhitespace: true },
+    rules: [
+      { id: 'include-stdio', type: 'regex', pattern: '#\\s*include\\s*<stdio\\.h>', flags: 'm', message: 'Incluye <stdio.h>.' },
+      { id: 'include-limits', type: 'regex', pattern: '#\\s*include\\s*<limits\\.h>', flags: 'm', message: 'Incluye <limits.h>.' },
+      { id: 'uses-uint-max', type: 'regex', pattern: '\\bUINT_MAX\\b', flags: 'm', message: 'Usa UINT_MAX.' },
+      { id: 'plus-one', type: 'regex', pattern: '(\\+\\s*1|\\+\\+)', flags: 'm', message: 'Suma 1 a la variable (por ejemplo: + 1 o ++).' },
+      { id: 'printf-u', type: 'regex', pattern: 'printf\\s*\\(\\s*"[^"]*%u', flags: 'm', message: 'Imprime con %u.' },
+    ],
+  },
+
+  'm2-501-e8-uint-wrap-down': {
+    version: 1,
+    exerciseId: 'm2-501-e8-uint-wrap-down',
+    title: 'Ejercicio 8: 0 - 1 en unsigned',
+    language: 'c',
+    hints: ['Incluye <limits.h>.', 'Inicializa en 0.', 'Resta 1 y muestra el resultado.'],
+    normalize: { stripComments: true, collapseWhitespace: true },
+    rules: [
+      { id: 'include-stdio', type: 'regex', pattern: '#\\s*include\\s*<stdio\\.h>', flags: 'm', message: 'Incluye <stdio.h>.' },
+      { id: 'unsigned-int', type: 'regex', pattern: '\\bunsigned\\s+int\\b', flags: 'm', message: 'Usa unsigned int.' },
+      { id: 'init-0', type: 'regex', pattern: '=\\s*0\\s*;', flags: 'm', message: 'Inicializa la variable en 0.' },
+      { id: 'minus-one', type: 'regex', pattern: '(-\\s*1|--)', flags: 'm', message: 'Resta 1 a la variable.' },
+      { id: 'printf-u', type: 'regex', pattern: 'printf\\s*\\(\\s*"[^"]*%u', flags: 'm', message: 'Imprime con %u.' },
+    ],
+  },
+
+  'm2-501-e9-flt-max': {
+    version: 1,
+    exerciseId: 'm2-501-e9-flt-max',
+    title: 'Ejercicio 9: FLT_MAX',
+    language: 'c',
+    hints: ['Incluye <float.h>.', 'Usa FLT_MAX.', 'Imprime con %e.'],
+    normalize: { stripComments: true, collapseWhitespace: true },
+    rules: [
+      { id: 'include-stdio', type: 'regex', pattern: '#\\s*include\\s*<stdio\\.h>', flags: 'm', message: 'Incluye <stdio.h>.' },
+      { id: 'include-float', type: 'regex', pattern: '#\\s*include\\s*<float\\.h>', flags: 'm', message: 'Incluye <float.h>.' },
+      { id: 'uses-flt-max', type: 'regex', pattern: '\\bFLT_MAX\\b', flags: 'm', message: 'Usa FLT_MAX.' },
+      { id: 'printf-e', type: 'regex', pattern: 'printf\\s*\\(\\s*"[^"]*%e', flags: 'm', message: 'Imprime con printf usando %e.' },
+    ],
+  },
+
+  'm2-501-e10-dbl-max': {
+    version: 1,
+    exerciseId: 'm2-501-e10-dbl-max',
+    title: 'Ejercicio 10: DBL_MAX',
+    language: 'c',
+    hints: ['Incluye <float.h>.', 'Usa DBL_MAX.', 'Imprime con %le o %e.'],
+    normalize: { stripComments: true, collapseWhitespace: true },
+    rules: [
+      { id: 'include-stdio', type: 'regex', pattern: '#\\s*include\\s*<stdio\\.h>', flags: 'm', message: 'Incluye <stdio.h>.' },
+      { id: 'include-float', type: 'regex', pattern: '#\\s*include\\s*<float\\.h>', flags: 'm', message: 'Incluye <float.h>.' },
+      { id: 'uses-dbl-max', type: 'regex', pattern: '\\bDBL_MAX\\b', flags: 'm', message: 'Usa DBL_MAX.' },
+      { id: 'printf', type: 'regex', pattern: 'printf\\s*\\(', flags: 'm', message: 'Imprime el valor con printf.' },
+    ],
+  },
+
+  'm2-501-e11-signed-unsigned': {
+    version: 1,
+    exerciseId: 'm2-501-e11-signed-unsigned',
+    title: 'Ejercicio 11: signed vs unsigned',
+    language: 'c',
+    hints: ['Declara int A = -10.', 'Declara unsigned int B = 1.', 'Resta A - B y muestra el resultado.'],
+    normalize: { stripComments: true, collapseWhitespace: true },
+    rules: [
+      { id: 'include-stdio', type: 'regex', pattern: '#\\s*include\\s*<stdio\\.h>', flags: 'm', message: 'Incluye <stdio.h>.' },
+      { id: 'decl-a', type: 'regex', pattern: '\\bint\\s+A\\s*=\\s*-\\s*10\\s*;', flags: 'm', message: 'Declara: int A = -10;' },
+      { id: 'decl-b', type: 'regex', pattern: '\\bunsigned\\s+int\\s+B\\s*=\\s*1\\s*;', flags: 'm', message: 'Declara: unsigned int B = 1;' },
+      { id: 'sub', type: 'regex', pattern: 'A\\s*-\\s*B', flags: 'm', message: 'Realiza la resta A - B.' },
+      { id: 'printf', type: 'regex', pattern: 'printf\\s*\\(', flags: 'm', message: 'Imprime A, B y/o el resultado.' },
+    ],
+  },
+
+  'm2-501-e12-schar-overflow': {
+    version: 1,
+    exerciseId: 'm2-501-e12-schar-overflow',
+    title: 'Ejercicio 12: signed char overflow',
+    language: 'c',
+    hints: ['Incluye <limits.h>.', 'Declara signed char con 120.', 'Suma 10 e imprime.'],
+    normalize: { stripComments: true, collapseWhitespace: true },
+    rules: [
+      { id: 'include-stdio', type: 'regex', pattern: '#\\s*include\\s*<stdio\\.h>', flags: 'm', message: 'Incluye <stdio.h>.' },
+      { id: 'include-limits', type: 'regex', pattern: '#\\s*include\\s*<limits\\.h>', flags: 'm', message: 'Incluye <limits.h>.' },
+      { id: 'signed-char', type: 'regex', pattern: '\\bsigned\\s+char\\b', flags: 'm', message: 'Usa signed char.' },
+      { id: 'init', type: 'regex', pattern: '=\\s*120\\s*;', flags: 'm', message: 'Inicializa con 120.' },
+      { id: 'add-10', type: 'regex', pattern: '(\\+\\s*10|\\+=\\s*10)', flags: 'm', message: 'Suma 10 al valor.' },
+      { id: 'uses-char-max', type: 'regex', pattern: '\\bCHAR_MAX\\b', flags: 'm', message: 'Muestra el límite usando CHAR_MAX.' },
+    ],
+  },
+
+  'm2-501-e13-signed-int': {
+    version: 1,
+    exerciseId: 'm2-501-e13-signed-int',
+    title: 'Ejercicio 13: signed int',
+    language: 'c',
+    hints: ['Declara signed int deuda = -1500.', 'Imprime deuda con %d.'],
+    normalize: { stripComments: true, collapseWhitespace: true },
+    rules: [
+      { id: 'include-stdio', type: 'regex', pattern: '#\\s*include\\s*<stdio\\.h>', flags: 'm', message: 'Incluye <stdio.h>.' },
+      { id: 'decl', type: 'regex', pattern: '\\bsigned\\s+int\\s+deuda\\s*=\\s*-\\s*1500\\s*;', flags: 'm', message: 'Declara: signed int deuda = -1500;' },
+      { id: 'printf', type: 'regex', pattern: 'printf\\s*\\(.*%d', flags: 'm', message: 'Imprime con printf usando %d.' },
+    ],
+  },
+
+  'm2-501-e14-uchar-max': {
+    version: 1,
+    exerciseId: 'm2-501-e14-uchar-max',
+    title: 'Ejercicio 14: unsigned char 255',
+    language: 'c',
+    hints: ['Declara unsigned char byte_max = 255.', 'Imprime el valor con %d.'],
+    normalize: { stripComments: true, collapseWhitespace: true },
+    rules: [
+      { id: 'include-stdio', type: 'regex', pattern: '#\\s*include\\s*<stdio\\.h>', flags: 'm', message: 'Incluye <stdio.h>.' },
+      { id: 'decl', type: 'regex', pattern: '\\bunsigned\\s+char\\s+byte_max\\s*=\\s*255\\s*;', flags: 'm', message: 'Declara: unsigned char byte_max = 255;' },
+      { id: 'printf', type: 'regex', pattern: 'printf\\s*\\(.*%d', flags: 'm', message: 'Imprime con printf usando %d.' },
+    ],
+  },
+
+  'm2-501-e15-float-overflow': {
+    version: 1,
+    exerciseId: 'm2-501-e15-float-overflow',
+    title: 'Ejercicio 15: overflow float',
+    language: 'c',
+    hints: ['Incluye <float.h>.', 'Usa FLT_MAX.', 'Multiplica por 2.0f e imprime.'],
+    normalize: { stripComments: true, collapseWhitespace: true },
+    rules: [
+      { id: 'include-stdio', type: 'regex', pattern: '#\\s*include\\s*<stdio\\.h>', flags: 'm', message: 'Incluye <stdio.h>.' },
+      { id: 'include-float', type: 'regex', pattern: '#\\s*include\\s*<float\\.h>', flags: 'm', message: 'Incluye <float.h>.' },
+      { id: 'uses-flt-max', type: 'regex', pattern: '\\bFLT_MAX\\b', flags: 'm', message: 'Usa FLT_MAX.' },
+      { id: 'mul-2', type: 'regex', pattern: '\\*\\s*2\\.0f', flags: 'm', message: 'Multiplica por 2.0f.' },
+      { id: 'printf', type: 'regex', pattern: 'printf\\s*\\(', flags: 'm', message: 'Imprime los valores con printf.' },
+    ],
+  },
+};

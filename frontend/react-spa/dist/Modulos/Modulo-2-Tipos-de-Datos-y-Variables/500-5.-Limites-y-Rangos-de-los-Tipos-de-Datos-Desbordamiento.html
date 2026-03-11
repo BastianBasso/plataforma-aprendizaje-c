@@ -102,19 +102,24 @@ double, long double).</p>
 <p>Para acceder a estos límites, simplemente debes incluir el
 <em>header</em> correspondiente al inicio de tu archivo:</p>
 <p>C</p>
-<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
-<p>#<strong>include</strong> &lt;limits.h&gt; // Necesario para
-INT_MAX</p>
-<p>int main(void) {</p>
-<p>// Uso de la constante INT_MAX para inicializar una variable a su
-máximo.</p>
-<p>int maximo_entero = INT_MAX;</p>
-<p>printf("El valor INT_MAX en este sistema es: %d\n",
-maximo_entero);</p>
-<p>// Si INT_MAX es 2,147,483,647 (típico 4 bytes), este valor se
-imprimirá.</p>
-<p>return 0;</p>
-<p>}</p>
+<div class="c2h-code">
+  <div class="c2h-code-inner">
+    <table>
+      <tr><td>1</td><td><span class="c2h-directive">#include</span> <span class="c2h-val-str">&lt;stdio.h&gt;</span></td></tr>
+      <tr><td>2</td><td><span class="c2h-directive">#include</span> <span class="c2h-val-str">&lt;limits.h&gt;</span> <span class="c2h-comment">// Necesario para INT_MAX</span></td></tr>
+      <tr><td>3</td><td></td></tr>
+      <tr><td>4</td><td><span class="c2h-kword c2h-kword-int">int</span> <span class="c2h-identifier c2h-fdeclname">main</span>(<span class="c2h-kword c2h-kword-void">void</span>) {</td></tr>
+      <tr><td>5</td><td>    <span class="c2h-comment">// Uso de la constante INT_MAX para inicializar una variable a su máximo.</span></td></tr>
+      <tr><td>6</td><td>    <span class="c2h-kword c2h-kword-int">int</span> <span class="c2h-identifier">maximo_entero</span> <span class="c2h-operator">=</span> <span class="c2h-identifier">INT_MAX</span>;</td></tr>
+      <tr><td>7</td><td>    <span class="c2h-identifier c2h-fcallname">printf</span>(<span class="c2h-val-str">"El valor INT_MAX en este sistema es: %d\n"</span>, <span class="c2h-identifier">maximo_entero</span>);</td></tr>
+      <tr><td>8</td><td>    </td></tr>
+      <tr><td>9</td><td>    <span class="c2h-comment">// Si INT_MAX es 2,147,483,647 (típico 4 bytes), este valor se imprimirá.</span></td></tr>
+      <tr><td>10</td><td>    <span class="c2h-kword c2h-kword-return">return</span> <span class="c2h-val-int">0</span>;</td></tr>
+      <tr><td>11</td><td>}</td></tr>
+      <tr><td>12</td><td></td></tr>
+    </table>
+  </div>
+</div>
 <p>Al utilizar estas macros en lugar de escribir los números de forma
 manual (ej., 2147483647), garantizas que tu programa siempre respete los
 límites de la arquitectura, evitando problemas de desbordamiento de
@@ -141,17 +146,25 @@ unidad mayor que ese límite, el resultado es un
 </ul>
 <p><strong>Ejemplo de <em>Overflow</em>:</strong></p>
 <p>C</p>
-<p>// Usamos INT_MAX (el valor máximo para un int)</p>
-<p>#<strong>include</strong> &lt;limits.h&gt;</p>
-<p>int main(void) {</p>
-<p>int valor_maximo = INT_MAX; // Ejemplo: 2,147,483,647</p>
-<p>// Intentar sumar 1 al valor máximo causa overflow.</p>
-<p>int desbordamiento = valor_maximo + 1;</p>
-<p>// El resultado no es el esperado (+2,147,483,648).</p>
-<p>// En su lugar, el valor "da la vuelta" al límite negativo (ver
-próximo tema).</p>
-<p>return 0;</p>
-<p>}</p>
+<div class="c2h-code">
+  <div class="c2h-code-inner">
+    <table>
+      <tr><td>1</td><td><span class="c2h-comment">// Usamos INT_MAX (el valor máximo para un int)</span></td></tr>
+      <tr><td>2</td><td><span class="c2h-directive">#include</span> <span class="c2h-val-str">&lt;limits.h&gt;</span></td></tr>
+      <tr><td>3</td><td></td></tr>
+      <tr><td>4</td><td><span class="c2h-kword c2h-kword-int">int</span> <span class="c2h-identifier c2h-fdeclname">main</span>(<span class="c2h-kword c2h-kword-void">void</span>) {</td></tr>
+      <tr><td>5</td><td>    <span class="c2h-kword c2h-kword-int">int</span> <span class="c2h-identifier">valor_maximo</span> <span class="c2h-operator">=</span> <span class="c2h-identifier">INT_MAX</span>; <span class="c2h-comment">// Ejemplo: 2,147,483,647</span></td></tr>
+      <tr><td>6</td><td>    <span class="c2h-comment">// Intentar sumar 1 al valor máximo causa overflow.</span></td></tr>
+      <tr><td>7</td><td>    <span class="c2h-kword c2h-kword-int">int</span> <span class="c2h-identifier">desbordamiento</span> <span class="c2h-operator">=</span> <span class="c2h-identifier">valor_maximo</span> <span class="c2h-operator">+</span> <span class="c2h-val-int">1</span>;</td></tr>
+      <tr><td>8</td><td>    <span class="c2h-comment">// El resultado no es el esperado (+2,147,483,648).</span></td></tr>
+      <tr><td>9</td><td>    <span class="c2h-comment">// En su lugar, el valor "da la vuelta" al límite negativo (ver próximo tema).</span></td></tr>
+      <tr><td>10</td><td>    </td></tr>
+      <tr><td>11</td><td>    <span class="c2h-kword c2h-kword-return">return</span> <span class="c2h-val-int">0</span>;</td></tr>
+      <tr><td>12</td><td>}</td></tr>
+      <tr><td>13</td><td></td></tr>
+    </table>
+  </div>
+</div>
 <p><strong>2. Desbordamiento Inferior (<em>Underflow</em>)</strong></p>
 <p>El <em>underflow</em> ocurre cuando el resultado de una operación es
 <strong>menor que el valor mínimo</strong> que el tipo de dato puede
@@ -194,30 +207,41 @@ positivo</strong> (INT_MAX), el siguiente incremento hace que el valor
 negativo</strong> (INT_MIN), el siguiente decremento lo hace saltar de
 vuelta al valor <strong>máximo positivo</strong>.</p></li>
 </ul>
-<p>$$\text{Fórmula del Overflow (Típico): } \text{INT\_MAX} + 1
-\rightarrow \text{INT\_MIN}$$</p>
+<p>Fórmula del Overflow (Típico): INT_MAX + 1 → INT_MIN</p>
 <p><strong>Demostración Empírica en C</strong></p>
 <p>Para demostrar este efecto, es necesario utilizar el <em>header</em>
 &lt;limits.h&gt; para acceder al valor máximo que nuestro sistema puede
 manejar.</p>
 <p>C</p>
-<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
-<p>#<strong>include</strong> &lt;limits.h&gt; // Necesario para
-INT_MAX</p>
-<p>int main(void) {</p>
-<p>// 1. Inicializamos la variable con el límite superior de int.</p>
-<p>int contador = INT_MAX;</p>
-<p>printf("Valor Máximo (INT_MAX): %d\n", contador);</p>
-<p>// 2. Realizamos la operación que causa el desbordamiento.</p>
-<p>contador = contador + 1;</p>
-<p>// 3. Imprimimos el nuevo valor, que debería ser el valor mínimo
-(INT_MIN).</p>
-<p>printf("Valor después de sumar 1: %d\n", contador);</p>
-<p>return 0;</p>
-<p>}</p>
+<div class="c2h-code">
+  <div class="c2h-code-inner">
+    <table>
+      <tr><td>1</td><td><span class="c2h-directive">#include</span> <span class="c2h-val-str">&lt;stdio.h&gt;</span></td></tr>
+      <tr><td>2</td><td><span class="c2h-directive">#include</span> <span class="c2h-val-str">&lt;limits.h&gt;</span> <span class="c2h-comment">// Necesario para INT_MAX</span></td></tr>
+      <tr><td>3</td><td></td></tr>
+      <tr><td>4</td><td><span class="c2h-kword c2h-kword-int">int</span> <span class="c2h-identifier c2h-fdeclname">main</span>(<span class="c2h-kword c2h-kword-void">void</span>) {</td></tr>
+      <tr><td>5</td><td>    </td></tr>
+      <tr><td>6</td><td>    <span class="c2h-comment">// 1. Inicializamos la variable con el límite superior de int.</span></td></tr>
+      <tr><td>7</td><td>    <span class="c2h-kword c2h-kword-int">int</span> <span class="c2h-identifier">contador</span> <span class="c2h-operator">=</span> <span class="c2h-identifier">INT_MAX</span>;</td></tr>
+      <tr><td>8</td><td>    <span class="c2h-identifier c2h-fcallname">printf</span>(<span class="c2h-val-str">"Valor Máximo (INT_MAX): %d\n"</span>, <span class="c2h-identifier">contador</span>);</td></tr>
+      <tr><td>9</td><td>    </td></tr>
+      <tr><td>10</td><td>    <span class="c2h-comment">// 2. Realizamos la operación que causa el desbordamiento.</span></td></tr>
+      <tr><td>11</td><td>    <span class="c2h-identifier">contador</span> <span class="c2h-operator">=</span> <span class="c2h-identifier">contador</span> <span class="c2h-operator">+</span> <span class="c2h-val-int">1</span>;</td></tr>  
+      <tr><td>12</td><td>    </td></tr>
+      <tr><td>13</td><td>    <span class="c2h-comment">// 3. Imprimimos el nuevo valor, que debería ser el valor mínimo (INT_MIN).</span></td></tr>
+      <tr><td>14</td><td>    <span class="c2h-identifier c2h-fcallname">printf</span>(<span class="c2h-val-str">"Valor después de sumar 1: %d\n"</span>, <span class="c2h-identifier">contador</span>);</td></tr>
+      <tr><td>15</td><td>    </td></tr>
+      <tr><td>16</td><td>    <span class="c2h-kword c2h-kword-return">return</span> <span class="c2h-val-int">0</span>;</td></tr>
+      <tr><td>17</td><td>}</td></tr>
+      <tr><td>18</td><td></td></tr>
+    </table>
+  </div>
+</div>
 <p><strong>Salida Típica (Sistema de 32/64 bits):</strong></p>
+<blockquote>
 <p>Valor Máximo (INT_MAX): 2147483647</p>
 <p>Valor después de sumar 1: -2147483648</p>
+</blockquote>
 <p>El resultado es el <strong>valor más negativo</strong> posible para
 un int, demostrando el salto cíclico. Este comportamiento es muy
 importante de entender, ya que es una fuente común de errores de lógica
@@ -335,17 +359,25 @@ positivo.</td>
 </tbody>
 </table>
 <p>C</p>
-<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
-<p>int main(void) {</p>
-<p>// Variable con rango positivo y negativo.</p>
-<p>signed int cuenta_normal = -500;</p>
-<p>// Variable solo con rango positivo (el doble que el signed int).</p>
-<p>unsigned int poblacion_total = 4000000000;</p>
-<p>printf("Cuenta normal: %d\n", cuenta_normal);</p>
-<p>printf("Población (solo positivo): %u\n", poblacion_total); // Usa
-%u</p>
-<p>return 0;</p>
-<p>}</p>
+<div class="c2h-code">
+  <div class="c2h-code-inner">
+    <table>
+      <tr><td>1</td><td><span class="c2h-directive">#include</span> <span class="c2h-val-str">&lt;stdio.h&gt;</span></td></tr>
+      <tr><td>2</td><td></td></tr>
+      <tr><td>3</td><td><span class="c2h-kword c2h-kword-int">int</span> <span class="c2h-identifier c2h-fdeclname">main</span>(<span class="c2h-kword c2h-kword-void">void</span>) {</td></tr>
+      <tr><td>4</td><td>    <span class="c2h-comment">// Variable con rango positivo y negativo.</span></td></tr>
+      <tr><td>5</td><td>    <span class="c2h-kword c2h-kword-signed">signed</span> <span class="c2h-kword c2h-kword-int">int</span> <span class="c2h-identifier">cuenta_normal</span> <span class="c2h-operator">=</span> <span class="c2h-operator">-</span><span class="c2h-val-int">500</span>;</td></tr>
+      <tr><td>6</td><td>    <span class="c2h-comment">// Variable solo con rango positivo (el doble que el signed int).</span></td></tr>
+      <tr><td>7</td><td>    <span class="c2h-kword c2h-kword-unsigned">unsigned</span> <span class="c2h-kword c2h-kword-int">int</span> <span class="c2h-identifier">poblacion_total</span> <span class="c2h-operator">=</span> <span class="c2h-val-int">4000000000</span>;</td></tr>
+      <tr><td>8</td><td>    </td></tr>
+      <tr><td>9</td><td>    <span class="c2h-identifier c2h-fcallname">printf</span>(<span class="c2h-val-str">"Cuenta normal: %d\n"</span>, <span class="c2h-identifier">cuenta_normal</span>);</td></tr>
+      <tr><td>10</td><td>    <span class="c2h-identifier c2h-fcallname">printf</span>(<span class="c2h-val-str">"Población (solo positivo): %u\n"</span>, <span class="c2h-identifier">poblacion_total</span>); <span class="c2h-comment">// Usa %u</span></td></tr>
+      <tr><td>11</td><td>    <span class="c2h-kword c2h-kword-return">return</span> <span class="c2h-val-int">0</span>;</td></tr>
+      <tr><td>12</td><td>}</td></tr>
+      <tr><td>13</td><td></td></tr>
+    </table>
+  </div>
+</div>
 <p>Es crucial usar el modificador correcto: si intentas almacenar un
 número negativo en una variable unsigned, se producirá un
 <em>overflow</em> inmediato, causando el efecto <em>wrap around</em> y

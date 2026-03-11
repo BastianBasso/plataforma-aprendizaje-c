@@ -54,7 +54,7 @@ cambiar).</td>
 <td style="text-align: left;"><strong>Ejemplo Típico</strong></td>
 <td style="text-align: left;">La edad de un usuario (cambia con el
 tiempo).</td>
-<td style="text-align: left;">El valor de $\pi$ (3.14159...).</td>
+<td style="text-align: left;">El valor de π (3.14159...).</td>
 </tr>
 </tbody>
 </table>
@@ -91,8 +91,13 @@ después de la inicialización."</strong></p>
 <p><strong>Sintaxis y Reglas Clave</strong></p>
 <p>La sintaxis es similar a la de una variable, pero con la palabra
 clave const al inicio:</p>
-<p>$$\text{Sintaxis: } \text{const} \space \space \text{tipo\_de\_dato}
-\space \space \text{NOMBRE} = \text{valor}\text{;}$$</p>
+<div class="c2h-code">
+  <div class="c2h-code-inner">
+    <table>
+      <tr><td>1</td><td><span class="c2h-kword c2h-kword-const">const</span> <span class="c2h-kword c2h-kword-int">int</span> <span class="c2h-identifier">edad</span> <span class="c2h-operator">=</span> <span class="c2h-val-int">25</span>;</td></tr>
+    </table>
+  </div>
+</div>
 <ol type="1">
 <li><p><strong>Inicialización Obligatoria:</strong> Una constante
 <strong>debe ser inicializada</strong> al momento de su declaración. Si
@@ -105,17 +110,27 @@ Compilación</strong>.</p></li>
 </ol>
 <p><strong>Ejemplos Prácticos:</strong></p>
 <p>C</p>
-<p>// Constante entera para un límite máximo.</p>
-<p>const int LIMITE_MAXIMO = 100;</p>
-<p>// Constante de punto flotante para un cálculo financiero.</p>
-<p>const float TASA_IVA = 0.19f;</p>
-<p>// Constante de carácter para un código fijo.</p>
-<p>const char CODIGO_ERROR = 'E';</p>
-<p>int main(void) {</p>
-<p>// Esto causará un ERROR DE COMPILACIÓN:</p>
-<p>// LIMITE_MAXIMO = 200;</p>
-<p>return 0;</p>
-<p>}</p>
+<div class="c2h-code">
+  <div class="c2h-code-inner">
+    <table>
+      <tr><td>1</td><td><span class="c2h-comment">// Constante entera para un límite máximo.</span></td></tr>
+      <tr><td>2</td><td><span class="c2h-kword c2h-kword-const">const</span> <span class="c2h-kword c2h-kword-int">int</span> <span class="c2h-identifier">LIMITE_MAXIMO</span> <span class="c2h-operator">=</span> <span class="c2h-val-int">100</span>;</td></tr>
+      <tr><td>3</td><td></td></tr>
+      <tr><td>4</td><td><span class="c2h-comment">// Constante de punto flotante para un cálculo financiero.</span></td></tr>
+      <tr><td>5</td><td><span class="c2h-kword c2h-kword-const">const</span> <span class="c2h-kword c2h-kword-float">float</span> <span class="c2h-identifier">TASA_IVA</span> <span class="c2h-operator">=</span> <span class="c2h-val-flt">0.19</span><span class="c2h-identifier">f</span>;</td></tr>
+      <tr><td>6</td><td></td></tr>
+      <tr><td>7</td><td><span class="c2h-comment">// Constante de carácter para un código fijo.</span></td></tr>
+      <tr><td>8</td><td><span class="c2h-kword c2h-kword-const">const</span> <span class="c2h-kword c2h-kword-char">char</span> <span class="c2h-identifier">CODIGO_ERROR</span> <span class="c2h-operator">=</span> <span class="c2h-val-char">'E'</span>;</td></tr>
+      <tr><td>9</td><td></td></tr>
+      <tr><td>10</td><td><span class="c2h-kword c2h-kword-int">int</span> <span class="c2h-identifier c2h-fdeclname">main</span>(<span class="c2h-kword c2h-kword-void">void</span>) {</td></tr>
+      <tr><td>11</td><td>    <span class="c2h-comment">// Esto causará un ERROR DE COMPILACIÓN:</span></td></tr>
+      <tr><td>12</td><td>    <span class="c2h-comment">// LIMITE_MAXIMO = 200;</span></td></tr>
+      <tr><td>13</td><td>    <span class="c2h-kword c2h-kword-return">return</span> <span class="c2h-val-int">0</span>;</td></tr>
+      <tr><td>14</td><td>}</td></tr>
+    </table>
+  </div>
+</div>
+<br>
 <p><strong>Ventajas de const</strong></p>
 <ul>
 <li><p><strong>Seguridad:</strong> Garantiza la inmutabilidad a nivel de
@@ -138,23 +153,35 @@ del <strong>preprocesador</strong> <strong>#define</strong>.</p>
 de compilación que vimos en el Módulo 1) que realice una simple tarea de
 <strong>reemplazo de texto</strong> antes de que el compilador vea el
 código.</p>
-<p>$$\text{Sintaxis: } \text{\#define} \space \space
-\text{NOMBRE\_CONSTANTE} \space \space \text{valor}$$</p>
+<div class="c2h-code">
+  <div class="c2h-code-inner">
+    <table>
+      <tr><td>1</td><td><span class="c2h-directive">#define</span> <span class="c2h-identifier">NOMBRE_CONSTANTE</span> <span class="c2h-identifier">valor</span></td></tr>
+    </table>
+  </div>
+</div>
 <p><strong>Ejemplo de #define:</strong></p>
 <p>C</p>
-<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
-<p>// El preprocesador reemplazará cada 'PI' por '3.14159f' antes de la
-compilación.</p>
-<p>#<strong>define</strong> PI 3.14159f</p>
-<p>#<strong>define</strong> MAX_USUARIOS 50</p>
-<p>int main(void) {</p>
-<p>float radio = 10.0f;</p>
-<p>// El compilador ve: float area = 3.14159f * radio * radio;</p>
-<p>float area = PI * radio * radio;</p>
-<p>printf("El área es: %.2f\n", area);</p>
-<p>printf("Límite: %d\n", MAX_USUARIOS);</p>
-<p>return 0;</p>
-<p>}</p>
+<div class="c2h-code">
+  <div class="c2h-code-inner">
+    <table>
+      <tr><td>1</td><td><span class="c2h-directive">#include</span> <span class="c2h-val-str">&lt;stdio.h&gt;</span></td></tr>
+      <tr><td>2</td><td><span class="c2h-comment">// El preprocesador reemplazará cada 'PI' por '3.14159f' antes de la compilación.</span></td></tr>
+      <tr><td>3</td><td><span class="c2h-directive">#define</span> <span class="c2h-identifier">PI</span> <span class="c2h-val-flt">3.14159</span><span class="c2h-identifier">f</span></td></tr>
+      <tr><td>4</td><td><span class="c2h-directive">#define</span> <span class="c2h-identifier">MAX_USUARIOS</span> <span class="c2h-val-int">50</span></td></tr>
+      <tr><td>5</td><td></td></tr>
+      <tr><td>6</td><td><span class="c2h-kword c2h-kword-int">int</span> <span class="c2h-identifier c2h-fdeclname">main</span>(<span class="c2h-kword c2h-kword-void">void</span>) {</td></tr>
+      <tr><td>7</td><td>    <span class="c2h-kword c2h-kword-float">float</span> <span class="c2h-identifier">radio</span> <span class="c2h-operator">=</span> <span class="c2h-val-flt">10.0</span><span class="c2h-identifier">f</span>;</td></tr>
+      <tr><td>8</td><td>    <span class="c2h-comment">// El compilador ve: float area = 3.14159f * radio * radio;</span></td></tr>
+      <tr><td>9</td><td>    <span class="c2h-kword c2h-kword-float">float</span> <span class="c2h-identifier">area</span> <span class="c2h-operator">=</span> <span class="c2h-identifier">PI</span> <span class="c2h-operator">*</span> <span class="c2h-identifier">radio</span> <span class="c2h-operator">*</span> <span class="c2h-identifier">radio</span>;</td></tr>
+      <tr><td>10</td><td>    </td></tr>
+      <tr><td>11</td><td>    <span class="c2h-identifier c2h-fcallname">printf</span>(<span class="c2h-val-str">"El área es: %.2f\n"</span>, <span class="c2h-identifier">area</span>);</td></tr>
+      <tr><td>12</td><td>    <span class="c2h-identifier c2h-fcallname">printf</span>(<span class="c2h-val-str">"Límite: %d\n"</span>, <span class="c2h-identifier">MAX_USUARIOS</span>);</td></tr>
+      <tr><td>13</td><td>    <span class="c2h-kword c2h-kword-return">return</span> <span class="c2h-val-int">0</span>;</td></tr>
+      <tr><td>14</td><td>}</td></tr>
+    </table>
+  </div>
+</div>
 <p><strong>#define vs. const (Ventajas y Desventajas)</strong></p>
 <table style="width:97%;">
 <colgroup>
@@ -282,12 +309,14 @@ del código.</p></li>
 </ol>
 <p><strong>Ejemplos de Aplicación:</strong></p>
 <p>C</p>
+<blockquote>
 <p>// Mal Práctica (Parece una variable)</p>
 <p>const float tasa = 0.05f;</p>
 <p>// ✅ Buena Práctica: Snake Case en Mayúsculas</p>
 <p>const float TASA_INTERES_FIJA = 0.05f;</p>
 <p>// ✅ Buena Práctica para una constante entera</p>
 <p>#<strong>define</strong> TAMANIO_BUFFER 1024</p>
+</blockquote>
 <p>Adherirse a esta convención es esencial para escribir código
 profesional y colaborativo en C.</p>
 <p><strong>Sección Extra: Conversión de Tipos (Casting) en C
@@ -343,16 +372,24 @@ promovido al tipo de dato "mayor" antes de la operación.</li>
 </table>
 <p><strong>Ejemplo de Conversión Implícita:</strong></p>
 <p>C</p>
-<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
-<p>int main(void) {</p>
-<p>int entero = 10;</p>
-<p>float decimal = 3.5f;</p>
-<p>// El 'entero' (10) se promueve implícitamente a float (10.0f)</p>
-<p>// antes de la suma.</p>
-<p>float resultado = entero + decimal;</p>
-<p>printf("Resultado implícito (10.0 + 3.5): %.1f\n", resultado);</p>
-<p>return 0;</p>
-<p>}</p>
+<div class="c2h-code">
+  <div class="c2h-code-inner">
+    <table>
+      <tr><td>1</td><td><span class="c2h-directive">#include</span> <span class="c2h-val-str">&lt;stdio.h&gt;</span></td></tr>
+      <tr><td>2</td><td></td></tr>
+      <tr><td>3</td><td><span class="c2h-kword c2h-kword-int">int</span> <span class="c2h-identifier c2h-fdeclname">main</span>(<span class="c2h-kword c2h-kword-void">void</span>) {</td></tr>
+      <tr><td>4</td><td>    <span class="c2h-kword c2h-kword-int">int</span> <span class="c2h-identifier">entero</span> <span class="c2h-operator">=</span> <span class="c2h-val-int">10</span>;</td></tr>
+      <tr><td>5</td><td>    <span class="c2h-kword c2h-kword-float">float</span> <span class="c2h-identifier">decimal</span> <span class="c2h-operator">=</span> <span class="c2h-val-flt">3.5</span><span class="c2h-identifier">f</span>;</td></tr>
+      <tr><td>6</td><td>    <span class="c2h-comment">// El 'entero' (10) se promueve implícitamente a float (10.0f)</span></td></tr>
+      <tr><td>7</td><td>    <span class="c2h-comment">// antes de la suma.</span></td></tr>
+      <tr><td>8</td><td>    <span class="c2h-kword c2h-kword-float">float</span> <span class="c2h-identifier">resultado</span> <span class="c2h-operator">=</span> <span class="c2h-identifier">entero</span> <span class="c2h-operator">+</span> <span class="c2h-identifier">decimal</span>;</td></tr>
+      <tr><td>9</td><td>    <span class="c2h-identifier c2h-fcallname">printf</span>(<span class="c2h-val-str">"Resultado implícito (10.0 + 3.5): %.1f\n"</span>, <span class="c2h-identifier">resultado</span>);</td></tr>
+      <tr><td>10</td><td>    </td></tr>
+      <tr><td>11</td><td>    <span class="c2h-kword c2h-kword-return">return</span> <span class="c2h-val-int">0</span>;</td></tr>
+      <tr><td>12</td><td>}</td></tr>
+    </table>
+  </div>
+</div>
 <p><strong>Salida Esperada:</strong></p>
 <p>Resultado implícito (10.0 + 3.5): 13.5</p>
 <p><strong>2. Conversión Explícita (Casting)</strong></p>
@@ -365,28 +402,38 @@ Esto se realiza mediante el <strong>operador de
 entre paréntesis () inmediatamente antes de la variable o valor a
 convertir.</li>
 </ul>
-<p>$$\text{Sintaxis de Casting: } \text{(tipo\_destino)} \space \space
-\text{expresión\_a\_convertir}$$</p>
+<p>Sintaxis de Casting: (tipo_destino) expresión_a_convertir</p>
 <p><strong>Ejemplo de Conversión Explícita (Casting):</strong></p>
 <p>El casting es vital para operaciones como la división de enteros,
 donde se necesita un resultado decimal.</p>
 <p>C</p>
-<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
-<p>int main(void) {</p>
-<p>int suma_total = 100;</p>
-<p>int contador = 6;</p>
-<p>// División de enteros (100 / 6) resultaría en 16.</p>
-<p>// Para obtener el promedio decimal, forzamos la conversión de
-'suma_total' a float.</p>
-<p>float promedio = (float)suma_total / contador;</p>
-<p>printf("Promedio sin casting (entero): %d / %d = 16\n", suma_total,
-contador);</p>
-<p>printf("Promedio con casting (decimal): %.2f\n", promedio);</p>
-<p>return 0;</p>
-<p>}</p>
+<div class="c2h-code">
+  <div class="c2h-code-inner">
+    <table>
+      <tr><td>1</td><td><span class="c2h-directive">#include</span> <span class="c2h-val-str">&lt;stdio.h&gt;</span></td></tr>
+      <tr><td>2</td><td></td></tr>
+      <tr><td>3</td><td><span class="c2h-kword c2h-kword-int">int</span> <span class="c2h-identifier c2h-fdeclname">main</span>(<span class="c2h-kword c2h-kword-void">void</span>) {</td></tr>
+      <tr><td>4</td><td>    <span class="c2h-kword c2h-kword-int">int</span> <span class="c2h-identifier">suma_total</span> <span class="c2h-operator">=</span> <span class="c2h-val-int">100</span>;</td></tr>
+      <tr><td>5</td><td>    <span class="c2h-kword c2h-kword-int">int</span> <span class="c2h-identifier">contador</span> <span class="c2h-operator">=</span> <span class="c2h-val-int">6</span>;</td></tr>
+      <tr><td>6</td><td>    <span class="c2h-comment">// División de enteros (100 / 6) resultaría en 16.</span></td></tr>
+      <tr><td>7</td><td>    <span class="c2h-comment">// Para obtener el promedio decimal, forzamos la conversión de 'suma_total' a float.</span></td></tr>
+      <tr><td>8</td><td>    <span class="c2h-kword c2h-kword-float">float</span> <span class="c2h-identifier">promedio</span> <span class="c2h-operator">=</span> (<span class="c2h-kword c2h-kword-float">float</span>)<span class="c2h-identifier">suma_total</span> <span class="c2h-operator">/</span> <span class="c2h-identifier">contador</span>;</td></tr>
+      <tr><td>9</td><td>    </td></tr>
+      <tr><td>10</td><td>    <span class="c2h-identifier c2h-fcallname">printf</span>(<span class="c2h-val-str">"Promedio sin casting (entero): %d / %d = 16\n"</span>, <span class="c2h-identifier">suma_total</span>, <span class="c2h-identifier">contador</span>);</td></tr>
+      <tr><td>11</td><td>    <span class="c2h-identifier c2h-fcallname">printf</span>(<span class="c2h-val-str">"Promedio con casting (decimal): %.2f\n"</span>, <span class="c2h-identifier">promedio</span>);</td></tr>
+      <tr><td>12</td><td>    </td></tr>
+      <tr><td>13</td><td>    <span class="c2h-kword c2h-kword-return">return</span> <span class="c2h-val-int">0</span>;</td></tr>
+      <tr><td>14</td><td>}</td></tr>
+      
+    </table>
+  </div>
+</div>
+<br>
 <p><strong>Salida Esperada:</strong></p>
+<blockquote>
 <p>Promedio sin casting (entero): 100 / 6 = 16</p>
 <p>Promedio con casting (decimal): 16.67</p>
+</blockquote>
 <p><strong>¡Advertencia! Pérdida de Datos:</strong></p>
 <p>Si haces un <em>cast</em> de un tipo más grande a uno más pequeño
 (ej. float a int), se <strong>trunca</strong> la parte decimal (se

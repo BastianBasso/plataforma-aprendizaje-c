@@ -344,10 +344,13 @@ body {
 .app-header-nav {
   display: flex;
   gap: 12px;
+  flex: 1;
+  justify-content: center;
 }
 
 .app-header-nav a {
   color: #b8c1ec;
+  font-size: calc(1rem + 5px);
 }
 
 .app-header-user {
@@ -369,6 +372,35 @@ body {
   text-decoration: none;
   border: 0;
   font-weight: 800;
+}
+
+.app-header-iconBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: #b8c1ec;
+  color: #232946;
+  text-decoration: none;
+  margin-left: 30px;
+  flex: 0 0 auto;
+}
+
+.app-header-iconBtn:hover {
+  filter: brightness(0.98);
+}
+
+.app-header-iconBtn:focus-visible {
+  outline: 2px solid #b8c1ec;
+  outline-offset: 2px;
+}
+
+.app-header-icon {
+  width: 20px;
+  height: 20px;
+  display: block;
 }
 
 .app-shell-body {
