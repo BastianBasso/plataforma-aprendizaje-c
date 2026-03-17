@@ -1,0 +1,16 @@
+<svg width="38" height="38" viewBox="0 0 38 38" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="gradLogo" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="60%" stop-color="#162047" />
+      <stop offset="100%" stop-color="#3b2fa6" />
+    </linearGradient>
+    
+    <filter id="shadowLogo" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#3b2fa6" flood-opacity="0.08" />
+    </filter>
+  </defs>
+
+  <rect width="38" height="38" rx="8" fill="url(#gradLogo)" filter="url(#shadowLogo)" />
+  
+  <text x="50%" y="50%" dominant-baseline="central" text-anchor="middle" fill="#ffffff" font-family="system-ui, sans-serif" font-weight="900" font-size="24px">C</text>
+</svg>

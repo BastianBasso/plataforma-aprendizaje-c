@@ -38,9 +38,9 @@ export function Login() {
         return;
       }
 
-      if (json?.userId != null) {
+      if (json?.usuario?.id != null) {
         try {
-          sessionStorage.setItem('userId', String(json.userId));
+          sessionStorage.setItem('userId', String(json.usuario.id));
         } catch {
         }
       }

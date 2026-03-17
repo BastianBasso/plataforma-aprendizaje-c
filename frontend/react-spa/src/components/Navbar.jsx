@@ -16,7 +16,10 @@ export function Navbar({ modulosIndex }) {
                 </li>
               ))}
             </ul>
+            <br />
+
           </div>
+
         ))}
       </div>
     </nav>

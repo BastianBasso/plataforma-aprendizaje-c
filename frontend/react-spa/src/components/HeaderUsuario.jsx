@@ -43,7 +43,7 @@ export function HeaderUsuario() {
           <nav className="app-header-nav" aria-label="Navegación">
             
             {user?.rol === 'Administrador' || user?.rol === 'Super Administrador' && (
-              <Link to="/admin" style={{ fontWeight: 800, color: '#1a4e8a' }}>
+              <Link to="/admin" style={{  color: '#b8c1ec' }}>
                 Panel Admin
               </Link>
             )}
