@@ -93,7 +93,6 @@ export function AlternativeQuiz({ quiz, api, onSubmitted }) {
         });
         
         const data = await res.json();
-        // AHORA GUARDAMOS TAMBIÉN EL ID CORRECTO
         nuevasCorrecciones[normalizeId(preguntaId)] = {
             esCorrecta: data.esCorrecta,
             idCorrecta: data.idCorrecta ? normalizeId(data.idCorrecta) : null

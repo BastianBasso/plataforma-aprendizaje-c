@@ -71,7 +71,6 @@ const getUserProgressDetail = async (req, res) => {
 };
 
 
-// Obtener todos los usuarios (Para Admin y Super Admin)
 const getAllUsers = async (req, res) => {
     try {
         const { rows: adminCheck } = await db.query(
@@ -79,19 +78,44 @@ const getAllUsers = async (req, res) => {
             [req.session.userId]
         );
 
-        // CORRECCIÓN DEL ERROR 403: Permitimos a ambos roles
         const rolUsuario = adminCheck[0]?.rol;
         if (!rolUsuario || (rolUsuario !== 'Administrador' && rolUsuario !== 'Super Administrador')) {
             return res.status(403).json({ success: false, message: 'Acceso denegado. Solo administradores.' });
         }
 
         const query = `
-            SELECT id, COALESCE(nombre, usuario) as name, rol as role, correo as email, ultimo_acceso as lastconnection
-            FROM usuario ORDER BY id ASC
+            WITH TotalLecciones AS (
+                SELECT COUNT(id) AS total FROM leccion
+            ),
+            ProgresoUsuario AS (
+                SELECT 
+                    usuario_id, 
+                    COUNT(DISTINCT leccion_id) AS lecciones_completadas
+                FROM progreso
+                GROUP BY usuario_id
+            )
+            SELECT 
+                u.id, 
+                COALESCE(u.nombre, u.usuario) as name, 
+                u.rol as role, 
+                u.correo as email, 
+                u.ultimo_acceso as lastconnection,
+                COALESCE(
+                    ROUND((CAST(pu.lecciones_completadas AS NUMERIC) * 100) / NULLIF(tl.total, 0), 0),
+                    0
+                ) as progress
+            FROM usuario u
+            CROSS JOIN TotalLecciones tl
+            LEFT JOIN ProgresoUsuario pu ON u.id = pu.usuario_id
+            ORDER BY u.id ASC;
         `;
         const { rows } = await db.query(query);
 
-        const usersConProgreso = rows.map(u => ({ ...u, progress: 0 }));
+        const usersConProgreso = rows.map(u => ({ 
+            ...u, 
+            progress: parseInt(u.progress) || 0 
+        }));
+        
         res.json({ success: true, users: usersConProgreso });
 
     } catch (error) {
