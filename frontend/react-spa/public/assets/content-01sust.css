@@ -228,46 +228,22 @@ blockquote {
     https://github.com/cozis/c2html
 
  */
-.c2h-c2h-code {
-  all: unset;
-}
-.c2h-code-inner table{
-  all: unset;
-}
-.c2h-directive{
-  all: unset;
-}
-.c2h-val-str{
-  all: unset;
-}
-.c2h-code table td {
-  all: unset;
-}
-.c2h-comment {
-    all: unset;
-}
 
-.c2h-val-int,
-.c2h-val-flt {
-    all: unset;
-}
-
-.c2h-val-str,
-.c2h-val-char {
-    all: unset;
-}
-
-.c2h-directive,
-.c2h-kword {
-    all: unset;
-}
+/*
+  Nota: el contenido principal (".main-content table") aplica estilos fuertes a las tablas.
+  El código `c2h-code` también usa una tabla para numerar líneas, así que aquí lo aislamos
+  con overrides en vez de usar `all: unset` (que rompe `display: table`/`table-cell`).
+*/
 
 
 
 
 div.c2h-code {
     padding: 10px;
-    border-radius: 3px;
+  margin: 0.75rem 0 1.25rem;
+  border: 1px solid #e3eaf2;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(60, 120, 200, 0.07);
 
     font-family: monospace;
     font-size: 16px;
@@ -297,6 +273,11 @@ div.c2h-code-inner {
 div.c2h-code table {
     border-collapse: collapse;
     font-size: inherit;
+  width: auto;
+  margin: 0;
+  background: transparent;
+  box-shadow: none;
+  border-radius: 0;
 }
 
 div.c2h-code table td {
@@ -307,6 +288,8 @@ div.c2h-code table td {
      * number align to the first line.                   
      */
     vertical-align: top;
+    padding: 0;
+    border-bottom: 0;
 }
 
 div.c2h-code table td:first-child {
@@ -375,5 +358,118 @@ div.c2h-code table td:last-child {
 
 .c2h-fcallname {
     color: hsl(210, 50%, 60%);
+}
+
+/* =========================
+   Ejercicios de Programación
+   ========================= */
+
+section[data-feature="programming-exercise"] {
+  margin: 1rem 0 1.25rem;
+  padding: 18px 18px;
+  background: #f7fbff;
+  border: 1px solid #e3eaf2;
+  border-radius: 14px;
+  box-shadow: 0 2px 8px rgba(60, 120, 200, 0.07);
+}
+
+section[data-feature="programming-exercise"] h2 {
+  margin-top: 0;
+}
+
+section[data-feature="programming-exercise"] details {
+  margin-top: 0.75rem;
+  border: 1px solid #e3eaf2;
+  border-radius: 12px;
+  background: #fff;
+  padding: 10px 12px;
+}
+
+section[data-feature="programming-exercise"] details > summary {
+  cursor: pointer;
+  font-weight: 700;
+  color: #1a4e8a;
+}
+
+section[data-feature="programming-exercise"] details pre {
+  margin-top: 0.5rem;
+  background: #eaf6ff;
+  border: 1px solid #e3eaf2;
+  border-radius: 10px;
+  padding: 10px 12px;
+}
+
+section[data-feature="programming-exercise"] label {
+  margin-top: 0.75rem;
+}
+
+section[data-feature="programming-exercise"] textarea.programming-exercise-textarea {
+  width: 100%;
+  font-family: ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,Liberation Mono,Courier New,monospace;
+  font-size: 0.98em;
+  line-height: 1.55;
+  padding: 12px 14px;
+  margin-top: 0.5rem;
+  background: #fff;
+  border: 1px solid #e3eaf2;
+  border-radius: 12px;
+  outline: none;
+}
+
+section[data-feature="programming-exercise"] textarea.programming-exercise-textarea:focus {
+  border-color: #2d7be0;
+  box-shadow: 0 0 0 3px rgba(60, 120, 200, 0.15);
+}
+
+section[data-feature="programming-exercise"] textarea.programming-exercise-textarea[data-validation-state="pass"] {
+  border-color: rgb(21 128 61);
+  background: rgb(220 252 231 / 0.35);
+}
+
+section[data-feature="programming-exercise"] textarea.programming-exercise-textarea[data-validation-state="fail"] {
+  border-color: rgb(185 28 28);
+  background: rgb(254 226 226 / 0.45);
+}
+
+section[data-feature="programming-exercise"] button {
+  margin-top: 0.75rem;
+  padding: 10px 16px;
+  border-radius: 12px;
+  background: #1a4e8a;
+  color: #fff;
+  font-weight: 700;
+  border: 0;
+}
+
+section[data-feature="programming-exercise"] button:hover:not(:disabled) {
+  background: #2d7be0;
+}
+
+section[data-feature="programming-exercise"] button:disabled {
+  opacity: 0.7;
+}
+
+section[data-feature="programming-exercise"] .quiz-message {
+  margin-top: 0.75rem;
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px solid #e3eaf2;
+  background: #eaf6ff;
+  color: #1a4e8a;
+}
+
+section[data-feature="programming-exercise"] .quiz-message.success {
+  background: rgb(220 252 231);
+  color: rgb(21 128 61);
+}
+
+section[data-feature="programming-exercise"] .quiz-message.warning {
+  background: rgb(254 249 195);
+  color: rgb(161 98 7);
+}
+
+section[data-feature="programming-exercise"] .quiz-message.info {
+  background: #e3f0ff;
+  color: #1a4e8a;
 }
 

@@ -3,164 +3,286 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modulo 2 ejercicios 3</title>
     <link rel="stylesheet" crossorigin href="/assets/content-01sust.css">
 </head>
 <body>
 <div class="main-content">
-<p><strong>Ejercicios de Programación: Variables en C</strong></p>
-<p><strong>Ejercicio 1: Declaración en Dos Pasos (Separado)</strong></p>
-<p><strong>Instrucción:</strong> Declara una variable int llamada
-horas_trabajadas. En una línea <strong>separada</strong>, inicialízala
-con el valor 40. Finalmente, imprime el valor.</p>
-<p><strong>Solución en C:</strong></p>
-<p>C</p>
-<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
-<p>int main(void) {</p>
-<p>int horas_trabajadas; // Declaración</p>
-<p>horas_trabajadas = 40; // Inicialización</p>
-<p>printf("Horas trabajadas: %d\n", horas_trabajadas);</p>
-<p>return 0;</p>
-<p>}</p>
-<p><strong>Salida Esperada:</strong></p>
-<p>Horas trabajadas: 40</p>
-<p><strong>Ejercicio 2: Inicialización Directa
-(Recomendada)</strong></p>
-<p><strong>Instrucción:</strong> Declara e inicializa directamente (un
-solo paso) tres variables: distancia (float con valor 150.5f),
-calificacion (char con valor 'A') y precio_unitario (double con valor
-19.99). Imprime los tres valores.</p>
-<p><strong>Solución en C:</strong></p>
-<p>C</p>
-<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
-<p>int main(void) {</p>
-<p>float distancia = 150.5f;</p>
-<p>char calificacion = 'A';</p>
-<p>double precio_unitario = 19.99;</p>
-<p>printf("Distancia: %.1f km\n", distancia);</p>
-<p>printf("Calificación: %c\n", calificacion);</p>
-<p>printf("Precio: %.2lf\n", precio_unitario);</p>
-<p>return 0;</p>
-<p>}</p>
-<p><strong>Salida Esperada:</strong></p>
-<p>Distancia: 150.5 km</p>
-<p>Calificación: A</p>
-<p>Precio: 19.99</p>
-<p><strong>Ejercicio 3: El Misterio del Valor Basura
-(Advertencia)</strong></p>
-<p><strong>Instrucción:</strong> Declara una variable int llamada
-valor_sin_init y <strong>NO</strong> la inicialices. Intenta imprimir su
-valor. Añade un comentario en la salida sobre por qué el resultado es
-impredecible.</p>
-<p><strong>Solución en C:</strong></p>
-<p>C</p>
-<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
-<p>int main(void) {</p>
-<p>int valor_sin_init; // Declarada, pero no inicializada</p>
-<p>printf("El valor de la variable sin inicializar es: %d\n",
-valor_sin_init);</p>
-<p>printf("--- ADVERTENCIA: Este valor es basura e impredecible
----\n");</p>
-<p>return 0;</p>
-<p>}</p>
-<p><strong>Salida Esperada (El número cambiará, pero la estructura es
-constante):</strong></p>
-<p>El valor de la variable sin inicializar es: [NUMERO ALEATORIO GRANDE
-O PEQUEÑO]</p>
-<p>--- ADVERTENCIA: Este valor es basura e impredecible ---</p>
-<p><strong>Ejercicio 4: Reasignación de un Contador</strong></p>
-<p><strong>Instrucción:</strong> Inicializa un int llamado contador a 0.
-En la siguiente línea, reasígnalo a 10. Finalmente, usa la reasignación
-para incrementar su valor en 1 (usando contador = contador + 1;).
-Imprime el valor final.</p>
-<p><strong>Solución en C:</strong></p>
-<p>C</p>
-<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
-<p>int main(void) {</p>
-<p>int contador = 0; // Inicialización a 0</p>
-<p>contador = 10; // Reasignación a 10</p>
-<p>contador = contador + 1; // Reasignación: 10 + 1 = 11</p>
-<p>printf("Valor final del contador: %d\n", contador);</p>
-<p>return 0;</p>
-<p>}</p>
-<p><strong>Salida Esperada:</strong></p>
-<p>Valor final del contador: 11</p>
-<p><strong>Ejercicio 5: Uso de Variables en Operaciones
-Aritméticas</strong></p>
-<p><strong>Instrucción:</strong> Declara e inicializa un float llamado
-radio a 5.0f. Declara otro float llamado area. Usa el valor de radio
-para calcular el área del círculo ($\text{Área} = 3.14159 \times
-\text{radio} \times \text{radio}$) y asigna el resultado a la variable
-area.</p>
-<p><strong>Solución en C:</strong></p>
-<p>C</p>
-<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
-<p>int main(void) {</p>
-<p>float radio = 5.0f;</p>
-<p>float area; // Declaración de la variable donde se guardará el
-resultado</p>
-<p>// Uso del valor de 'radio' en la fórmula</p>
-<p>area = 3.14159f * radio * radio;</p>
-<p>printf("El área del círculo es: %.2f\n", area);</p>
-<p>return 0;</p>
-<p>}</p>
-<p><strong>Salida Esperada:</strong></p>
-<p>El área del círculo es: 78.54</p>
-<p><strong>Ejercicio 6: Reasignación para Cambio de Estado</strong></p>
-<p><strong>Instrucción:</strong> Declara una variable char llamada
-estado e inicialízala con 'P' (Pendiente). Usa printf() para mostrar el
-estado inicial. Luego, reasigna estado a 'C' (Completado) y vuelve a
-imprimir el nuevo estado.</p>
-<p><strong>Solución en C:</strong></p>
-<p>C</p>
-<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
-<p>int main(void) {</p>
-<p>char estado = 'P';</p>
-<p>printf("Estado inicial: %c (Pendiente)\n", estado);</p>
-<p>estado = 'C'; // Reasignación</p>
-<p>printf("Nuevo estado: %c (Completado)\n", estado);</p>
-<p>return 0;</p>
-<p>}</p>
-<p><strong>Salida Esperada:</strong></p>
-<p>Estado inicial: P (Pendiente)</p>
-<p>Nuevo estado: C (Completado)</p>
-<p><strong>Ejercicio 7: Reasignación de Tipo Entero desde
-Float</strong></p>
-<p><strong>Instrucción:</strong> Inicializa un double llamado
-valor_bruto a 15.75. Declara un int llamado valor_entero. Reasigna
-valor_entero a una conversión del valor_bruto (sin usar <em>cast</em>,
-para demostrar la reasignación con truncamiento). Imprime el valor final
-de valor_entero.</p>
-<p><strong>Solución en C:</strong></p>
-<p>C</p>
-<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
-<p>int main(void) {</p>
-<p>double valor_bruto = 15.75;</p>
-<p>int valor_entero;</p>
-<p>// Reasignación: la parte .75 se pierde (truncamiento)</p>
-<p>valor_entero = valor_bruto;</p>
-<p>printf("El valor entero final es: %d\n", valor_entero);</p>
-<p>return 0;</p>
-<p>}</p>
-<p><strong>Salida Esperada:</strong></p>
-<p>El valor entero final es: 15</p>
-<p><strong>Ejercicio 8: Inicialización Múltiple Segura</strong></p>
-<p><strong>Instrucción:</strong> Inicializa tres variables int en una
-sola línea (x, y, z), todas con el valor inicial de 0. Luego, reasigna x
-a 5 y y a 10. Imprime la suma de las tres variables.</p>
-<p><strong>Solución en C:</strong></p>
-<p>C</p>
-<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
-<p>int main(void) {</p>
-<p>int x = 0, y = 0, z = 0; // Inicialización múltiple</p>
-<p>x = 5; // Reasignación</p>
-<p>y = 10; // Reasignación</p>
-<p>// Uso de variables</p>
-<p>int suma = x + y + z;</p>
-<p>printf("La suma final (5 + 10 + 0) es: %d\n", suma);</p>
-<p>return 0;</p>
-<p>}</p>
-<p><strong>Salida Esperada:</strong></p>
-<p>La suma final (5 + 10 + 0) es: 15</p>
+
+<p><strong>⚙️ Ejercicios de Programación: Variables en C</strong></p>
+
+<h3>Ejercicio 1: Declaración en Dos Pasos (Separado)</h3>
+<p><strong>Instrucción:</strong> Declara una variable <strong>int</strong> llamada <strong>horas_trabajadas</strong>. En una línea separada, inicialízala con el valor <strong>40</strong>. Finalmente, imprime el valor.</p>
+
+<div data-exercise="programming">
+    <script type="application/json" data-exercise-config>
+        {
+            "version": 1,
+            "exerciseId": "m2-301-e1-decl-separado",
+            "lessonId": 2301,
+            "showTitle": false
+        }
+    </script>
+</div>
+
+<details>
+    <summary><strong>Solución en C</strong></summary>
+    <div class="c2h-code">
+        <div class="c2h-code-inner">
+            <table>
+                <tr><td>1</td><td><span class="c2h-directive">#include</span> <span class="c2h-val-str">&lt;stdio.h&gt;</span></td></tr>
+                <tr><td>2</td><td><span class="c2h-kword c2h-kword-int">int</span> <span class="c2h-identifier c2h-fdeclname">main</span>(<span class="c2h-kword c2h-kword-void">void</span>) {</td></tr>
+                <tr><td>3</td><td>&nbsp;&nbsp;&nbsp;&nbsp;<span class="c2h-kword c2h-kword-int">int</span> <span class="c2h-identifier">horas_trabajadas</span>; <span class="c2h-comment">// Declaración</span></td></tr>
+                <tr><td>4</td><td>&nbsp;&nbsp;&nbsp;&nbsp;<span class="c2h-identifier">horas_trabajadas</span> = <span class="c2h-val-int">40</span>; <span class="c2h-comment">// Inicialización</span></td></tr>
+                <tr><td>5</td><td>&nbsp;&nbsp;&nbsp;&nbsp;<span class="c2h-identifier c2h-fcallname">printf</span>(<span class="c2h-val-str">"Horas trabajadas: %d\n"</span>, <span class="c2h-identifier">horas_trabajadas</span>);</td></tr>
+                <tr><td>6</td><td>&nbsp;&nbsp;&nbsp;&nbsp;<span class="c2h-kword c2h-kword-return">return</span> <span class="c2h-val-int">0</span>;</td></tr>
+                <tr><td>7</td><td>}</td></tr>
+            </table>
+        </div>
+    </div>
+</details>
+
+<br>
+
+<h3>Ejercicio 2: Inicialización Directa (Recomendada)</h3>
+<p><strong>Instrucción:</strong> Declara e inicializa directamente (un solo paso) tres variables: <strong>distancia</strong> (float con valor <strong>150.5f</strong>), <strong>calificacion</strong> (char con valor <strong>'A'</strong>) y <strong>precio_unitario</strong> (double con valor <strong>19.99</strong>). Imprime los tres valores.</p>
+
+<div data-exercise="programming">
+    <script type="application/json" data-exercise-config>
+        {
+            "version": 1,
+            "exerciseId": "m2-301-e2-init-directa",
+            "lessonId": 2301,
+            "showTitle": false
+        }
+    </script>
+</div>
+
+<details>
+    <summary><strong>Solución en C</strong></summary>
+    <div class="c2h-code">
+        <div class="c2h-code-inner">
+            <table>
+                <tr><td>1</td><td><span class="c2h-directive">#include</span> <span class="c2h-val-str">&lt;stdio.h&gt;</span></td></tr>
+                <tr><td>2</td><td><span class="c2h-kword c2h-kword-int">int</span> <span class="c2h-identifier c2h-fdeclname">main</span>(<span class="c2h-kword c2h-kword-void">void</span>) {</td></tr>
+                <tr><td>3</td><td>&nbsp;&nbsp;&nbsp;&nbsp;<span class="c2h-kword c2h-kword-float">float</span> <span class="c2h-identifier">distancia</span> = <span class="c2h-val-flt">150.5f</span>;</td></tr>
+                <tr><td>4</td><td>&nbsp;&nbsp;&nbsp;&nbsp;<span class="c2h-kword c2h-kword-char">char</span> <span class="c2h-identifier">calificacion</span> = <span class="c2h-val-str">'A'</span>;</td></tr>
+                <tr><td>5</td><td>&nbsp;&nbsp;&nbsp;&nbsp;<span class="c2h-kword c2h-kword-double">double</span> <span class="c2h-identifier">precio_unitario</span> = <span class="c2h-val-flt">19.99</span>;</td></tr>
+                <tr><td>6</td><td>&nbsp;&nbsp;&nbsp;&nbsp;<span class="c2h-identifier c2h-fcallname">printf</span>(<span class="c2h-val-str">"Distancia: %.1f km\n"</span>, <span class="c2h-identifier">distancia</span>);</td></tr>
+                <tr><td>7</td><td>&nbsp;&nbsp;&nbsp;&nbsp;<span class="c2h-identifier c2h-fcallname">printf</span>(<span class="c2h-val-str">"Calificación: %c\n"</span>, <span class="c2h-identifier">calificacion</span>);</td></tr>
+                <tr><td>8</td><td>&nbsp;&nbsp;&nbsp;&nbsp;<span class="c2h-identifier c2h-fcallname">printf</span>(<span class="c2h-val-str">"Precio: %.2lf\n"</span>, <span class="c2h-identifier">precio_unitario</span>);</td></tr>
+                <tr><td>9</td><td>&nbsp;&nbsp;&nbsp;&nbsp;<span class="c2h-kword c2h-kword-return">return</span> <span class="c2h-val-int">0</span>;</td></tr>
+                <tr><td>10</td><td>}</td></tr>
+            </table>
+        </div>
+    </div>
+</details>
+
+<br>
+
+<h3>Ejercicio 3: El Misterio del Valor Basura (Advertencia)</h3>
+<p><strong>Instrucción:</strong> Declara una variable int llamada <strong>valor_sin_init</strong> y <strong>NO</strong> la inicialices. Intenta imprimir su valor. Imprime además un mensaje de advertencia indicando por qué el resultado es impredecible.</p>
+
+<div data-exercise="programming">
+    <script type="application/json" data-exercise-config>
+        {
+            "version": 1,
+            "exerciseId": "m2-301-e3-valor-basura",
+            "lessonId": 2301,
+            "showTitle": false
+        }
+    </script>
+</div>
+
+<details>
+    <summary><strong>Solución en C</strong></summary>
+    <div class="c2h-code">
+        <div class="c2h-code-inner">
+            <table>
+                <tr><td>1</td><td><span class="c2h-directive">#include</span> <span class="c2h-val-str">&lt;stdio.h&gt;</span></td></tr>
+                <tr><td>2</td><td><span class="c2h-kword c2h-kword-int">int</span> <span class="c2h-identifier c2h-fdeclname">main</span>(<span class="c2h-kword c2h-kword-void">void</span>) {</td></tr>
+                <tr><td>3</td><td>&nbsp;&nbsp;&nbsp;&nbsp;<span class="c2h-kword c2h-kword-int">int</span> <span class="c2h-identifier">valor_sin_init</span>; <span class="c2h-comment">// Declarada, pero no inicializada</span></td></tr>
+                <tr><td>4</td><td>&nbsp;&nbsp;&nbsp;&nbsp;<span class="c2h-identifier c2h-fcallname">printf</span>(<span class="c2h-val-str">"El valor de la variable sin inicializar es: %d\n"</span>, <span class="c2h-identifier">valor_sin_init</span>);</td></tr>
+                <tr><td>5</td><td>&nbsp;&nbsp;&nbsp;&nbsp;<span class="c2h-identifier c2h-fcallname">printf</span>(<span class="c2h-val-str">"--- ADVERTENCIA: Este valor es basura e impredecible ---\n"</span>);</td></tr>
+                <tr><td>6</td><td>&nbsp;&nbsp;&nbsp;&nbsp;<span class="c2h-kword c2h-kword-return">return</span> <span class="c2h-val-int">0</span>;</td></tr>
+                <tr><td>7</td><td>}</td></tr>
+            </table>
+        </div>
+    </div>
+</details>
+
+<br>
+
+<h3>Ejercicio 4: Reasignación de un Contador</h3>
+<p><strong>Instrucción:</strong> Inicializa un int llamado <strong>contador</strong> a 0. En la siguiente línea, reasígnalo a 10. Finalmente, incrementa su valor en 1 usando <strong>contador = contador + 1;</strong> e imprime el valor final.</p>
+
+<div data-exercise="programming">
+    <script type="application/json" data-exercise-config>
+        {
+            "version": 1,
+            "exerciseId": "m2-301-e4-contador",
+            "lessonId": 2301,
+            "showTitle": false
+        }
+    </script>
+</div>
+
+<details>
+    <summary><strong>Solución en C</strong></summary>
+    <div class="c2h-code">
+        <div class="c2h-code-inner">
+            <table>
+                <tr><td>1</td><td><span class="c2h-directive">#include</span> <span class="c2h-val-str">&lt;stdio.h&gt;</span></td></tr>
+                <tr><td>2</td><td><span class="c2h-kword c2h-kword-int">int</span> <span class="c2h-identifier c2h-fdeclname">main</span>(<span class="c2h-kword c2h-kword-void">void</span>) {</td></tr>
+                <tr><td>3</td><td>&nbsp;&nbsp;&nbsp;&nbsp;<span class="c2h-kword c2h-kword-int">int</span> <span class="c2h-identifier">contador</span> = <span class="c2h-val-int">0</span>; <span class="c2h-comment">// Inicialización a 0</span></td></tr>
+                <tr><td>4</td><td>&nbsp;&nbsp;&nbsp;&nbsp;<span class="c2h-identifier">contador</span> = <span class="c2h-val-int">10</span>; <span class="c2h-comment">// Reasignación a 10</span></td></tr>
+                <tr><td>5</td><td>&nbsp;&nbsp;&nbsp;&nbsp;<span class="c2h-identifier">contador</span> = <span class="c2h-identifier">contador</span> + <span class="c2h-val-int">1</span>; <span class="c2h-comment">// 10 + 1 = 11</span></td></tr>
+                <tr><td>6</td><td>&nbsp;&nbsp;&nbsp;&nbsp;<span class="c2h-identifier c2h-fcallname">printf</span>(<span class="c2h-val-str">"Valor final del contador: %d\n"</span>, <span class="c2h-identifier">contador</span>);</td></tr>
+                <tr><td>7</td><td>&nbsp;&nbsp;&nbsp;&nbsp;<span class="c2h-kword c2h-kword-return">return</span> <span class="c2h-val-int">0</span>;</td></tr>
+                <tr><td>8</td><td>}</td></tr>
+            </table>
+        </div>
+    </div>
+</details>
+
+<br>
+
+<h3>Ejercicio 5: Uso de Variables en Operaciones Aritméticas</h3>
+<p><strong>Instrucción:</strong> Declara e inicializa un float llamado <strong>radio</strong> a 5.0f. Declara otro float llamado <strong>area</strong>. Usa el valor de radio para calcular el área del círculo (Área = 3.14159 × radio × radio) y asigna el resultado a la variable area. Imprime el área con dos decimales.</p>
+
+<div data-exercise="programming">
+    <script type="application/json" data-exercise-config>
+        {
+            "version": 1,
+            "exerciseId": "m2-301-e5-area",
+            "lessonId": 2301,
+            "showTitle": false
+        }
+    </script>
+</div>
+
+<details>
+    <summary><strong>Solución en C</strong></summary>
+    <div class="c2h-code">
+        <div class="c2h-code-inner">
+            <table>
+                <tr><td>1</td><td><span class="c2h-directive">#include</span> <span class="c2h-val-str">&lt;stdio.h&gt;</span></td></tr>
+                <tr><td>2</td><td><span class="c2h-kword c2h-kword-int">int</span> <span class="c2h-identifier c2h-fdeclname">main</span>(<span class="c2h-kword c2h-kword-void">void</span>) {</td></tr>
+                <tr><td>3</td><td>&nbsp;&nbsp;&nbsp;&nbsp;<span class="c2h-kword c2h-kword-float">float</span> <span class="c2h-identifier">radio</span> = <span class="c2h-val-flt">5.0f</span>;</td></tr>
+                <tr><td>4</td><td>&nbsp;&nbsp;&nbsp;&nbsp;<span class="c2h-kword c2h-kword-float">float</span> <span class="c2h-identifier">area</span>; <span class="c2h-comment">// Variable donde se guardará el resultado</span></td></tr>
+                <tr><td>5</td><td>&nbsp;&nbsp;&nbsp;&nbsp;<span class="c2h-identifier">area</span> = <span class="c2h-val-flt">3.14159f</span> * <span class="c2h-identifier">radio</span> * <span class="c2h-identifier">radio</span>;</td></tr>
+                <tr><td>6</td><td>&nbsp;&nbsp;&nbsp;&nbsp;<span class="c2h-identifier c2h-fcallname">printf</span>(<span class="c2h-val-str">"El área del círculo es: %.2f\n"</span>, <span class="c2h-identifier">area</span>);</td></tr>
+                <tr><td>7</td><td>&nbsp;&nbsp;&nbsp;&nbsp;<span class="c2h-kword c2h-kword-return">return</span> <span class="c2h-val-int">0</span>;</td></tr>
+                <tr><td>8</td><td>}</td></tr>
+            </table>
+        </div>
+    </div>
+</details>
+
+<br>
+
+<h3>Ejercicio 6: Reasignación para Cambio de Estado</h3>
+<p><strong>Instrucción:</strong> Declara una variable char llamada <strong>estado</strong> e inicialízala con 'P' (Pendiente). Imprime el estado inicial. Luego, reasigna estado a 'C' (Completado) y vuelve a imprimir el nuevo estado.</p>
+
+<div data-exercise="programming">
+    <script type="application/json" data-exercise-config>
+        {
+            "version": 1,
+            "exerciseId": "m2-301-e6-estado",
+            "lessonId": 2301,
+            "showTitle": false
+        }
+    </script>
+</div>
+
+<details>
+    <summary><strong>Solución en C</strong></summary>
+    <div class="c2h-code">
+        <div class="c2h-code-inner">
+            <table>
+                <tr><td>1</td><td><span class="c2h-directive">#include</span> <span class="c2h-val-str">&lt;stdio.h&gt;</span></td></tr>
+                <tr><td>2</td><td><span class="c2h-kword c2h-kword-int">int</span> <span class="c2h-identifier c2h-fdeclname">main</span>(<span class="c2h-kword c2h-kword-void">void</span>) {</td></tr>
+                <tr><td>3</td><td>&nbsp;&nbsp;&nbsp;&nbsp;<span class="c2h-kword c2h-kword-char">char</span> <span class="c2h-identifier">estado</span> = <span class="c2h-val-str">'P'</span>;</td></tr>
+                <tr><td>4</td><td>&nbsp;&nbsp;&nbsp;&nbsp;<span class="c2h-identifier c2h-fcallname">printf</span>(<span class="c2h-val-str">"Estado inicial: %c (Pendiente)\n"</span>, <span class="c2h-identifier">estado</span>);</td></tr>
+                <tr><td>5</td><td>&nbsp;&nbsp;&nbsp;&nbsp;<span class="c2h-identifier">estado</span> = <span class="c2h-val-str">'C'</span>; <span class="c2h-comment">// Reasignación</span></td></tr>
+                <tr><td>6</td><td>&nbsp;&nbsp;&nbsp;&nbsp;<span class="c2h-identifier c2h-fcallname">printf</span>(<span class="c2h-val-str">"Nuevo estado: %c (Completado)\n"</span>, <span class="c2h-identifier">estado</span>);</td></tr>
+                <tr><td>7</td><td>&nbsp;&nbsp;&nbsp;&nbsp;<span class="c2h-kword c2h-kword-return">return</span> <span class="c2h-val-int">0</span>;</td></tr>
+                <tr><td>8</td><td>}</td></tr>
+            </table>
+        </div>
+    </div>
+</details>
+
+<br>
+
+<h3>Ejercicio 7: Reasignación de Tipo Entero desde Double (Truncamiento)</h3>
+<p><strong>Instrucción:</strong> Inicializa un double llamado <strong>valor_bruto</strong> a 15.75. Declara un int llamado <strong>valor_entero</strong>. Asigna valor_bruto a valor_entero (sin cast) para demostrar el truncamiento y luego imprime valor_entero.</p>
+
+<div data-exercise="programming">
+    <script type="application/json" data-exercise-config>
+        {
+            "version": 1,
+            "exerciseId": "m2-301-e7-trunc-double-int",
+            "lessonId": 2301,
+            "showTitle": false
+        }
+    </script>
+</div>
+
+<details>
+    <summary><strong>Solución en C</strong></summary>
+    <div class="c2h-code">
+        <div class="c2h-code-inner">
+            <table>
+                <tr><td>1</td><td><span class="c2h-directive">#include</span> <span class="c2h-val-str">&lt;stdio.h&gt;</span></td></tr>
+                <tr><td>2</td><td><span class="c2h-kword c2h-kword-int">int</span> <span class="c2h-identifier c2h-fdeclname">main</span>(<span class="c2h-kword c2h-kword-void">void</span>) {</td></tr>
+                <tr><td>3</td><td>&nbsp;&nbsp;&nbsp;&nbsp;<span class="c2h-kword c2h-kword-double">double</span> <span class="c2h-identifier">valor_bruto</span> = <span class="c2h-val-flt">15.75</span>;</td></tr>
+                <tr><td>4</td><td>&nbsp;&nbsp;&nbsp;&nbsp;<span class="c2h-kword c2h-kword-int">int</span> <span class="c2h-identifier">valor_entero</span>;</td></tr>
+                <tr><td>5</td><td>&nbsp;&nbsp;&nbsp;&nbsp;<span class="c2h-identifier">valor_entero</span> = <span class="c2h-identifier">valor_bruto</span>; <span class="c2h-comment">// Truncamiento: se pierde la parte .75</span></td></tr>
+                <tr><td>6</td><td>&nbsp;&nbsp;&nbsp;&nbsp;<span class="c2h-identifier c2h-fcallname">printf</span>(<span class="c2h-val-str">"El valor entero final es: %d\n"</span>, <span class="c2h-identifier">valor_entero</span>);</td></tr>
+                <tr><td>7</td><td>&nbsp;&nbsp;&nbsp;&nbsp;<span class="c2h-kword c2h-kword-return">return</span> <span class="c2h-val-int">0</span>;</td></tr>
+                <tr><td>8</td><td>}</td></tr>
+            </table>
+        </div>
+    </div>
+</details>
+
+<br>
+
+<h3>Ejercicio 8: Inicialización Múltiple Segura</h3>
+<p><strong>Instrucción:</strong> Inicializa tres variables int en una sola línea (x, y, z), todas con el valor inicial de 0. Luego, reasigna x a 5 y y a 10. Imprime la suma final.</p>
+
+<div data-exercise="programming">
+    <script type="application/json" data-exercise-config>
+        {
+            "version": 1,
+            "exerciseId": "m2-301-e8-init-multiple-suma",
+            "lessonId": 2301,
+            "showTitle": false
+        }
+    </script>
+</div>
+
+<details>
+    <summary><strong>Solución en C</strong></summary>
+    <div class="c2h-code">
+        <div class="c2h-code-inner">
+            <table>
+                <tr><td>1</td><td><span class="c2h-directive">#include</span> <span class="c2h-val-str">&lt;stdio.h&gt;</span></td></tr>
+                <tr><td>2</td><td><span class="c2h-kword c2h-kword-int">int</span> <span class="c2h-identifier c2h-fdeclname">main</span>(<span class="c2h-kword c2h-kword-void">void</span>) {</td></tr>
+                <tr><td>3</td><td>&nbsp;&nbsp;&nbsp;&nbsp;<span class="c2h-kword c2h-kword-int">int</span> <span class="c2h-identifier">x</span> = <span class="c2h-val-int">0</span>, <span class="c2h-identifier">y</span> = <span class="c2h-val-int">0</span>, <span class="c2h-identifier">z</span> = <span class="c2h-val-int">0</span>;</td></tr>
+                <tr><td>4</td><td>&nbsp;&nbsp;&nbsp;&nbsp;<span class="c2h-identifier">x</span> = <span class="c2h-val-int">5</span>;</td></tr>
+                <tr><td>5</td><td>&nbsp;&nbsp;&nbsp;&nbsp;<span class="c2h-identifier">y</span> = <span class="c2h-val-int">10</span>;</td></tr>
+                <tr><td>6</td><td>&nbsp;&nbsp;&nbsp;&nbsp;<span class="c2h-kword c2h-kword-int">int</span> <span class="c2h-identifier">suma</span> = <span class="c2h-identifier">x</span> + <span class="c2h-identifier">y</span> + <span class="c2h-identifier">z</span>;</td></tr>
+                <tr><td>7</td><td>&nbsp;&nbsp;&nbsp;&nbsp;<span class="c2h-identifier c2h-fcallname">printf</span>(<span class="c2h-val-str">"La suma final (5 + 10 + 0) es: %d\n"</span>, <span class="c2h-identifier">suma</span>);</td></tr>
+                <tr><td>8</td><td>&nbsp;&nbsp;&nbsp;&nbsp;<span class="c2h-kword c2h-kword-return">return</span> <span class="c2h-val-int">0</span>;</td></tr>
+                <tr><td>9</td><td>}</td></tr>
+            </table>
+        </div>
+    </div>
+</details>
+
+<br>
 
 </div>
 </body>

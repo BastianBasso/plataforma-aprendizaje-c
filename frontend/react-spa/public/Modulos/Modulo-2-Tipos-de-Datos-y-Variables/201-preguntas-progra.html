@@ -6,203 +6,385 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Modulo 2 ejercicios 2</title>
     <link rel="stylesheet" crossorigin href="/assets/content-01sust.css">
-   
+    
 </head>
 
 <!-- Header -->
- 
+
 
 <body>
-    
+    <div class="main-content">
+        
+        <p><strong>⚙️ Ejercicios de Programación: Tipos de Datos
+            Primitivos</strong></p>
+            
+            <h3>Ejercicio 1: Medidor de Peso (Operador sizeof)</h3>
+            <p><strong>Instrucción:</strong> Escribe un programa que utilice el operador sizeof() para imprimir el tamaño en bytes de los cuatro tipos primitivos principales: char, int, float y double.</p>
+            <div data-exercise="programming">
+                <script type="application/json" data-exercise-config>
+                    {
+                        "version": 1,
+                        "exerciseId": "m2-201-e1-sizeof",
+                        "lessonId": 2201,
+                        "showTitle": false
+                    }
+                </script>
+            </div>
+            
+            
+<details>
+    <summary><strong>Solución en C</strong></summary>
+    <div class="c2h-code">
+        <div class="c2h-code-inner">
+            <table>
+                <tr><td>1</td><td><span class="c2h-directive">#include</span> <span class="c2h-val-str">&lt;stdio.h&gt;</span></td></tr>
+                <tr><td>2</td><td><span class="c2h-kword c2h-kword-int">int</span> <span class="c2h-identifier c2h-fdeclname">main</span>(<span class="c2h-kword c2h-kword-void">void</span>) {</td></tr>
+                <tr><td>3</td><td>&nbsp;&nbsp;&nbsp;&nbsp;<span class="c2h-identifier c2h-fcallname">printf</span>(<span class="c2h-val-str">"--- TAMAÑOS EN BYTES ---\n"</span>);</td></tr>
+                <tr><td>4</td><td>&nbsp;&nbsp;&nbsp;&nbsp;<span class="c2h-identifier c2h-fcallname">printf</span>(<span class="c2h-val-str">"Tamaño de char: %zu bytes\n"</span>, <span class="c2h-kword c2h-kword-sizeof">sizeof</span>(<span class="c2h-kword c2h-kword-char">char</span>));</td></tr>
+                <tr><td>5</td><td>&nbsp;&nbsp;&nbsp;&nbsp;<span class="c2h-identifier c2h-fcallname">printf</span>(<span class="c2h-val-str">"Tamaño de int: %zu bytes\n"</span>, <span class="c2h-kword c2h-kword-sizeof">sizeof</span>(<span class="c2h-kword c2h-kword-int">int</span>));</td></tr>
+                <tr><td>6</td><td>&nbsp;&nbsp;&nbsp;&nbsp;<span class="c2h-identifier c2h-fcallname">printf</span>(<span class="c2h-val-str">"Tamaño de float: %zu bytes\n"</span>, <span class="c2h-kword c2h-kword-sizeof">sizeof</span>(<span class="c2h-kword c2h-kword-float">float</span>));</td></tr>
+                <tr><td>7</td><td>&nbsp;&nbsp;&nbsp;&nbsp;<span class="c2h-identifier c2h-fcallname">printf</span>(<span class="c2h-val-str">"Tamaño de double: %zu bytes\n"</span>, <span class="c2h-kword c2h-kword-sizeof">sizeof</span>(<span class="c2h-kword c2h-kword-double">double</span>));</td></tr>
+                <tr><td>8</td><td>&nbsp;&nbsp;&nbsp;&nbsp;<span class="c2h-kword c2h-kword-return">return</span> <span class="c2h-val-int">0</span>;</td></tr>
+                <tr><td>9</td><td>}</td></tr>
+            </table>
+        </div>
+    </div>
+</details>
 
-<p><strong>⚙️ Ejercicios de Programación: Tipos de Datos
-Primitivos</strong></p>
-<p><strong>Ejercicio 1: Medidor de Peso (Operador sizeof)</strong></p>
-<p><strong>Instrucción:</strong> Escribe un programa que utilice el
-operador sizeof() para imprimir el tamaño en bytes de los cuatro tipos
-primitivos principales: char, int, float y double.</p>
-<p><strong>Solución en C:</strong></p>
-<p>C</p>
-<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
-<p>int main(void) {</p>
-<p>printf("--- TAMAÑOS EN BYTES ---\n");</p>
-<p>printf("Tamaño de char: %zu bytes\n", sizeof(char));</p>
-<p>printf("Tamaño de int: %zu bytes\n", sizeof(int));</p>
-<p>printf("Tamaño de float: %zu bytes\n", sizeof(float));</p>
-<p>printf("Tamaño de double: %zu bytes\n", sizeof(double));</p>
-<p>return 0;</p>
-<p>}</p>
-<p><strong>Salida Esperada (Típica en sistemas de 64 bits):</strong></p>
-<p>--- TAMAÑOS EN BYTES ---</p>
-<p>Tamaño de char: 1 bytes</p>
-<p>Tamaño de int: 4 bytes</p>
-<p>Tamaño de float: 4 bytes</p>
-<p>Tamaño de double: 8 bytes</p>
-<p><strong>Ejercicio 2: ASCII Básico (Char como Número)</strong></p>
+<br>
+
+<h3>Ejercicio 2: ASCII Básico (Char como Número)</h3>
 <p><strong>Instrucción:</strong> Declara una variable char llamada
 letra_A e inicialízala con el valor 'A'. Imprime esta variable dos
 veces: la primera como <strong>carácter</strong> (%c) y la segunda como
 <strong>número entero decimal</strong> (%d) para mostrar su código
 ASCII.</p>
-<p><strong>Solución en C:</strong></p>
-<p>C</p>
-<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
-<p>int main(void) {</p>
-<p>char letra_A = 'A';</p>
-<p>printf("El carácter es: %c\n", letra_A);</p>
-<p>printf("Su valor ASCII es: %d\n", letra_A);</p>
-<p>return 0;</p>
-<p>}</p>
-<p><strong>Salida Esperada:</strong></p>
-<p>El carácter es: A</p>
-<p>Su valor ASCII es: 65</p>
-<p><strong>Ejercicio 3: Declaración y Uso Mixto</strong></p>
+
+<div data-exercise="programming">
+    <script type="application/json" data-exercise-config>
+        {
+            "version": 1,
+            "exerciseId": "m2-201-e2-ascii",
+            "lessonId": 2201,
+            "showTitle": false
+        }
+    </script>
+</div>
+
+<details>
+    <summary><strong>Solución en C</strong></summary>
+    <div class="c2h-code">
+        <div class="c2h-code-inner">
+            <table>
+                <tr><td>1</td><td><span class="c2h-directive">#include</span> <span class="c2h-val-str">&lt;stdio.h&gt;</span></td></tr>
+                <tr><td>2</td><td><span class="c2h-kword c2h-kword-int">int</span> <span class="c2h-identifier c2h-fdeclname">main</span>(<span class="c2h-kword c2h-kword-void">void</span>) {</td></tr>
+                <tr><td>3</td><td>&nbsp;&nbsp;&nbsp;&nbsp;<span class="c2h-kword c2h-kword-char">char</span> <span class="c2h-identifier">letra_A</span> = <span class="c2h-val-str">'A'</span>;</td></tr>
+                <tr><td>4</td><td>&nbsp;&nbsp;&nbsp;&nbsp;<span class="c2h-identifier c2h-fcallname">printf</span>(<span class="c2h-val-str">"El carácter es: %c\n"</span>, <span class="c2h-identifier">letra_A</span>);</td></tr>
+                <tr><td>5</td><td>&nbsp;&nbsp;&nbsp;&nbsp;<span class="c2h-identifier c2h-fcallname">printf</span>(<span class="c2h-val-str">"Su valor ASCII es: %d\n"</span>, <span class="c2h-identifier">letra_A</span>);</td></tr>
+                <tr><td>6</td><td>&nbsp;&nbsp;&nbsp;&nbsp;<span class="c2h-kword c2h-kword-return">return</span> <span class="c2h-val-int">0</span>;</td></tr>
+                <tr><td>7</td><td>}</td></tr>
+            </table>
+        </div>
+    </div>
+</details>
+
+<br>
+
+
+<h3>Ejercicio 3: Declaración y Uso Mixto</h3>
 <p><strong>Instrucción:</strong> Declara e inicializa tres variables:
 una edad (int), un promedio (float) y el símbolo de moneda (char).
 Imprime los tres valores en una sola línea de forma descriptiva.</p>
-<p><strong>Solución en C:</strong></p>
-<p>C</p>
-<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
-<p>int main(void) {</p>
-<p>int edad = 28;</p>
-<p>float promedio_final = 8.75f;</p>
-<p>char simbolo_moneda = '$';</p>
-<p>printf("Perfil: %c%d de edad con promedio de %.2f.\n",</p>
-<p>simbolo_moneda, edad, promedio_final);</p>
-<p>return 0;</p>
-<p>}</p>
-<p><strong>Salida Esperada:</strong></p>
-<p>Perfil: $28 de edad con promedio de 8.75.</p>
-<p><strong>Ejercicio 4: Diferenciando Precisión (double)</strong></p>
+
+<div data-exercise="programming">
+    <script type="application/json" data-exercise-config>
+        {
+            "version": 1,
+            "exerciseId": "m2-201-e3-mixto",
+            "lessonId": 2201,
+            "showTitle": false
+        }
+    </script>
+</div>
+
+<details>
+    <summary><strong>Solución en C</strong></summary>
+    <div class="c2h-code">
+        <div class="c2h-code-inner">
+            <table>
+                <tr><td>1</td><td><span class="c2h-directive">#include</span> <span class="c2h-val-str">&lt;stdio.h&gt;</span></td></tr>
+                <tr><td>2</td><td><span class="c2h-kword c2h-kword-int">int</span> <span class="c2h-identifier c2h-fdeclname">main</span>(<span class="c2h-kword c2h-kword-void">void</span>) {</td></tr>
+                <tr><td>3</td><td>&nbsp;&nbsp;&nbsp;&nbsp;<span class="c2h-kword c2h-kword-int">int</span> <span class="c2h-identifier">edad</span> = <span class="c2h-val-int">28</span>;</td></tr>
+                <tr><td>4</td><td>&nbsp;&nbsp;&nbsp;&nbsp;<span class="c2h-kword c2h-kword-float">float</span> <span class="c2h-identifier">promedio_final</span> = 8.75f;</td></tr>
+                <tr><td>5</td><td>&nbsp;&nbsp;&nbsp;&nbsp;<span class="c2h-kword c2h-kword-char">char</span> <span class="c2h-identifier">simbolo_moneda</span> = <span class="c2h-val-str">'$'</span>;</td></tr>
+                <tr><td>6</td><td>&nbsp;&nbsp;&nbsp;&nbsp;<span class="c2h-identifier c2h-fcallname">printf</span>(<span class="c2h-val-str">"Perfil: %c%d de edad con promedio de %.2f.\n"</span>,</td></tr>
+                <tr><td>7</td><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="c2h-identifier">simbolo_moneda</span>, <span class="c2h-identifier">edad</span>, <span class="c2h-identifier">promedio_final</span>);</td></tr>
+                <tr><td>8</td><td>&nbsp;&nbsp;&nbsp;&nbsp;<span class="c2h-kword c2h-kword-return">return</span> <span class="c2h-val-int">0</span>;</td></tr>
+                <tr><td>9</td><td>}</td></tr>
+            </table>
+        </div>
+    </div>
+</details>
+
+<br>
+
+<h3>Ejercicio 4: Diferenciando Precisión (double)</h3>
 <p><strong>Instrucción:</strong> Declara una variable de tipo double
 para almacenar una versión muy precisa de PI. Imprime el valor
 utilizando el especificador de formato de punto flotante (%f) y luego
 utiliza <strong>%.10f</strong> para demostrar que el double puede
 almacenar más de 6 decimales con exactitud.</p>
-<p><strong>Solución en C:</strong></p>
-<p>C</p>
-<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
-<p>int main(void) {</p>
-<p>double pi_preciso = 3.1415926535;</p>
-<p>printf("PI con precisión estándar (6 decimales): %.6f\n",
-pi_preciso);</p>
-<p>printf("PI con alta precisión (10 decimales): %.10f\n",
-pi_preciso);</p>
-<p>return 0;</p>
-<p>}</p>
-<p><strong>Salida Esperada:</strong></p>
-<p>PI con precisión estándar (6 decimales): 3.141593</p>
-<p>PI con alta precisión (10 decimales): 3.1415926535</p>
-<p><strong>Ejercicio 5: Declaración Explícita de float</strong></p>
+
+<div data-exercise="programming">
+    <script type="application/json" data-exercise-config>
+        {
+            "version": 1,
+            "exerciseId": "m2-201-e4-double",
+            "lessonId": 2201,
+            "showTitle": false
+        }
+    </script>
+</div>
+
+<details>
+    <summary><strong>Solución en C</strong></summary>
+    <div class="c2h-code">
+        <div class="c2h-code-inner">
+            <table>
+                <tr><td>1</td><td><span class="c2h-directive">#include</span> <span class="c2h-val-str">&lt;stdio.h&gt;</span></td></tr>
+                <tr><td>2</td><td><span class="c2h-kword c2h-kword-int">int</span> <span class="c2h-identifier c2h-fdeclname">main</span>(<span class="c2h-kword c2h-kword-void">void</span>) {</td></tr>
+                <tr><td>3</td><td>&nbsp;&nbsp;&nbsp;&nbsp;<span class="c2h-kword c2h-kword-double">double</span> <span class="c2h-identifier">pi_preciso</span> = 3.1415926535;</td></tr>
+                <tr><td>4</td><td>&nbsp;&nbsp;&nbsp;&nbsp;<span class="c2h-identifier c2h-fcallname">printf</span>(<span class="c2h-val-str">"PI con precisión estándar (6 decimales): %.6f\n"</span>, <span class="c2h-identifier">pi_preciso</span>);</td></tr>
+                <tr><td>5</td><td>&nbsp;&nbsp;&nbsp;&nbsp;<span class="c2h-identifier c2h-fcallname">printf</span>(<span class="c2h-val-str">"PI con alta precisión (10 decimales): %.10f\n"</span>, <span class="c2h-identifier">pi_preciso</span>);</td></tr>
+                <tr><td>6</td><td>&nbsp;&nbsp;&nbsp;&nbsp;<span class="c2h-kword c2h-kword-return">return</span> <span class="c2h-val-int">0</span>;</td></tr>
+                <tr><td>7</td><td>}</td></tr>
+            </table>
+        </div>
+    </div>
+</details>
+
+<br>
+
+<h3>Ejercicio 5: Declaración Explícita de float</h3>
 <p><strong>Instrucción:</strong> Declara una variable float llamada
 altura y asígnale el valor 1.85. Asegúrate de usar el sufijo
 <strong>f</strong> para indicarle al compilador que es un float y no un
 double. Imprime el valor.</p>
-<p><strong>Solución en C:</strong></p>
-<p>C</p>
-<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
-<p>int main(void) {</p>
-<p>// Es crucial usar 'f' para evitar una advertencia de conversión,</p>
-<p>// ya que 1.85 sin sufijo es un double por defecto en C.</p>
-<p>float altura = 1.85f;</p>
-<p>printf("Mi altura es: %.2f metros\n", altura);</p>
-<p>return 0;</p>
-<p>}</p>
-<p><strong>Salida Esperada:</strong></p>
-<p>Mi altura es: 1.85 metros</p>
-<p><strong>Ejercicio 6: Aritmética de Caracteres ASCII</strong></p>
+
+<div data-exercise="programming">
+    <script type="application/json" data-exercise-config>
+        {
+            "version": 1,
+            "exerciseId": "m2-201-e5-float-sufijo",
+            "lessonId": 2201,
+            "showTitle": false
+        }
+    </script>
+</div>
+
+<details>
+    <summary><strong>Solución en C</strong></summary>
+    <div class="c2h-code">
+        <div class="c2h-code-inner">
+            <table>
+                <tr><td>1</td><td><span class="c2h-directive">#include</span> <span class="c2h-val-str">&lt;stdio.h&gt;</span></td></tr>
+                <tr><td>2</td><td><span class="c2h-kword c2h-kword-int">int</span> <span class="c2h-identifier c2h-fdeclname">main</span>(<span class="c2h-kword c2h-kword-void">void</span>) {</td></tr>
+                <tr><td>3</td><td>&nbsp;&nbsp;&nbsp;&nbsp;<span class="c2h-comment">// Es crucial usar 'f' para evitar una advertencia de conversión,</span></td></tr>
+                <tr><td>4</td><td>&nbsp;&nbsp;&nbsp;&nbsp;<span class="c2h-comment">// ya que 1.85 sin sufijo es un double por defecto en C.</span></td></tr>
+                <tr><td>5</td><td>&nbsp;&nbsp;&nbsp;&nbsp;<span class="c2h-kword c2h-kword-float">float</span> <span class="c2h-identifier">altura</span> = 1.85f;</td></tr>
+                <tr><td>6</td><td>&nbsp;&nbsp;&nbsp;&nbsp;<span class="c2h-identifier c2h-fcallname">printf</span>(<span class="c2h-val-str">"Mi altura es: %.2f metros\n"</span>, <span class="c2h-identifier">altura</span>);</td></tr>
+                <tr><td>7</td><td>&nbsp;&nbsp;&nbsp;&nbsp;<span class="c2h-kword c2h-kword-return">return</span> <span class="c2h-val-int">0</span>;</td></tr>
+                <tr><td>8</td><td>}</td></tr>
+            </table>
+        </div>
+    </div>
+</details>
+
+<br>
+
+<h3>Ejercicio 6: Aritmética de Caracteres ASCII</h3>
 <p><strong>Instrucción:</strong> Declara una variable char con la letra
 'J'. Súmale el valor 5 a esa variable y luego imprime el resultado como
 carácter para encontrar la letra resultante en la secuencia ASCII.</p>
-<p><strong>Solución en C:</strong></p>
-<p>C</p>
-<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
-<p>int main(void) {</p>
-<p>char letra_inicial = 'J';</p>
-<p>// Se suma 5 al código ASCII de 'J' (74 + 5 = 79).</p>
-<p>char letra_final = letra_inicial + 5;</p>
-<p>printf("La letra inicial es: %c\n", letra_inicial);</p>
-<p>printf("La letra resultante es: %c\n", letra_final);</p>
-<p>return 0;</p>
-<p>}</p>
-<p><strong>Salida Esperada:</strong></p>
-<p>La letra inicial es: J</p>
-<p>La letra resultante es: O</p>
-<p><strong>Ejercicio 7: Rango Básico de Enteros</strong></p>
+
+<div data-exercise="programming">
+    <script type="application/json" data-exercise-config>
+        {
+            "version": 1,
+            "exerciseId": "m2-201-e6-ascii-aritmetica",
+            "lessonId": 2201,
+            "showTitle": false
+        }
+    </script>
+</div>
+
+<details>
+    <summary><strong>Solución en C</strong></summary>
+    <div class="c2h-code">
+        <div class="c2h-code-inner">
+            <table>
+                <tr><td>1</td><td><span class="c2h-directive">#include</span> <span class="c2h-val-str">&lt;stdio.h&gt;</span></td></tr>
+                <tr><td>2</td><td><span class="c2h-kword c2h-kword-int">int</span> <span class="c2h-identifier c2h-fdeclname">main</span>(<span class="c2h-kword c2h-kword-void">void</span>) {</td></tr>
+                <tr><td>3</td><td>&nbsp;&nbsp;&nbsp;&nbsp;<span class="c2h-kword c2h-kword-char">char</span> <span class="c2h-identifier">letra_inicial</span> = <span class="c2h-val-str">'J'</span>;</td></tr>
+                <tr><td>4</td><td>&nbsp;&nbsp;&nbsp;&nbsp;<span class="c2h-comment">// Se suma 5 al código ASCII de 'J' (74 + 5 = 79).</span></td></tr>
+                <tr><td>5</td><td>&nbsp;&nbsp;&nbsp;&nbsp;<span class="c2h-kword c2h-kword-char">char</span> <span class="c2h-identifier">letra_final</span> = <span class="c2h-identifier">letra_inicial</span> + <span class="c2h-val-int">5</span>;</td></tr>
+                <tr><td>6</td><td>&nbsp;&nbsp;&nbsp;&nbsp;<span class="c2h-identifier c2h-fcallname">printf</span>(<span class="c2h-val-str">"La letra inicial es: %c\n"</span>, <span class="c2h-identifier">letra_inicial</span>);</td></tr>
+                <tr><td>7</td><td>&nbsp;&nbsp;&nbsp;&nbsp;<span class="c2h-identifier c2h-fcallname">printf</span>(<span class="c2h-val-str">"La letra resultante es: %c\n"</span>, <span class="c2h-identifier">letra_final</span>);</td></tr>
+                <tr><td>8</td><td>&nbsp;&nbsp;&nbsp;&nbsp;<span class="c2h-kword c2h-kword-return">return</span> <span class="c2h-val-int">0</span>;</td></tr>
+                <tr><td>9</td><td>}</td></tr>
+            </table>
+        </div>
+    </div>
+</details>
+
+<br>
+
+<h3>Ejercicio 7: Rango Básico de Enteros</h3>
 <p><strong>Instrucción:</strong> Declara dos variables int: una llamada
 saldo con un valor positivo (15000) y otra llamada gasto con un valor
 negativo (-3500). Imprime ambos valores.</p>
-<p><strong>Solución en C:</strong></p>
-<p>C</p>
-<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
-<p>int main(void) {</p>
-<p>int saldo = 15000;</p>
-<p>int gasto = -3500;</p>
-<p>printf("Saldo de la cuenta: %d\n", saldo);</p>
-<p>printf("Gasto registrado: %d\n", gasto);</p>
-<p>return 0;</p>
-<p>}</p>
-<p><strong>Salida Esperada:</strong></p>
-<p>Saldo de la cuenta: 15000</p>
-<p>Gasto registrado: -3500</p>
-<p><strong>Ejercicio 8: Asignación de int desde float
-(Truncamiento)</strong></p>
+
+<div data-exercise="programming">
+    <script type="application/json" data-exercise-config>
+        {
+            "version": 1,
+            "exerciseId": "m2-201-e7-enteros-signo",
+            "lessonId": 2201,
+            "showTitle": false
+        }
+    </script>
+</div>
+
+<details>
+    <summary><strong>Solución en C</strong></summary>
+    <div class="c2h-code">
+        <div class="c2h-code-inner">
+            <table>
+                <tr><td>1</td><td><span class="c2h-directive">#include</span> <span class="c2h-val-str">&lt;stdio.h&gt;</span></td></tr>
+                <tr><td>2</td><td><span class="c2h-kword c2h-kword-int">int</span> <span class="c2h-identifier c2h-fdeclname">main</span>(<span class="c2h-kword c2h-kword-void">void</span>) {</td></tr>
+                <tr><td>3</td><td>&nbsp;&nbsp;&nbsp;&nbsp;<span class="c2h-kword c2h-kword-int">int</span> <span class="c2h-identifier">saldo</span> = <span class="c2h-val-int">15000</span>;</td></tr>
+                <tr><td>4</td><td>&nbsp;&nbsp;&nbsp;&nbsp;<span class="c2h-kword c2h-kword-int">int</span> <span class="c2h-identifier">gasto</span> = -<span class="c2h-val-int">3500</span>;</td></tr>
+                <tr><td>5</td><td>&nbsp;&nbsp;&nbsp;&nbsp;<span class="c2h-identifier c2h-fcallname">printf</span>(<span class="c2h-val-str">"Saldo de la cuenta: %d\n"</span>, <span class="c2h-identifier">saldo</span>);</td></tr>
+                <tr><td>6</td><td>&nbsp;&nbsp;&nbsp;&nbsp;<span class="c2h-identifier c2h-fcallname">printf</span>(<span class="c2h-val-str">"Gasto registrado: %d\n"</span>, <span class="c2h-identifier">gasto</span>);</td></tr>
+                <tr><td>7</td><td>&nbsp;&nbsp;&nbsp;&nbsp;<span class="c2h-kword c2h-kword-return">return</span> <span class="c2h-val-int">0</span>;</td></tr>
+                <tr><td>8</td><td>}</td></tr>
+            </table>
+        </div>
+    </div>
+</details>
+
+<br>
+
+<h3>Ejercicio 8: Asignación de int desde float (Truncamiento)</h3>
 <p><strong>Instrucción:</strong> Declara una variable float llamada
 pi_decimal con el valor 3.14159f. Luego, declara una variable int
 llamada pi_entero y asigna el valor de pi_decimal a pi_entero. Imprime
 el valor de pi_entero para demostrar la <strong>pérdida de la parte
 decimal</strong> (truncamiento).</p>
-<p><strong>Solución en C:</strong></p>
-<p>C</p>
-<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
-<p>int main(void) {</p>
-<p>float pi_decimal = 3.14159f;</p>
-<p>// Al asignar un float a un int, C trunca (corta) la parte
-decimal.</p>
-<p>int pi_entero = pi_decimal;</p>
-<p>printf("Valor original: %.5f\n", pi_decimal);</p>
-<p>printf("Valor entero después de la asignación: %d\n", pi_entero);</p>
-<p>return 0;</p>
-<p>}</p>
-<p><strong>Salida Esperada:</strong></p>
-<p>Valor original: 3.14159</p>
-<p>Valor entero después de la asignación: 3</p>
-<p><strong>Ejercicio 9: Impresión de Carácter con Comillas
-Dobles</strong></p>
+
+<div data-exercise="programming">
+    <script type="application/json" data-exercise-config>
+        {
+            "version": 1,
+            "exerciseId": "m2-201-e8-truncamiento",
+            "lessonId": 2201,
+            "showTitle": false
+        }
+    </script>
+</div>
+
+<details>
+    <summary><strong>Solución en C</strong></summary>
+    <div class="c2h-code">
+        <div class="c2h-code-inner">
+            <table>
+                <tr><td>1</td><td><span class="c2h-directive">#include</span> <span class="c2h-val-str">&lt;stdio.h&gt;</span></td></tr>
+                <tr><td>2</td><td><span class="c2h-kword c2h-kword-int">int</span> <span class="c2h-identifier c2h-fdeclname">main</span>(<span class="c2h-kword c2h-kword-void">void</span>) {</td></tr>
+                <tr><td>3</td><td>&nbsp;&nbsp;&nbsp;&nbsp;<span class="c2h-kword c2h-kword-float">float</span> <span class="c2h-identifier">pi_decimal</span> = 3.14159f;</td></tr>
+                <tr><td>4</td><td>&nbsp;&nbsp;&nbsp;&nbsp;<span class="c2h-comment">// Al asignar un float a un int, C trunca (corta) la parte decimal.</span></td></tr>
+                <tr><td>5</td><td>&nbsp;&nbsp;&nbsp;&nbsp;<span class="c2h-kword c2h-kword-int">int</span> <span class="c2h-identifier">pi_entero</span> = <span class="c2h-identifier">pi_decimal</span>;</td></tr>
+                <tr><td>6</td><td>&nbsp;&nbsp;&nbsp;&nbsp;<span class="c2h-identifier c2h-fcallname">printf</span>(<span class="c2h-val-str">"Valor original: %.5f\n"</span>, <span class="c2h-identifier">pi_decimal</span>);</td></tr>
+                <tr><td>7</td><td>&nbsp;&nbsp;&nbsp;&nbsp;<span class="c2h-identifier c2h-fcallname">printf</span>(<span class="c2h-val-str">"Valor entero después de la asignación: %d\n"</span>, <span class="c2h-identifier">pi_entero</span>);</td></tr>
+                <tr><td>8</td><td>&nbsp;&nbsp;&nbsp;&nbsp;<span class="c2h-kword c2h-kword-return">return</span> <span class="c2h-val-int">0</span>;</td></tr>
+                <tr><td>9</td><td>}</td></tr>
+            </table>
+        </div>
+    </div>
+</details>
+
+<br>
+
+<h3>Ejercicio 9: Impresión de Carácter con Comillas Dobles</h3>
 <p><strong>Instrucción:</strong> Usa solo una llamada a printf() para
 mostrar el nombre de un tipo primitivo y el carácter que utiliza para su
 delimitación, incluyendo comillas dobles en la salida.</p>
-<p><strong>Solución en C:</strong></p>
-<p>C</p>
-<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
-<p>int main(void) {</p>
-<p>// Usamos el carácter de escape para comillas dobles (\" para el
-texto)</p>
-<p>// y el carácter de escape para comillas simples (\' para el char,
-aunque \' no es estrictamente necesario, es más claro).</p>
-<p>printf("El tipo \"char\" usa el delimitador \'\' para sus
-valores.\n");</p>
-<p>return 0;</p>
-<p>}</p>
-<p><strong>Salida Esperada:</strong></p>
-<p>El tipo "char" usa el delimitador '' para sus valores.</p>
-<p><strong>Ejercicio 10: Declaración Múltiple en una Línea</strong></p>
+
+<div data-exercise="programming">
+    <script type="application/json" data-exercise-config>
+        {
+            "version": 1,
+            "exerciseId": "m2-201-e9-comillas",
+            "lessonId": 2201,
+            "showTitle": false
+        }
+    </script>
+</div>
+
+<details>
+    <summary><strong>Solución en C</strong></summary>
+    <div class="c2h-code">
+        <div class="c2h-code-inner">
+            <table>
+                <tr><td>1</td><td><span class="c2h-directive">#include</span> <span class="c2h-val-str">&lt;stdio.h&gt;</span></td></tr>
+                <tr><td>2</td><td><span class="c2h-kword c2h-kword-int">int</span> <span class="c2h-identifier c2h-fdeclname">main</span>(<span class="c2h-kword c2h-kword-void">void</span>) {</td></tr>
+                <tr><td>3</td><td>&nbsp;&nbsp;&nbsp;&nbsp;<span class="c2h-comment">// Usamos el carácter de escape para comillas dobles (\" para el texto)</span></td></tr>
+                <tr><td>4</td><td>&nbsp;&nbsp;&nbsp;&nbsp;<span class="c2h-comment">// y el carácter de escape para comillas simples (\' para el char, aunque \' no es estrictamente necesario, es más claro).</span></td></tr>
+                <tr><td>5</td><td>&nbsp;&nbsp;&nbsp;&nbsp;<span class="c2h-identifier c2h-fcallname">printf</span>(<span class="c2h-val-str">"El tipo \"char\" usa el delimitador \'\' para sus valores.\n"</span>);</td></tr>
+                <tr><td>6</td><td>&nbsp;&nbsp;&nbsp;&nbsp;<span class="c2h-kword c2h-kword-return">return</span> <span class="c2h-val-int">0</span>;</td></tr>
+                <tr><td>7</td><td>}</td></tr>
+            </table>
+        </div>
+    </div>
+</details>
+
+<br>
+
+<h3>Ejercicio 10: Declaración Múltiple en una Línea</h3>
 <p><strong>Instrucción:</strong> Declara e inicializa tres variables de
 tipo int (huespedes, dias, precio) en <strong>una sola línea</strong> de
 código. Luego calcula el costo total en una cuarta variable int e
 imprime el resultado.</p>
-<p><strong>Solución en C:</strong></p>
-<p>C</p>
-<p>#<strong>include</strong> &lt;stdio.h&gt;</p>
-<p>int main(void) {</p>
-<p>// Declaración múltiple: Separamos cada variable con coma.</p>
-<p>int huespedes = 4, dias = 3, precio = 50;</p>
-<p>int costo_total = huespedes * dias * precio;</p>
-<p>printf("El costo total de la reserva es: %d\n", costo_total);</p>
-<p>return 0;</p>
-<p>}</p>
-<p><strong>Salida Esperada:</strong></p>
-<p>El costo total de la reserva es: 600</p>
+
+<div data-exercise="programming">
+    <script type="application/json" data-exercise-config>
+        {
+            "version": 1,
+            "exerciseId": "m2-201-e10-multiple-decl",
+            "lessonId": 2201,
+            "showTitle": false
+        }
+    </script>
+</div>
+
+<details>
+    <summary><strong>Solución en C</strong></summary>
+    <div class="c2h-code">
+        <div class="c2h-code-inner">
+            <table>
+                <tr><td>1</td><td><span class="c2h-directive">#include</span> <span class="c2h-val-str">&lt;stdio.h&gt;</span></td></tr>
+                <tr><td>2</td><td><span class="c2h-kword c2h-kword-int">int</span> <span class="c2h-identifier c2h-fdeclname">main</span>(<span class="c2h-kword c2h-kword-void">void</span>) {</td></tr>
+                <tr><td>3</td><td>&nbsp;&nbsp;&nbsp;&nbsp;<span class="c2h-comment">// Declaración múltiple: Separamos cada variable con coma.</span></td></tr>
+                <tr><td>4</td><td>&nbsp;&nbsp;&nbsp;&nbsp;<span class="c2h-kword c2h-kword-int">int</span> <span class="c2h-identifier">huespedes</span> = <span class="c2h-val-int">4</span>, <span class="c2h-identifier">dias</span> = <span class="c2h-val-int">3</span>, <span class="c2h-identifier">precio</span> = <span class="c2h-val-int">50</span>;</td></tr>
+                <tr><td>5</td><td>&nbsp;&nbsp;&nbsp;&nbsp;<span class="c2h-kword c2h-kword-int">int</span> <span class="c2h-identifier">costo_total</span> = <span class="c2h-identifier">huespedes</span> * <span class="c2h-identifier">dias</span> * <span class="c2h-identifier">precio</span>;</td></tr>
+                <tr><td>6</td><td>&nbsp;&nbsp;&nbsp;&nbsp;<span class="c2h-identifier c2h-fcallname">printf</span>(<span class="c2h-val-str">"El costo total de la reserva es: %d\\n"</span>, <span class="c2h-identifier">costo_total</span>);</td></tr>
+                <tr><td>7</td><td>&nbsp;&nbsp;&nbsp;&nbsp;<span class="c2h-kword c2h-kword-return">return</span> <span class="c2h-val-int">0</span>;</td></tr>
+                <tr><td>8</td><td>}</td></tr>
+            </table>
+        </div>
+    </div>
+</details>
+
+<br>
 
 
 

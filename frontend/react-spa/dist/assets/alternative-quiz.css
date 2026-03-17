@@ -24,6 +24,10 @@
   border-radius: 8px;
 }
 
+.alt-quiz .question-item p {
+  white-space: pre-wrap;
+}
+
 .alt-quiz .alt-quiz-label {
   font-weight: 600;
 }
