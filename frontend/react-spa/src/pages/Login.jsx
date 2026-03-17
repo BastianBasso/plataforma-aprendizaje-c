@@ -38,12 +38,12 @@ export function Login() {
         return;
       }
 
-      if (json?.userId != null) {
-        try {
-          sessionStorage.setItem('userId', String(json.userId));
-        } catch {
-        }
-      }
+          if (json?.usuario?.id != null) {
+            try {
+              sessionStorage.setItem('userId', String(json.usuario.id));
+            } catch {
+            }
+          }
 
       await refresh();
 
