@@ -12,6 +12,8 @@ const progresoRoutes = require('./routes/progresoRoutes');
 
 const adminRoutes = require('./routes/adminRoutes'); 
 
+const cursoRoutes = require('./routes/cursoRoutes');
+
 // 2. Configuración de sesión 
 app.use(session({
     secret: 'tu_secreto_muy_seguro_y_largo',
@@ -40,6 +42,7 @@ app.use('/api', authRoutes);     // endpoints de registro
 app.use('/api', loginRoutes);    // endpoints de login/logout
 app.use('/api', userRoutes);     // endpoints de usuarios
 app.use('/api', progresoRoutes); // endpoints de progreso 
+app.use('/api', cursoRoutes); // endpoints de cursos y módulos
 
 app.use('/api', adminRoutes); 
 

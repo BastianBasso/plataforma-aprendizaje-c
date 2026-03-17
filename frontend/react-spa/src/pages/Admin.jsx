@@ -33,6 +33,95 @@ export function Admin() {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 7;
 
+  // Estados para la pestaña de Cursos
+  const [cursos, setCursos] = useState([]);
+  const [selectedCurso, setSelectedCurso] = useState('');
+  const [modulos, setModulos] = useState([]);
+  const [loadingModulos, setLoadingModulos] = useState(false);
+
+  const [isModuleModalOpen, setIsModuleModalOpen] = useState(false);
+  const [newModuleTitle, setNewModuleTitle] = useState('');
+  const [newModuleDesc, setNewModuleDesc] = useState('');
+
+  // 1. Cargar los cursos disponibles
+  const fetchCursos = async () => {
+    try {
+      const response = await fetch('/api/cursos');
+      const data = await response.json();
+      
+      if (data.success && data.cursos.length > 0) {
+        setCursos(data.cursos);
+        // Seleccionamos el primer curso por defecto y cargamos sus módulos
+        const primerCursoId = data.cursos[0].id;
+        setSelectedCurso(primerCursoId);
+        fetchModulos(primerCursoId);
+      }
+    } catch (error) {
+      console.error("Error al cargar cursos:", error);
+    }
+  };
+
+  // 2. Cargar los módulos de un curso específico
+  const fetchModulos = async (cursoId) => {
+    setLoadingModulos(true);
+    try {
+      const response = await fetch(`/api/cursos/${cursoId}/modulos`);
+      const data = await response.json();
+      if (data.success) {
+        setModulos(data.modulos);
+      }
+    } catch (error) {
+      console.error("Error al cargar módulos:", error);
+    } finally {
+      setLoadingModulos(false);
+    }
+  };
+
+  const handleCreateModule = async (e) => {
+    e.preventDefault();
+    if (!newModuleTitle.trim()) return alert("El título es obligatorio");
+
+    try {
+      const response = await fetch(`/api/cursos/${selectedCurso}/modulos`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ titulo: newModuleTitle, descripcion: newModuleDesc })
+      });
+      
+      const data = await response.json();
+      if (data.success) {
+        setModulos([...modulos, data.modulo]);
+        setNewModuleTitle('');
+        setNewModuleDesc('');
+        setIsModuleModalOpen(false);
+        alert("¡Módulo creado exitosamente!");
+      } else {
+        alert("Error: " + data.message);
+      }
+    } catch (error) {
+      console.error("Error al crear:", error);
+      alert("Error de conexión al crear el módulo.");
+    }
+  };
+
+  // 3. Efecto para que cargue los cursos solo cuando entramos a la pestaña "cursos"
+  useEffect(() => {
+    if (activeSection === 'cursos') {
+      fetchCursos();
+    }
+  }, [activeSection]);
+
+  // 4. Manejar el cambio del selector
+  const handleCursoChange = (e) => {
+    const nuevoCursoId = e.target.value;
+    if (nuevoCursoId === 'nuevo') {
+      alert("Aquí abriremos un modal para crear un curso nuevo pronto!");
+      return;
+    }
+    setSelectedCurso(nuevoCursoId);
+    fetchModulos(nuevoCursoId);
+  };
+
   useEffect(() => {
     if ((user?.rol === 'Administrador' || user?.rol === 'Super Administrador') && activeSection === 'usuarios') {
       setLoadingUsers(true);
@@ -351,106 +440,246 @@ export function Admin() {
           </aside>
 
           <section className="admin-main-col" aria-label="Contenido admin">
-            <section className="generic-card" aria-label="Barra de herramientas">
-              <div className="toolbar">
-                <div className="toolbar-left">
-                  <div className="admin-search-box" role="search">
-                    <Icon name="search" />
-                    <input
-                      type="text"
-                      value={query}
-                      onChange={(e) => setQuery(e.target.value)}
-                      placeholder="Buscar solo por nombre o usuario..."
-                      aria-label="Buscar usuarios"
-                      autoComplete="off"
-                    />
+            
+            {/* =========================================
+                PESTAÑA 1: GESTIÓN DE USUARIOS 
+                ========================================= */}
+            {activeSection === 'usuarios' && (
+              <>
+                <section className="generic-card" aria-label="Barra de herramientas">
+                  <div className="toolbar">
+                    <div className="toolbar-left">
+                      <div className="admin-search-box" role="search">
+                        <Icon name="search" />
+                        <input
+                          type="text"
+                          value={query}
+                          onChange={(e) => setQuery(e.target.value)}
+                          placeholder="Buscar solo por nombre o usuario..."
+                          aria-label="Buscar usuarios"
+                          autoComplete="off"
+                        />
+                      </div>
+                    </div>
                   </div>
-                </div>
-              </div>
-              <div className="footerRow" aria-label="Resumen">
-                <p className="mini">Sección: {pageTitle}</p>
-                <p className="mini">Total usuarios: {filteredUsers.length}</p>
-              </div>
-            </section>
+                  <div className="footerRow" aria-label="Resumen">
+                    <p className="mini">Sección: {pageTitle}</p>
+                    <p className="mini">Total usuarios: {filteredUsers.length}</p>
+                  </div>
+                </section>
 
-            <section className="generic-card" aria-label="Tabla">
-              <div className="tablewrap" role="region" aria-label="Listado de usuarios" tabIndex={0}>
-                {loadingUsers ? (
-                  <div style={{ padding: '40px', textAlign: 'center', fontWeight: '900', color: '#1a4e8a', fontSize: '1.2rem' }}>Cargando usuarios desde la base de datos...</div>
-                ) : (
-                  <>
-                    <table>
-                      <thead>
-                        <tr>
-                          <th style={{ width: 40 }}>#</th>
-                          <th>NOMBRE</th>
-                          <th>ROL</th>
-                          <th>CORREO</th>
-                          <th style={{ width: 100 }}>% AVANCE</th>
-                          <th style={{ width: 140 }}>ÚLTIMA CONEXIÓN</th>
-                          <th style={{ width: 110, textAlign: 'center' }}>ACCIONES</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {paginatedUsers.length ? (
-                          paginatedUsers.map((u, index) => {
-                            const realIndex = (currentPage - 1) * itemsPerPage + index + 1;
-                            return (
-                              <tr key={u.id}>
-                                <td className="muted">{realIndex}</td>
-                                <td>{u.name}</td>
-                                <td className="muted">{u.role}</td>
-                                <td><span className="pill">{u.email}</span></td>
-                                <td><span className={`pct ${progressTone(u.progress)}`}>{u.progress}%</span></td>
-                                <td className="muted">{formatDate(u.lastconnection)}</td>
-                                <td style={{ textAlign: 'center' }}>
-                                  <div style={{ display: 'flex', gap: '8px', justifyContent: 'center' }}>
-                                    <button className="action-btn edit" onClick={() => openEditModal(u)} title="Editar Rol">
-                                      <Icon name="edit" />
-                                    </button>
-                                    {user?.id !== u.id && (
-                                      <button className="action-btn delete" onClick={() => handleDeleteUser(u)} title="Eliminar Usuario">
-                                        <Icon name="trash" />
-                                      </button>
-                                    )}
-                                  </div>
+                <section className="generic-card" aria-label="Tabla">
+                  <div className="tablewrap" role="region" aria-label="Listado de usuarios" tabIndex={0}>
+                    {loadingUsers ? (
+                      <div style={{ padding: '40px', textAlign: 'center', fontWeight: '900', color: '#1a4e8a', fontSize: '1.2rem' }}>Cargando usuarios desde la base de datos...</div>
+                    ) : (
+                      <>
+                        <table>
+                          <thead>
+                            <tr>
+                              <th style={{ width: 40 }}>#</th>
+                              <th>NOMBRE</th>
+                              <th>ROL</th>
+                              <th>CORREO</th>
+                              <th style={{ width: 100 }}>% AVANCE</th>
+                              <th style={{ width: 140 }}>ÚLTIMA CONEXIÓN</th>
+                              <th style={{ width: 110, textAlign: 'center' }}>ACCIONES</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {paginatedUsers.length ? (
+                              paginatedUsers.map((u, index) => {
+                                const realIndex = (currentPage - 1) * itemsPerPage + index + 1;
+                                return (
+                                  <tr key={u.id}>
+                                    <td className="muted">{realIndex}</td>
+                                    <td>{u.name}</td>
+                                    <td className="muted">{u.role}</td>
+                                    <td><span className="pill">{u.email}</span></td>
+                                    <td><span className={`pct ${progressTone(u.progress)}`}>{u.progress}%</span></td>
+                                    <td><span className="muted">{formatDate(u.lastconnection)}</span></td>
+                                    <td style={{ textAlign: 'center' }}>
+                                      <div style={{ display: 'flex', gap: '8px', justifyContent: 'center' }}>
+                                        <button className="action-btn edit" onClick={() => openEditModal(u)} title="Editar Rol">
+                                          <Icon name="edit" />
+                                        </button>
+                                        {user?.id !== u.id && (
+                                          <button className="action-btn delete" onClick={() => handleDeleteUser(u)} title="Eliminar Usuario">
+                                            <Icon name="trash" />
+                                          </button>
+                                        )}
+                                      </div>
+                                    </td>
+                                  </tr>
+                                );
+                              })
+                            ) : (
+                              <tr>
+                                <td colSpan={7} style={{ padding: 24, textAlign: 'center' }}>
+                                  <span className="muted">Sin resultados para “{String(query || '').trim()}”.</span>
                                 </td>
                               </tr>
-                            );
-                          })
-                        ) : (
-                          <tr>
-                            <td colSpan={7} style={{ padding: 24, textAlign: 'center' }}>
-                              <span className="muted">Sin resultados para “{String(query || '').trim()}”.</span>
-                            </td>
-                          </tr>
-                        )}
-                      </tbody>
-                    </table>
+                            )}
+                          </tbody>
+                        </table>
 
-                    {totalPages > 1 && (
-                      <div className="pagination">
-                        <button 
-                          onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
-                          disabled={currentPage === 1}
+                        {totalPages > 1 && (
+                          <div className="pagination">
+                            <button 
+                              onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
+                              disabled={currentPage === 1}
+                            >
+                              Anterior
+                            </button>
+                            <span className="page-info">
+                              Página {currentPage} de {totalPages}
+                            </span>
+                            <button 
+                              onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
+                              disabled={currentPage === totalPages}
+                            >
+                              Siguiente
+                            </button>
+                          </div>
+                        )}
+                      </>
+                    )}
+                  </div>
+                </section>
+              </>
+            )}
+
+            {/* =========================================
+                  PESTAÑA 2: EDICIÓN DE CURSOS Y MÓDULOS
+                  ========================================= */}
+              {activeSection === 'cursos' && (
+                <>
+                  <section className="generic-card" aria-label="Barra de herramientas de cursos">
+                    <div className="toolbar" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                      
+                      <div className="toolbar-left" style={{ display: 'flex', gap: '15px', alignItems: 'center' }}>
+                        <h2 style={{ margin: 0, color: '#1a4e8a', fontSize: '1.4rem' }}>Gestor de Contenido</h2>
+                        
+                        {/* Selector de Cursos (Pronto lo llenaremos con la BD) */}
+                        <select 
+                          className="admin-select" 
+                          style={{ padding: '10px 16px', fontSize: '1.1rem', minWidth: '280px', borderRadius: '6px', border: '2px solid #ccc', backgroundColor: '#ffffff', color: '#333333', fontWeight: '600', cursor: 'pointer', outline: 'none' }}
+                          value={selectedCurso}
+                          onChange={handleCursoChange}
                         >
-                          Anterior
-                        </button>
-                        <span className="page-info">
-                          Página {currentPage} de {totalPages}
-                        </span>
+                          {cursos.map(curso => (
+                            <option key={curso.id} value={curso.id}>Curso: {curso.nombre}</option>
+                          ))}
+                          <option value="nuevo" style={{ fontStyle: 'italic', color: '#1a4e8a' }}>+ Crear nuevo curso...</option>
+                        </select>
+                      </div>
+
+                      <div className="toolbar-right">
                         <button 
-                          onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
-                          disabled={currentPage === totalPages}
+                          className="primary-btn" 
+                          style={{ padding: '8px 16px', backgroundColor: '#1a4e8a', color: 'white', borderRadius: '6px', border: 'none', cursor: 'pointer', fontWeight: 'bold' }}
+                          onClick={() => setIsModuleModalOpen(true)}
                         >
-                          Siguiente
+                          Nuevo Módulo
                         </button>
                       </div>
-                    )}
-                  </>
-                )}
-              </div>
-            </section>
+
+                    </div>
+                  </section>
+
+                  <section className="generic-card" aria-label="Tabla de módulos">
+                    <div className="tablewrap" role="region" aria-label="Listado de módulos" tabIndex={0}>
+                      <table>
+                        <thead>
+                          <tr>
+                            <th style={{ width: 60 }}>ORDEN</th>
+                            <th>NOMBRE DEL MÓDULO</th>
+                            <th>DESCRIPCIÓN</th>
+                            <th style={{ width: 120, textAlign: 'center' }}>LECCIONES</th>
+                            <th style={{ width: 140, textAlign: 'center' }}>ESTADO</th>
+                            <th style={{ width: 110, textAlign: 'center' }}>ACCIONES</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                            {loadingModulos ? (
+                              <tr><td colSpan="6" style={{ textAlign: 'center', padding: '20px' }}>Cargando módulos...</td></tr>
+                            ) : modulos.length > 0 ? (
+                              modulos.map((mod) => (
+                                <tr key={mod.id}>
+                                  <td className="muted">{mod.orden}</td>
+                                  <td style={{ fontWeight: 'bold' }}>{mod.titulo}</td>
+                                  <td className="muted">{mod.descripcion || 'Sin descripción'}</td>
+                                  <td style={{ textAlign: 'center' }}><span className="pill">{mod.total_lecciones} Lecciones</span></td>
+                                  <td style={{ textAlign: 'center' }}>
+                                    <span className={`pct ${mod.estado === 'Publicado' ? 'high' : 'low'}`}>{mod.estado}</span>
+                                  </td>
+                                  <td style={{ textAlign: 'center' }}>
+                                    <div style={{ display: 'flex', gap: '8px', justifyContent: 'center' }}>
+                                      <button className="action-btn edit" title="Editar Módulo"><Icon name="edit" /></button>
+                                      <button className="action-btn delete" title="Eliminar Módulo"><Icon name="trash" /></button>
+                                    </div>
+                                  </td>
+                                </tr>
+                              ))
+                            ) : (
+                              <tr><td colSpan="6" style={{ textAlign: 'center', padding: '20px', color: '#888' }}>No hay módulos en este curso aún.</td></tr>
+                            )}
+                          </tbody>
+                      </table>
+                    </div>
+                  </section>
+                </>
+              )}
+
+            {/* =========================================
+                PESTAÑA 3: CONFIGURACIÓN 
+                ========================================= */}
+            {activeSection === 'configuracion' && (
+              <section className="generic-card" style={{ minHeight: '400px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', textAlign: 'center', padding: '40px' }}>
+                <Icon name="settings" style={{ width: 64, height: 64, color: '#1a4e8a', marginBottom: '20px' }} />
+                <h2 style={{ color: '#1a4e8a', fontSize: '1.8rem', marginBottom: '10px' }}>Configuración del Sistema</h2>
+                <p style={{ color: '#405268', maxWidth: '500px', lineHeight: '1.6' }}>
+                  Ajustes globales de la plataforma y variables de entorno.
+                </p>
+              </section>
+            )}
+              {/* MODAL PARA CREAR NUEVO MÓDULO */}
+              {isModuleModalOpen && (
+                <div className="modal-overlay" onClick={() => setIsModuleModalOpen(false)}>
+                  <div className="modal-content" onClick={(e) => e.stopPropagation()} style={{ maxWidth: '500px' }}>
+                    <h3 style={{ color: '#1a4e8a', marginBottom: '20px' }}>Crear Nuevo Módulo</h3>
+                    
+                    <form onSubmit={handleCreateModule}>
+                      <div style={{ marginBottom: '15px', textAlign: 'left' }}>
+                        <label style={{ display: 'block', fontWeight: 'bold', marginBottom: '5px' }}>Título del Módulo *</label>
+                        <input 
+                          type="text" 
+                          value={newModuleTitle} 
+                          onChange={(e) => setNewModuleTitle(e.target.value)} 
+                          placeholder="Ej: Módulo 11 - Introducción a Punteros Dobles"
+                          style={{ width: '100%', padding: '10px', borderRadius: '4px', border: '1px solid #ccc' }}
+                          required
+                        />
+                      </div>
+
+                      <div style={{ marginBottom: '20px', textAlign: 'left' }}>
+                        <label style={{ display: 'block', fontWeight: 'bold', marginBottom: '5px' }}>Descripción</label>
+                        <textarea 
+                          value={newModuleDesc} 
+                          onChange={(e) => setNewModuleDesc(e.target.value)} 
+                          placeholder="Breve descripción de lo que se aprenderá..."
+                          style={{ width: '100%', padding: '10px', borderRadius: '4px', border: '1px solid #ccc', minHeight: '80px', resize: 'vertical' }}
+                        />
+                      </div>
+
+                      <div className="modal-actions" style={{ display: 'flex', justifyContent: 'flex-end', gap: '10px' }}>
+                        <button type="button" className="action-btn" onClick={() => setIsModuleModalOpen(false)}>Cancelar</button>
+                        <button type="submit" className="primary-btn" style={{ padding: '8px 16px', backgroundColor: '#1a4e8a', color: 'white', border: 'none', borderRadius: '4px' }}>Guardar Módulo</button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              )}
           </section>
         </div>
       </main>
