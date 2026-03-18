@@ -126,7 +126,8 @@ export function Login() {
           border-radius: 12px;
           overflow: hidden;
           box-shadow: 0 10px 30px rgba(2, 6, 23, 0.45);
-          max-width: 920px;
+          max-width: 70em;
+          min-height: 50vh; 
           width: 100%;
           background: #ffffff;
         }

@@ -104,7 +104,8 @@ export function Registro() {
           border-radius: 12px;
           overflow: hidden;
           box-shadow: 0 10px 30px rgba(2, 6, 23, 0.45);
-          max-width: 1100px;
+          max-width: 80em;
+          min-height: 50vh; 
           width: 100%;
           background: #ffffff;
         }
@@ -119,7 +120,7 @@ export function Registro() {
           display: flex;
           align-items: center;
           justify-content: center;
-          width: 50%;
+          width: 30%;
         }
 
         .code-bg {

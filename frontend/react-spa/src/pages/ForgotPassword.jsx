@@ -69,7 +69,8 @@ export function ForgotPassword() {
           border-radius: 12px;
           overflow: hidden;
           box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); /* Sombra un poco más fuerte para el fondo oscuro */
-          max-width: 520px;
+          max-width: 50em;
+          min-height: 30vh; 
           width: 100%;
           background: #ffffff;
         }
@@ -139,6 +140,7 @@ export function ForgotPassword() {
           background: linear-gradient(90deg, #2563eb, #4f46e5);
           color: #ffffff;
           box-shadow: 0 6px 18px rgba(37, 99, 235, 0.25);
+          max-width: 400px;
           width: 100%; /* Botón ancho como en el login */
           font-size: 1rem;
           transition: transform 0.1s;
@@ -181,7 +183,7 @@ export function ForgotPassword() {
             <p className="fp-subtitle">
               Ingresa tu correo y te enviaremos un enlace seguro para restablecer tu contraseña.
             </p>
-
+            <br />
             <form className="fp-form" onSubmit={onSubmit}>
               <label>
                 Correo Electrónico
@@ -197,13 +199,13 @@ export function ForgotPassword() {
 
               {error ? <p className="form-error">{error}</p> : null}
               {message ? <p className="form-success">{message}</p> : null}
-
+              <br />
               <div className="fp-actions">
                 <button className="fp-primary-btn" type="submit" disabled={submitting}>
                   {submitting ? 'Enviando correo...' : 'Enviar enlace de recuperación'}
                 </button>
               </div>
-
+              
               <div className="fp-footer">
                 <Link to="/login">Volver al inicio de sesión</Link>
               </div>
