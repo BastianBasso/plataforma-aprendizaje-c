@@ -42,12 +42,12 @@ export function HeaderUsuario() {
         {isAuthenticated ? (
           <nav className="app-header-nav" aria-label="Navegación">
             
-            {user?.rol === 'Administrador' || user?.rol === 'Super Administrador' && (
+            {(user?.rol === 'Administrador' || user?.rol === 'Super Administrador') && (
               <Link to="/admin" style={{  color: '#b8c1ec' }}>
                 Panel Admin
               </Link>
             )}
-
+            
             <Link to="/cursos">Cursos</Link>
           </nav>
         ) : null}

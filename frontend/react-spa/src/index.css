@@ -33,8 +33,9 @@
 /* --- Navbar cards (port desde js-spa/components/navbar.js) --- */
 .navbar-custom {
   display: flex;
-  gap: 1.5em;
-  flex-wrap: wrap;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  gap: 3em;
   background: #232946;
   color: #fff;
   padding: 1em 2em;
@@ -47,9 +48,9 @@
   border-radius: 10px;
   box-shadow: 0 2px 8px rgba(59, 47, 166, 0.1);
   padding: 1em 1.2em;
-  min-width: 220px;
-  max-width: 260px;
-  margin: 0.5em 0;
+  width: 100%;
+  max-width: none;
+  margin: 0;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -343,7 +344,7 @@ body {
 
 .app-header-nav {
   display: flex;
-  gap: 12px;
+  gap: 120px;
   flex: 1;
   justify-content: center;
 }
