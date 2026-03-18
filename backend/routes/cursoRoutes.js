@@ -11,4 +11,7 @@ router.get('/cursos/:cursoId/modulos', requireAuth, cursoController.getModulosBy
 
 router.post('/cursos/:cursoId/modulos', requireAuth, cursoController.createModulo);
 
+router.put('/modulos/:moduloId', requireAuth, cursoController.updateModule);
+router.delete('/modulos/:moduloId', requireAuth, cursoController.deleteModule);
+
 module.exports = router;

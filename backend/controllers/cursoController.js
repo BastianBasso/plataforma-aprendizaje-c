@@ -80,8 +80,61 @@ const createModulo = async (req, res) => {
     }
 };
 
+// 4. Actualizar un módulo existente
+const updateModule = async (req, res) => {
+    const { moduloId } = req.params;
+    const { titulo, descripcion } = req.body;
+
+    try {
+        const query = `
+            UPDATE modulo 
+            SET titulo = $1, descripcion = $2 
+            WHERE id = $3 
+            RETURNING *;
+        `;
+        const result = await db.query(query, [titulo, descripcion, moduloId]);
+
+        if (result.rows.length === 0) {
+            return res.status(404).json({ success: false, message: 'Módulo no encontrado.' });
+        }
+
+        // Formatear para React
+        const moduloActualizado = {
+            ...result.rows[0],
+            nombre: result.rows[0].titulo
+        };
+
+        res.status(200).json({ success: true, modulo: moduloActualizado, message: 'Módulo actualizado correctamente.' });
+    } catch (error) {
+        console.error('Error al actualizar módulo:', error);
+        res.status(500).json({ success: false, message: 'Error en el servidor al actualizar.' });
+    }
+};
+
+// 5. Eliminar un módulo
+const deleteModule = async (req, res) => {
+    const { moduloId } = req.params;
+
+    try {
+        const query = 'DELETE FROM modulo WHERE id = $1 RETURNING *';
+        const result = await db.query(query, [moduloId]);
+
+        if (result.rows.length === 0) {
+            return res.status(404).json({ success: false, message: 'Módulo no encontrado.' });
+        }
+
+        res.status(200).json({ success: true, message: 'Módulo eliminado correctamente.' });
+    } catch (error) {
+        console.error('Error al eliminar módulo:', error);
+        res.status(500).json({ success: false, message: 'No se puede eliminar. Verifica que no tenga lecciones dentro.' });
+    }
+};
+
 module.exports = {
     getCursos,
     getModulosByCurso,
-    createModulo
+    createModulo,
+    updateModule,
+    deleteModule
+
 };
