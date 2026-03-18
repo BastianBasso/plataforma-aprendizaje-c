@@ -42,6 +42,20 @@ export function Admin() {
   const [isModuleModalOpen, setIsModuleModalOpen] = useState(false);
   const [newModuleTitle, setNewModuleTitle] = useState('');
   const [newModuleDesc, setNewModuleDesc] = useState('');
+  const [editingModuleId, setEditingModuleId] = useState(null); 
+  const [moduleToDelete, setModuleToDelete] = useState(null); 
+  const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
+
+  // Estado para las notificaciones
+  const [toastMessage, setToastMessage] = useState(null);
+
+  // Función para mostrar la notificación tipo Toast
+  const showToast = (message, type = 'success') => {
+    setToastMessage({ message, type });
+    setTimeout(() => {
+      setToastMessage(null);
+    }, 2000); // Desaparece después de 2 segundos
+  };
 
   // 1. Cargar los cursos disponibles
   const fetchCursos = async () => {
@@ -77,30 +91,79 @@ export function Admin() {
     }
   };
 
-  const handleCreateModule = async (e) => {
+  const openNewModuleModal = () => {
+    setEditingModuleId(null);
+    setNewModuleTitle('');
+    setNewModuleDesc('');
+    setIsModuleModalOpen(true);
+  };
+
+  const openEditModuleModal = (mod) => {
+    setEditingModuleId(mod.id);
+    setNewModuleTitle(mod.titulo);
+    setNewModuleDesc(mod.descripcion || '');
+    setIsModuleModalOpen(true);
+  };
+
+  const handleSaveModule = async (e) => {
     e.preventDefault();
-    if (!newModuleTitle.trim()) return alert("El título es obligatorio");
+    if (!newModuleTitle.trim()) return showToast("El título es obligatorio", "error");
+
+    const isEditing = editingModuleId !== null;
+    const url = isEditing 
+        ? `/api/modulos/${editingModuleId}` 
+        : `/api/cursos/${selectedCurso}/modulos`;
+    const method = isEditing ? 'PUT' : 'POST';
 
     try {
-      const response = await fetch(`/api/cursos/${selectedCurso}/modulos`, {
-        method: 'POST',
+      const response = await fetch(url, {
+        method: method,
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ titulo: newModuleTitle, descripcion: newModuleDesc })
       });
       
       const data = await response.json();
       if (data.success) {
-        setModulos([...modulos, data.modulo]);
-        setNewModuleTitle('');
-        setNewModuleDesc('');
+        if (isEditing) {
+          setModulos(modulos.map(m => m.id === editingModuleId ? { ...m, titulo: newModuleTitle, descripcion: newModuleDesc } : m));
+          showToast("¡Módulo actualizado exitosamente!");
+        } else {
+          setModulos([...modulos, data.modulo]);
+          showToast("¡Módulo creado exitosamente!");
+        }
         setIsModuleModalOpen(false);
-        alert("¡Módulo creado exitosamente!");
       } else {
-        alert("Error: " + data.message);
+        showToast("Error: " + data.message, "error");
       }
     } catch (error) {
-      console.error("Error al crear:", error);
-      alert("Error de conexión al crear el módulo.");
+      showToast("Error de conexión al guardar el módulo.", "error");
+    }
+  };
+
+  const confirmDeleteModule = (mod) => {
+    setModuleToDelete(mod);
+    setIsConfirmModalOpen(true);
+  };
+
+  const executeDeleteModule = async () => {
+    if (!moduleToDelete) return;
+
+    try {
+      const response = await fetch(`/api/modulos/${moduleToDelete.id}`, { method: 'DELETE' });
+      const data = await response.json();
+      
+      if (data.success) {
+        setModulos(modulos.filter(m => m.id !== moduleToDelete.id)); 
+        showToast("Módulo eliminado correctamente");
+      } else {
+        showToast("Error: " + data.message, "error");
+      }
+    } catch (error) {
+      showToast("Error de conexión al eliminar.", "error");
+    } finally {
+      // Siempre cerramos el modal y limpiamos, pase lo que pase
+      setIsConfirmModalOpen(false);
+      setModuleToDelete(null);
     }
   };
 
@@ -578,7 +641,7 @@ export function Admin() {
                         <button 
                           className="primary-btn" 
                           style={{ padding: '8px 16px', backgroundColor: '#1a4e8a', color: 'white', borderRadius: '6px', border: 'none', cursor: 'pointer', fontWeight: 'bold' }}
-                          onClick={() => setIsModuleModalOpen(true)}
+                          onClick={openNewModuleModal}
                         >
                           Nuevo Módulo
                         </button>
@@ -615,8 +678,12 @@ export function Admin() {
                                   </td>
                                   <td style={{ textAlign: 'center' }}>
                                     <div style={{ display: 'flex', gap: '8px', justifyContent: 'center' }}>
-                                      <button className="action-btn edit" title="Editar Módulo"><Icon name="edit" /></button>
-                                      <button className="action-btn delete" title="Eliminar Módulo"><Icon name="trash" /></button>
+                                      <button className="action-btn edit" title="Editar Módulo" onClick={() => openEditModuleModal(mod)}>
+                                        <Icon name="edit" />
+                                      </button>
+                                      <button className="action-btn delete" title="Eliminar Módulo" onClick={() => confirmDeleteModule(mod)}>
+                                        <Icon name="trash" />
+                                      </button>
                                     </div>
                                   </td>
                                 </tr>
@@ -643,43 +710,167 @@ export function Admin() {
                 </p>
               </section>
             )}
-              {/* MODAL PARA CREAR NUEVO MÓDULO */}
-              {isModuleModalOpen && (
-                <div className="modal-overlay" onClick={() => setIsModuleModalOpen(false)}>
-                  <div className="modal-content" onClick={(e) => e.stopPropagation()} style={{ maxWidth: '500px' }}>
-                    <h3 style={{ color: '#1a4e8a', marginBottom: '20px' }}>Crear Nuevo Módulo</h3>
-                    
-                    <form onSubmit={handleCreateModule}>
-                      <div style={{ marginBottom: '15px', textAlign: 'left' }}>
-                        <label style={{ display: 'block', fontWeight: 'bold', marginBottom: '5px' }}>Título del Módulo *</label>
-                        <input 
-                          type="text" 
-                          value={newModuleTitle} 
-                          onChange={(e) => setNewModuleTitle(e.target.value)} 
-                          placeholder="Ej: Módulo 11 - Introducción a Punteros Dobles"
-                          style={{ width: '100%', padding: '10px', borderRadius: '4px', border: '1px solid #ccc' }}
-                          required
-                        />
-                      </div>
 
-                      <div style={{ marginBottom: '20px', textAlign: 'left' }}>
-                        <label style={{ display: 'block', fontWeight: 'bold', marginBottom: '5px' }}>Descripción</label>
-                        <textarea 
-                          value={newModuleDesc} 
-                          onChange={(e) => setNewModuleDesc(e.target.value)} 
-                          placeholder="Breve descripción de lo que se aprenderá..."
-                          style={{ width: '100%', padding: '10px', borderRadius: '4px', border: '1px solid #ccc', minHeight: '80px', resize: 'vertical' }}
-                        />
-                      </div>
-
-                      <div className="modal-actions" style={{ display: 'flex', justifyContent: 'flex-end', gap: '10px' }}>
-                        <button type="button" className="action-btn" onClick={() => setIsModuleModalOpen(false)}>Cancelar</button>
-                        <button type="submit" className="primary-btn" style={{ padding: '8px 16px', backgroundColor: '#1a4e8a', color: 'white', border: 'none', borderRadius: '4px' }}>Guardar Módulo</button>
-                      </div>
-                    </form>
+            {/* MODAL DE CONFIRMACIÓN PARA ELIMINAR */}
+            {isConfirmModalOpen && (
+              <div 
+                onClick={() => setIsConfirmModalOpen(false)}
+                style={{
+                  position: 'fixed', top: 0, left: 0, right: 0, bottom: 0,
+                  backgroundColor: 'rgba(0, 0, 0, 0.75)', 
+                  display: 'flex', justifyContent: 'center', alignItems: 'center',
+                  zIndex: 10000,
+                  fontFamily: 'Arial, Helvetica, sans-serif' // <-- FUENTE ARIAL
+                }}
+              >
+                <div 
+                  onClick={(e) => e.stopPropagation()} 
+                  style={{ 
+                    backgroundColor: '#ffffff', width: '100%', maxWidth: '400px', 
+                    padding: '30px', borderRadius: '12px', 
+                    boxShadow: '0 10px 25px rgba(0,0,0,0.5)',
+                    display: 'flex', flexDirection: 'column', gap: '15px',
+                    textAlign: 'center'
+                  }}
+                >
+                  <div style={{ color: '#e74c3c', marginBottom: '10px' }}>
+                    <Icon name="trash" style={{ width: 48, height: 48 }} />
+                  </div>
+                  <h3 style={{ color: '#333', margin: '0', fontSize: '1.4rem' }}>
+                    Eliminar Módulo
+                  </h3>
+                  <p style={{ color: '#555', lineHeight: '1.5', margin: '10px 0 20px 0' }}>
+                    ¿Estás seguro que deseas eliminar el módulo <strong>"{moduleToDelete?.titulo}"</strong>?<br/>Esta acción no se puede deshacer.
+                  </p>
+                  
+                  <div style={{ display: 'flex', justifyContent: 'center', gap: '12px' }}>
+                    <button 
+                      onClick={() => setIsConfirmModalOpen(false)}
+                      style={{ 
+                        padding: '10px 20px', backgroundColor: '#e2e6ea', color: '#333', 
+                        border: 'none', borderRadius: '6px', cursor: 'pointer', fontWeight: 'bold' 
+                      }}
+                    >
+                      Cancelar
+                    </button>
+                    <button 
+                      onClick={executeDeleteModule}
+                      style={{ 
+                        padding: '10px 20px', backgroundColor: '#e74c3c', color: '#ffffff', 
+                        border: 'none', borderRadius: '6px', cursor: 'pointer', fontWeight: 'bold' 
+                      }}
+                    >
+                      Sí, eliminar
+                    </button>
                   </div>
                 </div>
-              )}
+              </div>
+            )}
+              {/* MODAL PARA CREAR NUEVO MÓDULO */}
+                {isModuleModalOpen && (
+                  <div 
+                    onClick={() => setIsModuleModalOpen(false)}
+                    style={{
+                      position: 'fixed', top: 0, left: 0, right: 0, bottom: 0,
+                      backgroundColor: 'rgba(0, 0, 0, 0.75)', 
+                      display: 'flex', justifyContent: 'center', alignItems: 'center',
+                      zIndex: 9999
+                    }}
+                  >
+                    <div 
+                      onClick={(e) => e.stopPropagation()} 
+                      style={{ 
+                        backgroundColor: '#ffffff', 
+                        width: '100%', maxWidth: '500px', 
+                        padding: '30px', 
+                        borderRadius: '12px', 
+                        boxShadow: '0 10px 25px rgba(0,0,0,0.5)',
+                        display: 'flex', flexDirection: 'column', gap: '15px'
+                      }}
+                    >
+                      <h3 style={{ color: '#1a4e8a', margin: '0 0 10px 0', fontSize: '1.5rem', borderBottom: '2px solid #eee', paddingBottom: '10px' }}>
+                        {editingModuleId ? 'Editar Módulo' : 'Crear Nuevo Módulo'}
+                      </h3>
+                      
+                          <form onSubmit={handleSaveModule} style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>                        <div>
+                          <label style={{ display: 'block', fontWeight: 'bold', marginBottom: '5px', color: '#333333' }}>
+                            Título del Módulo <span style={{ color: '#e74c3c' }}>*</span>
+                          </label>
+                          <input 
+                            type="text" 
+                            value={newModuleTitle} 
+                            onChange={(e) => setNewModuleTitle(e.target.value)} 
+                            placeholder="Ej: Módulo 11 - Introducción..."
+                            style={{ 
+                              width: '100%', padding: '12px', borderRadius: '6px', 
+                              border: '1px solid #ccc', backgroundColor: '#ffffff',
+                              color: '#333333', fontSize: '1rem', boxSizing: 'border-box',
+                              outline: 'none'
+                            }}
+                            required
+                          />
+                        </div>
+
+                        <div>
+                          <label style={{ display: 'block', fontWeight: 'bold', marginBottom: '5px', color: '#333333' }}>
+                            Descripción
+                          </label>
+                          <textarea 
+                            value={newModuleDesc} 
+                            onChange={(e) => setNewModuleDesc(e.target.value)} 
+                            placeholder="Breve descripción de lo que se aprenderá..."
+                            style={{ 
+                              width: '100%', padding: '12px', borderRadius: '6px', 
+                              border: '1px solid #ccc', backgroundColor: '#ffffff',
+                              color: '#333333', fontSize: '1rem', minHeight: '90px', 
+                              resize: 'vertical', boxSizing: 'border-box', outline: 'none'
+                            }}
+                          />
+                        </div>
+
+                        <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '10px', marginTop: '10px' }}>
+                          <button 
+                            type="button" 
+                            onClick={() => setIsModuleModalOpen(false)}
+                            style={{ 
+                              padding: '10px 18px', backgroundColor: '#e2e6ea', color: '#333333', 
+                              border: 'none', borderRadius: '6px', cursor: 'pointer', fontWeight: 'bold' 
+                            }}
+                          >
+                            Cancelar
+                          </button>
+                          <button 
+                            type="submit" 
+                            style={{ 
+                              padding: '10px 18px', backgroundColor: '#1a4e8a', color: '#ffffff', 
+                              border: 'none', borderRadius: '6px', cursor: 'pointer', fontWeight: 'bold' 
+                            }}
+                          >
+                            Guardar Módulo
+                          </button>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                )}
+                {/* TOAST NOTIFICATION */}
+            {toastMessage && (
+              <div style={{
+                position: 'fixed',
+                bottom: '20px',
+                right: '20px',
+                backgroundColor: toastMessage.type === 'error' ? '#e74c3c' : '#2ecc71',
+                color: 'white',
+                padding: '12px 24px',
+                borderRadius: '8px',
+                boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
+                zIndex: 10000,
+                fontWeight: 'bold',
+                animation: 'fadein 0.5s, fadeout 0.5s 2.5s'
+              }}>
+                {toastMessage.message}
+              </div>
+            )}
           </section>
         </div>
       </main>
