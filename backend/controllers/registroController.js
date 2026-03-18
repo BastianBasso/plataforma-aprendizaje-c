@@ -10,6 +10,9 @@ const transporter = nodemailer.createTransport({
     auth: {
         user: 'soporteplatafomac@gmail.com', 
         pass: 'tpkt ladi ygrf rjss' 
+    },
+    tls: {
+        rejectUnauthorized: false 
     }
 });
 
@@ -102,7 +105,7 @@ const forgotPassword = async (req, res) => {
             return res.status(500).json({ success: false, message: 'Error interno del servidor al generar el enlace.' });
         }
 
-        const resetLink = `http://localhost:8080/restore-password.html?token=${token}`;
+        const resetLink = `http://localhost:5173/react/restore-password?token=${token}`;
 
         const mailOptions = {
             from: 'soporteplatafomac@gmail.com',

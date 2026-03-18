@@ -5,6 +5,7 @@ export function Registro() {
   const [text, setText] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
@@ -49,7 +50,52 @@ export function Registro() {
           align-items: center;
           justify-content: center;
           padding: 24px;
-          background: #6b7280;
+          position: relative; 
+          background-image: url('/image/fondoNegroCOD.jpg');
+          background-size: cover;
+          background-position: center;
+        }
+        
+        .auth-page::before {
+          content: "";
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background-color: rgba(15, 23, 42, 0.85); 
+          backdrop-filter: blur(4px); 
+          z-index: 0;
+        }
+
+        .auth-card {
+           position: relative;
+           z-index: 1;
+        }
+
+        .password-wrapper {
+          position: relative;
+          display: flex;
+          align-items: center;
+        }
+        .password-wrapper input {
+          width: 100%;
+          padding-right: 40px; 
+        }
+        .eye-button {
+          position: absolute;
+          right: 12px;
+          background: none;
+          border: none;
+          cursor: pointer;
+          color: #6b7280;
+          display: flex;
+          align-items: center;
+          padding: 0;
+          transition: color 0.2s;
+        }
+        .eye-button:hover {
+          color: #2563eb; 
         }
 
         .auth-card {
@@ -315,7 +361,35 @@ void init()
 
               <label>
                 Contraseña
-                <input type="password" value={password} onChange={e => setPassword(e.target.value)} autoComplete="new-password" />
+                <div className="password-wrapper">
+                  <input 
+                    type={showPassword ? "text" : "password"} 
+                    value={password} /* Asegúrate de que esta variable coincida con tu estado */
+                    onChange={e => setPassword(e.target.value)} 
+                    autoComplete="new-password" 
+                  />
+                  <button
+                    type="button"
+                    className="eye-button"
+                    onClick={() => setShowPassword(!showPassword)}
+                    tabIndex="-1"
+                    title={showPassword ? "Ocultar contraseña" : "Mostrar contraseña"}
+                  >
+                    {showPassword ? (
+                      /* Ícono Ocultar */
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path>
+                        <line x1="1" y1="1" x2="23" y2="23"></line>
+                      </svg>
+                    ) : (
+                      /* Ícono Mostrar */
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                        <circle cx="12" cy="12" r="3"></circle>
+                      </svg>
+                    )}
+                  </button>
+                </div>
               </label>
 
               {error ? <p className="form-error">{error}</p> : null}
