@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import '../styles/authCodeBackground.css';
 
 export function ForgotPassword() {
   const [email, setEmail] = useState('');
@@ -46,26 +47,13 @@ export function ForgotPassword() {
           justify-content: center;
           padding: 24px;
           position: relative; 
-          background-image: url('/image/fondoNegroCOD.jpg'); 
-          background-size: cover;
-          background-position: center;
           font-family: 'Arial', sans-serif;
-        }
-
-        /* CAPA OSCURA SEMI-TRANSPARENTE */
-        .auth-page::before {
-          content: "";
-          position: absolute;
-          top: 0; left: 0; right: 0; bottom: 0;
-          background-color: rgba(15, 23, 42, 0.85); 
-          backdrop-filter: blur(4px); 
-          z-index: 0;
         }
 
         /* TARJETA BLANCA (Debe estar por encima de la capa oscura) */
         .auth-card {
           position: relative;
-          z-index: 1; /* Esto asegura que no sea tapada por el fondo */
+          z-index: 2; /* Esto asegura que no sea tapada por el fondo */
           border-radius: 12px;
           overflow: hidden;
           box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); /* Sombra un poco más fuerte para el fondo oscuro */
@@ -176,7 +164,13 @@ export function ForgotPassword() {
         .form-success { color: #15803d; font-size: 0.85rem; font-weight: bold; text-align: center; }
       `}</style>
 
-      <div className="auth-page">
+      <div className="auth-page auth-page--code">
+        <div className="auth-code-columns" aria-hidden="true">
+          <span className="auth-code-col auth-code-col--1" />
+          <span className="auth-code-col auth-code-col--2" />
+          <span className="auth-code-col auth-code-col--3" />
+          <span className="auth-code-col auth-code-col--4" />
+        </div>
         <div className="auth-card">
           <div className="auth-card-inner">
             <h1 className="fp-title">Recuperar contraseña</h1>

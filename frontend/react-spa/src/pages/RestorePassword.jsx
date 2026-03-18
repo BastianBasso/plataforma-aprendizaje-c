@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
+import '../styles/authCodeBackground.css';
 
 export function RestorePassword() {
   const [searchParams] = useSearchParams();
@@ -58,7 +59,7 @@ export function RestorePassword() {
   );
 
   return (
-    <main className="auth-page" aria-label="Restablecer contraseña">
+    <main className="auth-page auth-page--code" aria-label="Restablecer contraseña">
       <style>{`
         /* FONDO TECH UNIFICADO */
         .auth-page {
@@ -68,25 +69,13 @@ export function RestorePassword() {
           justify-content: center;
           padding: 24px;
           position: relative; 
-          background-image: url('/image/fondoNegroCOD.jpg'); 
-          background-size: cover;
-          background-position: center;
           font-family: 'Arial', sans-serif;
-        }
-        
-        .auth-page::before {
-          content: "";
-          position: absolute;
-          top: 0; left: 0; right: 0; bottom: 0;
-          background-color: rgba(15, 23, 42, 0.85); 
-          backdrop-filter: blur(4px); 
-          z-index: 0;
         }
 
         /* TARJETA CENTRAL BLANCA */
         .auth-card-simple {
           position: relative;
-          z-index: 1;
+          z-index: 2;
           background: #ffffff;
           width: 100%;
           max-width: 420px;
@@ -215,6 +204,13 @@ export function RestorePassword() {
           text-decoration: underline;
         }
       `}</style>
+
+      <div className="auth-code-columns" aria-hidden="true">
+        <span className="auth-code-col auth-code-col--1" />
+        <span className="auth-code-col auth-code-col--2" />
+        <span className="auth-code-col auth-code-col--3" />
+        <span className="auth-code-col auth-code-col--4" />
+      </div>
 
       <div className="auth-card-simple">
         <h1 className="auth-title">Nueva contraseña</h1>

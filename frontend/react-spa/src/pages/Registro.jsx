@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import '../styles/authCodeBackground.css';
 
 export function Registro() {
   const [text, setText] = useState('');
@@ -51,26 +52,11 @@ export function Registro() {
           justify-content: center;
           padding: 24px;
           position: relative; 
-          background-image: url('/image/fondoNegroCOD.jpg');
-          background-size: cover;
-          background-position: center;
-        }
-        
-        .auth-page::before {
-          content: "";
-          position: absolute;
-          top: 0;
-          left: 0;
-          right: 0;
-          bottom: 0;
-          background-color: rgba(15, 23, 42, 0.85); 
-          backdrop-filter: blur(4px); 
-          z-index: 0;
         }
 
         .auth-card {
            position: relative;
-           z-index: 1;
+            z-index: 2;
         }
 
         .password-wrapper {
@@ -271,7 +257,13 @@ export function Registro() {
         }
       `}</style>
 
-      <div className="auth-page">
+      <div className="auth-page auth-page--code">
+        <div className="auth-code-columns" aria-hidden="true">
+          <span className="auth-code-col auth-code-col--1" />
+          <span className="auth-code-col auth-code-col--2" />
+          <span className="auth-code-col auth-code-col--3" />
+          <span className="auth-code-col auth-code-col--4" />
+        </div>
         <div className="auth-card">
           <div className="left-panel" aria-hidden="true">
             <div className="code-bg" aria-hidden="true">

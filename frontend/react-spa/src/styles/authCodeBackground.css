@@ -1,0 +1,171 @@
+/* Fondo animado tipo “código” para vistas de autenticación.
+   Se aplica agregando la clase: auth-page auth-page--code */
+
+.auth-page--code {
+  position: relative;
+  isolation: isolate;
+  background-color: rgba(35, 60, 116, 0.7);
+  background-image:
+    radial-gradient(900px 500px at 20% 15%, rgba(33, 36, 252, 0.16), transparent 55%),
+    radial-gradient(700px 420px at 85% 35%, rgba(36, 111, 232, 0.14), transparent 55%);
+  overflow: hidden;
+}
+
+/* Columnas reales: cada columna tiene su propia animación (independiente). */
+.auth-code-columns {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+
+  
+}
+
+.auth-code-col {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 25%;
+  opacity: 0.9;
+}
+
+.auth-code-col::before {
+  content:
+    "#include <stdio.h>\A"
+    "#include <stdlib.h>\A"
+    "#include <string.h>\A"
+    "#include <math.h>\A"
+    "\A"
+    "typedef struct {\A"
+    "  int id;\A"
+    "  char email[64];\A"
+    "} User;\A"
+    "\A"
+    "#define MAX(a,b) ((a)>(b)?(a):(b))\A"
+    "#define MIN(a,b) ((a)<(b)?(a):(b))\A"
+    "\A"
+    "static int is_valid_email(const char *s) {\A"
+    "  return s && *s;\A"
+    "}\A"
+    "\A"
+    "int main(void) {\A"
+    "  printf(\"Plataforma C\\n\");\A"
+    "  return 0;\A"
+    "}\A"
+    "\A"
+    "// Aprende • Practica • Progresa\A"
+    "// 0101 1010 1100 0011\A"
+    "\A"
+    "int v[8] = {1,1,2,3,5,8,13,21};\A"
+    "for (size_t i = 0; i < 8; i++) {\A"
+    "  printf(\"%d \", v[i]);\A"
+    "}\A"
+    "\A"
+    "char name[32] = \"Elias\";\A"
+    "size_t n = strlen(name);\A"
+    "for (size_t i = 0; i < n; i++) {\A"
+    "  putchar(name[i]);\A"
+    "}\A"
+    "\A"
+    "FILE *f = fopen(\"data.txt\", \"r\");\A"
+    "if (f) {\A"
+    "  char line[128];\A"
+    "  while (fgets(line, sizeof line, f)) {\A"
+    "    /* parse */\A"
+    "  }\A"
+    "  fclose(f);\A"
+    "}\A"
+    "\A"
+    "typedef struct Node {\A"
+    "  int value;\A"
+    "  struct Node *next;\A"
+    "} Node;\A"
+    "\A"
+    "Node *head = (Node*)calloc(1, sizeof(Node));\A"
+    "if (head) { head->value = 7; }\A"
+    "\A"
+    "int acc = 0;\A"
+    "for (int i = 0; i < 200; i++) {\A"
+    "  acc = (acc + i) % 97;\A"
+    "}\A"
+    "printf(\"acc=%d\\n\", acc);\A"
+    "\A"
+    "int acc2 = 0;\A"
+    "for (int i = 0; i < 200; i++) {\A"
+    "  acc2 = (acc2 + i*i) % 101;\A"
+    "}\A"
+    "printf(\"acc2=%d\\n\", acc2);\A"
+    "\A"
+    "// ---- repeat ----\A"
+    "int s = 0;\A"
+    "for (int i = 0; i < 256; i++) {\A"
+    "  s ^= (i << 1);\A"
+    "}\A"
+    "printf(\"s=%d\\n\", s);\A"
+    "\A"
+    "// ---- repeat ----\A"
+    "for (int i = 0; i < 10; i++) {\A"
+    "  puts(\"loop\");\A"
+    "}\A";
+
+  position: absolute;
+  left: 0;
+  top: -60%;
+  width: 100%;
+  white-space: pre;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-size: 13px;
+  line-height: 1.55;
+  color: rgba(165, 243, 252, 0.50);
+  text-shadow:
+    0 0 10px rgba(59, 130, 246, 0.16),
+    0 0 18px rgba(99, 102, 241, 0.10);
+  transform: translate3d(0, 0, 0) skewX(-12deg);
+  will-change: transform;
+}
+
+.auth-code-col--1 { left: 0%; }
+.auth-code-col--2 { left: 25%; opacity: 0.7; }
+.auth-code-col--3 { left: 50%; opacity: 0.6; }
+.auth-code-col--4 { left: 75%; opacity: 0.75; }
+
+.auth-code-col--1::before { animation: auth-col-scroll-1 12s linear infinite; }
+.auth-code-col--2::before { animation: auth-col-scroll-2 15s linear infinite; }
+.auth-code-col--3::before { animation: auth-col-scroll-3 13s linear infinite; }
+.auth-code-col--4::before { animation: auth-col-scroll-4 16s linear infinite; }
+
+/* Asegura que el contenido quede por encima */
+.auth-page--code > :not(.auth-code-columns) {
+  position: relative;
+  z-index: 2;
+}
+
+@keyframes auth-col-scroll-1 {
+  0% { transform: translate3d(0, 0%, 0) skewX(-12deg); }
+  100% { transform: translate3d(0, 70%, 0) skewX(-12deg); }
+}
+
+@keyframes auth-col-scroll-2 {
+  0% { transform: translate3d(0, 15%, 0) skewX(-12deg); }
+  100% { transform: translate3d(0, 85%, 0) skewX(-12deg); }
+}
+
+@keyframes auth-col-scroll-3 {
+  0% { transform: translate3d(0, -10%, 0) skewX(-12deg); }
+  100% { transform: translate3d(0, 60%, 0) skewX(-12deg); }
+}
+
+@keyframes auth-col-scroll-4 {
+  0% { transform: translate3d(0, 25%, 0) skewX(-12deg); }
+  100% { transform: translate3d(0, 95%, 0) skewX(-12deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .auth-code-col--1::before,
+  .auth-code-col--2::before,
+  .auth-code-col--3::before,
+  .auth-code-col--4::before {
+    animation: none;
+  }
+}
