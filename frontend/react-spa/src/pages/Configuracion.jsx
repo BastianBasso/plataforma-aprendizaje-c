@@ -92,16 +92,10 @@ export function Configuracion() {
     }
   }
 
-  async function handleSavePassword(e) {
+async function handleSavePassword(e) {
     e.preventDefault();
     setPwdMessage('');
     setPwdMessageType(''); 
-
-    if (newPassword.length < 6) {
-      setPwdMessage('La contraseña debe tener al menos 6 caracteres.');
-      setPwdMessageType('error');
-      return;
-    }
 
     setIsSavingPwd(true);
     try {
@@ -117,7 +111,11 @@ export function Configuracion() {
         setPwdMessageType('success');
         setNewPassword(''); 
       } else {
-        setPwdMessage(data.message || 'Error al cambiar contraseña');
+        if (data.errors && Array.isArray(data.errors)) {
+          setPwdMessage(data.errors);
+        } else {
+          setPwdMessage(data.message || 'Error al cambiar contraseña');
+        }
         setPwdMessageType('error');
       }
     } catch (error) {
@@ -189,8 +187,8 @@ export function Configuracion() {
           .hub-config .hub-title { color: #1a4e8a; font-weight: 700; font-size: 2.0rem; letter-spacing: 0.5px; margin: 0 0 6px; }
           .hub-config .hub-subtitle { color: #222e3a; opacity: 0.85; margin: 0; }
           
-          .hub-config .config-grid { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 30px; margin-top: 25px; align-items: start; }
-          
+          .hub-config .config-grid { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 30px; margin-top: 25px; align-items: stretch; }         
+
           .hub-config .config-card-title { margin: 0 0 16px; color: #1a4e8a; font-weight: 800; font-size: 1.2rem; border-bottom: 2px solid #eef2f7; padding-bottom: 10px;}
           .hub-config .row { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 12px 0; border-bottom: 1px solid #eef2f7; min-height: 48px;}
           .hub-config .row:last-of-type { border-bottom: 0; }
@@ -239,6 +237,15 @@ export function Configuracion() {
           
           @media (max-width: 850px) { .hub-config .config-grid { grid-template-columns: 1fr; } }
           @media (max-width: 600px) { .hub.hub-config { padding: 20px 15px; margin: 15px; } }
+
+          /* Estilos para los Toggles de Preferencias */
+          .hub-config .toggle-row { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid #eef2f7; }
+          .hub-config .toggle-row:last-of-type { border-bottom: none; }
+          .hub-config .toggle-label { font-size: 0.95rem; color: #374151; font-weight: 700; }
+          .hub-config .toggle-switch { position: relative; width: 44px; height: 24px; appearance: none; background: #cbd5e1; border-radius: 999px; outline: none; cursor: pointer; transition: background 0.3s; box-shadow: inset 0 2px 4px rgba(0,0,0,0.1); margin: 0;}
+          .hub-config .toggle-switch:checked { background: #1e7035; }
+          .hub-config .toggle-switch::after { content: ''; position: absolute; top: 2px; left: 2px; width: 20px; height: 20px; background: white; border-radius: 50%; box-shadow: 0 2px 5px rgba(0,0,0,0.2); transition: transform 0.3s; }
+          .hub-config .toggle-switch:checked::after { transform: translateX(20px); }
         `}</style>
 
         <div className="generic-card">
@@ -252,25 +259,54 @@ export function Configuracion() {
           </div>
         )}
 
-          <div className="config-grid">
-            {/* TARJETA 1: IDENTIDAD DEL USUARIO (Ahora más limpia) */}
+<div className="config-grid">
+          
+          {/* COLUMNA IZQUIERDA */}
+          {/* Agregamos height: '100%' a la columna entera */}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '25px', height: '100%' }}>
+            
+            {/* TARJETA 1: IDENTIDAD */}
             <section className="generic-card" aria-label="Resumen del Perfil">
               <h2 className="config-card-title">Detalles de la Cuenta</h2>
-              
               {renderRow('Usuario', 'usuario')}
               {renderRow('Nombre', 'nombre')}
               {renderRow('Correo Electrónico', 'correo', 'email')}
-
               {user?.rol && user.rol.toLowerCase() !== 'usuario' && (
                 <div className="row">
                   <div className="k">Rol de Sistema</div>
                   <div className="v" style={{ color: '#8a1a1a' }}>{user.rol}</div>
                 </div>
               )}
-          </section>
-          {/* TARJETA 2: ESTADÍSTICAS Y SEGURIDAD */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '25px' }}>
+            </section>
+
+            {/* TARJETA 2: PREFERENCIAS */}
+            {/* Agregamos flex: 1 para que esta tarjeta empuje hacia abajo */}
+            <section className="generic-card" aria-label="Preferencias" style={{ flex: 1 }}>
+              <h2 className="config-card-title">Preferencias de la Plataforma</h2>
+              
+              <div className="toggle-row">
+                <span className="toggle-label">Recibir correos de progreso</span>
+                <input type="checkbox" className="toggle-switch" defaultChecked />
+              </div>
+              
+              <div className="toggle-row">
+                <span className="toggle-label">Mostrar mi perfil a otros estudiantes</span>
+                <input type="checkbox" className="toggle-switch" />
+              </div>
+
+              <div className="toggle-row">
+                <span className="toggle-label">Avisos de nuevos módulos</span>
+                <input type="checkbox" className="toggle-switch" defaultChecked />
+              </div>
+            </section>
+
+          </div>
+
+          {/* COLUMNA DERECHA */}
+          {/* Agregamos height: '100%' a la columna entera */}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '25px', height: '100%' }}>
             
+            {/* TARJETA 3: ESTADÍSTICAS */}
             <section className="generic-card" aria-label="Estadísticas">
               <h2 className="config-card-title">Tus Estadísticas</h2>
               <div className="row">
@@ -294,17 +330,18 @@ export function Configuracion() {
               </div>
             </section>
 
-            <section className="generic-card" aria-label="Seguridad" style={{ flexGrow: 1 }}>
+            {/* TARJETA 4: SEGURIDAD */}
+            {/* Cambiamos flexGrow: 1 por flex: 1 para mayor compatibilidad */}
+            <section className="generic-card" aria-label="Seguridad" style={{ flex: 1 }}>
               <h2 className="config-card-title">Seguridad</h2>
-              
               <form onSubmit={handleSavePassword}>
                 <label className="k" style={{ display: 'block', marginBottom: '6px', fontSize: '0.9rem' }}>
                   Cambiar Contraseña
                 </label>
-                <input 
+                 <input 
                   type="password" 
                   className="pwd-input" 
-                  placeholder="Nueva contraseña (mínimo 6 carácteres)"
+                  placeholder="Nueva contraseña..." 
                   value={newPassword}
                   onChange={(e) => setNewPassword(e.target.value)}
                   disabled={isSavingPwd}
@@ -314,15 +351,25 @@ export function Configuracion() {
                 </button>
                 
                 {pwdMessage && (
-                  <div className={`pwd-msg ${pwdMessageType}`}>
-                    {pwdMessage}
+                  <div 
+                    className={`pwd-msg ${pwdMessageType}`} 
+                    style={{ textAlign: Array.isArray(pwdMessage) ? 'left' : 'center' }}
+                  >
+                    {Array.isArray(pwdMessage) ? (
+                      <ul style={{ margin: 0, paddingLeft: '20px' }}>
+                        {pwdMessage.map((err, i) => (
+                          <li key={i} style={{ marginBottom: '4px' }}>{err}</li>
+                        ))}
+                      </ul>
+                    ) : (
+                      pwdMessage
+                    )}
                   </div>
                 )}
               </form>
-
             </section>
-          </div>
 
+          </div>
         </div>
       </main>
     </Shell>

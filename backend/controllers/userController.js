@@ -1,5 +1,6 @@
 const db = require('../db');
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs'); 
+const { validatePassword, validateEmail, validateRequiredFields } = require('../utils/validators');
 
 const getPerfil = async (req, res) => {
   try {
@@ -23,14 +24,20 @@ const getPerfil = async (req, res) => {
 const updatePerfil = async (req, res) => {
   const { usuario, nombre, correo, bio } = req.body;
 
-  try {
-      if (!usuario || !correo) {
-          return res.status(400).json({ success: false, message: 'El usuario y el correo no pueden estar vacíos' });
-      }
+  const fieldsValidation = validateRequiredFields({ usuario, correo }, ['usuario', 'correo']);
+  if (!fieldsValidation.isValid) {
+      return res.status(400).json({ success: false, message: fieldsValidation.error });
+  }
 
+  const emailValidation = validateEmail(correo);
+  if (!emailValidation.isValid) {
+      return res.status(400).json({ success: false, message: emailValidation.error });
+  }
+
+  try {
       await db.query(
         'UPDATE usuario SET usuario=$1, nombre=$2, correo=$3, bio=$4 WHERE id=$5',
-        [usuario, nombre, correo, bio || '', req.session.userId]
+        [usuario, nombre, emailValidation.normalizedEmail, bio || '', req.session.userId]
       );
       
       res.json({ success: true, message: 'Perfil actualizado correctamente' });
@@ -53,10 +60,40 @@ const uploadImagen = async (req, res) => {
   res.json({ imagenUrl });
 };
 
+const updatePassword = async (req, res) => {
+  const { nuevaContrasena } = req.body;
 
+  if (!nuevaContrasena) {
+      return res.status(400).json({ success: false, message: 'La nueva contraseña es requerida.' });
+  }
+
+  const passwordValidation = validatePassword(nuevaContrasena);
+  if (!passwordValidation.isValid) {
+      return res.status(400).json({
+          success: false,
+          message: "La contraseña no cumple con los requisitos de seguridad.",
+          errors: passwordValidation.errors 
+      });
+  }
+
+  try {
+      const hashedPassword = await bcrypt.hash(nuevaContrasena, 10);
+
+      await db.query(
+          'UPDATE usuario SET contraseña=$1 WHERE id=$2',
+          [hashedPassword, req.session.userId]
+      );
+
+      res.json({ success: true, message: 'Contraseña actualizada correctamente.' });
+  } catch (error) {
+      console.error('Error al cambiar contraseña desde perfil:', error);
+      res.status(500).json({ success: false, message: 'Error interno al cambiar la contraseña.' });
+  }
+};
 
 module.exports = {
     getPerfil,
     updatePerfil,
-    uploadImagen
+    uploadImagen,
+    updatePassword 
 };
