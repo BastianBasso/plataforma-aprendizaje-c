@@ -4,6 +4,7 @@ import '../styles/authCodeBackground.css';
 
 export function Registro() {
   const [text, setText] = useState('');
+  const [nombre, setNombre] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
@@ -24,12 +25,16 @@ export function Registro() {
         method: 'POST',
         credentials: 'include',
         headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-        body: JSON.stringify({ text, email, password }),
+        body: JSON.stringify({ nombre, text, email, password }),
       });
       const json = await res.json().catch(() => null);
 
-      if (!res.ok || !json?.success) {
-        setError(json?.message || 'No se pudo registrar');
+       if (!res.ok || !json?.success) {
+        if (json?.errors && json.errors.length > 0) {
+          setError(json.errors); 
+        } else {
+          setError(json?.message || 'No se pudo registrar'); 
+        }
         return;
       }
 
@@ -342,6 +347,11 @@ void init()
             </p>
 
             <form className="reg-form" onSubmit={onSubmit}>
+               <label>
+                Nombre 
+              <input type="text" value={nombre} onChange={e => setNombre(e.target.value)} required />
+              </label>
+
               <label>
                 Usuario
                 <input value={text} onChange={e => setText(e.target.value)} autoComplete="username" />
@@ -385,7 +395,20 @@ void init()
                 </div>
               </label>
 
-              {error ? <p className="form-error">{error}</p> : null}
+                {/* MENSAJES DE ERROR INTELIGENTES */}
+                {error ? (
+                  <div className="form-error" style={{ textAlign: 'left', background: '#fee2e2', color: '#b91c1c', padding: '12px', borderRadius: '8px', fontSize: '0.85rem' }}>
+                    {Array.isArray(error) ? (
+                      <ul style={{ margin: 0, paddingLeft: '20px' }}>
+                        {error.map((err, index) => (
+                          <li key={index} style={{ marginBottom: '4px' }}>{err}</li>
+                        ))}
+                      </ul>
+                    ) : (
+                      <p style={{ margin: 0, fontWeight: 'bold', textAlign: 'center' }}>{error}</p>
+                    )}
+                  </div>
+                ) : null}
               {success ? <p className="form-success">{success}</p> : null}
 
               <div className="reg-actions">

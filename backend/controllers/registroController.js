@@ -19,23 +19,21 @@ const transporter = nodemailer.createTransport({
 
  // Registra un nuevo usuario en el sistema
  
+// Registra un nuevo usuario en el sistema
 const register = async (req, res) => {
     console.log("Cuerpo de la solicitud (req.body):", req.body);
-    const { text, email, password } = req.body; // 'text' es el nombre de usuario desde el frontend
+    const { nombre, text, email, password } = req.body; 
 
-    // 1. Validación de campos requeridos
-    const fieldsValidation = validateRequiredFields({ text, email, password }, ['text', 'email', 'password']);
+    const fieldsValidation = validateRequiredFields({ nombre, text, email, password }, ['nombre', 'text', 'email', 'password']);
     if (!fieldsValidation.isValid) {
         return res.status(400).json({ success: false, message: fieldsValidation.error });
     }
 
-    // 2. Validación de formato de email
     const emailValidation = validateEmail(email);
     if (!emailValidation.isValid) {
         return res.status(400).json({ success: false, message: emailValidation.error });
     }
 
-    // 3. Validación de seguridad de la contraseña
     const passwordValidation = validatePassword(password);
     if (!passwordValidation.isValid) {
         return res.status(400).json({
@@ -50,8 +48,8 @@ const register = async (req, res) => {
     try {
         const hashedPassword = await bcrypt.hash(password, 10);
 
-        const query = "INSERT INTO Usuario (Usuario, Correo, Contraseña, Rol) VALUES ($1, $2, $3, $4) RETURNING ID";
-        const result = await db.query(query, [text, emailValidation.normalizedEmail, hashedPassword, defaultRole]);
+        const query = "INSERT INTO Usuario (Nombre, Usuario, Correo, Contraseña, Rol) VALUES ($1, $2, $3, $4, $5) RETURNING ID";
+        const result = await db.query(query, [nombre, text, emailValidation.normalizedEmail, hashedPassword, defaultRole]);
 
         console.log("Usuario registrado, resultado de la BD:", result.rows[0]);
         res.status(201).json({ success: true, message: "Usuario registrado exitosamente" });
@@ -59,11 +57,11 @@ const register = async (req, res) => {
     } catch (error) {
         console.error("Error en el bloque try/catch de /register:", error);
 
-        if (error.code === '23505') { // Código de error de PostgreSQL para violación de unicidad
+        if (error.code === '23505') { 
             if (error.constraint === 'usuario_correo_key') {
                  return res.status(409).json({ success: false, message: 'El correo ya existe' });
             } else if (error.constraint === 'usuario_usuario_key') {
-                return res.status(409).json({ success: false, message: 'El usuario ya existe' });
+                return res.status(409).json({ success: false, message: 'El nombre de usuario ya existe' });
             }
              return res.status(409).json({ success: false, message: 'El usuario o el correo ya existen.' });
         }

@@ -9,6 +9,7 @@ router.get('/search-user', requireAuth, userController.getPerfil);
 router.get('/perfil', requireAuth, userController.getPerfil);
 router.put('/perfil', requireAuth, userController.updatePerfil);
 router.post('/perfil/imagen', requireAuth, subidaImagen.single('imagen'), userController.uploadImagen);
+router.put('/perfil/password', requireAuth, userController.updatePassword);
 
 
 
